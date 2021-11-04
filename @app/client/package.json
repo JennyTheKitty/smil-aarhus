@@ -1,0 +1,41 @@
+{
+  "name": "@app/client",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production NODE_OPTIONS=\"$NODE_OPTIONS -r @app/config/env\" vite-ssr build"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.4.16",
+    "@fullcalendar/core": "^5.10.0",
+    "@fullcalendar/daygrid": "^5.10.0",
+    "@fullcalendar/list": "^5.10.0",
+    "@fullcalendar/vue3": "^5.10.0",
+    "@headlessui/vue": "^0.0.0-dev.9f638c9",
+    "@vue/apollo-composable": "^4.0.0-alpha.15",
+    "@vue/apollo-option": "^4.0.0-alpha.15",
+    "@vueuse/core": "^6.5.3",
+    "@vueuse/head": "^0.6.0",
+    "graphql": "^15.6.1",
+    "nprogress": "^0.2.0",
+    "vite-ssr": "/home/jas/dev/tmp/vite-ssr/dist",
+    "vue": "^3.0.6",
+    "vue-i18n": "^9.2.0-beta.16",
+    "vue-router": "^4.0.3"
+  },
+  "devDependencies": {
+    "@iconify-json/carbon": "^1.0.7",
+    "@intlify/vite-plugin-vue-i18n": "^2.5.0",
+    "@types/nprogress": "^0.2.0",
+    "@vitejs/plugin-vue": "^1.9.3",
+    "@vue/compiler-sfc": "^3.2.20",
+    "@vue/server-renderer": "^3.2.20",
+    "rollup-plugin-visualizer": "^5.5.2",
+    "typescript": "^4.4.4",
+    "unplugin-auto-import": "^0.4.12",
+    "unplugin-icons": "^0.12.15",
+    "unplugin-vue-components": "^0.15.6",
+    "vite": "^2.6.7",
+    "vite-imagetools": "^3.8.0",
+    "vite-plugin-windicss": "^1.4.11"
+  }
+}

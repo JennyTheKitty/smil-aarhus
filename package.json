@@ -1,0 +1,73 @@
+{
+  "name": "smil_aarhus",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SMIL AARHUS Website BETA",
+  "scripts": {
+    "setup": "yarn && yarn setup:packages",
+    "setup:packages": "lerna run setup",
+    "lint": "tsc -b && yarn prettier:all --check && yarn eslint .",
+    "lint:fix": "yarn eslint --fix . && yarn prettier:all --write",
+    "eslint": "eslint --ext .js,.jsx,.ts,.tsx,.graphql",
+    "prettier:all": "prettier --ignore-path .eslintignore \"**/*.{js,jsx,ts,tsx,graphql,md}\"",
+    "depcheck": "lerna exec --stream \"yarn depcheck --ignores=\"@app/config,@app/client,tslib,webpack,babel-plugin-import,source-map-support,@graphql-codegen/*,*eslint*,@typescript-eslint/*,graphql-toolkit,net,tls,dayjs\"\"",
+    "dev": "cross-env-shell NODE_ENV=development 'yarn && tsc -b && concurrently --kill-others --names \"TSC,WATCH,RUN,TEST\" --prefix \"({name})\" --prefix-colors \"yellow.bold,yellow.bold,cyan.bold,greenBright.bold\" \"tsc -b --watch --preserveWatchOutput\" \"lerna run --parallel watch\" \"lerna run --parallel dev\"'",
+    "build": "lerna run build",
+    "licenses": "yarn --silent licenses generate-disclaimer > LICENSES.md",
+    "--shortcuts to run commands in workspaces--": "",
+    "admin": "yarn workspace @app/admin",
+    "client": "yarn workspace @app/client",
+    "config": "yarn workspace @app/config",
+    "db": "yarn workspace @app/db",
+    "graphql": "yarn workspace @app/graphql",
+    "server": "yarn workspace @app/server"
+  },
+  "author": "Jasmin Bom",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "dependencies": {
+    "abort-controller": "^3.0.0",
+    "graphql": "^15.4.0",
+    "lerna": "^4.0.0",
+    "string-width": "^5.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.25.0",
+    "@typescript-eslint/parser": "^4.25.0",
+    "concurrently": "^6.2.0",
+    "depcheck": "^1.4.1",
+    "dotenv": "^10.0.0",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-cypress": "^2.11.3",
+    "eslint-plugin-graphql": "^4.0.0",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-vue": "^7.19.1",
+    "eslint-plugin-react-hooks": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint_d": "^10.1.2",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.3.0",
+    "rimraf": "^3.0.2",
+    "ts-loader": "^8.0.11",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2",
+    "update-dotenv": "^1.1.1"
+  },
+  "resolutions": {
+    "graphql": "15.x",
+    "pg-connection-string": "2.x"
+  },
+  "workspaces": {
+    "packages": [
+      "@app/*"
+    ]
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "proseWrap": "always"
+  },
+  "type": "module"
+}

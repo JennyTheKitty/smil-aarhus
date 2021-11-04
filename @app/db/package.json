@@ -1,0 +1,19 @@
+{
+  "name": "@app/db",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "gm": "cross-env NODE_OPTIONS=\"$NODE_OPTIONS -r @app/config/env\" graphile-migrate",
+    "migrate": "yarn gm migrate",
+    "watch": "yarn gm watch",
+    "commit": "yarn gm commit",
+    "uncommit": "yarn gm uncommit",
+    "reset": "yarn gm reset",
+    "dump": "yarn gm migrate && yarn gm reset --shadow --erase && yarn gm migrate --shadow --forceActions"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "graphile-migrate": "^1.2.0"
+  }
+}

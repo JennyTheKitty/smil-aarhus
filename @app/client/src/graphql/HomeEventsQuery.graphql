@@ -1,0 +1,42 @@
+query HomeEventsQuery($startsAfter: Datetime) {
+  specialEvents: events(
+    filter: {
+      special: { equalTo: true }
+      startsAt: { greaterThan: $startsAfter }
+    }
+    first: 1
+    orderBy: STARTS_AT_ASC
+  ) {
+    nodes {
+      ...event
+    }
+  }
+  events(
+    filter: {
+      special: { equalTo: false }
+      startsAt: { greaterThan: $startsAfter }
+    }
+    first: 3
+    orderBy: STARTS_AT_ASC
+  ) {
+    nodes {
+      ...event
+    }
+  }
+}
+
+fragment event on Event {
+  translations {
+    nodes {
+      slug
+      title
+      languageCode
+      description
+    }
+  }
+  endsAt
+  id
+  startsAt
+  categoryId
+  special
+}

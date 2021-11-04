@@ -1,0 +1,14 @@
+[sqlfluff]
+output_line_length = 128
+dialect = postgres
+exclude_rules = L031
+
+[sqlfluff:rules:L010]  # Keywords
+capitalisation_policy = upper
+
+[sqlfluff:rules:L014] # unquoted identifiers
+extended_capitalisation_policy = lower
+
+[sqlfluff:rules:L016] # Line is too long
+ignore_comment_lines = true
+max_line_length = 128

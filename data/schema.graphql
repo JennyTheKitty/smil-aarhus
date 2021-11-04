@@ -1,0 +1,3816 @@
+"""
+A signed eight-byte integer. The upper big integer values are greater than the
+max value for a JavaScript number. Therefore all big integers will be output as
+strings and not numbers.
+"""
+scalar BigInt
+
+"""
+A filter to be used against BigInt fields. All fields are combined with a logical ‘and.’
+"""
+input BigIntFilter {
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: BigInt
+
+  """Equal to the specified value."""
+  equalTo: BigInt
+
+  """Greater than the specified value."""
+  greaterThan: BigInt
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: BigInt
+
+  """Included in the specified list."""
+  in: [BigInt!]
+
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Less than the specified value."""
+  lessThan: BigInt
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: BigInt
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: BigInt
+
+  """Not equal to the specified value."""
+  notEqualTo: BigInt
+
+  """Not included in the specified list."""
+  notIn: [BigInt!]
+}
+
+"""
+A filter to be used against Boolean fields. All fields are combined with a logical ‘and.’
+"""
+input BooleanFilter {
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: Boolean
+
+  """Equal to the specified value."""
+  equalTo: Boolean
+
+  """Greater than the specified value."""
+  greaterThan: Boolean
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: Boolean
+
+  """Included in the specified list."""
+  in: [Boolean!]
+
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Less than the specified value."""
+  lessThan: Boolean
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: Boolean
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: Boolean
+
+  """Not equal to the specified value."""
+  notEqualTo: Boolean
+
+  """Not included in the specified list."""
+  notIn: [Boolean!]
+}
+
+"""All input for the create `EventCategory` mutation."""
+input CreateEventCategoryInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `EventCategory` to be created by this mutation."""
+  eventCategory: EventCategoryInput!
+}
+
+"""The output of our create `EventCategory` mutation."""
+type CreateEventCategoryPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `EventCategory` that was created by this mutation."""
+  eventCategory: EventCategory
+
+  """An edge for our `EventCategory`. May be used by Relay 1."""
+  eventCategoryEdge(
+    """The method to use when ordering `EventCategory`."""
+    orderBy: [EventCategoriesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventCategoriesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `EventCategoryTr` mutation."""
+input CreateEventCategoryTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `EventCategoryTr` to be created by this mutation."""
+  eventCategoryTr: EventCategoryTrInput!
+}
+
+"""The output of our create `EventCategoryTr` mutation."""
+type CreateEventCategoryTrPayload {
+  """
+  Reads a single `EventCategory` that is related to this `EventCategoryTr`.
+  """
+  category: EventCategory
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `EventCategoryTr` that was created by this mutation."""
+  eventCategoryTr: EventCategoryTr
+
+  """An edge for our `EventCategoryTr`. May be used by Relay 1."""
+  eventCategoryTrEdge(
+    """The method to use when ordering `EventCategoryTr`."""
+    orderBy: [EventCategoryTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventCategoryTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `Event` mutation."""
+input CreateEventInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Event` to be created by this mutation."""
+  event: EventInput!
+}
+
+"""The output of our create `Event` mutation."""
+type CreateEventPayload {
+  """Reads a single `EventCategory` that is related to this `Event`."""
+  category: EventCategory
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Event` that was created by this mutation."""
+  event: Event
+
+  """An edge for our `Event`. May be used by Relay 1."""
+  eventEdge(
+    """The method to use when ordering `Event`."""
+    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `EventTemplate` mutation."""
+input CreateEventTemplateInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `EventTemplate` to be created by this mutation."""
+  eventTemplate: EventTemplateInput!
+}
+
+"""The output of our create `EventTemplate` mutation."""
+type CreateEventTemplatePayload {
+  """
+  Reads a single `EventCategory` that is related to this `EventTemplate`.
+  """
+  category: EventCategory
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `EventTemplate` that was created by this mutation."""
+  eventTemplate: EventTemplate
+
+  """An edge for our `EventTemplate`. May be used by Relay 1."""
+  eventTemplateEdge(
+    """The method to use when ordering `EventTemplate`."""
+    orderBy: [EventTemplatesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTemplatesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `EventTemplateTr` mutation."""
+input CreateEventTemplateTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `EventTemplateTr` to be created by this mutation."""
+  eventTemplateTr: EventTemplateTrInput!
+}
+
+"""The output of our create `EventTemplateTr` mutation."""
+type CreateEventTemplateTrPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Reads a single `EventTemplate` that is related to this `EventTemplateTr`.
+  """
+  eventTemplate: EventTemplate
+
+  """The `EventTemplateTr` that was created by this mutation."""
+  eventTemplateTr: EventTemplateTr
+
+  """An edge for our `EventTemplateTr`. May be used by Relay 1."""
+  eventTemplateTrEdge(
+    """The method to use when ordering `EventTemplateTr`."""
+    orderBy: [EventTemplateTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTemplateTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `EventTr` mutation."""
+input CreateEventTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `EventTr` to be created by this mutation."""
+  eventTr: EventTrInput!
+}
+
+"""The output of our create `EventTr` mutation."""
+type CreateEventTrPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Event` that is related to this `EventTr`."""
+  event: Event
+
+  """The `EventTr` that was created by this mutation."""
+  eventTr: EventTr
+
+  """An edge for our `EventTr`. May be used by Relay 1."""
+  eventTrEdge(
+    """The method to use when ordering `EventTr`."""
+    orderBy: [EventTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `Group` mutation."""
+input CreateGroupInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Group` to be created by this mutation."""
+  group: GroupInput!
+}
+
+"""The output of our create `Group` mutation."""
+type CreateGroupPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Group` that was created by this mutation."""
+  group: Group
+
+  """An edge for our `Group`. May be used by Relay 1."""
+  groupEdge(
+    """The method to use when ordering `Group`."""
+    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): GroupsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `GroupTr` mutation."""
+input CreateGroupTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `GroupTr` to be created by this mutation."""
+  groupTr: GroupTrInput!
+}
+
+"""The output of our create `GroupTr` mutation."""
+type CreateGroupTrPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Group` that is related to this `GroupTr`."""
+  group: Group
+
+  """The `GroupTr` that was created by this mutation."""
+  groupTr: GroupTr
+
+  """An edge for our `GroupTr`. May be used by Relay 1."""
+  groupTrEdge(
+    """The method to use when ordering `GroupTr`."""
+    orderBy: [GroupTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): GroupTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `Member` mutation."""
+input CreateMemberInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Member` to be created by this mutation."""
+  member: MemberInput!
+}
+
+"""The output of our create `Member` mutation."""
+type CreateMemberPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Member` that was created by this mutation."""
+  member: Member
+
+  """An edge for our `Member`. May be used by Relay 1."""
+  memberEdge(
+    """The method to use when ordering `Member`."""
+    orderBy: [MembersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MembersEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `Page` mutation."""
+input CreatePageInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Page` to be created by this mutation."""
+  page: PageInput!
+}
+
+"""The output of our create `Page` mutation."""
+type CreatePagePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Page` that was created by this mutation."""
+  page: Page
+
+  """An edge for our `Page`. May be used by Relay 1."""
+  pageEdge(
+    """The method to use when ordering `Page`."""
+    orderBy: [PagesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PagesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `PageTr` mutation."""
+input CreatePageTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `PageTr` to be created by this mutation."""
+  pageTr: PageTrInput!
+}
+
+"""The output of our create `PageTr` mutation."""
+type CreatePageTrPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Page` that is related to this `PageTr`."""
+  pageByPageName: Page
+
+  """The `PageTr` that was created by this mutation."""
+  pageTr: PageTr
+
+  """An edge for our `PageTr`. May be used by Relay 1."""
+  pageTrEdge(
+    """The method to use when ordering `PageTr`."""
+    orderBy: [PageTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PageTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""A location in a connection that can be used for resuming pagination."""
+scalar Cursor
+
+"""
+A point in time as described by the [ISO
+8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
+"""
+scalar Datetime
+
+"""
+A filter to be used against Datetime fields. All fields are combined with a logical ‘and.’
+"""
+input DatetimeFilter {
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: Datetime
+
+  """Equal to the specified value."""
+  equalTo: Datetime
+
+  """Greater than the specified value."""
+  greaterThan: Datetime
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: Datetime
+
+  """Included in the specified list."""
+  in: [Datetime!]
+
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Less than the specified value."""
+  lessThan: Datetime
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: Datetime
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: Datetime
+
+  """Not equal to the specified value."""
+  notEqualTo: Datetime
+
+  """Not included in the specified list."""
+  notIn: [Datetime!]
+}
+
+"""All input for the `deleteEventCategory` mutation."""
+input DeleteEventCategoryInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+}
+
+"""The output of our delete `EventCategory` mutation."""
+type DeleteEventCategoryPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedEventCategoryNodeId: ID
+
+  """The `EventCategory` that was deleted by this mutation."""
+  eventCategory: EventCategory
+
+  """An edge for our `EventCategory`. May be used by Relay 1."""
+  eventCategoryEdge(
+    """The method to use when ordering `EventCategory`."""
+    orderBy: [EventCategoriesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventCategoriesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteEventCategoryTr` mutation."""
+input DeleteEventCategoryTrInput {
+  categoryId: BigInt!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  languageCode: TrLanguage!
+}
+
+"""The output of our delete `EventCategoryTr` mutation."""
+type DeleteEventCategoryTrPayload {
+  """
+  Reads a single `EventCategory` that is related to this `EventCategoryTr`.
+  """
+  category: EventCategory
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedEventCategoryTrNodeId: ID
+
+  """The `EventCategoryTr` that was deleted by this mutation."""
+  eventCategoryTr: EventCategoryTr
+
+  """An edge for our `EventCategoryTr`. May be used by Relay 1."""
+  eventCategoryTrEdge(
+    """The method to use when ordering `EventCategoryTr`."""
+    orderBy: [EventCategoryTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventCategoryTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteEvent` mutation."""
+input DeleteEventInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+}
+
+"""The output of our delete `Event` mutation."""
+type DeleteEventPayload {
+  """Reads a single `EventCategory` that is related to this `Event`."""
+  category: EventCategory
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedEventNodeId: ID
+
+  """The `Event` that was deleted by this mutation."""
+  event: Event
+
+  """An edge for our `Event`. May be used by Relay 1."""
+  eventEdge(
+    """The method to use when ordering `Event`."""
+    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteEventTemplate` mutation."""
+input DeleteEventTemplateInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+}
+
+"""The output of our delete `EventTemplate` mutation."""
+type DeleteEventTemplatePayload {
+  """
+  Reads a single `EventCategory` that is related to this `EventTemplate`.
+  """
+  category: EventCategory
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedEventTemplateNodeId: ID
+
+  """The `EventTemplate` that was deleted by this mutation."""
+  eventTemplate: EventTemplate
+
+  """An edge for our `EventTemplate`. May be used by Relay 1."""
+  eventTemplateEdge(
+    """The method to use when ordering `EventTemplate`."""
+    orderBy: [EventTemplatesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTemplatesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteEventTemplateTr` mutation."""
+input DeleteEventTemplateTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  eventTemplateId: BigInt!
+  languageCode: TrLanguage!
+}
+
+"""The output of our delete `EventTemplateTr` mutation."""
+type DeleteEventTemplateTrPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedEventTemplateTrNodeId: ID
+
+  """
+  Reads a single `EventTemplate` that is related to this `EventTemplateTr`.
+  """
+  eventTemplate: EventTemplate
+
+  """The `EventTemplateTr` that was deleted by this mutation."""
+  eventTemplateTr: EventTemplateTr
+
+  """An edge for our `EventTemplateTr`. May be used by Relay 1."""
+  eventTemplateTrEdge(
+    """The method to use when ordering `EventTemplateTr`."""
+    orderBy: [EventTemplateTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTemplateTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteEventTr` mutation."""
+input DeleteEventTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  eventId: BigInt!
+  languageCode: TrLanguage!
+}
+
+"""The output of our delete `EventTr` mutation."""
+type DeleteEventTrPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedEventTrNodeId: ID
+
+  """Reads a single `Event` that is related to this `EventTr`."""
+  event: Event
+
+  """The `EventTr` that was deleted by this mutation."""
+  eventTr: EventTr
+
+  """An edge for our `EventTr`. May be used by Relay 1."""
+  eventTrEdge(
+    """The method to use when ordering `EventTr`."""
+    orderBy: [EventTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteGroup` mutation."""
+input DeleteGroupInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+}
+
+"""The output of our delete `Group` mutation."""
+type DeleteGroupPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedGroupNodeId: ID
+
+  """The `Group` that was deleted by this mutation."""
+  group: Group
+
+  """An edge for our `Group`. May be used by Relay 1."""
+  groupEdge(
+    """The method to use when ordering `Group`."""
+    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): GroupsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteGroupTr` mutation."""
+input DeleteGroupTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  groupId: BigInt!
+  languageCode: TrLanguage!
+}
+
+"""The output of our delete `GroupTr` mutation."""
+type DeleteGroupTrPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedGroupTrNodeId: ID
+
+  """Reads a single `Group` that is related to this `GroupTr`."""
+  group: Group
+
+  """The `GroupTr` that was deleted by this mutation."""
+  groupTr: GroupTr
+
+  """An edge for our `GroupTr`. May be used by Relay 1."""
+  groupTrEdge(
+    """The method to use when ordering `GroupTr`."""
+    orderBy: [GroupTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): GroupTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteMemberByUsername` mutation."""
+input DeleteMemberByUsernameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  username: String!
+}
+
+"""All input for the `deleteMember` mutation."""
+input DeleteMemberInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: UUID!
+}
+
+"""The output of our delete `Member` mutation."""
+type DeleteMemberPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedMemberNodeId: ID
+
+  """The `Member` that was deleted by this mutation."""
+  member: Member
+
+  """An edge for our `Member`. May be used by Relay 1."""
+  memberEdge(
+    """The method to use when ordering `Member`."""
+    orderBy: [MembersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MembersEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deletePage` mutation."""
+input DeletePageInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  name: String!
+}
+
+"""The output of our delete `Page` mutation."""
+type DeletePagePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedPageNodeId: ID
+
+  """The `Page` that was deleted by this mutation."""
+  page: Page
+
+  """An edge for our `Page`. May be used by Relay 1."""
+  pageEdge(
+    """The method to use when ordering `Page`."""
+    orderBy: [PagesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PagesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deletePageTr` mutation."""
+input DeletePageTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  languageCode: TrLanguage!
+  pageName: String!
+}
+
+"""The output of our delete `PageTr` mutation."""
+type DeletePageTrPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedPageTrNodeId: ID
+
+  """Reads a single `Page` that is related to this `PageTr`."""
+  pageByPageName: Page
+
+  """The `PageTr` that was deleted by this mutation."""
+  pageTr: PageTr
+
+  """An edge for our `PageTr`. May be used by Relay 1."""
+  pageTrEdge(
+    """The method to use when ordering `PageTr`."""
+    orderBy: [PageTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PageTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+type Event {
+  """Reads a single `EventCategory` that is related to this `Event`."""
+  category: EventCategory
+  categoryId: BigInt!
+  endsAt: Datetime!
+  id: BigInt!
+  special: Boolean!
+  startsAt: Datetime!
+
+  """Reads and enables pagination through a set of `EventTr`."""
+  translations(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EventTrCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventTrFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `EventTr`."""
+    orderBy: [EventTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTrsConnection!
+}
+
+"""A connection to a list of `EventCategory` values."""
+type EventCategoriesConnection {
+  """
+  A list of edges which contains the `EventCategory` and cursor to aid in pagination.
+  """
+  edges: [EventCategoriesEdge!]!
+
+  """A list of `EventCategory` objects."""
+  nodes: [EventCategory!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `EventCategory` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `EventCategory` edge in the connection."""
+type EventCategoriesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `EventCategory` at the end of the edge."""
+  node: EventCategory!
+}
+
+"""Methods to use when ordering `EventCategory`."""
+enum EventCategoriesOrderBy {
+  ID_ASC
+  ID_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+type EventCategory {
+  """Reads and enables pagination through a set of `EventTemplate`."""
+  eventTemplatesByCategoryId(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EventTemplateCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventTemplateFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `EventTemplate`."""
+    orderBy: [EventTemplatesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTemplatesConnection!
+
+  """Reads and enables pagination through a set of `Event`."""
+  eventsByCategoryId(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EventCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Event`."""
+    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventsConnection!
+  id: BigInt!
+
+  """Reads and enables pagination through a set of `EventCategoryTr`."""
+  translations(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EventCategoryTrCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventCategoryTrFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `EventCategoryTr`."""
+    orderBy: [EventCategoryTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventCategoryTrsConnection!
+}
+
+"""
+A condition to be used against `EventCategory` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input EventCategoryCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: BigInt
+}
+
+"""
+A filter to be used against `EventCategory` object types. All fields are combined with a logical ‘and.’
+"""
+input EventCategoryFilter {
+  """Checks for all expressions in this list."""
+  and: [EventCategoryFilter!]
+
+  """Filter by the object’s `id` field."""
+  id: BigIntFilter
+
+  """Negates the expression."""
+  not: EventCategoryFilter
+
+  """Checks for any expressions in this list."""
+  or: [EventCategoryFilter!]
+}
+
+"""An input for mutations affecting `EventCategory`"""
+input EventCategoryInput {
+  id: BigInt
+}
+
+"""
+Represents an update to a `EventCategory`. Fields that are set will be updated.
+"""
+input EventCategoryPatch {
+  id: BigInt
+}
+
+type EventCategoryTr {
+  """
+  Reads a single `EventCategory` that is related to this `EventCategoryTr`.
+  """
+  category: EventCategory
+  categoryId: BigInt!
+  languageCode: TrLanguage!
+  title: String!
+}
+
+"""
+A condition to be used against `EventCategoryTr` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input EventCategoryTrCondition {
+  """Checks for equality with the object’s `categoryId` field."""
+  categoryId: BigInt
+
+  """Checks for equality with the object’s `languageCode` field."""
+  languageCode: TrLanguage
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+}
+
+"""
+A filter to be used against `EventCategoryTr` object types. All fields are combined with a logical ‘and.’
+"""
+input EventCategoryTrFilter {
+  """Checks for all expressions in this list."""
+  and: [EventCategoryTrFilter!]
+
+  """Filter by the object’s `categoryId` field."""
+  categoryId: BigIntFilter
+
+  """Filter by the object’s `languageCode` field."""
+  languageCode: TrLanguageFilter
+
+  """Negates the expression."""
+  not: EventCategoryTrFilter
+
+  """Checks for any expressions in this list."""
+  or: [EventCategoryTrFilter!]
+
+  """Filter by the object’s `title` field."""
+  title: StringFilter
+}
+
+"""An input for mutations affecting `EventCategoryTr`"""
+input EventCategoryTrInput {
+  categoryId: BigInt!
+  languageCode: TrLanguage!
+  title: String!
+}
+
+"""
+Represents an update to a `EventCategoryTr`. Fields that are set will be updated.
+"""
+input EventCategoryTrPatch {
+  categoryId: BigInt
+  languageCode: TrLanguage
+  title: String
+}
+
+"""A connection to a list of `EventCategoryTr` values."""
+type EventCategoryTrsConnection {
+  """
+  A list of edges which contains the `EventCategoryTr` and cursor to aid in pagination.
+  """
+  edges: [EventCategoryTrsEdge!]!
+
+  """A list of `EventCategoryTr` objects."""
+  nodes: [EventCategoryTr!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `EventCategoryTr` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+"""A `EventCategoryTr` edge in the connection."""
+type EventCategoryTrsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `EventCategoryTr` at the end of the edge."""
+  node: EventCategoryTr!
+}
+
+"""Methods to use when ordering `EventCategoryTr`."""
+enum EventCategoryTrsOrderBy {
+  CATEGORY_ID_ASC
+  CATEGORY_ID_DESC
+  LANGUAGE_CODE_ASC
+  LANGUAGE_CODE_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  TITLE_ASC
+  TITLE_DESC
+}
+
+"""
+A condition to be used against `Event` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input EventCondition {
+  """Checks for equality with the object’s `categoryId` field."""
+  categoryId: BigInt
+
+  """Checks for equality with the object’s `endsAt` field."""
+  endsAt: Datetime
+
+  """Checks for equality with the object’s `id` field."""
+  id: BigInt
+
+  """Checks for equality with the object’s `special` field."""
+  special: Boolean
+
+  """Checks for equality with the object’s `startsAt` field."""
+  startsAt: Datetime
+}
+
+"""
+A filter to be used against `Event` object types. All fields are combined with a logical ‘and.’
+"""
+input EventFilter {
+  """Checks for all expressions in this list."""
+  and: [EventFilter!]
+
+  """Filter by the object’s `categoryId` field."""
+  categoryId: BigIntFilter
+
+  """Filter by the object’s `endsAt` field."""
+  endsAt: DatetimeFilter
+
+  """Filter by the object’s `id` field."""
+  id: BigIntFilter
+
+  """Negates the expression."""
+  not: EventFilter
+
+  """Checks for any expressions in this list."""
+  or: [EventFilter!]
+
+  """Filter by the object’s `special` field."""
+  special: BooleanFilter
+
+  """Filter by the object’s `startsAt` field."""
+  startsAt: DatetimeFilter
+}
+
+"""An input for mutations affecting `Event`"""
+input EventInput {
+  categoryId: BigInt!
+  endsAt: Datetime!
+  id: BigInt
+  special: Boolean!
+  startsAt: Datetime!
+}
+
+"""
+Represents an update to a `Event`. Fields that are set will be updated.
+"""
+input EventPatch {
+  categoryId: BigInt
+  endsAt: Datetime
+  id: BigInt
+  special: Boolean
+  startsAt: Datetime
+}
+
+type EventTemplate {
+  """
+  Reads a single `EventCategory` that is related to this `EventTemplate`.
+  """
+  category: EventCategory
+  categoryId: BigInt!
+  id: BigInt!
+
+  """Reads and enables pagination through a set of `EventTemplateTr`."""
+  translations(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EventTemplateTrCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventTemplateTrFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `EventTemplateTr`."""
+    orderBy: [EventTemplateTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTemplateTrsConnection!
+}
+
+"""
+A condition to be used against `EventTemplate` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input EventTemplateCondition {
+  """Checks for equality with the object’s `categoryId` field."""
+  categoryId: BigInt
+
+  """Checks for equality with the object’s `id` field."""
+  id: BigInt
+}
+
+"""
+A filter to be used against `EventTemplate` object types. All fields are combined with a logical ‘and.’
+"""
+input EventTemplateFilter {
+  """Checks for all expressions in this list."""
+  and: [EventTemplateFilter!]
+
+  """Filter by the object’s `categoryId` field."""
+  categoryId: BigIntFilter
+
+  """Filter by the object’s `id` field."""
+  id: BigIntFilter
+
+  """Negates the expression."""
+  not: EventTemplateFilter
+
+  """Checks for any expressions in this list."""
+  or: [EventTemplateFilter!]
+}
+
+"""An input for mutations affecting `EventTemplate`"""
+input EventTemplateInput {
+  categoryId: BigInt!
+  id: BigInt
+}
+
+"""
+Represents an update to a `EventTemplate`. Fields that are set will be updated.
+"""
+input EventTemplatePatch {
+  categoryId: BigInt
+  id: BigInt
+}
+
+type EventTemplateTr {
+  description: String!
+
+  """
+  Reads a single `EventTemplate` that is related to this `EventTemplateTr`.
+  """
+  eventTemplate: EventTemplate
+  eventTemplateId: BigInt!
+  languageCode: TrLanguage!
+  title: String!
+  venue: String!
+}
+
+"""
+A condition to be used against `EventTemplateTr` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input EventTemplateTrCondition {
+  """Checks for equality with the object’s `description` field."""
+  description: String
+
+  """Checks for equality with the object’s `eventTemplateId` field."""
+  eventTemplateId: BigInt
+
+  """Checks for equality with the object’s `languageCode` field."""
+  languageCode: TrLanguage
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+
+  """Checks for equality with the object’s `venue` field."""
+  venue: String
+}
+
+"""
+A filter to be used against `EventTemplateTr` object types. All fields are combined with a logical ‘and.’
+"""
+input EventTemplateTrFilter {
+  """Checks for all expressions in this list."""
+  and: [EventTemplateTrFilter!]
+
+  """Filter by the object’s `description` field."""
+  description: StringFilter
+
+  """Filter by the object’s `eventTemplateId` field."""
+  eventTemplateId: BigIntFilter
+
+  """Filter by the object’s `languageCode` field."""
+  languageCode: TrLanguageFilter
+
+  """Negates the expression."""
+  not: EventTemplateTrFilter
+
+  """Checks for any expressions in this list."""
+  or: [EventTemplateTrFilter!]
+
+  """Filter by the object’s `title` field."""
+  title: StringFilter
+
+  """Filter by the object’s `venue` field."""
+  venue: StringFilter
+}
+
+"""An input for mutations affecting `EventTemplateTr`"""
+input EventTemplateTrInput {
+  description: String!
+  eventTemplateId: BigInt!
+  languageCode: TrLanguage!
+  title: String!
+  venue: String!
+}
+
+"""
+Represents an update to a `EventTemplateTr`. Fields that are set will be updated.
+"""
+input EventTemplateTrPatch {
+  description: String
+  eventTemplateId: BigInt
+  languageCode: TrLanguage
+  title: String
+  venue: String
+}
+
+"""A connection to a list of `EventTemplateTr` values."""
+type EventTemplateTrsConnection {
+  """
+  A list of edges which contains the `EventTemplateTr` and cursor to aid in pagination.
+  """
+  edges: [EventTemplateTrsEdge!]!
+
+  """A list of `EventTemplateTr` objects."""
+  nodes: [EventTemplateTr!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `EventTemplateTr` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+"""A `EventTemplateTr` edge in the connection."""
+type EventTemplateTrsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `EventTemplateTr` at the end of the edge."""
+  node: EventTemplateTr!
+}
+
+"""Methods to use when ordering `EventTemplateTr`."""
+enum EventTemplateTrsOrderBy {
+  DESCRIPTION_ASC
+  DESCRIPTION_DESC
+  EVENT_TEMPLATE_ID_ASC
+  EVENT_TEMPLATE_ID_DESC
+  LANGUAGE_CODE_ASC
+  LANGUAGE_CODE_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  TITLE_ASC
+  TITLE_DESC
+  VENUE_ASC
+  VENUE_DESC
+}
+
+"""A connection to a list of `EventTemplate` values."""
+type EventTemplatesConnection {
+  """
+  A list of edges which contains the `EventTemplate` and cursor to aid in pagination.
+  """
+  edges: [EventTemplatesEdge!]!
+
+  """A list of `EventTemplate` objects."""
+  nodes: [EventTemplate!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `EventTemplate` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `EventTemplate` edge in the connection."""
+type EventTemplatesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `EventTemplate` at the end of the edge."""
+  node: EventTemplate!
+}
+
+"""Methods to use when ordering `EventTemplate`."""
+enum EventTemplatesOrderBy {
+  CATEGORY_ID_ASC
+  CATEGORY_ID_DESC
+  ID_ASC
+  ID_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+type EventTr {
+  description: String!
+
+  """Reads a single `Event` that is related to this `EventTr`."""
+  event: Event
+  eventId: BigInt!
+  languageCode: TrLanguage!
+  slug: String!
+  title: String!
+  venue: String!
+}
+
+"""
+A condition to be used against `EventTr` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input EventTrCondition {
+  """Checks for equality with the object’s `description` field."""
+  description: String
+
+  """Checks for equality with the object’s `eventId` field."""
+  eventId: BigInt
+
+  """Checks for equality with the object’s `languageCode` field."""
+  languageCode: TrLanguage
+
+  """Checks for equality with the object’s `slug` field."""
+  slug: String
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+
+  """Checks for equality with the object’s `venue` field."""
+  venue: String
+}
+
+"""
+A filter to be used against `EventTr` object types. All fields are combined with a logical ‘and.’
+"""
+input EventTrFilter {
+  """Checks for all expressions in this list."""
+  and: [EventTrFilter!]
+
+  """Filter by the object’s `description` field."""
+  description: StringFilter
+
+  """Filter by the object’s `eventId` field."""
+  eventId: BigIntFilter
+
+  """Filter by the object’s `languageCode` field."""
+  languageCode: TrLanguageFilter
+
+  """Negates the expression."""
+  not: EventTrFilter
+
+  """Checks for any expressions in this list."""
+  or: [EventTrFilter!]
+
+  """Filter by the object’s `slug` field."""
+  slug: StringFilter
+
+  """Filter by the object’s `title` field."""
+  title: StringFilter
+
+  """Filter by the object’s `venue` field."""
+  venue: StringFilter
+}
+
+"""An input for mutations affecting `EventTr`"""
+input EventTrInput {
+  description: String!
+  eventId: BigInt!
+  languageCode: TrLanguage!
+  slug: String!
+  title: String!
+  venue: String!
+}
+
+"""
+Represents an update to a `EventTr`. Fields that are set will be updated.
+"""
+input EventTrPatch {
+  description: String
+  eventId: BigInt
+  languageCode: TrLanguage
+  slug: String
+  title: String
+  venue: String
+}
+
+"""A connection to a list of `EventTr` values."""
+type EventTrsConnection {
+  """
+  A list of edges which contains the `EventTr` and cursor to aid in pagination.
+  """
+  edges: [EventTrsEdge!]!
+
+  """A list of `EventTr` objects."""
+  nodes: [EventTr!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `EventTr` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `EventTr` edge in the connection."""
+type EventTrsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `EventTr` at the end of the edge."""
+  node: EventTr!
+}
+
+"""Methods to use when ordering `EventTr`."""
+enum EventTrsOrderBy {
+  DESCRIPTION_ASC
+  DESCRIPTION_DESC
+  EVENT_ID_ASC
+  EVENT_ID_DESC
+  LANGUAGE_CODE_ASC
+  LANGUAGE_CODE_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  SLUG_ASC
+  SLUG_DESC
+  TITLE_ASC
+  TITLE_DESC
+  VENUE_ASC
+  VENUE_DESC
+}
+
+"""A connection to a list of `Event` values."""
+type EventsConnection {
+  """
+  A list of edges which contains the `Event` and cursor to aid in pagination.
+  """
+  edges: [EventsEdge!]!
+
+  """A list of `Event` objects."""
+  nodes: [Event!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Event` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Event` edge in the connection."""
+type EventsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Event` at the end of the edge."""
+  node: Event!
+}
+
+"""Methods to use when ordering `Event`."""
+enum EventsOrderBy {
+  CATEGORY_ID_ASC
+  CATEGORY_ID_DESC
+  ENDS_AT_ASC
+  ENDS_AT_DESC
+  ID_ASC
+  ID_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  SPECIAL_ASC
+  SPECIAL_DESC
+  STARTS_AT_ASC
+  STARTS_AT_DESC
+}
+
+"""All input for the `formatArray` mutation."""
+input FormatArrayInput {
+  arr: [String]!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  delim: String!
+  formatStr: String!
+}
+
+"""The output of our `formatArray` mutation."""
+type FormatArrayPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+  string: String
+}
+
+"""All input for the `getColumns` mutation."""
+input GetColumnsInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  excludeColumns: [String]!
+  tableName: String!
+}
+
+"""The output of our `getColumns` mutation."""
+type GetColumnsPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+  strings: [String]
+}
+
+type Group {
+  id: BigInt!
+  imageFile: String
+
+  """Reads and enables pagination through a set of `GroupTr`."""
+  translations(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: GroupTrCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: GroupTrFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `GroupTr`."""
+    orderBy: [GroupTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): GroupTrsConnection!
+}
+
+"""
+A condition to be used against `Group` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input GroupCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: BigInt
+
+  """Checks for equality with the object’s `imageFile` field."""
+  imageFile: String
+}
+
+"""
+A filter to be used against `Group` object types. All fields are combined with a logical ‘and.’
+"""
+input GroupFilter {
+  """Checks for all expressions in this list."""
+  and: [GroupFilter!]
+
+  """Filter by the object’s `id` field."""
+  id: BigIntFilter
+
+  """Filter by the object’s `imageFile` field."""
+  imageFile: StringFilter
+
+  """Negates the expression."""
+  not: GroupFilter
+
+  """Checks for any expressions in this list."""
+  or: [GroupFilter!]
+}
+
+"""An input for mutations affecting `Group`"""
+input GroupInput {
+  id: BigInt
+  imageFile: String
+}
+
+"""
+Represents an update to a `Group`. Fields that are set will be updated.
+"""
+input GroupPatch {
+  id: BigInt
+  imageFile: String
+}
+
+type GroupTr {
+  description: String!
+
+  """Reads a single `Group` that is related to this `GroupTr`."""
+  group: Group
+  groupId: BigInt!
+  languageCode: TrLanguage!
+  title: String!
+}
+
+"""
+A condition to be used against `GroupTr` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input GroupTrCondition {
+  """Checks for equality with the object’s `description` field."""
+  description: String
+
+  """Checks for equality with the object’s `groupId` field."""
+  groupId: BigInt
+
+  """Checks for equality with the object’s `languageCode` field."""
+  languageCode: TrLanguage
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+}
+
+"""
+A filter to be used against `GroupTr` object types. All fields are combined with a logical ‘and.’
+"""
+input GroupTrFilter {
+  """Checks for all expressions in this list."""
+  and: [GroupTrFilter!]
+
+  """Filter by the object’s `description` field."""
+  description: StringFilter
+
+  """Filter by the object’s `groupId` field."""
+  groupId: BigIntFilter
+
+  """Filter by the object’s `languageCode` field."""
+  languageCode: TrLanguageFilter
+
+  """Negates the expression."""
+  not: GroupTrFilter
+
+  """Checks for any expressions in this list."""
+  or: [GroupTrFilter!]
+
+  """Filter by the object’s `title` field."""
+  title: StringFilter
+}
+
+"""An input for mutations affecting `GroupTr`"""
+input GroupTrInput {
+  description: String!
+  groupId: BigInt!
+  languageCode: TrLanguage!
+  title: String!
+}
+
+"""
+Represents an update to a `GroupTr`. Fields that are set will be updated.
+"""
+input GroupTrPatch {
+  description: String
+  groupId: BigInt
+  languageCode: TrLanguage
+  title: String
+}
+
+"""A connection to a list of `GroupTr` values."""
+type GroupTrsConnection {
+  """
+  A list of edges which contains the `GroupTr` and cursor to aid in pagination.
+  """
+  edges: [GroupTrsEdge!]!
+
+  """A list of `GroupTr` objects."""
+  nodes: [GroupTr!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `GroupTr` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `GroupTr` edge in the connection."""
+type GroupTrsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `GroupTr` at the end of the edge."""
+  node: GroupTr!
+}
+
+"""Methods to use when ordering `GroupTr`."""
+enum GroupTrsOrderBy {
+  DESCRIPTION_ASC
+  DESCRIPTION_DESC
+  GROUP_ID_ASC
+  GROUP_ID_DESC
+  LANGUAGE_CODE_ASC
+  LANGUAGE_CODE_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  TITLE_ASC
+  TITLE_DESC
+}
+
+"""A connection to a list of `Group` values."""
+type GroupsConnection {
+  """
+  A list of edges which contains the `Group` and cursor to aid in pagination.
+  """
+  edges: [GroupsEdge!]!
+
+  """A list of `Group` objects."""
+  nodes: [Group!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Group` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Group` edge in the connection."""
+type GroupsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Group` at the end of the edge."""
+  node: Group!
+}
+
+"""Methods to use when ordering `Group`."""
+enum GroupsOrderBy {
+  ID_ASC
+  ID_DESC
+  IMAGE_FILE_ASC
+  IMAGE_FILE_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+type Member {
+  id: UUID!
+  isActive: Boolean!
+  name: String!
+  userRole: String!
+  username: String!
+}
+
+"""
+A condition to be used against `Member` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input MemberCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: UUID
+
+  """Checks for equality with the object’s `isActive` field."""
+  isActive: Boolean
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
+
+  """Checks for equality with the object’s `userRole` field."""
+  userRole: String
+
+  """Checks for equality with the object’s `username` field."""
+  username: String
+}
+
+"""
+A filter to be used against `Member` object types. All fields are combined with a logical ‘and.’
+"""
+input MemberFilter {
+  """Checks for all expressions in this list."""
+  and: [MemberFilter!]
+
+  """Filter by the object’s `id` field."""
+  id: UUIDFilter
+
+  """Filter by the object’s `isActive` field."""
+  isActive: BooleanFilter
+
+  """Filter by the object’s `name` field."""
+  name: StringFilter
+
+  """Negates the expression."""
+  not: MemberFilter
+
+  """Checks for any expressions in this list."""
+  or: [MemberFilter!]
+
+  """Filter by the object’s `userRole` field."""
+  userRole: StringFilter
+
+  """Filter by the object’s `username` field."""
+  username: StringFilter
+}
+
+"""An input for mutations affecting `Member`"""
+input MemberInput {
+  id: UUID
+  isActive: Boolean!
+  name: String!
+  userRole: String!
+  username: String!
+}
+
+"""
+Represents an update to a `Member`. Fields that are set will be updated.
+"""
+input MemberPatch {
+  id: UUID
+  isActive: Boolean
+  name: String
+  userRole: String
+  username: String
+}
+
+"""A connection to a list of `Member` values."""
+type MembersConnection {
+  """
+  A list of edges which contains the `Member` and cursor to aid in pagination.
+  """
+  edges: [MembersEdge!]!
+
+  """A list of `Member` objects."""
+  nodes: [Member!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Member` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Member` edge in the connection."""
+type MembersEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Member` at the end of the edge."""
+  node: Member!
+}
+
+"""Methods to use when ordering `Member`."""
+enum MembersOrderBy {
+  ID_ASC
+  ID_DESC
+  IS_ACTIVE_ASC
+  IS_ACTIVE_DESC
+  NAME_ASC
+  NAME_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  USERNAME_ASC
+  USERNAME_DESC
+  USER_ROLE_ASC
+  USER_ROLE_DESC
+}
+
+"""
+The root mutation type which contains root level fields which mutate data.
+"""
+type Mutation {
+  """Creates a single `Event`."""
+  createEvent(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateEventInput!
+  ): CreateEventPayload
+
+  """Creates a single `EventCategory`."""
+  createEventCategory(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateEventCategoryInput!
+  ): CreateEventCategoryPayload
+
+  """Creates a single `EventCategoryTr`."""
+  createEventCategoryTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateEventCategoryTrInput!
+  ): CreateEventCategoryTrPayload
+
+  """Creates a single `EventTemplate`."""
+  createEventTemplate(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateEventTemplateInput!
+  ): CreateEventTemplatePayload
+
+  """Creates a single `EventTemplateTr`."""
+  createEventTemplateTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateEventTemplateTrInput!
+  ): CreateEventTemplateTrPayload
+
+  """Creates a single `EventTr`."""
+  createEventTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateEventTrInput!
+  ): CreateEventTrPayload
+
+  """Creates a single `Group`."""
+  createGroup(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateGroupInput!
+  ): CreateGroupPayload
+
+  """Creates a single `GroupTr`."""
+  createGroupTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateGroupTrInput!
+  ): CreateGroupTrPayload
+
+  """Creates a single `Member`."""
+  createMember(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateMemberInput!
+  ): CreateMemberPayload
+
+  """Creates a single `Page`."""
+  createPage(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreatePageInput!
+  ): CreatePagePayload
+
+  """Creates a single `PageTr`."""
+  createPageTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreatePageTrInput!
+  ): CreatePageTrPayload
+
+  """Deletes a single `Event` using a unique key."""
+  deleteEvent(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteEventInput!
+  ): DeleteEventPayload
+
+  """Deletes a single `EventCategory` using a unique key."""
+  deleteEventCategory(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteEventCategoryInput!
+  ): DeleteEventCategoryPayload
+
+  """Deletes a single `EventCategoryTr` using a unique key."""
+  deleteEventCategoryTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteEventCategoryTrInput!
+  ): DeleteEventCategoryTrPayload
+
+  """Deletes a single `EventTemplate` using a unique key."""
+  deleteEventTemplate(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteEventTemplateInput!
+  ): DeleteEventTemplatePayload
+
+  """Deletes a single `EventTemplateTr` using a unique key."""
+  deleteEventTemplateTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteEventTemplateTrInput!
+  ): DeleteEventTemplateTrPayload
+
+  """Deletes a single `EventTr` using a unique key."""
+  deleteEventTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteEventTrInput!
+  ): DeleteEventTrPayload
+
+  """Deletes a single `Group` using a unique key."""
+  deleteGroup(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteGroupInput!
+  ): DeleteGroupPayload
+
+  """Deletes a single `GroupTr` using a unique key."""
+  deleteGroupTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteGroupTrInput!
+  ): DeleteGroupTrPayload
+
+  """Deletes a single `Member` using a unique key."""
+  deleteMember(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteMemberInput!
+  ): DeleteMemberPayload
+
+  """Deletes a single `Member` using a unique key."""
+  deleteMemberByUsername(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteMemberByUsernameInput!
+  ): DeleteMemberPayload
+
+  """Deletes a single `Page` using a unique key."""
+  deletePage(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeletePageInput!
+  ): DeletePagePayload
+
+  """Deletes a single `PageTr` using a unique key."""
+  deletePageTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeletePageTrInput!
+  ): DeletePageTrPayload
+  formatArray(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: FormatArrayInput!
+  ): FormatArrayPayload
+  getColumns(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: GetColumnsInput!
+  ): GetColumnsPayload
+
+  """Updates a single `Event` using a unique key and a patch."""
+  updateEvent(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateEventInput!
+  ): UpdateEventPayload
+
+  """Updates a single `EventCategory` using a unique key and a patch."""
+  updateEventCategory(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateEventCategoryInput!
+  ): UpdateEventCategoryPayload
+
+  """Updates a single `EventCategoryTr` using a unique key and a patch."""
+  updateEventCategoryTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateEventCategoryTrInput!
+  ): UpdateEventCategoryTrPayload
+
+  """Updates a single `EventTemplate` using a unique key and a patch."""
+  updateEventTemplate(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateEventTemplateInput!
+  ): UpdateEventTemplatePayload
+
+  """Updates a single `EventTemplateTr` using a unique key and a patch."""
+  updateEventTemplateTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateEventTemplateTrInput!
+  ): UpdateEventTemplateTrPayload
+
+  """Updates a single `EventTr` using a unique key and a patch."""
+  updateEventTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateEventTrInput!
+  ): UpdateEventTrPayload
+
+  """Updates a single `Group` using a unique key and a patch."""
+  updateGroup(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateGroupInput!
+  ): UpdateGroupPayload
+
+  """Updates a single `GroupTr` using a unique key and a patch."""
+  updateGroupTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateGroupTrInput!
+  ): UpdateGroupTrPayload
+
+  """Updates a single `Member` using a unique key and a patch."""
+  updateMember(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateMemberInput!
+  ): UpdateMemberPayload
+
+  """Updates a single `Member` using a unique key and a patch."""
+  updateMemberByUsername(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateMemberByUsernameInput!
+  ): UpdateMemberPayload
+
+  """Updates a single `Page` using a unique key and a patch."""
+  updatePage(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdatePageInput!
+  ): UpdatePagePayload
+
+  """Updates a single `PageTr` using a unique key and a patch."""
+  updatePageTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdatePageTrInput!
+  ): UpdatePageTrPayload
+}
+
+type Page {
+  name: String!
+
+  """Reads and enables pagination through a set of `PageTr`."""
+  translations(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: PageTrCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: PageTrFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `PageTr`."""
+    orderBy: [PageTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PageTrsConnection!
+}
+
+"""
+A condition to be used against `Page` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input PageCondition {
+  """Checks for equality with the object’s `name` field."""
+  name: String
+}
+
+"""
+A filter to be used against `Page` object types. All fields are combined with a logical ‘and.’
+"""
+input PageFilter {
+  """Checks for all expressions in this list."""
+  and: [PageFilter!]
+
+  """Filter by the object’s `name` field."""
+  name: StringFilter
+
+  """Negates the expression."""
+  not: PageFilter
+
+  """Checks for any expressions in this list."""
+  or: [PageFilter!]
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: Cursor
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: Cursor
+}
+
+"""An input for mutations affecting `Page`"""
+input PageInput {
+  name: String!
+}
+
+"""Represents an update to a `Page`. Fields that are set will be updated."""
+input PagePatch {
+  name: String
+}
+
+type PageTr {
+  content: String!
+  languageCode: TrLanguage!
+
+  """Reads a single `Page` that is related to this `PageTr`."""
+  pageByPageName: Page
+  pageName: String!
+}
+
+"""
+A condition to be used against `PageTr` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input PageTrCondition {
+  """Checks for equality with the object’s `content` field."""
+  content: String
+
+  """Checks for equality with the object’s `languageCode` field."""
+  languageCode: TrLanguage
+
+  """Checks for equality with the object’s `pageName` field."""
+  pageName: String
+}
+
+"""
+A filter to be used against `PageTr` object types. All fields are combined with a logical ‘and.’
+"""
+input PageTrFilter {
+  """Checks for all expressions in this list."""
+  and: [PageTrFilter!]
+
+  """Filter by the object’s `content` field."""
+  content: StringFilter
+
+  """Filter by the object’s `languageCode` field."""
+  languageCode: TrLanguageFilter
+
+  """Negates the expression."""
+  not: PageTrFilter
+
+  """Checks for any expressions in this list."""
+  or: [PageTrFilter!]
+
+  """Filter by the object’s `pageName` field."""
+  pageName: StringFilter
+}
+
+"""An input for mutations affecting `PageTr`"""
+input PageTrInput {
+  content: String!
+  languageCode: TrLanguage!
+  pageName: String!
+}
+
+"""
+Represents an update to a `PageTr`. Fields that are set will be updated.
+"""
+input PageTrPatch {
+  content: String
+  languageCode: TrLanguage
+  pageName: String
+}
+
+"""A connection to a list of `PageTr` values."""
+type PageTrsConnection {
+  """
+  A list of edges which contains the `PageTr` and cursor to aid in pagination.
+  """
+  edges: [PageTrsEdge!]!
+
+  """A list of `PageTr` objects."""
+  nodes: [PageTr!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `PageTr` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `PageTr` edge in the connection."""
+type PageTrsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `PageTr` at the end of the edge."""
+  node: PageTr!
+}
+
+"""Methods to use when ordering `PageTr`."""
+enum PageTrsOrderBy {
+  CONTENT_ASC
+  CONTENT_DESC
+  LANGUAGE_CODE_ASC
+  LANGUAGE_CODE_DESC
+  NATURAL
+  PAGE_NAME_ASC
+  PAGE_NAME_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""A connection to a list of `Page` values."""
+type PagesConnection {
+  """
+  A list of edges which contains the `Page` and cursor to aid in pagination.
+  """
+  edges: [PagesEdge!]!
+
+  """A list of `Page` objects."""
+  nodes: [Page!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Page` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Page` edge in the connection."""
+type PagesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Page` at the end of the edge."""
+  node: Page!
+}
+
+"""Methods to use when ordering `Page`."""
+enum PagesOrderBy {
+  NAME_ASC
+  NAME_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""The root query type which gives access points into the data universe."""
+type Query {
+  arrayDiff(array1: String!, array2: String!): String
+  event(id: BigInt!): Event
+
+  """Reads and enables pagination through a set of `EventCategory`."""
+  eventCategories(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EventCategoryCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventCategoryFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `EventCategory`."""
+    orderBy: [EventCategoriesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventCategoriesConnection
+  eventCategory(id: BigInt!): EventCategory
+  eventCategoryTr(categoryId: BigInt!, languageCode: TrLanguage!): EventCategoryTr
+
+  """Reads and enables pagination through a set of `EventCategoryTr`."""
+  eventCategoryTrs(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EventCategoryTrCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventCategoryTrFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `EventCategoryTr`."""
+    orderBy: [EventCategoryTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventCategoryTrsConnection
+  eventTemplate(id: BigInt!): EventTemplate
+  eventTemplateTr(eventTemplateId: BigInt!, languageCode: TrLanguage!): EventTemplateTr
+
+  """Reads and enables pagination through a set of `EventTemplateTr`."""
+  eventTemplateTrs(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EventTemplateTrCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventTemplateTrFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `EventTemplateTr`."""
+    orderBy: [EventTemplateTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTemplateTrsConnection
+
+  """Reads and enables pagination through a set of `EventTemplate`."""
+  eventTemplates(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EventTemplateCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventTemplateFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `EventTemplate`."""
+    orderBy: [EventTemplatesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTemplatesConnection
+  eventTr(eventId: BigInt!, languageCode: TrLanguage!): EventTr
+
+  """Reads and enables pagination through a set of `EventTr`."""
+  eventTrs(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EventTrCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventTrFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `EventTr`."""
+    orderBy: [EventTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTrsConnection
+
+  """Reads and enables pagination through a set of `Event`."""
+  events(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EventCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Event`."""
+    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventsConnection
+  fRegexpEscape(arg0: String!): String
+  group(id: BigInt!): Group
+  groupTr(groupId: BigInt!, languageCode: TrLanguage!): GroupTr
+
+  """Reads and enables pagination through a set of `GroupTr`."""
+  groupTrs(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: GroupTrCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: GroupTrFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `GroupTr`."""
+    orderBy: [GroupTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): GroupTrsConnection
+
+  """Reads and enables pagination through a set of `Group`."""
+  groups(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: GroupCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: GroupFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Group`."""
+    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): GroupsConnection
+  member(id: UUID!): Member
+  memberByUsername(username: String!): Member
+
+  """Reads and enables pagination through a set of `Member`."""
+  members(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: MemberCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: MemberFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Member`."""
+    orderBy: [MembersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MembersConnection
+  page(name: String!): Page
+  pageTr(languageCode: TrLanguage!, pageName: String!): PageTr
+
+  """Reads and enables pagination through a set of `PageTr`."""
+  pageTrs(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: PageTrCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: PageTrFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `PageTr`."""
+    orderBy: [PageTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PageTrsConnection
+
+  """Reads and enables pagination through a set of `Page`."""
+  pages(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: PageCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: PageFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Page`."""
+    orderBy: [PagesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PagesConnection
+
+  """
+  Exposes the root query type nested one level down. This is helpful for Relay 1
+  which can only query top level fields if they are in a particular form.
+  """
+  query: Query!
+  slugify(t: String!): String
+}
+
+"""
+A filter to be used against String fields. All fields are combined with a logical ‘and.’
+"""
+input StringFilter {
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: String
+
+  """
+  Not equal to the specified value, treating null like an ordinary value (case-insensitive).
+  """
+  distinctFromInsensitive: String
+
+  """Ends with the specified string (case-sensitive)."""
+  endsWith: String
+
+  """Ends with the specified string (case-insensitive)."""
+  endsWithInsensitive: String
+
+  """Equal to the specified value."""
+  equalTo: String
+
+  """Equal to the specified value (case-insensitive)."""
+  equalToInsensitive: String
+
+  """Greater than the specified value."""
+  greaterThan: String
+
+  """Greater than the specified value (case-insensitive)."""
+  greaterThanInsensitive: String
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: String
+
+  """Greater than or equal to the specified value (case-insensitive)."""
+  greaterThanOrEqualToInsensitive: String
+
+  """Included in the specified list."""
+  in: [String!]
+
+  """Included in the specified list (case-insensitive)."""
+  inInsensitive: [String!]
+
+  """Contains the specified string (case-sensitive)."""
+  includes: String
+
+  """Contains the specified string (case-insensitive)."""
+  includesInsensitive: String
+
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Less than the specified value."""
+  lessThan: String
+
+  """Less than the specified value (case-insensitive)."""
+  lessThanInsensitive: String
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: String
+
+  """Less than or equal to the specified value (case-insensitive)."""
+  lessThanOrEqualToInsensitive: String
+
+  """
+  Matches the specified pattern (case-sensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.
+  """
+  like: String
+
+  """
+  Matches the specified pattern (case-insensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.
+  """
+  likeInsensitive: String
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: String
+
+  """
+  Equal to the specified value, treating null like an ordinary value (case-insensitive).
+  """
+  notDistinctFromInsensitive: String
+
+  """Does not end with the specified string (case-sensitive)."""
+  notEndsWith: String
+
+  """Does not end with the specified string (case-insensitive)."""
+  notEndsWithInsensitive: String
+
+  """Not equal to the specified value."""
+  notEqualTo: String
+
+  """Not equal to the specified value (case-insensitive)."""
+  notEqualToInsensitive: String
+
+  """Not included in the specified list."""
+  notIn: [String!]
+
+  """Not included in the specified list (case-insensitive)."""
+  notInInsensitive: [String!]
+
+  """Does not contain the specified string (case-sensitive)."""
+  notIncludes: String
+
+  """Does not contain the specified string (case-insensitive)."""
+  notIncludesInsensitive: String
+
+  """
+  Does not match the specified pattern (case-sensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.
+  """
+  notLike: String
+
+  """
+  Does not match the specified pattern (case-insensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.
+  """
+  notLikeInsensitive: String
+
+  """Does not start with the specified string (case-sensitive)."""
+  notStartsWith: String
+
+  """Does not start with the specified string (case-insensitive)."""
+  notStartsWithInsensitive: String
+
+  """Starts with the specified string (case-sensitive)."""
+  startsWith: String
+
+  """Starts with the specified string (case-insensitive)."""
+  startsWithInsensitive: String
+}
+
+enum TrLanguage {
+  DA
+  EN
+}
+
+"""
+A filter to be used against TrLanguage fields. All fields are combined with a logical ‘and.’
+"""
+input TrLanguageFilter {
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: TrLanguage
+
+  """Equal to the specified value."""
+  equalTo: TrLanguage
+
+  """Greater than the specified value."""
+  greaterThan: TrLanguage
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: TrLanguage
+
+  """Included in the specified list."""
+  in: [TrLanguage!]
+
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Less than the specified value."""
+  lessThan: TrLanguage
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: TrLanguage
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: TrLanguage
+
+  """Not equal to the specified value."""
+  notEqualTo: TrLanguage
+
+  """Not included in the specified list."""
+  notIn: [TrLanguage!]
+}
+
+"""
+A universally unique identifier as defined by [RFC 4122](https://tools.ietf.org/html/rfc4122).
+"""
+scalar UUID
+
+"""
+A filter to be used against UUID fields. All fields are combined with a logical ‘and.’
+"""
+input UUIDFilter {
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: UUID
+
+  """Equal to the specified value."""
+  equalTo: UUID
+
+  """Greater than the specified value."""
+  greaterThan: UUID
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: UUID
+
+  """Included in the specified list."""
+  in: [UUID!]
+
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Less than the specified value."""
+  lessThan: UUID
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: UUID
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: UUID
+
+  """Not equal to the specified value."""
+  notEqualTo: UUID
+
+  """Not included in the specified list."""
+  notIn: [UUID!]
+}
+
+"""All input for the `updateEventCategory` mutation."""
+input UpdateEventCategoryInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+
+  """
+  An object where the defined keys will be set on the `EventCategory` being updated.
+  """
+  patch: EventCategoryPatch!
+}
+
+"""The output of our update `EventCategory` mutation."""
+type UpdateEventCategoryPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `EventCategory` that was updated by this mutation."""
+  eventCategory: EventCategory
+
+  """An edge for our `EventCategory`. May be used by Relay 1."""
+  eventCategoryEdge(
+    """The method to use when ordering `EventCategory`."""
+    orderBy: [EventCategoriesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventCategoriesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateEventCategoryTr` mutation."""
+input UpdateEventCategoryTrInput {
+  categoryId: BigInt!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  languageCode: TrLanguage!
+
+  """
+  An object where the defined keys will be set on the `EventCategoryTr` being updated.
+  """
+  patch: EventCategoryTrPatch!
+}
+
+"""The output of our update `EventCategoryTr` mutation."""
+type UpdateEventCategoryTrPayload {
+  """
+  Reads a single `EventCategory` that is related to this `EventCategoryTr`.
+  """
+  category: EventCategory
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `EventCategoryTr` that was updated by this mutation."""
+  eventCategoryTr: EventCategoryTr
+
+  """An edge for our `EventCategoryTr`. May be used by Relay 1."""
+  eventCategoryTrEdge(
+    """The method to use when ordering `EventCategoryTr`."""
+    orderBy: [EventCategoryTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventCategoryTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateEvent` mutation."""
+input UpdateEventInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+
+  """
+  An object where the defined keys will be set on the `Event` being updated.
+  """
+  patch: EventPatch!
+}
+
+"""The output of our update `Event` mutation."""
+type UpdateEventPayload {
+  """Reads a single `EventCategory` that is related to this `Event`."""
+  category: EventCategory
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Event` that was updated by this mutation."""
+  event: Event
+
+  """An edge for our `Event`. May be used by Relay 1."""
+  eventEdge(
+    """The method to use when ordering `Event`."""
+    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateEventTemplate` mutation."""
+input UpdateEventTemplateInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+
+  """
+  An object where the defined keys will be set on the `EventTemplate` being updated.
+  """
+  patch: EventTemplatePatch!
+}
+
+"""The output of our update `EventTemplate` mutation."""
+type UpdateEventTemplatePayload {
+  """
+  Reads a single `EventCategory` that is related to this `EventTemplate`.
+  """
+  category: EventCategory
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `EventTemplate` that was updated by this mutation."""
+  eventTemplate: EventTemplate
+
+  """An edge for our `EventTemplate`. May be used by Relay 1."""
+  eventTemplateEdge(
+    """The method to use when ordering `EventTemplate`."""
+    orderBy: [EventTemplatesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTemplatesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateEventTemplateTr` mutation."""
+input UpdateEventTemplateTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  eventTemplateId: BigInt!
+  languageCode: TrLanguage!
+
+  """
+  An object where the defined keys will be set on the `EventTemplateTr` being updated.
+  """
+  patch: EventTemplateTrPatch!
+}
+
+"""The output of our update `EventTemplateTr` mutation."""
+type UpdateEventTemplateTrPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Reads a single `EventTemplate` that is related to this `EventTemplateTr`.
+  """
+  eventTemplate: EventTemplate
+
+  """The `EventTemplateTr` that was updated by this mutation."""
+  eventTemplateTr: EventTemplateTr
+
+  """An edge for our `EventTemplateTr`. May be used by Relay 1."""
+  eventTemplateTrEdge(
+    """The method to use when ordering `EventTemplateTr`."""
+    orderBy: [EventTemplateTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTemplateTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateEventTr` mutation."""
+input UpdateEventTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  eventId: BigInt!
+  languageCode: TrLanguage!
+
+  """
+  An object where the defined keys will be set on the `EventTr` being updated.
+  """
+  patch: EventTrPatch!
+}
+
+"""The output of our update `EventTr` mutation."""
+type UpdateEventTrPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Event` that is related to this `EventTr`."""
+  event: Event
+
+  """The `EventTr` that was updated by this mutation."""
+  eventTr: EventTr
+
+  """An edge for our `EventTr`. May be used by Relay 1."""
+  eventTrEdge(
+    """The method to use when ordering `EventTr`."""
+    orderBy: [EventTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateGroup` mutation."""
+input UpdateGroupInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+
+  """
+  An object where the defined keys will be set on the `Group` being updated.
+  """
+  patch: GroupPatch!
+}
+
+"""The output of our update `Group` mutation."""
+type UpdateGroupPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Group` that was updated by this mutation."""
+  group: Group
+
+  """An edge for our `Group`. May be used by Relay 1."""
+  groupEdge(
+    """The method to use when ordering `Group`."""
+    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): GroupsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateGroupTr` mutation."""
+input UpdateGroupTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  groupId: BigInt!
+  languageCode: TrLanguage!
+
+  """
+  An object where the defined keys will be set on the `GroupTr` being updated.
+  """
+  patch: GroupTrPatch!
+}
+
+"""The output of our update `GroupTr` mutation."""
+type UpdateGroupTrPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Group` that is related to this `GroupTr`."""
+  group: Group
+
+  """The `GroupTr` that was updated by this mutation."""
+  groupTr: GroupTr
+
+  """An edge for our `GroupTr`. May be used by Relay 1."""
+  groupTrEdge(
+    """The method to use when ordering `GroupTr`."""
+    orderBy: [GroupTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): GroupTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateMemberByUsername` mutation."""
+input UpdateMemberByUsernameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Member` being updated.
+  """
+  patch: MemberPatch!
+  username: String!
+}
+
+"""All input for the `updateMember` mutation."""
+input UpdateMemberInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: UUID!
+
+  """
+  An object where the defined keys will be set on the `Member` being updated.
+  """
+  patch: MemberPatch!
+}
+
+"""The output of our update `Member` mutation."""
+type UpdateMemberPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Member` that was updated by this mutation."""
+  member: Member
+
+  """An edge for our `Member`. May be used by Relay 1."""
+  memberEdge(
+    """The method to use when ordering `Member`."""
+    orderBy: [MembersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MembersEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updatePage` mutation."""
+input UpdatePageInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  name: String!
+
+  """
+  An object where the defined keys will be set on the `Page` being updated.
+  """
+  patch: PagePatch!
+}
+
+"""The output of our update `Page` mutation."""
+type UpdatePagePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Page` that was updated by this mutation."""
+  page: Page
+
+  """An edge for our `Page`. May be used by Relay 1."""
+  pageEdge(
+    """The method to use when ordering `Page`."""
+    orderBy: [PagesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PagesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updatePageTr` mutation."""
+input UpdatePageTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  languageCode: TrLanguage!
+  pageName: String!
+
+  """
+  An object where the defined keys will be set on the `PageTr` being updated.
+  """
+  patch: PageTrPatch!
+}
+
+"""The output of our update `PageTr` mutation."""
+type UpdatePageTrPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Page` that is related to this `PageTr`."""
+  pageByPageName: Page
+
+  """The `PageTr` that was updated by this mutation."""
+  pageTr: PageTr
+
+  """An edge for our `PageTr`. May be used by Relay 1."""
+  pageTrEdge(
+    """The method to use when ordering `PageTr`."""
+    orderBy: [PageTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PageTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}

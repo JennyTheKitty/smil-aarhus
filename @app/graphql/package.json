@@ -1,0 +1,24 @@
+{
+  "name": "@app/graphql",
+  "private": true,
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "yarn codegen && tsc -b",
+    "watch": "yarn codegen --watch",
+    "codegen": "graphql-codegen --config codegen.yml"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.3.19",
+    "tslib": "^2.2.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/add": "^2.0.1",
+    "@graphql-codegen/cli": "^1.17.9",
+    "@graphql-codegen/typescript": "^1.17.10",
+    "@graphql-codegen/typescript-operations": "^1.17.8",
+    "@graphql-codegen/typed-document-node": "^2.1.6",
+    "@types/lodash": "^4.14.176"
+  }
+}

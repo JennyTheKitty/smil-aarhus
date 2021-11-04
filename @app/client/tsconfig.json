@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "rootDir": "src",
+    "outDir": "dist",
+    "allowJs": true,
+    "lib": ["esnext", "dom"],
+    "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo",
+    "declarationDir": "dist", 
+    "types": ["vite/client"],
+    "paths": {
+      "~/*": ["src/*"],
+    },
+    "jsxFactory": "VueJSX"
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.json"],
+  "exclude": ["node_modules"]
+}

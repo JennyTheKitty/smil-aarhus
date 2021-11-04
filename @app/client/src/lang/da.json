@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "title": "De fedeste BDSM\nlokaler i Aarhus",
+    "subtitle": "Blah blah, smil aarhus's lokaler are the greatest of all time blah blah.",
+    "buttons": {
+      "signup": "Bliv medlem",
+      "pictures": "Flere billeder"
+    }
+  },
+  "home": {
+    "upcoming-events": "Kommende events",
+    "special-events": "Special event",
+    "latest-news": "Seneste nyhed",
+    "goto-calendar": "Gå til kalenderen"
+  },
+  "nav": {
+    "info": "Info",
+    "groups": "Grupper",
+    "calendar": "Kalender",
+    "news": "Nyheder",
+    "home": "Hjem"
+  },
+  "path": {
+    "calendar": "calendar"
+  },
+  "address-title": "Addresse:",
+  "address": "SMIL Aarhus\nVestergade 49 C 2. sal. 8000 Aarhus C.\n(Opgang C finder du i bunden af gården.)"
+}

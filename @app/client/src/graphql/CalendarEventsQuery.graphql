@@ -1,0 +1,29 @@
+query CalendarEventsQuery($startsAfter: Datetime, $startsBefore: Datetime) {
+  events(
+    filter: {
+      special: { equalTo: false }
+      startsAt: { greaterThan: $startsAfter, lessThan: $startsBefore }
+    }
+    orderBy: STARTS_AT_ASC
+  ) {
+    nodes {
+      ...event
+    }
+  }
+}
+
+fragment event on Event {
+  translations {
+    nodes {
+      slug
+      title
+      languageCode
+      description
+    }
+  }
+  endsAt
+  id
+  startsAt
+  categoryId
+  special
+}

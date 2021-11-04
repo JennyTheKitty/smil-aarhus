@@ -1,0 +1,5 @@
+node_modules
+**/dist
+/data/schema.graphql
+/data/admin-schema.graphql
+/@app/graphql/index.*

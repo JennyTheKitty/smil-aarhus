@@ -1,0 +1,10 @@
+query PageQuery($name: String = "") {
+  page(name: $name) {
+    translations {
+      nodes {
+        content
+        languageCode
+      }
+    }
+  }
+}
