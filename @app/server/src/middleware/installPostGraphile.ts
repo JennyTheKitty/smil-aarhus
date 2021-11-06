@@ -2,11 +2,7 @@ import PgSimplfyInflector from "@graphile-contrib/pg-simplify-inflector";
 import Router from "@koa/router";
 import { NodePlugin } from "graphile-build";
 import Koa from "koa";
-import {
-  makeAddInflectorsPlugin,
-  postgraphile,
-  PostGraphileOptions,
-} from "postgraphile";
+import { postgraphile, PostGraphileOptions } from "postgraphile";
 import PgConnectionFilter from "postgraphile-plugin-connection-filter";
 // @ts-ignore
 import PgFulltextFilterPlugin from "postgraphile-plugin-fulltext-filter";
@@ -19,20 +15,20 @@ import handleErrors from "../utils/handleErrors";
 
 const isDev = process.env.NODE_ENV === "development";
 
-const PersonPlugin = makeAddInflectorsPlugin((inflection) => {
-  return {
-    inputType(typeName: string) {
-      if (typeName == "Member") {
-        // This is never actually included in the graphql schema
-        return "Fish";
-      }
-      if (typeName == "MemberInputRecord") {
-        return "MemberInput";
-      }
-      return inflection.upperCamelCase(`${typeName}-input`);
-    },
-  };
-}, true);
+// const PersonPlugin = makeAddInflectorsPlugin((inflection) => {
+//   return {
+//     inputType(typeName: string) {
+//       if (typeName == "Member") {
+//         // This is never actually included in the graphql schema
+//         return "Fish";
+//       }
+//       if (typeName == "MemberInputRecord") {
+//         return "MemberInput";
+//       }
+//       return inflection.upperCamelCase(`${typeName}-input`);
+//     },
+//   };
+// }, true);
 
 export const postgraphileOptions: PostGraphileOptions = {
   graphiql: isDev,

@@ -22,8 +22,6 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const isDev = process.env.NODE_ENV === "development";
-
 const httpLink = new HttpLink({
   uri: "/admin/graphql",
   credentials: "include",

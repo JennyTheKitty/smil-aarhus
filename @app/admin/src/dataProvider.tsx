@@ -49,7 +49,6 @@ export async function createDataProvider(
         }
       }
     }
-    console.log(params);
     return await dataProvider(type, resource, params);
   };
 }

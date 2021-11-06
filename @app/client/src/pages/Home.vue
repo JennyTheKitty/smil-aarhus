@@ -20,12 +20,12 @@
                 <span class="text-sm sm:text-md">{{ t('hero.subtitle') }}</span>
                 <div class="flex space-x-10 pt-1 sm:pt-5">
                     <button
-                        class="rounded-full flex font-semibold border-2 border-gray-200 text-sm py-1.5 pr-4 pl-4 transition ease-in duration-200 items-center group relative sm:text-md hover:(bg-gray-200 text-black) focus:outline-none active:top-0.5 focus-visible:(bg-gray-200 text-black)"
+                        class="rounded-full flex font-semibold border-2 border-gray-200 text-sm py-1.5 pr-4 pl-4 transition ease-in duration-200 items-center group relative sm:text-md hover:(bg-gray-200 text-black) focus:outline-none active:top-0.5 focus-visible:(bg-gray-200 text-black) "
                     >
                         <span>{{ t('hero.buttons.signup') }}</span>
                     </button>
                     <button
-                        class="rounded-full flex font-semibold border-2 border-gray-200 text-sm py-1.5 pr-4 pl-4 transition ease-in duration-200 items-center group relative sm:text-md hover:(bg-gray-200 text-black) focus:outline-none active:top-0.5 focus-visible:(bg-gray-200 text-black)"
+                        class="rounded-full flex font-semibold border-2 border-gray-200 text-sm py-1.5 pr-4 pl-4 transition ease-in duration-200 items-center group relative sm:text-md hover:(bg-gray-200 text-black) focus:outline-none active:top-0.5 focus-visible:(bg-gray-200 text-black) "
                     >
                         <span>{{ t('hero.buttons.pictures') }}</span>
                     </button>
@@ -49,6 +49,7 @@
                         </div>
                     </a>
                     <main role="main" class="rounded-lg bg-dark-800 shadow-lg mt-5 w-full p-8">
+                        <!-- eslint-disable-next-line vue/no-v-html -->
                         <div class="content" v-html="page?.content"></div>
                     </main>
                 </div>
@@ -86,7 +87,7 @@ import { HomeEventsQueryDocument, PageQueryDocument } from '@app/graphql/dist/cl
 
 import { useTranslation } from '../utils';
 
-const { t, d, locale } = useI18n();
+const { t, locale } = useI18n();
 const i18nRoute = inject(key.i18nRoute)!;
 
 const now = new Date();

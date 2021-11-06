@@ -1,28 +1,19 @@
-import { Add, CalendarToday as Icon } from "@material-ui/icons";
-import { stringify } from "query-string";
+import { CalendarToday as Icon } from "@material-ui/icons";
 import RichTextInput from "ra-input-rich-text";
 import {
-  AutocompleteInput,
-  Button,
   Create,
-  CreateButton,
   CreateProps,
   Datagrid,
   Edit,
   EditProps,
-  ExportButton,
   ImageField,
   ImageInput,
-  Link,
   List,
   ListProps,
-  ReferenceField,
-  ReferenceInput,
   required,
   SimpleForm,
   TextField,
   TextInput,
-  TopToolbar,
   TranslatableInputs,
 } from "react-admin";
 
