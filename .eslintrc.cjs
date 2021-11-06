@@ -1,5 +1,9 @@
 const { readFileSync } = require("fs");
 const schemaString = readFileSync(`${__dirname}/data/schema.graphql`, "utf8");
+const adminSchemaString = readFileSync(
+  `${__dirname}/data/admin-schema.graphql`,
+  "utf8"
+);
 
 module.exports = {
   parser: "@typescript-eslint/parser",
@@ -34,12 +38,119 @@ module.exports = {
       },
     },
     {
-      files: ['@app/client/src/**/*.ts', '*.vue'],
+      files: ["@app/client/src/**", "*.vue"],
       rules: {
         "react-hooks/rules-of-hooks": 0,
         "react-hooks/exhaustive-deps": 0,
-      }
-    }
+        "graphql/template-strings": [
+          "error",
+          {
+            env: "literal",
+            schemaString,
+            validators: [
+              "ExecutableDefinitionsRule",
+              "FieldsOnCorrectTypeRule",
+              "FragmentsOnCompositeTypesRule",
+              "KnownArgumentNamesRule",
+              "KnownDirectivesRule", // disabled by default in relay
+              // "KnownFragmentNamesRule", // disabled by default in all envs
+              "KnownTypeNamesRule",
+              "LoneAnonymousOperationRule",
+              "NoFragmentCyclesRule",
+              "NoUndefinedVariablesRule", //disabled by default in relay
+              // "NoUnusedFragmentsRule" // disabled by default in all envs
+              // "NoUnusedVariablesRule" throws even when fragments use the variable
+              "OverlappingFieldsCanBeMergedRule",
+              "PossibleFragmentSpreadsRule",
+              "ProvidedRequiredArgumentsRule", // disabled by default in relay
+              "ScalarLeafsRule", // disabled by default in relay
+              "SingleFieldSubscriptionsRule",
+              "UniqueArgumentNamesRule",
+              "UniqueDirectivesPerLocationRule",
+              "UniqueFragmentNamesRule",
+              "UniqueInputFieldNamesRule",
+              "UniqueOperationNamesRule",
+              "UniqueVariableNamesRule",
+              "ValuesOfCorrectTypeRule",
+              "VariablesAreInputTypesRule",
+              // "VariablesDefaultValueAllowedRule",
+              "VariablesInAllowedPositionRule",
+            ],
+          },
+        ],
+        "graphql/named-operations": [
+          "error",
+          {
+            schemaString,
+          },
+        ],
+        "graphql/required-fields": [
+          "error",
+          {
+            env: "literal",
+            schemaString,
+            requiredFields: ["nodeId"],
+          },
+        ],
+      },
+    },
+    {
+      files: ["@app/admin/src/**", "*.vue"],
+      rules: {
+        "react-hooks/rules-of-hooks": 0,
+        "react-hooks/exhaustive-deps": 0,
+        "graphql/template-strings": [
+          "error",
+          {
+            env: "literal",
+            schemaString: adminSchemaString,
+            validators: [
+              "ExecutableDefinitionsRule",
+              "FieldsOnCorrectTypeRule",
+              "FragmentsOnCompositeTypesRule",
+              "KnownArgumentNamesRule",
+              "KnownDirectivesRule", // disabled by default in relay
+              // "KnownFragmentNamesRule", // disabled by default in all envs
+              "KnownTypeNamesRule",
+              "LoneAnonymousOperationRule",
+              "NoFragmentCyclesRule",
+              "NoUndefinedVariablesRule", //disabled by default in relay
+              // "NoUnusedFragmentsRule" // disabled by default in all envs
+              // "NoUnusedVariablesRule" throws even when fragments use the variable
+              "OverlappingFieldsCanBeMergedRule",
+              "PossibleFragmentSpreadsRule",
+              "ProvidedRequiredArgumentsRule", // disabled by default in relay
+              "ScalarLeafsRule", // disabled by default in relay
+              "SingleFieldSubscriptionsRule",
+              "UniqueArgumentNamesRule",
+              "UniqueDirectivesPerLocationRule",
+              "UniqueFragmentNamesRule",
+              "UniqueInputFieldNamesRule",
+              "UniqueOperationNamesRule",
+              "UniqueVariableNamesRule",
+              "ValuesOfCorrectTypeRule",
+              "VariablesAreInputTypesRule",
+              // "VariablesDefaultValueAllowedRule",
+              "VariablesInAllowedPositionRule",
+            ],
+          },
+        ],
+        "graphql/named-operations": [
+          "error",
+          {
+            schemaString: adminSchemaString,
+          },
+        ],
+        "graphql/required-fields": [
+          "error",
+          {
+            env: "literal",
+            schemaString: adminSchemaString,
+            requiredFields: ["nodeId"],
+          },
+        ],
+      },
+    },
   ],
   parserOptions: {
     ecmaVersion: 2018,
@@ -119,56 +230,6 @@ module.exports = {
 
     "import/no-extraneous-dependencies": 0,
 
-    "graphql/template-strings": [
-      "error",
-      {
-        env: "literal",
-        schemaString,
-        validators: [
-          "ExecutableDefinitionsRule",
-          "FieldsOnCorrectTypeRule",
-          "FragmentsOnCompositeTypesRule",
-          "KnownArgumentNamesRule",
-          "KnownDirectivesRule", // disabled by default in relay
-          // "KnownFragmentNamesRule", // disabled by default in all envs
-          "KnownTypeNamesRule",
-          "LoneAnonymousOperationRule",
-          "NoFragmentCyclesRule",
-          "NoUndefinedVariablesRule", //disabled by default in relay
-          // "NoUnusedFragmentsRule" // disabled by default in all envs
-          // "NoUnusedVariablesRule" throws even when fragments use the variable
-          "OverlappingFieldsCanBeMergedRule",
-          "PossibleFragmentSpreadsRule",
-          "ProvidedRequiredArgumentsRule", // disabled by default in relay
-          "ScalarLeafsRule", // disabled by default in relay
-          "SingleFieldSubscriptionsRule",
-          "UniqueArgumentNamesRule",
-          "UniqueDirectivesPerLocationRule",
-          "UniqueFragmentNamesRule",
-          "UniqueInputFieldNamesRule",
-          "UniqueOperationNamesRule",
-          "UniqueVariableNamesRule",
-          "ValuesOfCorrectTypeRule",
-          "VariablesAreInputTypesRule",
-          // "VariablesDefaultValueAllowedRule",
-          "VariablesInAllowedPositionRule",
-        ],
-      },
-    ],
-    "graphql/named-operations": [
-      "error",
-      {
-        schemaString,
-      },
-    ],
-    "graphql/required-fields": [
-      "error",
-      {
-        env: "literal",
-        schemaString,
-        requiredFields: ["nodeId"],
-      },
-    ],
     "react/destructuring-assignment": 0,
 
     "arrow-body-style": 0,

@@ -13,6 +13,8 @@ import PgFulltextFilterPlugin from "postgraphile-plugin-fulltext-filter";
 
 import { getAuthPgPool } from "../databasePools";
 import AuthPlugin from "../plugins/AuthPlugin";
+import CreateUploadUrlPlugin from "../plugins/CreateUploadUrlPlugin";
+import ImageUrlSigningPlugin from "../plugins/ImageUrlSigningPlugin";
 import handleErrors from "../utils/handleErrors";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -48,7 +50,7 @@ export const postgraphileOptions: PostGraphileOptions = {
   jwtSecret: process.env.ACCESS_TOKEN_SECRET,
   pgDefaultRole: "smil_anonymous",
   jwtPgTypeIdentifier: "smil_aarhus.jwt_token",
-  ownerConnectionString: process.env.ROOT_DATABASE_URL,
+  ownerConnectionString: process.env.DATABASE_URL,
   skipPlugins: [NodePlugin],
   sortExport: true,
   graphileBuildOptions: {
@@ -66,7 +68,11 @@ export const postgraphileClientMiddleware = postgraphile(
   "smil_aarhus",
   {
     ...postgraphileOptions,
-    appendPlugins: [PgSimplfyInflector, PgConnectionFilter],
+    appendPlugins: [
+      PgSimplfyInflector,
+      PgConnectionFilter,
+      ImageUrlSigningPlugin,
+    ],
     exportGqlSchemaPath: isDev
       ? `${__dirname}/../../../../data/schema.graphql`
       : undefined,
@@ -83,6 +89,7 @@ const postgraphileAdminMiddleware = postgraphile(
       PgConnectionFilter,
       PgFulltextFilterPlugin,
       AuthPlugin,
+      CreateUploadUrlPlugin,
       //PersonPlugin,
     ],
     graphqlRoute: `/admin/graphql`,

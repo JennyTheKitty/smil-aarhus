@@ -32,6 +32,12 @@
       "source.fixAll.eslint": false
     }
   },
+  "[postgres]": {
+    "editor.formatOnSave": false
+  },
+  "[sql]": {
+    "editor.formatOnSave": false
+  },
   "[markdown]": {
     "files.trimTrailingWhitespace": false
   }

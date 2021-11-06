@@ -11,7 +11,7 @@ import '@fullcalendar/core/vdom.cjs'
 import '@fullcalendar/vue3';
 
 // eslint-enable simple-import-sort/imports
-import { CalendarEventsQueryDocument } from '@app/graphql';
+import { CalendarEventsQueryDocument } from '@app/graphql/dist/client';
 import daLocale from '@fullcalendar/core/locales/da';
 import dayGridPlugin from '@fullcalendar/daygrid'
 import listPlugin from '@fullcalendar/list';

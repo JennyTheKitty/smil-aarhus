@@ -7,26 +7,25 @@ function swallowPoolError(_error: Error) {
 }
 
 const rootPgPool = new Pool({
-  connectionString: process.env.ROOT_DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
 });
 rootPgPool.on("error", swallowPoolError);
 
 const authPgPool = new Pool({
-  connectionString: process.env.DATABASE_AUTH_URL,
+  connectionString: process.env.AUTH_DATABASE_URL,
 });
 authPgPool.on("error", swallowPoolError);
 
 export function getRootPgPool(): Pool {
   return rootPgPool;
-} 
+}
 export function getAuthPgPool(): Pool {
   return authPgPool;
 }
- 
+
 shutdownActions.push(() => {
   rootPgPool.end();
 });
 shutdownActions.push(() => {
   authPgPool.end();
 });
-  

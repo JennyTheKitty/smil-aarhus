@@ -1,7 +1,8 @@
 <template>
-    <ul class="divide-y space-y-4 divide-gray-200">
-        <li v-for="event in events" :key="event.value!.id">
+    <ul v-if="events.length" class="divide-y space-y-4 divide-gray-200">
+        <li v-for="(event, i) in events" :key="i">
             <router-link
+                v-if="event.value"
                 class="block hover:bg-gray-900"
                 :to="i18nRoute({ name: 'calendar', params: { eventSlug: event.value!.slug } })"
             >
@@ -23,14 +24,13 @@
 </template>
 
 <script setup lang="ts">
-import { EventFragment } from '@app/graphql';
+import { EventFragment } from '@app/graphql/dist/client';
 
 import { Translated } from '../utils';
 
 const props = defineProps<{
     events: Translated<EventFragment>[]
 }>();
-
 const { t, d, locale } = useI18n();
 const i18nRoute = inject(key.i18nRoute)!;
 </script>

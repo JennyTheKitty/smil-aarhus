@@ -7,5 +7,8 @@ export default defineConfig({
   optimizeDeps: {
     entries: ["src/main.tsx"],
   },
-  base: '/admin/',
+  base: "/admin/",
+  define: {
+    __DOMAIN__: JSON.stringify(process.env.DOMAIN),
+  },
 });

@@ -14,7 +14,7 @@ const AuthPlugin = makeExtendSchemaPlugin((_, { pgJwtSignOptions }) => ({
       password: String!
     }
     extend type Mutation {
-      authenticate(input: AuthenticateInput!): String
+      authenticate(input: AuthenticateInput!): String!
       logout: Boolean
     }
   `,

@@ -29,7 +29,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql STRICT SECURITY DEFINER;
 
-GRANT EXECUTE ON FUNCTION smil_aarhus_private.authenticate TO smil_postgraphile;
+GRANT EXECUTE ON FUNCTION smil_aarhus_private.authenticate TO :DATABASE_AUTHENTICATOR;
 
 
 CREATE FUNCTION smil_aarhus_admin.current_member()

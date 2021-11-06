@@ -17,7 +17,7 @@
     "@vueuse/head": "^0.6.0",
     "graphql": "^15.6.1",
     "nprogress": "^0.2.0",
-    "vite-ssr": "/home/jas/dev/tmp/vite-ssr/dist",
+    "vite-ssr": "file:../../vendor/vite-ssr",
     "vue": "^3.0.6",
     "vue-i18n": "^9.2.0-beta.16",
     "vue-router": "^4.0.3"

@@ -1,0 +1,6 @@
+mutation GetUploadUrl($contentType: String!) {
+  createUploadUrl(input: { contentType: $contentType }) {
+    uploadUrl
+    formData
+  }
+}

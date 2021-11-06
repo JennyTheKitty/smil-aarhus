@@ -199,6 +199,41 @@ type CreateEventTemplatePayload {
   query: Query
 }
 
+"""All input for the create `Group` mutation."""
+input CreateGroupInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Group` to be created by this mutation."""
+  group: GroupInput!
+}
+
+"""The output of our create `Group` mutation."""
+type CreateGroupPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Group` that was created by this mutation."""
+  group: Group
+
+  """An edge for our `Group`. May be used by Relay 1."""
+  groupEdge(
+    """The method to use when ordering `Group`."""
+    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): GroupsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
 """All input for the create `Member` mutation."""
 input CreateMemberInput {
   """
@@ -232,6 +267,40 @@ type CreateMemberPayload {
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
+}
+
+"""All input for the `createUploadUrl` mutation."""
+input CreateUploadUrlInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  You must provide the content type (or MIME type) of the content you intend
+  to upload. For further information about content types, see
+  https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+  """
+  contentType: String!
+}
+
+"""The output of our `createUploadUrl` mutation."""
+type CreateUploadUrlPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  formData: String!
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Upload content to this signed URL."""
+  uploadUrl: String!
 }
 
 """A location in a connection that can be used for resuming pagination."""
@@ -380,6 +449,40 @@ type DeleteEventTemplatePayload {
     """The method to use when ordering `EventTemplate`."""
     orderBy: [EventTemplatesOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventTemplatesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteGroup` mutation."""
+input DeleteGroupInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+}
+
+"""The output of our delete `Group` mutation."""
+type DeleteGroupPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedGroupNodeId: ID
+
+  """The `Group` that was deleted by this mutation."""
+  group: Group
+
+  """An edge for our `Group`. May be used by Relay 1."""
+  groupEdge(
+    """The method to use when ordering `Group`."""
+    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): GroupsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -780,6 +883,114 @@ enum EventsOrderBy {
   VENUE_DESC
 }
 
+type Group {
+  description: KeyValueHash!
+  id: BigInt!
+  imageFile: String!
+  title: KeyValueHash!
+}
+
+"""
+A condition to be used against `Group` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input GroupCondition {
+  """Checks for equality with the object’s `description` field."""
+  description: KeyValueHash
+
+  """Checks for equality with the object’s `id` field."""
+  id: BigInt
+
+  """Checks for equality with the object’s `imageFile` field."""
+  imageFile: String
+
+  """Checks for equality with the object’s `title` field."""
+  title: KeyValueHash
+}
+
+"""
+A filter to be used against `Group` object types. All fields are combined with a logical ‘and.’
+"""
+input GroupFilter {
+  """Checks for all expressions in this list."""
+  and: [GroupFilter!]
+
+  """Filter by the object’s `description` field."""
+  description: KeyValueHashFilter
+
+  """Filter by the object’s `id` field."""
+  id: BigIntFilter
+
+  """Filter by the object’s `imageFile` field."""
+  imageFile: StringFilter
+
+  """Negates the expression."""
+  not: GroupFilter
+
+  """Checks for any expressions in this list."""
+  or: [GroupFilter!]
+
+  """Filter by the object’s `title` field."""
+  title: KeyValueHashFilter
+}
+
+"""An input for mutations affecting `Group`"""
+input GroupInput {
+  description: KeyValueHash!
+  imageFile: String!
+  title: KeyValueHash!
+}
+
+"""
+Represents an update to a `Group`. Fields that are set will be updated.
+"""
+input GroupPatch {
+  description: KeyValueHash
+  id: BigInt
+  imageFile: String
+  title: KeyValueHash
+}
+
+"""A connection to a list of `Group` values."""
+type GroupsConnection {
+  """
+  A list of edges which contains the `Group` and cursor to aid in pagination.
+  """
+  edges: [GroupsEdge!]!
+
+  """A list of `Group` objects."""
+  nodes: [Group!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Group` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Group` edge in the connection."""
+type GroupsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Group` at the end of the edge."""
+  node: Group!
+}
+
+"""Methods to use when ordering `Group`."""
+enum GroupsOrderBy {
+  DESCRIPTION_ASC
+  DESCRIPTION_DESC
+  ID_ASC
+  ID_DESC
+  IMAGE_FILE_ASC
+  IMAGE_FILE_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  TITLE_ASC
+  TITLE_DESC
+}
+
 """
 A set of key/value pairs, keys are strings, values may be a string or null. Exposed as a JSON object.
 """
@@ -959,7 +1170,7 @@ type Mutation {
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
     input: AuthenticateInput!
-  ): String
+  ): String!
 
   """Creates a single `Event`."""
   createEvent(
@@ -985,6 +1196,14 @@ type Mutation {
     input: CreateEventTemplateInput!
   ): CreateEventTemplatePayload
 
+  """Creates a single `Group`."""
+  createGroup(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateGroupInput!
+  ): CreateGroupPayload
+
   """Creates a single `Member`."""
   createMember(
     """
@@ -992,6 +1211,14 @@ type Mutation {
     """
     input: CreateMemberInput!
   ): CreateMemberPayload
+
+  """Get a signed URL for uploading files. It will expire in 5 minutes."""
+  createUploadUrl(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateUploadUrlInput!
+  ): CreateUploadUrlPayload
 
   """Deletes a single `Event` using a unique key."""
   deleteEvent(
@@ -1016,6 +1243,14 @@ type Mutation {
     """
     input: DeleteEventTemplateInput!
   ): DeleteEventTemplatePayload
+
+  """Deletes a single `Group` using a unique key."""
+  deleteGroup(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteGroupInput!
+  ): DeleteGroupPayload
 
   """Deletes a single `Member` using a unique key."""
   deleteMember(
@@ -1049,6 +1284,14 @@ type Mutation {
     """
     input: UpdateEventTemplateInput!
   ): UpdateEventTemplatePayload
+
+  """Updates a single `Group` using a unique key and a patch."""
+  updateGroup(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateGroupInput!
+  ): UpdateGroupPayload
 
   """Updates a single `Member` using a unique key and a patch."""
   updateMember(
@@ -1182,6 +1425,41 @@ type Query {
     """The method to use when ordering `Event`."""
     orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventsConnection
+  group(id: BigInt!): Group
+
+  """Reads and enables pagination through a set of `Group`."""
+  groups(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: GroupCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: GroupFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Group`."""
+    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): GroupsConnection
   member(id: UUID!): Member
 
   """Reads and enables pagination through a set of `Member`."""
@@ -1511,6 +1789,44 @@ type UpdateEventTemplatePayload {
     """The method to use when ordering `EventTemplate`."""
     orderBy: [EventTemplatesOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventTemplatesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateGroup` mutation."""
+input UpdateGroupInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+
+  """
+  An object where the defined keys will be set on the `Group` being updated.
+  """
+  patch: GroupPatch!
+}
+
+"""The output of our update `Group` mutation."""
+type UpdateGroupPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Group` that was updated by this mutation."""
+  group: Group
+
+  """An edge for our `Group`. May be used by Relay 1."""
+  groupEdge(
+    """The method to use when ordering `Group`."""
+    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): GroupsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.

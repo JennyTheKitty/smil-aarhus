@@ -20,12 +20,12 @@
                 <span class="text-sm sm:text-md">{{ t('hero.subtitle') }}</span>
                 <div class="flex space-x-10 pt-1 sm:pt-5">
                     <button
-                        class="rounded-full flex font-semibold border-2 border-gray-200 text-sm py-1.5 pr-4 pl-4 transition ease-in duration-200 items-center group relative sm:text-md hover:(bg-gray-200 text-black) focus:outline-none active:top-0.5 focus-visible:(bg-gray-200 text-black) "
+                        class="rounded-full flex font-semibold border-2 border-gray-200 text-sm py-1.5 pr-4 pl-4 transition ease-in duration-200 items-center group relative sm:text-md hover:(bg-gray-200 text-black) focus:outline-none active:top-0.5 focus-visible:(bg-gray-200 text-black)"
                     >
                         <span>{{ t('hero.buttons.signup') }}</span>
                     </button>
                     <button
-                        class="rounded-full flex font-semibold border-2 border-gray-200 text-sm py-1.5 pr-4 pl-4 transition ease-in duration-200 items-center group relative sm:text-md hover:(bg-gray-200 text-black) focus:outline-none active:top-0.5 focus-visible:(bg-gray-200 text-black) "
+                        class="rounded-full flex font-semibold border-2 border-gray-200 text-sm py-1.5 pr-4 pl-4 transition ease-in duration-200 items-center group relative sm:text-md hover:(bg-gray-200 text-black) focus:outline-none active:top-0.5 focus-visible:(bg-gray-200 text-black)"
                     >
                         <span>{{ t('hero.buttons.pictures') }}</span>
                     </button>
@@ -54,37 +54,12 @@
                 </div>
                 <aside class="mx-auto w-full max-w-2xl lg:pl-4 lg:w-3/10 <lg:pt-4">
                     <div class="flex flex-col space-y-5 w-full">
-                        <!-- <div
-                            v-if="specialEvent"
-                            class="rounded-lg cursor-pointer shadow-lg overflow-hidden"
-                        >
-                            <router-link
-                                :to="i18nRoute({ name: 'calendar', params: { eventSlug: specialEvent.slug } })"
-                                class="h-full w-full block"
-                            >
-                                <div class="bg-dark-800 w-full p-4">
-                                    <p
-                                        class="font-medium text-md text-pink-500"
-                                    >{{ t('home.special-events') }}</p>
-                                    <p
-                                        class="font-medium text-xl text-white mb-2"
-                                    >{{ specialEvent.title }}</p>
-                                    <div class="mt-2 sm:flex sm:justify-between">
-                                        <div class="sm:flex">
-                                            <p
-                                                class="flex font-light text-md text-gray-300 items-center"
-                                            >{{ d(specialEvent.startsAt, 'long') }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </router-link>
-                        </div> -->
-                        <div v-if='specialEvent' class="rounded-lg shadow-lg overflow-hidden">
+                        <div v-if="specialEvent" class="rounded-lg shadow-lg overflow-hidden">
                             <div class="bg-dark-800 w-full p-4">
                                 <p
                                     class="font-medium text-md text-pink-500"
                                 >{{ t('home.special-events') }}</p>
-                                <EventWidget :events='[specialEvent]' />
+                                <EventWidget :events="[specialEvent]" />
                             </div>
                         </div>
                         <div class="rounded-lg shadow-lg overflow-hidden">
@@ -92,7 +67,7 @@
                                 <p
                                     class="font-medium text-md text-pink-500"
                                 >{{ t('home.upcoming-events') }}</p>
-                                <EventWidget :events='events' />
+                                <EventWidget :events="events" />
                                 <router-link
                                     :to="i18nRoute({ name: 'calendar' })"
                                     class="underline"
@@ -107,7 +82,7 @@
 </template>
 
 <script setup lang="ts">
-import { HomeEventsQueryDocument, PageQueryDocument } from '@app/graphql';
+import { HomeEventsQueryDocument, PageQueryDocument } from '@app/graphql/dist/client';
 
 import { useTranslation } from '../utils';
 

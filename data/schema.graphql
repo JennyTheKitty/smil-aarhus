@@ -1853,6 +1853,8 @@ type GetColumnsPayload {
 type Group {
   id: BigInt!
   imageFile: String
+  imageSrc: String!
+  imageSrcSet: String!
 
   """Reads and enables pagination through a set of `GroupTr`."""
   translations(

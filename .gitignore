@@ -5,3 +5,4 @@ build/
 /yarn-error.log
 /@app/graphql/index.*
 yarn-error.log
+vendor/

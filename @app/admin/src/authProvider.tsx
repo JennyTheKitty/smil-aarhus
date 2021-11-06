@@ -1,43 +1,21 @@
-import { gql } from "@apollo/client";
+import {
+  AuthenticateDocument,
+  GetMeDocument,
+  LogoutDocument,
+} from "@app/graphql/dist/admin";
 import { AuthProvider } from "ra-core";
 
 import { accessToken } from "./accessToken";
 import client from "./Apollo";
 
-const LOGIN_MUTATION = gql`
-  mutation Authenticate($username: String!, $password: String!) {
-    authenticate(input: { username: $username, password: $password })
-  }
-`;
-
-const LOGOUT_MUTATION = gql`
-  mutation Logout {
-    logout
-  }
-`;
-
-const GET_ME_QUERY = gql`
-  query GetMe {
-    currentMember {
-      name,
-      id,
-      userRole
-    }
-  }
-`;
-
 const authProvider: AuthProvider = {
   login: async ({ username, password }) => {
-    const response = await client.mutate({
-      mutation: LOGIN_MUTATION,
+    const { data } = await client.mutate({
+      mutation: AuthenticateDocument,
       variables: { username, password },
     });
-    const {
-      data: { authenticate: jwtToken },
-    } = response;
-
-    if (jwtToken) {
-      accessToken.setToken(jwtToken);
+    if (data) {
+      accessToken.setToken(data.authenticate);
     } else {
       throw new Error("Error??");
     }
@@ -58,24 +36,21 @@ const authProvider: AuthProvider = {
   },
   logout: async () => {
     accessToken.setToken("");
-    const response = await client.mutate({
-      mutation: LOGOUT_MUTATION,
+    const { data } = await client.mutate({
+      mutation: LogoutDocument,
     });
-    const {
-      data: { logout: success },
-    } = response;
-    if (!success) {
+    if (!data || !data.logout) {
       throw new Error("Could not log out.");
     }
   },
   getIdentity: async () => {
-    const {
-      data: {
-        currentMember: { name, id, userRole },
-      },
-    } = await client.query({
-      query: GET_ME_QUERY,
+    const { data } = await client.query({
+      query: GetMeDocument,
     });
+    if (!data || !data.currentMember) {
+      throw new Error("Could not get logged in user.");
+    }
+    const { id, userRole, name } = data.currentMember;
     return { id, fullName: `${name} (${userRole})` };
   },
   // authorization

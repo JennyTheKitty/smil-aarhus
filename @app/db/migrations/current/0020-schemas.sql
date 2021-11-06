@@ -7,7 +7,7 @@ CREATE SCHEMA smil_aarhus_admin;
 GRANT USAGE ON SCHEMA public, smil_aarhus, smil_aarhus_admin TO smil_anonymous, smil_organizer, smil_admin;
 
 -- Postgraphile needs to login
-GRANT USAGE ON SCHEMA smil_aarhus_private TO smil_postgraphile;
+GRANT USAGE ON SCHEMA smil_aarhus_private TO :DATABASE_AUTHENTICATOR;
 
 -- Allow logged in to use sequences (to insert data)
 ALTER DEFAULT PRIVILEGES IN SCHEMA public, smil_aarhus, smil_aarhus_admin
