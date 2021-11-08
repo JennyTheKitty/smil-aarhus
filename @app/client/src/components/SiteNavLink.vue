@@ -12,9 +12,12 @@
         w:align="items-center"
         class="group btn-focus-ring"
       >
-        <span w:font="medium" w:text="sm gray-300 hover:white" w:p="y-2 x-3">{{
-          link.name
-        }}</span>
+        <span
+          w:font="medium"
+          w:text="base gray-300 hover:white"
+          w:p="y-2 x-3"
+          >{{ link.name }}</span
+        >
         <span
           w:m="r-1 -2-2"
           w:transform="~ group-hover:translate-y-0.5"
@@ -77,7 +80,7 @@
       v-bind="link"
       w:rounded="md"
       w:font="medium"
-      w:text="sm gray-300 hover:white"
+      w:text="base gray-300 hover:white"
       w:p="y-2 x-3"
       class="btn-focus-ring"
       >{{ link.name }}</router-link
