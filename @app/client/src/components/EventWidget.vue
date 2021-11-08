@@ -1,28 +1,36 @@
 <template>
-  <ul v-if="events.length" w:divide="y gray-200" w:space="y-4">
+  <ul v-if="events.length">
     <li v-for="(event, i) in events" :key="i">
       <router-link
         v-if="event.value"
-        w:display="block"
-        w:bg="hover:gray-900"
+        w:bg="hover:dark-900"
+        w:flex="~"
+        w:m="t-1"
         :to="i18nRoute({ name: 'calendar', params: { eventSlug: event.value!.slug } })"
       >
-        <div>
-          <div w:flex="~" w:align="items-center" w:justify="between">
-            <p w:text="base white md:truncate">{{ event.value!.title }}</p>
-          </div>
-          <div w:m="t-2" w:flex="sm:~" w:justify="sm:between">
-            <div w:flex="sm:~">
-              <p
-                w:flex="~"
-                w:font="light"
-                w:text="base gray-300"
-                w:align="items-center"
-              >
-                {{ d(event.value!.startsAt, 'long') }}
-              </p>
-            </div>
-          </div>
+        <div
+          w:flex="~ col shrink-0"
+          w:w="18"
+          w:text="right"
+          w:p="r-3 y-1"
+          w:justify="between"
+        >
+          <span>{{ dayjs(event.value!.startsAt).format('D MMM') }}</span>
+          <span w:text="sm gray-500">
+            {{ dayjs(event.value!.startsAt).format('ddd') }}
+          </span>
+        </div>
+        <div w:border="r-2 blue-500" w:m="y-1" />
+        <div w:flex="~ col" w:p="l-3 y-1">
+          <span w:text="base white">{{ event.value!.title }}</span>
+          <span w:text="sm gray-500">
+            <icon-mdi-clock-time-five-outline
+              w:display="inline-block"
+              w:m="b-0.5 -l-1 r-0.5"
+            />
+            {{dayjs(event.value!.startsAt).format('LT') }} -
+            {{dayjs(event.value!.endsAt).format('LT')}}</span
+          >
         </div>
       </router-link>
     </li>
@@ -31,6 +39,7 @@
 
 <script setup lang="ts">
 import { EventFragment } from '@app/graphql/dist/client';
+import dayjs from 'dayjs';
 
 import { Translated } from '../utils';
 

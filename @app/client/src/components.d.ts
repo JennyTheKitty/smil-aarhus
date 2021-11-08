@@ -15,6 +15,7 @@ declare module 'vue' {
     IconFontelicoEmoDevil: typeof import('~icons/fontelico/emo-devil')['default']
     IconMdiChevronDown: typeof import('~icons/mdi/chevron-down')['default']
     IconMdiChevronUp: typeof import('~icons/mdi/chevron-up')['default']
+    IconMdiClockTimeFiveOutline: typeof import('~icons/mdi/clock-time-five-outline')['default']
     IconMdiEmoticonHappyOutline: typeof import('~icons/mdi/emoticon-happy-outline')['default']
     IconMdiMenu: typeof import('~icons/mdi/menu')['default']
     IconMdiTranslate: typeof import('~icons/mdi/translate')['default']

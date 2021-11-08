@@ -15,6 +15,7 @@
     "@vue/apollo-option": "^4.0.0-alpha.15",
     "@vueuse/core": "^6.5.3",
     "@vueuse/head": "^0.6.0",
+    "dayjs": "^1.10.7",
     "graphql": "^15.6.1",
     "nprogress": "^0.2.0",
     "vite-ssr": "file:../../vendor/vite-ssr",

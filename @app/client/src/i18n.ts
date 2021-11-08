@@ -1,7 +1,13 @@
+import 'dayjs/locale/da';
+
+import dayjs from 'dayjs';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { createI18n } from 'vue-i18n';
 import { RouteLocationNormalized, RouteLocationRaw } from 'vue-router';
 
 import da from './lang/da.json';
+
+dayjs.extend(LocalizedFormat);
 
 const SUPPORTED_LANGUAGES = ['da', 'en'] as const;
 const DEFAULT_LANGUAGE = 'da';
@@ -92,6 +98,7 @@ export const Trans = {
     if (i18n.global.locale === lang) return Promise.resolve(lang); // has been loaded prior
     return Trans.loadLanguageFile(lang).then((msgs) => {
       i18n.global.setLocaleMessage(lang, msgs.default || msgs);
+      dayjs.locale(lang);
       // TODO: Report as bug?
       // @ts-ignore
       i18n.global.locale.value = lang;
