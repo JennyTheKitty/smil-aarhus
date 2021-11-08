@@ -1,0 +1,21 @@
+div:deep(.fc) {
+  --fc-border-color: #888;
+  --fc-neutral-bg-color: #222;
+
+  :global(.fc-daygrid-day-top) {
+    @apply text-sm text-gray-500 justify-center;
+  }
+  :global(.fc-event-title),
+  :global(.fc-col-header-cell) {
+    @apply !font-normal;
+  }
+  :global(.fc-col-header-cell) {
+    @apply text-gray-500;
+  }
+  :global(.fc-day-today .fc-daygrid-day-top .fc-daygrid-day-number) {
+    @apply rounded-full flex bg-pink-900 h-24px text-white w-24px justify-center items-center;
+  }
+  :global(.fc-daygrid-day.fc-day-today) {
+    background-color: unset !important;
+  }
+}

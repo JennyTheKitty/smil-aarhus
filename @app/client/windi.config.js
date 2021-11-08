@@ -1,9 +1,10 @@
-import { defineConfig } from 'windicss/helpers'
+import { defineConfig } from "windicss/helpers";
 
 export default defineConfig({
   extract: {
-    include: [
-      'src/**/*.vue',
-    ],
+    include: ["src/**/*.vue"],
   },
-})
+  attributify: {
+    prefix: "w",
+  },
+});

@@ -1,13 +1,20 @@
 <template>
   <div v-if="mobile"></div>
-  <div v-else class="flex items-center">
+  <div v-else w:flex="~" w:align="items-center">
     <Popover v-if="Object.prototype.hasOwnProperty.call(link, 'links')" v-slot="{ open }">
       <PopoverButton
-        class="rounded-md cursor-pointer flex items-center group btn-focus-ring"
+        w:rounded="md"
+        w:cursor="pointer"
+        w:flex="~"
+        w:align="items-center"
+        class="group btn-focus-ring"
       >
-        <span class="font-medium text-sm py-2 px-3 text-gray-300 hover:text-white">{{ link.name }}</span>
+        <span w:font="medium" w:text="sm gray-300 hover:white" w:p="y-2 x-3">{{ link.name }}</span>
         <span
-          class="mr-1 -ml-2 transform transition-transform text-gray-500 duration-200 group-hover:translate-y-0.5"
+          w:m="r-1 -2-2"
+          w:transform="~ group-hover:translate-y-0.5"
+          w:transition="transform duration-200"
+          w:text="gray-500"
         >
           <icon-mdi-chevron-up v-if="open" />
           <icon-mdi-chevron-down v-else />
@@ -22,18 +29,30 @@
         leave-to-class="translate-y-1 opacity-0"
       >
         <PopoverPanel
-          class="rounded-xl bg-dark-900 border-gray-500 border-1 mt-3 grid py-3 px-2 transform left-1/2 z-5 grid-cols-2 -translate-x-1/2 absolute"
+          w:rounded="xl"
+          w:bg="dark-900"
+          w:border="1 gray-500"
+          w:grid="~ cols-2"
+          w:pos="absolute left-1/2"
+          w:m="t-3"
+          w:p="y-3 x-2"
+          w:z="5"
+          w:transform="~ -translate-x-1/2"
         >
           <router-link
             v-for="sublink in (link as Menu).links"
             :key="sublink.name"
             v-bind="sublink"
-            class="rounded-md flex my-1 mx-3 py-2 px-2 group btn-focus-ring"
+            w:rounded="md"
+            w:flex="~"
+            w:m="y-1 x-3"
+            w:p="2"
+            class="group btn-focus-ring"
           >
-            <component :is='sublink.icon' v-if='sublink.icon' class="-mt-0.5 mr-2 text-2xl" />
-            <div class="flex flex-col">
-              <span class="font-medium text-sm text-gray-300 group-hover:text-white">{{ sublink.name }}</span>
-              <span class="font-light text-sm text-gray-200">{{ sublink.description }}</span>
+            <component :is="sublink.icon" v-if="sublink.icon" w:text="2xl" w:m="-t-0.5 r-2" />
+            <div w:flex="~ col">
+              <span w:font="medium" w:text="sm gray-300 group-hover:white">{{ sublink.name }}</span>
+              <span w:font="light" w:text="sm gray-200">{{ sublink.description }}</span>
             </div>
           </router-link>
         </PopoverPanel>
@@ -42,7 +61,11 @@
     <router-link
       v-else
       v-bind="link"
-      class="rounded-md font-medium text-sm py-2 px-3 text-gray-300 btn-focus-ring hover:text-white"
+      w:rounded="md"
+      w:font="medium"
+      w:text="sm gray-300 hover:white"
+      w:p="y-2 x-3"
+      class="btn-focus-ring"
     >{{ link.name }}</router-link>
   </div>
 </template>
@@ -56,7 +79,7 @@ export type Link =
   | InnerLink
   | Menu;
 
-const props = defineProps<{
+defineProps<{
   link: Link,
   mobile: Boolean
 }>();

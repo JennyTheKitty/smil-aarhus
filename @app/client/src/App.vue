@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-dark-500">
+  <div w:bg="dark-500">
     <SiteNav :links="navLinks" />
     <router-view v-slot="{ Component }">
       <transition

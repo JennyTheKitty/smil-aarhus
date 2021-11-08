@@ -1,33 +1,52 @@
 <template>
-  <nav class="bg-dark-900 shadow text-gray-300">
-    <div class="mx-auto max-w-7xl px-2 md:px-8">
-      <div class="flex h-16 items-center justify-between">
-        <div class="w-full grid grid-cols-[1fr,auto,1fr] justify-center items-center">
+  <nav w:bg="dark-900" w:shadow="~" w:text="gray-300">
+    <div w:m="auto" w:max-w="7xl" w:p="x-2 md:x-8">
+      <div w:flex="~" w:h="16" w:align="items-center" w:justify="between">
+        <div
+          w:w="full"
+          w:grid="~"
+          w:justify="center"
+          w:align="items-center"
+          class="grid-cols-[1fr,auto,1fr]"
+        >
           <router-link
-            class="rounded-md flex font-medium h-14 px-2 text-gray-300 justify-self-start items-center btn-focus-ring hover:text-white"
+            w:rounded="md"
+            w:flex="~"
+            w:font="medium"
+            w:h="14"
+            w:p="x-2"
+            w:text="gray hover:white"
+            w:justify="self-start"
+            w:align="items-center"
+            class="btn-focus-ring"
             :to="i18nRoute({ name: 'home' })"
             :title="t('nav.home')"
           >
-            <icon-smil-logo-aarhus class="text-7xl" />
+            <icon-smil-logo-aarhus w:text="7xl" />
           </router-link>
-          <PopoverGroup class="space-x-4 ml-10 hidden items-center md:flex">
-            <div v-for="link in props.links" :key="link.name">
+          <PopoverGroup w:space="x-4" w:m="l-10" w:display="hidden md:flex" w:align="items-center">
+            <div v-for="link in links" :key="link.name">
               <SiteNavLink :link="link" :mobile="false" />
             </div>
           </PopoverGroup>
-          <LocaleSwitcher class="justify-self-end" />
+          <LocaleSwitcher w:justify="self-end" />
         </div>
         <div
-          class="rounded-md flex mr-2 -ml-8 p-2 text-3xl inline-flex items-center justify-center md:hidden hover:text-gray-300 focus:outline-none"
+          w:display="inline-flex md:hidden"
+          w:m="r-2 -l-8"
+          w:p="2"
+          w:text="3xl white"
+          w:align="items-center"
+          w:justify="center"
         >
           <NavToggleButton v-model="menuOpen" />
         </div>
       </div>
     </div>
     <ExpandTransition>
-      <div v-show="menuOpen" class="md:hidden">
-        <div class="space-y-1 px-2 pb-3 sm:px-3">
-          <div v-for="link in props.links" :key="link.name">
+      <div v-show="menuOpen" w:display="md:hidden">
+        <div w:space="y-1" w:p="x-2 b-3">
+          <div v-for="link in links" :key="link.name">
             <SiteNavLink :link="link" :mobile="true" />
           </div>
         </div>
@@ -39,7 +58,7 @@
 <script setup lang="ts">
 import type { Link } from './SiteNavLink.vue';
 
-const props = defineProps<{
+defineProps<{
   links: Array<Link>;
 }>();
 

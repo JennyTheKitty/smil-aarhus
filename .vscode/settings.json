@@ -40,5 +40,6 @@
   },
   "[markdown]": {
     "files.trimTrailingWhitespace": false
-  }
+  },
+  "windicss.colorDecoratorsType": "border"
 }

@@ -1,5 +1,13 @@
 <template>
-  <div class="bg-dark-800 rounded-2xl m-5 shadow-lg text-white p-5 relative">
+  <div
+    w:bg="dark-800"
+    w:rounded="2xl"
+    w:m="5"
+    w:shadow="lg"
+    w:text="white"
+    w:p="5"
+    w:pos="relative"
+  >
     <FullCalendar ref="calendar" :options="calendarOptions" />
   </div>
 </template>
@@ -95,3 +103,5 @@ onMounted(() => {
 })
 
 </script>
+
+<style scoped src="./EventCalendar.css" />

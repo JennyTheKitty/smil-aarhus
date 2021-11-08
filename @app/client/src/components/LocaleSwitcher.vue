@@ -1,8 +1,15 @@
 <template>
-  <Menu as="div" class="text-left relative inline-block">
+  <Menu as="div" w:text="left" w:pos="relative">
     <div>
       <MenuButton
-        class="rounded-md font-medium space-x-2 text-sm py-2 px-3 text-gray-300 hidden items-center btn-focus-ring md:flex hover:text-white"
+        w:rounded="md"
+        w:font="medium"
+        w:space="x-2"
+        w:text="sm gray-300 hover:white"
+        w:p="y-2 x-3"
+        w:display="hidden md:flex"
+        w:align="center"
+        class="btn-focus-ring"
       >
         <span>{{ locales[locale].text }}</span>
         <icon-mdi-translate />
@@ -18,19 +25,31 @@
       leave-to-class="transform scale-95 opacity-0"
     >
       <MenuItems
-        class="rounded-xl bg-dark-900 border-gray-500 border-1 shadow-lg mt-2 origin-top-right right-0 w-42 z-5 absolute focus:outline-none"
+        w:rounded="xl"
+        w:bg="dark-900"
+        w:border="1 gray-500"
+        w:shadow="lg"
+        w:m="t-2"
+        w:transform="origin-top-right"
+        w:z="5"
+        w:w="42"
+        w:pos="absolute right-0"
+        w:outline="focus:none"
       >
-        <div class="py-1 px-1">
+        <div w:p="1">
           <MenuItem v-for="{ text, icons }, lang in locales" v-slot="{ active }" :key="text">
             <button
-              :class="[
-                active ? 'bg-pink-900' : '',
-                'group flex rounded-md items-center w-full px-2 py-2 text-sm text-white',
-              ]"
+              :w:bg="active ? 'pink-900' : ''"
+              w:flex="~"
+              w:rounded="md"
+              w:align="items-center"
+              w:w="full"
+              w:p="2"
+              w:text="sm white"
               @click="switchLocale(lang)"
             >
               {{ text }}
-              <div class="flex-grow"></div>
+              <div w:flex="grow"></div>
               <component :is="icon" v-for="icon, i in icons" :key="i" />
             </button>
           </MenuItem>

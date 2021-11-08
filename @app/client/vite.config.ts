@@ -1,4 +1,4 @@
-import vueI18n from '@intlify/vite-plugin-vue-i18n'
+import vueI18n from "@intlify/vite-plugin-vue-i18n";
 import Vue from "@vitejs/plugin-vue";
 import path from "path";
 import AutoImport from "unplugin-auto-import/vite";
@@ -54,7 +54,7 @@ export default defineConfig({
       //     graphileApolloLink: new GraphileApolloLink(request, response),
       //   };
       // },
-      excludeSsrComponents: [/EventCalendar.vue/]
+      excludeSsrComponents: [/EventCalendar.vue/],
     }),
     Vue({
       include: [/\.vue$/],
@@ -72,7 +72,7 @@ export default defineConfig({
       },
     }),
     vueI18n({
-      include: path.resolve(__dirname, './src/lang/**')
+      include: path.resolve(__dirname, "./src/lang/**"),
     }),
     AutoImport({
       imports: [

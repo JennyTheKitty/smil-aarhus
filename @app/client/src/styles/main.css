@@ -2,37 +2,18 @@
   @apply focus:outline-none focus-visible:ring-white focus-visible:ring-2 focus-visible:ring-opacity-75;
 }
 
-.content h1 {
-  @apply font-light text-3xl;
-}
-.content p:not(:last-of-type) {
-  @apply mb-5;
-}
-.content p {
-  @apply font-light leading-relaxed;
+.btn-hero {
+  @apply rounded-full flex font-semibold border-2 border-gray-200 text-sm py-1.5 pr-4 pl-4 transition ease-in duration-200 items-center relative sm:text-base hover:(bg-gray-200 text-black) focus:outline-none active:top-0.5 focus-visible:(bg-gray-200 text-black) ;
 }
 
-
-:root {
-  --fc-border-color: #888;
-  --fc-neutral-bg-color: #222;
-}
-
-.fc .fc-daygrid-day-top {
-  @apply text-sm text-gray-500 justify-center;
-}
-.fc-event-title, .fc-col-header-cell {
-  @apply !font-normal;
-}
-.fc-col-header-cell {
-  @apply text-gray-500;
-}
-.fc .fc-day-today .fc-daygrid-day-top{
-  @apply pt-0.5;
-}
-.fc .fc-day-today .fc-daygrid-day-top .fc-daygrid-day-number {
-  @apply rounded-full flex bg-pink-900 h-24px text-white w-24px justify-center items-center;
-}
-.fc .fc-daygrid-day.fc-day-today {
-  background-color: unset !important;
+.content {
+  h1 {
+    @apply font-light text-3xl;
+  }
+  p:not(:last-of-type) {
+    @apply mb-5;
+  }
+  p {
+    @apply font-light leading-relaxed;
+  }
 }
