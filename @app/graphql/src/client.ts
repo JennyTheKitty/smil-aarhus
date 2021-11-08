@@ -3221,7 +3221,7 @@ export const EventFragmentDoc = gql`
 export const CalendarEventsQueryDocument = gql`
     query CalendarEventsQuery($startsAfter: Datetime, $startsBefore: Datetime) {
   events(
-    filter: {special: {equalTo: false}, startsAt: {greaterThan: $startsAfter, lessThan: $startsBefore}}
+    filter: {startsAt: {greaterThan: $startsAfter, lessThan: $startsBefore}}
     orderBy: STARTS_AT_ASC
   ) {
     nodes {
@@ -3243,7 +3243,7 @@ export const HomeEventsQueryDocument = gql`
   }
   events(
     filter: {special: {equalTo: false}, startsAt: {greaterThan: $startsAfter}}
-    first: 3
+    first: 5
     orderBy: STARTS_AT_ASC
   ) {
     nodes {

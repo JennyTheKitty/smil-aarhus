@@ -16,7 +16,7 @@ query HomeEventsQuery($startsAfter: Datetime) {
       special: { equalTo: false }
       startsAt: { greaterThan: $startsAfter }
     }
-    first: 3
+    first: 5
     orderBy: STARTS_AT_ASC
   ) {
     nodes {

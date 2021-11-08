@@ -1,9 +1,6 @@
 query CalendarEventsQuery($startsAfter: Datetime, $startsBefore: Datetime) {
   events(
-    filter: {
-      special: { equalTo: false }
-      startsAt: { greaterThan: $startsAfter, lessThan: $startsBefore }
-    }
+    filter: { startsAt: { greaterThan: $startsAfter, lessThan: $startsBefore } }
     orderBy: STARTS_AT_ASC
   ) {
     nodes {

@@ -5,9 +5,13 @@ div:deep(.fc) {
   :global(.fc-daygrid-day-top) {
     @apply text-sm text-gray-500 justify-center;
   }
+  :global(.fc-event) {
+    align-items: first baseline;
+  }
   :global(.fc-event-title),
   :global(.fc-col-header-cell) {
     @apply !font-normal;
+    white-space: normal !important;
   }
   :global(.fc-col-header-cell) {
     @apply text-gray-500;
