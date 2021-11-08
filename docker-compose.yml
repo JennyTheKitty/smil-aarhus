@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 services:
   server:
     build:
@@ -31,13 +31,13 @@ services:
       - default
     ports:
       # The main server
-      - "5678:5678"
+      - '5678:5678'
       # Vite HMR
-      - "12345:12345"
+      - '12345:12345'
       # Node `--inspect=...` port numbers for debugging
-      - "9678:9678"
-      - "9876:9876"
-      - "9757:9757"
+      - '9678:9678'
+      - '9876:9876'
+      - '9757:9757'
     depends_on:
       - db
       - minio
@@ -85,9 +85,9 @@ services:
       # Vite HMR
       # - "12345:12345"
       # Node `--inspect=...` port numbers for debugging
-      - "9678:9678"
-      - "9876:9876"
-      - "9757:9757"
+      - '9678:9678'
+      - '9876:9876'
+      - '9757:9757'
     depends_on:
       - db
       - minio
@@ -96,17 +96,19 @@ services:
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
     labels:
-      - "traefik.enable=true"
+      - 'traefik.enable=true'
 
-      - "traefik.http.routers.dev.rule=Host(`${DOMAIN}`)"
-      - "traefik.http.routers.dev.entrypoints=web"
-      - "traefik.http.routers.dev.service=dev"
-      - "traefik.http.services.dev.loadbalancer.server.port=5678"
+      - 'traefik.http.routers.dev.rule=Host(`${DOMAIN}`)'
+      - 'traefik.http.routers.dev.entrypoints=web'
+      - 'traefik.http.routers.dev.service=dev'
+      - 'traefik.http.services.dev.loadbalancer.server.port=5678'
+      - 'traefik.http.middlewares.compress.compress=true'
+      - 'traefik.http.routers.dev.middlewares=compress@docker'
 
-      - "traefik.http.routers.dev-vite.rule=Host(`${DOMAIN}`)"
-      - "traefik.http.routers.dev-vite.service=dev-vite"
-      - "traefik.http.routers.dev-vite.entrypoints=ws"
-      - "traefik.http.services.dev-vite.loadbalancer.server.port=12345"
+      - 'traefik.http.routers.dev-vite.rule=Host(`${DOMAIN}`)'
+      - 'traefik.http.routers.dev-vite.service=dev-vite'
+      - 'traefik.http.routers.dev-vite.entrypoints=ws'
+      - 'traefik.http.services.dev-vite.loadbalancer.server.port=12345'
 
   # This runs the database that everything else connects to
   db:
@@ -126,12 +128,11 @@ services:
       - db-volume:/var/lib/postgresql/data
       - ./data:/data
     ports:
-      - "6543:5432"
+      - '6543:5432'
     restart: unless-stopped
     networks:
       - default
-    command:
-      postgres -c logging_collector=on -c log_destination=stderr -c
+    command: postgres -c logging_collector=on -c log_destination=stderr -c
       log_directory=/var/lib/postgresql/data/logs -c log_rotation_age=60 -c
       log_truncate_on_rotation=on -c log_filename=server_log.hour.%H%M
 
@@ -153,22 +154,22 @@ services:
       - default
     command: server --console-address ":9001" /data
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.minio.rule=Host(`media.${DOMAIN}`)"
-      - "traefik.http.routers.minio.entrypoints=web"
-      - "traefik.http.routers.minio.service=minio"
-      - "traefik.http.services.minio.loadbalancer.server.port=9000"
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.minio.rule=Host(`media.${DOMAIN}`)'
+      - 'traefik.http.routers.minio.entrypoints=web'
+      - 'traefik.http.routers.minio.service=minio'
+      - 'traefik.http.services.minio.loadbalancer.server.port=9000'
 
-      - "traefik.http.routers.minio-console.rule=Host(`console.media.${DOMAIN}`)"
-      - "traefik.http.routers.minio-console.service=minio-console"
-      - "traefik.http.routers.minio-console.entrypoints=web"
-      - "traefik.http.services.minio-console.loadbalancer.server.port=9001"
+      - 'traefik.http.routers.minio-console.rule=Host(`console.media.${DOMAIN}`)'
+      - 'traefik.http.routers.minio-console.service=minio-console'
+      - 'traefik.http.routers.minio-console.entrypoints=web'
+      - 'traefik.http.services.minio-console.loadbalancer.server.port=9001'
 
   imgproxy:
     image: darthsim/imgproxy:latest
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "imgproxy", "health"]
+      test: ['CMD', 'imgproxy', 'health']
     env_file:
       - .env
     networks:
@@ -181,34 +182,34 @@ services:
       # IMGPROXY_REPORT_DOWNLOADING_ERRORS: "false"
       IMGPROXY_MAX_SRC_FILE_SIZE: 20971520 # 20MB
       # IMGPROXY_TTL: 2592000 # client-side cache time is 30 days
-      IMGPROXY_FORMAT_QUALITY: "jpeg=80,webp=70,avif=50"
+      IMGPROXY_FORMAT_QUALITY: 'jpeg=80,webp=70,avif=50'
       # IMGPROXY_SIGNATURE_SIZE: 32
-      IMGPROXY_USE_S3: "true"
-      IMGPROXY_S3_REGION: "test"
-      IMGPROXY_S3_ENDPOINT: "http://minio:9000"
+      IMGPROXY_USE_S3: 'true'
+      IMGPROXY_S3_REGION: 'test'
+      IMGPROXY_S3_ENDPOINT: 'http://minio:9000'
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.img.rule=Host(`img.${DOMAIN}`)"
-      - "traefik.http.routers.img.entrypoints=web"
-      - "traefik.http.routers.img.service=img"
-      - "traefik.http.services.img.loadbalancer.server.port=8080"
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.img.rule=Host(`img.${DOMAIN}`)'
+      - 'traefik.http.routers.img.entrypoints=web'
+      - 'traefik.http.routers.img.service=img'
+      - 'traefik.http.services.img.loadbalancer.server.port=8080'
 
   traefik:
-    image: "traefik:v2.5"
+    image: 'traefik:v2.5'
     restart: unless-stopped
     command:
-      - "--log.level=DEBUG"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.ws.address=:12345"
+      - '--log.level=DEBUG'
+      - '--api.insecure=true'
+      - '--providers.docker=true'
+      - '--providers.docker.exposedbydefault=false'
+      - '--entrypoints.web.address=:80'
+      - '--entrypoints.ws.address=:12345'
     ports:
-      - "80:80"
-      - "12345:12345"
-      - "8080:8080"
+      - '80:80'
+      - '12345:12345'
+      - '8080:8080'
     volumes:
-      - "$XDG_RUNTIME_DIR/docker.sock:/var/run/docker.sock:ro"
+      - '$XDG_RUNTIME_DIR/docker.sock:/var/run/docker.sock:ro'
 
 networks:
   default:

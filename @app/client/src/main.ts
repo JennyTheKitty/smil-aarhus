@@ -27,7 +27,7 @@ if (__ROOT_URL__ === '') {
   throw new Error('No ROOT_URL');
 }
 
-if (!import.meta.env.SSR) {
+if (!import.meta.env.SSR && import.meta.env.DEV) {
   // @ts-ignore
   (async () => import('virtual:windi-devtools'))();
 }
