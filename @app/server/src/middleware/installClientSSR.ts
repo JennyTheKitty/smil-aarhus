@@ -4,23 +4,23 @@ import {
   NextLink,
   Observable,
   Operation,
-} from "@apollo/client";
-import Router from "@koa/router";
-import { execute, getOperationAST } from "graphql";
-import { IncomingMessage, ServerResponse } from "http";
-import Koa from "koa";
-import c2k from "koa-connect";
-import mount from "koa-mount";
-import serve from "koa-static";
-import { resolve as pathResolve } from "path";
-import { createSsrServer } from "vite-ssr/dev";
+} from '@apollo/client';
+import Router from '@koa/router';
+import { execute, getOperationAST } from 'graphql';
+import { IncomingMessage, ServerResponse } from 'http';
+import Koa from 'koa';
+import c2k from 'koa-connect';
+import mount from 'koa-mount';
+import serve from 'koa-static';
+import { resolve as pathResolve } from 'path';
+import { createSsrServer } from 'vite-ssr/dev';
 
-import { postgraphileClientMiddleware } from "./installPostGraphile";
+import { postgraphileClientMiddleware } from './installPostGraphile';
 
 if (!process.env.NODE_ENV) {
-  throw new Error("No NODE_ENV envvar! Try `export NODE_ENV=development`");
+  throw new Error('No NODE_ENV envvar! Try `export NODE_ENV=development`');
 }
-const isDev = process.env.NODE_ENV === "development";
+const isDev = process.env.NODE_ENV === 'development';
 
 /**
  * A Graphile Apollo link for use during SSR. Allows Apollo Client to resolve
@@ -39,7 +39,7 @@ export class GraphileApolloLink extends ApolloLink {
       (async () => {
         try {
           const op = getOperationAST(operation.query, operation.operationName);
-          if (!op || op.operation !== "query") {
+          if (!op || op.operation !== 'query') {
             if (!observer.closed) {
               /* Only do queries (not subscriptions) on server side */
               observer.complete();
@@ -79,7 +79,7 @@ export class GraphileApolloLink extends ApolloLink {
 }
 
 export default async function installClientSSR(app: Koa, router: Router) {
-  const resolve = (p: string) => pathResolve(__dirname + "/../../../client", p);
+  const resolve = (p: string) => pathResolve(__dirname + '/../../../client', p);
   app.use(async (ctx, next) => {
     const link = new GraphileApolloLink(ctx.req, ctx.res);
     ctx.state.graphileApolloLink = link;
@@ -87,17 +87,17 @@ export default async function installClientSSR(app: Koa, router: Router) {
   });
 
   if (isDev) {
-    const root = resolve(".");
+    const root = resolve('.');
     const viteServer = await createSsrServer({
       root,
       // ssr: resolve('/src/server.js') // if you need seperate entry file for ssr
-      logLevel: "info",
+      logLevel: 'info',
       server: {
-        middlewareMode: "ssr",
+        middlewareMode: 'ssr',
         hmr: {
-          port: 12345
-        }
-      }
+          port: 12345,
+        },
+      },
     });
 
     // Use vite's connect instance as middleware
@@ -112,11 +112,11 @@ export default async function installClientSSR(app: Koa, router: Router) {
     const { default: renderPage } = await import(`${dist}/server`);
     // Serve every static asset route
     for (const asset of ssr.assets || []) {
-      app.use(mount("/" + asset, serve(`${dist}/client/` + asset)));
+      app.use(mount('/' + asset, serve(`${dist}/client/` + asset)));
     }
-    router.get("/(.*)", async (ctx, next) => {
+    router.get('/(.*)', async (ctx, next) => {
       console.log(ctx.url);
-      const url = ctx.protocol + "://" + ctx.get("host") + ctx.originalUrl;
+      const url = ctx.protocol + '://' + ctx.get('host') + ctx.originalUrl;
       const { html, status, initialState } = await renderPage(url, {
         manifest,
         preload: true,
@@ -127,7 +127,7 @@ export default async function installClientSSR(app: Koa, router: Router) {
         // initialState: { ... } // <- This would also be available
       });
       if (!Object.hasOwnProperty.call(ctx.state, 'inlineScripts')) {
-        ctx.state.inlineScripts = []
+        ctx.state.inlineScripts = [];
       }
       ctx.state.inlineScripts.push(`window.__INITIAL_STATE__=${initialState}`);
       ctx.response.status = status || 200;

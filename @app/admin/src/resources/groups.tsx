@@ -1,5 +1,5 @@
-import { CalendarToday as Icon } from "@material-ui/icons";
-import RichTextInput from "ra-input-rich-text";
+import { CalendarToday as Icon } from '@material-ui/icons';
+import RichTextInput from 'ra-input-rich-text';
 import {
   Create,
   CreateProps,
@@ -15,7 +15,7 @@ import {
   TextField,
   TextInput,
   TranslatableInputs,
-} from "react-admin";
+} from 'react-admin';
 
 interface Group {
   title: { [lang: string]: string };
@@ -38,11 +38,11 @@ export const GroupList = (props: ListProps) => (
 );
 
 const GroupTitle = ({ record }: Props) => {
-  return <span>Group: {record ? `"${record.title.en}"` : ""}</span>;
+  return <span>Group: {record ? `"${record.title.en}"` : ''}</span>;
 };
 
 function formatLogo(value: any) {
-  if (!value || typeof value === "string") {
+  if (!value || typeof value === 'string') {
     // Value is null or the url string from the backend, wrap it in an object so the form input can handle it
     return { url: value };
   } else {
@@ -54,7 +54,7 @@ function formatLogo(value: any) {
 export const GroupEdit = (props: EditProps) => (
   <Edit {...props} title={<GroupTitle />}>
     <SimpleForm>
-      <TranslatableInputs locales={["en", "da"]}>
+      <TranslatableInputs locales={['en', 'da']}>
         <TextInput source="title" validate={required()} />
         <RichTextInput source="description" validate={required()} />
       </TranslatableInputs>
@@ -73,7 +73,7 @@ export const GroupEdit = (props: EditProps) => (
 export const GroupCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
-      <TranslatableInputs locales={["en", "da"]}>
+      <TranslatableInputs locales={['en', 'da']}>
         <TextInput source="title" validate={required()} />
         <RichTextInput source="description" validate={required()} />
       </TranslatableInputs>
@@ -94,6 +94,6 @@ export default {
   list: GroupList,
   edit: GroupEdit,
   create: GroupCreate,
-  options: { label: "Groups" },
+  options: { label: 'Groups' },
   icon: Icon,
 };

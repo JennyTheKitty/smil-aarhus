@@ -1,18 +1,18 @@
-import { createHmac } from "crypto";
-import { gql, makeExtendSchemaPlugin } from "graphile-utils";
+import { createHmac } from 'crypto';
+import { gql, makeExtendSchemaPlugin } from 'graphile-utils';
 
 const urlSafeBase64 = (buf: any) => {
   return Buffer.from(buf)
-    .toString("base64")
-    .replace(/=/g, "")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_");
+    .toString('base64')
+    .replace(/=/g, '')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_');
 };
 
-const hexDecode = (hex: string) => Buffer.from(hex, "hex");
+const hexDecode = (hex: string) => Buffer.from(hex, 'hex');
 
 const sign = (salt: string, target: string, secret: string): string => {
-  const hmac = createHmac("sha256", hexDecode(secret));
+  const hmac = createHmac('sha256', hexDecode(secret));
   hmac.update(hexDecode(salt));
   hmac.update(target);
   return urlSafeBase64(hmac.digest().slice(0, 32));
@@ -22,7 +22,7 @@ function createUrl(
   options: { width: number; height: number }
 ): string {
   // eslint-disable-next-line no-param-reassign
-  url = url.replace("http://media.localhost/", "s3://");
+  url = url.replace('http://media.localhost/', 's3://');
   console.log(url);
   const encoded_url = urlSafeBase64(url);
   const path = `/resize:auto:${options.width}:${options.height}/${encoded_url}.jpg`;
@@ -58,7 +58,7 @@ const ImageUrlSigningPlugin = makeExtendSchemaPlugin(() => {
                 height: 0,
               })} ${width}w`;
             })
-            .join(", ");
+            .join(', ');
         },
       },
     },

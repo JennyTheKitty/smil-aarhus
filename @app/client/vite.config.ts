@@ -1,17 +1,17 @@
-import vueI18n from "@intlify/vite-plugin-vue-i18n";
-import Vue from "@vitejs/plugin-vue";
-import path from "path";
-import AutoImport from "unplugin-auto-import/vite";
-import { FileSystemIconLoader } from "unplugin-icons/loaders";
-import IconsResolver from "unplugin-icons/resolver";
-import Icons from "unplugin-icons/vite";
-import { HeadlessUiResolver } from "unplugin-vue-components/resolvers";
-import Components from "unplugin-vue-components/vite";
-import { defineConfig } from "vite";
+import vueI18n from '@intlify/vite-plugin-vue-i18n';
+import Vue from '@vitejs/plugin-vue';
+import path from 'path';
+import AutoImport from 'unplugin-auto-import/vite';
+import { FileSystemIconLoader } from 'unplugin-icons/loaders';
+import IconsResolver from 'unplugin-icons/resolver';
+import Icons from 'unplugin-icons/vite';
+import { HeadlessUiResolver } from 'unplugin-vue-components/resolvers';
+import Components from 'unplugin-vue-components/vite';
+import { defineConfig } from 'vite';
 // @ts-ignore
-import { imagetools } from "vite-imagetools";
-import WindiCSS from "vite-plugin-windicss";
-import viteSSR from "vite-ssr/plugin.js";
+import { imagetools } from 'vite-imagetools';
+import WindiCSS from 'vite-plugin-windicss';
+import viteSSR from 'vite-ssr/plugin.js';
 
 export const ssrTransformCustomDir = () => ({
   props: [],
@@ -22,7 +22,7 @@ export const ssrTransformCustomDir = () => ({
 export default defineConfig({
   resolve: {
     alias: {
-      "~/": `${path.resolve(__dirname, "src")}/`,
+      '~/': `${path.resolve(__dirname, 'src')}/`,
     },
   },
   server: {
@@ -72,31 +72,31 @@ export default defineConfig({
       },
     }),
     vueI18n({
-      include: path.resolve(__dirname, "./src/lang/**"),
+      include: path.resolve(__dirname, './src/lang/**'),
     }),
     AutoImport({
       imports: [
-        "vue",
-        "vue-i18n",
-        "vue-router",
-        "@vueuse/head",
-        "@vueuse/core",
+        'vue',
+        'vue-i18n',
+        'vue-router',
+        '@vueuse/head',
+        '@vueuse/core',
         {
-          "@vue/apollo-composable": ["useQuery", "useMutation", "useResult"],
-          "@app/client/src/symbols": ["key"],
+          '@vue/apollo-composable': ['useQuery', 'useMutation', 'useResult'],
+          '@app/client/src/symbols': ['key'],
         },
       ],
-      dts: path.resolve(__dirname, "src", "auto-imports.d.ts"),
+      dts: path.resolve(__dirname, 'src', 'auto-imports.d.ts'),
       resolvers: [
         IconsResolver({
-          prefix: "Icon",
-          customCollections: ["smil"],
+          prefix: 'Icon',
+          customCollections: ['smil'],
         }),
       ],
     }),
     // https://github.com/antfu/unplugin-vue-components
     Components({
-      extensions: ["vue"],
+      extensions: ['vue'],
 
       // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
@@ -106,19 +106,19 @@ export default defineConfig({
         // auto import icons
         // https://github.com/antfu/unplugin-icons
         IconsResolver({
-          componentPrefix: "icon",
-          customCollections: ["smil"],
+          componentPrefix: 'icon',
+          customCollections: ['smil'],
           // enabledCollections: ['carbon']
         }),
         HeadlessUiResolver(),
       ],
-      dts: path.resolve(__dirname, "src", "components.d.ts"),
+      dts: path.resolve(__dirname, 'src', 'components.d.ts'),
     }),
     Icons({
       autoInstall: true,
       customCollections: {
         smil: FileSystemIconLoader(
-          path.resolve(__dirname, "src", "assets", "icons")
+          path.resolve(__dirname, 'src', 'assets', 'icons')
         ),
       },
     }),

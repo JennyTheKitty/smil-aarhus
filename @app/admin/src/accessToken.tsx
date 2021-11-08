@@ -1,8 +1,8 @@
-import jwtDecode from "jwt-decode";
+import jwtDecode from 'jwt-decode';
 
 class AccessToken {
   // The access_token is ephemeral and deliberately not set in localStorage/cookies
-  accessToken = "";
+  accessToken = '';
 
   setToken(token: string) {
     this.accessToken = token;
@@ -41,19 +41,19 @@ class AccessToken {
       console.log(data);
 
       if (!data.ok || !data.access_token) {
-        throw new Error("Error refreshing token.");
+        throw new Error('Error refreshing token.');
       }
       this.setToken(data.access_token);
     } catch (err) {
       this.handleFetchError(err as Error);
-      throw new Error("Please login to continue.");
+      throw new Error('Please login to continue.');
     }
   }
 
   innerFetch() {
-    return fetch("/access_token", {
-      method: "POST",
-      credentials: "include",
+    return fetch('/access_token', {
+      method: 'POST',
+      credentials: 'include',
     });
   }
 
@@ -62,7 +62,7 @@ class AccessToken {
   }
 
   handleFetchError(err: Error) {
-    console.warn("Your refresh token is invalid. Please try re-logging in.");
+    console.warn('Your refresh token is invalid. Please try re-logging in.');
     console.error(err);
   }
 }

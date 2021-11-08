@@ -1,6 +1,6 @@
-import { Pool } from "pg";
+import { Pool } from 'pg';
 
-import { shutdownActions } from "./shutdownActions";
+import { shutdownActions } from './shutdownActions';
 
 function swallowPoolError(_error: Error) {
   /* noop */
@@ -9,12 +9,12 @@ function swallowPoolError(_error: Error) {
 const rootPgPool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
-rootPgPool.on("error", swallowPoolError);
+rootPgPool.on('error', swallowPoolError);
 
 const authPgPool = new Pool({
   connectionString: process.env.AUTH_DATABASE_URL,
 });
-authPgPool.on("error", swallowPoolError);
+authPgPool.on('error', swallowPoolError);
 
 export function getRootPgPool(): Pool {
   return rootPgPool;

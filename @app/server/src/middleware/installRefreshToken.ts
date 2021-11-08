@@ -1,21 +1,21 @@
-import Router from "@koa/router";
-import { verify } from "jsonwebtoken";
-import Koa from "koa";
+import Router from '@koa/router';
+import { verify } from 'jsonwebtoken';
+import Koa from 'koa';
 
-import { getAuthPgPool } from "../databasePools";
-import { sendRefreshToken, signToken } from "../plugins/AuthPlugin";
+import { getAuthPgPool } from '../databasePools';
+import { sendRefreshToken, signToken } from '../plugins/AuthPlugin';
 
 const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET, REFRESH_TOKEN_COOKIE_NAME } =
   process.env;
 
 export default async function installRefreshToken(app: Koa, router: Router) {
-  router.post("/access_token", async (ctx, next) => {
+  router.post('/access_token', async (ctx, next) => {
     const token = ctx.cookies.get(REFRESH_TOKEN_COOKIE_NAME!);
     console.log(token);
     if (token) {
       try {
         const payload = verify(token, REFRESH_TOKEN_SECRET!, {
-          algorithms: ["HS256"],
+          algorithms: ['HS256'],
         });
         // user lookup - if user was deleted, they no longer get a token
         const { rows } = await getAuthPgPool().query(
@@ -34,7 +34,7 @@ export default async function installRefreshToken(app: Koa, router: Router) {
               signToken(
                 sub,
                 userRole,
-                { expiresIn: "7 days" },
+                { expiresIn: '7 days' },
                 REFRESH_TOKEN_SECRET!
               )
             );
@@ -51,6 +51,6 @@ export default async function installRefreshToken(app: Koa, router: Router) {
       }
     }
 
-    ctx.body = { ok: false, accessToken: "" };
+    ctx.body = { ok: false, accessToken: '' };
   });
 }

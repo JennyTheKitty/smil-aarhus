@@ -1,6 +1,6 @@
-import { Add, CalendarToday as Icon } from "@material-ui/icons";
-import { stringify } from "query-string";
-import RichTextInput from "ra-input-rich-text";
+import { Add, CalendarToday as Icon } from '@material-ui/icons';
+import { stringify } from 'query-string';
+import RichTextInput from 'ra-input-rich-text';
 import {
   AutocompleteInput,
   Button,
@@ -22,7 +22,7 @@ import {
   TextInput,
   TopToolbar,
   TranslatableInputs,
-} from "react-admin";
+} from 'react-admin';
 
 interface EventTemplate {
   title: { [lang: string]: string };
@@ -48,7 +48,7 @@ const CreateEventButton = ({ record }: Props) => (
     onClick={(event) => event.stopPropagation()}
     label="Create event"
     to={{
-      pathname: "/events/create",
+      pathname: '/events/create',
       search: stringify({
         source: JSON.stringify({
           title: record?.title,
@@ -77,13 +77,13 @@ export const EventTemplateList = (props: ListProps) => (
 );
 
 const EventTemplateTitle = ({ record }: Props) => {
-  return <span>Template: {record ? `"${record.title.en}"` : ""}</span>;
+  return <span>Template: {record ? `"${record.title.en}"` : ''}</span>;
 };
 
 export const EventTemplateEdit = (props: EditProps) => (
   <Edit {...props} title={<EventTemplateTitle />}>
     <SimpleForm>
-      <TranslatableInputs locales={["en", "da"]}>
+      <TranslatableInputs locales={['en', 'da']}>
         <TextInput source="title" validate={required()} />
         <RichTextInput source="description" validate={required()} />
         <TextInput source="venue" validate={required()} />
@@ -102,7 +102,7 @@ export const EventTemplateEdit = (props: EditProps) => (
 export const EventTemplateCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
-      <TranslatableInputs locales={["en", "da"]}>
+      <TranslatableInputs locales={['en', 'da']}>
         <TextInput source="title" validate={required()} />
         <RichTextInput source="description" validate={required()} />
         <TextInput source="venue" validate={required()} />
@@ -123,6 +123,6 @@ export default {
   list: EventTemplateList,
   edit: EventTemplateEdit,
   create: EventTemplateCreate,
-  options: { label: "Events templates" },
+  options: { label: 'Events templates' },
   icon: Icon,
 };

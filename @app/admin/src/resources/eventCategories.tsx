@@ -1,4 +1,4 @@
-import { Category as Icon } from "@material-ui/icons";
+import { Category as Icon } from '@material-ui/icons';
 import {
   Create,
   CreateProps,
@@ -11,7 +11,7 @@ import {
   TextField,
   TextInput,
   TranslatableInputs,
-} from "react-admin";
+} from 'react-admin';
 
 interface EventCategory {
   title: { [lang: string]: string };
@@ -30,13 +30,13 @@ export const EventCategoryList = (props: ListProps) => (
 );
 
 const EventCategoryTitle = ({ record }: Props) => {
-  return <span>Event category: {record ? `"${record.title.en}"` : ""}</span>;
+  return <span>Event category: {record ? `"${record.title.en}"` : ''}</span>;
 };
 
 export const EventCategoryEdit = (props: EditProps) => (
   <Edit {...props} title={<EventCategoryTitle />}>
     <SimpleForm>
-      <TranslatableInputs locales={["en", "da"]}>
+      <TranslatableInputs locales={['en', 'da']}>
         <TextInput source="title" />
       </TranslatableInputs>
     </SimpleForm>
@@ -46,7 +46,7 @@ export const EventCategoryEdit = (props: EditProps) => (
 export const EventCategoryCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
-      <TranslatableInputs locales={["en", "da"]}>
+      <TranslatableInputs locales={['en', 'da']}>
         <TextInput source="title" />
       </TranslatableInputs>
     </SimpleForm>
@@ -58,6 +58,6 @@ export default {
   list: EventCategoryList,
   edit: EventCategoryEdit,
   create: EventCategoryCreate,
-  options: { label: "Event categories" },
+  options: { label: 'Event categories' },
   icon: Icon,
 };

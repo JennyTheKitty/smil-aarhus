@@ -23,20 +23,20 @@ function callShutdownActions(): Array<Promise<void> | void> {
       return Promise.reject(e);
     }
   });
-} 
+}
 function gracefulShutdown(callback: () => void) {
   const promises = callShutdownActions();
   if (promises.length === 0) {
     return callback();
-  } 
+  }
 
   let called = false;
   function callbackOnce() {
-    if (!called) { 
+    if (!called) {
       called = true;
       callback();
     }
-  } 
+  }
 
   // Guarantee the callback will be called
   const guaranteeCallback = setTimeout(callbackOnce, 3000);
@@ -45,16 +45,15 @@ function gracefulShutdown(callback: () => void) {
   Promise.all(promises).then(callbackOnce, callbackOnce);
 }
 
-process.once("SIGINT", () => {
+process.once('SIGINT', () => {
   // Ignore further SIGINT signals whilst we're processing
-  process.on("SIGINT", ignore);
+  process.on('SIGINT', ignore);
   gracefulShutdown(() => {
-    process.kill(process.pid, "SIGINT");
+    process.kill(process.pid, 'SIGINT');
     process.exit(1);
   });
 });
 
-process.once("exit", () => {
+process.once('exit', () => {
   callShutdownActions();
 });
-   

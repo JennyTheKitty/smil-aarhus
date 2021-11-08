@@ -1,35 +1,35 @@
 // windicss layers
-import "virtual:windi-base.css";
-import "virtual:windi-components.css";
+import 'virtual:windi-base.css';
+import 'virtual:windi-components.css';
 // your custom styles here
-import "./styles/main.css";
+import './styles/main.css';
 // windicss utilities should be the last style import
-import "virtual:windi-utilities.css";
-import "@vue/runtime-dom";
+import 'virtual:windi-utilities.css';
+import '@vue/runtime-dom';
 
 // NOTE: Very important this isn't imported from @apollo/client
 // or it will drag @types/react along with it
-import { InMemoryCache } from "@apollo/client/core";
-import { provideApolloClient } from "@vue/apollo-composable";
-import { createApolloProvider } from "@vue/apollo-option";
-import { createHead } from "@vueuse/head";
-import viteSSR, { ClientOnly } from "vite-ssr";
+import { InMemoryCache } from '@apollo/client/core';
+import { provideApolloClient } from '@vue/apollo-composable';
+import { createApolloProvider } from '@vue/apollo-option';
+import { createHead } from '@vueuse/head';
+import viteSSR, { ClientOnly } from 'vite-ssr';
 
-import { createApolloClient } from "./apollo";
-import App from "./App.vue";
-import { i18n, Trans } from "./i18n";
-import routes from "./routes";
+import { createApolloClient } from './apollo';
+import App from './App.vue';
+import { i18n, Trans } from './i18n';
+import routes from './routes';
 
 // @ts-ignore
 // eslint-disable-next-line no-undef
-if (__ROOT_URL__ === "") {
+if (__ROOT_URL__ === '') {
   console.log(import.meta.env);
-  throw new Error("No ROOT_URL");
+  throw new Error('No ROOT_URL');
 }
 
 if (!import.meta.env.SSR) {
   // @ts-ignore
-  (async () => import("virtual:windi-devtools"))();
+  (async () => import('virtual:windi-devtools'))();
 }
 
 export default viteSSR(

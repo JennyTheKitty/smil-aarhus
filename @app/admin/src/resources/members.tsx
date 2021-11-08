@@ -1,4 +1,4 @@
-import { Person as Icon } from "@material-ui/icons";
+import { Person as Icon } from '@material-ui/icons';
 import {
   BooleanField,
   BooleanInput,
@@ -14,7 +14,7 @@ import {
   SimpleForm,
   TextField,
   TextInput,
-} from "react-admin";
+} from 'react-admin';
 
 interface Member {
   userName: string;
@@ -39,7 +39,7 @@ export const MemberList = (props: ListProps) => (
 );
 
 const MemberTitle = ({ record }: Props) => {
-  return <span>User: {record ? `"${record.name}"` : ""}</span>;
+  return <span>User: {record ? `"${record.name}"` : ''}</span>;
 };
 
 const UserRoleInput = () => {
@@ -47,8 +47,8 @@ const UserRoleInput = () => {
     <RadioButtonGroupInput
       source="userRole"
       choices={[
-        { id: "smil_admin", name: "Admin" },
-        { id: "smil_organizer", name: "Organizer" },
+        { id: 'smil_admin', name: 'Admin' },
+        { id: 'smil_organizer', name: 'Organizer' },
       ]}
     />
   );
@@ -82,6 +82,6 @@ export default {
   list: MemberList,
   edit: MemberEdit,
   create: MemberCreate,
-  options: { label: "Users" },
+  options: { label: 'Users' },
   icon: Icon,
 };

@@ -1,14 +1,14 @@
-import { gql, makeExtendSchemaPlugin } from "graphile-utils";
-import { Client as MinioClient } from "minio";
-import { v4 as uuidv4 } from "uuid";
+import { gql, makeExtendSchemaPlugin } from 'graphile-utils';
+import { Client as MinioClient } from 'minio';
+import { v4 as uuidv4 } from 'uuid';
 
 const uploadBucket = process.env.AWS_UPLOADS_BUCKET!;
 
 // NOTE: Only for presigning, not actual requests
 // Actual requests would need minio as endpoint
 var minioClient = new MinioClient({
-  endPoint: "media." + process.env.DOMAIN!,
-  region: "test",
+  endPoint: 'media.' + process.env.DOMAIN!,
+  region: 'test',
   port: 80,
   useSSL: false,
   accessKey: process.env.AWS_ACCESS_KEY_ID!,
@@ -39,13 +39,13 @@ async function generatePresignedPostPolicy(
 
     return await minioClient.presignedPostPolicy(policy);
   } catch (error) {
-    console.error("ERROR GENERATING PRESIGNED POST POLICY: ", error);
+    console.error('ERROR GENERATING PRESIGNED POST POLICY: ', error);
     throw new Error(error as any);
   }
 }
 
 /** The set of content types that we allow users to upload.*/
-const ALLOWED_UPLOAD_CONTENT_TYPES = ["image/jpeg", "image/png"];
+const ALLOWED_UPLOAD_CONTENT_TYPES = ['image/jpeg', 'image/png'];
 
 const CreateUploadUrlPlugin = makeExtendSchemaPlugin(() => ({
   typeDefs: gql`
@@ -106,10 +106,10 @@ const CreateUploadUrlPlugin = makeExtendSchemaPlugin(() => ({
       ) {
         if (!uploadBucket) {
           const err = new Error(
-            "Server misconfigured: missing `MINIO_UPLOADS_BUCKET` envvar"
+            'Server misconfigured: missing `MINIO_UPLOADS_BUCKET` envvar'
           );
           // @ts-ignore
-          err.code = "MSCFG";
+          err.code = 'MSCFG';
           throw err;
         }
 

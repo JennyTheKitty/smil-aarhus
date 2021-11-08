@@ -1,15 +1,15 @@
-import Router from "@koa/router";
-import Koa from "koa";
+import Router from '@koa/router';
+import Koa from 'koa';
 
-import * as middleware from "./middleware";
-import { shutdownActions } from "./shutdownActions";
+import * as middleware from './middleware';
+import { shutdownActions } from './shutdownActions';
 
 export async function makeApp(): Promise<Koa> {
-  const isDev = process.env.NODE_ENV === "development";
+  const isDev = process.env.NODE_ENV === 'development';
 
   if (isDev) {
     shutdownActions.push(() => {
-      require("inspector").close();
+      require('inspector').close();
     });
   }
 

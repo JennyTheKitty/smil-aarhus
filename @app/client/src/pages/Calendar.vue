@@ -7,7 +7,10 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
 
-watch(() => route.params, () => console.log(route.params));
+watch(
+  () => route.params,
+  () => console.log(route.params)
+);
 </script>

@@ -3,12 +3,12 @@ import {
   ApolloLink,
   HttpLink,
   InMemoryCache,
-} from "@apollo/client/core";
-import { setContext } from "@apollo/client/link/context";
-import { onError } from "@apollo/client/link/error";
-import { TokenRefreshLink } from "apollo-link-token-refresh";
+} from '@apollo/client/core';
+import { setContext } from '@apollo/client/link/context';
+import { onError } from '@apollo/client/link/error';
+import { TokenRefreshLink } from 'apollo-link-token-refresh';
 
-import { accessToken } from "./accessToken";
+import { accessToken } from './accessToken';
 
 const authLink = setContext((_, { headers }) => {
   const token = accessToken.getToken();
@@ -17,34 +17,34 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      Authorization: token ? `Bearer ${token}` : "",
+      Authorization: token ? `Bearer ${token}` : '',
     },
   };
 });
 
 const httpLink = new HttpLink({
-  uri: "/admin/graphql",
-  credentials: "include",
+  uri: '/admin/graphql',
+  credentials: 'include',
 });
 
 const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
   if (graphQLErrors) {
     for (let err of graphQLErrors) {
       console.error(
-        "[GraphQL error]: Message:",
+        '[GraphQL error]: Message:',
         err.message,
-        "Location(s):",
+        'Location(s):',
         err.locations,
-        "Path:",
+        'Path:',
         err.path
       );
     }
   }
   if (networkError) {
     console.warn(
-      "[Network error]:",
+      '[Network error]:',
       networkError,
-      "Operation:",
+      'Operation:',
       operation.operationName
     );
   }
@@ -65,12 +65,12 @@ const client = new ApolloClient({
   cache,
   defaultOptions: {
     watchQuery: {
-      fetchPolicy: "no-cache",
-      errorPolicy: "ignore",
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'ignore',
     },
     query: {
-      fetchPolicy: "no-cache",
-      errorPolicy: "all",
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'all',
     },
   },
 });

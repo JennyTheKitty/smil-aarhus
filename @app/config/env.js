@@ -1,10 +1,10 @@
 /* Use via `node -r @app/config/env path/to/file.js` */
-require("dotenv").config({ path: `${__dirname}/../../.env` });
+require('dotenv').config({ path: `${__dirname}/../../.env` });
 
 // These are the connection strings for the DB and the test DB.
 // NOTE: in production you probably want to add ?ssl=true to force SSL usage.
 // NOTE: these used to be in `.env` but now it is used by docker-compose we can't use expansions
-const { resolve } = require("path");
+const { resolve } = require('path');
 
 function fixFilePaths(connectionString) {
   // Connection string may contain '../../data/amazon-rds-ca-cert.pem' or
@@ -13,7 +13,7 @@ function fixFilePaths(connectionString) {
   // here.
   return connectionString.replace(
     /\.\.\/\.\.\/data\//g,
-    resolve(__dirname, "../../data") + "/"
+    resolve(__dirname, '../../data') + '/'
   );
 }
 

@@ -1,46 +1,46 @@
-import { RouteRecordRaw } from "vue-router";
+import { RouteRecordRaw } from 'vue-router';
 
-import Lang from "./components/Lang.vue";
-import { Trans } from "./i18n";
-import * as pages from "./pages";
+import Lang from './components/Lang.vue';
+import { Trans } from './i18n';
+import * as pages from './pages';
 
 export default [
   {
-    path: "/:lang(da|en)",
+    path: '/:lang(da|en)',
     component: Lang,
     beforeEnter: Trans.routeMiddleware,
     children: [
       {
-        path: "",
-        name: "home",
+        path: '',
+        name: 'home',
         component: pages.Home,
       },
       {
-        path: "info",
-        name: "info",
+        path: 'info',
+        name: 'info',
         component: pages.Info,
       },
       {
-        path: "calendar/:eventSlug?",
-        name: "calendar",
+        path: 'calendar/:eventSlug?',
+        name: 'calendar',
         component: pages.Calendar,
       },
       {
-        path: "news/:newsSlug?",
-        name: "news",
+        path: 'news/:newsSlug?',
+        name: 'news',
         component: pages.News,
       },
 
       {
-        path: ":path(.+)+",
+        path: ':path(.+)+',
         component: pages.NotFound,
       },
     ],
   },
   {
-    path: "/:path(.+)*",
+    path: '/:path(.+)*',
     redirect(route) {
-      return "/" + Trans.getUserSupportedLang() + route.path;
+      return '/' + Trans.getUserSupportedLang() + route.path;
     },
   },
 ] as RouteRecordRaw[];

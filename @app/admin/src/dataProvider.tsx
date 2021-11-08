@@ -1,7 +1,7 @@
-import { ApolloClient } from "@apollo/client/core";
-import { GetUploadUrlDocument } from "@app/graphql/dist/admin";
-import pgDataProvider from "ra-postgraphile";
-import { LegacyDataProvider } from "react-admin";
+import { ApolloClient } from '@apollo/client/core';
+import { GetUploadUrlDocument } from '@app/graphql/dist/admin';
+import pgDataProvider from 'ra-postgraphile';
+import { LegacyDataProvider } from 'react-admin';
 
 export async function createDataProvider(
   client: ApolloClient<any>
@@ -9,16 +9,16 @@ export async function createDataProvider(
   const dataProvider = await pgDataProvider(client as any);
   return async (type, resource, params) => {
     console.log(type, resource, params);
-    if ("data" in params) {
+    if ('data' in params) {
       for (const [name, field] of Object.entries(params.data)) {
         if (
-          typeof field === "object" &&
+          typeof field === 'object' &&
           !Array.isArray(field) &&
           field !== null
         ) {
-          if (Object.prototype.hasOwnProperty.call(field, "rawFile")) {
-            if (field["rawFile"] instanceof File) {
-              const file = field["rawFile"];
+          if (Object.prototype.hasOwnProperty.call(field, 'rawFile')) {
+            if (field['rawFile'] instanceof File) {
+              const file = field['rawFile'];
               const {
                 data: { createUploadUrl: data },
               } = await client.query({
@@ -33,15 +33,15 @@ export async function createDataProvider(
               )) {
                 formData.append(key, val);
               }
-              formData.append("file", file);
+              formData.append('file', file);
               const res = await fetch(data!.uploadUrl, {
-                method: "POST",
+                method: 'POST',
                 body: formData,
               });
               if (!res.ok) {
-                throw new Error("Network response was not OK");
+                throw new Error('Network response was not OK');
               }
-              const url = res.headers.get("Location");
+              const url = res.headers.get('Location');
 
               params.data[name] = url;
             }

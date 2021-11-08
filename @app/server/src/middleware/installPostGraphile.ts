@@ -1,19 +1,19 @@
-import PgSimplfyInflector from "@graphile-contrib/pg-simplify-inflector";
-import Router from "@koa/router";
-import { NodePlugin } from "graphile-build";
-import Koa from "koa";
-import { postgraphile, PostGraphileOptions } from "postgraphile";
-import PgConnectionFilter from "postgraphile-plugin-connection-filter";
+import PgSimplfyInflector from '@graphile-contrib/pg-simplify-inflector';
+import Router from '@koa/router';
+import { NodePlugin } from 'graphile-build';
+import Koa from 'koa';
+import { postgraphile, PostGraphileOptions } from 'postgraphile';
+import PgConnectionFilter from 'postgraphile-plugin-connection-filter';
 // @ts-ignore
-import PgFulltextFilterPlugin from "postgraphile-plugin-fulltext-filter";
+import PgFulltextFilterPlugin from 'postgraphile-plugin-fulltext-filter';
 
-import { getAuthPgPool } from "../databasePools";
-import AuthPlugin from "../plugins/AuthPlugin";
-import CreateUploadUrlPlugin from "../plugins/CreateUploadUrlPlugin";
-import ImageUrlSigningPlugin from "../plugins/ImageUrlSigningPlugin";
-import handleErrors from "../utils/handleErrors";
+import { getAuthPgPool } from '../databasePools';
+import AuthPlugin from '../plugins/AuthPlugin';
+import CreateUploadUrlPlugin from '../plugins/CreateUploadUrlPlugin';
+import ImageUrlSigningPlugin from '../plugins/ImageUrlSigningPlugin';
+import handleErrors from '../utils/handleErrors';
 
-const isDev = process.env.NODE_ENV === "development";
+const isDev = process.env.NODE_ENV === 'development';
 
 // const PersonPlugin = makeAddInflectorsPlugin((inflection) => {
 //   return {
@@ -42,10 +42,10 @@ export const postgraphileOptions: PostGraphileOptions = {
   ignoreRBAC: true,
   disableQueryLog: true,
   handleErrors,
-  legacyRelations: "omit",
+  legacyRelations: 'omit',
   jwtSecret: process.env.ACCESS_TOKEN_SECRET,
-  pgDefaultRole: "smil_anonymous",
-  jwtPgTypeIdentifier: "smil_aarhus.jwt_token",
+  pgDefaultRole: 'smil_anonymous',
+  jwtPgTypeIdentifier: 'smil_aarhus.jwt_token',
   ownerConnectionString: process.env.DATABASE_URL,
   skipPlugins: [NodePlugin],
   sortExport: true,
@@ -61,7 +61,7 @@ export const postgraphileOptions: PostGraphileOptions = {
 
 export const postgraphileClientMiddleware = postgraphile(
   getAuthPgPool(),
-  "smil_aarhus",
+  'smil_aarhus',
   {
     ...postgraphileOptions,
     appendPlugins: [
@@ -77,7 +77,7 @@ export const postgraphileClientMiddleware = postgraphile(
 
 const postgraphileAdminMiddleware = postgraphile(
   getAuthPgPool(),
-  "smil_aarhus_admin",
+  'smil_aarhus_admin',
   {
     ...postgraphileOptions,
     appendPlugins: [

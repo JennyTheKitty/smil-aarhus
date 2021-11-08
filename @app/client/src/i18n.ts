@@ -1,38 +1,46 @@
-import { createI18n } from "vue-i18n";
-import {
-  RouteLocationNormalized,
-  RouteLocationRaw,
-} from "vue-router";
+import { createI18n } from 'vue-i18n';
+import { RouteLocationNormalized, RouteLocationRaw } from 'vue-router';
 
-import da from "./lang/da.json";
+import da from './lang/da.json';
 
-const SUPPORTED_LANGUAGES = ["da", "en"] as const;
-const DEFAULT_LANGUAGE = "da";
-export const FALLBACK_LANGUAGE = "da";
+const SUPPORTED_LANGUAGES = ['da', 'en'] as const;
+const DEFAULT_LANGUAGE = 'da';
+export const FALLBACK_LANGUAGE = 'da';
 
-export type Lang = (typeof SUPPORTED_LANGUAGES)[number];
+export type Lang = typeof SUPPORTED_LANGUAGES[number];
 
 const datetimeFormats = {
-  'en': {
+  en: {
     short: {
-      year: 'numeric', month: 'short', day: 'numeric'
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
     },
     long: {
-      year: 'numeric', month: 'short', day: 'numeric',
-      weekday: 'short', hour: 'numeric', minute: 'numeric'
-    }
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      weekday: 'short',
+      hour: 'numeric',
+      minute: 'numeric',
+    },
   },
-  'da': {
+  da: {
     short: {
-      year: 'numeric', month: 'short', day: 'numeric'
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
     },
     long: {
-      year: 'numeric', month: 'short', day: 'numeric',
-      weekday: 'short', hour: 'numeric', minute: 'numeric'
-    }
-  }
-}
-
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      weekday: 'short',
+      hour: 'numeric',
+      minute: 'numeric',
+    },
+  },
+};
 
 export const i18n = createI18n({
   legacy: false,
@@ -70,7 +78,7 @@ export const Trans = {
     const lang = Trans.defaultLanguage;
     return {
       lang: lang,
-      langNoISO: lang.split("-")[0],
+      langNoISO: lang.split('-')[0],
     };
   },
 
@@ -80,7 +88,7 @@ export const Trans = {
 
   changeLanguage(lang: Lang): Promise<string> {
     if (!Trans.isLangSupported(lang))
-      return Promise.reject(new Error("Language not supported"));
+      return Promise.reject(new Error('Language not supported'));
     if (i18n.global.locale === lang) return Promise.resolve(lang); // has been loaded prior
     return Trans.loadLanguageFile(lang).then((msgs) => {
       i18n.global.setLocaleMessage(lang, msgs.default || msgs);
@@ -96,7 +104,6 @@ export const Trans = {
     return import(`./lang/${lang}.json`);
   },
 
-
   isLangSupported(lang: Lang) {
     return Trans.supportedLanguages.includes(lang);
   },
@@ -108,14 +115,11 @@ export const Trans = {
     return true;
   },
 
-  i18nRoute(
-    to: RouteLocationRaw,
-    lang: Lang | null = null
-  ): RouteLocationRaw {
+  i18nRoute(to: RouteLocationRaw, lang: Lang | null = null): RouteLocationRaw {
     // @ts-ignore
     // eslint-disable-next-line no-param-reassign
     if (lang === null) lang = i18n.global.locale.value;
-    if (typeof to === "string") {
+    if (typeof to === 'string') {
       return {
         path: to,
         params: { lang },
@@ -125,7 +129,7 @@ export const Trans = {
       ...to,
       params: {
         lang,
-        ...("params" in to ? to.params : {}),
+        ...('params' in to ? to.params : {}),
       },
     };
   },

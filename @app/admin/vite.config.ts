@@ -1,13 +1,13 @@
-import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
-    entries: ["src/main.tsx"],
+    entries: ['src/main.tsx'],
   },
-  base: "/admin/",
+  base: '/admin/',
   define: {
     __DOMAIN__: JSON.stringify(process.env.DOMAIN),
   },

@@ -2,5 +2,7 @@ node_modules
 **/dist
 /data/schema.graphql
 /data/admin-schema.graphql
-/@app/graphql/index.*
+/@app/graphql/src
 vendor/
+@app/client/src/auto-imports.d.ts
+@app/client/src/components.d.ts

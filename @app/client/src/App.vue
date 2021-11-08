@@ -37,37 +37,37 @@ const navLinks = computed(() => [
         name: 'Hvad er SMIL?',
         description: 'Generalt info om smil',
         to: '/info/hvad-er-smil',
-        icon: IconMdiInformationOutline
+        icon: IconMdiInformationOutline,
       },
       {
         name: 'Udvidet åbningstid',
         description: '???',
         to: '/info/udvidet-åbningstid',
-        icon: IconMdiTimelapse
+        icon: IconMdiTimelapse,
       },
       {
         name: 'SMIL Aarhus',
         description: 'Historie om SMIL Aarhus',
         to: '/info/smil-aarhus',
-        icon: IconMdiRestoreAlert
+        icon: IconMdiRestoreAlert,
       },
       {
         name: 'FAQ',
         description: 'Ofte stillede spørgsmål',
         to: '/info/faq',
-        icon: IconWpfFaq
+        icon: IconWpfFaq,
       },
       {
         name: 'Regler',
         description: 'God opførsel i SMIL',
         to: '/info/regler',
-        icon: IconMdiClipboardText
+        icon: IconMdiClipboardText,
       },
       {
         name: 'Lokaler',
         description: 'Billeder & info',
         to: '/info/lokaler',
-        icon: IconMdiFloorPlan
+        icon: IconMdiFloorPlan,
       },
       // {
       //   name: 'Konakt',
@@ -81,7 +81,7 @@ const navLinks = computed(() => [
       //   to: '/fetlife',
       //   icon: IconSmilFetlife
       // }
-    ]
+    ],
   },
   {
     name: t('nav.groups'),
@@ -92,17 +92,16 @@ const navLinks = computed(() => [
       { name: 'Kink Youth', to: '/grupper/kink-youth' },
       { name: 'Frivilliggruppen', to: '/grupper/frivillig' },
       { name: 'Kink Academy', to: '/grupper/kink-academy' },
-      { name: 'Peer Whip', to: '/grupper/peer-whip' }
-    ]
+      { name: 'Peer Whip', to: '/grupper/peer-whip' },
+    ],
   },
   {
     name: t('nav.calendar'),
-    to: Trans.i18nRoute({ name: 'calendar' })
+    to: Trans.i18nRoute({ name: 'calendar' }),
   },
   {
     name: t('nav.news'),
-    to: Trans.i18nRoute({ name: 'news' })
-  }
+    to: Trans.i18nRoute({ name: 'news' }),
+  },
 ]);
-
 </script>

@@ -1,6 +1,6 @@
-import { Typography } from "@material-ui/core";
-import { Add, Event as Icon } from "@material-ui/icons";
-import RichTextInput from "ra-input-rich-text";
+import { Typography } from '@material-ui/core';
+import { Add, Event as Icon } from '@material-ui/icons';
+import RichTextInput from 'ra-input-rich-text';
 import {
   AutocompleteInput,
   BooleanField,
@@ -26,11 +26,11 @@ import {
   TopToolbar,
   TranslatableInputs,
   useTranslatableContext,
-} from "react-admin";
+} from 'react-admin';
 // @ts-ignore
-import { DateInput, DateTimeInput } from "react-admin-date-inputs";
+import { DateInput, DateTimeInput } from 'react-admin-date-inputs';
 
-const locales = ["en", "da"];
+const locales = ['en', 'da'];
 
 interface Event {
   startsAt: Date;
@@ -47,7 +47,7 @@ interface Props {
 export const lessThan = {
   parse: (value: string): any => ({
     value,
-    operator: "lessThan",
+    operator: 'lessThan',
   }),
   format: (obj: any) => obj && obj.value,
 };
@@ -82,7 +82,7 @@ const ListActions = () => (
       component={Link}
       label="Create from template"
       to={{
-        pathname: "/EventTemplates",
+        pathname: '/EventTemplates',
       }}
     >
       <Add />
@@ -113,7 +113,7 @@ export const EventList = (props: ListProps) => (
 );
 
 const EventTitle = ({ record }: Props) => {
-  return <span>Event: {record ? `"${record.title.en}"` : ""}</span>;
+  return <span>Event: {record ? `"${record.title.en}"` : ''}</span>;
 };
 
 const EventHelp = () => {
@@ -137,13 +137,13 @@ export const EventEdit = (props: EditProps) => (
       <DateTimeInput
         source="startsAt"
         label="Starts at"
-        options={{ format: "dd/MM/yyyy, HH:mm:ss", ampm: false }}
+        options={{ format: 'dd/MM/yyyy, HH:mm:ss', ampm: false }}
         validate={required()}
       />
       <DateTimeInput
         source="endsAt"
         label="Ends at"
-        options={{ format: "dd/MM/yyyy, HH:mm:ss", ampm: false }}
+        options={{ format: 'dd/MM/yyyy, HH:mm:ss', ampm: false }}
         validate={required()}
       />
       <BooleanInput source="special" />
@@ -214,13 +214,13 @@ export const EventCreate = (props: CreateProps) => (
       <DateTimeInput
         source="startsAt"
         label="Starts at"
-        options={{ format: "dd/MM/yyyy, HH:mm:ss", ampm: false }}
+        options={{ format: 'dd/MM/yyyy, HH:mm:ss', ampm: false }}
         validate={required()}
       />
       <DateTimeInput
         source="endsAt"
         label="Ends at"
-        options={{ format: "dd/MM/yyyy, HH:mm:ss", ampm: false }}
+        options={{ format: 'dd/MM/yyyy, HH:mm:ss', ampm: false }}
         validate={required()}
       />
       <BooleanInput source="special" />
@@ -240,6 +240,6 @@ export default {
   list: EventList,
   edit: EventEdit,
   create: EventCreate,
-  options: { label: "Events" },
+  options: { label: 'Events' },
   icon: Icon,
 };

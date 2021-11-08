@@ -1,35 +1,35 @@
-import Router from "@koa/router";
-import crypto from "crypto";
-import helmet from "helmet";
-import Koa from "koa";
-import koaHelmet from "koa-helmet";
+import Router from '@koa/router';
+import crypto from 'crypto';
+import helmet from 'helmet';
+import Koa from 'koa';
+import koaHelmet from 'koa-helmet';
 
 const tmpRootUrl = process.env.ROOT_URL;
 
-if (!tmpRootUrl || typeof tmpRootUrl !== "string") {
-  throw new Error("Envvar ROOT_URL is required.");
+if (!tmpRootUrl || typeof tmpRootUrl !== 'string') {
+  throw new Error('Envvar ROOT_URL is required.');
 }
 const ROOT_URL = tmpRootUrl;
 
-const isDev = process.env.NODE_ENV === "development";
+const isDev = process.env.NODE_ENV === 'development';
 
 function createSha256CspHash(content: string) {
   return (
-    "sha256-" + crypto.createHash("sha256").update(content).digest("base64")
+    'sha256-' + crypto.createHash('sha256').update(content).digest('base64')
   );
 }
 
 const CSP_DIRECTIVES = {
   ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-  "script-src": ["'self'"],
-  "connect-src": [
+  'script-src': ["'self'"],
+  'connect-src': [
     "'self'",
     // Safari doesn't allow using wss:// origins as 'self' from
     // an https:// page, so we have to translate explicitly for
     // it.
-    ROOT_URL.replace(/^http/, "ws"),
+    ROOT_URL.replace(/^http/, 'ws'),
     // ws://localhost:24678/
-    ROOT_URL.replace(/^http/, "ws").replace(/3000/, "24678"),
+    ROOT_URL.replace(/^http/, 'ws').replace(/3000/, '24678'),
   ],
 };
 
@@ -44,7 +44,7 @@ export default async function installHelmet(app: Koa, _router: Router) {
                 ...CSP_DIRECTIVES,
                 // Dev needs 'unsafe-eval' due to
                 // https://github.com/vercel/next.js/issues/14221
-                "script-src": ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
+                'script-src': ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
               },
             },
           }
@@ -53,19 +53,19 @@ export default async function installHelmet(app: Koa, _router: Router) {
               directives: {
                 ...CSP_DIRECTIVES,
                 // "script-src": ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
-                "script-src": [
-                  ...CSP_DIRECTIVES["script-src"],
+                'script-src': [
+                  ...CSP_DIRECTIVES['script-src'],
                   ...(ctx.state.inlineScripts
                     ? [
                         ...Array.from(
                           ctx.state.inlineScripts as Array<string>
-                        ).map((script) => `'${createSha256CspHash(script)}'`)
+                        ).map((script) => `'${createSha256CspHash(script)}'`),
                       ]
                     : []),
                 ],
               },
             },
-            hsts: false
+            hsts: false,
           }
     );
     await cspMiddleware(ctx, next);

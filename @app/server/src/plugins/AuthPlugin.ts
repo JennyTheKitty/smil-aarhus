@@ -1,8 +1,8 @@
-import { gql, makeExtendSchemaPlugin } from "graphile-utils";
-import { sign, SignOptions } from "jsonwebtoken";
-import { Context } from "koa";
+import { gql, makeExtendSchemaPlugin } from 'graphile-utils';
+import { sign, SignOptions } from 'jsonwebtoken';
+import { Context } from 'koa';
 
-import { getAuthPgPool } from "../databasePools";
+import { getAuthPgPool } from '../databasePools';
 
 const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET, REFRESH_TOKEN_COOKIE_NAME } =
   process.env;
@@ -35,9 +35,9 @@ const AuthPlugin = makeExtendSchemaPlugin((_, { pgJwtSignOptions }) => ({
           );
           if (!tokenPlaintext) {
             // unable to auth/invalid creds
-            throw new Error("not authenticated");
+            throw new Error('not authenticated');
           }
-          console.log(">>", tokenPlaintext);
+          console.log('>>', tokenPlaintext);
           const { sub, role } = tokenPlaintext;
 
           const accessToken = signToken(
@@ -49,7 +49,7 @@ const AuthPlugin = makeExtendSchemaPlugin((_, { pgJwtSignOptions }) => ({
           const refreshToken = signToken(
             sub,
             role,
-            { ...pgJwtSignOptions, expiresIn: "7 days" },
+            { ...pgJwtSignOptions, expiresIn: '7 days' },
             REFRESH_TOKEN_SECRET!
           );
           sendRefreshToken(context.ctx, refreshToken);
@@ -93,13 +93,13 @@ export const signToken = (
       pgJwtSignOptions,
       pgJwtSignOptions && pgJwtSignOptions.audience
         ? null
-        : { audience: "postgraphile" },
+        : { audience: 'postgraphile' },
       pgJwtSignOptions && pgJwtSignOptions.issuer
         ? null
-        : { issuer: "postgraphile" },
+        : { issuer: 'postgraphile' },
       pgJwtSignOptions && pgJwtSignOptions.expiresIn
         ? null
-        : { expiresIn: "15 mins" }
+        : { expiresIn: '15 mins' }
     )
   );
 };
@@ -108,6 +108,6 @@ export const sendRefreshToken = (ctx: Context, token: string | null) => {
   ctx.cookies.set(REFRESH_TOKEN_COOKIE_NAME!, token, {
     httpOnly: true,
     sameSite: true,
-    path: "/access_token",
+    path: '/access_token',
   });
 };

@@ -1,7 +1,7 @@
 // ./AuthOnlyAdmin.js
 // Use <AuthOnlyAdmin> instead of <Admin> to avoid flash-of-dashboard when checkAuth is not fulfilled.
 // See: https://github.com/marmelab/react-admin/issues/5229
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
   AdminContext,
   AdminProps,
@@ -9,7 +9,7 @@ import {
   AdminUIProps,
   useCheckAuth,
   useTimeout,
-} from "react-admin";
+} from 'react-admin';
 
 const AuthOnlyAdminUI = (props: AdminUIProps) => {
   const checkAuth = useCheckAuth();

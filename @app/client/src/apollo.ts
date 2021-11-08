@@ -1,5 +1,5 @@
-import type { ApolloCache, ApolloLink } from "@apollo/client/core";
-import { ApolloClient,HttpLink } from "@apollo/client/core";
+import type { ApolloCache, ApolloLink } from '@apollo/client/core';
+import { ApolloClient, HttpLink } from '@apollo/client/core';
 
 export function createApolloClient(
   ssr = false,
@@ -21,7 +21,7 @@ export function createApolloClient(
   } else {
     link = apolloLink;
   }
-  console.log("apollo ssr", ssr);
+  console.log('apollo ssr', ssr);
   const apolloClient = new ApolloClient({
     link,
     cache,

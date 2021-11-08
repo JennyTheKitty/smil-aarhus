@@ -2,11 +2,11 @@ import {
   AuthenticateDocument,
   GetMeDocument,
   LogoutDocument,
-} from "@app/graphql/dist/admin";
-import { AuthProvider } from "ra-core";
+} from '@app/graphql/dist/admin';
+import { AuthProvider } from 'ra-core';
 
-import { accessToken } from "./accessToken";
-import client from "./Apollo";
+import { accessToken } from './accessToken';
+import client from './Apollo';
 
 const authProvider: AuthProvider = {
   login: async ({ username, password }) => {
@@ -17,14 +17,14 @@ const authProvider: AuthProvider = {
     if (data) {
       accessToken.setToken(data.authenticate);
     } else {
-      throw new Error("Error??");
+      throw new Error('Error??');
     }
   },
   checkError: (error) => {
-    console.log("checkerror", error);
+    console.log('checkerror', error);
     const status = error.status;
     if (status === 401 || status === 403) {
-      accessToken.setToken("");
+      accessToken.setToken('');
       return Promise.reject();
     }
     return Promise.resolve();
@@ -35,12 +35,12 @@ const authProvider: AuthProvider = {
     }
   },
   logout: async () => {
-    accessToken.setToken("");
+    accessToken.setToken('');
     const { data } = await client.mutate({
       mutation: LogoutDocument,
     });
     if (!data || !data.logout) {
-      throw new Error("Could not log out.");
+      throw new Error('Could not log out.');
     }
   },
   getIdentity: async () => {
@@ -48,7 +48,7 @@ const authProvider: AuthProvider = {
       query: GetMeDocument,
     });
     if (!data || !data.currentMember) {
-      throw new Error("Could not get logged in user.");
+      throw new Error('Could not get logged in user.');
     }
     const { id, userRole, name } = data.currentMember;
     return { id, fullName: `${name} (${userRole})` };
