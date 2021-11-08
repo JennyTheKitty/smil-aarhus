@@ -14,46 +14,55 @@
 
 <script setup lang="ts">
 // solves problem with Vite SSR
-import '@fullcalendar/core/vdom.cjs'
+import '@fullcalendar/core/vdom.cjs';
 // eslint-disable-next-line import/no-duplicates
 import '@fullcalendar/vue3';
 
 // eslint-enable simple-import-sort/imports
 import { CalendarEventsQueryDocument } from '@app/graphql/dist/client';
 import daLocale from '@fullcalendar/core/locales/da';
-import dayGridPlugin from '@fullcalendar/daygrid'
+import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
 // eslint-disable-next-line import/no-duplicates
-import FullCalendar, { CalendarOptions, EventInput } from '@fullcalendar/vue3'
+import FullCalendar, { CalendarOptions, EventInput } from '@fullcalendar/vue3';
 
 import { useTranslation } from '../utils';
-
 
 const calendar = ref<null | typeof FullCalendar>(null);
 const { locale } = useI18n();
 const i18nRoute = inject(key.i18nRoute)!;
-const router = useRouter()
+const router = useRouter();
 
 let eventSuccessFn = ref<((input: EventInput[]) => void) | null>(null);
 
 const variables = ref({
   startsAfter: '',
-  startsBefore: ''
+  startsBefore: '',
 });
 const options = computed(() => ({
-  enabled: eventSuccessFn.value !== null
+  enabled: eventSuccessFn.value !== null,
 }));
 const { onResult } = useQuery(CalendarEventsQueryDocument, variables, options);
 
 onResult((result) => {
-  const events = result.data?.events!.nodes.map(event => useTranslation(event, locale)).map(event => ({
-    title: event.value!.title,
-    start: event.value!.startsAt,
-    end: event.value!.startsAt,
-    url: router.resolve(i18nRoute({ name: 'calendar', params: { eventSlug: event.value!.slug } })).href,
-  } as EventInput));
+  const events = result.data
+    ?.events!.nodes.map((event) => useTranslation(event, locale))
+    .map(
+      (event) =>
+        ({
+          title: event.value!.title,
+          start: event.value!.startsAt,
+          end: event.value!.startsAt,
+          url: router.resolve(
+            i18nRoute({
+              name: 'calendar',
+              params: { eventSlug: event.value!.slug },
+            })
+          ).href,
+        } as EventInput)
+    );
   if (events && eventSuccessFn.value) eventSuccessFn.value(events);
-})
+});
 
 onMounted(() => {
   watch(locale, () => {
@@ -69,7 +78,7 @@ const calendarOptions: CalendarOptions = {
   headerToolbar: {
     left: 'prev,next today',
     center: 'title',
-    right: 'dayGridMonth,listYear'
+    right: 'dayGridMonth,listYear',
   },
   // headerToolbar: false,
   fixedWeekCount: false,
@@ -79,7 +88,7 @@ const calendarOptions: CalendarOptions = {
   eventTimeFormat: {
     hour: 'numeric',
     minute: '2-digit',
-    meridiem: false
+    meridiem: false,
   },
   firstDay: 1,
   showNonCurrentDates: false,
@@ -93,15 +102,18 @@ const calendarOptions: CalendarOptions = {
   eventClick({ event, jsEvent }) {
     router.push(event.url);
     jsEvent.preventDefault();
-  }
+  },
 };
 
 onMounted(() => {
-  watch(locale, () => {
-    calendar.value!.getApi().setOption('locale', locale.value);
-  }, { immediate: true })
-})
-
+  watch(
+    locale,
+    () => {
+      calendar.value!.getApi().setOption('locale', locale.value);
+    },
+    { immediate: true }
+  );
+});
 </script>
 
 <style scoped src="./EventCalendar.css" />

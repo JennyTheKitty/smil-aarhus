@@ -37,7 +37,11 @@
         w:outline="focus:none"
       >
         <div w:p="1">
-          <MenuItem v-for="{ text, icons }, lang in locales" v-slot="{ active }" :key="text">
+          <MenuItem
+            v-for="({ text, icons }, lang) in locales"
+            v-slot="{ active }"
+            :key="text"
+          >
             <button
               :w:bg="active ? 'pink-900' : ''"
               w:flex="~"
@@ -50,7 +54,7 @@
             >
               {{ text }}
               <div w:flex="grow"></div>
-              <component :is="icon" v-for="icon, i in icons" :key="i" />
+              <component :is="icon" v-for="(icon, i) in icons" :key="i" />
             </button>
           </MenuItem>
         </div>
@@ -60,29 +64,25 @@
 </template>
 
 <script setup lang="ts">
-import { Lang, Trans } from '../i18n'
+import { Lang, Trans } from '../i18n';
 
-const router = useRouter()
+const router = useRouter();
 const { locale } = useI18n();
 
 const locales = {
   en: {
     text: 'English',
-    icons: [
-      IconEmojioneFlagForUnitedKingdom,
-      IconEmojioneFlagForUnitedStates,
-    ]
+    icons: [IconEmojioneFlagForUnitedKingdom, IconEmojioneFlagForUnitedStates],
   },
   da: {
     text: 'Dansk',
-    icons: [IconEmojioneFlagForDenmark]
-  }
+    icons: [IconEmojioneFlagForDenmark],
+  },
 } as const;
 
 async function switchLocale(lang: Lang) {
-  const to = router.resolve({ params: { lang } })
+  const to = router.resolve({ params: { lang } });
   await Trans.changeLanguage(lang);
   await router.push(to);
 }
-
 </script>

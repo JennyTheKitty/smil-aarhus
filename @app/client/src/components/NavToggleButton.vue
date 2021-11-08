@@ -21,16 +21,21 @@
 </template>
 
 <script setup lang="ts">
-const props = withDefaults(defineProps<{
-  modelValue: boolean
-}>(), { modelValue: false });
+const props = withDefaults(
+  defineProps<{
+    modelValue: boolean;
+  }>(),
+  { modelValue: false }
+);
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: boolean): void
-}>()
+  (e: 'update:modelValue', value: boolean): void;
+}>();
 
-const open = useVModel(props, 'modelValue', emit)
-const toggleOpen = () => {open.value = !open.value};
+const open = useVModel(props, 'modelValue', emit);
+const toggleOpen = () => {
+  open.value = !open.value;
+};
 </script>
 
 <style scoped>

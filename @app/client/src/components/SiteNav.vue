@@ -24,7 +24,12 @@
           >
             <icon-smil-logo-aarhus w:text="7xl" />
           </router-link>
-          <PopoverGroup w:space="x-4" w:m="l-10" w:display="hidden md:flex" w:align="items-center">
+          <PopoverGroup
+            w:space="x-4"
+            w:m="l-10"
+            w:display="hidden md:flex"
+            w:align="items-center"
+          >
             <div v-for="link in links" :key="link.name">
               <SiteNavLink :link="link" :mobile="false" />
             </div>

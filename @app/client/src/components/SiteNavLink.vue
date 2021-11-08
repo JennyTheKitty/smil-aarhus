@@ -1,7 +1,10 @@
 <template>
   <div v-if="mobile"></div>
   <div v-else w:flex="~" w:align="items-center">
-    <Popover v-if="Object.prototype.hasOwnProperty.call(link, 'links')" v-slot="{ open }">
+    <Popover
+      v-if="Object.prototype.hasOwnProperty.call(link, 'links')"
+      v-slot="{ open }"
+    >
       <PopoverButton
         w:rounded="md"
         w:cursor="pointer"
@@ -9,7 +12,9 @@
         w:align="items-center"
         class="group btn-focus-ring"
       >
-        <span w:font="medium" w:text="sm gray-300 hover:white" w:p="y-2 x-3">{{ link.name }}</span>
+        <span w:font="medium" w:text="sm gray-300 hover:white" w:p="y-2 x-3">{{
+          link.name
+        }}</span>
         <span
           w:m="r-1 -2-2"
           w:transform="~ group-hover:translate-y-0.5"
@@ -49,10 +54,19 @@
             w:p="2"
             class="group btn-focus-ring"
           >
-            <component :is="sublink.icon" v-if="sublink.icon" w:text="2xl" w:m="-t-0.5 r-2" />
+            <component
+              :is="sublink.icon"
+              v-if="sublink.icon"
+              w:text="2xl"
+              w:m="-t-0.5 r-2"
+            />
             <div w:flex="~ col">
-              <span w:font="medium" w:text="sm gray-300 group-hover:white">{{ sublink.name }}</span>
-              <span w:font="light" w:text="sm gray-200">{{ sublink.description }}</span>
+              <span w:font="medium" w:text="sm gray-300 group-hover:white">{{
+                sublink.name
+              }}</span>
+              <span w:font="light" w:text="sm gray-200">{{
+                sublink.description
+              }}</span>
             </div>
           </router-link>
         </PopoverPanel>
@@ -66,22 +80,23 @@
       w:text="sm gray-300 hover:white"
       w:p="y-2 x-3"
       class="btn-focus-ring"
-    >{{ link.name }}</router-link>
+      >{{ link.name }}</router-link
+    >
   </div>
 </template>
 
 <script setup lang="ts">
-import { RouterLinkProps } from "vue-router";
+import { RouterLinkProps } from 'vue-router';
 
 type InnerLink = RouterLinkProps & { name: string };
-type Menu = { name: string; links: Array<InnerLink & { description?: string; icon?: any }> }
-export type Link =
-  | InnerLink
-  | Menu;
+type Menu = {
+  name: string;
+  links: Array<InnerLink & { description?: string; icon?: any }>;
+};
+export type Link = InnerLink | Menu;
 
 defineProps<{
-  link: Link,
-  mobile: Boolean
+  link: Link;
+  mobile: Boolean;
 }>();
-
 </script>
