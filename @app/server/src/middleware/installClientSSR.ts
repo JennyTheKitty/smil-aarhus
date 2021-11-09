@@ -6,7 +6,7 @@ import {
   Operation,
   OperationResult,
 } from '@urql/core';
-import { DocumentNode, execute, getOperationAST, GraphQLSchema } from 'graphql';
+import { execute, GraphQLSchema } from 'graphql';
 import { IncomingMessage, ServerResponse } from 'http';
 import Koa from 'koa';
 import c2k from 'koa-connect';
@@ -83,7 +83,7 @@ const GraphileExchange = (
   req: IncomingMessage,
   res: ServerResponse
 ): Exchange => {
-  return ({ client, forward, dispatchDebug }) => {
+  return ({ forward, dispatchDebug }) => {
     return (ops$) => {
       const sharedOps$ = share(ops$);
 
