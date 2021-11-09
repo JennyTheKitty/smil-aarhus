@@ -31,7 +31,7 @@
             w:align="items-center"
           >
             <div v-for="link in links" :key="link.name">
-              <SiteNavLink :link="link" :mobile="false" />
+              <NavLink :link="link" :mobile="false" />
             </div>
           </PopoverGroup>
           <LocaleSwitcher w:justify="self-end" />
@@ -44,7 +44,7 @@
           w:align="items-center"
           w:justify="center"
         >
-          <NavToggleButton v-model="menuOpen" />
+          <NavMenuButton v-model="menuOpen" />
         </div>
       </div>
     </div>
@@ -52,7 +52,7 @@
       <div v-show="menuOpen" w:display="md:hidden">
         <div w:space="y-1" w:p="x-2 b-3">
           <div v-for="link in links" :key="link.name">
-            <SiteNavLink :link="link" :mobile="true" />
+            <NavLink :link="link" :mobile="true" />
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Link } from './SiteNavLink.vue';
+import type { Link } from './NavLink.vue';
 
 defineProps<{
   links: Array<Link>;

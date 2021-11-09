@@ -1,6 +1,6 @@
 <template>
   <div w:bg="dark-500">
-    <SiteNav :links="navLinks" />
+    <NavBar :links="navLinks" />
     <router-view v-slot="{ Component }">
       <transition
         enter-active-class="transition duration-500 ease-out"

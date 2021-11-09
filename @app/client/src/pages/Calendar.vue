@@ -1,7 +1,7 @@
 <template>
   <div>
     <ClientOnly>
-      <EventCalendar />
+      <MonthCalendar />
     </ClientOnly>
   </div>
 </template>

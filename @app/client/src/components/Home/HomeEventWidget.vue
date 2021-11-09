@@ -41,7 +41,7 @@
 import { EventFragment } from '@app/graphql/dist/client';
 import dayjs from 'dayjs';
 
-import { Translated } from '../utils';
+import { Translated } from '../../utils';
 
 defineProps<{
   events: Translated<EventFragment>[];

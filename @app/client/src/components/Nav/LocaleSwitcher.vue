@@ -64,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import { Lang, Trans } from '../i18n';
+import { Lang, Trans } from '../../i18n';
 
 const router = useRouter();
 const { locale } = useI18n();

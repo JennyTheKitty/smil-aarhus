@@ -26,7 +26,7 @@ import listPlugin from '@fullcalendar/list';
 // eslint-disable-next-line import/no-duplicates
 import FullCalendar, { CalendarOptions, EventInput } from '@fullcalendar/vue3';
 
-import { useTranslation } from '../utils';
+import { useTranslation } from '../../utils';
 
 const calendar = ref<null | typeof FullCalendar>(null);
 const { locale } = useI18n();
@@ -116,4 +116,4 @@ onMounted(() => {
 });
 </script>
 
-<style scoped src="./EventCalendar.css" />
+<style scoped src="./MonthCalendar.css" />
