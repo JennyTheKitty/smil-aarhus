@@ -6,6 +6,7 @@ import './styles/main.css';
 // windicss utilities should be the last style import
 import 'virtual:windi-utilities.css';
 import '@vue/runtime-dom';
+import 'nprogress/nprogress.css';
 
 import {
   cacheExchange,
@@ -16,7 +17,9 @@ import {
 } from '@urql/core';
 import urql from '@urql/vue';
 import { createHead } from '@vueuse/head';
+import { useNProgress } from '@vueuse/integrations/useNProgress';
 import viteSSR, { ClientOnly } from 'vite-ssr';
+import { Router } from 'vue-router';
 
 import App from './App.vue';
 import { i18n, Trans } from './i18n';
@@ -59,7 +62,7 @@ export default viteSSR(
     },
   },
   async (ctx) => {
-    const { app, initialState, request } = ctx;
+    const { app, initialState, request, router } = ctx;
     const head = createHead();
     app.use(head);
 
@@ -69,6 +72,18 @@ export default viteSSR(
     app.component(ClientOnly.name, ClientOnly);
 
     const isServerSide = import.meta.env.SSR;
+
+    if (!isServerSide) {
+      const { isLoading } = useNProgress();
+
+      (router as Router).beforeEach((to, from, next) => {
+        isLoading.value = true;
+        next();
+      });
+      (router as Router).afterEach(() => {
+        isLoading.value = false;
+      });
+    }
 
     const lastExchange = isServerSide
       ? (request as { _koaCtx: any } | undefined)?._koaCtx.state
