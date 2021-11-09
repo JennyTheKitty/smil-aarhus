@@ -19,14 +19,12 @@ const sign = (salt: string, target: string, secret: string): string => {
 };
 function createUrl(
   url: string,
-  options: { width: number; height: number }
+  options: { width: number; height: number; ext: string }
 ): string {
   // eslint-disable-next-line no-param-reassign
   url = url.replace('http://media.localhost/', 's3://');
-  console.log(url);
   const encoded_url = urlSafeBase64(url);
-  const path = `/resize:auto:${options.width}:${options.height}/${encoded_url}.jpg`;
-  console.log(path);
+  const path = `/resize:auto:${options.width}:${options.height}/${encoded_url}.${options.ext}`;
   const signature = sign(
     process.env.IMGPROXY_SALT!,
     path,
@@ -35,30 +33,49 @@ function createUrl(
   return `http://img.${process.env.DOMAIN}/${signature}${path}`;
 }
 
+function createResponsiveImage(file: string) {
+  const widths = [100, 250, 500, 1000, 2000];
+  return {
+    src: createUrl(file, { width: 0, height: 0, ext: 'jpg' }),
+    srcSetWebp: widths
+      .map((width) => {
+        return `${createUrl(file, {
+          width,
+          height: 0,
+          ext: 'webp',
+        })} ${width}w`;
+      })
+      .join(', '),
+    srcSetJpeg: widths
+      .map((width) => {
+        return `${createUrl(file, {
+          width,
+          height: 0,
+          ext: 'jpg',
+        })} ${width}w`;
+      })
+      .join(', '),
+  };
+}
+
 const ImageUrlSigningPlugin = makeExtendSchemaPlugin(() => {
   return {
     typeDefs: gql`
       extend type Group {
-        imageSrc: String! @requires(columns: ["image_file"])
-        imageSrcSet: String! @requires(columns: ["image_file"])
+        image: ResponsiveImage! @requires(columns: ["image_file"])
+      }
+      type ResponsiveImage {
+        # width: Int!
+        # height: Int!
+        src: String!
+        srcSetWebp: String!
+        srcSetJpeg: String!
       }
     `,
     resolvers: {
       Group: {
-        imageSrc: async (group) => {
-          console.log(group);
-          return createUrl(group.imageFile, { width: 0, height: 0 });
-        },
-        imageSrcSet: async (group) => {
-          const widths = [100, 250, 500, 1000, 2000];
-          return widths
-            .map((width) => {
-              return `${createUrl(group.imageFile, {
-                width,
-                height: 0,
-              })} ${width}w`;
-            })
-            .join(', ');
+        image: async (group) => {
+          return createResponsiveImage(group.imageFile);
         },
       },
     },

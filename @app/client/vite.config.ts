@@ -13,11 +13,6 @@ import { imagetools } from 'vite-imagetools';
 import WindiCSS from 'vite-plugin-windicss';
 import viteSSR from 'vite-ssr/plugin.js';
 
-export const ssrTransformCustomDir = () => ({
-  props: [],
-  needRuntime: true,
-});
-
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
@@ -30,45 +25,28 @@ export default defineConfig({
       strict: true,
     },
   },
-  // optimizeDeps: {
-  //   include: [
-  //     "vue",
-  //     "vue-router",
-  //     "@vueuse/head",
-  //     "@vueuse/core",
-  //     "@vue/apollo-composable"
-  //   ],
-  //   exclude: ["vue-demi"],
-  // },
   build: {
-    minify: true,
+    // minify: 'terser',
+    // sourcemap: true,
+    // terserOptions: {
+    //   compress: false,
+    //   mangle: false,
+    //   output: {
+    //     comments: false,
+    //   },
+    // },
   },
   define: {
     __ROOT_URL__: JSON.stringify(process.env.ROOT_URL),
   },
   plugins: [
     viteSSR({
-      // @ts-ignore
-      // getRenderContext({ request, response }) {
-      //   return {
-      //     graphileApolloLink: new GraphileApolloLink(request, response),
-      //   };
-      // },
-      excludeSsrComponents: [/EventCalendar.vue/],
+      excludeSsrComponents: [/MonthCalendar.vue/],
     }),
     Vue({
       include: [/\.vue$/],
       template: {
         ssr: true,
-        compilerOptions: {
-          directiveTransforms: {
-            // "b-modal": ssrTransformCustomDir,
-            // "b-popover": ssrTransformCustomDir,
-            // "b-toggle": ssrTransformCustomDir,
-            // "b-tooltip": ssrTransformCustomDir,
-            // "b-visible": ssrTransformCustomDir,
-          },
-        },
       },
     }),
     vueI18n({
@@ -77,13 +55,13 @@ export default defineConfig({
     AutoImport({
       imports: [
         'vue',
-        'vue-i18n',
         'vue-router',
         '@vueuse/head',
         '@vueuse/core',
         {
-          '@vue/apollo-composable': ['useQuery', 'useMutation', 'useResult'],
           '@app/client/src/symbols': ['key'],
+          'petite-vue-i18n': ['useI18n'],
+          '@urql/vue': ['useQuery', 'useMutation'],
         },
       ],
       dts: path.resolve(__dirname, 'src', 'auto-imports.d.ts'),

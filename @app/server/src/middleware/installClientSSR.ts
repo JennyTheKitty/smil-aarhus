@@ -1,12 +1,12 @@
-import {
-  ApolloLink,
-  FetchResult,
-  NextLink,
-  Observable,
-  Operation,
-} from '@apollo/client';
 import Router from '@koa/router';
-import { execute, getOperationAST } from 'graphql';
+import {
+  Exchange,
+  makeErrorResult,
+  makeResult,
+  Operation,
+  OperationResult,
+} from '@urql/core';
+import { DocumentNode, execute, getOperationAST, GraphQLSchema } from 'graphql';
 import { IncomingMessage, ServerResponse } from 'http';
 import Koa from 'koa';
 import c2k from 'koa-connect';
@@ -14,6 +14,17 @@ import mount from 'koa-mount';
 import serve from 'koa-static';
 import { resolve as pathResolve } from 'path';
 import { createSsrServer } from 'vite-ssr/dev';
+import {
+  filter,
+  make,
+  merge,
+  mergeMap,
+  onPush,
+  pipe,
+  share,
+  Source,
+  takeUntil,
+} from 'wonka';
 
 import { postgraphileClientMiddleware } from './installPostGraphile';
 
@@ -22,67 +33,113 @@ if (!process.env.NODE_ENV) {
 }
 const isDev = process.env.NODE_ENV === 'development';
 
-/**
- * A Graphile Apollo link for use during SSR. Allows Apollo Client to resolve
- * server-side requests without requiring an HTTP roundtrip.
- */
-export class GraphileApolloLink extends ApolloLink {
-  constructor(private req: IncomingMessage, private res: ServerResponse) {
-    super();
-  }
-
-  request(
-    operation: Operation,
-    _forward?: NextLink
-  ): Observable<FetchResult> | null {
-    return new Observable((observer) => {
-      (async () => {
-        try {
-          const op = getOperationAST(operation.query, operation.operationName);
-          if (!op || op.operation !== 'query') {
-            if (!observer.closed) {
-              /* Only do queries (not subscriptions) on server side */
-              observer.complete();
-            }
-            return;
-          }
-          const schema = await postgraphileClientMiddleware.getGraphQLSchema();
-          const data =
-            await postgraphileClientMiddleware.withPostGraphileContextFromReqRes(
-              this.req,
-              this.res,
-              {},
-              (context) =>
-                execute(
-                  schema,
-                  operation.query,
-                  {},
-                  context,
-                  operation.variables,
-                  operation.operationName
-                )
-            );
-          if (!observer.closed) {
-            observer.next(data);
-            observer.complete();
-          }
-        } catch (e) {
-          if (!observer.closed) {
-            observer.error(e);
-          } else {
-            console.error(e);
-          }
-        }
-      })();
-    });
-  }
+export interface Body {
+  query?: string;
+  operationName: string | undefined;
+  variables: undefined | Record<string, any>;
+  extensions: undefined | Record<string, any>;
 }
+
+const makeSource = (
+  operation: Operation,
+  req: IncomingMessage,
+  res: ServerResponse
+): Source<OperationResult> => {
+  return make<OperationResult>(({ next, complete }) => {
+    let ended = false;
+    Promise.resolve()
+      .then(() => {
+        if (ended) return;
+        return postgraphileClientMiddleware.getGraphQLSchema();
+      })
+      .then((schema: GraphQLSchema | void) => {
+        if (!schema) return;
+        return postgraphileClientMiddleware.withPostGraphileContextFromReqRes(
+          req,
+          res,
+          {},
+          (context) =>
+            execute(schema, operation.query, {}, context, operation.variables)
+        );
+      })
+      .then((data) => {
+        return next(makeResult(operation, data));
+      })
+      .then(complete)
+      .catch((error: Error) => {
+        const result = makeErrorResult(operation, error, '');
+
+        next(result);
+        complete();
+      });
+
+    return () => {
+      ended = true;
+    };
+  });
+};
+
+const GraphileExchange = (
+  req: IncomingMessage,
+  res: ServerResponse
+): Exchange => {
+  return ({ client, forward, dispatchDebug }) => {
+    return (ops$) => {
+      const sharedOps$ = share(ops$);
+
+      const results$ = pipe(
+        sharedOps$,
+        filter((operation) => {
+          return operation.kind === 'query' || operation.kind === 'mutation';
+        }),
+        mergeMap((operation) => {
+          const { key } = operation;
+          const teardown$ = pipe(
+            sharedOps$,
+            filter((op) => op.kind === 'teardown' && op.key === key)
+          );
+
+          return pipe(
+            makeSource(operation, req, res),
+            takeUntil(teardown$),
+            onPush((result) => {
+              const error = !result.data ? result.error : undefined;
+
+              dispatchDebug({
+                type: error ? 'fetchError' : 'fetchSuccess',
+                message: `A ${
+                  error ? 'failed' : 'successful'
+                } fetch response has been returned.`,
+                operation,
+                data: {
+                  url: '',
+                  fetchOptions: '',
+                  value: error || result,
+                },
+              });
+            })
+          );
+        })
+      );
+
+      const forward$ = pipe(
+        sharedOps$,
+        filter((operation) => {
+          return operation.kind !== 'query' && operation.kind !== 'mutation';
+        }),
+        forward
+      );
+
+      return merge([results$, forward$]);
+    };
+  };
+};
 
 export default async function installClientSSR(app: Koa, router: Router) {
   const resolve = (p: string) => pathResolve(__dirname + '/../../../client', p);
   app.use(async (ctx, next) => {
-    const link = new GraphileApolloLink(ctx.req, ctx.res);
-    ctx.state.graphileApolloLink = link;
+    const link = GraphileExchange(ctx.req, ctx.res);
+    ctx.state.graphileExchange = link;
     await next();
   });
 
@@ -122,8 +179,6 @@ export default async function installClientSSR(app: Koa, router: Router) {
         preload: true,
         response: ctx.res,
         request: ctx.req,
-        // Anything passed here will be available in the main hook
-        graphileApolloLink: ctx.state.graphileApolloLink,
         // initialState: { ... } // <- This would also be available
       });
       if (!Object.hasOwnProperty.call(ctx.state, 'inlineScripts')) {

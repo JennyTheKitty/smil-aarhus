@@ -7,15 +7,17 @@ import './styles/main.css';
 import 'virtual:windi-utilities.css';
 import '@vue/runtime-dom';
 
-// NOTE: Very important this isn't imported from @apollo/client
-// or it will drag @types/react along with it
-import { InMemoryCache } from '@apollo/client/core';
-import { provideApolloClient } from '@vue/apollo-composable';
-import { createApolloProvider } from '@vue/apollo-option';
+import {
+  cacheExchange,
+  createClient,
+  dedupExchange,
+  fetchExchange,
+  ssrExchange,
+} from '@urql/core';
+import urql from '@urql/vue';
 import { createHead } from '@vueuse/head';
 import viteSSR, { ClientOnly } from 'vite-ssr';
 
-import { createApolloClient } from './apollo';
 import App from './App.vue';
 import { i18n, Trans } from './i18n';
 import routes from './routes';
@@ -37,8 +39,19 @@ export default viteSSR(
   {
     routes,
     transformState(state, defaultTransformer) {
-      if (import.meta.env.SSR) state.apolloCache = state.apolloCache.extract();
-
+      if (import.meta.env.SSR) {
+        state.urqlCache = Object.fromEntries(
+          Object.entries(
+            (state.ssr as ReturnType<typeof ssrExchange>).extractData()
+          ).map(([key, val]) => {
+            return [
+              key,
+              { ...val, data: val.data?.replace(/(?<!\\)\\(.)/g, '\\\\$1') },
+            ];
+          })
+        );
+      }
+      delete state.ssr;
       return defaultTransformer(state);
     },
     pageProps: {
@@ -46,7 +59,7 @@ export default viteSSR(
     },
   },
   async (ctx) => {
-    const { app, initialState, graphileApolloLink } = ctx;
+    const { app, initialState, request } = ctx;
     const head = createHead();
     app.use(head);
 
@@ -55,30 +68,27 @@ export default viteSSR(
 
     app.component(ClientOnly.name, ClientOnly);
 
-    const cache = new InMemoryCache({
-      dataIdFromObject: (object) => object.nodeId as string,
+    const isServerSide = import.meta.env.SSR;
+
+    const lastExchange = isServerSide
+      ? (request as { _koaCtx: any } | undefined)?._koaCtx.state
+          .graphileExchange
+      : fetchExchange;
+
+    const ssr = ssrExchange({
+      isClient: !isServerSide,
+      initialState: !isServerSide ? initialState.urqlCache : {},
     });
-    if (!import.meta.env.SSR) {
-      cache.restore(initialState.apolloCache);
-    }
-    initialState.apolloCache = cache;
+    initialState.ssr = ssr;
 
-    const ApolloLink =
-      import.meta.env.SSR && graphileApolloLink ? graphileApolloLink : null;
-
-    const defaultClient = createApolloClient(
-      import.meta.env.SSR,
-      initialState.apolloCache,
-      ApolloLink,
-      initialState.csrfToken
-    );
-
-    provideApolloClient(defaultClient);
-
-    const apolloProvider = createApolloProvider({
-      defaultClient,
+    const client = createClient({
+      // @ts-ignore
+      // eslint-disable-next-line no-undef
+      url: `${__ROOT_URL__}/graphql`,
+      exchanges: [dedupExchange, cacheExchange, ssr, lastExchange],
     });
-    app.use(apolloProvider);
+
+    app.use(urql, client);
 
     return { head };
   }

@@ -7,13 +7,19 @@
     "allowJs": true,
     "lib": ["esnext", "dom"],
     "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo",
-    "declarationDir": "dist", 
-    "types": ["vite/client"],
+    "declarationDir": "dist",
+    "types": ["vite/client", "@intlify/vite-plugin-vue-i18n/client"],
     "paths": {
-      "~/*": ["src/*"],
+      "~/*": ["src/*"]
     },
     "jsxFactory": "VueJSX"
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.json"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/**/*.json"
+  ],
   "exclude": ["node_modules"]
 }

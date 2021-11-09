@@ -22,6 +22,7 @@ function createSha256CspHash(content: string) {
 const CSP_DIRECTIVES = {
   ...helmet.contentSecurityPolicy.getDefaultDirectives(),
   'script-src': ["'self'"],
+  'img-src': ["'self'", `img.${process.env.DOMAIN}`],
   'connect-src': [
     "'self'",
     // Safari doesn't allow using wss:// origins as 'self' from
@@ -55,6 +56,7 @@ export default async function installHelmet(app: Koa, _router: Router) {
                 // "script-src": ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
                 'script-src': [
                   ...CSP_DIRECTIVES['script-src'],
+                  "'unsafe-eval'",
                   ...(ctx.state.inlineScripts
                     ? [
                         ...Array.from(

@@ -1,4 +1,5 @@
 import { gql, makeExtendSchemaPlugin } from 'graphile-utils';
+import mime from 'mime-types';
 import { Client as MinioClient } from 'minio';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -124,8 +125,10 @@ const CreateUploadUrlPlugin = makeExtendSchemaPlugin(() => ({
           );
         }
 
+        const ext = mime.extension(contentType);
+
         const data = await generatePresignedPostPolicy(
-          `media/${uuidv4()}`,
+          `media/${uuidv4()}` + (ext ? `.${ext}` : ''),
           contentType,
           {}
         );

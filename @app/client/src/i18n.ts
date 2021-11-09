@@ -2,7 +2,7 @@ import 'dayjs/locale/da';
 
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
-import { createI18n } from 'vue-i18n';
+import { createI18n } from 'petite-vue-i18n';
 import { RouteLocationNormalized, RouteLocationRaw } from 'vue-router';
 
 import da from './lang/da.json';
@@ -15,44 +15,9 @@ export const FALLBACK_LANGUAGE = 'da';
 
 export type Lang = typeof SUPPORTED_LANGUAGES[number];
 
-const datetimeFormats = {
-  en: {
-    short: {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    },
-    long: {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      weekday: 'short',
-      hour: 'numeric',
-      minute: 'numeric',
-    },
-  },
-  da: {
-    short: {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    },
-    long: {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      weekday: 'short',
-      hour: 'numeric',
-      minute: 'numeric',
-    },
-  },
-};
-
 export const i18n = createI18n({
   legacy: false,
   locale: DEFAULT_LANGUAGE,
-  // @ts-ignore
-  datetimeFormats,
   fallbackLocale: FALLBACK_LANGUAGE,
   messages: { da },
 });

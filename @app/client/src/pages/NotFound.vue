@@ -61,14 +61,11 @@
               active:top-0.5
               focus-visible:(bg-gray-200
               text-black)
-            "
+              "
           >
             <span>Gå til forsiden</span>
           </button>
         </div>
-        <!-- <div class="mx-auto max-w-md w-full block relative md:mt-0 lg:max-w-2xl">
-                <img src="/images/illustrations/1.svg"/>
-            </div> -->
       </div>
     </div>
   </main>

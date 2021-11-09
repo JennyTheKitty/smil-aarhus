@@ -39,13 +39,14 @@ const variables = ref({
   startsAfter: '',
   startsBefore: '',
 });
-const options = computed(() => ({
-  enabled: eventSuccessFn.value !== null,
-}));
-const { onResult } = useQuery(CalendarEventsQueryDocument, variables, options);
+const { data } = useQuery({
+  query: CalendarEventsQueryDocument,
+  variables,
+  pause: computed(() => eventSuccessFn.value === null),
+});
 
-onResult((result) => {
-  const events = result.data
+watch(data, (data) => {
+  const events = data
     ?.events!.nodes.map((event) => useTranslation(event, locale))
     .map(
       (event) =>

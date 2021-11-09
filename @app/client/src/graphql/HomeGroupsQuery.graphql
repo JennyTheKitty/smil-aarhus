@@ -1,0 +1,19 @@
+query HomeGroupsQuery {
+  groups {
+    nodes {
+      id
+      image {
+        src
+        srcSetWebp
+        srcSetJpeg
+      }
+      translations {
+        nodes {
+          languageCode
+          title
+          description
+        }
+      }
+    }
+  }
+}

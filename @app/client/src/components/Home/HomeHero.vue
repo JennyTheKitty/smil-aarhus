@@ -6,12 +6,14 @@
           ../../assets/images/artem-labunsky-whsB1P4Kblc-unsplash.jpg?w=300;900;1500;2000&format=webp&srcset&metadata=width;height
         "
         type="image/webp"
+        sizes="100vw"
       />
       <source
         srcset="
           ../../assets/images/artem-labunsky-whsB1P4Kblc-unsplash.jpg?w=300;900;1500;2000&format=jpg&srcset
         "
         type="image/webp"
+        sizes="100vw"
       />
       <img
         alt

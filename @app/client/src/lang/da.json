@@ -1,28 +1,18 @@
 {
-  "hero": {
-    "title": "De fedeste BDSM\nlokaler i Aarhus",
-    "subtitle": "Blah blah, smil aarhus's lokaler are the greatest of all time blah blah.",
-    "buttons": {
-      "signup": "Bliv medlem",
-      "pictures": "Flere billeder"
-    }
-  },
-  "home": {
-    "upcoming-events": "Kommende events",
-    "special-events": "Special event",
-    "latest-news": "Seneste nyhed",
-    "goto-calendar": "Gå til kalenderen"
-  },
-  "nav": {
-    "info": "Info",
-    "groups": "Grupper",
-    "calendar": "Kalender",
-    "news": "Nyheder",
-    "home": "Hjem"
-  },
-  "path": {
-    "calendar": "calendar"
-  },
+  "address": "SMIL Aarhus\nVestergade 49 C 2. sal. 8000 Aarhus C.\n(Opgang C finder du i bunden af gården.)",
   "address-title": "Addresse:",
-  "address": "SMIL Aarhus\nVestergade 49 C 2. sal. 8000 Aarhus C.\n(Opgang C finder du i bunden af gården.)"
+  "hero.buttons.pictures": "Flere billeder",
+  "hero.buttons.signup": "Bliv medlem",
+  "hero.subtitle": "Blah blah, smil aarhus's lokaler are the greatest of all time blah blah.",
+  "hero.title": "De fedeste BDSM\nlokaler i Aarhus",
+  "home.goto-calendar": "Gå til kalenderen",
+  "home.latest-news": "Seneste nyhed",
+  "home.special-events": "Special event",
+  "home.upcoming-events": "Kommende events",
+  "nav.calendar": "Kalender",
+  "nav.groups": "Grupper",
+  "nav.home": "Hjem",
+  "nav.info": "Info",
+  "nav.news": "Nyheder",
+  "path.calendar": "calendar"
 }

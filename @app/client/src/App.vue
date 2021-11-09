@@ -1,20 +1,29 @@
 <template>
   <div w:bg="dark-500">
     <NavBar :links="navLinks" />
-    <router-view v-slot="{ Component }">
-      <transition
-        enter-active-class="transition duration-500 ease-out"
-        enter-from-class="opacity-0"
-        enter-to-class="opacity-100"
-        leave-active-class="transition duration-500 ease-in"
-        leave-from-class="opacity-100"
-        leave-to-class="opacity-0"
-      >
-        <keep-alive>
-          <component :is="Component" />
-        </keep-alive>
-      </transition>
-    </router-view>
+
+    <suspense>
+      <router-view v-slot="{ Component }">
+        <template v-if="Component">
+          <transition
+            enter-active-class="transition duration-500 ease-out"
+            enter-from-class="opacity-0"
+            enter-to-class="opacity-100"
+            leave-active-class="transition duration-500 ease-in"
+            leave-from-class="opacity-100"
+            leave-to-class="opacity-0"
+            mode="out-in"
+          >
+            <keep-alive>
+              <component :is="Component"></component>
+            </keep-alive>
+          </transition>
+        </template>
+      </router-view>
+      <template #fallback>
+        <div>Loading...</div>
+      </template>
+    </suspense>
 
     <Footer />
   </div>

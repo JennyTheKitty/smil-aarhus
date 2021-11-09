@@ -1551,9 +1551,8 @@ export type GetColumnsPayload = {
 export type Group = {
   __typename?: 'Group';
   id: Scalars['BigInt'];
+  image: ResponsiveImage;
   imageFile: Maybe<Scalars['String']>;
-  imageSrc: Scalars['String'];
-  imageSrcSet: Scalars['String'];
   /** Reads and enables pagination through a set of `GroupTr`. */
   translations: GroupTrsConnection;
 };
@@ -2590,6 +2589,13 @@ export type QuerySlugifyArgs = {
   t: Scalars['String'];
 };
 
+export type ResponsiveImage = {
+  __typename?: 'ResponsiveImage';
+  src: Scalars['String'];
+  srcSetJpeg: Scalars['String'];
+  srcSetWebp: Scalars['String'];
+};
+
 /** A filter to be used against String fields. All fields are combined with a logical ‘and.’ */
 export type StringFilter = {
   /** Not equal to the specified value, treating null like an ordinary value. */
@@ -3182,6 +3188,30 @@ export type HomeEventsQueryQuery = (
   )> }
 );
 
+export type HomeGroupsQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type HomeGroupsQueryQuery = (
+  { __typename?: 'Query' }
+  & { groups: Maybe<(
+    { __typename?: 'GroupsConnection' }
+    & { nodes: Array<(
+      { __typename?: 'Group' }
+      & Pick<Group, 'id'>
+      & { image: (
+        { __typename?: 'ResponsiveImage' }
+        & Pick<ResponsiveImage, 'src' | 'srcSetWebp' | 'srcSetJpeg'>
+      ), translations: (
+        { __typename?: 'GroupTrsConnection' }
+        & { nodes: Array<(
+          { __typename?: 'GroupTr' }
+          & Pick<GroupTr, 'languageCode' | 'title' | 'description'>
+        )> }
+      ) }
+    )> }
+  )> }
+);
+
 export type PageQueryQueryVariables = Exact<{
   name?: Maybe<Scalars['String']>;
 }>;
@@ -3252,6 +3282,27 @@ export const HomeEventsQueryDocument = gql`
   }
 }
     ${EventFragmentDoc}` as unknown as DocumentNode<HomeEventsQueryQuery, HomeEventsQueryQueryVariables>;
+export const HomeGroupsQueryDocument = gql`
+    query HomeGroupsQuery {
+  groups {
+    nodes {
+      id
+      image {
+        src
+        srcSetWebp
+        srcSetJpeg
+      }
+      translations {
+        nodes {
+          languageCode
+          title
+          description
+        }
+      }
+    }
+  }
+}
+    ` as unknown as DocumentNode<HomeGroupsQueryQuery, HomeGroupsQueryQueryVariables>;
 export const PageQueryDocument = gql`
     query PageQuery($name: String = "") {
   page(name: $name) {

@@ -1,25 +1,17 @@
 {
-  "hero": {
-    "subtitle": "Blah blah, smil aarhus's premises are the greatest of all time blah blah.",
-    "title": "The coolest BDSM\npremises in Aarhus",
-    "buttons": {
-      "pictures": "More pictures",
-      "signup": "Sign up"
-    }
-  },
-  "home": {
-    "latest-news": "Latest news",
-    "special-events": "Special event",
-    "upcoming-events": "Upcoming events",
-    "goto-calendar": "Go to the calendar"
-  },
-  "nav": {
-    "groups": "Groups",
-    "news": "News",
-    "info": "Info",
-    "calendar": "Calendar",
-    "home": "Home"
-  },
+  "address": "SMIL Aarhus\nVestergade 49 C 2nd fl. 8000 Aarhus C.\n(Entrance C can be found at the end of the courtyard.)",
   "address-title": "Address:",
-  "address": "SMIL Aarhus\nVestergade 49 C 2nd fl. 8000 Aarhus C.\n(Entrance C can be found at the end of the courtyard.)"
+  "hero.buttons.pictures": "More pictures",
+  "hero.buttons.signup": "Sign up",
+  "hero.subtitle": "Blah blah, smil aarhus's premises are the greatest of all time blah blah.",
+  "hero.title": "The coolest BDSM\npremises in Aarhus",
+  "home.goto-calendar": "Go to the calendar",
+  "home.latest-news": "Latest news",
+  "home.special-events": "Special event",
+  "home.upcoming-events": "Upcoming events",
+  "nav.calendar": "Calendar",
+  "nav.groups": "Groups",
+  "nav.home": "Home",
+  "nav.info": "Info",
+  "nav.news": "News"
 }
