@@ -39,7 +39,7 @@
       <h1 w:font="bold" w:text="space-pre-line 2xl sm:4xl md:5xl lg:6xl">
         {{ t('hero.title') }}
       </h1>
-      <span w:text="sm sm:md">{{ t('hero.subtitle') }}</span>
+      <span w:text="sm sm:base">{{ t('hero.subtitle') }}</span>
       <div w:flex="~ row" w:space="x-10" w:p="t-1 sm:t-5">
         <button class="btn-hero">
           <span>{{ t('hero.buttons.signup') }}</span>

@@ -8,13 +8,7 @@
         w:m="t-1"
         :to="i18nRoute({ name: 'calendar', params: { eventSlug: event.value!.slug } })"
       >
-        <div
-          w:flex="~ col shrink-0"
-          w:w="18"
-          w:text="right"
-          w:p="r-3 y-1"
-          w:justify="between"
-        >
+        <div w:flex="~ col shrink-0" w:w="18" w:text="right" w:p="r-3 y-1">
           <span>{{ dayjs(event.value!.startsAt).format('D MMM') }}</span>
           <span w:text="sm gray-500">
             {{ dayjs(event.value!.startsAt).format('ddd') }}
