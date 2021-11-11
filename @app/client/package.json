@@ -5,10 +5,11 @@
     "build": "cross-env NODE_ENV=production NODE_OPTIONS=\"$NODE_OPTIONS -r @app/config/env\" vite-ssr build"
   },
   "dependencies": {
-    "@fullcalendar/core": "^5.10.0",
-    "@fullcalendar/daygrid": "^5.10.0",
-    "@fullcalendar/list": "^5.10.0",
-    "@fullcalendar/vue3": "^5.10.0",
+    "@fullcalendar/core": "^5.10.1",
+    "@fullcalendar/daygrid": "^5.10.1",
+    "@fullcalendar/list": "^5.10.1",
+    "@fullcalendar/timegrid": "^5.10.1",
+    "@fullcalendar/vue3": "^5.10.1",
     "@headlessui/vue": "^0.0.0-dev.9f638c9",
     "@urql/vue": "^0.6.0",
     "@vueuse/core": "^6.5.3",
