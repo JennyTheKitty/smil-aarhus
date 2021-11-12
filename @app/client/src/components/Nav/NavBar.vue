@@ -1,5 +1,12 @@
 <template>
-  <nav w:bg="dark-900" w:shadow="~" w:text="gray-300">
+  <nav
+    id="nav"
+    w:bg="dark-900"
+    w:text="gray-300"
+    w:z="5"
+    w:pos="sticky top-0"
+    w:transition="~ background-color duration-50"
+  >
     <div w:m="auto" w:max-w="7xl" w:p="x-2 md:x-8">
       <div w:flex="~" w:h="16" w:align="items-center" w:justify="between">
         <div
@@ -70,6 +77,20 @@ defineProps<{
 const menuOpen = ref(false);
 
 const { t } = useI18n();
-
+const route = useRoute();
 const i18nRoute = inject(key.i18nRoute)!;
+
+const heroHeight = inject(key.heroHeight);
+const { y: windowY } = useWindowScroll();
+const bgOpacity = computed(() => {
+  return heroHeight?.value && route.name === 'home'
+    ? Math.min(0.9, windowY.value / heroHeight.value)
+    : 1.0;
+});
 </script>
+
+<style>
+#nav {
+  --tw-bg-opacity: v-bind(bgOpacity);
+}
+</style>

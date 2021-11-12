@@ -2,7 +2,7 @@
   <div>
     <HomeHero />
 
-    <div w:m="x-auto" w:text="white" w:max-w="7xl">
+    <div w:m="x-auto t-4" w:text="white" w:max-w="7xl">
       <div w:flex="~ col lg:row" w:p="y-4 x-4">
         <div w:w="lg:7/10">
           <a

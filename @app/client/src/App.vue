@@ -34,6 +34,8 @@ import { Trans } from './i18n';
 
 const { t } = useI18n();
 
+provide(key.heroHeight, ref(0));
+
 const navLinks = computed(() => [
   // {
   //   name: 'Home',

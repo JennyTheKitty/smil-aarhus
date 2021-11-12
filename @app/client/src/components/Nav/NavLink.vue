@@ -39,7 +39,7 @@
         <PopoverPanel
           w:rounded="xl"
           w:bg="dark-900"
-          w:border="1 gray-500"
+          w:border="2 pink-800"
           w:grid="~ cols-2"
           w:pos="absolute left-1/2"
           w:m="t-3"

@@ -1,5 +1,5 @@
 <template>
-  <div w:h="full" w:rounded="2xl" w:m="5" w:max-h="50vh" w:pos="relative">
+  <div ref="hero" class="home-hero" w:h="full" w:pos="relative" w:m="-t-16">
     <picture>
       <source
         srcset="
@@ -17,11 +17,11 @@
       />
       <img
         alt
+        class="home-hero"
         w:object="cover"
-        w:rounded="2xl"
         w:w="full"
         w:max-h="50vh"
-        w:filter="~ brightness-25"
+        w:filter="~ brightness-35"
         v-bind="imgDimensions"
       />
     </picture>
@@ -35,6 +35,7 @@
       w:p="4"
       w:space="y-1 sm:y-5"
       w:text="white center"
+      w:border="b-4 b-pink-800"
     >
       <h1 w:font="bold" w:text="space-pre-line 2xl sm:4xl md:5xl lg:6xl">
         {{ t('hero.title') }}
@@ -42,10 +43,9 @@
       <span w:text="sm sm:base">{{ t('hero.subtitle') }}</span>
       <div w:flex="~ row" w:space="x-10" w:p="t-1 sm:t-5">
         <button class="btn-hero">
-          <span>{{ t('hero.buttons.signup') }}</span>
-        </button>
-        <button class="btn-hero">
-          <span>{{ t('hero.buttons.pictures') }}</span>
+          <span w:text="uppercase" w:font="tracking-wider">{{
+            t('hero.buttons.signup')
+          }}</span>
         </button>
       </div>
     </div>
@@ -58,4 +58,17 @@
 import imgDimensions from '../../assets/images/artem-labunsky-whsB1P4Kblc-unsplash.jpg?metadata=width;height';
 
 const { t } = useI18n();
+const hero = ref(null);
+
+const { height } = useElementSize(hero);
+const heroHeight = inject(key.heroHeight);
+watch(height, () => {
+  heroHeight!.value = height.value;
+});
 </script>
+
+<style>
+.home-hero {
+  max-height: calc(64px + 50vh);
+}
+</style>
