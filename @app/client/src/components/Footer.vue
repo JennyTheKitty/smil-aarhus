@@ -22,7 +22,13 @@
         <span w:font="tracking-tight light" w:text="">
           {{ t('footer.address.help') }}
         </span>
-        <a href="#" w:flex="~" w:align="items-center">
+        <a
+          href="https://goo.gl/maps/8NeBeSR2rsC6MAHV9"
+          target="_blank"
+          rel="noopener"
+          w:flex="~"
+          w:align="items-center"
+        >
           <icon-mdi-map w:m="x-2" />
           {{ t('footer.see-on-map') }}
         </a>
@@ -31,22 +37,43 @@
         <span w:font="tracking-0.4em">{{ t('footer.contact') }}</span>
         <icon-mdi-mail-ru w:text="3xl" w:m="6" />
         <div w:text="start">
-          <span w:flex="~" w:align="items-center">
+          <a
+            href="#mail"
+            w:flex="~"
+            w:align="items-center"
+            @click.stop.prevent="mailto('YmVzdHlyZWxzZUBzbWlsYWFyaHVzLmRr')"
+          >
             <icon-mdi-human-greeting w:m="x-2" />
             {{ t('footer.contact.management') }}
-          </span>
-          <span w:flex="~" w:align="items-center">
+          </a>
+          <a
+            href="#mail"
+            w:flex="~"
+            w:align="items-center"
+            @click.stop.prevent="mailto('a2FydG90ZWtAc21pbGFhcmh1cy5kaw==')"
+          >
             <icon-mdi-account-group w:m="x-2" />
             {{ t('footer.contact.index') }}
-          </span>
-          <span w:flex="~" w:align="items-center">
+          </a>
+          <a
+            href="#mail"
+            w:flex="~"
+            w:align="items-center"
+            @click.stop.prevent="mailto('aW5mb0BzbWlsYWFyaHVzLmRr')"
+          >
             <icon-mdi-information-outline w:m="x-2" />
             {{ t('footer.contact.info') }}
-          </span>
-          <span w:flex="~" w:align="items-center">
+          </a>
+          <a
+            href="https://fetlife.com/users/6730952"
+            target="_blank"
+            rel="noopener"
+            w:flex="~"
+            w:align="items-center"
+          >
             <icon-smil-fetlife w:m="x-2" />
             {{ t('footer.contact.fetlife') }}
-          </span>
+          </a>
         </div>
       </div>
     </div>
@@ -54,5 +81,14 @@
 </template>
 
 <script setup lang="ts">
+import { atob } from 'abab';
+
 const { t } = useI18n();
+
+function mailto(encoded: string) {
+  const a = document.createElement('a');
+  a.target = '_blank';
+  a.href = `mailto:${atob(encoded)}`;
+  a.click();
+}
 </script>
