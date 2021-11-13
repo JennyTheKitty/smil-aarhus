@@ -12,6 +12,7 @@ query HomeGroupsQuery {
           languageCode
           title
           description
+          slug
         }
       }
     }

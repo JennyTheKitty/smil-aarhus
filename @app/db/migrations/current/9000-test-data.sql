@@ -118,3 +118,61 @@ VALUES ('home', 'da', '<h1>Velkommen til SMIL Aarhus</h1><p>Vi er en forening fo
 
 INSERT INTO smil_aarhus.page_tr
 VALUES ('home', 'en', '<h1>Welcome to SMIL Aarhus</h1><p>We are an association for people who are interested in and practice BDSM, sadomasochism, hard sex and a wide range of kinks in the same area.</p><p> If you are curious and considering becoming a member, you can read more under "Become a member" and use the calendar to find an Information Evening where you can get a tour and ask questions to the member who shows you around. If you want to visit some of our open events, you can look in the calendar for the events where you can come as a day member.</p><p>If you are already a member, the calendar is good to keep an eye on when you plan to play in the extended opening hours, as there may well be events during extended opening hours.</p>');
+
+INSERT INTO smil_aarhus."group"
+(id, image_file)
+VALUES(1, 'http://media.localhost/smil-aarhus/media/b5693919-37ef-4480-848f-49b099ad4994.jpeg');
+INSERT INTO smil_aarhus."group"
+(id, image_file)
+VALUES(2, 'http://media.localhost/smil-aarhus/media/36a86154-45f7-4066-8f58-0105916e2f2a.jpeg');
+INSERT INTO smil_aarhus."group"
+(id, image_file)
+VALUES(3, 'http://media.localhost/smil-aarhus/media/a9e1f80b-9f69-4c8d-8d43-24d5978c9f42.jpeg');
+INSERT INTO smil_aarhus."group"
+(id, image_file)
+VALUES(4, 'http://media.localhost/smil-aarhus/media/576aac3e-fdcc-4ac7-ae39-6fdbc908f5f2.jpeg');
+INSERT INTO smil_aarhus."group"
+(id, image_file)
+VALUES(5, 'http://media.localhost/smil-aarhus/media/5ac9c28d-ee1b-4e0d-9b50-8b43690faff7.jpeg');
+INSERT INTO smil_aarhus."group"
+(id, image_file)
+VALUES(6, 'http://media.localhost/smil-aarhus/media/85e49295-46a6-4e3c-80df-e480a3303aa8.jpeg');
+
+
+INSERT INTO smil_aarhus.group_tr
+(group_id, language_code, title, description)
+VALUES(1, 'en', 'Peer Rope', '<p>At Peer Rope we meet for the ropes. We do not bind a particular style, but meet around the joy of rope. </p>');
+INSERT INTO smil_aarhus.group_tr
+(group_id, language_code, title, description)
+VALUES(1, 'da', 'Peer Rope', '<p>Til Peer Rope mødes vi om rebene. Vi binder ikke en bestemt stilart, men mødes omkring glæden ved reb.</p>');
+INSERT INTO smil_aarhus.group_tr
+(group_id, language_code, title, description)
+VALUES(2, 'en', 'Peer Whip', '<p>Peer Whip is for those with a passion for floggers, whips, canes, etc. We meet in order to learn, practice, and give each other feedback.</p>');
+INSERT INTO smil_aarhus.group_tr
+(group_id, language_code, title, description)
+VALUES(2, 'da', 'Peer Whip', '<p>Idéen med Peer Whip er, at de som har passion for slagredskaber mødes for at lære, øve og give feedback.</p>');
+INSERT INTO smil_aarhus.group_tr
+(group_id, language_code, title, description)
+VALUES(3, 'en', 'Kink Academy', '<p>...</p>');
+INSERT INTO smil_aarhus.group_tr
+(group_id, language_code, title, description)
+VALUES(3, 'da', 'Kink Academy', '<p>...</p>');
+INSERT INTO smil_aarhus.group_tr
+(group_id, language_code, title, description)
+VALUES(4, 'en', 'Queer Community', '<p>...</p>');
+INSERT INTO smil_aarhus.group_tr
+(group_id, language_code, title, description)
+VALUES(4, 'da', 'Queer Community', '<p>...</p>');
+INSERT INTO smil_aarhus.group_tr
+(group_id, language_code, title, description)
+VALUES(5, 'en', 'Kink Youth', '<p>...</p>');
+INSERT INTO smil_aarhus.group_tr
+(group_id, language_code, title, description)
+VALUES(5, 'da', 'Kink Youth', '<p>...</p>');
+INSERT INTO smil_aarhus.group_tr
+(group_id, language_code, title, description)
+VALUES(6, 'en', 'Shaaaaark', '<p>Ikea</p>');
+INSERT INTO smil_aarhus.group_tr
+(group_id, language_code, title, description)
+VALUES(6, 'da', 'Haaaaaaaj', '<p>Ikea</p>');
+

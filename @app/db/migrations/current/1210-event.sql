@@ -30,4 +30,4 @@ GRANT INSERT, UPDATE, DELETE ON TABLE smil_aarhus.event_tr TO smil_organizer, sm
 
 CREATE TRIGGER add_event_tr_slug BEFORE INSERT ON smil_aarhus.event_tr FOR EACH ROW
 WHEN (NEW.title IS NOT NULL AND NEW.slug IS NULL)
-EXECUTE PROCEDURE smil_aarhus.tr_set_slug('event', 'id', 'event_id');
+EXECUTE PROCEDURE smil_aarhus.tr_set_slug('event', 'id', 'event_id', 'true');

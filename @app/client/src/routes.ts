@@ -21,14 +21,19 @@ export default [
         component: pages.Info,
       },
       {
-        path: 'calendar/:eventSlug?',
+        path: 'calendar/:slug?',
         name: 'calendar',
         component: pages.Calendar,
       },
       {
-        path: 'news/:newsSlug?',
+        path: 'news/:slug?',
         name: 'news',
         component: pages.News,
+      },
+      {
+        path: 'groups/:slug?',
+        name: 'groups',
+        component: pages.Groups,
       },
 
       {

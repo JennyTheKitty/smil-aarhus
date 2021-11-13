@@ -9,7 +9,11 @@ SELECT
     hstore(
         array_agg(smil_aarhus.group_tr.language_code),
         array_agg(smil_aarhus.group_tr.description)
-    ) AS description
+    ) AS description,
+    hstore(
+        array_agg(smil_aarhus.group_tr.language_code),
+        array_agg(smil_aarhus.group_tr.slug)
+    ) AS slug
 FROM
     smil_aarhus.group
 INNER JOIN

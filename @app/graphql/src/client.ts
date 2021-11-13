@@ -1610,6 +1610,7 @@ export type GroupTr = {
   group: Maybe<Group>;
   groupId: Scalars['BigInt'];
   languageCode: TrLanguage;
+  slug: Scalars['String'];
   title: Scalars['String'];
 };
 
@@ -1621,6 +1622,8 @@ export type GroupTrCondition = {
   groupId?: Maybe<Scalars['BigInt']>;
   /** Checks for equality with the object’s `languageCode` field. */
   languageCode?: Maybe<TrLanguage>;
+  /** Checks for equality with the object’s `slug` field. */
+  slug?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `title` field. */
   title?: Maybe<Scalars['String']>;
 };
@@ -1639,6 +1642,8 @@ export type GroupTrFilter = {
   not?: Maybe<GroupTrFilter>;
   /** Checks for any expressions in this list. */
   or?: Maybe<Array<GroupTrFilter>>;
+  /** Filter by the object’s `slug` field. */
+  slug?: Maybe<StringFilter>;
   /** Filter by the object’s `title` field. */
   title?: Maybe<StringFilter>;
 };
@@ -1648,6 +1653,7 @@ export type GroupTrInput = {
   description: Scalars['String'];
   groupId: Scalars['BigInt'];
   languageCode: TrLanguage;
+  slug: Scalars['String'];
   title: Scalars['String'];
 };
 
@@ -1656,6 +1662,7 @@ export type GroupTrPatch = {
   description?: Maybe<Scalars['String']>;
   groupId?: Maybe<Scalars['BigInt']>;
   languageCode?: Maybe<TrLanguage>;
+  slug?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -1692,6 +1699,8 @@ export enum GroupTrsOrderBy {
   Natural = 'NATURAL',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
+  SlugAsc = 'SLUG_ASC',
+  SlugDesc = 'SLUG_DESC',
   TitleAsc = 'TITLE_ASC',
   TitleDesc = 'TITLE_DESC'
 }
@@ -3205,7 +3214,7 @@ export type HomeGroupsQueryQuery = (
         { __typename?: 'GroupTrsConnection' }
         & { nodes: Array<(
           { __typename?: 'GroupTr' }
-          & Pick<GroupTr, 'languageCode' | 'title' | 'description'>
+          & Pick<GroupTr, 'languageCode' | 'title' | 'description' | 'slug'>
         )> }
       ) }
     )> }
@@ -3272,8 +3281,8 @@ export const HomeEventsQueryDocument = gql`
     }
   }
   events(
-    filter: {special: {equalTo: false}, startsAt: {greaterThan: $startsAfter}}
-    first: 5
+    filter: {startsAt: {greaterThan: $startsAfter}}
+    first: 10
     orderBy: STARTS_AT_ASC
   ) {
     nodes {
@@ -3297,6 +3306,7 @@ export const HomeGroupsQueryDocument = gql`
           languageCode
           title
           description
+          slug
         }
       }
     }

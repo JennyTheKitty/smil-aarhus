@@ -1942,6 +1942,7 @@ type GroupTr {
   group: Group
   groupId: BigInt!
   languageCode: TrLanguage!
+  slug: String!
   title: String!
 }
 
@@ -1957,6 +1958,9 @@ input GroupTrCondition {
 
   """Checks for equality with the object’s `languageCode` field."""
   languageCode: TrLanguage
+
+  """Checks for equality with the object’s `slug` field."""
+  slug: String
 
   """Checks for equality with the object’s `title` field."""
   title: String
@@ -1984,6 +1988,9 @@ input GroupTrFilter {
   """Checks for any expressions in this list."""
   or: [GroupTrFilter!]
 
+  """Filter by the object’s `slug` field."""
+  slug: StringFilter
+
   """Filter by the object’s `title` field."""
   title: StringFilter
 }
@@ -1993,6 +2000,7 @@ input GroupTrInput {
   description: String!
   groupId: BigInt!
   languageCode: TrLanguage!
+  slug: String!
   title: String!
 }
 
@@ -2003,6 +2011,7 @@ input GroupTrPatch {
   description: String
   groupId: BigInt
   languageCode: TrLanguage
+  slug: String
   title: String
 }
 
@@ -2043,6 +2052,8 @@ enum GroupTrsOrderBy {
   NATURAL
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
+  SLUG_ASC
+  SLUG_DESC
   TITLE_ASC
   TITLE_DESC
 }

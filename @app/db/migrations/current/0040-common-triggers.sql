@@ -121,26 +121,31 @@ DECLARE
     tbl text := TG_ARGV[0];
     tbl_id text := TG_ARGV[1];
     tr_tbl_id text := TG_ARGV[2];
+    dated boolean := TG_ARGV[3];
     _l record;
     _cnt record;
     _slug text;
 BEGIN
-    -- Get start date
-    EXECUTE format($q$
-        SELECT starts_at
-        FROM smil_aarhus.%1$I
-        WHERE %2$I = $1.%3$I;
-    $q$, tbl, tbl_id, tr_tbl_id) USING NEW INTO _l;
+    IF (dated) THEN
+        -- Get start date
+        EXECUTE format($q$
+            SELECT starts_at
+            FROM smil_aarhus.%1$I
+            WHERE %2$I = $1.%3$I;
+        $q$, tbl, tbl_id, tr_tbl_id) USING NEW INTO _l;
 
-    -- Create slug
-    _slug := to_char(_l.starts_at, 'YYYY-MM-DD-') || smil_aarhus.slugify(NEW.title);
+        -- Create slug
+        _slug := to_char(_l.starts_at, 'YYYY-MM-DD-') || smil_aarhus.slugify(NEW.title);
+    ELSE
+        _slug := smil_aarhus.slugify(NEW.title);
+    END IF;
 
     -- Check for conflicts
     EXECUTE format($q$
-        SELECT count(1) cnt 
+        SELECT count(1) cnt
         FROM SMIL_AARHUS.%1$I x
-        WHERE x.slug ~ ('^' || $1 || '(\-\d+)?$');
-    $q$, TG_TABLE_NAME) USING _slug INTO _cnt;
+        WHERE x.slug ~ ('^' || $1 || '(\-\d+)?$') AND x.language_code = $2.language_code;
+    $q$, TG_TABLE_NAME) USING _slug, NEW INTO _cnt;
 
     IF (_cnt.cnt > 0) THEN
         _slug := _slug || '-' || (_cnt.cnt);

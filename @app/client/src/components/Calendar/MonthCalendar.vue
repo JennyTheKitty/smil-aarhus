@@ -155,7 +155,7 @@ const calendarOptions: CalendarOptions = {
               url: router.resolve(
                 i18nRoute({
                   name: 'calendar',
-                  params: { eventSlug: event.slug },
+                  params: { slug: event.slug },
                 })
               ).href,
               display: 'list-item',

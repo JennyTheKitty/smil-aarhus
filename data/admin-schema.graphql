@@ -898,6 +898,7 @@ type Group {
   description: KeyValueHash!
   id: BigInt!
   imageFile: String!
+  slug: KeyValueHash
   title: KeyValueHash!
 }
 
@@ -913,6 +914,9 @@ input GroupCondition {
 
   """Checks for equality with the object’s `imageFile` field."""
   imageFile: String
+
+  """Checks for equality with the object’s `slug` field."""
+  slug: KeyValueHash
 
   """Checks for equality with the object’s `title` field."""
   title: KeyValueHash
@@ -940,6 +944,9 @@ input GroupFilter {
   """Checks for any expressions in this list."""
   or: [GroupFilter!]
 
+  """Filter by the object’s `slug` field."""
+  slug: KeyValueHashFilter
+
   """Filter by the object’s `title` field."""
   title: KeyValueHashFilter
 }
@@ -948,6 +955,7 @@ input GroupFilter {
 input GroupInput {
   description: KeyValueHash!
   imageFile: String!
+  slug: KeyValueHash
   title: KeyValueHash!
 }
 
@@ -958,6 +966,7 @@ input GroupPatch {
   description: KeyValueHash
   id: BigInt
   imageFile: String
+  slug: KeyValueHash
   title: KeyValueHash
 }
 
@@ -998,6 +1007,8 @@ enum GroupsOrderBy {
   NATURAL
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
+  SLUG_ASC
+  SLUG_DESC
   TITLE_ASC
   TITLE_DESC
 }

@@ -794,6 +794,7 @@ export type Group = {
   description: Scalars['KeyValueHash'];
   id: Scalars['BigInt'];
   imageFile: Scalars['String'];
+  slug: Maybe<Scalars['KeyValueHash']>;
   title: Scalars['KeyValueHash'];
 };
 
@@ -805,6 +806,8 @@ export type GroupCondition = {
   id?: Maybe<Scalars['BigInt']>;
   /** Checks for equality with the object’s `imageFile` field. */
   imageFile?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `slug` field. */
+  slug?: Maybe<Scalars['KeyValueHash']>;
   /** Checks for equality with the object’s `title` field. */
   title?: Maybe<Scalars['KeyValueHash']>;
 };
@@ -823,6 +826,8 @@ export type GroupFilter = {
   not?: Maybe<GroupFilter>;
   /** Checks for any expressions in this list. */
   or?: Maybe<Array<GroupFilter>>;
+  /** Filter by the object’s `slug` field. */
+  slug?: Maybe<KeyValueHashFilter>;
   /** Filter by the object’s `title` field. */
   title?: Maybe<KeyValueHashFilter>;
 };
@@ -831,6 +836,7 @@ export type GroupFilter = {
 export type GroupInput = {
   description: Scalars['KeyValueHash'];
   imageFile: Scalars['String'];
+  slug?: Maybe<Scalars['KeyValueHash']>;
   title: Scalars['KeyValueHash'];
 };
 
@@ -839,6 +845,7 @@ export type GroupPatch = {
   description?: Maybe<Scalars['KeyValueHash']>;
   id?: Maybe<Scalars['BigInt']>;
   imageFile?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['KeyValueHash']>;
   title?: Maybe<Scalars['KeyValueHash']>;
 };
 
@@ -875,6 +882,8 @@ export enum GroupsOrderBy {
   Natural = 'NATURAL',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
+  SlugAsc = 'SLUG_ASC',
+  SlugDesc = 'SLUG_DESC',
   TitleAsc = 'TITLE_ASC',
   TitleDesc = 'TITLE_DESC'
 }

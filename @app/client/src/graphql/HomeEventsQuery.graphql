@@ -12,11 +12,8 @@ query HomeEventsQuery($startsAfter: Datetime) {
     }
   }
   events(
-    filter: {
-      special: { equalTo: false }
-      startsAt: { greaterThan: $startsAfter }
-    }
-    first: 5
+    filter: { startsAt: { greaterThan: $startsAfter } }
+    first: 10
     orderBy: STARTS_AT_ASC
   ) {
     nodes {
