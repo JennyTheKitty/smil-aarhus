@@ -16,7 +16,11 @@ SELECT
     hstore(
         array_agg(smil_aarhus.event_tr.language_code),
         array_agg(smil_aarhus.event_tr.venue)
-    ) AS venue
+    ) AS venue,
+    hstore(
+        array_agg(smil_aarhus.event_tr.language_code),
+        array_agg(smil_aarhus.event_tr.slug)
+    ) AS slug
 FROM
     smil_aarhus.event
 INNER JOIN

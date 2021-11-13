@@ -483,6 +483,7 @@ export type Event = {
   description: Scalars['KeyValueHash'];
   endsAt: Scalars['Datetime'];
   id: Scalars['BigInt'];
+  slug: Maybe<Scalars['KeyValueHash']>;
   special: Scalars['Boolean'];
   startsAt: Scalars['Datetime'];
   title: Scalars['KeyValueHash'];
@@ -574,6 +575,8 @@ export type EventCondition = {
   endsAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `slug` field. */
+  slug?: Maybe<Scalars['KeyValueHash']>;
   /** Checks for equality with the object’s `special` field. */
   special?: Maybe<Scalars['Boolean']>;
   /** Checks for equality with the object’s `startsAt` field. */
@@ -600,6 +603,8 @@ export type EventFilter = {
   not?: Maybe<EventFilter>;
   /** Checks for any expressions in this list. */
   or?: Maybe<Array<EventFilter>>;
+  /** Filter by the object’s `slug` field. */
+  slug?: Maybe<KeyValueHashFilter>;
   /** Filter by the object’s `special` field. */
   special?: Maybe<BooleanFilter>;
   /** Filter by the object’s `startsAt` field. */
@@ -615,6 +620,7 @@ export type EventInput = {
   categoryId: Scalars['BigInt'];
   description: Scalars['KeyValueHash'];
   endsAt: Scalars['Datetime'];
+  slug?: Maybe<Scalars['KeyValueHash']>;
   special: Scalars['Boolean'];
   startsAt: Scalars['Datetime'];
   title: Scalars['KeyValueHash'];
@@ -627,6 +633,7 @@ export type EventPatch = {
   description?: Maybe<Scalars['KeyValueHash']>;
   endsAt?: Maybe<Scalars['Datetime']>;
   id?: Maybe<Scalars['BigInt']>;
+  slug?: Maybe<Scalars['KeyValueHash']>;
   special?: Maybe<Scalars['Boolean']>;
   startsAt?: Maybe<Scalars['Datetime']>;
   title?: Maybe<Scalars['KeyValueHash']>;
@@ -770,6 +777,8 @@ export enum EventsOrderBy {
   Natural = 'NATURAL',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
+  SlugAsc = 'SLUG_ASC',
+  SlugDesc = 'SLUG_DESC',
   SpecialAsc = 'SPECIAL_ASC',
   SpecialDesc = 'SPECIAL_DESC',
   StartsAtAsc = 'STARTS_AT_ASC',

@@ -529,6 +529,7 @@ type Event {
   description: KeyValueHash!
   endsAt: Datetime!
   id: BigInt!
+  slug: KeyValueHash
   special: Boolean!
   startsAt: Datetime!
   title: KeyValueHash!
@@ -638,6 +639,9 @@ input EventCondition {
   """Checks for equality with the object’s `id` field."""
   id: BigInt
 
+  """Checks for equality with the object’s `slug` field."""
+  slug: KeyValueHash
+
   """Checks for equality with the object’s `special` field."""
   special: Boolean
 
@@ -676,6 +680,9 @@ input EventFilter {
   """Checks for any expressions in this list."""
   or: [EventFilter!]
 
+  """Filter by the object’s `slug` field."""
+  slug: KeyValueHashFilter
+
   """Filter by the object’s `special` field."""
   special: BooleanFilter
 
@@ -694,6 +701,7 @@ input EventInput {
   categoryId: BigInt!
   description: KeyValueHash!
   endsAt: Datetime!
+  slug: KeyValueHash
   special: Boolean!
   startsAt: Datetime!
   title: KeyValueHash!
@@ -708,6 +716,7 @@ input EventPatch {
   description: KeyValueHash
   endsAt: Datetime
   id: BigInt
+  slug: KeyValueHash
   special: Boolean
   startsAt: Datetime
   title: KeyValueHash
@@ -873,6 +882,8 @@ enum EventsOrderBy {
   NATURAL
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
+  SLUG_ASC
+  SLUG_DESC
   SPECIAL_ASC
   SPECIAL_DESC
   STARTS_AT_ASC
