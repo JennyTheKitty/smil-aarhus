@@ -91,6 +91,7 @@ const ImageUrlSigningPlugin = makeExtendSchemaPlugin(() => {
       },
       Event: {
         image: async (event) => {
+          if (event['@imageFile'] === undefined) return undefined;
           if (event['@imageFile'] === null) return null;
           return createResponsiveImage(event['@imageFile']);
         },

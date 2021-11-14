@@ -35,7 +35,7 @@ const AuthPlugin = makeExtendSchemaPlugin((_, { pgJwtSignOptions }) => ({
           );
           if (!tokenPlaintext) {
             // unable to auth/invalid creds
-            throw new Error('not authenticated');
+            throw new Error('Invalid username/password');
           }
           console.log('>>', tokenPlaintext);
           const { sub, role } = tokenPlaintext;

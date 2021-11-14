@@ -1,3 +1,8 @@
+input AuthenticateInput {
+  password: String!
+  username: String!
+}
+
 """
 A signed eight-byte integer. The upper big integer values are greater than the
 max value for a JavaScript number. Therefore all big integers will be output as
@@ -571,6 +576,40 @@ type CreatePageTrPayload {
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
+}
+
+"""All input for the `createUploadUrl` mutation."""
+input CreateUploadUrlInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  You must provide the content type (or MIME type) of the content you intend
+  to upload. For further information about content types, see
+  https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+  """
+  contentType: String!
+}
+
+"""The output of our `createUploadUrl` mutation."""
+type CreateUploadUrlPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  formData: String!
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Upload content to this signed URL."""
+  uploadUrl: String!
 }
 
 """A location in a connection that can be used for resuming pagination."""
@@ -2863,6 +2902,13 @@ enum MembersOrderBy {
 The root mutation type which contains root level fields which mutate data.
 """
 type Mutation {
+  authenticate(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: AuthenticateInput!
+  ): String!
+
   """Creates a single `Event`."""
   createEvent(
     """
@@ -2966,6 +3012,14 @@ type Mutation {
     """
     input: CreatePageTrInput!
   ): CreatePageTrPayload
+
+  """Get a signed URL for uploading files. It will expire in 5 minutes."""
+  createUploadUrl(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateUploadUrlInput!
+  ): CreateUploadUrlPayload
 
   """Deletes a single `Event` using a unique key."""
   deleteEvent(
@@ -3078,6 +3132,7 @@ type Mutation {
     """
     input: DeletePageTrInput!
   ): DeletePageTrPayload
+  logout: Boolean
 
   """Updates a single `Event` using a unique key and a patch."""
   updateEvent(
@@ -3418,6 +3473,7 @@ enum PagesOrderBy {
 
 """The root query type which gives access points into the data universe."""
 type Query {
+  currentMember: Member
   event(id: BigInt!): Event
   eventTag(id: BigInt!): EventTag
   eventTagTr(languageCode: TrLanguage!, tagId: BigInt!): EventTagTr

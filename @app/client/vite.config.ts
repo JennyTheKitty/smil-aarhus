@@ -41,7 +41,7 @@ export default defineConfig({
   },
   plugins: [
     viteSSR({
-      excludeSsrComponents: [/MonthCalendar.vue/],
+      excludeSsrComponents: [/MonthCalendar.vue/, /LoginDialog.vue/],
     }),
     Vue({
       include: [/\.vue$/],

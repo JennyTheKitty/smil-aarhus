@@ -29,6 +29,11 @@ export type Scalars = {
   UUID: any;
 };
 
+export type AuthenticateInput = {
+  password: Scalars['String'];
+  username: Scalars['String'];
+};
+
 
 /** A filter to be used against BigInt fields. All fields are combined with a logical ‘and.’ */
 export type BigIntFilter = {
@@ -527,6 +532,36 @@ export type CreatePageTrPayload = {
 /** The output of our create `PageTr` mutation. */
 export type CreatePageTrPayloadPageTrEdgeArgs = {
   orderBy?: Maybe<Array<PageTrsOrderBy>>;
+};
+
+/** All input for the `createUploadUrl` mutation. */
+export type CreateUploadUrlInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /**
+   * You must provide the content type (or MIME type) of the content you intend
+   * to upload. For further information about content types, see
+   * https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+   */
+  contentType: Scalars['String'];
+};
+
+/** The output of our `createUploadUrl` mutation. */
+export type CreateUploadUrlPayload = {
+  __typename?: 'CreateUploadUrlPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  formData: Scalars['String'];
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+  /** Upload content to this signed URL. */
+  uploadUrl: Scalars['String'];
 };
 
 
@@ -2302,6 +2337,7 @@ export enum MembersOrderBy {
 /** The root mutation type which contains root level fields which mutate data. */
 export type Mutation = {
   __typename?: 'Mutation';
+  authenticate: Scalars['String'];
   /** Creates a single `Event`. */
   createEvent: Maybe<CreateEventPayload>;
   /** Creates a single `EventTag`. */
@@ -2328,6 +2364,8 @@ export type Mutation = {
   createPage: Maybe<CreatePagePayload>;
   /** Creates a single `PageTr`. */
   createPageTr: Maybe<CreatePageTrPayload>;
+  /** Get a signed URL for uploading files. It will expire in 5 minutes. */
+  createUploadUrl: Maybe<CreateUploadUrlPayload>;
   /** Deletes a single `Event` using a unique key. */
   deleteEvent: Maybe<DeleteEventPayload>;
   /** Deletes a single `EventTag` using a unique key. */
@@ -2356,6 +2394,7 @@ export type Mutation = {
   deletePage: Maybe<DeletePagePayload>;
   /** Deletes a single `PageTr` using a unique key. */
   deletePageTr: Maybe<DeletePageTrPayload>;
+  logout: Maybe<Scalars['Boolean']>;
   /** Updates a single `Event` using a unique key and a patch. */
   updateEvent: Maybe<UpdateEventPayload>;
   /** Updates a single `EventTag` using a unique key and a patch. */
@@ -2384,6 +2423,12 @@ export type Mutation = {
   updatePage: Maybe<UpdatePagePayload>;
   /** Updates a single `PageTr` using a unique key and a patch. */
   updatePageTr: Maybe<UpdatePageTrPayload>;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationAuthenticateArgs = {
+  input: AuthenticateInput;
 };
 
 
@@ -2462,6 +2507,12 @@ export type MutationCreatePageArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreatePageTrArgs = {
   input: CreatePageTrInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateUploadUrlArgs = {
+  input: CreateUploadUrlInput;
 };
 
 
@@ -2810,6 +2861,7 @@ export enum PagesOrderBy {
 /** The root query type which gives access points into the data universe. */
 export type Query = {
   __typename?: 'Query';
+  currentMember: Maybe<Member>;
   event: Maybe<Event>;
   eventTag: Maybe<EventTag>;
   eventTagTr: Maybe<EventTagTr>;
@@ -3709,6 +3761,17 @@ export type UpdatePageTrPayloadPageTrEdgeArgs = {
   orderBy?: Maybe<Array<PageTrsOrderBy>>;
 };
 
+export type AuthenticateMutationVariables = Exact<{
+  username: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type AuthenticateMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'authenticate'>
+);
+
 export type CalendarEventsQueryQueryVariables = Exact<{
   startsAfter?: Maybe<Scalars['Datetime']>;
   startsBefore?: Maybe<Scalars['Datetime']>;
@@ -3736,6 +3799,30 @@ export type EventFragment = (
       & Pick<EventTr, 'slug' | 'title' | 'languageCode' | 'description'>
     )> }
   ) }
+);
+
+export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMeQuery = (
+  { __typename?: 'Query' }
+  & { currentMember: Maybe<(
+    { __typename?: 'Member' }
+    & Pick<Member, 'name' | 'id' | 'userRole'>
+  )> }
+);
+
+export type GetUploadUrlMutationVariables = Exact<{
+  contentType: Scalars['String'];
+}>;
+
+
+export type GetUploadUrlMutation = (
+  { __typename?: 'Mutation' }
+  & { createUploadUrl: Maybe<(
+    { __typename?: 'CreateUploadUrlPayload' }
+    & Pick<CreateUploadUrlPayload, 'uploadUrl' | 'formData'>
+  )> }
 );
 
 export type HomeEventsQueryQueryVariables = Exact<{
@@ -3788,6 +3875,14 @@ export type HomeGroupsQueryQuery = (
   )> }
 );
 
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'logout'>
+);
+
 export type PageQueryQueryVariables = Exact<{
   name?: Maybe<Scalars['String']>;
 }>;
@@ -3823,6 +3918,11 @@ export const EventFragmentDoc = gql`
   special
 }
     ` as unknown as DocumentNode<EventFragment, unknown>;
+export const AuthenticateDocument = gql`
+    mutation Authenticate($username: String!, $password: String!) {
+  authenticate(input: {username: $username, password: $password})
+}
+    ` as unknown as DocumentNode<AuthenticateMutation, AuthenticateMutationVariables>;
 export const CalendarEventsQueryDocument = gql`
     query CalendarEventsQuery($startsAfter: Datetime, $startsBefore: Datetime) {
   events(
@@ -3835,6 +3935,23 @@ export const CalendarEventsQueryDocument = gql`
   }
 }
     ${EventFragmentDoc}` as unknown as DocumentNode<CalendarEventsQueryQuery, CalendarEventsQueryQueryVariables>;
+export const GetMeDocument = gql`
+    query GetMe {
+  currentMember {
+    name
+    id
+    userRole
+  }
+}
+    ` as unknown as DocumentNode<GetMeQuery, GetMeQueryVariables>;
+export const GetUploadUrlDocument = gql`
+    mutation GetUploadUrl($contentType: String!) {
+  createUploadUrl(input: {contentType: $contentType}) {
+    uploadUrl
+    formData
+  }
+}
+    ` as unknown as DocumentNode<GetUploadUrlMutation, GetUploadUrlMutationVariables>;
 export const HomeEventsQueryDocument = gql`
     query HomeEventsQuery($startsAfter: Datetime) {
   specialEvents: events(
@@ -3884,6 +4001,11 @@ export const HomeGroupsQueryDocument = gql`
   }
 }
     ` as unknown as DocumentNode<HomeGroupsQueryQuery, HomeGroupsQueryQueryVariables>;
+export const LogoutDocument = gql`
+    mutation Logout {
+  logout
+}
+    ` as unknown as DocumentNode<LogoutMutation, LogoutMutationVariables>;
 export const PageQueryDocument = gql`
     query PageQuery($name: String = "") {
   page(name: $name) {

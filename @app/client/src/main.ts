@@ -9,18 +9,22 @@ import '@vue/runtime-dom';
 import 'nprogress/nprogress.css';
 
 import {
-  cacheExchange,
   createClient,
   dedupExchange,
   fetchExchange,
+  makeOperation,
   ssrExchange,
 } from '@urql/core';
+import { authExchange } from '@urql/exchange-auth';
+import { cacheExchange } from '@urql/exchange-graphcache';
 import urql from '@urql/vue';
 import { createHead } from '@vueuse/head';
 import { useNProgress } from '@vueuse/integrations/useNProgress';
+import jwtDecode from 'jwt-decode';
 import viteSSR, { ClientOnly } from 'vite-ssr';
 import { Router } from 'vue-router';
 
+import { accessToken } from './accessToken';
 import App from './App.vue';
 import { i18n, Trans } from './i18n';
 import routes from './routes';
@@ -100,7 +104,121 @@ export default viteSSR(
       // @ts-ignore
       // eslint-disable-next-line no-undef
       url: `${__ROOT_URL__}/graphql`,
-      exchanges: [dedupExchange, cacheExchange, ssr, lastExchange],
+
+      exchanges: [
+        dedupExchange,
+        ssr,
+        cacheExchange({
+          updates: {
+            Mutation: {
+              authenticate(_result, _args, cache, _info) {
+                cache.invalidate({ __typename: 'Query' }, 'currentMember');
+              },
+              logout(_result, _args, cache, _info) {
+                cache.invalidate({ __typename: 'Query' }, 'currentMember');
+              },
+            },
+          },
+        }),
+        authExchange({
+          async getAuth({}) {
+            try {
+              const res = await fetch('/access_token', {
+                method: 'POST',
+                credentials: 'include',
+              });
+              const data = JSON.parse(await res.text()) as {
+                ok: boolean;
+                access_token: string;
+              };
+
+              if (!data.ok || !data.access_token) {
+                return null;
+              }
+
+              accessToken.value = data.access_token;
+
+              return {};
+            } catch (err) {
+              return null;
+            }
+          },
+
+          addAuthToOperation({ operation }) {
+            const fetchOptions =
+              typeof operation.context.fetchOptions === 'function'
+                ? operation.context.fetchOptions()
+                : operation.context.fetchOptions || {};
+
+            const headers = fetchOptions.headers || {};
+            if (accessToken.value) {
+              headers['Authorization'] = `Bearer ${accessToken.value}`;
+            } else {
+              delete headers['Authorization'];
+            }
+
+            return makeOperation(operation.kind, operation, {
+              ...operation.context,
+              fetchOptions: {
+                ...fetchOptions,
+                headers,
+              },
+            });
+          },
+          didAuthError({ error }) {
+            return error.graphQLErrors.some((e) => {
+              console.log(e);
+              // return (
+              //   (e as any).response.status === 401 ||
+              //   (e as any).response.status === 403
+              // );
+              return false;
+            });
+          },
+          willAuthError({ operation }) {
+            if (operation.kind === 'mutation') {
+              if (!accessToken.value) {
+                return !operation.query.definitions.some((definition) => {
+                  return (
+                    definition.kind === 'OperationDefinition' &&
+                    definition.selectionSet.selections.some((node) => {
+                      return (
+                        node.kind === 'Field' &&
+                        (node.name.value === 'authenticate' ||
+                          node.name.value === 'logout')
+                      );
+                    })
+                  );
+                });
+              } else {
+                const { exp } = jwtDecode(accessToken.value) as {
+                  exp: number;
+                };
+                return Date.now() >= exp * 1000;
+              }
+            } else if (operation.kind === 'query') {
+              if (
+                !accessToken.value &&
+                operation.query.definitions.some((definition) => {
+                  return (
+                    definition.kind === 'OperationDefinition' &&
+                    definition.selectionSet.selections.some((node) => {
+                      return (
+                        node.kind === 'Field' &&
+                        node.name.value === 'currentMember'
+                      );
+                    })
+                  );
+                })
+              )
+                return true;
+            }
+
+            return false;
+          },
+        }),
+        lastExchange,
+      ],
     });
 
     app.use(urql, client);

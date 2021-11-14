@@ -3,7 +3,7 @@
     w:bg="dark-900"
     w:text="center sm true-gray-100"
     w:font="leading-relaxed"
-    w:p="t-8 b-16"
+    w:p="t-8 b-8"
   >
     <div w:m="x-auto b-8" w:w="max-content">
       <icon-smil-logo w:m="b-4" w:text="9xl" />
@@ -76,6 +76,10 @@
           </a>
         </div>
       </div>
+    </div>
+    <div w:m="t-12" w:flex="~ col">
+      <span w:text="gray-500">© SMil Aarhus</span>
+      <ClientOnly><FooterUserWidget /></ClientOnly>
     </div>
   </div>
 </template>

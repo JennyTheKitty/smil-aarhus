@@ -32,13 +32,13 @@ $$ LANGUAGE plpgsql STRICT SECURITY DEFINER;
 GRANT EXECUTE ON FUNCTION smil_aarhus_private.authenticate TO :DATABASE_AUTHENTICATOR;
 
 
-CREATE FUNCTION smil_aarhus_admin.current_member()
-RETURNS smil_aarhus_admin.member
+CREATE FUNCTION smil_aarhus.current_member()
+RETURNS smil_aarhus.member
 AS $$
 SELECT
     *
 FROM
-    smil_aarhus_admin.member
+    smil_aarhus.member
 WHERE
     id = NULLIF(current_setting('jwt.claims.sub', TRUE), '')::uuid
 $$ LANGUAGE SQL STABLE;

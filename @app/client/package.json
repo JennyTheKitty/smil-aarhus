@@ -10,7 +10,9 @@
     "@fullcalendar/list": "^5.10.1",
     "@fullcalendar/timegrid": "^5.10.1",
     "@fullcalendar/vue3": "^5.10.1",
-    "@headlessui/vue": "^0.0.0-dev.9f638c9",
+    "@headlessui/vue": "^0.0.0-dev.50d9fd3",
+    "@urql/exchange-auth": "^0.1.6",
+    "@urql/exchange-graphcache": "^4.3.5",
     "@urql/vue": "^0.6.0",
     "@vueuse/core": "^6.5.3",
     "@vueuse/head": "^0.6.0",
@@ -18,6 +20,8 @@
     "abab": "^2.0.5",
     "dayjs": "^1.10.7",
     "graphql": "^15.6.1",
+    "jwt-decode": "^3.1.2",
+    "naive-ui": "^2.20.2",
     "nprogress": "^0.2.0",
     "petite-vue-i18n": "^9.2.0-beta.17",
     "vite-ssr": "file:../../vendor/vite-ssr",
@@ -38,5 +42,8 @@
     "vite": "^2.6.7",
     "vite-imagetools": "^3.8.0",
     "vite-plugin-windicss": "^1.4.11"
+  },
+  "resolutions": {
+    "**/@urql/core": "2.3.5"
   }
 }
