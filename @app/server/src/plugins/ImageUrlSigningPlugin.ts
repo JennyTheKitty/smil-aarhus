@@ -64,6 +64,12 @@ const ImageUrlSigningPlugin = makeExtendSchemaPlugin(() => {
       extend type Group {
         image: ResponsiveImage! @requires(columns: ["image_file"])
       }
+      extend type EventTag {
+        image: ResponsiveImage @requires(columns: ["image_file"])
+      }
+      extend type Event {
+        image: ResponsiveImage @requires(columns: ["image_file"])
+      }
       type ResponsiveImage {
         # width: Int!
         # height: Int!
@@ -76,6 +82,17 @@ const ImageUrlSigningPlugin = makeExtendSchemaPlugin(() => {
       Group: {
         image: async (group) => {
           return createResponsiveImage(group.imageFile);
+        },
+      },
+      EventTag: {
+        image: async (eventTag) => {
+          return createResponsiveImage(eventTag.imageFile);
+        },
+      },
+      Event: {
+        image: async (event) => {
+          if (event['@imageFile'] === null) return null;
+          return createResponsiveImage(event['@imageFile']);
         },
       },
     },

@@ -1430,6 +1430,11 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.2.tgz#30aa825f11d438671d585bd44e7fd564535fc210"
   integrity sha512-82cpyJyKRoQoRi+14ibCeGPu0CwypgtBAdBhq1WfvagpCZNKqwXbKwXllYSMG91DhmG4jt9gN8eP6lGOtozuaw==
 
+"@graphile-contrib/pg-many-to-many@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@graphile-contrib/pg-many-to-many/-/pg-many-to-many-1.0.1.tgz#c6eb333c877938f7a4fda3da0ee95393b223bd08"
+  integrity sha512-gFk0OaiXtO2BGHy0QIeceBsCoq8IvjkPuCN58JR1EBOuEPduZ+siwB6/SUF70ErBUiT41+qNKgTOayQfo2tU0A==
+
 "@graphile-contrib/pg-simplify-inflector@^6.1.0":
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/@graphile-contrib/pg-simplify-inflector/-/pg-simplify-inflector-6.1.0.tgz#5ecb842bd43af4d3ffdfcd25b1e7c452374f7440"

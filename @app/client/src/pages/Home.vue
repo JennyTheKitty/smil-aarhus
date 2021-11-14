@@ -108,9 +108,79 @@
     <div w:bg="dark-900">
       <div w:max-w="5xl" w:m="x-auto" w:p="y-10">
         <h1 w:text="center pink-500 3xl">Kommende Events</h1>
-        <div w:flex="~" w:m="t-5">
-          <div w:w="1/2" class="blah">
-            <HomeEventWidget :events="specialEvents" />
+        <div w:flex="~" w:m="t-5" w:justify="center">
+          <div v-if="specialEvent" w:w="1/2">
+            <router-link
+              :to="
+                i18nRoute({
+                  name: 'calendar',
+                  params: { slug: specialEvent.slug },
+                })
+              "
+              w:rounded="lg"
+              w:bg="black"
+              w:shadow="lg"
+              w:w="75"
+              w:h="75"
+              w:pos="relative"
+              w:overflow="hidden"
+              class="group"
+            >
+              <picture>
+                <source
+                  :srcset="specialEvent.image?.srcSetWebp"
+                  type="image/webp"
+                  sizes="20rem"
+                />
+                <source
+                  :srcset="specialEvent.image?.srcSetJpeg"
+                  type="image/webp"
+                  sizes="20rem"
+                />
+                <img
+                  alt=""
+                  :src="specialEvent.image?.src"
+                  loading="lazy"
+                  w:w="full"
+                  w:h="full"
+                  w:object="cover"
+                  w:rounded="lg"
+                />
+              </picture>
+              <div
+                w:pos="absolute bottom-0"
+                w:rounded="lg"
+                w:w="full"
+                w:h="full"
+                w:gradient="to-b from-transparent via-transparent to-black"
+                style="--tw-to-opacity: 0.8"
+              ></div>
+              <div
+                w:pos="absolute bottom-0"
+                w:rounded="lg"
+                w:w="full"
+                w:h="full"
+                w:bg="black opacity-0 group-hover:opacity-50"
+                w:transition="~ duration-100 all"
+              ></div>
+              <div
+                w:pos="absolute top-0"
+                w:m="t-60 group-hover:t-10"
+                w:p="4"
+                w:w="full"
+                w:flex="~ col"
+                w:transition="~ duration-200 all"
+              >
+                <span
+                  w:text="white xl shadow-lg center group-hover:3xl space-nowrap"
+                  w:w="group-hover:full 0"
+                  w:font="bold tracking-wide group-hover:tracking-wider"
+                  w:transition="~ duration-200 all"
+                >
+                  {{ specialEvent.title }}
+                </span>
+              </div>
+            </router-link>
           </div>
           <div
             w:w="1/2"
@@ -142,7 +212,6 @@
 <script setup lang="ts">
 import {
   HomeEventsQueryDocument,
-  HomeGroupsQueryDocument,
   PageQueryDocument,
 } from '@app/graphql/dist/client';
 
@@ -171,9 +240,6 @@ const { data: eventsData } = await useQuery({
 const specialEvent = useTranslation(
   eventsData.value?.specialEvents?.nodes[0] || null,
   locale
-);
-const specialEvents = computed(() =>
-  specialEvent.value ? [specialEvent] : []
 );
 
 const events = computed(() =>

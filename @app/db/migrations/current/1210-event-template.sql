@@ -1,6 +1,5 @@
 CREATE TABLE smil_aarhus.event_template(
-    id bigserial PRIMARY KEY,
-    category_id bigint REFERENCES smil_aarhus.event_category (id) NOT NULL
+    id bigserial PRIMARY KEY
 );
 
 CREATE TABLE smil_aarhus.event_template_tr(

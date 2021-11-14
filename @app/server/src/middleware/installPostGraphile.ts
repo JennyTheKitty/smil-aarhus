@@ -1,3 +1,4 @@
+import PgManyToManyPlugin from '@graphile-contrib/pg-many-to-many';
 import PgSimplfyInflector from '@graphile-contrib/pg-simplify-inflector';
 import Router from '@koa/router';
 import { NodePlugin } from 'graphile-build';
@@ -68,6 +69,7 @@ export const postgraphileClientMiddleware = postgraphile(
       PgSimplfyInflector,
       PgConnectionFilter,
       ImageUrlSigningPlugin,
+      PgManyToManyPlugin,
     ],
     exportGqlSchemaPath: isDev
       ? `${__dirname}/../../../../data/schema.graphql`

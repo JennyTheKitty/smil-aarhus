@@ -21,6 +21,5 @@ fragment event on Event {
   endsAt
   id
   startsAt
-  categoryId
   special
 }

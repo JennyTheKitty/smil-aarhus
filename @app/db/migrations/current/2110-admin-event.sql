@@ -3,7 +3,6 @@ SELECT
     smil_aarhus.event.id,
     smil_aarhus.event.starts_at,
     smil_aarhus.event.ends_at,
-    smil_aarhus.event.category_id,
     smil_aarhus.event.special,
     hstore(
         array_agg(smil_aarhus.event_tr.language_code),
@@ -33,7 +32,6 @@ COMMENT ON COLUMN smil_aarhus_admin.event.id IS E'@omit create';
 COMMENT ON COLUMN smil_aarhus_admin.event.starts_at IS E'@notNull';
 COMMENT ON COLUMN smil_aarhus_admin.event.ends_at IS E'@notNull';
 COMMENT ON COLUMN smil_aarhus_admin.event.special IS E'@notNull';
-COMMENT ON COLUMN smil_aarhus_admin.event.category_id IS E'@notNull';
 COMMENT ON COLUMN smil_aarhus_admin.event.title IS E'@notNull';
 COMMENT ON COLUMN smil_aarhus_admin.event.description IS E'@notNull';
 COMMENT ON COLUMN smil_aarhus_admin.event.venue IS E'@notNull';

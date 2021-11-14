@@ -7,8 +7,13 @@
           <div w:flex="~" w:space="x-5" w:p="x-10">
             <router-link
               v-for="group in groups"
-              :key="group.value!.id"
-              :to="i18nRoute({ name: 'groups', params: {slug: group.value!.slug }})"
+              :key="group.value.id"
+              :to="
+                i18nRoute({
+                  name: 'groups',
+                  params: { slug: group.value.slug },
+                })
+              "
               w:rounded="lg"
               w:bg="black"
               w:shadow="lg"
@@ -20,18 +25,18 @@
             >
               <picture>
                 <source
-                  :srcset="group.value!.image.srcSetWebp"
+                  :srcset="group.value.image.srcSetWebp"
                   type="image/webp"
                   sizes="20rem"
                 />
                 <source
-                  :srcset="group.value!.image.srcSetJpeg"
+                  :srcset="group.value.image.srcSetJpeg"
                   type="image/webp"
                   sizes="20rem"
                 />
                 <img
                   alt=""
-                  :src="group.value!.image.src"
+                  :src="group.value.image.src"
                   loading="lazy"
                   w:w="full"
                   w:h="full"
@@ -69,14 +74,10 @@
                   w:font="bold tracking-wide group-hover:tracking-wider"
                   w:transition="~ duration-200 all"
                 >
-                  {{ group.value?.title }}
+                  {{ group.value.title }}
                 </span>
-                <span
-                  w:text="center"
-                  w:w="full"
-                  w:p="4"
-                  v-html="group.value?.description"
-                >
+                <span w:text="center" w:w="full" w:p="4">
+                  {{ group.value.shortDescription }}
                 </span>
               </div>
             </router-link>

@@ -13,6 +13,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+COMMENT ON FUNCTION smil_aarhus.array_diff is E'@omit execute';
+
 CREATE OR REPLACE FUNCTION smil_aarhus.format_array(
     arr text[], format_str text, delim text
 )
@@ -29,6 +31,8 @@ BEGIN
     RETURN ARRAY_TO_STRING(_tmp, delim, '*');
 END;
 $$ LANGUAGE plpgsql;
+
+COMMENT ON FUNCTION smil_aarhus.format_array is E'@omit execute';
 
 CREATE OR REPLACE FUNCTION smil_aarhus.get_columns(
     table_name text, exclude_columns text[]
@@ -51,6 +55,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+COMMENT ON FUNCTION smil_aarhus.get_columns is E'@omit execute';
+
 CREATE OR REPLACE FUNCTION smil_aarhus.slugify(t text) RETURNS text
 AS $$
 BEGIN
@@ -67,8 +73,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql STRICT IMMUTABLE PARALLEL SAFE;
 
+COMMENT ON FUNCTION smil_aarhus.slugify is E'@omit execute';
+
 CREATE OR REPLACE FUNCTION smil_aarhus.f_regexp_escape(text)
 RETURNS text
 AS $func$
 SELECT regexp_replace($1, '([!$()*+.:<=>?[\\\]^{|}-])', '\\\1', 'g')
 $func$ LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE;
+
+COMMENT ON FUNCTION smil_aarhus.f_regexp_escape is E'@omit execute';

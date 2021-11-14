@@ -10,15 +10,26 @@ export type Translateable = Record<string, unknown> & {
 };
 
 export type Translated<T extends Translateable> = Ref<
-  | (Omit<Omit<T, 'translations'>, '__typename'> &
-      Omit<T['translations']['nodes'][number], '__typename'>)
-  | null
+  Omit<Omit<T, 'translations'>, '__typename'> &
+    Omit<T['translations']['nodes'][number], '__typename'>
 >;
 
 export function useTranslation<T extends Translateable>(
+  o: MaybeRef<null>,
+  locale: Ref<string>
+): Ref<null>;
+export function useTranslation<T extends Translateable>(
+  o: MaybeRef<T>,
+  locale: Ref<string>
+): Translated<T>;
+export function useTranslation<T extends Translateable>(
   o: MaybeRef<T | null>,
   locale: Ref<string>
-): Translated<T> {
+): Translated<T> | Ref<null>;
+export function useTranslation<T extends Translateable>(
+  o: MaybeRef<T | null>,
+  locale: Ref<string>
+): Translated<T> | Ref<null> {
   return computed(() => {
     const obj = unref(o);
     if (obj === null) return null;

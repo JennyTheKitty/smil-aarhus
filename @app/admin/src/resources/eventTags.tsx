@@ -13,15 +13,15 @@ import {
   TranslatableInputs,
 } from 'react-admin';
 
-interface EventCategory {
+interface EventTag {
   title: { [lang: string]: string };
 }
 
 interface Props {
-  record?: EventCategory;
+  record?: EventTag;
 }
 
-export const EventCategoryList = (props: ListProps) => (
+export const EventTagList = (props: ListProps) => (
   <List {...props} title="List of event categories">
     <Datagrid rowClick="edit">
       <TextField source="title.en" label="Title" sortable={false} />
@@ -29,12 +29,12 @@ export const EventCategoryList = (props: ListProps) => (
   </List>
 );
 
-const EventCategoryTitle = ({ record }: Props) => {
+const EventTagTitle = ({ record }: Props) => {
   return <span>Event category: {record ? `"${record.title.en}"` : ''}</span>;
 };
 
-export const EventCategoryEdit = (props: EditProps) => (
-  <Edit {...props} title={<EventCategoryTitle />}>
+export const EventTagEdit = (props: EditProps) => (
+  <Edit {...props} title={<EventTagTitle />}>
     <SimpleForm>
       <TranslatableInputs locales={['en', 'da']}>
         <TextInput source="title" />
@@ -43,7 +43,7 @@ export const EventCategoryEdit = (props: EditProps) => (
   </Edit>
 );
 
-export const EventCategoryCreate = (props: CreateProps) => (
+export const EventTagCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TranslatableInputs locales={['en', 'da']}>
@@ -55,9 +55,9 @@ export const EventCategoryCreate = (props: CreateProps) => (
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  list: EventCategoryList,
-  edit: EventCategoryEdit,
-  create: EventCategoryCreate,
+  list: EventTagList,
+  edit: EventTagEdit,
+  create: EventTagCreate,
   options: { label: 'Event categories' },
   icon: Icon,
 };

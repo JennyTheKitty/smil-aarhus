@@ -9,6 +9,7 @@
     "schema:export": "cross-env NODE_OPTIONS=\"$NODE_OPTIONS -r @app/config/env\" ts-node scripts/schema-export.ts"
   },
   "dependencies": {
+    "@graphile-contrib/pg-many-to-many": "^1.0.1",
     "@graphile-contrib/pg-simplify-inflector": "^6.1.0",
     "@koa/cors": "^3.1.0",
     "@koa/router": "^10.1.1",

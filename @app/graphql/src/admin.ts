@@ -89,39 +89,6 @@ export type BooleanFilter = {
   notIn?: Maybe<Array<Scalars['Boolean']>>;
 };
 
-/** All input for the create `EventCategory` mutation. */
-export type CreateEventCategoryInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `EventCategory` to be created by this mutation. */
-  eventCategory: EventCategoryInput;
-};
-
-/** The output of our create `EventCategory` mutation. */
-export type CreateEventCategoryPayload = {
-  __typename?: 'CreateEventCategoryPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** The `EventCategory` that was created by this mutation. */
-  eventCategory: Maybe<EventCategory>;
-  /** An edge for our `EventCategory`. May be used by Relay 1. */
-  eventCategoryEdge: Maybe<EventCategoriesEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our create `EventCategory` mutation. */
-export type CreateEventCategoryPayloadEventCategoryEdgeArgs = {
-  orderBy?: Maybe<Array<EventCategoriesOrderBy>>;
-};
-
 /** All input for the create `Event` mutation. */
 export type CreateEventInput = {
   /**
@@ -312,39 +279,6 @@ export type DatetimeFilter = {
   notIn?: Maybe<Array<Scalars['Datetime']>>;
 };
 
-/** All input for the `deleteEventCategory` mutation. */
-export type DeleteEventCategoryInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['BigInt'];
-};
-
-/** The output of our delete `EventCategory` mutation. */
-export type DeleteEventCategoryPayload = {
-  __typename?: 'DeleteEventCategoryPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  deletedEventCategoryNodeId: Maybe<Scalars['ID']>;
-  /** The `EventCategory` that was deleted by this mutation. */
-  eventCategory: Maybe<EventCategory>;
-  /** An edge for our `EventCategory`. May be used by Relay 1. */
-  eventCategoryEdge: Maybe<EventCategoriesEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our delete `EventCategory` mutation. */
-export type DeleteEventCategoryPayloadEventCategoryEdgeArgs = {
-  orderBy?: Maybe<Array<EventCategoriesOrderBy>>;
-};
-
 /** All input for the `deleteEvent` mutation. */
 export type DeleteEventInput = {
   /**
@@ -479,7 +413,6 @@ export type DeleteMemberPayloadMemberEdgeArgs = {
 
 export type Event = {
   __typename?: 'Event';
-  categoryId: Scalars['BigInt'];
   description: Scalars['KeyValueHash'];
   endsAt: Scalars['Datetime'];
   id: Scalars['BigInt'];
@@ -490,85 +423,8 @@ export type Event = {
   venue: Scalars['KeyValueHash'];
 };
 
-/** A connection to a list of `EventCategory` values. */
-export type EventCategoriesConnection = {
-  __typename?: 'EventCategoriesConnection';
-  /** A list of edges which contains the `EventCategory` and cursor to aid in pagination. */
-  edges: Array<EventCategoriesEdge>;
-  /** A list of `EventCategory` objects. */
-  nodes: Array<EventCategory>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `EventCategory` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `EventCategory` edge in the connection. */
-export type EventCategoriesEdge = {
-  __typename?: 'EventCategoriesEdge';
-  /** A cursor for use in pagination. */
-  cursor: Maybe<Scalars['Cursor']>;
-  /** The `EventCategory` at the end of the edge. */
-  node: EventCategory;
-};
-
-/** Methods to use when ordering `EventCategory`. */
-export enum EventCategoriesOrderBy {
-  IdAsc = 'ID_ASC',
-  IdDesc = 'ID_DESC',
-  Natural = 'NATURAL',
-  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
-  PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
-  TitleAsc = 'TITLE_ASC',
-  TitleDesc = 'TITLE_DESC'
-}
-
-export type EventCategory = {
-  __typename?: 'EventCategory';
-  id: Scalars['BigInt'];
-  title: Scalars['KeyValueHash'];
-};
-
-/**
- * A condition to be used against `EventCategory` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
-export type EventCategoryCondition = {
-  /** Checks for equality with the object’s `id` field. */
-  id?: Maybe<Scalars['BigInt']>;
-  /** Checks for equality with the object’s `title` field. */
-  title?: Maybe<Scalars['KeyValueHash']>;
-};
-
-/** A filter to be used against `EventCategory` object types. All fields are combined with a logical ‘and.’ */
-export type EventCategoryFilter = {
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<EventCategoryFilter>>;
-  /** Filter by the object’s `id` field. */
-  id?: Maybe<BigIntFilter>;
-  /** Negates the expression. */
-  not?: Maybe<EventCategoryFilter>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<EventCategoryFilter>>;
-  /** Filter by the object’s `title` field. */
-  title?: Maybe<KeyValueHashFilter>;
-};
-
-/** An input for mutations affecting `EventCategory` */
-export type EventCategoryInput = {
-  title: Scalars['KeyValueHash'];
-};
-
-/** Represents an update to a `EventCategory`. Fields that are set will be updated. */
-export type EventCategoryPatch = {
-  id?: Maybe<Scalars['BigInt']>;
-  title?: Maybe<Scalars['KeyValueHash']>;
-};
-
 /** A condition to be used against `Event` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type EventCondition = {
-  /** Checks for equality with the object’s `categoryId` field. */
-  categoryId?: Maybe<Scalars['BigInt']>;
   /** Checks for equality with the object’s `description` field. */
   description?: Maybe<Scalars['KeyValueHash']>;
   /** Checks for equality with the object’s `endsAt` field. */
@@ -591,8 +447,6 @@ export type EventCondition = {
 export type EventFilter = {
   /** Checks for all expressions in this list. */
   and?: Maybe<Array<EventFilter>>;
-  /** Filter by the object’s `categoryId` field. */
-  categoryId?: Maybe<BigIntFilter>;
   /** Filter by the object’s `description` field. */
   description?: Maybe<KeyValueHashFilter>;
   /** Filter by the object’s `endsAt` field. */
@@ -617,7 +471,6 @@ export type EventFilter = {
 
 /** An input for mutations affecting `Event` */
 export type EventInput = {
-  categoryId: Scalars['BigInt'];
   description: Scalars['KeyValueHash'];
   endsAt: Scalars['Datetime'];
   slug?: Maybe<Scalars['KeyValueHash']>;
@@ -629,7 +482,6 @@ export type EventInput = {
 
 /** Represents an update to a `Event`. Fields that are set will be updated. */
 export type EventPatch = {
-  categoryId?: Maybe<Scalars['BigInt']>;
   description?: Maybe<Scalars['KeyValueHash']>;
   endsAt?: Maybe<Scalars['Datetime']>;
   id?: Maybe<Scalars['BigInt']>;
@@ -642,7 +494,6 @@ export type EventPatch = {
 
 export type EventTemplate = {
   __typename?: 'EventTemplate';
-  categoryId: Scalars['BigInt'];
   description: Scalars['KeyValueHash'];
   id: Scalars['BigInt'];
   title: Scalars['KeyValueHash'];
@@ -654,8 +505,6 @@ export type EventTemplate = {
  * tested for equality and combined with a logical ‘and.’
  */
 export type EventTemplateCondition = {
-  /** Checks for equality with the object’s `categoryId` field. */
-  categoryId?: Maybe<Scalars['BigInt']>;
   /** Checks for equality with the object’s `description` field. */
   description?: Maybe<Scalars['KeyValueHash']>;
   /** Checks for equality with the object’s `id` field. */
@@ -670,8 +519,6 @@ export type EventTemplateCondition = {
 export type EventTemplateFilter = {
   /** Checks for all expressions in this list. */
   and?: Maybe<Array<EventTemplateFilter>>;
-  /** Filter by the object’s `categoryId` field. */
-  categoryId?: Maybe<BigIntFilter>;
   /** Filter by the object’s `description` field. */
   description?: Maybe<KeyValueHashFilter>;
   /** Filter by the object’s `id` field. */
@@ -688,7 +535,6 @@ export type EventTemplateFilter = {
 
 /** An input for mutations affecting `EventTemplate` */
 export type EventTemplateInput = {
-  categoryId: Scalars['BigInt'];
   description: Scalars['KeyValueHash'];
   title: Scalars['KeyValueHash'];
   venue: Scalars['KeyValueHash'];
@@ -696,7 +542,6 @@ export type EventTemplateInput = {
 
 /** Represents an update to a `EventTemplate`. Fields that are set will be updated. */
 export type EventTemplatePatch = {
-  categoryId?: Maybe<Scalars['BigInt']>;
   description?: Maybe<Scalars['KeyValueHash']>;
   id?: Maybe<Scalars['BigInt']>;
   title?: Maybe<Scalars['KeyValueHash']>;
@@ -727,8 +572,6 @@ export type EventTemplatesEdge = {
 
 /** Methods to use when ordering `EventTemplate`. */
 export enum EventTemplatesOrderBy {
-  CategoryIdAsc = 'CATEGORY_ID_ASC',
-  CategoryIdDesc = 'CATEGORY_ID_DESC',
   DescriptionAsc = 'DESCRIPTION_ASC',
   DescriptionDesc = 'DESCRIPTION_DESC',
   IdAsc = 'ID_ASC',
@@ -766,8 +609,6 @@ export type EventsEdge = {
 
 /** Methods to use when ordering `Event`. */
 export enum EventsOrderBy {
-  CategoryIdAsc = 'CATEGORY_ID_ASC',
-  CategoryIdDesc = 'CATEGORY_ID_DESC',
   DescriptionAsc = 'DESCRIPTION_ASC',
   DescriptionDesc = 'DESCRIPTION_DESC',
   EndsAtAsc = 'ENDS_AT_ASC',
@@ -1023,8 +864,6 @@ export type Mutation = {
   authenticate: Scalars['String'];
   /** Creates a single `Event`. */
   createEvent: Maybe<CreateEventPayload>;
-  /** Creates a single `EventCategory`. */
-  createEventCategory: Maybe<CreateEventCategoryPayload>;
   /** Creates a single `EventTemplate`. */
   createEventTemplate: Maybe<CreateEventTemplatePayload>;
   /** Creates a single `Group`. */
@@ -1035,8 +874,6 @@ export type Mutation = {
   createUploadUrl: Maybe<CreateUploadUrlPayload>;
   /** Deletes a single `Event` using a unique key. */
   deleteEvent: Maybe<DeleteEventPayload>;
-  /** Deletes a single `EventCategory` using a unique key. */
-  deleteEventCategory: Maybe<DeleteEventCategoryPayload>;
   /** Deletes a single `EventTemplate` using a unique key. */
   deleteEventTemplate: Maybe<DeleteEventTemplatePayload>;
   /** Deletes a single `Group` using a unique key. */
@@ -1046,8 +883,6 @@ export type Mutation = {
   logout: Maybe<Scalars['Boolean']>;
   /** Updates a single `Event` using a unique key and a patch. */
   updateEvent: Maybe<UpdateEventPayload>;
-  /** Updates a single `EventCategory` using a unique key and a patch. */
-  updateEventCategory: Maybe<UpdateEventCategoryPayload>;
   /** Updates a single `EventTemplate` using a unique key and a patch. */
   updateEventTemplate: Maybe<UpdateEventTemplatePayload>;
   /** Updates a single `Group` using a unique key and a patch. */
@@ -1066,12 +901,6 @@ export type MutationAuthenticateArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateEventArgs = {
   input: CreateEventInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateEventCategoryArgs = {
-  input: CreateEventCategoryInput;
 };
 
 
@@ -1106,12 +935,6 @@ export type MutationDeleteEventArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteEventCategoryArgs = {
-  input: DeleteEventCategoryInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteEventTemplateArgs = {
   input: DeleteEventTemplateInput;
 };
@@ -1132,12 +955,6 @@ export type MutationDeleteMemberArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateEventArgs = {
   input: UpdateEventInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateEventCategoryArgs = {
-  input: UpdateEventCategoryInput;
 };
 
 
@@ -1176,9 +993,6 @@ export type Query = {
   __typename?: 'Query';
   currentMember: Maybe<Member>;
   event: Maybe<Event>;
-  /** Reads and enables pagination through a set of `EventCategory`. */
-  eventCategories: Maybe<EventCategoriesConnection>;
-  eventCategory: Maybe<EventCategory>;
   eventTemplate: Maybe<EventTemplate>;
   /** Reads and enables pagination through a set of `EventTemplate`. */
   eventTemplates: Maybe<EventTemplatesConnection>;
@@ -1200,25 +1014,6 @@ export type Query = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryEventArgs = {
-  id: Scalars['BigInt'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryEventCategoriesArgs = {
-  after?: Maybe<Scalars['Cursor']>;
-  before?: Maybe<Scalars['Cursor']>;
-  condition?: Maybe<EventCategoryCondition>;
-  filter?: Maybe<EventCategoryFilter>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<EventCategoriesOrderBy>>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryEventCategoryArgs = {
   id: Scalars['BigInt'];
 };
 
@@ -1395,40 +1190,6 @@ export type UuidFilter = {
   notEqualTo?: Maybe<Scalars['UUID']>;
   /** Not included in the specified list. */
   notIn?: Maybe<Array<Scalars['UUID']>>;
-};
-
-/** All input for the `updateEventCategory` mutation. */
-export type UpdateEventCategoryInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['BigInt'];
-  /** An object where the defined keys will be set on the `EventCategory` being updated. */
-  patch: EventCategoryPatch;
-};
-
-/** The output of our update `EventCategory` mutation. */
-export type UpdateEventCategoryPayload = {
-  __typename?: 'UpdateEventCategoryPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** The `EventCategory` that was updated by this mutation. */
-  eventCategory: Maybe<EventCategory>;
-  /** An edge for our `EventCategory`. May be used by Relay 1. */
-  eventCategoryEdge: Maybe<EventCategoriesEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our update `EventCategory` mutation. */
-export type UpdateEventCategoryPayloadEventCategoryEdgeArgs = {
-  orderBy?: Maybe<Array<EventCategoriesOrderBy>>;
 };
 
 /** All input for the `updateEvent` mutation. */

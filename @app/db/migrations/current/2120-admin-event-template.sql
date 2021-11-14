@@ -1,7 +1,6 @@
 CREATE VIEW smil_aarhus_admin.event_template AS
 SELECT
     smil_aarhus.event_template.id,
-    smil_aarhus.event_template.category_id,
     hstore(
         array_agg(smil_aarhus.event_template_tr.language_code),
         array_agg(smil_aarhus.event_template_tr.title)
@@ -24,7 +23,6 @@ GROUP BY
 
 COMMENT ON VIEW smil_aarhus_admin.event_template IS E'@primaryKey id';
 COMMENT ON COLUMN smil_aarhus_admin.event_template.id IS E'@omit create';
-COMMENT ON COLUMN smil_aarhus_admin.event_template.category_id IS E'@notNull';
 COMMENT ON COLUMN smil_aarhus_admin.event_template.title IS E'@notNull';
 COMMENT ON COLUMN smil_aarhus_admin.event_template.description IS E'@notNull';
 COMMENT ON COLUMN smil_aarhus_admin.event_template.venue IS E'@notNull';

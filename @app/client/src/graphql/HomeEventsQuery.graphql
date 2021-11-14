@@ -9,6 +9,11 @@ query HomeEventsQuery($startsAfter: Datetime) {
   ) {
     nodes {
       ...event
+      image {
+        src
+        srcSetWebp
+        srcSetJpeg
+      }
     }
   }
   events(
@@ -34,6 +39,5 @@ fragment event on Event {
   endsAt
   id
   startsAt
-  categoryId
   special
 }
