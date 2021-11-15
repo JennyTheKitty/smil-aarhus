@@ -68,7 +68,7 @@ const ImageUrlSigningPlugin = makeExtendSchemaPlugin(() => {
         image: ResponsiveImage @requires(columns: ["image_file"])
       }
       extend type Event {
-        image: ResponsiveImage @requires(columns: ["image_file"])
+        image: ResponsiveImage # NOTE NEEDS imageField but it's computed
       }
       type ResponsiveImage {
         # width: Int!

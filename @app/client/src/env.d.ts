@@ -6,3 +6,18 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>;
   export default component;
 }
+
+declare module '@ckeditor/ckeditor5-vue' {
+  const CKEditor: any;
+  export default CKEditor;
+}
+
+declare module '@ckeditor/ckeditor5-build-inline' {
+  const InlineEditor: any;
+  export = InlineEditor;
+}
+
+declare module '@ckeditor/ckeditor5-source-editing/src/sourceediting' {
+  const SourceEditing: any;
+  export = SourceEditing;
+}

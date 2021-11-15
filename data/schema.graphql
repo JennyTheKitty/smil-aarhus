@@ -14,11 +14,6 @@ scalar BigInt
 A filter to be used against BigInt fields. All fields are combined with a logical ‘and.’
 """
 input BigIntFilter {
-  """
-  Not equal to the specified value, treating null like an ordinary value.
-  """
-  distinctFrom: BigInt
-
   """Equal to the specified value."""
   equalTo: BigInt
 
@@ -27,9 +22,6 @@ input BigIntFilter {
 
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: BigInt
-
-  """Included in the specified list."""
-  in: [BigInt!]
 
   """
   Is null (if `true` is specified) or is not null (if `false` is specified).
@@ -42,25 +34,14 @@ input BigIntFilter {
   """Less than or equal to the specified value."""
   lessThanOrEqualTo: BigInt
 
-  """Equal to the specified value, treating null like an ordinary value."""
-  notDistinctFrom: BigInt
-
   """Not equal to the specified value."""
   notEqualTo: BigInt
-
-  """Not included in the specified list."""
-  notIn: [BigInt!]
 }
 
 """
 A filter to be used against Boolean fields. All fields are combined with a logical ‘and.’
 """
 input BooleanFilter {
-  """
-  Not equal to the specified value, treating null like an ordinary value.
-  """
-  distinctFrom: Boolean
-
   """Equal to the specified value."""
   equalTo: Boolean
 
@@ -69,9 +50,6 @@ input BooleanFilter {
 
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: Boolean
-
-  """Included in the specified list."""
-  in: [Boolean!]
 
   """
   Is null (if `true` is specified) or is not null (if `false` is specified).
@@ -84,14 +62,8 @@ input BooleanFilter {
   """Less than or equal to the specified value."""
   lessThanOrEqualTo: Boolean
 
-  """Equal to the specified value, treating null like an ordinary value."""
-  notDistinctFrom: Boolean
-
   """Not equal to the specified value."""
   notEqualTo: Boolean
-
-  """Not included in the specified list."""
-  notIn: [Boolean!]
 }
 
 """All input for the create `Event` mutation."""
@@ -625,11 +597,6 @@ scalar Datetime
 A filter to be used against Datetime fields. All fields are combined with a logical ‘and.’
 """
 input DatetimeFilter {
-  """
-  Not equal to the specified value, treating null like an ordinary value.
-  """
-  distinctFrom: Datetime
-
   """Equal to the specified value."""
   equalTo: Datetime
 
@@ -638,9 +605,6 @@ input DatetimeFilter {
 
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: Datetime
-
-  """Included in the specified list."""
-  in: [Datetime!]
 
   """
   Is null (if `true` is specified) or is not null (if `false` is specified).
@@ -653,14 +617,8 @@ input DatetimeFilter {
   """Less than or equal to the specified value."""
   lessThanOrEqualTo: Datetime
 
-  """Equal to the specified value, treating null like an ordinary value."""
-  notDistinctFrom: Datetime
-
   """Not equal to the specified value."""
   notEqualTo: Datetime
-
-  """Not included in the specified list."""
-  notIn: [Datetime!]
 }
 
 """All input for the `deleteEvent` mutation."""
@@ -1221,80 +1179,12 @@ type Event {
     """The method to use when ordering `EventViaGroup`."""
     orderBy: [EventViaGroupsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventViaGroupsConnection!
-
-  """Reads and enables pagination through a set of `Group`."""
-  groups(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: GroupCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: GroupFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `Group`."""
-    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventGroupsManyToManyConnection!
   id: BigInt!
   image: ResponsiveImage
   imageFile: String
   overrideImageFile: String
   special: Boolean!
   startsAt: Datetime!
-
-  """Reads and enables pagination through a set of `EventTag`."""
-  tags(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: EventTagCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventTagFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `EventTag`."""
-    orderBy: [EventTagsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTagsManyToManyConnection!
 
   """Reads and enables pagination through a set of `EventTr`."""
   translations(
@@ -1355,23 +1245,11 @@ input EventCondition {
 A filter to be used against `Event` object types. All fields are combined with a logical ‘and.’
 """
 input EventFilter {
-  """Checks for all expressions in this list."""
-  and: [EventFilter!]
-
   """Filter by the object’s `endsAt` field."""
   endsAt: DatetimeFilter
 
   """Filter by the object’s `id` field."""
   id: BigIntFilter
-
-  """Filter by the object’s `imageFile` field."""
-  imageFile: StringFilter
-
-  """Negates the expression."""
-  not: EventFilter
-
-  """Checks for any expressions in this list."""
-  or: [EventFilter!]
 
   """Filter by the object’s `overrideImageFile` field."""
   overrideImageFile: StringFilter
@@ -1381,34 +1259,6 @@ input EventFilter {
 
   """Filter by the object’s `startsAt` field."""
   startsAt: DatetimeFilter
-}
-
-"""
-A connection to a list of `Group` values, with data from `EventViaGroup`.
-"""
-type EventGroupsManyToManyConnection {
-  """
-  A list of edges which contains the `Group`, info from the `EventViaGroup`, and the cursor to aid in pagination.
-  """
-  edges: [EventGroupsManyToManyEdge!]!
-
-  """A list of `Group` objects."""
-  nodes: [Group!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Group` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Group` edge in the connection, with data from `EventViaGroup`."""
-type EventGroupsManyToManyEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Group` at the end of the edge."""
-  node: Group!
 }
 
 """An input for mutations affecting `Event`"""
@@ -1465,40 +1315,6 @@ type EventTag {
     """The method to use when ordering `EventViaEventTag`."""
     orderBy: [EventViaEventTagsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventViaEventTagsConnection!
-
-  """Reads and enables pagination through a set of `Event`."""
-  eventsByEventViaEventTagTagIdAndEventId(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: EventCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `Event`."""
-    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTagEventsByEventViaEventTagTagIdAndEventIdManyToManyConnection!
   id: BigInt!
   image: ResponsiveImage
   imageFile: String
@@ -1551,51 +1367,14 @@ input EventTagCondition {
 }
 
 """
-A connection to a list of `Event` values, with data from `EventViaEventTag`.
-"""
-type EventTagEventsByEventViaEventTagTagIdAndEventIdManyToManyConnection {
-  """
-  A list of edges which contains the `Event`, info from the `EventViaEventTag`, and the cursor to aid in pagination.
-  """
-  edges: [EventTagEventsByEventViaEventTagTagIdAndEventIdManyToManyEdge!]!
-
-  """A list of `Event` objects."""
-  nodes: [Event!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Event` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Event` edge in the connection, with data from `EventViaEventTag`."""
-type EventTagEventsByEventViaEventTagTagIdAndEventIdManyToManyEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Event` at the end of the edge."""
-  node: Event!
-}
-
-"""
 A filter to be used against `EventTag` object types. All fields are combined with a logical ‘and.’
 """
 input EventTagFilter {
-  """Checks for all expressions in this list."""
-  and: [EventTagFilter!]
-
   """Filter by the object’s `id` field."""
   id: BigIntFilter
 
   """Filter by the object’s `imageFile` field."""
   imageFile: StringFilter
-
-  """Negates the expression."""
-  not: EventTagFilter
-
-  """Checks for any expressions in this list."""
-  or: [EventTagFilter!]
 }
 
 """An input for mutations affecting `EventTag`"""
@@ -1640,17 +1419,8 @@ input EventTagTrCondition {
 A filter to be used against `EventTagTr` object types. All fields are combined with a logical ‘and.’
 """
 input EventTagTrFilter {
-  """Checks for all expressions in this list."""
-  and: [EventTagTrFilter!]
-
   """Filter by the object’s `languageCode` field."""
   languageCode: TrLanguageFilter
-
-  """Negates the expression."""
-  not: EventTagTrFilter
-
-  """Checks for any expressions in this list."""
-  or: [EventTagTrFilter!]
 
   """Filter by the object’s `tagId` field."""
   tagId: BigIntFilter
@@ -1740,36 +1510,6 @@ type EventTagsEdge {
   node: EventTag!
 }
 
-"""
-A connection to a list of `EventTag` values, with data from `EventViaEventTag`.
-"""
-type EventTagsManyToManyConnection {
-  """
-  A list of edges which contains the `EventTag`, info from the `EventViaEventTag`, and the cursor to aid in pagination.
-  """
-  edges: [EventTagsManyToManyEdge!]!
-
-  """A list of `EventTag` objects."""
-  nodes: [EventTag!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `EventTag` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""
-A `EventTag` edge in the connection, with data from `EventViaEventTag`.
-"""
-type EventTagsManyToManyEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `EventTag` at the end of the edge."""
-  node: EventTag!
-}
-
 """Methods to use when ordering `EventTag`."""
 enum EventTagsOrderBy {
   ID_ASC
@@ -1832,17 +1572,8 @@ input EventTemplateCondition {
 A filter to be used against `EventTemplate` object types. All fields are combined with a logical ‘and.’
 """
 input EventTemplateFilter {
-  """Checks for all expressions in this list."""
-  and: [EventTemplateFilter!]
-
   """Filter by the object’s `id` field."""
   id: BigIntFilter
-
-  """Negates the expression."""
-  not: EventTemplateFilter
-
-  """Checks for any expressions in this list."""
-  or: [EventTemplateFilter!]
 }
 
 """An input for mutations affecting `EventTemplate`"""
@@ -1895,9 +1626,6 @@ input EventTemplateTrCondition {
 A filter to be used against `EventTemplateTr` object types. All fields are combined with a logical ‘and.’
 """
 input EventTemplateTrFilter {
-  """Checks for all expressions in this list."""
-  and: [EventTemplateTrFilter!]
-
   """Filter by the object’s `description` field."""
   description: StringFilter
 
@@ -1906,12 +1634,6 @@ input EventTemplateTrFilter {
 
   """Filter by the object’s `languageCode` field."""
   languageCode: TrLanguageFilter
-
-  """Negates the expression."""
-  not: EventTemplateTrFilter
-
-  """Checks for any expressions in this list."""
-  or: [EventTemplateTrFilter!]
 
   """Filter by the object’s `title` field."""
   title: StringFilter
@@ -2059,9 +1781,6 @@ input EventTrCondition {
 A filter to be used against `EventTr` object types. All fields are combined with a logical ‘and.’
 """
 input EventTrFilter {
-  """Checks for all expressions in this list."""
-  and: [EventTrFilter!]
-
   """Filter by the object’s `description` field."""
   description: StringFilter
 
@@ -2070,12 +1789,6 @@ input EventTrFilter {
 
   """Filter by the object’s `languageCode` field."""
   languageCode: TrLanguageFilter
-
-  """Negates the expression."""
-  not: EventTrFilter
-
-  """Checks for any expressions in this list."""
-  or: [EventTrFilter!]
 
   """Filter by the object’s `slug` field."""
   slug: StringFilter
@@ -2180,17 +1893,8 @@ input EventViaEventTagCondition {
 A filter to be used against `EventViaEventTag` object types. All fields are combined with a logical ‘and.’
 """
 input EventViaEventTagFilter {
-  """Checks for all expressions in this list."""
-  and: [EventViaEventTagFilter!]
-
   """Filter by the object’s `eventId` field."""
   eventId: BigIntFilter
-
-  """Negates the expression."""
-  not: EventViaEventTagFilter
-
-  """Checks for any expressions in this list."""
-  or: [EventViaEventTagFilter!]
 
   """Filter by the object’s `tagId` field."""
   tagId: IntFilter
@@ -2275,20 +1979,11 @@ input EventViaGroupCondition {
 A filter to be used against `EventViaGroup` object types. All fields are combined with a logical ‘and.’
 """
 input EventViaGroupFilter {
-  """Checks for all expressions in this list."""
-  and: [EventViaGroupFilter!]
-
   """Filter by the object’s `eventId` field."""
   eventId: BigIntFilter
 
   """Filter by the object’s `groupId` field."""
   groupId: IntFilter
-
-  """Negates the expression."""
-  not: EventViaGroupFilter
-
-  """Checks for any expressions in this list."""
-  or: [EventViaGroupFilter!]
 }
 
 """An input for mutations affecting `EventViaGroup`"""
@@ -2419,40 +2114,6 @@ type Group {
     """The method to use when ordering `EventViaGroup`."""
     orderBy: [EventViaGroupsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventViaGroupsConnection!
-
-  """Reads and enables pagination through a set of `Event`."""
-  eventsByEventViaGroupGroupIdAndEventId(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: EventCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `Event`."""
-    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): GroupEventsByEventViaGroupGroupIdAndEventIdManyToManyConnection!
   id: BigInt!
   image: ResponsiveImage!
   imageFile: String!
@@ -2504,51 +2165,14 @@ input GroupCondition {
 }
 
 """
-A connection to a list of `Event` values, with data from `EventViaGroup`.
-"""
-type GroupEventsByEventViaGroupGroupIdAndEventIdManyToManyConnection {
-  """
-  A list of edges which contains the `Event`, info from the `EventViaGroup`, and the cursor to aid in pagination.
-  """
-  edges: [GroupEventsByEventViaGroupGroupIdAndEventIdManyToManyEdge!]!
-
-  """A list of `Event` objects."""
-  nodes: [Event!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Event` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Event` edge in the connection, with data from `EventViaGroup`."""
-type GroupEventsByEventViaGroupGroupIdAndEventIdManyToManyEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Event` at the end of the edge."""
-  node: Event!
-}
-
-"""
 A filter to be used against `Group` object types. All fields are combined with a logical ‘and.’
 """
 input GroupFilter {
-  """Checks for all expressions in this list."""
-  and: [GroupFilter!]
-
   """Filter by the object’s `id` field."""
   id: BigIntFilter
 
   """Filter by the object’s `imageFile` field."""
   imageFile: StringFilter
-
-  """Negates the expression."""
-  not: GroupFilter
-
-  """Checks for any expressions in this list."""
-  or: [GroupFilter!]
 }
 
 """An input for mutations affecting `Group`"""
@@ -2604,9 +2228,6 @@ input GroupTrCondition {
 A filter to be used against `GroupTr` object types. All fields are combined with a logical ‘and.’
 """
 input GroupTrFilter {
-  """Checks for all expressions in this list."""
-  and: [GroupTrFilter!]
-
   """Filter by the object’s `description` field."""
   description: StringFilter
 
@@ -2615,12 +2236,6 @@ input GroupTrFilter {
 
   """Filter by the object’s `languageCode` field."""
   languageCode: TrLanguageFilter
-
-  """Negates the expression."""
-  not: GroupTrFilter
-
-  """Checks for any expressions in this list."""
-  or: [GroupTrFilter!]
 
   """Filter by the object’s `shortDescription` field."""
   shortDescription: StringFilter
@@ -2740,11 +2355,6 @@ enum GroupsOrderBy {
 A filter to be used against Int fields. All fields are combined with a logical ‘and.’
 """
 input IntFilter {
-  """
-  Not equal to the specified value, treating null like an ordinary value.
-  """
-  distinctFrom: Int
-
   """Equal to the specified value."""
   equalTo: Int
 
@@ -2753,9 +2363,6 @@ input IntFilter {
 
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: Int
-
-  """Included in the specified list."""
-  in: [Int!]
 
   """
   Is null (if `true` is specified) or is not null (if `false` is specified).
@@ -2768,14 +2375,8 @@ input IntFilter {
   """Less than or equal to the specified value."""
   lessThanOrEqualTo: Int
 
-  """Equal to the specified value, treating null like an ordinary value."""
-  notDistinctFrom: Int
-
   """Not equal to the specified value."""
   notEqualTo: Int
-
-  """Not included in the specified list."""
-  notIn: [Int!]
 }
 
 type Member {
@@ -2810,9 +2411,6 @@ input MemberCondition {
 A filter to be used against `Member` object types. All fields are combined with a logical ‘and.’
 """
 input MemberFilter {
-  """Checks for all expressions in this list."""
-  and: [MemberFilter!]
-
   """Filter by the object’s `id` field."""
   id: UUIDFilter
 
@@ -2821,12 +2419,6 @@ input MemberFilter {
 
   """Filter by the object’s `name` field."""
   name: StringFilter
-
-  """Negates the expression."""
-  not: MemberFilter
-
-  """Checks for any expressions in this list."""
-  or: [MemberFilter!]
 
   """Filter by the object’s `userRole` field."""
   userRole: StringFilter
@@ -3297,17 +2889,8 @@ input PageCondition {
 A filter to be used against `Page` object types. All fields are combined with a logical ‘and.’
 """
 input PageFilter {
-  """Checks for all expressions in this list."""
-  and: [PageFilter!]
-
   """Filter by the object’s `name` field."""
   name: StringFilter
-
-  """Negates the expression."""
-  not: PageFilter
-
-  """Checks for any expressions in this list."""
-  or: [PageFilter!]
 }
 
 """Information about pagination in a connection."""
@@ -3362,20 +2945,11 @@ input PageTrCondition {
 A filter to be used against `PageTr` object types. All fields are combined with a logical ‘and.’
 """
 input PageTrFilter {
-  """Checks for all expressions in this list."""
-  and: [PageTrFilter!]
-
   """Filter by the object’s `content` field."""
   content: StringFilter
 
   """Filter by the object’s `languageCode` field."""
   languageCode: TrLanguageFilter
-
-  """Negates the expression."""
-  not: PageTrFilter
-
-  """Checks for any expressions in this list."""
-  or: [PageTrFilter!]
 
   """Filter by the object’s `pageName` field."""
   pageName: StringFilter
@@ -3880,51 +3454,14 @@ type ResponsiveImage {
 A filter to be used against String fields. All fields are combined with a logical ‘and.’
 """
 input StringFilter {
-  """
-  Not equal to the specified value, treating null like an ordinary value.
-  """
-  distinctFrom: String
-
-  """
-  Not equal to the specified value, treating null like an ordinary value (case-insensitive).
-  """
-  distinctFromInsensitive: String
-
-  """Ends with the specified string (case-sensitive)."""
-  endsWith: String
-
-  """Ends with the specified string (case-insensitive)."""
-  endsWithInsensitive: String
-
   """Equal to the specified value."""
   equalTo: String
-
-  """Equal to the specified value (case-insensitive)."""
-  equalToInsensitive: String
 
   """Greater than the specified value."""
   greaterThan: String
 
-  """Greater than the specified value (case-insensitive)."""
-  greaterThanInsensitive: String
-
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: String
-
-  """Greater than or equal to the specified value (case-insensitive)."""
-  greaterThanOrEqualToInsensitive: String
-
-  """Included in the specified list."""
-  in: [String!]
-
-  """Included in the specified list (case-insensitive)."""
-  inInsensitive: [String!]
-
-  """Contains the specified string (case-sensitive)."""
-  includes: String
-
-  """Contains the specified string (case-insensitive)."""
-  includesInsensitive: String
 
   """
   Is null (if `true` is specified) or is not null (if `false` is specified).
@@ -3934,78 +3471,11 @@ input StringFilter {
   """Less than the specified value."""
   lessThan: String
 
-  """Less than the specified value (case-insensitive)."""
-  lessThanInsensitive: String
-
   """Less than or equal to the specified value."""
   lessThanOrEqualTo: String
 
-  """Less than or equal to the specified value (case-insensitive)."""
-  lessThanOrEqualToInsensitive: String
-
-  """
-  Matches the specified pattern (case-sensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.
-  """
-  like: String
-
-  """
-  Matches the specified pattern (case-insensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.
-  """
-  likeInsensitive: String
-
-  """Equal to the specified value, treating null like an ordinary value."""
-  notDistinctFrom: String
-
-  """
-  Equal to the specified value, treating null like an ordinary value (case-insensitive).
-  """
-  notDistinctFromInsensitive: String
-
-  """Does not end with the specified string (case-sensitive)."""
-  notEndsWith: String
-
-  """Does not end with the specified string (case-insensitive)."""
-  notEndsWithInsensitive: String
-
   """Not equal to the specified value."""
   notEqualTo: String
-
-  """Not equal to the specified value (case-insensitive)."""
-  notEqualToInsensitive: String
-
-  """Not included in the specified list."""
-  notIn: [String!]
-
-  """Not included in the specified list (case-insensitive)."""
-  notInInsensitive: [String!]
-
-  """Does not contain the specified string (case-sensitive)."""
-  notIncludes: String
-
-  """Does not contain the specified string (case-insensitive)."""
-  notIncludesInsensitive: String
-
-  """
-  Does not match the specified pattern (case-sensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.
-  """
-  notLike: String
-
-  """
-  Does not match the specified pattern (case-insensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.
-  """
-  notLikeInsensitive: String
-
-  """Does not start with the specified string (case-sensitive)."""
-  notStartsWith: String
-
-  """Does not start with the specified string (case-insensitive)."""
-  notStartsWithInsensitive: String
-
-  """Starts with the specified string (case-sensitive)."""
-  startsWith: String
-
-  """Starts with the specified string (case-insensitive)."""
-  startsWithInsensitive: String
 }
 
 enum TrLanguage {
@@ -4017,11 +3487,6 @@ enum TrLanguage {
 A filter to be used against TrLanguage fields. All fields are combined with a logical ‘and.’
 """
 input TrLanguageFilter {
-  """
-  Not equal to the specified value, treating null like an ordinary value.
-  """
-  distinctFrom: TrLanguage
-
   """Equal to the specified value."""
   equalTo: TrLanguage
 
@@ -4030,9 +3495,6 @@ input TrLanguageFilter {
 
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: TrLanguage
-
-  """Included in the specified list."""
-  in: [TrLanguage!]
 
   """
   Is null (if `true` is specified) or is not null (if `false` is specified).
@@ -4045,14 +3507,8 @@ input TrLanguageFilter {
   """Less than or equal to the specified value."""
   lessThanOrEqualTo: TrLanguage
 
-  """Equal to the specified value, treating null like an ordinary value."""
-  notDistinctFrom: TrLanguage
-
   """Not equal to the specified value."""
   notEqualTo: TrLanguage
-
-  """Not included in the specified list."""
-  notIn: [TrLanguage!]
 }
 
 """
@@ -4064,11 +3520,6 @@ scalar UUID
 A filter to be used against UUID fields. All fields are combined with a logical ‘and.’
 """
 input UUIDFilter {
-  """
-  Not equal to the specified value, treating null like an ordinary value.
-  """
-  distinctFrom: UUID
-
   """Equal to the specified value."""
   equalTo: UUID
 
@@ -4077,9 +3528,6 @@ input UUIDFilter {
 
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: UUID
-
-  """Included in the specified list."""
-  in: [UUID!]
 
   """
   Is null (if `true` is specified) or is not null (if `false` is specified).
@@ -4092,14 +3540,8 @@ input UUIDFilter {
   """Less than or equal to the specified value."""
   lessThanOrEqualTo: UUID
 
-  """Equal to the specified value, treating null like an ordinary value."""
-  notDistinctFrom: UUID
-
   """Not equal to the specified value."""
   notEqualTo: UUID
-
-  """Not included in the specified list."""
-  notIn: [UUID!]
 }
 
 """All input for the `updateEvent` mutation."""

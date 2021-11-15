@@ -9,44 +9,47 @@ export type Translateable = Record<string, unknown> & {
   };
 };
 
-export type Translated<T extends Translateable> = Ref<
-  Omit<Omit<T, 'translations'>, '__typename'> &
-    Omit<T['translations']['nodes'][number], '__typename'>
->;
+export type Translated<T extends Translateable> = Omit<
+  Omit<T, 'translations'>,
+  '__typename'
+> &
+  Omit<T['translations']['nodes'][number], '__typename'>;
 
+export function useTranslation<T extends Translateable>(
+  o: MaybeRef<undefined>,
+  locale: Ref<string>
+): null;
 export function useTranslation<T extends Translateable>(
   o: MaybeRef<null>,
   locale: Ref<string>
-): Ref<null>;
+): null;
 export function useTranslation<T extends Translateable>(
   o: MaybeRef<T>,
   locale: Ref<string>
 ): Translated<T>;
 export function useTranslation<T extends Translateable>(
-  o: MaybeRef<T | null>,
+  o: MaybeRef<T | null | undefined>,
   locale: Ref<string>
-): Translated<T> | Ref<null>;
+): Translated<T> | null;
 export function useTranslation<T extends Translateable>(
-  o: MaybeRef<T | null>,
+  o: T | null | undefined,
   locale: Ref<string>
-): Translated<T> | Ref<null> {
-  return computed(() => {
-    const obj = unref(o);
-    if (obj === null) return null;
-    const {
-      translations: { nodes },
-      ...rest
-    } = obj;
-    let translation: T['translations']['nodes'][number] | undefined;
-    for (const l of [locale.value, FALLBACK_LANGUAGE]) {
-      translation = nodes.find((node) => node.languageCode.toLowerCase() === l);
-      if (translation !== undefined) break;
-    }
-    if (translation === undefined) translation = nodes[0];
+): Translated<T> | null {
+  const obj = unref(o);
+  if (obj === null || obj === undefined) return null;
+  const {
+    translations: { nodes },
+    ...rest
+  } = obj;
+  let translation: T['translations']['nodes'][number] | undefined;
+  for (const l of [locale.value, FALLBACK_LANGUAGE]) {
+    translation = nodes.find((node) => node.languageCode.toLowerCase() === l);
+    if (translation !== undefined) break;
+  }
+  if (translation === undefined) translation = nodes[0];
 
-    return {
-      ...rest,
-      ...translation,
-    };
-  });
+  return {
+    ...rest,
+    ...translation,
+  };
 }

@@ -4,12 +4,12 @@ query CalendarEventsQuery($startsAfter: Datetime, $startsBefore: Datetime) {
     orderBy: STARTS_AT_ASC
   ) {
     nodes {
-      ...event
+      ...calendarEvent
     }
   }
 }
 
-fragment event on Event {
+fragment calendarEvent on Event {
   translations {
     nodes {
       slug

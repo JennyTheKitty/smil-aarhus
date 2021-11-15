@@ -145,8 +145,7 @@ const calendarOptions: CalendarOptions = {
         // Turn into event input
         const newEvents = result.data.events.nodes
           .map((event) => useTranslation(event, locale))
-          .map((e) => {
-            const event = unref(e)!;
+          .map((event) => {
             return {
               id: event.id,
               title: event.title,

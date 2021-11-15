@@ -1,78 +1,48 @@
 <template>
-  <TransitionRoot appear :show="isOpen" as="template">
-    <Dialog :open="isOpen" @close="$emit('update:isOpen', false)">
-      <div
-        w:pos="fixed inset-0"
-        w:z="10"
-        w:flex="~ col"
-        w:align="items-center"
-        w:justify="center"
-      >
-        <TransitionChild
-          as="template"
-          enter="duration-300 ease-out"
-          enter-from="opacity-0"
-          enter-to="opacity-100"
-          leave="duration-200 ease-in"
-          leave-from="opacity-100"
-          leave-to="opacity-0"
+  <BaseDialog
+    :is-open="isOpen"
+    :dismissable="true"
+    @update:is-open="$emit('update:isOpen', $event)"
+  >
+    <div
+      w:w="md"
+      w:rounded="lg"
+      w:shadow="lg"
+      w:pos="relative"
+      w:border="2 pink-800"
+      w:bg="dark-800"
+      w:text="white"
+      w:p="4"
+    >
+      <DialogTitle w:text="center lg" w:m="0 b-4">
+        Login to SMil Aarhus
+      </DialogTitle>
+      <n-config-provider :theme="darkTheme">
+        <n-form
+          :label-width="80"
+          :model="model"
+          label-placement="left"
+          @submit="submit"
         >
-          <DialogOverlay w:pos="inset-0 fixed" w:bg="black opacity-50" />
-        </TransitionChild>
-        <TransitionChild
-          as="div"
-          enter="duration-300 ease-out"
-          enter-from="opacity-0 scale-95"
-          enter-to="opacity-100 scale-100"
-          leave="duration-200 ease-in"
-          leave-from="opacity-100 scale-100"
-          leave-to="opacity-0 scale-95"
-        >
-          <div
-            w:w="md"
-            w:rounded="lg"
-            w:shadow="lg"
-            w:pos="relative"
-            w:border="2 pink-800"
-            w:bg="dark-800"
-            w:text="white"
-            w:p="4"
-          >
-            <DialogTitle w:text="center lg" w:m="0 b-4">
-              Login to SMil Aarhus
-            </DialogTitle>
-            <n-config-provider :theme="darkTheme">
-              <n-form
-                :label-width="80"
-                :model="model"
-                label-placement="left"
-                @submit="submit"
-              >
-                <n-form-item label="Username" path="username">
-                  <n-input
-                    v-model:value="model.username"
-                    placeholder="Username"
-                  />
-                </n-form-item>
-                <n-form-item label="Password" path="password">
-                  <n-input
-                    v-model:value="model.password"
-                    placeholder="Password"
-                    type="password"
-                  />
-                </n-form-item>
-                <n-form-item class="t" :feedback="feedback">
-                  <input type="submit" w:display="hidden" />
-                  <div w:flex="grow"></div>
-                  <n-button @click="submit">Login</n-button>
-                </n-form-item>
-              </n-form>
-            </n-config-provider>
-          </div>
-        </TransitionChild>
-      </div>
-    </Dialog>
-  </TransitionRoot>
+          <n-form-item label="Username" path="username">
+            <n-input v-model:value="model.username" placeholder="Username" />
+          </n-form-item>
+          <n-form-item label="Password" path="password">
+            <n-input
+              v-model:value="model.password"
+              placeholder="Password"
+              type="password"
+            />
+          </n-form-item>
+          <n-form-item class="t" :feedback="feedback">
+            <input type="submit" w:display="hidden" />
+            <div w:flex="grow"></div>
+            <n-button @click="submit">Login</n-button>
+          </n-form-item>
+        </n-form>
+      </n-config-provider>
+    </div>
+  </BaseDialog>
 </template>
 
 <script setup lang="ts">

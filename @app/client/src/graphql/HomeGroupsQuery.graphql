@@ -13,6 +13,7 @@ query HomeGroupsQuery {
           title
           shortDescription
           slug
+          groupId
         }
       }
     }

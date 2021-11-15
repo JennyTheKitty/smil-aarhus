@@ -1,0 +1,17 @@
+mutation UpdatePageTranslation(
+  $content: String!
+  $pageName: String!
+  $languageCode: TrLanguage!
+) {
+  updatePageTr(
+    input: {
+      patch: { content: $content }
+      pageName: $pageName
+      languageCode: $languageCode
+    }
+  ) {
+    pageTr {
+      ...PageTranslation
+    }
+  }
+}

@@ -8,6 +8,8 @@ import 'virtual:windi-utilities.css';
 import '@vue/runtime-dom';
 import 'nprogress/nprogress.css';
 
+import { EventTr, GroupTr, Page, PageTr } from '@app/graphql/dist/client';
+import schema from '@app/graphql/dist/introspection';
 import {
   createClient,
   dedupExchange,
@@ -15,6 +17,7 @@ import {
   makeOperation,
   ssrExchange,
 } from '@urql/core';
+import { devtoolsExchange } from '@urql/devtools';
 import { authExchange } from '@urql/exchange-auth';
 import { cacheExchange } from '@urql/exchange-graphcache';
 import urql from '@urql/vue';
@@ -106,9 +109,11 @@ export default viteSSR(
       url: `${__ROOT_URL__}/graphql`,
 
       exchanges: [
+        devtoolsExchange,
         dedupExchange,
-        ssr,
+        // ssr,
         cacheExchange({
+          schema,
           updates: {
             Mutation: {
               authenticate(_result, _args, cache, _info) {
@@ -118,6 +123,16 @@ export default viteSSR(
                 cache.invalidate({ __typename: 'Query' }, 'currentMember');
               },
             },
+          },
+          keys: {
+            EventTr: (data) =>
+              `${(data as EventTr).languageCode}|${(data as EventTr).eventId}`,
+            PageTr: (data) =>
+              `${(data as PageTr).languageCode}|${(data as PageTr).pageName}`,
+            GroupTr: (data) =>
+              `${(data as GroupTr).languageCode}|${(data as GroupTr).groupId}`,
+            Page: (data) => (data as Page).name,
+            ResponsiveImage: () => null,
           },
         }),
         authExchange({
@@ -217,6 +232,7 @@ export default viteSSR(
             return false;
           },
         }),
+        // ssr,
         lastExchange,
       ],
     });

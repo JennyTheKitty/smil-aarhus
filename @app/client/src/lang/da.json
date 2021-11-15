@@ -15,11 +15,18 @@
   "home.goto-calendar": "Gå til kalenderen",
   "home.latest-news": "Seneste nyhed",
   "home.special-events": "Special event",
-  "home.upcoming-events": "Kommende events",
+  "home.upcoming-events": "Kommende Events",
   "nav.calendar": "Kalender",
   "nav.groups": "Grupper",
   "nav.home": "Hjem",
   "nav.info": "Info",
   "nav.news": "Nyheder",
-  "path.calendar": "calendar"
+  "path.calendar": "calendar",
+  "edit-page": "Rediger side",
+  "edit": "Rediger",
+  "cancel": "Annuller",
+  "save": "Gem",
+  "home.more-pictures": "Se flere billeder",
+  "home.see-all-pictures": "Se alle billeder",
+  "home.groups": "Interessegrupper"
 }

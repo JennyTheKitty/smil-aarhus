@@ -149,6 +149,9 @@ VALUES (5, 'da', 'Julefeeeeest', 'Test fest.', 'SMIL Aarhus', NULL);
 INSERT INTO smil_aarhus.event_via_event_tag
 VALUES(5, 2);
 
+INSERT INTO smil_aarhus.event_via_group
+VALUES(5, 6);
+
 INSERT INTO smil_aarhus.event
 VALUES (DEFAULT, date_trunc('day', now()) + (INTERVAL '23' day) + (INTERVAL '20' hour), date_trunc('day', now()) + (INTERVAL '24' day) + (INTERVAL '3' hour), FALSE);
 

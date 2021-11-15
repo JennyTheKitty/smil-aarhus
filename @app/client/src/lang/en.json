@@ -20,5 +20,11 @@
   "nav.groups": "Groups",
   "nav.home": "Home",
   "nav.info": "Info",
-  "nav.news": "News"
+  "nav.news": "News",
+  "cancel": "Cancel",
+  "edit": "Edit",
+  "home.groups": "Interest groups",
+  "home.more-pictures": "See more photos",
+  "home.see-all-pictures": "See all photos",
+  "save": "Save"
 }

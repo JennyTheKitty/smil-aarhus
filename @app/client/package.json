@@ -5,12 +5,16 @@
     "build": "cross-env NODE_ENV=production NODE_OPTIONS=\"$NODE_OPTIONS -r @app/config/env\" vite-ssr build"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^31.0.0",
+    "@ckeditor/ckeditor5-build-inline": "^31.0.0",
+    "@ckeditor/ckeditor5-vue": "^2.0.1",
     "@fullcalendar/core": "^5.10.1",
     "@fullcalendar/daygrid": "^5.10.1",
     "@fullcalendar/list": "^5.10.1",
     "@fullcalendar/timegrid": "^5.10.1",
     "@fullcalendar/vue3": "^5.10.1",
     "@headlessui/vue": "^0.0.0-dev.50d9fd3",
+    "@urql/devtools": "^2.0.3",
     "@urql/exchange-auth": "^0.1.6",
     "@urql/exchange-graphcache": "^4.3.5",
     "@urql/vue": "^0.6.0",

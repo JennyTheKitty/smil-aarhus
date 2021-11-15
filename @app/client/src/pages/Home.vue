@@ -37,13 +37,10 @@
       w:flex="~"
     >
       <!-- eslint-disable-next-line vue/no-v-html -->
-      <div
-        w:w="1/2"
-        w:p="8 t-0"
-        class="content"
-        v-html="page.value?.content"
-      ></div>
-      <div w:w="1/2" w:flex="~ col" w:justify="center">
+      <div w:w="1/2" w:p="8 t-0">
+        <Content name="home" />
+      </div>
+      <div w:w="1/2" w:flex="~ col" w:m="t-8">
         <div w:grid="~ cols-2 gap-4">
           <div
             v-for="(img, i) in images"
@@ -79,7 +76,9 @@
               w:pointer="none"
               w:transition="~ duration-200 all"
             >
-              <span w:text="true-gray-100 center">Show more pictures</span>
+              <span w:text="true-gray-100 center">{{
+                t('home.more-pictures')
+              }}</span>
             </div>
             <img
               class="object-cover"
@@ -99,7 +98,7 @@
             w:border="rounded-xl"
             class="btn-focus-ring"
           >
-            Go to pictures page
+            {{ t('home.see-all-pictures') }}
           </a>
         </div>
       </div>
@@ -107,9 +106,15 @@
 
     <div w:bg="dark-900">
       <div w:max-w="5xl" w:m="x-auto" w:p="y-10">
-        <h1 w:text="center pink-500 3xl">Kommende Events</h1>
+        <h1 w:text="center pink-500 3xl">{{ t('home.upcoming-events') }}</h1>
         <div w:flex="~" w:m="t-5" w:justify="center">
-          <div v-if="specialEvent" w:w="1/2">
+          <div
+            v-if="specialEvent"
+            w:w="1/2"
+            w:p="x-10"
+            w:flex="~ col"
+            w:justify="center"
+          >
             <router-link
               :to="
                 i18nRoute({
@@ -118,13 +123,16 @@
                 })
               "
               w:rounded="lg"
-              w:bg="black"
+              w:bg="dark-800"
               w:shadow="lg"
-              w:w="75"
-              w:h="75"
+              w:w="full"
               w:pos="relative"
               w:overflow="hidden"
-              class="group"
+              class="group btn-focus-ring"
+              w:display="block"
+              w:text="white"
+              w:transition="~ transform duration-200"
+              w:transform="~ hover:-translate-y-2"
             >
               <picture>
                 <source
@@ -142,43 +150,38 @@
                   :src="specialEvent.image?.src"
                   loading="lazy"
                   w:w="full"
-                  w:h="full"
+                  w:h="60"
+                  w:overflow="visible"
                   w:object="cover"
-                  w:rounded="lg"
+                  w:rounded="t-lg"
                 />
               </picture>
-              <div
-                w:pos="absolute bottom-0"
-                w:rounded="lg"
-                w:w="full"
-                w:h="full"
-                w:gradient="to-b from-transparent via-transparent to-black"
-                style="--tw-to-opacity: 0.8"
-              ></div>
-              <div
-                w:pos="absolute bottom-0"
-                w:rounded="lg"
-                w:w="full"
-                w:h="full"
-                w:bg="black opacity-0 group-hover:opacity-50"
-                w:transition="~ duration-100 all"
-              ></div>
-              <div
-                w:pos="absolute top-0"
-                w:m="t-60 group-hover:t-10"
-                w:p="4"
-                w:w="full"
-                w:flex="~ col"
-                w:transition="~ duration-200 all"
-              >
-                <span
-                  w:text="white xl shadow-lg center group-hover:3xl space-nowrap"
-                  w:w="group-hover:full 0"
-                  w:font="bold tracking-wide group-hover:tracking-wider"
-                  w:transition="~ duration-200 all"
+              <div w:flex="~" w:p="4" w:border="pink-600 t-2">
+                <div
+                  w:flex="~ col shrink-0"
+                  w:w="20"
+                  w:text="right"
+                  w:p="r-3 y-1"
                 >
-                  {{ specialEvent.title }}
-                </span>
+                  <span w:text="lg">{{
+                    dayjs(specialEvent.startsAt).format('D MMM')
+                  }}</span>
+                  <span w:text="sm gray-500">
+                    {{ dayjs(specialEvent.startsAt).format('ddd') }}
+                  </span>
+                </div>
+                <div w:border="r-2 blue-500" w:m="y-1" />
+                <div w:flex="~ col" w:p="l-3 y-1">
+                  <span w:text="base lg white">{{ specialEvent.title }}</span>
+                  <span w:text="sm gray-500">
+                    <icon-mdi-clock-time-five-outline
+                      w:display="inline-block"
+                      w:m="b-0.5 -l-1 r-0.5"
+                    />
+                    {{ dayjs(specialEvent.startsAt).format('LT') }} -
+                    {{ dayjs(specialEvent.endsAt).format('LT') }}</span
+                  >
+                </div>
               </div>
             </router-link>
           </div>
@@ -210,10 +213,8 @@
 </template>
 
 <script setup lang="ts">
-import {
-  HomeEventsQueryDocument,
-  PageQueryDocument,
-} from '@app/graphql/dist/client';
+import { HomeEventsQueryDocument } from '@app/graphql/dist/client';
+import dayjs from 'dayjs';
 
 import img1 from '../assets/images/lokale.01.jpg';
 import img2 from '../assets/images/lokale.04.jpg';
@@ -237,22 +238,13 @@ const { data: eventsData } = await useQuery({
     startsAfter: today.toISOString(),
   },
 });
-const specialEvent = useTranslation(
-  eventsData.value?.specialEvents?.nodes[0] || null,
-  locale
+const specialEvent = computed(() =>
+  useTranslation(eventsData.value?.specialEvents?.nodes[0] || null, locale)
 );
 
 const events = computed(() =>
   (eventsData.value?.events?.nodes || [])
     .map((event) => useTranslation(event, locale))
-    .filter((e) => e.value?.id !== specialEvent.value?.id)
-);
-
-const { data: pageData } = await useQuery({
-  query: PageQueryDocument,
-  variables: { name: 'home' },
-});
-const page = computed(() =>
-  useTranslation(pageData.value?.page || null, locale)
+    .filter((e) => e?.id !== specialEvent.value?.id)
 );
 </script>

@@ -21,3 +21,10 @@ generates:
       - 'typescript'
       - 'typescript-operations'
       - 'typed-document-node'
+  ./src/introspection.json:
+    schema: '../../data/schema.graphql'
+    documents: '../client/src/**/*.graphql'
+    plugins:
+      - urql-introspection
+    config:
+      minify: true

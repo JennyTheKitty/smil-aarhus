@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div v-if="data?.currentMember" w:flex="~ col">
+    <div v-if="state.currentMember" w:flex="~ col">
       <span w:text="gray-500">Logged in as:</span>
       <span>
-        {{ data.currentMember.name }} ({{ data.currentMember.userRole }})
+        {{ state.currentMember.name }} ({{ state.currentMember.userRole }})
       </span>
       <a href="#" w:text="gray-500" @click.stop.prevent="logout">Logout</a>
     </div>
@@ -24,6 +24,7 @@
 import { GetMeDocument, LogoutDocument } from '@app/graphql/dist/client';
 
 import { accessToken } from '../accessToken';
+import { useGlobalState } from '../store';
 
 const isLoginDialogOpen = ref(false);
 const LoginDialog = defineAsyncComponent(async () => {
@@ -33,6 +34,12 @@ const LoginDialog = defineAsyncComponent(async () => {
 
 const { data } = useQuery({
   query: GetMeDocument,
+});
+
+const state = useGlobalState();
+
+watch(data, () => {
+  state.value.currentMember = data.value?.currentMember || null;
 });
 
 const { executeMutation } = useMutation(LogoutDocument);

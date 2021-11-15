@@ -37,54 +37,38 @@ export type AuthenticateInput = {
 
 /** A filter to be used against BigInt fields. All fields are combined with a logical ‘and.’ */
 export type BigIntFilter = {
-  /** Not equal to the specified value, treating null like an ordinary value. */
-  distinctFrom?: Maybe<Scalars['BigInt']>;
   /** Equal to the specified value. */
   equalTo?: Maybe<Scalars['BigInt']>;
   /** Greater than the specified value. */
   greaterThan?: Maybe<Scalars['BigInt']>;
   /** Greater than or equal to the specified value. */
   greaterThanOrEqualTo?: Maybe<Scalars['BigInt']>;
-  /** Included in the specified list. */
-  in?: Maybe<Array<Scalars['BigInt']>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: Maybe<Scalars['Boolean']>;
   /** Less than the specified value. */
   lessThan?: Maybe<Scalars['BigInt']>;
   /** Less than or equal to the specified value. */
   lessThanOrEqualTo?: Maybe<Scalars['BigInt']>;
-  /** Equal to the specified value, treating null like an ordinary value. */
-  notDistinctFrom?: Maybe<Scalars['BigInt']>;
   /** Not equal to the specified value. */
   notEqualTo?: Maybe<Scalars['BigInt']>;
-  /** Not included in the specified list. */
-  notIn?: Maybe<Array<Scalars['BigInt']>>;
 };
 
 /** A filter to be used against Boolean fields. All fields are combined with a logical ‘and.’ */
 export type BooleanFilter = {
-  /** Not equal to the specified value, treating null like an ordinary value. */
-  distinctFrom?: Maybe<Scalars['Boolean']>;
   /** Equal to the specified value. */
   equalTo?: Maybe<Scalars['Boolean']>;
   /** Greater than the specified value. */
   greaterThan?: Maybe<Scalars['Boolean']>;
   /** Greater than or equal to the specified value. */
   greaterThanOrEqualTo?: Maybe<Scalars['Boolean']>;
-  /** Included in the specified list. */
-  in?: Maybe<Array<Scalars['Boolean']>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: Maybe<Scalars['Boolean']>;
   /** Less than the specified value. */
   lessThan?: Maybe<Scalars['Boolean']>;
   /** Less than or equal to the specified value. */
   lessThanOrEqualTo?: Maybe<Scalars['Boolean']>;
-  /** Equal to the specified value, treating null like an ordinary value. */
-  notDistinctFrom?: Maybe<Scalars['Boolean']>;
   /** Not equal to the specified value. */
   notEqualTo?: Maybe<Scalars['Boolean']>;
-  /** Not included in the specified list. */
-  notIn?: Maybe<Array<Scalars['Boolean']>>;
 };
 
 /** All input for the create `Event` mutation. */
@@ -568,28 +552,20 @@ export type CreateUploadUrlPayload = {
 
 /** A filter to be used against Datetime fields. All fields are combined with a logical ‘and.’ */
 export type DatetimeFilter = {
-  /** Not equal to the specified value, treating null like an ordinary value. */
-  distinctFrom?: Maybe<Scalars['Datetime']>;
   /** Equal to the specified value. */
   equalTo?: Maybe<Scalars['Datetime']>;
   /** Greater than the specified value. */
   greaterThan?: Maybe<Scalars['Datetime']>;
   /** Greater than or equal to the specified value. */
   greaterThanOrEqualTo?: Maybe<Scalars['Datetime']>;
-  /** Included in the specified list. */
-  in?: Maybe<Array<Scalars['Datetime']>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: Maybe<Scalars['Boolean']>;
   /** Less than the specified value. */
   lessThan?: Maybe<Scalars['Datetime']>;
   /** Less than or equal to the specified value. */
   lessThanOrEqualTo?: Maybe<Scalars['Datetime']>;
-  /** Equal to the specified value, treating null like an ordinary value. */
-  notDistinctFrom?: Maybe<Scalars['Datetime']>;
   /** Not equal to the specified value. */
   notEqualTo?: Maybe<Scalars['Datetime']>;
-  /** Not included in the specified list. */
-  notIn?: Maybe<Array<Scalars['Datetime']>>;
 };
 
 /** All input for the `deleteEvent` mutation. */
@@ -1063,16 +1039,12 @@ export type Event = {
   eventViaEventTags: EventViaEventTagsConnection;
   /** Reads and enables pagination through a set of `EventViaGroup`. */
   eventViaGroups: EventViaGroupsConnection;
-  /** Reads and enables pagination through a set of `Group`. */
-  groups: EventGroupsManyToManyConnection;
   id: Scalars['BigInt'];
   image: Maybe<ResponsiveImage>;
   imageFile: Maybe<Scalars['String']>;
   overrideImageFile: Maybe<Scalars['String']>;
   special: Scalars['Boolean'];
   startsAt: Scalars['Datetime'];
-  /** Reads and enables pagination through a set of `EventTag`. */
-  tags: EventTagsManyToManyConnection;
   /** Reads and enables pagination through a set of `EventTr`. */
   translations: EventTrsConnection;
 };
@@ -1099,30 +1071,6 @@ export type EventEventViaGroupsArgs = {
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<EventViaGroupsOrderBy>>;
-};
-
-
-export type EventGroupsArgs = {
-  after?: Maybe<Scalars['Cursor']>;
-  before?: Maybe<Scalars['Cursor']>;
-  condition?: Maybe<GroupCondition>;
-  filter?: Maybe<GroupFilter>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<GroupsOrderBy>>;
-};
-
-
-export type EventTagsArgs = {
-  after?: Maybe<Scalars['Cursor']>;
-  before?: Maybe<Scalars['Cursor']>;
-  condition?: Maybe<EventTagCondition>;
-  filter?: Maybe<EventTagFilter>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<EventTagsOrderBy>>;
 };
 
 
@@ -1153,46 +1101,16 @@ export type EventCondition = {
 
 /** A filter to be used against `Event` object types. All fields are combined with a logical ‘and.’ */
 export type EventFilter = {
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<EventFilter>>;
   /** Filter by the object’s `endsAt` field. */
   endsAt?: Maybe<DatetimeFilter>;
   /** Filter by the object’s `id` field. */
   id?: Maybe<BigIntFilter>;
-  /** Filter by the object’s `imageFile` field. */
-  imageFile?: Maybe<StringFilter>;
-  /** Negates the expression. */
-  not?: Maybe<EventFilter>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<EventFilter>>;
   /** Filter by the object’s `overrideImageFile` field. */
   overrideImageFile?: Maybe<StringFilter>;
   /** Filter by the object’s `special` field. */
   special?: Maybe<BooleanFilter>;
   /** Filter by the object’s `startsAt` field. */
   startsAt?: Maybe<DatetimeFilter>;
-};
-
-/** A connection to a list of `Group` values, with data from `EventViaGroup`. */
-export type EventGroupsManyToManyConnection = {
-  __typename?: 'EventGroupsManyToManyConnection';
-  /** A list of edges which contains the `Group`, info from the `EventViaGroup`, and the cursor to aid in pagination. */
-  edges: Array<EventGroupsManyToManyEdge>;
-  /** A list of `Group` objects. */
-  nodes: Array<Group>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Group` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Group` edge in the connection, with data from `EventViaGroup`. */
-export type EventGroupsManyToManyEdge = {
-  __typename?: 'EventGroupsManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor: Maybe<Scalars['Cursor']>;
-  /** The `Group` at the end of the edge. */
-  node: Group;
 };
 
 /** An input for mutations affecting `Event` */
@@ -1217,8 +1135,6 @@ export type EventTag = {
   __typename?: 'EventTag';
   /** Reads and enables pagination through a set of `EventViaEventTag`. */
   eventViaEventTagsByTagId: EventViaEventTagsConnection;
-  /** Reads and enables pagination through a set of `Event`. */
-  eventsByEventViaEventTagTagIdAndEventId: EventTagEventsByEventViaEventTagTagIdAndEventIdManyToManyConnection;
   id: Scalars['BigInt'];
   image: Maybe<ResponsiveImage>;
   imageFile: Maybe<Scalars['String']>;
@@ -1236,18 +1152,6 @@ export type EventTagEventViaEventTagsByTagIdArgs = {
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<EventViaEventTagsOrderBy>>;
-};
-
-
-export type EventTagEventsByEventViaEventTagTagIdAndEventIdArgs = {
-  after?: Maybe<Scalars['Cursor']>;
-  before?: Maybe<Scalars['Cursor']>;
-  condition?: Maybe<EventCondition>;
-  filter?: Maybe<EventFilter>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<EventsOrderBy>>;
 };
 
 
@@ -1273,40 +1177,12 @@ export type EventTagCondition = {
   imageFile?: Maybe<Scalars['String']>;
 };
 
-/** A connection to a list of `Event` values, with data from `EventViaEventTag`. */
-export type EventTagEventsByEventViaEventTagTagIdAndEventIdManyToManyConnection = {
-  __typename?: 'EventTagEventsByEventViaEventTagTagIdAndEventIdManyToManyConnection';
-  /** A list of edges which contains the `Event`, info from the `EventViaEventTag`, and the cursor to aid in pagination. */
-  edges: Array<EventTagEventsByEventViaEventTagTagIdAndEventIdManyToManyEdge>;
-  /** A list of `Event` objects. */
-  nodes: Array<Event>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Event` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Event` edge in the connection, with data from `EventViaEventTag`. */
-export type EventTagEventsByEventViaEventTagTagIdAndEventIdManyToManyEdge = {
-  __typename?: 'EventTagEventsByEventViaEventTagTagIdAndEventIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor: Maybe<Scalars['Cursor']>;
-  /** The `Event` at the end of the edge. */
-  node: Event;
-};
-
 /** A filter to be used against `EventTag` object types. All fields are combined with a logical ‘and.’ */
 export type EventTagFilter = {
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<EventTagFilter>>;
   /** Filter by the object’s `id` field. */
   id?: Maybe<BigIntFilter>;
   /** Filter by the object’s `imageFile` field. */
   imageFile?: Maybe<StringFilter>;
-  /** Negates the expression. */
-  not?: Maybe<EventTagFilter>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<EventTagFilter>>;
 };
 
 /** An input for mutations affecting `EventTag` */
@@ -1345,14 +1221,8 @@ export type EventTagTrCondition = {
 
 /** A filter to be used against `EventTagTr` object types. All fields are combined with a logical ‘and.’ */
 export type EventTagTrFilter = {
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<EventTagTrFilter>>;
   /** Filter by the object’s `languageCode` field. */
   languageCode?: Maybe<TrLanguageFilter>;
-  /** Negates the expression. */
-  not?: Maybe<EventTagTrFilter>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<EventTagTrFilter>>;
   /** Filter by the object’s `tagId` field. */
   tagId?: Maybe<BigIntFilter>;
   /** Filter by the object’s `title` field. */
@@ -1430,28 +1300,6 @@ export type EventTagsEdge = {
   node: EventTag;
 };
 
-/** A connection to a list of `EventTag` values, with data from `EventViaEventTag`. */
-export type EventTagsManyToManyConnection = {
-  __typename?: 'EventTagsManyToManyConnection';
-  /** A list of edges which contains the `EventTag`, info from the `EventViaEventTag`, and the cursor to aid in pagination. */
-  edges: Array<EventTagsManyToManyEdge>;
-  /** A list of `EventTag` objects. */
-  nodes: Array<EventTag>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `EventTag` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `EventTag` edge in the connection, with data from `EventViaEventTag`. */
-export type EventTagsManyToManyEdge = {
-  __typename?: 'EventTagsManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor: Maybe<Scalars['Cursor']>;
-  /** The `EventTag` at the end of the edge. */
-  node: EventTag;
-};
-
 /** Methods to use when ordering `EventTag`. */
 export enum EventTagsOrderBy {
   IdAsc = 'ID_ASC',
@@ -1493,14 +1341,8 @@ export type EventTemplateCondition = {
 
 /** A filter to be used against `EventTemplate` object types. All fields are combined with a logical ‘and.’ */
 export type EventTemplateFilter = {
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<EventTemplateFilter>>;
   /** Filter by the object’s `id` field. */
   id?: Maybe<BigIntFilter>;
-  /** Negates the expression. */
-  not?: Maybe<EventTemplateFilter>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<EventTemplateFilter>>;
 };
 
 /** An input for mutations affecting `EventTemplate` */
@@ -1543,18 +1385,12 @@ export type EventTemplateTrCondition = {
 
 /** A filter to be used against `EventTemplateTr` object types. All fields are combined with a logical ‘and.’ */
 export type EventTemplateTrFilter = {
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<EventTemplateTrFilter>>;
   /** Filter by the object’s `description` field. */
   description?: Maybe<StringFilter>;
   /** Filter by the object’s `eventTemplateId` field. */
   eventTemplateId?: Maybe<BigIntFilter>;
   /** Filter by the object’s `languageCode` field. */
   languageCode?: Maybe<TrLanguageFilter>;
-  /** Negates the expression. */
-  not?: Maybe<EventTemplateTrFilter>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<EventTemplateTrFilter>>;
   /** Filter by the object’s `title` field. */
   title?: Maybe<StringFilter>;
   /** Filter by the object’s `venue` field. */
@@ -1679,18 +1515,12 @@ export type EventTrCondition = {
 
 /** A filter to be used against `EventTr` object types. All fields are combined with a logical ‘and.’ */
 export type EventTrFilter = {
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<EventTrFilter>>;
   /** Filter by the object’s `description` field. */
   description?: Maybe<StringFilter>;
   /** Filter by the object’s `eventId` field. */
   eventId?: Maybe<BigIntFilter>;
   /** Filter by the object’s `languageCode` field. */
   languageCode?: Maybe<TrLanguageFilter>;
-  /** Negates the expression. */
-  not?: Maybe<EventTrFilter>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<EventTrFilter>>;
   /** Filter by the object’s `slug` field. */
   slug?: Maybe<StringFilter>;
   /** Filter by the object’s `title` field. */
@@ -1783,14 +1613,8 @@ export type EventViaEventTagCondition = {
 
 /** A filter to be used against `EventViaEventTag` object types. All fields are combined with a logical ‘and.’ */
 export type EventViaEventTagFilter = {
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<EventViaEventTagFilter>>;
   /** Filter by the object’s `eventId` field. */
   eventId?: Maybe<BigIntFilter>;
-  /** Negates the expression. */
-  not?: Maybe<EventViaEventTagFilter>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<EventViaEventTagFilter>>;
   /** Filter by the object’s `tagId` field. */
   tagId?: Maybe<IntFilter>;
 };
@@ -1863,16 +1687,10 @@ export type EventViaGroupCondition = {
 
 /** A filter to be used against `EventViaGroup` object types. All fields are combined with a logical ‘and.’ */
 export type EventViaGroupFilter = {
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<EventViaGroupFilter>>;
   /** Filter by the object’s `eventId` field. */
   eventId?: Maybe<BigIntFilter>;
   /** Filter by the object’s `groupId` field. */
   groupId?: Maybe<IntFilter>;
-  /** Negates the expression. */
-  not?: Maybe<EventViaGroupFilter>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<EventViaGroupFilter>>;
 };
 
 /** An input for mutations affecting `EventViaGroup` */
@@ -1963,8 +1781,6 @@ export type Group = {
   __typename?: 'Group';
   /** Reads and enables pagination through a set of `EventViaGroup`. */
   eventViaGroups: EventViaGroupsConnection;
-  /** Reads and enables pagination through a set of `Event`. */
-  eventsByEventViaGroupGroupIdAndEventId: GroupEventsByEventViaGroupGroupIdAndEventIdManyToManyConnection;
   id: Scalars['BigInt'];
   image: ResponsiveImage;
   imageFile: Scalars['String'];
@@ -1982,18 +1798,6 @@ export type GroupEventViaGroupsArgs = {
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<EventViaGroupsOrderBy>>;
-};
-
-
-export type GroupEventsByEventViaGroupGroupIdAndEventIdArgs = {
-  after?: Maybe<Scalars['Cursor']>;
-  before?: Maybe<Scalars['Cursor']>;
-  condition?: Maybe<EventCondition>;
-  filter?: Maybe<EventFilter>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<EventsOrderBy>>;
 };
 
 
@@ -2016,40 +1820,12 @@ export type GroupCondition = {
   imageFile?: Maybe<Scalars['String']>;
 };
 
-/** A connection to a list of `Event` values, with data from `EventViaGroup`. */
-export type GroupEventsByEventViaGroupGroupIdAndEventIdManyToManyConnection = {
-  __typename?: 'GroupEventsByEventViaGroupGroupIdAndEventIdManyToManyConnection';
-  /** A list of edges which contains the `Event`, info from the `EventViaGroup`, and the cursor to aid in pagination. */
-  edges: Array<GroupEventsByEventViaGroupGroupIdAndEventIdManyToManyEdge>;
-  /** A list of `Event` objects. */
-  nodes: Array<Event>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Event` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Event` edge in the connection, with data from `EventViaGroup`. */
-export type GroupEventsByEventViaGroupGroupIdAndEventIdManyToManyEdge = {
-  __typename?: 'GroupEventsByEventViaGroupGroupIdAndEventIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor: Maybe<Scalars['Cursor']>;
-  /** The `Event` at the end of the edge. */
-  node: Event;
-};
-
 /** A filter to be used against `Group` object types. All fields are combined with a logical ‘and.’ */
 export type GroupFilter = {
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<GroupFilter>>;
   /** Filter by the object’s `id` field. */
   id?: Maybe<BigIntFilter>;
   /** Filter by the object’s `imageFile` field. */
   imageFile?: Maybe<StringFilter>;
-  /** Negates the expression. */
-  not?: Maybe<GroupFilter>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<GroupFilter>>;
 };
 
 /** An input for mutations affecting `Group` */
@@ -2094,18 +1870,12 @@ export type GroupTrCondition = {
 
 /** A filter to be used against `GroupTr` object types. All fields are combined with a logical ‘and.’ */
 export type GroupTrFilter = {
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<GroupTrFilter>>;
   /** Filter by the object’s `description` field. */
   description?: Maybe<StringFilter>;
   /** Filter by the object’s `groupId` field. */
   groupId?: Maybe<BigIntFilter>;
   /** Filter by the object’s `languageCode` field. */
   languageCode?: Maybe<TrLanguageFilter>;
-  /** Negates the expression. */
-  not?: Maybe<GroupTrFilter>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<GroupTrFilter>>;
   /** Filter by the object’s `shortDescription` field. */
   shortDescription?: Maybe<StringFilter>;
   /** Filter by the object’s `slug` field. */
@@ -2210,28 +1980,20 @@ export enum GroupsOrderBy {
 
 /** A filter to be used against Int fields. All fields are combined with a logical ‘and.’ */
 export type IntFilter = {
-  /** Not equal to the specified value, treating null like an ordinary value. */
-  distinctFrom?: Maybe<Scalars['Int']>;
   /** Equal to the specified value. */
   equalTo?: Maybe<Scalars['Int']>;
   /** Greater than the specified value. */
   greaterThan?: Maybe<Scalars['Int']>;
   /** Greater than or equal to the specified value. */
   greaterThanOrEqualTo?: Maybe<Scalars['Int']>;
-  /** Included in the specified list. */
-  in?: Maybe<Array<Scalars['Int']>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: Maybe<Scalars['Boolean']>;
   /** Less than the specified value. */
   lessThan?: Maybe<Scalars['Int']>;
   /** Less than or equal to the specified value. */
   lessThanOrEqualTo?: Maybe<Scalars['Int']>;
-  /** Equal to the specified value, treating null like an ordinary value. */
-  notDistinctFrom?: Maybe<Scalars['Int']>;
   /** Not equal to the specified value. */
   notEqualTo?: Maybe<Scalars['Int']>;
-  /** Not included in the specified list. */
-  notIn?: Maybe<Array<Scalars['Int']>>;
 };
 
 export type Member = {
@@ -2259,18 +2021,12 @@ export type MemberCondition = {
 
 /** A filter to be used against `Member` object types. All fields are combined with a logical ‘and.’ */
 export type MemberFilter = {
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<MemberFilter>>;
   /** Filter by the object’s `id` field. */
   id?: Maybe<UuidFilter>;
   /** Filter by the object’s `isActive` field. */
   isActive?: Maybe<BooleanFilter>;
   /** Filter by the object’s `name` field. */
   name?: Maybe<StringFilter>;
-  /** Negates the expression. */
-  not?: Maybe<MemberFilter>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<MemberFilter>>;
   /** Filter by the object’s `userRole` field. */
   userRole?: Maybe<StringFilter>;
   /** Filter by the object’s `username` field. */
@@ -2710,14 +2466,8 @@ export type PageCondition = {
 
 /** A filter to be used against `Page` object types. All fields are combined with a logical ‘and.’ */
 export type PageFilter = {
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<PageFilter>>;
   /** Filter by the object’s `name` field. */
   name?: Maybe<StringFilter>;
-  /** Negates the expression. */
-  not?: Maybe<PageFilter>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<PageFilter>>;
 };
 
 /** Information about pagination in a connection. */
@@ -2764,16 +2514,10 @@ export type PageTrCondition = {
 
 /** A filter to be used against `PageTr` object types. All fields are combined with a logical ‘and.’ */
 export type PageTrFilter = {
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<PageTrFilter>>;
   /** Filter by the object’s `content` field. */
   content?: Maybe<StringFilter>;
   /** Filter by the object’s `languageCode` field. */
   languageCode?: Maybe<TrLanguageFilter>;
-  /** Negates the expression. */
-  not?: Maybe<PageTrFilter>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<PageTrFilter>>;
   /** Filter by the object’s `pageName` field. */
   pageName?: Maybe<StringFilter>;
 };
@@ -3148,80 +2892,20 @@ export type ResponsiveImage = {
 
 /** A filter to be used against String fields. All fields are combined with a logical ‘and.’ */
 export type StringFilter = {
-  /** Not equal to the specified value, treating null like an ordinary value. */
-  distinctFrom?: Maybe<Scalars['String']>;
-  /** Not equal to the specified value, treating null like an ordinary value (case-insensitive). */
-  distinctFromInsensitive?: Maybe<Scalars['String']>;
-  /** Ends with the specified string (case-sensitive). */
-  endsWith?: Maybe<Scalars['String']>;
-  /** Ends with the specified string (case-insensitive). */
-  endsWithInsensitive?: Maybe<Scalars['String']>;
   /** Equal to the specified value. */
   equalTo?: Maybe<Scalars['String']>;
-  /** Equal to the specified value (case-insensitive). */
-  equalToInsensitive?: Maybe<Scalars['String']>;
   /** Greater than the specified value. */
   greaterThan?: Maybe<Scalars['String']>;
-  /** Greater than the specified value (case-insensitive). */
-  greaterThanInsensitive?: Maybe<Scalars['String']>;
   /** Greater than or equal to the specified value. */
   greaterThanOrEqualTo?: Maybe<Scalars['String']>;
-  /** Greater than or equal to the specified value (case-insensitive). */
-  greaterThanOrEqualToInsensitive?: Maybe<Scalars['String']>;
-  /** Included in the specified list. */
-  in?: Maybe<Array<Scalars['String']>>;
-  /** Included in the specified list (case-insensitive). */
-  inInsensitive?: Maybe<Array<Scalars['String']>>;
-  /** Contains the specified string (case-sensitive). */
-  includes?: Maybe<Scalars['String']>;
-  /** Contains the specified string (case-insensitive). */
-  includesInsensitive?: Maybe<Scalars['String']>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: Maybe<Scalars['Boolean']>;
   /** Less than the specified value. */
   lessThan?: Maybe<Scalars['String']>;
-  /** Less than the specified value (case-insensitive). */
-  lessThanInsensitive?: Maybe<Scalars['String']>;
   /** Less than or equal to the specified value. */
   lessThanOrEqualTo?: Maybe<Scalars['String']>;
-  /** Less than or equal to the specified value (case-insensitive). */
-  lessThanOrEqualToInsensitive?: Maybe<Scalars['String']>;
-  /** Matches the specified pattern (case-sensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters. */
-  like?: Maybe<Scalars['String']>;
-  /** Matches the specified pattern (case-insensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters. */
-  likeInsensitive?: Maybe<Scalars['String']>;
-  /** Equal to the specified value, treating null like an ordinary value. */
-  notDistinctFrom?: Maybe<Scalars['String']>;
-  /** Equal to the specified value, treating null like an ordinary value (case-insensitive). */
-  notDistinctFromInsensitive?: Maybe<Scalars['String']>;
-  /** Does not end with the specified string (case-sensitive). */
-  notEndsWith?: Maybe<Scalars['String']>;
-  /** Does not end with the specified string (case-insensitive). */
-  notEndsWithInsensitive?: Maybe<Scalars['String']>;
   /** Not equal to the specified value. */
   notEqualTo?: Maybe<Scalars['String']>;
-  /** Not equal to the specified value (case-insensitive). */
-  notEqualToInsensitive?: Maybe<Scalars['String']>;
-  /** Not included in the specified list. */
-  notIn?: Maybe<Array<Scalars['String']>>;
-  /** Not included in the specified list (case-insensitive). */
-  notInInsensitive?: Maybe<Array<Scalars['String']>>;
-  /** Does not contain the specified string (case-sensitive). */
-  notIncludes?: Maybe<Scalars['String']>;
-  /** Does not contain the specified string (case-insensitive). */
-  notIncludesInsensitive?: Maybe<Scalars['String']>;
-  /** Does not match the specified pattern (case-sensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters. */
-  notLike?: Maybe<Scalars['String']>;
-  /** Does not match the specified pattern (case-insensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters. */
-  notLikeInsensitive?: Maybe<Scalars['String']>;
-  /** Does not start with the specified string (case-sensitive). */
-  notStartsWith?: Maybe<Scalars['String']>;
-  /** Does not start with the specified string (case-insensitive). */
-  notStartsWithInsensitive?: Maybe<Scalars['String']>;
-  /** Starts with the specified string (case-sensitive). */
-  startsWith?: Maybe<Scalars['String']>;
-  /** Starts with the specified string (case-insensitive). */
-  startsWithInsensitive?: Maybe<Scalars['String']>;
 };
 
 export enum TrLanguage {
@@ -3231,55 +2915,39 @@ export enum TrLanguage {
 
 /** A filter to be used against TrLanguage fields. All fields are combined with a logical ‘and.’ */
 export type TrLanguageFilter = {
-  /** Not equal to the specified value, treating null like an ordinary value. */
-  distinctFrom?: Maybe<TrLanguage>;
   /** Equal to the specified value. */
   equalTo?: Maybe<TrLanguage>;
   /** Greater than the specified value. */
   greaterThan?: Maybe<TrLanguage>;
   /** Greater than or equal to the specified value. */
   greaterThanOrEqualTo?: Maybe<TrLanguage>;
-  /** Included in the specified list. */
-  in?: Maybe<Array<TrLanguage>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: Maybe<Scalars['Boolean']>;
   /** Less than the specified value. */
   lessThan?: Maybe<TrLanguage>;
   /** Less than or equal to the specified value. */
   lessThanOrEqualTo?: Maybe<TrLanguage>;
-  /** Equal to the specified value, treating null like an ordinary value. */
-  notDistinctFrom?: Maybe<TrLanguage>;
   /** Not equal to the specified value. */
   notEqualTo?: Maybe<TrLanguage>;
-  /** Not included in the specified list. */
-  notIn?: Maybe<Array<TrLanguage>>;
 };
 
 
 /** A filter to be used against UUID fields. All fields are combined with a logical ‘and.’ */
 export type UuidFilter = {
-  /** Not equal to the specified value, treating null like an ordinary value. */
-  distinctFrom?: Maybe<Scalars['UUID']>;
   /** Equal to the specified value. */
   equalTo?: Maybe<Scalars['UUID']>;
   /** Greater than the specified value. */
   greaterThan?: Maybe<Scalars['UUID']>;
   /** Greater than or equal to the specified value. */
   greaterThanOrEqualTo?: Maybe<Scalars['UUID']>;
-  /** Included in the specified list. */
-  in?: Maybe<Array<Scalars['UUID']>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: Maybe<Scalars['Boolean']>;
   /** Less than the specified value. */
   lessThan?: Maybe<Scalars['UUID']>;
   /** Less than or equal to the specified value. */
   lessThanOrEqualTo?: Maybe<Scalars['UUID']>;
-  /** Equal to the specified value, treating null like an ordinary value. */
-  notDistinctFrom?: Maybe<Scalars['UUID']>;
   /** Not equal to the specified value. */
   notEqualTo?: Maybe<Scalars['UUID']>;
-  /** Not included in the specified list. */
-  notIn?: Maybe<Array<Scalars['UUID']>>;
 };
 
 /** All input for the `updateEvent` mutation. */
@@ -3784,12 +3452,12 @@ export type CalendarEventsQueryQuery = (
     { __typename?: 'EventsConnection' }
     & { nodes: Array<(
       { __typename?: 'Event' }
-      & EventFragment
+      & CalendarEventFragment
     )> }
   )> }
 );
 
-export type EventFragment = (
+export type CalendarEventFragment = (
   { __typename?: 'Event' }
   & Pick<Event, 'endsAt' | 'id' | 'startsAt' | 'special'>
   & { translations: (
@@ -3836,6 +3504,7 @@ export type HomeEventsQueryQuery = (
     { __typename?: 'EventsConnection' }
     & { nodes: Array<(
       { __typename?: 'Event' }
+      & Pick<Event, 'imageFile'>
       & { image: Maybe<(
         { __typename?: 'ResponsiveImage' }
         & Pick<ResponsiveImage, 'src' | 'srcSetWebp' | 'srcSetJpeg'>
@@ -3849,6 +3518,18 @@ export type HomeEventsQueryQuery = (
       & EventFragment
     )> }
   )> }
+);
+
+export type EventFragment = (
+  { __typename?: 'Event' }
+  & Pick<Event, 'endsAt' | 'id' | 'startsAt' | 'special'>
+  & { translations: (
+    { __typename?: 'EventTrsConnection' }
+    & { nodes: Array<(
+      { __typename?: 'EventTr' }
+      & Pick<EventTr, 'slug' | 'title' | 'languageCode' | 'description' | 'eventId'>
+    )> }
+  ) }
 );
 
 export type HomeGroupsQueryQueryVariables = Exact<{ [key: string]: never; }>;
@@ -3868,7 +3549,7 @@ export type HomeGroupsQueryQuery = (
         { __typename?: 'GroupTrsConnection' }
         & { nodes: Array<(
           { __typename?: 'GroupTr' }
-          & Pick<GroupTr, 'languageCode' | 'title' | 'shortDescription' | 'slug'>
+          & Pick<GroupTr, 'languageCode' | 'title' | 'shortDescription' | 'slug' | 'groupId'>
         )> }
       ) }
     )> }
@@ -3892,18 +3573,42 @@ export type PageQueryQuery = (
   { __typename?: 'Query' }
   & { page: Maybe<(
     { __typename?: 'Page' }
+    & Pick<Page, 'name'>
     & { translations: (
       { __typename?: 'PageTrsConnection' }
       & { nodes: Array<(
         { __typename?: 'PageTr' }
-        & Pick<PageTr, 'content' | 'languageCode'>
+        & PageTranslationFragment
       )> }
     ) }
   )> }
 );
 
-export const EventFragmentDoc = gql`
-    fragment event on Event {
+export type PageTranslationFragment = (
+  { __typename: 'PageTr' }
+  & Pick<PageTr, 'content' | 'languageCode' | 'pageName'>
+);
+
+export type UpdatePageTranslationMutationVariables = Exact<{
+  content: Scalars['String'];
+  pageName: Scalars['String'];
+  languageCode: TrLanguage;
+}>;
+
+
+export type UpdatePageTranslationMutation = (
+  { __typename?: 'Mutation' }
+  & { updatePageTr: Maybe<(
+    { __typename?: 'UpdatePageTrPayload' }
+    & { pageTr: Maybe<(
+      { __typename?: 'PageTr' }
+      & PageTranslationFragment
+    )> }
+  )> }
+);
+
+export const CalendarEventFragmentDoc = gql`
+    fragment calendarEvent on Event {
   translations {
     nodes {
       slug
@@ -3917,7 +3622,32 @@ export const EventFragmentDoc = gql`
   startsAt
   special
 }
+    ` as unknown as DocumentNode<CalendarEventFragment, unknown>;
+export const EventFragmentDoc = gql`
+    fragment event on Event {
+  translations {
+    nodes {
+      slug
+      title
+      languageCode
+      description
+      eventId
+    }
+  }
+  endsAt
+  id
+  startsAt
+  special
+}
     ` as unknown as DocumentNode<EventFragment, unknown>;
+export const PageTranslationFragmentDoc = gql`
+    fragment PageTranslation on PageTr {
+  __typename
+  content
+  languageCode
+  pageName
+}
+    ` as unknown as DocumentNode<PageTranslationFragment, unknown>;
 export const AuthenticateDocument = gql`
     mutation Authenticate($username: String!, $password: String!) {
   authenticate(input: {username: $username, password: $password})
@@ -3930,11 +3660,11 @@ export const CalendarEventsQueryDocument = gql`
     orderBy: STARTS_AT_ASC
   ) {
     nodes {
-      ...event
+      ...calendarEvent
     }
   }
 }
-    ${EventFragmentDoc}` as unknown as DocumentNode<CalendarEventsQueryQuery, CalendarEventsQueryQueryVariables>;
+    ${CalendarEventFragmentDoc}` as unknown as DocumentNode<CalendarEventsQueryQuery, CalendarEventsQueryQueryVariables>;
 export const GetMeDocument = gql`
     query GetMe {
   currentMember {
@@ -3966,6 +3696,7 @@ export const HomeEventsQueryDocument = gql`
         srcSetWebp
         srcSetJpeg
       }
+      imageFile
     }
   }
   events(
@@ -3995,6 +3726,7 @@ export const HomeGroupsQueryDocument = gql`
           title
           shortDescription
           slug
+          groupId
         }
       }
     }
@@ -4009,12 +3741,23 @@ export const LogoutDocument = gql`
 export const PageQueryDocument = gql`
     query PageQuery($name: String = "") {
   page(name: $name) {
+    name
     translations {
       nodes {
-        content
-        languageCode
+        ...PageTranslation
       }
     }
   }
 }
-    ` as unknown as DocumentNode<PageQueryQuery, PageQueryQueryVariables>;
+    ${PageTranslationFragmentDoc}` as unknown as DocumentNode<PageQueryQuery, PageQueryQueryVariables>;
+export const UpdatePageTranslationDocument = gql`
+    mutation UpdatePageTranslation($content: String!, $pageName: String!, $languageCode: TrLanguage!) {
+  updatePageTr(
+    input: {patch: {content: $content}, pageName: $pageName, languageCode: $languageCode}
+  ) {
+    pageTr {
+      ...PageTranslation
+    }
+  }
+}
+    ${PageTranslationFragmentDoc}` as unknown as DocumentNode<UpdatePageTranslationMutation, UpdatePageTranslationMutationVariables>;

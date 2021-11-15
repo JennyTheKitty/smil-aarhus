@@ -1,17 +1,17 @@
 <template>
   <div w:m="x-auto t-10 b-10" w:text="white" w:max-w="7xl">
-    <h1 w:text="center pink-500 3xl" w:m="b-5">Interessegrupper</h1>
+    <h1 w:text="center pink-500 3xl" w:m="b-5">{{ t('home.groups') }}</h1>
     <div w:pos="relative">
       <div ref="scroller" w:p="y-4 x-4" class="hidden-scroll-x">
         <div w:w="min-content">
           <div w:flex="~" w:space="x-5" w:p="x-10">
             <router-link
               v-for="group in groups"
-              :key="group.value.id"
+              :key="group.id"
               :to="
                 i18nRoute({
                   name: 'groups',
-                  params: { slug: group.value.slug },
+                  params: { slug: group.slug },
                 })
               "
               w:rounded="lg"
@@ -21,22 +21,22 @@
               w:h="75"
               w:pos="relative"
               w:overflow="hidden"
-              class="group"
+              class="group btn-focus-ring"
             >
               <picture>
                 <source
-                  :srcset="group.value.image.srcSetWebp"
+                  :srcset="group.image.srcSetWebp"
                   type="image/webp"
                   sizes="20rem"
                 />
                 <source
-                  :srcset="group.value.image.srcSetJpeg"
+                  :srcset="group.image.srcSetJpeg"
                   type="image/webp"
                   sizes="20rem"
                 />
                 <img
                   alt=""
-                  :src="group.value.image.src"
+                  :src="group.image.src"
                   loading="lazy"
                   w:w="full"
                   w:h="full"
@@ -74,10 +74,10 @@
                   w:font="bold tracking-wide group-hover:tracking-wider"
                   w:transition="~ duration-200 all"
                 >
-                  {{ group.value.title }}
+                  {{ group.title }}
                 </span>
                 <span w:text="center" w:w="full" w:p="4">
-                  {{ group.value.shortDescription }}
+                  {{ group.shortDescription }}
                 </span>
               </div>
             </router-link>
@@ -129,7 +129,7 @@ import { HomeGroupsQueryDocument } from '@app/graphql/dist/client';
 
 import { useTranslation } from '../../utils';
 
-const { locale } = useI18n();
+const { t, locale } = useI18n();
 const i18nRoute = inject(key.i18nRoute)!;
 
 const { data: groupsData } = await useQuery({

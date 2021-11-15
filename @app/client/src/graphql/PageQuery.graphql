@@ -1,10 +1,17 @@
 query PageQuery($name: String = "") {
   page(name: $name) {
+    name
     translations {
       nodes {
-        content
-        languageCode
+        ...PageTranslation
       }
     }
   }
+}
+
+fragment PageTranslation on PageTr {
+  __typename
+  content
+  languageCode
+  pageName
 }
