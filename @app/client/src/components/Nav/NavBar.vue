@@ -83,9 +83,12 @@ const i18nRoute = inject(key.i18nRoute)!;
 const heroHeight = inject(key.heroHeight);
 const { y: windowY } = useWindowScroll();
 const bgOpacity = computed(() => {
-  return heroHeight?.value && route.name === 'home'
-    ? Math.min(0.9, windowY.value / heroHeight.value)
-    : 1.0;
+  if (route.name === 'home') {
+    if (heroHeight?.value)
+      return Math.min(0.9, windowY.value / heroHeight.value);
+    return 0.0;
+  }
+  return 1.0;
 });
 </script>
 

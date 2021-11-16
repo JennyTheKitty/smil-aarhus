@@ -109,9 +109,9 @@ export default viteSSR(
       url: `${__ROOT_URL__}/graphql`,
 
       exchanges: [
-        devtoolsExchange,
+        ...(import.meta.env.DEV ? [devtoolsExchange] : []),
         dedupExchange,
-        // ssr,
+        ssr,
         cacheExchange({
           schema,
           updates: {
@@ -232,7 +232,6 @@ export default viteSSR(
             return false;
           },
         }),
-        ssr,
         lastExchange,
       ],
     });
