@@ -16,6 +16,7 @@ declare module 'vue' {
     Footer: typeof import('./components/Footer.vue')['default']
     FooterUserWidget: typeof import('./components/FooterUserWidget.vue')['default']
     FormInput: typeof import('./components/Form/FormInput.vue')['default']
+    HomeEventsSection: typeof import('./components/Home/HomeEventsSection.vue')['default']
     HomeEventWidget: typeof import('./components/Home/HomeEventWidget.vue')['default']
     HomeGroupsSection: typeof import('./components/Home/HomeGroupsSection.vue')['default']
     HomeHero: typeof import('./components/Home/HomeHero.vue')['default']

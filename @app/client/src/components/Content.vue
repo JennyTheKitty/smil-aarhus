@@ -82,7 +82,7 @@ const { t, locale } = useI18n();
 const state = useGlobalState();
 const editing = ref(false);
 
-const { data: pageData } = useQuery({
+const { data: pageData } = await useQuery({
   query: PageQueryDocument,
   variables: computed(() => ({ name: props.name })),
 });

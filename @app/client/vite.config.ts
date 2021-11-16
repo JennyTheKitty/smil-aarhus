@@ -1,5 +1,6 @@
 import vueI18n from '@intlify/vite-plugin-vue-i18n';
 import Vue from '@vitejs/plugin-vue';
+import fs from 'fs';
 import path from 'path';
 import AutoImport from 'unplugin-auto-import/vite';
 import { FileSystemIconLoader } from 'unplugin-icons/loaders';
@@ -49,8 +50,18 @@ export default defineConfig({
       '@urql/exchange-graphcache',
       '@urql/vue',
       '@headlessui/vue',
-      '@ckeditor/ckeditor5-build-classic',
-      '@ckeditor/ckeditor5-build-inline',
+      '@ckeditor/ckeditor5-basic-styles/src/bold.js',
+      '@ckeditor/ckeditor5-basic-styles/src/italic.js',
+      '@ckeditor/ckeditor5-editor-inline/src/inlineeditor.js',
+      '@ckeditor/ckeditor5-essentials/src/essentials.js',
+      '@ckeditor/ckeditor5-heading/src/heading.js',
+      '@ckeditor/ckeditor5-link/src/link.js',
+      '@ckeditor/ckeditor5-list/src/list.js',
+      '@ckeditor/ckeditor5-paragraph/src/paragraph.js',
+      '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice.js',
+      '@ckeditor/ckeditor5-typing/src/texttransformation.js',
+      '@ckeditor/ckeditor5-theme-lark',
+      '@ckeditor/ckeditor5-typing',
       '@ckeditor/ckeditor5-vue',
       '@fullcalendar/core',
       '@fullcalendar/daygrid',
@@ -131,5 +142,25 @@ export default defineConfig({
     }),
     WindiCSS({}),
     imagetools(),
+    ((options) => {
+      return {
+        name: 'vite-raw-plugin',
+        transform(code, id) {
+          if (options.fileRegex.test(id)) {
+            // eslint-disable-next-line no-param-reassign
+            code = fs.readFileSync(id, 'utf8');
+
+            const json = JSON.stringify(code)
+              .replace(/\u2028/g, '\\u2028')
+              .replace(/\u2029/g, '\\u2029');
+            return {
+              code: `export default ${json}`,
+            };
+          }
+        },
+      };
+    })({
+      fileRegex: /@ckeditor\/.*\.svg/,
+    }),
   ],
 });

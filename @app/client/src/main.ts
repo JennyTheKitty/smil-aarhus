@@ -232,7 +232,7 @@ export default viteSSR(
             return false;
           },
         }),
-        // ssr,
+        ssr,
         lastExchange,
       ],
     });

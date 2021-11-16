@@ -1,6 +1,6 @@
 <template>
   <CKEditor.component
-    :editor="InlineEditor"
+    :editor="Editor"
     :model-value="modelValue"
     :config="config"
     @update:modelValue="$emit('update:modelValue', $event)"
@@ -8,23 +8,12 @@
 </template>
 
 <script setup lang="ts">
-import InlineEditor from '@ckeditor/ckeditor5-build-inline';
 import CKEditor from '@ckeditor/ckeditor5-vue';
+
+import Editor from '../ckeditor';
 
 const config = {
   toolbar: {
-    items: [
-      'heading',
-      '|',
-      'bold',
-      'italic',
-      'link',
-      'numberedList',
-      'bulletedList',
-      '|',
-      'undo',
-      'redo',
-    ],
     shouldNotGroupWhenFull: true,
   },
 };

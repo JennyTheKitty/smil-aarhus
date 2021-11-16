@@ -1,3 +1,7 @@
+body {
+  background: theme('colors.dark.500');
+}
+
 .btn-focus-ring {
   @apply focus:outline-none focus-visible:ring-white focus-visible:ring-2 focus-visible:ring-opacity-75;
 }

@@ -12,12 +12,7 @@ declare module '@ckeditor/ckeditor5-vue' {
   export default CKEditor;
 }
 
-declare module '@ckeditor/ckeditor5-build-inline' {
-  const InlineEditor: any;
-  export = InlineEditor;
-}
-
-declare module '@ckeditor/ckeditor5-source-editing/src/sourceediting' {
-  const SourceEditing: any;
-  export = SourceEditing;
+declare module 'ckeditor.js' {
+  const Editor: any;
+  export = Editor;
 }

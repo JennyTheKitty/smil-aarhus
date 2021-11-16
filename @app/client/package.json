@@ -5,8 +5,21 @@
     "build": "cross-env NODE_ENV=production NODE_OPTIONS=\"$NODE_OPTIONS -r @app/config/env\" vite-ssr build"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-basic-styles": "^31.0.0",
     "@ckeditor/ckeditor5-build-classic": "^31.0.0",
     "@ckeditor/ckeditor5-build-inline": "^31.0.0",
+    "@ckeditor/ckeditor5-dev-utils": "^25.4.5",
+    "@ckeditor/ckeditor5-dev-webpack-plugin": "^25.4.5",
+    "@ckeditor/ckeditor5-editor-inline": "^31.0.0",
+    "@ckeditor/ckeditor5-essentials": "^31.0.0",
+    "@ckeditor/ckeditor5-heading": "^31.0.0",
+    "@ckeditor/ckeditor5-link": "^31.0.0",
+    "@ckeditor/ckeditor5-list": "^31.0.0",
+    "@ckeditor/ckeditor5-paragraph": "^31.0.0",
+    "@ckeditor/ckeditor5-paste-from-office": "^31.0.0",
+    "@ckeditor/ckeditor5-source-editing": "^31.0.0",
+    "@ckeditor/ckeditor5-theme-lark": "^31.0.0",
+    "@ckeditor/ckeditor5-typing": "^31.0.0",
     "@ckeditor/ckeditor5-vue": "^2.0.1",
     "@fullcalendar/core": "^5.10.1",
     "@fullcalendar/daygrid": "^5.10.1",
@@ -30,7 +43,9 @@
     "petite-vue-i18n": "^9.2.0-beta.17",
     "vite-ssr": "file:../../vendor/vite-ssr",
     "vue": "^3.0.6",
-    "vue-router": "^4.0.3"
+    "vue-lazy-hydration": "^2.0.0-beta.4",
+    "vue-router": "^4.0.3",
+    "webpack": "^5.64.1"
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.0.7",
