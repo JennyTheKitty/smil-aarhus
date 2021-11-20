@@ -2,13 +2,20 @@
   <div w:bg="dark-900">
     <div w:max-w="5xl" w:m="x-auto" w:p="y-10">
       <h1 w:text="center pink-500 3xl">{{ t('home.upcoming-events') }}</h1>
-      <div w:flex="~" w:m="t-5" w:justify="center">
+      <div
+        w:flex="~ col md:row"
+        w:m="t-5"
+        w:justify="center"
+        w:align="items-center"
+      >
         <div
           v-if="specialEvent"
-          w:w="1/2"
+          w:w="full md:1/2"
           w:p="x-10"
           w:flex="~ col"
           w:justify="center"
+          w:m="b-5 md:0"
+          w:max-w="128"
         >
           <router-link
             :to="
@@ -81,7 +88,7 @@
           </router-link>
         </div>
         <div
-          w:w="1/2"
+          w:w="full md:1/2"
           w:shadow="lg"
           w:overflow="hidden"
           w:flex="~ col"
@@ -89,6 +96,7 @@
           w:text="white"
           w:p="x-10"
           w:border="rounded-xl"
+          w:max-w="128"
         >
           <div w:bg="dark-800" w:w="full" w:p="4" w:border="rounded-xl">
             <HomeEventWidget :events="events" />
@@ -105,10 +113,11 @@
 </template>
 
 <script setup lang="ts">
-import { HomeEventsQueryDocument } from '@app/graphql/dist/client';
+import { Event, HomeEventsQueryDocument } from '@app/graphql/dist/client';
 import dayjs from 'dayjs';
+import { Ref } from 'vue';
 
-import { useTranslation } from '../../utils';
+import { Translated, useTranslation } from '../../utils';
 
 const { t, locale } = useI18n();
 const i18nRoute = inject(key.i18nRoute)!;
@@ -132,5 +141,5 @@ const events = computed(() =>
   (eventsData.value?.events?.nodes || [])
     .map((event) => useTranslation(event, locale))
     .filter((e) => e?.id !== specialEvent.value?.id)
-);
+) as unknown as Ref<Translated<Event>[]>;
 </script>

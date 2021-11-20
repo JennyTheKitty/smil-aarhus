@@ -4,10 +4,33 @@
     w:bg="dark-900"
     w:text="gray-300"
     w:z="5"
-    w:pos="sticky top-0"
+    w:pos="md:sticky top-0"
     w:transition="~ background-color duration-50"
   >
-    <div w:m="auto" w:max-w="7xl" w:p="x-2 md:x-8">
+    <ExpandTransition>
+      <div
+        v-show="menuOpen"
+        id="nav-menu"
+        w:w="full"
+        w:display="md:hidden"
+        w:z="4"
+        w:pos="absolute top-0"
+      >
+        <div
+          w:space="y-1"
+          w:p="x-5 b-3 t-20"
+          w:bg="dark-900 opacity-100"
+          w:pos="relative -top-2"
+          w:w="95vw"
+          w:m="x-auto"
+        >
+          <div v-for="link in links" :key="link.name">
+            <NavLink :link="link" :mobile="true" />
+          </div>
+        </div>
+      </div>
+    </ExpandTransition>
+    <div w:m="auto" w:max-w="7xl" w:p="x-2 md:x-8" w:z="10" w:pos="relative">
       <div w:flex="~" w:h="16" w:align="items-center" w:justify="between">
         <div
           w:w="full"
@@ -55,15 +78,6 @@
         </div>
       </div>
     </div>
-    <ExpandTransition>
-      <div v-show="menuOpen" w:display="md:hidden">
-        <div w:space="y-1" w:p="x-2 b-3">
-          <div v-for="link in links" :key="link.name">
-            <NavLink :link="link" :mobile="true" />
-          </div>
-        </div>
-      </div>
-    </ExpandTransition>
   </nav>
 </template>
 
@@ -84,7 +98,7 @@ const heroHeight = inject(key.heroHeight);
 const { y: windowY } = useWindowScroll();
 const bgOpacity = computed(() => {
   if (route.name === 'home') {
-    if (heroHeight?.value)
+    if (heroHeight?.value && !menuOpen.value)
       return Math.min(0.9, windowY.value / heroHeight.value);
     return 0.0;
   }

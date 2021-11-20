@@ -33,13 +33,13 @@
 </template>
 
 <script setup lang="ts">
-import { EventFragment } from '@app/graphql/dist/client';
+import { Event } from '@app/graphql/dist/client';
 import dayjs from 'dayjs';
 
 import { Translated } from '../../utils';
 
 defineProps<{
-  events: Translated<EventFragment>[];
+  events: Translated<Event>[];
 }>();
 const { d } = useI18n();
 const i18nRoute = inject(key.i18nRoute)!;

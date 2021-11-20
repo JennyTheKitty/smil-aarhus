@@ -17,8 +17,6 @@
               w:rounded="lg"
               w:bg="black"
               w:shadow="lg"
-              w:w="75"
-              w:h="75"
               w:pos="relative"
               w:overflow="hidden"
               class="group btn-focus-ring"
@@ -35,6 +33,7 @@
                   sizes="20rem"
                 />
                 <img
+                  ref="img"
                   alt=""
                   :src="group.image.src"
                   loading="lazy"
@@ -57,21 +56,21 @@
                 w:rounded="lg"
                 w:w="full"
                 w:h="full"
-                w:bg="black opacity-0 group-hover:opacity-50"
+                w:bg="black opacity-50 md:opacity-0 md:group-hover:opacity-50"
                 w:transition="~ duration-100 all"
               ></div>
               <div
                 w:pos="absolute top-0"
-                w:m="t-60 group-hover:t-10"
+                w:m="t-10 md:t-60 md:group-hover:t-10"
                 w:p="4"
                 w:w="full"
                 w:flex="~ col"
                 w:transition="~ duration-200 all"
               >
                 <span
-                  w:text="white xl shadow-lg center group-hover:3xl space-nowrap"
-                  w:w="group-hover:full 0"
-                  w:font="bold tracking-wide group-hover:tracking-wider"
+                  w:text="white 3xl md:xl shadow-lg center md:group-hover:3xl space-nowrap"
+                  w:w="full md:0 md:group-hover:full"
+                  w:font="bold tracking-wider md:tracking-wide md:group-hover:tracking-wider"
                   w:transition="~ duration-200 all"
                 >
                   {{ group.title }}
@@ -92,12 +91,12 @@
         w:flex="~ col"
         w:justify="center"
         w:gradient="to-l from-transparent to-dark-500"
-        w:overflow="visible"
+        w:overflow="hidden"
       >
         <a
           href="#"
           w:m="-l-4 r-4"
-          @click.stop.prevent="scroller!.scrollBy({left: -1024, behavior: 'smooth'})"
+          @click.stop.prevent="scroller!.scrollBy({left: -scrollAmount, behavior: 'smooth'})"
         >
           <icon-mdi-chevron-left w:text="5xl" />
         </a>
@@ -110,12 +109,12 @@
         w:flex="~ col"
         w:justify="center"
         w:gradient="to-r from-transparent to-dark-500"
-        w:overflow="visible"
+        w:overflow="hidden"
       >
         <a
           href="#"
           w:m="l-4 -r-4"
-          @click.stop.prevent="scroller!.scrollBy({left: 1024, behavior: 'smooth'})"
+          @click.stop.prevent="scroller!.scrollBy({left: scrollAmount, behavior: 'smooth'})"
         >
           <icon-mdi-chevron-right w:text="5xl" />
         </a>
@@ -142,7 +141,17 @@ const groups = computed(() =>
 );
 
 const scroller = ref<HTMLElement | null>(null);
-const { arrivedState } = useScroll(scroller);
+const img = ref<HTMLElement | null>(null);
+const { width: imgWidth } = useElementSize(img);
+const { x, arrivedState } = useScroll(scroller);
+const { width } = useElementSize(scroller);
+const scrollAmount = computed(() => {
+  console.log(width.value, img.value, imgWidth.value);
+  let scroll = 0;
+  scroll +=
+    (imgWidth.value + 20) * Math.floor(width.value / (imgWidth.value + 20));
+  return scroll;
+});
 </script>
 
 <style scoped>
@@ -155,5 +164,10 @@ const { arrivedState } = useScroll(scroller);
   /* WebKit */
   width: 0;
   height: 0;
+}
+
+.group {
+  width: min(calc(80vw - 40px), 300px);
+  height: min(calc(90vw - 40px), 300px);
 }
 </style>

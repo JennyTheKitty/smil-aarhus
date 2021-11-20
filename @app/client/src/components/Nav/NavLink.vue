@@ -1,5 +1,46 @@
 <template>
-  <div v-if="mobile"></div>
+  <div v-if="mobile">
+    <div v-if="Object.prototype.hasOwnProperty.call(link, 'links')">
+      <span w:text="lg gray-500">{{ link.name }}</span>
+      <router-link
+        v-for="sublink in (link as Menu).links"
+        :key="sublink.name"
+        v-bind="sublink"
+        w:rounded="md"
+        w:flex="~"
+        w:m="y-1"
+        w:p="2"
+        class="group btn-focus-ring"
+      >
+        <component
+          :is="sublink.icon"
+          v-if="sublink.icon"
+          w:text="2xl"
+          w:m="-t-0.5 r-2"
+        />
+        <div w:flex="~ col">
+          <span w:font="medium" w:text="sm gray-300 group-hover:white">{{
+            sublink.name
+          }}</span>
+          <span w:font="light" w:text="sm gray-200">{{
+            sublink.description
+          }}</span>
+        </div>
+      </router-link>
+    </div>
+    <router-link
+      v-else
+      v-bind="link"
+      w:rounded="md"
+      w:font="medium"
+      w:text="lg gray-300 hover:white"
+      w:p="y-2"
+      w:m="y-2"
+      w:display="block"
+      class="btn-focus-ring"
+      >{{ link.name }}</router-link
+    >
+  </div>
   <div v-else w:flex="~" w:align="items-center">
     <Popover
       v-if="Object.prototype.hasOwnProperty.call(link, 'links')"

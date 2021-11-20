@@ -32,15 +32,17 @@
       w:pos="top-0 absolute"
       w:align="items-center"
       w:justify="center"
-      w:p="4"
+      w:p="4 t-12 md:t-4"
       w:space="y-1 sm:y-5"
       w:text="white center"
       w:border="b-4 b-pink-800"
     >
-      <h1 w:font="bold" w:text="space-pre-line 2xl sm:4xl md:5xl lg:6xl">
+      <h1 class="title" w:font="bold" w:text="space-pre-line">
         {{ t('hero.title') }}
       </h1>
-      <span w:text="sm sm:base">{{ t('hero.subtitle') }}</span>
+      <span w:display="hidden md:block" w:text="base">{{
+        t('hero.subtitle')
+      }}</span>
       <div w:flex="~ row" w:space="x-10" w:p="t-1 sm:t-5">
         <button class="btn-hero">
           <span w:text="uppercase" w:font="tracking-wider">{{
@@ -67,8 +69,11 @@ watch(height, () => {
 });
 </script>
 
-<style>
+<style scoped>
 .home-hero {
   max-height: calc(64px + 50vh);
+}
+.title {
+  font-size: min(4rem, 7vw);
 }
 </style>

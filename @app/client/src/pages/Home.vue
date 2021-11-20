@@ -7,10 +7,10 @@
       class="btn-focus-ring"
       w:rounded="lg"
       w:cursor="pointer"
-      w:m="auto -y-16"
+      w:m="auto y-4 md:-y-16 md:b-16"
       w:shadow="lg"
       w:w="full"
-      w:max-w="2xl"
+      w:max-w="80vw md:2xl"
       w:display="block"
       w:overflow="hidden"
       w:z="3"
@@ -21,8 +21,10 @@
         <p w:font="medium" w:text="base pink-500">
           {{ t('home.latest-news') }}
         </p>
-        <p w:font="medium" w:text="xl white" w:m="b-2">Coronagenåbning!!</p>
-        <p w:font="light" w:text="base gray-300">
+        <p w:font="medium" w:text="base md:xl white" w:m="b-2">
+          Coronagenåbning!!
+        </p>
+        <p w:font="light" w:text="sm md:base gray-300">
           Efter at være lukket i lang tid, er SMIL Aarhus lokaler endelig åbne
           igen...
         </p>
@@ -31,16 +33,23 @@
 
     <main
       role="main"
-      w:m="x-auto t-28 b-20"
+      w:m="x-auto b-5 md:b-20"
       w:max-w="5xl"
       w:text="true-gray-100"
-      w:flex="~"
+      w:flex="~ col md:row"
+      w:align="items-center"
     >
       <!-- eslint-disable-next-line vue/no-v-html -->
-      <div w:w="1/2" w:p="8 t-0">
+      <div w:w="full md:1/2" w:p="x-8 t-0">
         <suspense><Content name="home" /></suspense>
       </div>
-      <div w:w="1/2" w:flex="~ col" w:m="t-8">
+      <div
+        w:w="full md:1/2"
+        w:flex="~ col"
+        w:m="md:t-8"
+        w:p="x-8 md:0"
+        w:max-w="128"
+      >
         <div w:grid="~ cols-2 gap-4">
           <div
             v-for="(img, i) in images"
@@ -91,7 +100,7 @@
         <div w:flex="~" w:justify="center" w:w="full">
           <a
             href="#"
-            w:transform="~ scale-0 focus:scale-100"
+            w:transform="~ md:scale-0 md:focus:scale-100"
             w:p="2"
             w:w="max-content"
             w:m="t-4"

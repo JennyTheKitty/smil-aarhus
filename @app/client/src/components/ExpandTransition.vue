@@ -79,7 +79,7 @@ export default defineComponent({
         // @ts-expect-error
         Transition,
         {
-          name: 'expnd-transition',
+          name: 'expand',
           onBeforeEnter,
           onEnter,
           onAfterLeave,
@@ -98,7 +98,7 @@ export default defineComponent({
 <style scoped>
 * {
   will-change: height;
-  transition: heigh 12s ease-in-out;
+  transition: height 0.5s ease-in-out;
 }
 </style>
 
