@@ -1,0 +1,93 @@
+query CalendarEventsQuery($startsAfter: Datetime, $startsBefore: Datetime) {
+  events(
+    filter: { startsAt: { greaterThan: $startsAfter, lessThan: $startsBefore } }
+    orderBy: STARTS_AT_ASC
+  ) {
+    nodes {
+      ...CalendarEvent
+    }
+  }
+}
+
+fragment CalendarEvent on Event {
+  translations {
+    nodes {
+      slug
+      title
+      languageCode
+      eventId
+    }
+  }
+  endsAt
+  id
+  startsAt
+}
+
+query CalendarEventBySlug($languageCode: String!, $slug: String!) {
+  eventBySlug(preferredLanguageCode: $languageCode, slug: $slug) {
+    translations {
+      nodes {
+        description
+        eventId
+        languageCode
+        slug
+        title
+      }
+    }
+    startsAt
+    imageFile
+    image {
+      src
+      srcSetJpeg
+      srcSetWebp
+    }
+    endsAt
+    id
+    tags {
+      nodes {
+        tag {
+          id
+          translations {
+            nodes {
+              languageCode
+              tagId
+              title
+            }
+          }
+        }
+        eventId
+        tagId
+      }
+    }
+    groups {
+      nodes {
+        group {
+          id
+          translations {
+            nodes {
+              groupId
+              languageCode
+              title
+            }
+          }
+        }
+        eventId
+        groupId
+      }
+    }
+  }
+}
+
+mutation UpsertEvent(
+  $data: EventDatumInput!
+  $translations: [EventTrDatumInput]!
+  $id: BigInt
+) {
+  upsertEvent(
+    input: { data: $data, translations: $translations, eventId: $id }
+  ) {
+    event {
+      ...CalendarEvent
+    }
+  }
+}

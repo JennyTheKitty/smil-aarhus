@@ -1,3 +1,15 @@
 mutation Authenticate($username: String!, $password: String!) {
   authenticate(input: { username: $username, password: $password })
 }
+
+mutation Logout {
+  logout
+}
+
+query GetMe {
+  currentMember {
+    name
+    id
+    userRole
+  }
+}

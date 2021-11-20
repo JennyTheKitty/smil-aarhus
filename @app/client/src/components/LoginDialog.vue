@@ -1,7 +1,6 @@
 <template>
   <BaseDialog
     :is-open="isOpen"
-    :dismissable="true"
     @update:is-open="$emit('update:isOpen', $event)"
   >
     <div

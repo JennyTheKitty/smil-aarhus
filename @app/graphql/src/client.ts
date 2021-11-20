@@ -71,210 +71,6 @@ export type BooleanFilter = {
   notEqualTo?: Maybe<Scalars['Boolean']>;
 };
 
-/** All input for the create `Event` mutation. */
-export type CreateEventInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Event` to be created by this mutation. */
-  event: EventInput;
-};
-
-/** The output of our create `Event` mutation. */
-export type CreateEventPayload = {
-  __typename?: 'CreateEventPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** The `Event` that was created by this mutation. */
-  event: Maybe<Event>;
-  /** An edge for our `Event`. May be used by Relay 1. */
-  eventEdge: Maybe<EventsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our create `Event` mutation. */
-export type CreateEventPayloadEventEdgeArgs = {
-  orderBy?: Maybe<Array<EventsOrderBy>>;
-};
-
-/** All input for the create `EventTag` mutation. */
-export type CreateEventTagInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `EventTag` to be created by this mutation. */
-  eventTag: EventTagInput;
-};
-
-/** The output of our create `EventTag` mutation. */
-export type CreateEventTagPayload = {
-  __typename?: 'CreateEventTagPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** The `EventTag` that was created by this mutation. */
-  eventTag: Maybe<EventTag>;
-  /** An edge for our `EventTag`. May be used by Relay 1. */
-  eventTagEdge: Maybe<EventTagsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our create `EventTag` mutation. */
-export type CreateEventTagPayloadEventTagEdgeArgs = {
-  orderBy?: Maybe<Array<EventTagsOrderBy>>;
-};
-
-/** All input for the create `EventTagTr` mutation. */
-export type CreateEventTagTrInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `EventTagTr` to be created by this mutation. */
-  eventTagTr: EventTagTrInput;
-};
-
-/** The output of our create `EventTagTr` mutation. */
-export type CreateEventTagTrPayload = {
-  __typename?: 'CreateEventTagTrPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** The `EventTagTr` that was created by this mutation. */
-  eventTagTr: Maybe<EventTagTr>;
-  /** An edge for our `EventTagTr`. May be used by Relay 1. */
-  eventTagTrEdge: Maybe<EventTagTrsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-  /** Reads a single `EventTag` that is related to this `EventTagTr`. */
-  tag: Maybe<EventTag>;
-};
-
-
-/** The output of our create `EventTagTr` mutation. */
-export type CreateEventTagTrPayloadEventTagTrEdgeArgs = {
-  orderBy?: Maybe<Array<EventTagTrsOrderBy>>;
-};
-
-/** All input for the create `EventTemplate` mutation. */
-export type CreateEventTemplateInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `EventTemplate` to be created by this mutation. */
-  eventTemplate: EventTemplateInput;
-};
-
-/** The output of our create `EventTemplate` mutation. */
-export type CreateEventTemplatePayload = {
-  __typename?: 'CreateEventTemplatePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** The `EventTemplate` that was created by this mutation. */
-  eventTemplate: Maybe<EventTemplate>;
-  /** An edge for our `EventTemplate`. May be used by Relay 1. */
-  eventTemplateEdge: Maybe<EventTemplatesEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our create `EventTemplate` mutation. */
-export type CreateEventTemplatePayloadEventTemplateEdgeArgs = {
-  orderBy?: Maybe<Array<EventTemplatesOrderBy>>;
-};
-
-/** All input for the create `EventTemplateTr` mutation. */
-export type CreateEventTemplateTrInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `EventTemplateTr` to be created by this mutation. */
-  eventTemplateTr: EventTemplateTrInput;
-};
-
-/** The output of our create `EventTemplateTr` mutation. */
-export type CreateEventTemplateTrPayload = {
-  __typename?: 'CreateEventTemplateTrPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** Reads a single `EventTemplate` that is related to this `EventTemplateTr`. */
-  eventTemplate: Maybe<EventTemplate>;
-  /** The `EventTemplateTr` that was created by this mutation. */
-  eventTemplateTr: Maybe<EventTemplateTr>;
-  /** An edge for our `EventTemplateTr`. May be used by Relay 1. */
-  eventTemplateTrEdge: Maybe<EventTemplateTrsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our create `EventTemplateTr` mutation. */
-export type CreateEventTemplateTrPayloadEventTemplateTrEdgeArgs = {
-  orderBy?: Maybe<Array<EventTemplateTrsOrderBy>>;
-};
-
-/** All input for the create `EventTr` mutation. */
-export type CreateEventTrInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `EventTr` to be created by this mutation. */
-  eventTr: EventTrInput;
-};
-
-/** The output of our create `EventTr` mutation. */
-export type CreateEventTrPayload = {
-  __typename?: 'CreateEventTrPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** Reads a single `Event` that is related to this `EventTr`. */
-  event: Maybe<Event>;
-  /** The `EventTr` that was created by this mutation. */
-  eventTr: Maybe<EventTr>;
-  /** An edge for our `EventTr`. May be used by Relay 1. */
-  eventTrEdge: Maybe<EventTrsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our create `EventTr` mutation. */
-export type CreateEventTrPayloadEventTrEdgeArgs = {
-  orderBy?: Maybe<Array<EventTrsOrderBy>>;
-};
-
 /** All input for the create `EventViaEventTag` mutation. */
 export type CreateEventViaEventTagInput = {
   /**
@@ -347,74 +143,6 @@ export type CreateEventViaGroupPayload = {
 /** The output of our create `EventViaGroup` mutation. */
 export type CreateEventViaGroupPayloadEventViaGroupEdgeArgs = {
   orderBy?: Maybe<Array<EventViaGroupsOrderBy>>;
-};
-
-/** All input for the create `Group` mutation. */
-export type CreateGroupInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Group` to be created by this mutation. */
-  group: GroupInput;
-};
-
-/** The output of our create `Group` mutation. */
-export type CreateGroupPayload = {
-  __typename?: 'CreateGroupPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** The `Group` that was created by this mutation. */
-  group: Maybe<Group>;
-  /** An edge for our `Group`. May be used by Relay 1. */
-  groupEdge: Maybe<GroupsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our create `Group` mutation. */
-export type CreateGroupPayloadGroupEdgeArgs = {
-  orderBy?: Maybe<Array<GroupsOrderBy>>;
-};
-
-/** All input for the create `GroupTr` mutation. */
-export type CreateGroupTrInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `GroupTr` to be created by this mutation. */
-  groupTr: GroupTrInput;
-};
-
-/** The output of our create `GroupTr` mutation. */
-export type CreateGroupTrPayload = {
-  __typename?: 'CreateGroupTrPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** Reads a single `Group` that is related to this `GroupTr`. */
-  group: Maybe<Group>;
-  /** The `GroupTr` that was created by this mutation. */
-  groupTr: Maybe<GroupTr>;
-  /** An edge for our `GroupTr`. May be used by Relay 1. */
-  groupTrEdge: Maybe<GroupTrsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our create `GroupTr` mutation. */
-export type CreateGroupTrPayloadGroupTrEdgeArgs = {
-  orderBy?: Maybe<Array<GroupTrsOrderBy>>;
 };
 
 /** All input for the create `Member` mutation. */
@@ -568,213 +296,6 @@ export type DatetimeFilter = {
   notEqualTo?: Maybe<Scalars['Datetime']>;
 };
 
-/** All input for the `deleteEvent` mutation. */
-export type DeleteEventInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['BigInt'];
-};
-
-/** The output of our delete `Event` mutation. */
-export type DeleteEventPayload = {
-  __typename?: 'DeleteEventPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  deletedEventNodeId: Maybe<Scalars['ID']>;
-  /** The `Event` that was deleted by this mutation. */
-  event: Maybe<Event>;
-  /** An edge for our `Event`. May be used by Relay 1. */
-  eventEdge: Maybe<EventsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our delete `Event` mutation. */
-export type DeleteEventPayloadEventEdgeArgs = {
-  orderBy?: Maybe<Array<EventsOrderBy>>;
-};
-
-/** All input for the `deleteEventTag` mutation. */
-export type DeleteEventTagInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['BigInt'];
-};
-
-/** The output of our delete `EventTag` mutation. */
-export type DeleteEventTagPayload = {
-  __typename?: 'DeleteEventTagPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  deletedEventTagNodeId: Maybe<Scalars['ID']>;
-  /** The `EventTag` that was deleted by this mutation. */
-  eventTag: Maybe<EventTag>;
-  /** An edge for our `EventTag`. May be used by Relay 1. */
-  eventTagEdge: Maybe<EventTagsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our delete `EventTag` mutation. */
-export type DeleteEventTagPayloadEventTagEdgeArgs = {
-  orderBy?: Maybe<Array<EventTagsOrderBy>>;
-};
-
-/** All input for the `deleteEventTagTr` mutation. */
-export type DeleteEventTagTrInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  languageCode: TrLanguage;
-  tagId: Scalars['BigInt'];
-};
-
-/** The output of our delete `EventTagTr` mutation. */
-export type DeleteEventTagTrPayload = {
-  __typename?: 'DeleteEventTagTrPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  deletedEventTagTrNodeId: Maybe<Scalars['ID']>;
-  /** The `EventTagTr` that was deleted by this mutation. */
-  eventTagTr: Maybe<EventTagTr>;
-  /** An edge for our `EventTagTr`. May be used by Relay 1. */
-  eventTagTrEdge: Maybe<EventTagTrsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-  /** Reads a single `EventTag` that is related to this `EventTagTr`. */
-  tag: Maybe<EventTag>;
-};
-
-
-/** The output of our delete `EventTagTr` mutation. */
-export type DeleteEventTagTrPayloadEventTagTrEdgeArgs = {
-  orderBy?: Maybe<Array<EventTagTrsOrderBy>>;
-};
-
-/** All input for the `deleteEventTemplate` mutation. */
-export type DeleteEventTemplateInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['BigInt'];
-};
-
-/** The output of our delete `EventTemplate` mutation. */
-export type DeleteEventTemplatePayload = {
-  __typename?: 'DeleteEventTemplatePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  deletedEventTemplateNodeId: Maybe<Scalars['ID']>;
-  /** The `EventTemplate` that was deleted by this mutation. */
-  eventTemplate: Maybe<EventTemplate>;
-  /** An edge for our `EventTemplate`. May be used by Relay 1. */
-  eventTemplateEdge: Maybe<EventTemplatesEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our delete `EventTemplate` mutation. */
-export type DeleteEventTemplatePayloadEventTemplateEdgeArgs = {
-  orderBy?: Maybe<Array<EventTemplatesOrderBy>>;
-};
-
-/** All input for the `deleteEventTemplateTr` mutation. */
-export type DeleteEventTemplateTrInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  eventTemplateId: Scalars['BigInt'];
-  languageCode: TrLanguage;
-};
-
-/** The output of our delete `EventTemplateTr` mutation. */
-export type DeleteEventTemplateTrPayload = {
-  __typename?: 'DeleteEventTemplateTrPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  deletedEventTemplateTrNodeId: Maybe<Scalars['ID']>;
-  /** Reads a single `EventTemplate` that is related to this `EventTemplateTr`. */
-  eventTemplate: Maybe<EventTemplate>;
-  /** The `EventTemplateTr` that was deleted by this mutation. */
-  eventTemplateTr: Maybe<EventTemplateTr>;
-  /** An edge for our `EventTemplateTr`. May be used by Relay 1. */
-  eventTemplateTrEdge: Maybe<EventTemplateTrsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our delete `EventTemplateTr` mutation. */
-export type DeleteEventTemplateTrPayloadEventTemplateTrEdgeArgs = {
-  orderBy?: Maybe<Array<EventTemplateTrsOrderBy>>;
-};
-
-/** All input for the `deleteEventTr` mutation. */
-export type DeleteEventTrInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  eventId: Scalars['BigInt'];
-  languageCode: TrLanguage;
-};
-
-/** The output of our delete `EventTr` mutation. */
-export type DeleteEventTrPayload = {
-  __typename?: 'DeleteEventTrPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  deletedEventTrNodeId: Maybe<Scalars['ID']>;
-  /** Reads a single `Event` that is related to this `EventTr`. */
-  event: Maybe<Event>;
-  /** The `EventTr` that was deleted by this mutation. */
-  eventTr: Maybe<EventTr>;
-  /** An edge for our `EventTr`. May be used by Relay 1. */
-  eventTrEdge: Maybe<EventTrsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our delete `EventTr` mutation. */
-export type DeleteEventTrPayloadEventTrEdgeArgs = {
-  orderBy?: Maybe<Array<EventTrsOrderBy>>;
-};
-
 /** All input for the `deleteEventViaEventTag` mutation. */
 export type DeleteEventViaEventTagInput = {
   /**
@@ -783,7 +304,7 @@ export type DeleteEventViaEventTagInput = {
    */
   clientMutationId?: Maybe<Scalars['String']>;
   eventId: Scalars['BigInt'];
-  tagId: Scalars['Int'];
+  tagId: Scalars['BigInt'];
 };
 
 /** The output of our delete `EventViaEventTag` mutation. */
@@ -821,7 +342,7 @@ export type DeleteEventViaGroupInput = {
    */
   clientMutationId?: Maybe<Scalars['String']>;
   eventId: Scalars['BigInt'];
-  groupId: Scalars['Int'];
+  groupId: Scalars['BigInt'];
 };
 
 /** The output of our delete `EventViaGroup` mutation. */
@@ -849,75 +370,6 @@ export type DeleteEventViaGroupPayload = {
 /** The output of our delete `EventViaGroup` mutation. */
 export type DeleteEventViaGroupPayloadEventViaGroupEdgeArgs = {
   orderBy?: Maybe<Array<EventViaGroupsOrderBy>>;
-};
-
-/** All input for the `deleteGroup` mutation. */
-export type DeleteGroupInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['BigInt'];
-};
-
-/** The output of our delete `Group` mutation. */
-export type DeleteGroupPayload = {
-  __typename?: 'DeleteGroupPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  deletedGroupNodeId: Maybe<Scalars['ID']>;
-  /** The `Group` that was deleted by this mutation. */
-  group: Maybe<Group>;
-  /** An edge for our `Group`. May be used by Relay 1. */
-  groupEdge: Maybe<GroupsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our delete `Group` mutation. */
-export type DeleteGroupPayloadGroupEdgeArgs = {
-  orderBy?: Maybe<Array<GroupsOrderBy>>;
-};
-
-/** All input for the `deleteGroupTr` mutation. */
-export type DeleteGroupTrInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  groupId: Scalars['BigInt'];
-  languageCode: TrLanguage;
-};
-
-/** The output of our delete `GroupTr` mutation. */
-export type DeleteGroupTrPayload = {
-  __typename?: 'DeleteGroupTrPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  deletedGroupTrNodeId: Maybe<Scalars['ID']>;
-  /** Reads a single `Group` that is related to this `GroupTr`. */
-  group: Maybe<Group>;
-  /** The `GroupTr` that was deleted by this mutation. */
-  groupTr: Maybe<GroupTr>;
-  /** An edge for our `GroupTr`. May be used by Relay 1. */
-  groupTrEdge: Maybe<GroupTrsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our delete `GroupTr` mutation. */
-export type DeleteGroupTrPayloadGroupTrEdgeArgs = {
-  orderBy?: Maybe<Array<GroupTrsOrderBy>>;
 };
 
 /** All input for the `deleteMemberByUsername` mutation. */
@@ -1035,34 +487,23 @@ export type DeletePageTrPayloadPageTrEdgeArgs = {
 export type Event = {
   __typename?: 'Event';
   endsAt: Scalars['Datetime'];
-  /** Reads and enables pagination through a set of `EventViaEventTag`. */
-  eventViaEventTags: EventViaEventTagsConnection;
   /** Reads and enables pagination through a set of `EventViaGroup`. */
-  eventViaGroups: EventViaGroupsConnection;
+  groups: EventViaGroupsConnection;
   id: Scalars['BigInt'];
   image: Maybe<ResponsiveImage>;
   imageFile: Maybe<Scalars['String']>;
+  isTemplate: Scalars['Boolean'];
   overrideImageFile: Maybe<Scalars['String']>;
   special: Scalars['Boolean'];
   startsAt: Scalars['Datetime'];
+  /** Reads and enables pagination through a set of `EventViaEventTag`. */
+  tags: EventViaEventTagsConnection;
   /** Reads and enables pagination through a set of `EventTr`. */
   translations: EventTrsConnection;
 };
 
 
-export type EventEventViaEventTagsArgs = {
-  after?: Maybe<Scalars['Cursor']>;
-  before?: Maybe<Scalars['Cursor']>;
-  condition?: Maybe<EventViaEventTagCondition>;
-  filter?: Maybe<EventViaEventTagFilter>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<EventViaEventTagsOrderBy>>;
-};
-
-
-export type EventEventViaGroupsArgs = {
+export type EventGroupsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   before?: Maybe<Scalars['Cursor']>;
   condition?: Maybe<EventViaGroupCondition>;
@@ -1071,6 +512,18 @@ export type EventEventViaGroupsArgs = {
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<EventViaGroupsOrderBy>>;
+};
+
+
+export type EventTagsArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  condition?: Maybe<EventViaEventTagCondition>;
+  filter?: Maybe<EventViaEventTagFilter>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<EventViaEventTagsOrderBy>>;
 };
 
 
@@ -1091,6 +544,8 @@ export type EventCondition = {
   endsAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `isTemplate` field. */
+  isTemplate?: Maybe<Scalars['Boolean']>;
   /** Checks for equality with the object’s `overrideImageFile` field. */
   overrideImageFile?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `special` field. */
@@ -1099,12 +554,25 @@ export type EventCondition = {
   startsAt?: Maybe<Scalars['Datetime']>;
 };
 
+/** An input for mutations affecting `EventDatum` */
+export type EventDatumInput = {
+  endsAt: Scalars['Datetime'];
+  groupIds?: Maybe<Array<Maybe<Scalars['BigInt']>>>;
+  isTemplate?: Maybe<Scalars['Boolean']>;
+  overrideImageFile?: Maybe<Scalars['String']>;
+  special: Scalars['Boolean'];
+  startsAt: Scalars['Datetime'];
+  tagIds?: Maybe<Array<Maybe<Scalars['BigInt']>>>;
+};
+
 /** A filter to be used against `Event` object types. All fields are combined with a logical ‘and.’ */
 export type EventFilter = {
   /** Filter by the object’s `endsAt` field. */
   endsAt?: Maybe<DatetimeFilter>;
   /** Filter by the object’s `id` field. */
   id?: Maybe<BigIntFilter>;
+  /** Filter by the object’s `isTemplate` field. */
+  isTemplate?: Maybe<BooleanFilter>;
   /** Filter by the object’s `overrideImageFile` field. */
   overrideImageFile?: Maybe<StringFilter>;
   /** Filter by the object’s `special` field. */
@@ -1113,28 +581,10 @@ export type EventFilter = {
   startsAt?: Maybe<DatetimeFilter>;
 };
 
-/** An input for mutations affecting `Event` */
-export type EventInput = {
-  endsAt: Scalars['Datetime'];
-  id?: Maybe<Scalars['BigInt']>;
-  overrideImageFile?: Maybe<Scalars['String']>;
-  special: Scalars['Boolean'];
-  startsAt: Scalars['Datetime'];
-};
-
-/** Represents an update to a `Event`. Fields that are set will be updated. */
-export type EventPatch = {
-  endsAt?: Maybe<Scalars['Datetime']>;
-  id?: Maybe<Scalars['BigInt']>;
-  overrideImageFile?: Maybe<Scalars['String']>;
-  special?: Maybe<Scalars['Boolean']>;
-  startsAt?: Maybe<Scalars['Datetime']>;
-};
-
 export type EventTag = {
   __typename?: 'EventTag';
   /** Reads and enables pagination through a set of `EventViaEventTag`. */
-  eventViaEventTagsByTagId: EventViaEventTagsConnection;
+  events: EventViaEventTagsConnection;
   id: Scalars['BigInt'];
   image: Maybe<ResponsiveImage>;
   imageFile: Maybe<Scalars['String']>;
@@ -1143,7 +593,7 @@ export type EventTag = {
 };
 
 
-export type EventTagEventViaEventTagsByTagIdArgs = {
+export type EventTagEventsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   before?: Maybe<Scalars['Cursor']>;
   condition?: Maybe<EventViaEventTagCondition>;
@@ -1185,18 +635,6 @@ export type EventTagFilter = {
   imageFile?: Maybe<StringFilter>;
 };
 
-/** An input for mutations affecting `EventTag` */
-export type EventTagInput = {
-  id?: Maybe<Scalars['BigInt']>;
-  imageFile?: Maybe<Scalars['String']>;
-};
-
-/** Represents an update to a `EventTag`. Fields that are set will be updated. */
-export type EventTagPatch = {
-  id?: Maybe<Scalars['BigInt']>;
-  imageFile?: Maybe<Scalars['String']>;
-};
-
 export type EventTagTr = {
   __typename?: 'EventTagTr';
   languageCode: TrLanguage;
@@ -1227,20 +665,6 @@ export type EventTagTrFilter = {
   tagId?: Maybe<BigIntFilter>;
   /** Filter by the object’s `title` field. */
   title?: Maybe<StringFilter>;
-};
-
-/** An input for mutations affecting `EventTagTr` */
-export type EventTagTrInput = {
-  languageCode: TrLanguage;
-  tagId: Scalars['BigInt'];
-  title: Scalars['String'];
-};
-
-/** Represents an update to a `EventTagTr`. Fields that are set will be updated. */
-export type EventTagTrPatch = {
-  languageCode?: Maybe<TrLanguage>;
-  tagId?: Maybe<Scalars['BigInt']>;
-  title?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `EventTagTr` values. */
@@ -1311,180 +735,6 @@ export enum EventTagsOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
-export type EventTemplate = {
-  __typename?: 'EventTemplate';
-  id: Scalars['BigInt'];
-  /** Reads and enables pagination through a set of `EventTemplateTr`. */
-  translations: EventTemplateTrsConnection;
-};
-
-
-export type EventTemplateTranslationsArgs = {
-  after?: Maybe<Scalars['Cursor']>;
-  before?: Maybe<Scalars['Cursor']>;
-  condition?: Maybe<EventTemplateTrCondition>;
-  filter?: Maybe<EventTemplateTrFilter>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<EventTemplateTrsOrderBy>>;
-};
-
-/**
- * A condition to be used against `EventTemplate` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
-export type EventTemplateCondition = {
-  /** Checks for equality with the object’s `id` field. */
-  id?: Maybe<Scalars['BigInt']>;
-};
-
-/** A filter to be used against `EventTemplate` object types. All fields are combined with a logical ‘and.’ */
-export type EventTemplateFilter = {
-  /** Filter by the object’s `id` field. */
-  id?: Maybe<BigIntFilter>;
-};
-
-/** An input for mutations affecting `EventTemplate` */
-export type EventTemplateInput = {
-  id?: Maybe<Scalars['BigInt']>;
-};
-
-/** Represents an update to a `EventTemplate`. Fields that are set will be updated. */
-export type EventTemplatePatch = {
-  id?: Maybe<Scalars['BigInt']>;
-};
-
-export type EventTemplateTr = {
-  __typename?: 'EventTemplateTr';
-  description: Scalars['String'];
-  /** Reads a single `EventTemplate` that is related to this `EventTemplateTr`. */
-  eventTemplate: Maybe<EventTemplate>;
-  eventTemplateId: Scalars['BigInt'];
-  languageCode: TrLanguage;
-  title: Scalars['String'];
-  venue: Scalars['String'];
-};
-
-/**
- * A condition to be used against `EventTemplateTr` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
-export type EventTemplateTrCondition = {
-  /** Checks for equality with the object’s `description` field. */
-  description?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `eventTemplateId` field. */
-  eventTemplateId?: Maybe<Scalars['BigInt']>;
-  /** Checks for equality with the object’s `languageCode` field. */
-  languageCode?: Maybe<TrLanguage>;
-  /** Checks for equality with the object’s `title` field. */
-  title?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `venue` field. */
-  venue?: Maybe<Scalars['String']>;
-};
-
-/** A filter to be used against `EventTemplateTr` object types. All fields are combined with a logical ‘and.’ */
-export type EventTemplateTrFilter = {
-  /** Filter by the object’s `description` field. */
-  description?: Maybe<StringFilter>;
-  /** Filter by the object’s `eventTemplateId` field. */
-  eventTemplateId?: Maybe<BigIntFilter>;
-  /** Filter by the object’s `languageCode` field. */
-  languageCode?: Maybe<TrLanguageFilter>;
-  /** Filter by the object’s `title` field. */
-  title?: Maybe<StringFilter>;
-  /** Filter by the object’s `venue` field. */
-  venue?: Maybe<StringFilter>;
-};
-
-/** An input for mutations affecting `EventTemplateTr` */
-export type EventTemplateTrInput = {
-  description: Scalars['String'];
-  eventTemplateId: Scalars['BigInt'];
-  languageCode: TrLanguage;
-  title: Scalars['String'];
-  venue: Scalars['String'];
-};
-
-/** Represents an update to a `EventTemplateTr`. Fields that are set will be updated. */
-export type EventTemplateTrPatch = {
-  description?: Maybe<Scalars['String']>;
-  eventTemplateId?: Maybe<Scalars['BigInt']>;
-  languageCode?: Maybe<TrLanguage>;
-  title?: Maybe<Scalars['String']>;
-  venue?: Maybe<Scalars['String']>;
-};
-
-/** A connection to a list of `EventTemplateTr` values. */
-export type EventTemplateTrsConnection = {
-  __typename?: 'EventTemplateTrsConnection';
-  /** A list of edges which contains the `EventTemplateTr` and cursor to aid in pagination. */
-  edges: Array<EventTemplateTrsEdge>;
-  /** A list of `EventTemplateTr` objects. */
-  nodes: Array<EventTemplateTr>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `EventTemplateTr` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `EventTemplateTr` edge in the connection. */
-export type EventTemplateTrsEdge = {
-  __typename?: 'EventTemplateTrsEdge';
-  /** A cursor for use in pagination. */
-  cursor: Maybe<Scalars['Cursor']>;
-  /** The `EventTemplateTr` at the end of the edge. */
-  node: EventTemplateTr;
-};
-
-/** Methods to use when ordering `EventTemplateTr`. */
-export enum EventTemplateTrsOrderBy {
-  DescriptionAsc = 'DESCRIPTION_ASC',
-  DescriptionDesc = 'DESCRIPTION_DESC',
-  EventTemplateIdAsc = 'EVENT_TEMPLATE_ID_ASC',
-  EventTemplateIdDesc = 'EVENT_TEMPLATE_ID_DESC',
-  LanguageCodeAsc = 'LANGUAGE_CODE_ASC',
-  LanguageCodeDesc = 'LANGUAGE_CODE_DESC',
-  Natural = 'NATURAL',
-  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
-  PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
-  TitleAsc = 'TITLE_ASC',
-  TitleDesc = 'TITLE_DESC',
-  VenueAsc = 'VENUE_ASC',
-  VenueDesc = 'VENUE_DESC'
-}
-
-/** A connection to a list of `EventTemplate` values. */
-export type EventTemplatesConnection = {
-  __typename?: 'EventTemplatesConnection';
-  /** A list of edges which contains the `EventTemplate` and cursor to aid in pagination. */
-  edges: Array<EventTemplatesEdge>;
-  /** A list of `EventTemplate` objects. */
-  nodes: Array<EventTemplate>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `EventTemplate` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `EventTemplate` edge in the connection. */
-export type EventTemplatesEdge = {
-  __typename?: 'EventTemplatesEdge';
-  /** A cursor for use in pagination. */
-  cursor: Maybe<Scalars['Cursor']>;
-  /** The `EventTemplate` at the end of the edge. */
-  node: EventTemplate;
-};
-
-/** Methods to use when ordering `EventTemplate`. */
-export enum EventTemplatesOrderBy {
-  IdAsc = 'ID_ASC',
-  IdDesc = 'ID_DESC',
-  Natural = 'NATURAL',
-  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
-  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
-}
-
 export type EventTr = {
   __typename?: 'EventTr';
   description: Scalars['String'];
@@ -1494,7 +744,6 @@ export type EventTr = {
   languageCode: TrLanguage;
   slug: Scalars['String'];
   title: Scalars['String'];
-  venue: Scalars['String'];
 };
 
 /** A condition to be used against `EventTr` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -1509,8 +758,13 @@ export type EventTrCondition = {
   slug?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `title` field. */
   title?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `venue` field. */
-  venue?: Maybe<Scalars['String']>;
+};
+
+/** An input for mutations affecting `EventTrDatum` */
+export type EventTrDatumInput = {
+  description: Scalars['String'];
+  languageCode: Scalars['String'];
+  title: Scalars['String'];
 };
 
 /** A filter to be used against `EventTr` object types. All fields are combined with a logical ‘and.’ */
@@ -1525,28 +779,6 @@ export type EventTrFilter = {
   slug?: Maybe<StringFilter>;
   /** Filter by the object’s `title` field. */
   title?: Maybe<StringFilter>;
-  /** Filter by the object’s `venue` field. */
-  venue?: Maybe<StringFilter>;
-};
-
-/** An input for mutations affecting `EventTr` */
-export type EventTrInput = {
-  description: Scalars['String'];
-  eventId: Scalars['BigInt'];
-  languageCode: TrLanguage;
-  slug: Scalars['String'];
-  title: Scalars['String'];
-  venue: Scalars['String'];
-};
-
-/** Represents an update to a `EventTr`. Fields that are set will be updated. */
-export type EventTrPatch = {
-  description?: Maybe<Scalars['String']>;
-  eventId?: Maybe<Scalars['BigInt']>;
-  languageCode?: Maybe<TrLanguage>;
-  slug?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  venue?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `EventTr` values. */
@@ -1585,9 +817,7 @@ export enum EventTrsOrderBy {
   SlugAsc = 'SLUG_ASC',
   SlugDesc = 'SLUG_DESC',
   TitleAsc = 'TITLE_ASC',
-  TitleDesc = 'TITLE_DESC',
-  VenueAsc = 'VENUE_ASC',
-  VenueDesc = 'VENUE_DESC'
+  TitleDesc = 'TITLE_DESC'
 }
 
 export type EventViaEventTag = {
@@ -1597,7 +827,7 @@ export type EventViaEventTag = {
   eventId: Scalars['BigInt'];
   /** Reads a single `EventTag` that is related to this `EventViaEventTag`. */
   tag: Maybe<EventTag>;
-  tagId: Scalars['Int'];
+  tagId: Scalars['BigInt'];
 };
 
 /**
@@ -1608,7 +838,7 @@ export type EventViaEventTagCondition = {
   /** Checks for equality with the object’s `eventId` field. */
   eventId?: Maybe<Scalars['BigInt']>;
   /** Checks for equality with the object’s `tagId` field. */
-  tagId?: Maybe<Scalars['Int']>;
+  tagId?: Maybe<Scalars['BigInt']>;
 };
 
 /** A filter to be used against `EventViaEventTag` object types. All fields are combined with a logical ‘and.’ */
@@ -1616,19 +846,19 @@ export type EventViaEventTagFilter = {
   /** Filter by the object’s `eventId` field. */
   eventId?: Maybe<BigIntFilter>;
   /** Filter by the object’s `tagId` field. */
-  tagId?: Maybe<IntFilter>;
+  tagId?: Maybe<BigIntFilter>;
 };
 
 /** An input for mutations affecting `EventViaEventTag` */
 export type EventViaEventTagInput = {
   eventId: Scalars['BigInt'];
-  tagId: Scalars['Int'];
+  tagId: Scalars['BigInt'];
 };
 
 /** Represents an update to a `EventViaEventTag`. Fields that are set will be updated. */
 export type EventViaEventTagPatch = {
   eventId?: Maybe<Scalars['BigInt']>;
-  tagId?: Maybe<Scalars['Int']>;
+  tagId?: Maybe<Scalars['BigInt']>;
 };
 
 /** A connection to a list of `EventViaEventTag` values. */
@@ -1671,7 +901,7 @@ export type EventViaGroup = {
   eventId: Scalars['BigInt'];
   /** Reads a single `Group` that is related to this `EventViaGroup`. */
   group: Maybe<Group>;
-  groupId: Scalars['Int'];
+  groupId: Scalars['BigInt'];
 };
 
 /**
@@ -1682,7 +912,7 @@ export type EventViaGroupCondition = {
   /** Checks for equality with the object’s `eventId` field. */
   eventId?: Maybe<Scalars['BigInt']>;
   /** Checks for equality with the object’s `groupId` field. */
-  groupId?: Maybe<Scalars['Int']>;
+  groupId?: Maybe<Scalars['BigInt']>;
 };
 
 /** A filter to be used against `EventViaGroup` object types. All fields are combined with a logical ‘and.’ */
@@ -1690,19 +920,19 @@ export type EventViaGroupFilter = {
   /** Filter by the object’s `eventId` field. */
   eventId?: Maybe<BigIntFilter>;
   /** Filter by the object’s `groupId` field. */
-  groupId?: Maybe<IntFilter>;
+  groupId?: Maybe<BigIntFilter>;
 };
 
 /** An input for mutations affecting `EventViaGroup` */
 export type EventViaGroupInput = {
   eventId: Scalars['BigInt'];
-  groupId: Scalars['Int'];
+  groupId: Scalars['BigInt'];
 };
 
 /** Represents an update to a `EventViaGroup`. Fields that are set will be updated. */
 export type EventViaGroupPatch = {
   eventId?: Maybe<Scalars['BigInt']>;
-  groupId?: Maybe<Scalars['Int']>;
+  groupId?: Maybe<Scalars['BigInt']>;
 };
 
 /** A connection to a list of `EventViaGroup` values. */
@@ -1766,6 +996,8 @@ export enum EventsOrderBy {
   EndsAtDesc = 'ENDS_AT_DESC',
   IdAsc = 'ID_ASC',
   IdDesc = 'ID_DESC',
+  IsTemplateAsc = 'IS_TEMPLATE_ASC',
+  IsTemplateDesc = 'IS_TEMPLATE_DESC',
   Natural = 'NATURAL',
   OverrideImageFileAsc = 'OVERRIDE_IMAGE_FILE_ASC',
   OverrideImageFileDesc = 'OVERRIDE_IMAGE_FILE_DESC',
@@ -1780,7 +1012,7 @@ export enum EventsOrderBy {
 export type Group = {
   __typename?: 'Group';
   /** Reads and enables pagination through a set of `EventViaGroup`. */
-  eventViaGroups: EventViaGroupsConnection;
+  events: EventViaGroupsConnection;
   id: Scalars['BigInt'];
   image: ResponsiveImage;
   imageFile: Scalars['String'];
@@ -1789,7 +1021,7 @@ export type Group = {
 };
 
 
-export type GroupEventViaGroupsArgs = {
+export type GroupEventsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   before?: Maybe<Scalars['Cursor']>;
   condition?: Maybe<EventViaGroupCondition>;
@@ -1826,18 +1058,6 @@ export type GroupFilter = {
   id?: Maybe<BigIntFilter>;
   /** Filter by the object’s `imageFile` field. */
   imageFile?: Maybe<StringFilter>;
-};
-
-/** An input for mutations affecting `Group` */
-export type GroupInput = {
-  id?: Maybe<Scalars['BigInt']>;
-  imageFile: Scalars['String'];
-};
-
-/** Represents an update to a `Group`. Fields that are set will be updated. */
-export type GroupPatch = {
-  id?: Maybe<Scalars['BigInt']>;
-  imageFile?: Maybe<Scalars['String']>;
 };
 
 export type GroupTr = {
@@ -1882,26 +1102,6 @@ export type GroupTrFilter = {
   slug?: Maybe<StringFilter>;
   /** Filter by the object’s `title` field. */
   title?: Maybe<StringFilter>;
-};
-
-/** An input for mutations affecting `GroupTr` */
-export type GroupTrInput = {
-  description: Scalars['String'];
-  groupId: Scalars['BigInt'];
-  languageCode: TrLanguage;
-  shortDescription: Scalars['String'];
-  slug: Scalars['String'];
-  title: Scalars['String'];
-};
-
-/** Represents an update to a `GroupTr`. Fields that are set will be updated. */
-export type GroupTrPatch = {
-  description?: Maybe<Scalars['String']>;
-  groupId?: Maybe<Scalars['BigInt']>;
-  languageCode?: Maybe<TrLanguage>;
-  shortDescription?: Maybe<Scalars['String']>;
-  slug?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `GroupTr` values. */
@@ -1977,24 +1177,6 @@ export enum GroupsOrderBy {
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
-
-/** A filter to be used against Int fields. All fields are combined with a logical ‘and.’ */
-export type IntFilter = {
-  /** Equal to the specified value. */
-  equalTo?: Maybe<Scalars['Int']>;
-  /** Greater than the specified value. */
-  greaterThan?: Maybe<Scalars['Int']>;
-  /** Greater than or equal to the specified value. */
-  greaterThanOrEqualTo?: Maybe<Scalars['Int']>;
-  /** Is null (if `true` is specified) or is not null (if `false` is specified). */
-  isNull?: Maybe<Scalars['Boolean']>;
-  /** Less than the specified value. */
-  lessThan?: Maybe<Scalars['Int']>;
-  /** Less than or equal to the specified value. */
-  lessThanOrEqualTo?: Maybe<Scalars['Int']>;
-  /** Not equal to the specified value. */
-  notEqualTo?: Maybe<Scalars['Int']>;
-};
 
 export type Member = {
   __typename?: 'Member';
@@ -2094,26 +1276,10 @@ export enum MembersOrderBy {
 export type Mutation = {
   __typename?: 'Mutation';
   authenticate: Scalars['String'];
-  /** Creates a single `Event`. */
-  createEvent: Maybe<CreateEventPayload>;
-  /** Creates a single `EventTag`. */
-  createEventTag: Maybe<CreateEventTagPayload>;
-  /** Creates a single `EventTagTr`. */
-  createEventTagTr: Maybe<CreateEventTagTrPayload>;
-  /** Creates a single `EventTemplate`. */
-  createEventTemplate: Maybe<CreateEventTemplatePayload>;
-  /** Creates a single `EventTemplateTr`. */
-  createEventTemplateTr: Maybe<CreateEventTemplateTrPayload>;
-  /** Creates a single `EventTr`. */
-  createEventTr: Maybe<CreateEventTrPayload>;
   /** Creates a single `EventViaEventTag`. */
   createEventViaEventTag: Maybe<CreateEventViaEventTagPayload>;
   /** Creates a single `EventViaGroup`. */
   createEventViaGroup: Maybe<CreateEventViaGroupPayload>;
-  /** Creates a single `Group`. */
-  createGroup: Maybe<CreateGroupPayload>;
-  /** Creates a single `GroupTr`. */
-  createGroupTr: Maybe<CreateGroupTrPayload>;
   /** Creates a single `Member`. */
   createMember: Maybe<CreateMemberPayload>;
   /** Creates a single `Page`. */
@@ -2122,26 +1288,10 @@ export type Mutation = {
   createPageTr: Maybe<CreatePageTrPayload>;
   /** Get a signed URL for uploading files. It will expire in 5 minutes. */
   createUploadUrl: Maybe<CreateUploadUrlPayload>;
-  /** Deletes a single `Event` using a unique key. */
-  deleteEvent: Maybe<DeleteEventPayload>;
-  /** Deletes a single `EventTag` using a unique key. */
-  deleteEventTag: Maybe<DeleteEventTagPayload>;
-  /** Deletes a single `EventTagTr` using a unique key. */
-  deleteEventTagTr: Maybe<DeleteEventTagTrPayload>;
-  /** Deletes a single `EventTemplate` using a unique key. */
-  deleteEventTemplate: Maybe<DeleteEventTemplatePayload>;
-  /** Deletes a single `EventTemplateTr` using a unique key. */
-  deleteEventTemplateTr: Maybe<DeleteEventTemplateTrPayload>;
-  /** Deletes a single `EventTr` using a unique key. */
-  deleteEventTr: Maybe<DeleteEventTrPayload>;
   /** Deletes a single `EventViaEventTag` using a unique key. */
   deleteEventViaEventTag: Maybe<DeleteEventViaEventTagPayload>;
   /** Deletes a single `EventViaGroup` using a unique key. */
   deleteEventViaGroup: Maybe<DeleteEventViaGroupPayload>;
-  /** Deletes a single `Group` using a unique key. */
-  deleteGroup: Maybe<DeleteGroupPayload>;
-  /** Deletes a single `GroupTr` using a unique key. */
-  deleteGroupTr: Maybe<DeleteGroupTrPayload>;
   /** Deletes a single `Member` using a unique key. */
   deleteMember: Maybe<DeleteMemberPayload>;
   /** Deletes a single `Member` using a unique key. */
@@ -2151,26 +1301,10 @@ export type Mutation = {
   /** Deletes a single `PageTr` using a unique key. */
   deletePageTr: Maybe<DeletePageTrPayload>;
   logout: Maybe<Scalars['Boolean']>;
-  /** Updates a single `Event` using a unique key and a patch. */
-  updateEvent: Maybe<UpdateEventPayload>;
-  /** Updates a single `EventTag` using a unique key and a patch. */
-  updateEventTag: Maybe<UpdateEventTagPayload>;
-  /** Updates a single `EventTagTr` using a unique key and a patch. */
-  updateEventTagTr: Maybe<UpdateEventTagTrPayload>;
-  /** Updates a single `EventTemplate` using a unique key and a patch. */
-  updateEventTemplate: Maybe<UpdateEventTemplatePayload>;
-  /** Updates a single `EventTemplateTr` using a unique key and a patch. */
-  updateEventTemplateTr: Maybe<UpdateEventTemplateTrPayload>;
-  /** Updates a single `EventTr` using a unique key and a patch. */
-  updateEventTr: Maybe<UpdateEventTrPayload>;
   /** Updates a single `EventViaEventTag` using a unique key and a patch. */
   updateEventViaEventTag: Maybe<UpdateEventViaEventTagPayload>;
   /** Updates a single `EventViaGroup` using a unique key and a patch. */
   updateEventViaGroup: Maybe<UpdateEventViaGroupPayload>;
-  /** Updates a single `Group` using a unique key and a patch. */
-  updateGroup: Maybe<UpdateGroupPayload>;
-  /** Updates a single `GroupTr` using a unique key and a patch. */
-  updateGroupTr: Maybe<UpdateGroupTrPayload>;
   /** Updates a single `Member` using a unique key and a patch. */
   updateMember: Maybe<UpdateMemberPayload>;
   /** Updates a single `Member` using a unique key and a patch. */
@@ -2179,48 +1313,13 @@ export type Mutation = {
   updatePage: Maybe<UpdatePagePayload>;
   /** Updates a single `PageTr` using a unique key and a patch. */
   updatePageTr: Maybe<UpdatePageTrPayload>;
+  upsertEvent: Maybe<UpsertEventPayload>;
 };
 
 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationAuthenticateArgs = {
   input: AuthenticateInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateEventArgs = {
-  input: CreateEventInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateEventTagArgs = {
-  input: CreateEventTagInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateEventTagTrArgs = {
-  input: CreateEventTagTrInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateEventTemplateArgs = {
-  input: CreateEventTemplateInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateEventTemplateTrArgs = {
-  input: CreateEventTemplateTrInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateEventTrArgs = {
-  input: CreateEventTrInput;
 };
 
 
@@ -2233,18 +1332,6 @@ export type MutationCreateEventViaEventTagArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateEventViaGroupArgs = {
   input: CreateEventViaGroupInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateGroupArgs = {
-  input: CreateGroupInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateGroupTrArgs = {
-  input: CreateGroupTrInput;
 };
 
 
@@ -2273,42 +1360,6 @@ export type MutationCreateUploadUrlArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteEventArgs = {
-  input: DeleteEventInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteEventTagArgs = {
-  input: DeleteEventTagInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteEventTagTrArgs = {
-  input: DeleteEventTagTrInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteEventTemplateArgs = {
-  input: DeleteEventTemplateInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteEventTemplateTrArgs = {
-  input: DeleteEventTemplateTrInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteEventTrArgs = {
-  input: DeleteEventTrInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteEventViaEventTagArgs = {
   input: DeleteEventViaEventTagInput;
 };
@@ -2317,18 +1368,6 @@ export type MutationDeleteEventViaEventTagArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteEventViaGroupArgs = {
   input: DeleteEventViaGroupInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteGroupArgs = {
-  input: DeleteGroupInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteGroupTrArgs = {
-  input: DeleteGroupTrInput;
 };
 
 
@@ -2357,42 +1396,6 @@ export type MutationDeletePageTrArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateEventArgs = {
-  input: UpdateEventInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateEventTagArgs = {
-  input: UpdateEventTagInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateEventTagTrArgs = {
-  input: UpdateEventTagTrInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateEventTemplateArgs = {
-  input: UpdateEventTemplateInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateEventTemplateTrArgs = {
-  input: UpdateEventTemplateTrInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateEventTrArgs = {
-  input: UpdateEventTrInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateEventViaEventTagArgs = {
   input: UpdateEventViaEventTagInput;
 };
@@ -2401,18 +1404,6 @@ export type MutationUpdateEventViaEventTagArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateEventViaGroupArgs = {
   input: UpdateEventViaGroupInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateGroupArgs = {
-  input: UpdateGroupInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateGroupTrArgs = {
-  input: UpdateGroupTrInput;
 };
 
 
@@ -2437,6 +1428,12 @@ export type MutationUpdatePageArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdatePageTrArgs = {
   input: UpdatePageTrInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpsertEventArgs = {
+  input: UpsertEventInput;
 };
 
 export type Page = {
@@ -2607,19 +1604,15 @@ export type Query = {
   __typename?: 'Query';
   currentMember: Maybe<Member>;
   event: Maybe<Event>;
+  eventBySlug: Maybe<Event>;
   eventTag: Maybe<EventTag>;
   eventTagTr: Maybe<EventTagTr>;
   /** Reads and enables pagination through a set of `EventTagTr`. */
   eventTagTrs: Maybe<EventTagTrsConnection>;
   /** Reads and enables pagination through a set of `EventTag`. */
   eventTags: Maybe<EventTagsConnection>;
-  eventTemplate: Maybe<EventTemplate>;
-  eventTemplateTr: Maybe<EventTemplateTr>;
-  /** Reads and enables pagination through a set of `EventTemplateTr`. */
-  eventTemplateTrs: Maybe<EventTemplateTrsConnection>;
-  /** Reads and enables pagination through a set of `EventTemplate`. */
-  eventTemplates: Maybe<EventTemplatesConnection>;
   eventTr: Maybe<EventTr>;
+  eventTrBySlugAndLanguageCode: Maybe<EventTr>;
   /** Reads and enables pagination through a set of `EventTr`. */
   eventTrs: Maybe<EventTrsConnection>;
   eventViaEventTag: Maybe<EventViaEventTag>;
@@ -2647,12 +1640,23 @@ export type Query = {
    * which can only query top level fields if they are in a particular form.
    */
   query: Query;
+  /** Reads and enables pagination through a set of `EventTag`. */
+  searchEventTags: Maybe<EventTagsConnection>;
+  /** Reads and enables pagination through a set of `Group`. */
+  searchGroups: Maybe<GroupsConnection>;
 };
 
 
 /** The root query type which gives access points into the data universe. */
 export type QueryEventArgs = {
   id: Scalars['BigInt'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryEventBySlugArgs = {
+  preferredLanguageCode: Scalars['String'];
+  slug: Scalars['String'];
 };
 
 
@@ -2696,48 +1700,16 @@ export type QueryEventTagsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryEventTemplateArgs = {
-  id: Scalars['BigInt'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryEventTemplateTrArgs = {
-  eventTemplateId: Scalars['BigInt'];
-  languageCode: TrLanguage;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryEventTemplateTrsArgs = {
-  after?: Maybe<Scalars['Cursor']>;
-  before?: Maybe<Scalars['Cursor']>;
-  condition?: Maybe<EventTemplateTrCondition>;
-  filter?: Maybe<EventTemplateTrFilter>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<EventTemplateTrsOrderBy>>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryEventTemplatesArgs = {
-  after?: Maybe<Scalars['Cursor']>;
-  before?: Maybe<Scalars['Cursor']>;
-  condition?: Maybe<EventTemplateCondition>;
-  filter?: Maybe<EventTemplateFilter>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<EventTemplatesOrderBy>>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
 export type QueryEventTrArgs = {
   eventId: Scalars['BigInt'];
   languageCode: TrLanguage;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryEventTrBySlugAndLanguageCodeArgs = {
+  languageCode: TrLanguage;
+  slug: Scalars['String'];
 };
 
 
@@ -2757,14 +1729,14 @@ export type QueryEventTrsArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryEventViaEventTagArgs = {
   eventId: Scalars['BigInt'];
-  tagId: Scalars['Int'];
+  tagId: Scalars['BigInt'];
 };
 
 
 /** The root query type which gives access points into the data universe. */
 export type QueryEventViaGroupArgs = {
   eventId: Scalars['BigInt'];
-  groupId: Scalars['Int'];
+  groupId: Scalars['BigInt'];
 };
 
 
@@ -2883,6 +1855,28 @@ export type QueryPagesArgs = {
   orderBy?: Maybe<Array<PagesOrderBy>>;
 };
 
+
+/** The root query type which gives access points into the data universe. */
+export type QuerySearchEventTagsArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  query: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QuerySearchGroupsArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  query: Scalars['String'];
+};
+
 export type ResponsiveImage = {
   __typename?: 'ResponsiveImage';
   src: Scalars['String'];
@@ -2950,219 +1944,6 @@ export type UuidFilter = {
   notEqualTo?: Maybe<Scalars['UUID']>;
 };
 
-/** All input for the `updateEvent` mutation. */
-export type UpdateEventInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['BigInt'];
-  /** An object where the defined keys will be set on the `Event` being updated. */
-  patch: EventPatch;
-};
-
-/** The output of our update `Event` mutation. */
-export type UpdateEventPayload = {
-  __typename?: 'UpdateEventPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** The `Event` that was updated by this mutation. */
-  event: Maybe<Event>;
-  /** An edge for our `Event`. May be used by Relay 1. */
-  eventEdge: Maybe<EventsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our update `Event` mutation. */
-export type UpdateEventPayloadEventEdgeArgs = {
-  orderBy?: Maybe<Array<EventsOrderBy>>;
-};
-
-/** All input for the `updateEventTag` mutation. */
-export type UpdateEventTagInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['BigInt'];
-  /** An object where the defined keys will be set on the `EventTag` being updated. */
-  patch: EventTagPatch;
-};
-
-/** The output of our update `EventTag` mutation. */
-export type UpdateEventTagPayload = {
-  __typename?: 'UpdateEventTagPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** The `EventTag` that was updated by this mutation. */
-  eventTag: Maybe<EventTag>;
-  /** An edge for our `EventTag`. May be used by Relay 1. */
-  eventTagEdge: Maybe<EventTagsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our update `EventTag` mutation. */
-export type UpdateEventTagPayloadEventTagEdgeArgs = {
-  orderBy?: Maybe<Array<EventTagsOrderBy>>;
-};
-
-/** All input for the `updateEventTagTr` mutation. */
-export type UpdateEventTagTrInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  languageCode: TrLanguage;
-  /** An object where the defined keys will be set on the `EventTagTr` being updated. */
-  patch: EventTagTrPatch;
-  tagId: Scalars['BigInt'];
-};
-
-/** The output of our update `EventTagTr` mutation. */
-export type UpdateEventTagTrPayload = {
-  __typename?: 'UpdateEventTagTrPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** The `EventTagTr` that was updated by this mutation. */
-  eventTagTr: Maybe<EventTagTr>;
-  /** An edge for our `EventTagTr`. May be used by Relay 1. */
-  eventTagTrEdge: Maybe<EventTagTrsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-  /** Reads a single `EventTag` that is related to this `EventTagTr`. */
-  tag: Maybe<EventTag>;
-};
-
-
-/** The output of our update `EventTagTr` mutation. */
-export type UpdateEventTagTrPayloadEventTagTrEdgeArgs = {
-  orderBy?: Maybe<Array<EventTagTrsOrderBy>>;
-};
-
-/** All input for the `updateEventTemplate` mutation. */
-export type UpdateEventTemplateInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['BigInt'];
-  /** An object where the defined keys will be set on the `EventTemplate` being updated. */
-  patch: EventTemplatePatch;
-};
-
-/** The output of our update `EventTemplate` mutation. */
-export type UpdateEventTemplatePayload = {
-  __typename?: 'UpdateEventTemplatePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** The `EventTemplate` that was updated by this mutation. */
-  eventTemplate: Maybe<EventTemplate>;
-  /** An edge for our `EventTemplate`. May be used by Relay 1. */
-  eventTemplateEdge: Maybe<EventTemplatesEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our update `EventTemplate` mutation. */
-export type UpdateEventTemplatePayloadEventTemplateEdgeArgs = {
-  orderBy?: Maybe<Array<EventTemplatesOrderBy>>;
-};
-
-/** All input for the `updateEventTemplateTr` mutation. */
-export type UpdateEventTemplateTrInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  eventTemplateId: Scalars['BigInt'];
-  languageCode: TrLanguage;
-  /** An object where the defined keys will be set on the `EventTemplateTr` being updated. */
-  patch: EventTemplateTrPatch;
-};
-
-/** The output of our update `EventTemplateTr` mutation. */
-export type UpdateEventTemplateTrPayload = {
-  __typename?: 'UpdateEventTemplateTrPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** Reads a single `EventTemplate` that is related to this `EventTemplateTr`. */
-  eventTemplate: Maybe<EventTemplate>;
-  /** The `EventTemplateTr` that was updated by this mutation. */
-  eventTemplateTr: Maybe<EventTemplateTr>;
-  /** An edge for our `EventTemplateTr`. May be used by Relay 1. */
-  eventTemplateTrEdge: Maybe<EventTemplateTrsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our update `EventTemplateTr` mutation. */
-export type UpdateEventTemplateTrPayloadEventTemplateTrEdgeArgs = {
-  orderBy?: Maybe<Array<EventTemplateTrsOrderBy>>;
-};
-
-/** All input for the `updateEventTr` mutation. */
-export type UpdateEventTrInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  eventId: Scalars['BigInt'];
-  languageCode: TrLanguage;
-  /** An object where the defined keys will be set on the `EventTr` being updated. */
-  patch: EventTrPatch;
-};
-
-/** The output of our update `EventTr` mutation. */
-export type UpdateEventTrPayload = {
-  __typename?: 'UpdateEventTrPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** Reads a single `Event` that is related to this `EventTr`. */
-  event: Maybe<Event>;
-  /** The `EventTr` that was updated by this mutation. */
-  eventTr: Maybe<EventTr>;
-  /** An edge for our `EventTr`. May be used by Relay 1. */
-  eventTrEdge: Maybe<EventTrsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our update `EventTr` mutation. */
-export type UpdateEventTrPayloadEventTrEdgeArgs = {
-  orderBy?: Maybe<Array<EventTrsOrderBy>>;
-};
-
 /** All input for the `updateEventViaEventTag` mutation. */
 export type UpdateEventViaEventTagInput = {
   /**
@@ -3173,7 +1954,7 @@ export type UpdateEventViaEventTagInput = {
   eventId: Scalars['BigInt'];
   /** An object where the defined keys will be set on the `EventViaEventTag` being updated. */
   patch: EventViaEventTagPatch;
-  tagId: Scalars['Int'];
+  tagId: Scalars['BigInt'];
 };
 
 /** The output of our update `EventViaEventTag` mutation. */
@@ -3210,7 +1991,7 @@ export type UpdateEventViaGroupInput = {
    */
   clientMutationId?: Maybe<Scalars['String']>;
   eventId: Scalars['BigInt'];
-  groupId: Scalars['Int'];
+  groupId: Scalars['BigInt'];
   /** An object where the defined keys will be set on the `EventViaGroup` being updated. */
   patch: EventViaGroupPatch;
 };
@@ -3239,77 +2020,6 @@ export type UpdateEventViaGroupPayload = {
 /** The output of our update `EventViaGroup` mutation. */
 export type UpdateEventViaGroupPayloadEventViaGroupEdgeArgs = {
   orderBy?: Maybe<Array<EventViaGroupsOrderBy>>;
-};
-
-/** All input for the `updateGroup` mutation. */
-export type UpdateGroupInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['BigInt'];
-  /** An object where the defined keys will be set on the `Group` being updated. */
-  patch: GroupPatch;
-};
-
-/** The output of our update `Group` mutation. */
-export type UpdateGroupPayload = {
-  __typename?: 'UpdateGroupPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** The `Group` that was updated by this mutation. */
-  group: Maybe<Group>;
-  /** An edge for our `Group`. May be used by Relay 1. */
-  groupEdge: Maybe<GroupsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our update `Group` mutation. */
-export type UpdateGroupPayloadGroupEdgeArgs = {
-  orderBy?: Maybe<Array<GroupsOrderBy>>;
-};
-
-/** All input for the `updateGroupTr` mutation. */
-export type UpdateGroupTrInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  groupId: Scalars['BigInt'];
-  languageCode: TrLanguage;
-  /** An object where the defined keys will be set on the `GroupTr` being updated. */
-  patch: GroupTrPatch;
-};
-
-/** The output of our update `GroupTr` mutation. */
-export type UpdateGroupTrPayload = {
-  __typename?: 'UpdateGroupTrPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId: Maybe<Scalars['String']>;
-  /** Reads a single `Group` that is related to this `GroupTr`. */
-  group: Maybe<Group>;
-  /** The `GroupTr` that was updated by this mutation. */
-  groupTr: Maybe<GroupTr>;
-  /** An edge for our `GroupTr`. May be used by Relay 1. */
-  groupTrEdge: Maybe<GroupTrsEdge>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query: Maybe<Query>;
-};
-
-
-/** The output of our update `GroupTr` mutation. */
-export type UpdateGroupTrPayloadGroupTrEdgeArgs = {
-  orderBy?: Maybe<Array<GroupTrsOrderBy>>;
 };
 
 /** All input for the `updateMemberByUsername` mutation. */
@@ -3429,6 +2139,39 @@ export type UpdatePageTrPayloadPageTrEdgeArgs = {
   orderBy?: Maybe<Array<PageTrsOrderBy>>;
 };
 
+/** All input for the `upsertEvent` mutation. */
+export type UpsertEventInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  data: EventDatumInput;
+  eventId?: Maybe<Scalars['BigInt']>;
+  translations: Array<Maybe<EventTrDatumInput>>;
+};
+
+/** The output of our `upsertEvent` mutation. */
+export type UpsertEventPayload = {
+  __typename?: 'UpsertEventPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  event: Maybe<Event>;
+  /** An edge for our `Event`. May be used by Relay 1. */
+  eventEdge: Maybe<EventsEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our `upsertEvent` mutation. */
+export type UpsertEventPayloadEventEdgeArgs = {
+  orderBy?: Maybe<Array<EventsOrderBy>>;
+};
+
 export type AuthenticateMutationVariables = Exact<{
   username: Scalars['String'];
   password: Scalars['String'];
@@ -3438,6 +2181,111 @@ export type AuthenticateMutationVariables = Exact<{
 export type AuthenticateMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'authenticate'>
+);
+
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'logout'>
+);
+
+export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMeQuery = (
+  { __typename?: 'Query' }
+  & { currentMember: Maybe<(
+    { __typename?: 'Member' }
+    & Pick<Member, 'name' | 'id' | 'userRole'>
+  )> }
+);
+
+export type SearchGroupsQueryVariables = Exact<{
+  query: Scalars['String'];
+}>;
+
+
+export type SearchGroupsQuery = (
+  { __typename?: 'Query' }
+  & { searchGroups: Maybe<(
+    { __typename?: 'GroupsConnection' }
+    & { nodes: Array<(
+      { __typename?: 'Group' }
+      & Pick<Group, 'id'>
+      & { translations: (
+        { __typename?: 'GroupTrsConnection' }
+        & { nodes: Array<(
+          { __typename?: 'GroupTr' }
+          & Pick<GroupTr, 'title' | 'groupId' | 'languageCode'>
+        )> }
+      ) }
+    )> }
+  )> }
+);
+
+export type SearchEventTagsQueryVariables = Exact<{
+  query: Scalars['String'];
+}>;
+
+
+export type SearchEventTagsQuery = (
+  { __typename?: 'Query' }
+  & { searchEventTags: Maybe<(
+    { __typename?: 'EventTagsConnection' }
+    & { nodes: Array<(
+      { __typename?: 'EventTag' }
+      & Pick<EventTag, 'id'>
+      & { translations: (
+        { __typename?: 'EventTagTrsConnection' }
+        & { nodes: Array<(
+          { __typename?: 'EventTagTr' }
+          & Pick<EventTagTr, 'languageCode' | 'title' | 'tagId'>
+        )> }
+      ) }
+    )> }
+  )> }
+);
+
+export type GroupByIdQueryVariables = Exact<{
+  id: Scalars['BigInt'];
+}>;
+
+
+export type GroupByIdQuery = (
+  { __typename?: 'Query' }
+  & { group: Maybe<(
+    { __typename?: 'Group' }
+    & Pick<Group, 'id'>
+    & { translations: (
+      { __typename?: 'GroupTrsConnection' }
+      & { nodes: Array<(
+        { __typename?: 'GroupTr' }
+        & Pick<GroupTr, 'languageCode' | 'title' | 'groupId'>
+      )> }
+    ) }
+  )> }
+);
+
+export type EventTagByIdQueryVariables = Exact<{
+  id: Scalars['BigInt'];
+}>;
+
+
+export type EventTagByIdQuery = (
+  { __typename?: 'Query' }
+  & { eventTag: Maybe<(
+    { __typename?: 'EventTag' }
+    & Pick<EventTag, 'id'>
+    & { translations: (
+      { __typename?: 'EventTagTrsConnection' }
+      & { nodes: Array<(
+        { __typename?: 'EventTagTr' }
+        & Pick<EventTagTr, 'languageCode' | 'title' | 'tagId'>
+      )> }
+    ) }
+  )> }
 );
 
 export type CalendarEventsQueryQueryVariables = Exact<{
@@ -3459,24 +2307,89 @@ export type CalendarEventsQueryQuery = (
 
 export type CalendarEventFragment = (
   { __typename?: 'Event' }
-  & Pick<Event, 'endsAt' | 'id' | 'startsAt' | 'special'>
+  & Pick<Event, 'endsAt' | 'id' | 'startsAt'>
   & { translations: (
     { __typename?: 'EventTrsConnection' }
     & { nodes: Array<(
       { __typename?: 'EventTr' }
-      & Pick<EventTr, 'slug' | 'title' | 'languageCode' | 'description'>
+      & Pick<EventTr, 'slug' | 'title' | 'languageCode' | 'eventId'>
     )> }
   ) }
 );
 
-export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
+export type CalendarEventBySlugQueryVariables = Exact<{
+  languageCode: Scalars['String'];
+  slug: Scalars['String'];
+}>;
 
 
-export type GetMeQuery = (
+export type CalendarEventBySlugQuery = (
   { __typename?: 'Query' }
-  & { currentMember: Maybe<(
-    { __typename?: 'Member' }
-    & Pick<Member, 'name' | 'id' | 'userRole'>
+  & { eventBySlug: Maybe<(
+    { __typename?: 'Event' }
+    & Pick<Event, 'startsAt' | 'imageFile' | 'endsAt' | 'id'>
+    & { translations: (
+      { __typename?: 'EventTrsConnection' }
+      & { nodes: Array<(
+        { __typename?: 'EventTr' }
+        & Pick<EventTr, 'description' | 'eventId' | 'languageCode' | 'slug' | 'title'>
+      )> }
+    ), image: Maybe<(
+      { __typename?: 'ResponsiveImage' }
+      & Pick<ResponsiveImage, 'src' | 'srcSetJpeg' | 'srcSetWebp'>
+    )>, tags: (
+      { __typename?: 'EventViaEventTagsConnection' }
+      & { nodes: Array<(
+        { __typename?: 'EventViaEventTag' }
+        & Pick<EventViaEventTag, 'eventId' | 'tagId'>
+        & { tag: Maybe<(
+          { __typename?: 'EventTag' }
+          & Pick<EventTag, 'id'>
+          & { translations: (
+            { __typename?: 'EventTagTrsConnection' }
+            & { nodes: Array<(
+              { __typename?: 'EventTagTr' }
+              & Pick<EventTagTr, 'languageCode' | 'tagId' | 'title'>
+            )> }
+          ) }
+        )> }
+      )> }
+    ), groups: (
+      { __typename?: 'EventViaGroupsConnection' }
+      & { nodes: Array<(
+        { __typename?: 'EventViaGroup' }
+        & Pick<EventViaGroup, 'eventId' | 'groupId'>
+        & { group: Maybe<(
+          { __typename?: 'Group' }
+          & Pick<Group, 'id'>
+          & { translations: (
+            { __typename?: 'GroupTrsConnection' }
+            & { nodes: Array<(
+              { __typename?: 'GroupTr' }
+              & Pick<GroupTr, 'groupId' | 'languageCode' | 'title'>
+            )> }
+          ) }
+        )> }
+      )> }
+    ) }
+  )> }
+);
+
+export type UpsertEventMutationVariables = Exact<{
+  data: EventDatumInput;
+  translations: Array<Maybe<EventTrDatumInput>> | Maybe<EventTrDatumInput>;
+  id?: Maybe<Scalars['BigInt']>;
+}>;
+
+
+export type UpsertEventMutation = (
+  { __typename?: 'Mutation' }
+  & { upsertEvent: Maybe<(
+    { __typename?: 'UpsertEventPayload' }
+    & { event: Maybe<(
+      { __typename?: 'Event' }
+      & CalendarEventFragment
+    )> }
   )> }
 );
 
@@ -3509,18 +2422,18 @@ export type HomeEventsQueryQuery = (
         { __typename?: 'ResponsiveImage' }
         & Pick<ResponsiveImage, 'src' | 'srcSetWebp' | 'srcSetJpeg'>
       )> }
-      & EventFragment
+      & HomeEventFragment
     )> }
   )>, events: Maybe<(
     { __typename?: 'EventsConnection' }
     & { nodes: Array<(
       { __typename?: 'Event' }
-      & EventFragment
+      & HomeEventFragment
     )> }
   )> }
 );
 
-export type EventFragment = (
+export type HomeEventFragment = (
   { __typename?: 'Event' }
   & Pick<Event, 'endsAt' | 'id' | 'startsAt' | 'special'>
   & { translations: (
@@ -3556,16 +2469,8 @@ export type HomeGroupsQueryQuery = (
   )> }
 );
 
-export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
-
-
-export type LogoutMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'logout'>
-);
-
 export type PageQueryQueryVariables = Exact<{
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
 }>;
 
 
@@ -3582,11 +2487,6 @@ export type PageQueryQuery = (
       )> }
     ) }
   )> }
-);
-
-export type PageTranslationFragment = (
-  { __typename: 'PageTr' }
-  & Pick<PageTr, 'content' | 'languageCode' | 'pageName'>
 );
 
 export type UpdatePageTranslationMutationVariables = Exact<{
@@ -3607,24 +2507,28 @@ export type UpdatePageTranslationMutation = (
   )> }
 );
 
+export type PageTranslationFragment = (
+  { __typename?: 'PageTr' }
+  & Pick<PageTr, 'content' | 'languageCode' | 'pageName'>
+);
+
 export const CalendarEventFragmentDoc = gql`
-    fragment calendarEvent on Event {
+    fragment CalendarEvent on Event {
   translations {
     nodes {
       slug
       title
       languageCode
-      description
+      eventId
     }
   }
   endsAt
   id
   startsAt
-  special
 }
     ` as unknown as DocumentNode<CalendarEventFragment, unknown>;
-export const EventFragmentDoc = gql`
-    fragment event on Event {
+export const HomeEventFragmentDoc = gql`
+    fragment HomeEvent on Event {
   translations {
     nodes {
       slug
@@ -3639,10 +2543,9 @@ export const EventFragmentDoc = gql`
   startsAt
   special
 }
-    ` as unknown as DocumentNode<EventFragment, unknown>;
+    ` as unknown as DocumentNode<HomeEventFragment, unknown>;
 export const PageTranslationFragmentDoc = gql`
     fragment PageTranslation on PageTr {
-  __typename
   content
   languageCode
   pageName
@@ -3653,18 +2556,11 @@ export const AuthenticateDocument = gql`
   authenticate(input: {username: $username, password: $password})
 }
     ` as unknown as DocumentNode<AuthenticateMutation, AuthenticateMutationVariables>;
-export const CalendarEventsQueryDocument = gql`
-    query CalendarEventsQuery($startsAfter: Datetime, $startsBefore: Datetime) {
-  events(
-    filter: {startsAt: {greaterThan: $startsAfter, lessThan: $startsBefore}}
-    orderBy: STARTS_AT_ASC
-  ) {
-    nodes {
-      ...calendarEvent
-    }
-  }
+export const LogoutDocument = gql`
+    mutation Logout {
+  logout
 }
-    ${CalendarEventFragmentDoc}` as unknown as DocumentNode<CalendarEventsQueryQuery, CalendarEventsQueryQueryVariables>;
+    ` as unknown as DocumentNode<LogoutMutation, LogoutMutationVariables>;
 export const GetMeDocument = gql`
     query GetMe {
   currentMember {
@@ -3674,6 +2570,143 @@ export const GetMeDocument = gql`
   }
 }
     ` as unknown as DocumentNode<GetMeQuery, GetMeQueryVariables>;
+export const SearchGroupsDocument = gql`
+    query SearchGroups($query: String!) {
+  searchGroups(query: $query) {
+    nodes {
+      id
+      translations {
+        nodes {
+          title
+          groupId
+          languageCode
+        }
+      }
+    }
+  }
+}
+    ` as unknown as DocumentNode<SearchGroupsQuery, SearchGroupsQueryVariables>;
+export const SearchEventTagsDocument = gql`
+    query SearchEventTags($query: String!) {
+  searchEventTags(query: $query) {
+    nodes {
+      id
+      translations {
+        nodes {
+          languageCode
+          title
+          tagId
+        }
+      }
+    }
+  }
+}
+    ` as unknown as DocumentNode<SearchEventTagsQuery, SearchEventTagsQueryVariables>;
+export const GroupByIdDocument = gql`
+    query GroupById($id: BigInt!) {
+  group(id: $id) {
+    id
+    translations {
+      nodes {
+        languageCode
+        title
+        groupId
+      }
+    }
+  }
+}
+    ` as unknown as DocumentNode<GroupByIdQuery, GroupByIdQueryVariables>;
+export const EventTagByIdDocument = gql`
+    query EventTagById($id: BigInt!) {
+  eventTag(id: $id) {
+    id
+    translations {
+      nodes {
+        languageCode
+        title
+        tagId
+      }
+    }
+  }
+}
+    ` as unknown as DocumentNode<EventTagByIdQuery, EventTagByIdQueryVariables>;
+export const CalendarEventsQueryDocument = gql`
+    query CalendarEventsQuery($startsAfter: Datetime, $startsBefore: Datetime) {
+  events(
+    filter: {startsAt: {greaterThan: $startsAfter, lessThan: $startsBefore}}
+    orderBy: STARTS_AT_ASC
+  ) {
+    nodes {
+      ...CalendarEvent
+    }
+  }
+}
+    ${CalendarEventFragmentDoc}` as unknown as DocumentNode<CalendarEventsQueryQuery, CalendarEventsQueryQueryVariables>;
+export const CalendarEventBySlugDocument = gql`
+    query CalendarEventBySlug($languageCode: String!, $slug: String!) {
+  eventBySlug(preferredLanguageCode: $languageCode, slug: $slug) {
+    translations {
+      nodes {
+        description
+        eventId
+        languageCode
+        slug
+        title
+      }
+    }
+    startsAt
+    imageFile
+    image {
+      src
+      srcSetJpeg
+      srcSetWebp
+    }
+    endsAt
+    id
+    tags {
+      nodes {
+        tag {
+          id
+          translations {
+            nodes {
+              languageCode
+              tagId
+              title
+            }
+          }
+        }
+        eventId
+        tagId
+      }
+    }
+    groups {
+      nodes {
+        group {
+          id
+          translations {
+            nodes {
+              groupId
+              languageCode
+              title
+            }
+          }
+        }
+        eventId
+        groupId
+      }
+    }
+  }
+}
+    ` as unknown as DocumentNode<CalendarEventBySlugQuery, CalendarEventBySlugQueryVariables>;
+export const UpsertEventDocument = gql`
+    mutation UpsertEvent($data: EventDatumInput!, $translations: [EventTrDatumInput]!, $id: BigInt) {
+  upsertEvent(input: {data: $data, translations: $translations, eventId: $id}) {
+    event {
+      ...CalendarEvent
+    }
+  }
+}
+    ${CalendarEventFragmentDoc}` as unknown as DocumentNode<UpsertEventMutation, UpsertEventMutationVariables>;
 export const GetUploadUrlDocument = gql`
     mutation GetUploadUrl($contentType: String!) {
   createUploadUrl(input: {contentType: $contentType}) {
@@ -3686,11 +2719,12 @@ export const HomeEventsQueryDocument = gql`
     query HomeEventsQuery($startsAfter: Datetime) {
   specialEvents: events(
     filter: {special: {equalTo: true}, startsAt: {greaterThan: $startsAfter}}
+    condition: {isTemplate: false}
     first: 1
     orderBy: STARTS_AT_ASC
   ) {
     nodes {
-      ...event
+      ...HomeEvent
       image {
         src
         srcSetWebp
@@ -3701,15 +2735,16 @@ export const HomeEventsQueryDocument = gql`
   }
   events(
     filter: {startsAt: {greaterThan: $startsAfter}}
+    condition: {isTemplate: false}
     first: 10
     orderBy: STARTS_AT_ASC
   ) {
     nodes {
-      ...event
+      ...HomeEvent
     }
   }
 }
-    ${EventFragmentDoc}` as unknown as DocumentNode<HomeEventsQueryQuery, HomeEventsQueryQueryVariables>;
+    ${HomeEventFragmentDoc}` as unknown as DocumentNode<HomeEventsQueryQuery, HomeEventsQueryQueryVariables>;
 export const HomeGroupsQueryDocument = gql`
     query HomeGroupsQuery {
   groups {
@@ -3733,13 +2768,8 @@ export const HomeGroupsQueryDocument = gql`
   }
 }
     ` as unknown as DocumentNode<HomeGroupsQueryQuery, HomeGroupsQueryQueryVariables>;
-export const LogoutDocument = gql`
-    mutation Logout {
-  logout
-}
-    ` as unknown as DocumentNode<LogoutMutation, LogoutMutationVariables>;
 export const PageQueryDocument = gql`
-    query PageQuery($name: String = "") {
+    query PageQuery($name: String!) {
   page(name: $name) {
     name
     translations {

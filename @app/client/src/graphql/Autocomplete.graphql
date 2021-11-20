@@ -1,0 +1,54 @@
+query SearchGroups($query: String!) {
+  searchGroups(query: $query) {
+    nodes {
+      id
+      translations {
+        nodes {
+          title
+          groupId
+          languageCode
+        }
+      }
+    }
+  }
+}
+query SearchEventTags($query: String!) {
+  searchEventTags(query: $query) {
+    nodes {
+      id
+      translations {
+        nodes {
+          languageCode
+          title
+          tagId
+        }
+      }
+    }
+  }
+}
+
+query GroupById($id: BigInt!) {
+  group(id: $id) {
+    id
+    translations {
+      nodes {
+        languageCode
+        title
+        groupId
+      }
+    }
+  }
+}
+
+query EventTagById($id: BigInt!) {
+  eventTag(id: $id) {
+    id
+    translations {
+      nodes {
+        languageCode
+        title
+        tagId
+      }
+    }
+  }
+}

@@ -1,12 +1,14 @@
 div:deep(.fc) {
   --fc-border-color: #888;
   --fc-neutral-bg-color: #222;
+  --fc-page-bg-color: theme('colors.dark.500');
 
   :global(.fc-daygrid-day-top) {
     @apply text-sm text-gray-500 justify-center;
   }
   :global(.fc-event) {
     align-items: first baseline;
+    max-width: 80%;
   }
   :global(.fc-event-title),
   :global(.fc-col-header-cell) {

@@ -8,7 +8,15 @@ import 'virtual:windi-utilities.css';
 import '@vue/runtime-dom';
 import 'nprogress/nprogress.css';
 
-import { EventTr, GroupTr, Page, PageTr } from '@app/graphql/dist/client';
+import {
+  EventTagTr,
+  EventTr,
+  EventViaEventTag,
+  EventViaGroup,
+  GroupTr,
+  Page,
+  PageTr,
+} from '@app/graphql/dist/client';
 import schema from '@app/graphql/dist/introspection';
 import {
   createClient,
@@ -131,6 +139,18 @@ export default viteSSR(
               `${(data as PageTr).languageCode}|${(data as PageTr).pageName}`,
             GroupTr: (data) =>
               `${(data as GroupTr).languageCode}|${(data as GroupTr).groupId}`,
+            EventTagTr: (data) =>
+              `${(data as EventTagTr).languageCode}|${
+                (data as EventTagTr).tagId
+              }`,
+            EventViaGroup: (data) =>
+              `${(data as EventViaGroup).eventId}|${
+                (data as EventViaGroup).groupId
+              }`,
+            EventViaEventTag: (data) =>
+              `${(data as EventViaEventTag).eventId}|${
+                (data as EventViaEventTag).tagId
+              }`,
             Page: (data) => (data as Page).name,
             ResponsiveImage: () => null,
           },

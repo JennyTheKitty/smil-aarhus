@@ -1,7 +1,0 @@
-query GetMe {
-  currentMember {
-    name
-    id
-    userRole
-  }
-}

@@ -1,5 +1,6 @@
 body {
   background: theme('colors.dark.500');
+  font-size: 14px;
 }
 
 .btn-focus-ring {

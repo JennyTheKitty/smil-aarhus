@@ -14,6 +14,13 @@ import { imagetools } from 'vite-imagetools';
 import WindiCSS from 'vite-plugin-windicss';
 import viteSSR from 'vite-ssr/plugin.js';
 
+type AssetInfo = {
+  fileName: string;
+  name?: string;
+  source: string | Uint8Array;
+  type: 'asset';
+};
+
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
@@ -43,6 +50,7 @@ export default defineConfig({
       'vue-router',
       '@vueuse/head',
       '@vueuse/core',
+      '@vueuse/shared',
       '@vueuse/integrations',
       '@urql/core',
       '@urql/devtools',
@@ -52,7 +60,8 @@ export default defineConfig({
       '@headlessui/vue',
       '@ckeditor/ckeditor5-basic-styles/src/bold.js',
       '@ckeditor/ckeditor5-basic-styles/src/italic.js',
-      '@ckeditor/ckeditor5-editor-inline/src/inlineeditor.js',
+      '@ckeditor/ckeditor5-editor-classic/src/classiceditor',
+      '@ckeditor/ckeditor5-editor-inline/src/inlineeditor',
       '@ckeditor/ckeditor5-essentials/src/essentials.js',
       '@ckeditor/ckeditor5-heading/src/heading.js',
       '@ckeditor/ckeditor5-link/src/link.js',
@@ -68,11 +77,13 @@ export default defineConfig({
       '@fullcalendar/list',
       '@fullcalendar/timegrid',
       '@fullcalendar/vue3',
+      '@fullcalendar/interaction',
       '@fullcalendar/core/vdom.cjs',
       '@fullcalendar/core/locales/da',
       'abab',
       'naive-ui',
       'petite-vue-i18n',
+      'graphql-tag',
     ],
     exclude: ['vue-demi'],
   },
@@ -155,7 +166,15 @@ export default defineConfig({
               .replace(/\u2029/g, '\\u2029');
             return {
               code: `export default ${json}`,
+              map: { mappings: '' },
             };
+          }
+        },
+        generateBundle(_, bundle) {
+          for (const [filename, info] of Object.entries(bundle)) {
+            if (options.fileRegex.test((info as AssetInfo).name)) {
+              delete bundle[filename];
+            }
           }
         },
       };

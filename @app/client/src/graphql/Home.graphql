@@ -4,11 +4,12 @@ query HomeEventsQuery($startsAfter: Datetime) {
       special: { equalTo: true }
       startsAt: { greaterThan: $startsAfter }
     }
+    condition: { isTemplate: false }
     first: 1
     orderBy: STARTS_AT_ASC
   ) {
     nodes {
-      ...event
+      ...HomeEvent
       image {
         src
         srcSetWebp
@@ -19,16 +20,17 @@ query HomeEventsQuery($startsAfter: Datetime) {
   }
   events(
     filter: { startsAt: { greaterThan: $startsAfter } }
+    condition: { isTemplate: false }
     first: 10
     orderBy: STARTS_AT_ASC
   ) {
     nodes {
-      ...event
+      ...HomeEvent
     }
   }
 }
 
-fragment event on Event {
+fragment HomeEvent on Event {
   translations {
     nodes {
       slug
@@ -42,4 +44,26 @@ fragment event on Event {
   id
   startsAt
   special
+}
+
+query HomeGroupsQuery {
+  groups {
+    nodes {
+      id
+      image {
+        src
+        srcSetWebp
+        srcSetJpeg
+      }
+      translations {
+        nodes {
+          languageCode
+          title
+          shortDescription
+          slug
+          groupId
+        }
+      }
+    }
+  }
 }

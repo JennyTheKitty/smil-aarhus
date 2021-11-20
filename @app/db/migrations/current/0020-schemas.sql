@@ -11,7 +11,7 @@ GRANT USAGE ON SCHEMA smil_aarhus_private TO :DATABASE_AUTHENTICATOR;
 
 -- Allow logged in to use sequences (to insert data)
 ALTER DEFAULT PRIVILEGES IN SCHEMA public, smil_aarhus, smil_aarhus_admin
-GRANT USAGE, SELECT ON SEQUENCES TO smil_organizer, smil_admin;
+GRANT USAGE, SELECT ON SEQUENCES TO smil_anonymous, smil_organizer, smil_admin;
 
 -- Allow all to execute function
 ALTER DEFAULT PRIVILEGES IN SCHEMA public, smil_aarhus

@@ -3,6 +3,9 @@ CREATE TABLE smil_aarhus.group(
     image_file text NOT NULL
 );
 
+
+COMMENT ON TABLE smil_aarhus.group IS E'@omit create,update,delete';
+
 CREATE TABLE smil_aarhus.group_tr(
     group_id bigint REFERENCES smil_aarhus.group (id),
     language_code text REFERENCES smil_aarhus.tr_language (code),
@@ -12,6 +15,9 @@ CREATE TABLE smil_aarhus.group_tr(
     slug text NOT NULL,
     PRIMARY KEY (group_id, language_code)
 );
+
+
+COMMENT ON TABLE smil_aarhus.group_tr IS E'@omit create,update,delete';
 
 COMMENT ON CONSTRAINT group_tr_group_id_fkey ON smil_aarhus.group_tr IS E'@foreignFieldName translations';
 
@@ -24,15 +30,29 @@ CREATE TRIGGER add_group_tr_slug BEFORE INSERT ON smil_aarhus.group_tr FOR EACH 
 WHEN (NEW.title IS NOT NULL AND NEW.slug IS NULL)
 EXECUTE PROCEDURE smil_aarhus.tr_set_slug('group', 'id', 'group_id', 'false');
 
+CREATE INDEX group_tr_title_trgm_index on smil_aarhus.group_tr using gin(title gin_trgm_ops);
+
+CREATE OR REPLACE FUNCTION smil_aarhus.search_groups(query text)
+returns setof smil_aarhus.group
+as $$
+SELECT DISTINCT smil_aarhus.group.*
+FROM
+  smil_aarhus.group_tr
+  inner join smil_aarhus.group ON smil_aarhus.group_tr.group_id = smil_aarhus.group.id
+WHERE similarity(smil_aarhus.group_tr.title, query) > 0.1 ;
+$$ language sql stable;
+
 create table smil_aarhus.event_via_group (
   event_id bigint constraint event_via_group_event_id_fkey references smil_aarhus.event (id),
-  group_id int constraint event_via_group_group_id_fkey references smil_aarhus.group (id),
+  group_id bigint constraint event_via_group_group_id_fkey references smil_aarhus.group (id),
   primary key (event_id, group_id)
 );
 
 comment on table smil_aarhus.event_via_group is E'@omit all';
 
-comment on constraint event_via_group_group_id_fkey on smil_aarhus.event_via_group is E'@manyToManyFieldName groups';
+
+comment on constraint event_via_group_event_id_fkey on smil_aarhus.event_via_group is E'@foreignFieldName groups\n@manyToManyFieldName groups';
+comment on constraint event_via_group_group_id_fkey on smil_aarhus.event_via_group is E'@foreignFieldName events\n@manyToManyFieldName events';
 
 GRANT SELECT ON TABLE smil_aarhus.event_via_group TO smil_anonymous, smil_organizer, smil_admin;
 GRANT INSERT, UPDATE, DELETE ON TABLE smil_aarhus.event_via_group TO smil_organizer, smil_admin;

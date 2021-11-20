@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION smil_aarhus_admin.tr_update_implementation()
+CREATE OR REPLACE FUNCTION smil_aarhus.tr_update_implementation()
 RETURNS TRIGGER
 AS $func$
 DECLARE
@@ -135,9 +135,13 @@ BEGIN
         $q$, tbl, tbl_id, tr_tbl_id) USING NEW INTO _l;
 
         -- Create slug
-        _slug := to_char(_l.starts_at, 'YYYY-MM-DD-') || smil_aarhus.slugify(NEW.title);
+        IF (_l.starts_at IS NOT NULL) THEN
+            _slug := to_char(_l.starts_at, 'YYYY-MM-DD-') || smil_aarhus.slugify(NEW.title::text);
+        ELSE
+            _slug := 'template-' || smil_aarhus.slugify(NEW.title::text);
+        END IF;
     ELSE
-        _slug := smil_aarhus.slugify(NEW.title);
+        _slug := smil_aarhus.slugify(NEW.title::text);
     END IF;
 
     -- Check for conflicts

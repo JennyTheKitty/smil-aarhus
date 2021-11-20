@@ -17,13 +17,7 @@
           leave-from="opacity-100"
           leave-to="opacity-0"
         >
-          <DialogOverlay
-            v-if="dismissable"
-            w:pos="inset-0 fixed"
-            w:bg="black opacity-50"
-          />
-
-          <div v-else w:pos="inset-0 fixed" w:bg="black opacity-50" />
+          <DialogOverlay w:pos="inset-0 fixed" w:bg="black opacity-50" />
         </TransitionChild>
         <TransitionChild
           as="div"
@@ -44,7 +38,6 @@
 <script setup lang="ts">
 defineProps<{
   isOpen: boolean;
-  dismissable: boolean;
 }>();
 defineEmits(['update:isOpen']);
 </script>

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="content">
+    <div class="content" w:text="base">
       <div
         v-if="!editing"
         w:p="x-1"
         w:border="1 transparent"
         v-html="page?.content"
       ></div>
-      <ContentEditor v-else v-model="editContent" />
+      <ContentEditor v-else v-model="editContent" :inline="true" />
     </div>
     <ClientOnly>
       <div v-if="state.currentMember && !editing" w:m="2">

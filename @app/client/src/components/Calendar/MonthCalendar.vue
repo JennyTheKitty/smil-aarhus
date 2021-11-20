@@ -1,14 +1,19 @@
 <template>
-  <div
-    w:bg="dark-800"
-    w:rounded="2xl"
-    w:m="5"
-    w:shadow="lg"
-    w:text="white"
-    w:p="5"
-    w:pos="relative"
-  >
+  <div ref="container" w:m="5" w:text="white" w:pos="relative">
     <FullCalendar ref="calendar" :options="calendarOptions" />
+    <MonthCalendarEventPopout
+      :container="container"
+      :event-el="selectedEvent.eventEl"
+      :event="selectedEvent.translatedEvent"
+      :open="selectedEvent.open"
+      @edit="editSelectedEvent"
+    />
+    <EventDialog
+      v-model:is-open="eventDialogIsOpen"
+      :create="eventDialogCreate"
+      :event="eventDialogEvent"
+      :refresh="refetch"
+    />
   </div>
 </template>
 
@@ -18,10 +23,15 @@ import '@fullcalendar/core/vdom.cjs';
 // eslint-disable-next-line import/no-duplicates
 import '@fullcalendar/vue3';
 
-// eslint-enable simple-import-sort/imports
-import { CalendarEventsQueryDocument } from '@app/graphql/dist/client';
+import {
+  CalendarEventBySlugDocument,
+  CalendarEventsQueryDocument,
+  Event,
+  TrLanguage,
+} from '@app/graphql/dist/client';
 import daLocale from '@fullcalendar/core/locales/da';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import FullCalendar, {
@@ -29,62 +39,133 @@ import FullCalendar, {
   CalendarOptions,
   EventContentArg,
   EventInput,
-  formatRange,
   // eslint-disable-next-line import/no-duplicates
 } from '@fullcalendar/vue3';
 import { useClientHandle } from '@urql/vue';
+import { promiseTimeout } from '@vueuse/shared';
 import dayjs from 'dayjs';
 
-import { useTranslation } from '../../utils';
+import { useGlobalState } from '../../store';
+import { Translated, useTranslation } from '../../utils';
+import { calculateExtendedOpeningEvents } from './extendedOpening';
+
+const MonthCalendarEventPopout = defineAsyncComponent(async () => {
+  await until(computed(() => selectedEvent.value.open)).toBe(true);
+  return await import('./MonthCalendarEventPopout.vue');
+});
+
+const EventDialog = defineAsyncComponent(async () => {
+  await until(eventDialogIsOpen).toBe(true);
+  return await import('./EventDialog.vue');
+});
 
 const calendar = ref<null | typeof FullCalendar>(null);
+const container = ref<null | HTMLDivElement>(null);
 const calendarApi = computed(() => calendar.value?.getApi() as Calendar | null);
 const { locale } = useI18n();
 const i18nRoute = inject(key.i18nRoute)!;
 const router = useRouter();
+const route = useRoute();
+const state = useGlobalState();
 const handle = useClientHandle();
+const loading = ref(false);
+const eventDialogIsOpen = ref(false);
+const eventDialogEvent = ref({});
+const eventDialogCreate = ref(true);
+// TODO: Somehow extract inner CalendarGetEventBySlugQuery.eventTrBySlugAndLanguageCode.event
+const selectedEvent = ref<{
+  event: Event | null;
+  translatedEvent: Translated<Event> | null;
+  eventEl: HTMLElement | null;
+  open: boolean;
+}>({ event: null, translatedEvent: null, eventEl: null, open: false });
 
-const HOUR = 60 * 60 * 1000;
-const BUFFER = HOUR / 2;
-
-let events: EventInput[] = [];
-const extendedOpening = [
-  { start: 0, end: 7, day: 1 }, // Mon
-
-  { start: 17, end: 24, day: 2 }, // Tue
-  { start: 0, end: 7, day: 3 }, // Wed
-
-  { start: 17, end: 24, day: 4 }, // Thu
-  { start: 0, end: 7, day: 5 }, // Fri
-
-  { start: 20, end: 24, day: 5 }, // Fri
-  { start: 0, end: 17, day: 6 }, // Sat
-
-  { start: 20, end: 24, day: 6 }, // Sat
-  { start: 0, end: 24, day: 0 }, // Sun
-].map((e) => ({ start: e.start * HOUR, end: e.end * HOUR, day: e.day }));
-
-const extendedOpeningProps = {
-  title: '',
-  groupId: 'extendedOpening',
-  display: 'block',
-  classNames: ['extended-opening'],
-};
+async function editSelectedEvent() {
+  await router.push(
+    i18nRoute({
+      name: 'calendar',
+    })
+  );
+  await until(() => selectedEvent.value.open).not.toBeTruthy();
+  await promiseTimeout(100);
+  eventDialogEvent.value = selectedEvent.value.event!;
+  eventDialogCreate.value = false;
+  eventDialogIsOpen.value = true;
+}
 
 watch(
-  locale,
-  () => {
-    events = [];
-    calendarApi.value?.refetchEvents();
-    calendarApi.value?.setOption('locale', locale.value);
+  () => route.params.slug,
+  async (slug) => {
+    if (!slug || typeof slug !== 'string') {
+      selectedEvent.value.open = false;
+      return;
+    }
+    const { data } = await handle.client
+      .query(
+        CalendarEventBySlugDocument,
+        {
+          languageCode: locale.value.toUpperCase() as TrLanguage,
+          slug: slug,
+        },
+        // TODO: Figure out how to use cache for this with updating and such
+        { requestPolicy: 'cache-and-network' }
+      )
+      .toPromise();
+    const event = data?.eventBySlug;
+    console.log(event);
+    if (!event) return;
+    const translatedEvent = useTranslation(event, locale);
+    if (!selectedEvent.value.eventEl) {
+      if (calendarApi.value) calendarApi.value.gotoDate(event.startsAt);
+      await until(loading).toBe(false);
+      const el = document.querySelector<HTMLElement>(
+        `.fc-event-main-frame[data-id="${slug}"]`
+      );
+      if (!el) {
+        console.warn('event el not found');
+        return;
+      }
+
+      selectedEvent.value.eventEl = el;
+    }
+
+    selectedEvent.value.translatedEvent = translatedEvent as Translated<Event>;
+    selectedEvent.value.event = event as Event;
+    selectedEvent.value.open = true;
   },
   { immediate: true }
 );
 
+let events: EventInput[] = [];
+
+function refetch() {
+  events = [];
+  calendarApi.value?.refetchEvents();
+}
+
+nextTick(() => {
+  watch(
+    locale,
+    () => {
+      refetch();
+      calendarApi.value?.setOption('locale', locale.value);
+    },
+    { immediate: true }
+  );
+
+  watch(
+    () => state.value.currentMember,
+    (currentMember) => {
+      calendarApi.value?.setOption('selectable', !!currentMember);
+    },
+    { immediate: true }
+  );
+});
+
 const calendarOptions: CalendarOptions = {
   locales: [daLocale],
   locale: locale.value,
-  plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
+  plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
   initialView: 'timeGridWeek',
   headerToolbar: {
     left: 'prev,next today',
@@ -92,10 +173,21 @@ const calendarOptions: CalendarOptions = {
     right: 'dayGridMonth,timeGridWeek,listYear',
   },
   firstDay: 1,
+  height: 'auto',
+  selectable: false,
+  select(info) {
+    calendarApi.value!.unselect();
+    eventDialogIsOpen.value = true;
+    eventDialogCreate.value = true;
+    eventDialogEvent.value = {
+      startsAt: info.startStr,
+      endsAt: info.endStr,
+    };
+  },
+  selectOverlap: true,
   views: {
     dayGridMonth: {
       fixedWeekCount: false,
-      aspectRatio: 2,
       weekNumbers: true,
       weekNumberFormat: { week: 'numeric' },
       showNonCurrentDates: false,
@@ -107,19 +199,28 @@ const calendarOptions: CalendarOptions = {
         { event }: EventContentArg,
         createElement: typeof FullCalendarVDom.createElement
       ) {
-        return createElement('div', { class: 'fc-event-main-frame' }, [
-          createElement('div', { class: 'fc-event-time' }, [
-            `
+        return createElement(
+          'div',
+          {
+            class: 'fc-event-main-frame',
+            'data-id': event.id,
+          },
+          [
+            createElement('div', { class: 'fc-event-time' }, [
+              `
             ${dayjs(event.start).format('LT')} -
             ${dayjs(event.end).format('LT')}
             `,
-          ]),
-          createElement('div', { class: 'fc-event-title-container' }, [
-            createElement('div', { class: 'fc-event-title', fcSticky: true }, [
-              `${event.title}`,
             ]),
-          ]),
-        ]);
+            createElement('div', { class: 'fc-event-title-container' }, [
+              createElement(
+                'div',
+                { class: 'fc-event-title', fcSticky: true },
+                [`${event.title}`]
+              ),
+            ]),
+          ]
+        );
       },
       slotDuration: '01:00:00',
       allDaySlot: false,
@@ -137,17 +238,21 @@ const calendarOptions: CalendarOptions = {
         };
         // Run one-of query
         const result = await handle.client
-          .query(CalendarEventsQueryDocument, variables)
+          .query(CalendarEventsQueryDocument, variables, {
+            // TODO: Figure out how to use cache for this with updating and such
+            requestPolicy: 'cache-and-network',
+          })
           .toPromise();
         if (result.error) throw result.error;
         if (!result.data || !result.data.events) throw new Error('no data');
+        console.log(result.data);
 
         // Turn into event input
         const newEvents = result.data.events.nodes
           .map((event) => useTranslation(event, locale))
           .map((event) => {
             return {
-              id: event.id,
+              id: event.slug,
               title: event.title,
               start: new Date(event.startsAt),
               end: new Date(event.endsAt),
@@ -163,75 +268,30 @@ const calendarOptions: CalendarOptions = {
           .sort((a, b) => +a.start - +b.start);
 
         // Calc extended opening for this week
-        const extendedOpeningEvents: EventInput[] = [];
+        const extendedOpeningEvents = calculateExtendedOpeningEvents(
+          info,
+          newEvents
+        );
 
-        let start = dayjs(info.start);
-        const end = dayjs(info.end);
-        while (start.isBefore(end, 'day')) {
-          const day = start.day();
-          const millis = start.valueOf();
-
-          for (const x of extendedOpening.filter((x) => x.day == day)) {
-            let ss = millis + x.start;
-            let ee = millis + x.end;
-
-            // Check for events before
-            for (const e of newEvents.filter(
-              (e) =>
-                e.end.valueOf() > ss - BUFFER &&
-                e.end.valueOf() < ee + BUFFER &&
-                e.start.valueOf() < ss - BUFFER
-            )) {
-              if ((e.end.valueOf() as number) + BUFFER > ss)
-                ss = (e.end.valueOf() as number) + BUFFER;
-            }
-
-            // Check for events after
-            for (const e of newEvents.filter(
-              (e) =>
-                e.start.valueOf() < ee + BUFFER &&
-                e.start.valueOf() > ss - BUFFER &&
-                e.end.valueOf() > ee + BUFFER
-            )) {
-              if ((e.start.valueOf() as number) - BUFFER < ee)
-                ee = (e.start.valueOf() as number) - BUFFER;
-            }
-
-            // Check for events during
-            for (const e of newEvents.filter(
-              (e) =>
-                e.start.valueOf() > ss - BUFFER && e.end.valueOf() < ee + BUFFER
-            )) {
-              extendedOpeningEvents.push({
-                ...extendedOpeningProps,
-                start: new Date(ss),
-                end: new Date((e.start.valueOf() as number) - BUFFER),
-              });
-              ss = (e.end.valueOf() as number) + BUFFER;
-            }
-
-            if (ss < ee) {
-              extendedOpeningEvents.push({
-                ...extendedOpeningProps,
-                start: new Date(ss),
-                end: new Date(ee),
-              });
-            }
-          }
-
-          start = start.add(1, 'days');
-        }
-
-        events = [...events, ...newEvents].filter(
+        events = [...newEvents, ...events].filter(
           (v, i, a) => a.findIndex((t) => t.id === v.id) === i
         );
         return [...events, ...extendedOpeningEvents];
       },
     },
   ],
-  eventClick({ event, jsEvent }) {
+  eventClick({ event, jsEvent, el }) {
+    selectedEvent.value = {
+      event: null,
+      eventEl: el,
+      open: false,
+      translatedEvent: null,
+    };
     router.push(event.url);
     jsEvent.preventDefault();
+  },
+  loading(isLoading) {
+    loading.value = isLoading;
   },
 };
 </script>

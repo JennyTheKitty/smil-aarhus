@@ -66,227 +66,6 @@ input BooleanFilter {
   notEqualTo: Boolean
 }
 
-"""All input for the create `Event` mutation."""
-input CreateEventInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """The `Event` to be created by this mutation."""
-  event: EventInput!
-}
-
-"""The output of our create `Event` mutation."""
-type CreateEventPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `Event` that was created by this mutation."""
-  event: Event
-
-  """An edge for our `Event`. May be used by Relay 1."""
-  eventEdge(
-    """The method to use when ordering `Event`."""
-    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the create `EventTag` mutation."""
-input CreateEventTagInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """The `EventTag` to be created by this mutation."""
-  eventTag: EventTagInput!
-}
-
-"""The output of our create `EventTag` mutation."""
-type CreateEventTagPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `EventTag` that was created by this mutation."""
-  eventTag: EventTag
-
-  """An edge for our `EventTag`. May be used by Relay 1."""
-  eventTagEdge(
-    """The method to use when ordering `EventTag`."""
-    orderBy: [EventTagsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTagsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the create `EventTagTr` mutation."""
-input CreateEventTagTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """The `EventTagTr` to be created by this mutation."""
-  eventTagTr: EventTagTrInput!
-}
-
-"""The output of our create `EventTagTr` mutation."""
-type CreateEventTagTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `EventTagTr` that was created by this mutation."""
-  eventTagTr: EventTagTr
-
-  """An edge for our `EventTagTr`. May be used by Relay 1."""
-  eventTagTrEdge(
-    """The method to use when ordering `EventTagTr`."""
-    orderBy: [EventTagTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTagTrsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-
-  """Reads a single `EventTag` that is related to this `EventTagTr`."""
-  tag: EventTag
-}
-
-"""All input for the create `EventTemplate` mutation."""
-input CreateEventTemplateInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """The `EventTemplate` to be created by this mutation."""
-  eventTemplate: EventTemplateInput!
-}
-
-"""The output of our create `EventTemplate` mutation."""
-type CreateEventTemplatePayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `EventTemplate` that was created by this mutation."""
-  eventTemplate: EventTemplate
-
-  """An edge for our `EventTemplate`. May be used by Relay 1."""
-  eventTemplateEdge(
-    """The method to use when ordering `EventTemplate`."""
-    orderBy: [EventTemplatesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTemplatesEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the create `EventTemplateTr` mutation."""
-input CreateEventTemplateTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """The `EventTemplateTr` to be created by this mutation."""
-  eventTemplateTr: EventTemplateTrInput!
-}
-
-"""The output of our create `EventTemplateTr` mutation."""
-type CreateEventTemplateTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """
-  Reads a single `EventTemplate` that is related to this `EventTemplateTr`.
-  """
-  eventTemplate: EventTemplate
-
-  """The `EventTemplateTr` that was created by this mutation."""
-  eventTemplateTr: EventTemplateTr
-
-  """An edge for our `EventTemplateTr`. May be used by Relay 1."""
-  eventTemplateTrEdge(
-    """The method to use when ordering `EventTemplateTr`."""
-    orderBy: [EventTemplateTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTemplateTrsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the create `EventTr` mutation."""
-input CreateEventTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """The `EventTr` to be created by this mutation."""
-  eventTr: EventTrInput!
-}
-
-"""The output of our create `EventTr` mutation."""
-type CreateEventTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """Reads a single `Event` that is related to this `EventTr`."""
-  event: Event
-
-  """The `EventTr` that was created by this mutation."""
-  eventTr: EventTr
-
-  """An edge for our `EventTr`. May be used by Relay 1."""
-  eventTrEdge(
-    """The method to use when ordering `EventTr`."""
-    orderBy: [EventTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTrsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
 """All input for the create `EventViaEventTag` mutation."""
 input CreateEventViaEventTagInput {
   """
@@ -362,79 +141,6 @@ type CreateEventViaGroupPayload {
 
   """Reads a single `Group` that is related to this `EventViaGroup`."""
   group: Group
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the create `Group` mutation."""
-input CreateGroupInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """The `Group` to be created by this mutation."""
-  group: GroupInput!
-}
-
-"""The output of our create `Group` mutation."""
-type CreateGroupPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `Group` that was created by this mutation."""
-  group: Group
-
-  """An edge for our `Group`. May be used by Relay 1."""
-  groupEdge(
-    """The method to use when ordering `Group`."""
-    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): GroupsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the create `GroupTr` mutation."""
-input CreateGroupTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """The `GroupTr` to be created by this mutation."""
-  groupTr: GroupTrInput!
-}
-
-"""The output of our create `GroupTr` mutation."""
-type CreateGroupTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """Reads a single `Group` that is related to this `GroupTr`."""
-  group: Group
-
-  """The `GroupTr` that was created by this mutation."""
-  groupTr: GroupTr
-
-  """An edge for our `GroupTr`. May be used by Relay 1."""
-  groupTrEdge(
-    """The method to use when ordering `GroupTr`."""
-    orderBy: [GroupTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): GroupTrsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -621,224 +327,6 @@ input DatetimeFilter {
   notEqualTo: Datetime
 }
 
-"""All input for the `deleteEvent` mutation."""
-input DeleteEventInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  id: BigInt!
-}
-
-"""The output of our delete `Event` mutation."""
-type DeleteEventPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedEventNodeId: ID
-
-  """The `Event` that was deleted by this mutation."""
-  event: Event
-
-  """An edge for our `Event`. May be used by Relay 1."""
-  eventEdge(
-    """The method to use when ordering `Event`."""
-    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `deleteEventTag` mutation."""
-input DeleteEventTagInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  id: BigInt!
-}
-
-"""The output of our delete `EventTag` mutation."""
-type DeleteEventTagPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedEventTagNodeId: ID
-
-  """The `EventTag` that was deleted by this mutation."""
-  eventTag: EventTag
-
-  """An edge for our `EventTag`. May be used by Relay 1."""
-  eventTagEdge(
-    """The method to use when ordering `EventTag`."""
-    orderBy: [EventTagsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTagsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `deleteEventTagTr` mutation."""
-input DeleteEventTagTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  languageCode: TrLanguage!
-  tagId: BigInt!
-}
-
-"""The output of our delete `EventTagTr` mutation."""
-type DeleteEventTagTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedEventTagTrNodeId: ID
-
-  """The `EventTagTr` that was deleted by this mutation."""
-  eventTagTr: EventTagTr
-
-  """An edge for our `EventTagTr`. May be used by Relay 1."""
-  eventTagTrEdge(
-    """The method to use when ordering `EventTagTr`."""
-    orderBy: [EventTagTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTagTrsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-
-  """Reads a single `EventTag` that is related to this `EventTagTr`."""
-  tag: EventTag
-}
-
-"""All input for the `deleteEventTemplate` mutation."""
-input DeleteEventTemplateInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  id: BigInt!
-}
-
-"""The output of our delete `EventTemplate` mutation."""
-type DeleteEventTemplatePayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedEventTemplateNodeId: ID
-
-  """The `EventTemplate` that was deleted by this mutation."""
-  eventTemplate: EventTemplate
-
-  """An edge for our `EventTemplate`. May be used by Relay 1."""
-  eventTemplateEdge(
-    """The method to use when ordering `EventTemplate`."""
-    orderBy: [EventTemplatesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTemplatesEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `deleteEventTemplateTr` mutation."""
-input DeleteEventTemplateTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  eventTemplateId: BigInt!
-  languageCode: TrLanguage!
-}
-
-"""The output of our delete `EventTemplateTr` mutation."""
-type DeleteEventTemplateTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedEventTemplateTrNodeId: ID
-
-  """
-  Reads a single `EventTemplate` that is related to this `EventTemplateTr`.
-  """
-  eventTemplate: EventTemplate
-
-  """The `EventTemplateTr` that was deleted by this mutation."""
-  eventTemplateTr: EventTemplateTr
-
-  """An edge for our `EventTemplateTr`. May be used by Relay 1."""
-  eventTemplateTrEdge(
-    """The method to use when ordering `EventTemplateTr`."""
-    orderBy: [EventTemplateTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTemplateTrsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `deleteEventTr` mutation."""
-input DeleteEventTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  eventId: BigInt!
-  languageCode: TrLanguage!
-}
-
-"""The output of our delete `EventTr` mutation."""
-type DeleteEventTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedEventTrNodeId: ID
-
-  """Reads a single `Event` that is related to this `EventTr`."""
-  event: Event
-
-  """The `EventTr` that was deleted by this mutation."""
-  eventTr: EventTr
-
-  """An edge for our `EventTr`. May be used by Relay 1."""
-  eventTrEdge(
-    """The method to use when ordering `EventTr`."""
-    orderBy: [EventTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTrsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
 """All input for the `deleteEventViaEventTag` mutation."""
 input DeleteEventViaEventTagInput {
   """
@@ -847,7 +335,7 @@ input DeleteEventViaEventTagInput {
   """
   clientMutationId: String
   eventId: BigInt!
-  tagId: Int!
+  tagId: BigInt!
 }
 
 """The output of our delete `EventViaEventTag` mutation."""
@@ -888,7 +376,7 @@ input DeleteEventViaGroupInput {
   """
   clientMutationId: String
   eventId: BigInt!
-  groupId: Int!
+  groupId: BigInt!
 }
 
 """The output of our delete `EventViaGroup` mutation."""
@@ -914,78 +402,6 @@ type DeleteEventViaGroupPayload {
 
   """Reads a single `Group` that is related to this `EventViaGroup`."""
   group: Group
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `deleteGroup` mutation."""
-input DeleteGroupInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  id: BigInt!
-}
-
-"""The output of our delete `Group` mutation."""
-type DeleteGroupPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedGroupNodeId: ID
-
-  """The `Group` that was deleted by this mutation."""
-  group: Group
-
-  """An edge for our `Group`. May be used by Relay 1."""
-  groupEdge(
-    """The method to use when ordering `Group`."""
-    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): GroupsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `deleteGroupTr` mutation."""
-input DeleteGroupTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  groupId: BigInt!
-  languageCode: TrLanguage!
-}
-
-"""The output of our delete `GroupTr` mutation."""
-type DeleteGroupTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedGroupTrNodeId: ID
-
-  """Reads a single `Group` that is related to this `GroupTr`."""
-  group: Group
-
-  """The `GroupTr` that was deleted by this mutation."""
-  groupTr: GroupTr
-
-  """An edge for our `GroupTr`. May be used by Relay 1."""
-  groupTrEdge(
-    """The method to use when ordering `GroupTr`."""
-    orderBy: [GroupTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): GroupTrsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -1112,42 +528,8 @@ type DeletePageTrPayload {
 type Event {
   endsAt: Datetime!
 
-  """Reads and enables pagination through a set of `EventViaEventTag`."""
-  eventViaEventTags(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: EventViaEventTagCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventViaEventTagFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `EventViaEventTag`."""
-    orderBy: [EventViaEventTagsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventViaEventTagsConnection!
-
   """Reads and enables pagination through a set of `EventViaGroup`."""
-  eventViaGroups(
+  groups(
     """Read all values in the set after (below) this cursor."""
     after: Cursor
 
@@ -1182,9 +564,44 @@ type Event {
   id: BigInt!
   image: ResponsiveImage
   imageFile: String
+  isTemplate: Boolean!
   overrideImageFile: String
   special: Boolean!
   startsAt: Datetime!
+
+  """Reads and enables pagination through a set of `EventViaEventTag`."""
+  tags(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EventViaEventTagCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventViaEventTagFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `EventViaEventTag`."""
+    orderBy: [EventViaEventTagsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventViaEventTagsConnection!
 
   """Reads and enables pagination through a set of `EventTr`."""
   translations(
@@ -1231,6 +648,9 @@ input EventCondition {
   """Checks for equality with the object’s `id` field."""
   id: BigInt
 
+  """Checks for equality with the object’s `isTemplate` field."""
+  isTemplate: Boolean
+
   """Checks for equality with the object’s `overrideImageFile` field."""
   overrideImageFile: String
 
@@ -1239,6 +659,17 @@ input EventCondition {
 
   """Checks for equality with the object’s `startsAt` field."""
   startsAt: Datetime
+}
+
+"""An input for mutations affecting `EventDatum`"""
+input EventDatumInput {
+  endsAt: Datetime!
+  groupIds: [BigInt]
+  isTemplate: Boolean
+  overrideImageFile: String
+  special: Boolean!
+  startsAt: Datetime!
+  tagIds: [BigInt]
 }
 
 """
@@ -1251,6 +682,9 @@ input EventFilter {
   """Filter by the object’s `id` field."""
   id: BigIntFilter
 
+  """Filter by the object’s `isTemplate` field."""
+  isTemplate: BooleanFilter
+
   """Filter by the object’s `overrideImageFile` field."""
   overrideImageFile: StringFilter
 
@@ -1261,29 +695,9 @@ input EventFilter {
   startsAt: DatetimeFilter
 }
 
-"""An input for mutations affecting `Event`"""
-input EventInput {
-  endsAt: Datetime!
-  id: BigInt
-  overrideImageFile: String
-  special: Boolean!
-  startsAt: Datetime!
-}
-
-"""
-Represents an update to a `Event`. Fields that are set will be updated.
-"""
-input EventPatch {
-  endsAt: Datetime
-  id: BigInt
-  overrideImageFile: String
-  special: Boolean
-  startsAt: Datetime
-}
-
 type EventTag {
   """Reads and enables pagination through a set of `EventViaEventTag`."""
-  eventViaEventTagsByTagId(
+  events(
     """Read all values in the set after (below) this cursor."""
     after: Cursor
 
@@ -1377,20 +791,6 @@ input EventTagFilter {
   imageFile: StringFilter
 }
 
-"""An input for mutations affecting `EventTag`"""
-input EventTagInput {
-  id: BigInt
-  imageFile: String
-}
-
-"""
-Represents an update to a `EventTag`. Fields that are set will be updated.
-"""
-input EventTagPatch {
-  id: BigInt
-  imageFile: String
-}
-
 type EventTagTr {
   languageCode: TrLanguage!
 
@@ -1427,22 +827,6 @@ input EventTagTrFilter {
 
   """Filter by the object’s `title` field."""
   title: StringFilter
-}
-
-"""An input for mutations affecting `EventTagTr`"""
-input EventTagTrInput {
-  languageCode: TrLanguage!
-  tagId: BigInt!
-  title: String!
-}
-
-"""
-Represents an update to a `EventTagTr`. Fields that are set will be updated.
-"""
-input EventTagTrPatch {
-  languageCode: TrLanguage
-  tagId: BigInt
-  title: String
 }
 
 """A connection to a list of `EventTagTr` values."""
@@ -1521,227 +905,6 @@ enum EventTagsOrderBy {
   PRIMARY_KEY_DESC
 }
 
-type EventTemplate {
-  id: BigInt!
-
-  """Reads and enables pagination through a set of `EventTemplateTr`."""
-  translations(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: EventTemplateTrCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventTemplateTrFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `EventTemplateTr`."""
-    orderBy: [EventTemplateTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTemplateTrsConnection!
-}
-
-"""
-A condition to be used against `EventTemplate` object types. All fields are
-tested for equality and combined with a logical ‘and.’
-"""
-input EventTemplateCondition {
-  """Checks for equality with the object’s `id` field."""
-  id: BigInt
-}
-
-"""
-A filter to be used against `EventTemplate` object types. All fields are combined with a logical ‘and.’
-"""
-input EventTemplateFilter {
-  """Filter by the object’s `id` field."""
-  id: BigIntFilter
-}
-
-"""An input for mutations affecting `EventTemplate`"""
-input EventTemplateInput {
-  id: BigInt
-}
-
-"""
-Represents an update to a `EventTemplate`. Fields that are set will be updated.
-"""
-input EventTemplatePatch {
-  id: BigInt
-}
-
-type EventTemplateTr {
-  description: String!
-
-  """
-  Reads a single `EventTemplate` that is related to this `EventTemplateTr`.
-  """
-  eventTemplate: EventTemplate
-  eventTemplateId: BigInt!
-  languageCode: TrLanguage!
-  title: String!
-  venue: String!
-}
-
-"""
-A condition to be used against `EventTemplateTr` object types. All fields are
-tested for equality and combined with a logical ‘and.’
-"""
-input EventTemplateTrCondition {
-  """Checks for equality with the object’s `description` field."""
-  description: String
-
-  """Checks for equality with the object’s `eventTemplateId` field."""
-  eventTemplateId: BigInt
-
-  """Checks for equality with the object’s `languageCode` field."""
-  languageCode: TrLanguage
-
-  """Checks for equality with the object’s `title` field."""
-  title: String
-
-  """Checks for equality with the object’s `venue` field."""
-  venue: String
-}
-
-"""
-A filter to be used against `EventTemplateTr` object types. All fields are combined with a logical ‘and.’
-"""
-input EventTemplateTrFilter {
-  """Filter by the object’s `description` field."""
-  description: StringFilter
-
-  """Filter by the object’s `eventTemplateId` field."""
-  eventTemplateId: BigIntFilter
-
-  """Filter by the object’s `languageCode` field."""
-  languageCode: TrLanguageFilter
-
-  """Filter by the object’s `title` field."""
-  title: StringFilter
-
-  """Filter by the object’s `venue` field."""
-  venue: StringFilter
-}
-
-"""An input for mutations affecting `EventTemplateTr`"""
-input EventTemplateTrInput {
-  description: String!
-  eventTemplateId: BigInt!
-  languageCode: TrLanguage!
-  title: String!
-  venue: String!
-}
-
-"""
-Represents an update to a `EventTemplateTr`. Fields that are set will be updated.
-"""
-input EventTemplateTrPatch {
-  description: String
-  eventTemplateId: BigInt
-  languageCode: TrLanguage
-  title: String
-  venue: String
-}
-
-"""A connection to a list of `EventTemplateTr` values."""
-type EventTemplateTrsConnection {
-  """
-  A list of edges which contains the `EventTemplateTr` and cursor to aid in pagination.
-  """
-  edges: [EventTemplateTrsEdge!]!
-
-  """A list of `EventTemplateTr` objects."""
-  nodes: [EventTemplateTr!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """
-  The count of *all* `EventTemplateTr` you could get from the connection.
-  """
-  totalCount: Int!
-}
-
-"""A `EventTemplateTr` edge in the connection."""
-type EventTemplateTrsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `EventTemplateTr` at the end of the edge."""
-  node: EventTemplateTr!
-}
-
-"""Methods to use when ordering `EventTemplateTr`."""
-enum EventTemplateTrsOrderBy {
-  DESCRIPTION_ASC
-  DESCRIPTION_DESC
-  EVENT_TEMPLATE_ID_ASC
-  EVENT_TEMPLATE_ID_DESC
-  LANGUAGE_CODE_ASC
-  LANGUAGE_CODE_DESC
-  NATURAL
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
-  TITLE_ASC
-  TITLE_DESC
-  VENUE_ASC
-  VENUE_DESC
-}
-
-"""A connection to a list of `EventTemplate` values."""
-type EventTemplatesConnection {
-  """
-  A list of edges which contains the `EventTemplate` and cursor to aid in pagination.
-  """
-  edges: [EventTemplatesEdge!]!
-
-  """A list of `EventTemplate` objects."""
-  nodes: [EventTemplate!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `EventTemplate` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `EventTemplate` edge in the connection."""
-type EventTemplatesEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `EventTemplate` at the end of the edge."""
-  node: EventTemplate!
-}
-
-"""Methods to use when ordering `EventTemplate`."""
-enum EventTemplatesOrderBy {
-  ID_ASC
-  ID_DESC
-  NATURAL
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
-}
-
 type EventTr {
   description: String!
 
@@ -1751,7 +914,6 @@ type EventTr {
   languageCode: TrLanguage!
   slug: String!
   title: String!
-  venue: String!
 }
 
 """
@@ -1772,9 +934,13 @@ input EventTrCondition {
 
   """Checks for equality with the object’s `title` field."""
   title: String
+}
 
-  """Checks for equality with the object’s `venue` field."""
-  venue: String
+"""An input for mutations affecting `EventTrDatum`"""
+input EventTrDatumInput {
+  description: String!
+  languageCode: String!
+  title: String!
 }
 
 """
@@ -1795,31 +961,6 @@ input EventTrFilter {
 
   """Filter by the object’s `title` field."""
   title: StringFilter
-
-  """Filter by the object’s `venue` field."""
-  venue: StringFilter
-}
-
-"""An input for mutations affecting `EventTr`"""
-input EventTrInput {
-  description: String!
-  eventId: BigInt!
-  languageCode: TrLanguage!
-  slug: String!
-  title: String!
-  venue: String!
-}
-
-"""
-Represents an update to a `EventTr`. Fields that are set will be updated.
-"""
-input EventTrPatch {
-  description: String
-  eventId: BigInt
-  languageCode: TrLanguage
-  slug: String
-  title: String
-  venue: String
 }
 
 """A connection to a list of `EventTr` values."""
@@ -1863,8 +1004,6 @@ enum EventTrsOrderBy {
   SLUG_DESC
   TITLE_ASC
   TITLE_DESC
-  VENUE_ASC
-  VENUE_DESC
 }
 
 type EventViaEventTag {
@@ -1874,7 +1013,7 @@ type EventViaEventTag {
 
   """Reads a single `EventTag` that is related to this `EventViaEventTag`."""
   tag: EventTag
-  tagId: Int!
+  tagId: BigInt!
 }
 
 """
@@ -1886,7 +1025,7 @@ input EventViaEventTagCondition {
   eventId: BigInt
 
   """Checks for equality with the object’s `tagId` field."""
-  tagId: Int
+  tagId: BigInt
 }
 
 """
@@ -1897,13 +1036,13 @@ input EventViaEventTagFilter {
   eventId: BigIntFilter
 
   """Filter by the object’s `tagId` field."""
-  tagId: IntFilter
+  tagId: BigIntFilter
 }
 
 """An input for mutations affecting `EventViaEventTag`"""
 input EventViaEventTagInput {
   eventId: BigInt!
-  tagId: Int!
+  tagId: BigInt!
 }
 
 """
@@ -1911,7 +1050,7 @@ Represents an update to a `EventViaEventTag`. Fields that are set will be update
 """
 input EventViaEventTagPatch {
   eventId: BigInt
-  tagId: Int
+  tagId: BigInt
 }
 
 """A connection to a list of `EventViaEventTag` values."""
@@ -1960,7 +1099,7 @@ type EventViaGroup {
 
   """Reads a single `Group` that is related to this `EventViaGroup`."""
   group: Group
-  groupId: Int!
+  groupId: BigInt!
 }
 
 """
@@ -1972,7 +1111,7 @@ input EventViaGroupCondition {
   eventId: BigInt
 
   """Checks for equality with the object’s `groupId` field."""
-  groupId: Int
+  groupId: BigInt
 }
 
 """
@@ -1983,13 +1122,13 @@ input EventViaGroupFilter {
   eventId: BigIntFilter
 
   """Filter by the object’s `groupId` field."""
-  groupId: IntFilter
+  groupId: BigIntFilter
 }
 
 """An input for mutations affecting `EventViaGroup`"""
 input EventViaGroupInput {
   eventId: BigInt!
-  groupId: Int!
+  groupId: BigInt!
 }
 
 """
@@ -1997,7 +1136,7 @@ Represents an update to a `EventViaGroup`. Fields that are set will be updated.
 """
 input EventViaGroupPatch {
   eventId: BigInt
-  groupId: Int
+  groupId: BigInt
 }
 
 """A connection to a list of `EventViaGroup` values."""
@@ -2069,6 +1208,8 @@ enum EventsOrderBy {
   ENDS_AT_DESC
   ID_ASC
   ID_DESC
+  IS_TEMPLATE_ASC
+  IS_TEMPLATE_DESC
   NATURAL
   OVERRIDE_IMAGE_FILE_ASC
   OVERRIDE_IMAGE_FILE_DESC
@@ -2082,7 +1223,7 @@ enum EventsOrderBy {
 
 type Group {
   """Reads and enables pagination through a set of `EventViaGroup`."""
-  eventViaGroups(
+  events(
     """Read all values in the set after (below) this cursor."""
     after: Cursor
 
@@ -2175,20 +1316,6 @@ input GroupFilter {
   imageFile: StringFilter
 }
 
-"""An input for mutations affecting `Group`"""
-input GroupInput {
-  id: BigInt
-  imageFile: String!
-}
-
-"""
-Represents an update to a `Group`. Fields that are set will be updated.
-"""
-input GroupPatch {
-  id: BigInt
-  imageFile: String
-}
-
 type GroupTr {
   description: String!
 
@@ -2245,28 +1372,6 @@ input GroupTrFilter {
 
   """Filter by the object’s `title` field."""
   title: StringFilter
-}
-
-"""An input for mutations affecting `GroupTr`"""
-input GroupTrInput {
-  description: String!
-  groupId: BigInt!
-  languageCode: TrLanguage!
-  shortDescription: String!
-  slug: String!
-  title: String!
-}
-
-"""
-Represents an update to a `GroupTr`. Fields that are set will be updated.
-"""
-input GroupTrPatch {
-  description: String
-  groupId: BigInt
-  languageCode: TrLanguage
-  shortDescription: String
-  slug: String
-  title: String
 }
 
 """A connection to a list of `GroupTr` values."""
@@ -2349,34 +1454,6 @@ enum GroupsOrderBy {
   NATURAL
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
-}
-
-"""
-A filter to be used against Int fields. All fields are combined with a logical ‘and.’
-"""
-input IntFilter {
-  """Equal to the specified value."""
-  equalTo: Int
-
-  """Greater than the specified value."""
-  greaterThan: Int
-
-  """Greater than or equal to the specified value."""
-  greaterThanOrEqualTo: Int
-
-  """
-  Is null (if `true` is specified) or is not null (if `false` is specified).
-  """
-  isNull: Boolean
-
-  """Less than the specified value."""
-  lessThan: Int
-
-  """Less than or equal to the specified value."""
-  lessThanOrEqualTo: Int
-
-  """Not equal to the specified value."""
-  notEqualTo: Int
 }
 
 type Member {
@@ -2501,54 +1578,6 @@ type Mutation {
     input: AuthenticateInput!
   ): String!
 
-  """Creates a single `Event`."""
-  createEvent(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreateEventInput!
-  ): CreateEventPayload
-
-  """Creates a single `EventTag`."""
-  createEventTag(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreateEventTagInput!
-  ): CreateEventTagPayload
-
-  """Creates a single `EventTagTr`."""
-  createEventTagTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreateEventTagTrInput!
-  ): CreateEventTagTrPayload
-
-  """Creates a single `EventTemplate`."""
-  createEventTemplate(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreateEventTemplateInput!
-  ): CreateEventTemplatePayload
-
-  """Creates a single `EventTemplateTr`."""
-  createEventTemplateTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreateEventTemplateTrInput!
-  ): CreateEventTemplateTrPayload
-
-  """Creates a single `EventTr`."""
-  createEventTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreateEventTrInput!
-  ): CreateEventTrPayload
-
   """Creates a single `EventViaEventTag`."""
   createEventViaEventTag(
     """
@@ -2564,22 +1593,6 @@ type Mutation {
     """
     input: CreateEventViaGroupInput!
   ): CreateEventViaGroupPayload
-
-  """Creates a single `Group`."""
-  createGroup(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreateGroupInput!
-  ): CreateGroupPayload
-
-  """Creates a single `GroupTr`."""
-  createGroupTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreateGroupTrInput!
-  ): CreateGroupTrPayload
 
   """Creates a single `Member`."""
   createMember(
@@ -2613,54 +1626,6 @@ type Mutation {
     input: CreateUploadUrlInput!
   ): CreateUploadUrlPayload
 
-  """Deletes a single `Event` using a unique key."""
-  deleteEvent(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteEventInput!
-  ): DeleteEventPayload
-
-  """Deletes a single `EventTag` using a unique key."""
-  deleteEventTag(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteEventTagInput!
-  ): DeleteEventTagPayload
-
-  """Deletes a single `EventTagTr` using a unique key."""
-  deleteEventTagTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteEventTagTrInput!
-  ): DeleteEventTagTrPayload
-
-  """Deletes a single `EventTemplate` using a unique key."""
-  deleteEventTemplate(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteEventTemplateInput!
-  ): DeleteEventTemplatePayload
-
-  """Deletes a single `EventTemplateTr` using a unique key."""
-  deleteEventTemplateTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteEventTemplateTrInput!
-  ): DeleteEventTemplateTrPayload
-
-  """Deletes a single `EventTr` using a unique key."""
-  deleteEventTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteEventTrInput!
-  ): DeleteEventTrPayload
-
   """Deletes a single `EventViaEventTag` using a unique key."""
   deleteEventViaEventTag(
     """
@@ -2676,22 +1641,6 @@ type Mutation {
     """
     input: DeleteEventViaGroupInput!
   ): DeleteEventViaGroupPayload
-
-  """Deletes a single `Group` using a unique key."""
-  deleteGroup(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteGroupInput!
-  ): DeleteGroupPayload
-
-  """Deletes a single `GroupTr` using a unique key."""
-  deleteGroupTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteGroupTrInput!
-  ): DeleteGroupTrPayload
 
   """Deletes a single `Member` using a unique key."""
   deleteMember(
@@ -2726,54 +1675,6 @@ type Mutation {
   ): DeletePageTrPayload
   logout: Boolean
 
-  """Updates a single `Event` using a unique key and a patch."""
-  updateEvent(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateEventInput!
-  ): UpdateEventPayload
-
-  """Updates a single `EventTag` using a unique key and a patch."""
-  updateEventTag(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateEventTagInput!
-  ): UpdateEventTagPayload
-
-  """Updates a single `EventTagTr` using a unique key and a patch."""
-  updateEventTagTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateEventTagTrInput!
-  ): UpdateEventTagTrPayload
-
-  """Updates a single `EventTemplate` using a unique key and a patch."""
-  updateEventTemplate(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateEventTemplateInput!
-  ): UpdateEventTemplatePayload
-
-  """Updates a single `EventTemplateTr` using a unique key and a patch."""
-  updateEventTemplateTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateEventTemplateTrInput!
-  ): UpdateEventTemplateTrPayload
-
-  """Updates a single `EventTr` using a unique key and a patch."""
-  updateEventTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateEventTrInput!
-  ): UpdateEventTrPayload
-
   """Updates a single `EventViaEventTag` using a unique key and a patch."""
   updateEventViaEventTag(
     """
@@ -2789,22 +1690,6 @@ type Mutation {
     """
     input: UpdateEventViaGroupInput!
   ): UpdateEventViaGroupPayload
-
-  """Updates a single `Group` using a unique key and a patch."""
-  updateGroup(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateGroupInput!
-  ): UpdateGroupPayload
-
-  """Updates a single `GroupTr` using a unique key and a patch."""
-  updateGroupTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateGroupTrInput!
-  ): UpdateGroupTrPayload
 
   """Updates a single `Member` using a unique key and a patch."""
   updateMember(
@@ -2837,6 +1722,12 @@ type Mutation {
     """
     input: UpdatePageTrInput!
   ): UpdatePageTrPayload
+  upsertEvent(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertEventInput!
+  ): UpsertEventPayload
 }
 
 type Page {
@@ -3049,6 +1940,7 @@ enum PagesOrderBy {
 type Query {
   currentMember: Member
   event(id: BigInt!): Event
+  eventBySlug(preferredLanguageCode: String!, slug: String!): Event
   eventTag(id: BigInt!): EventTag
   eventTagTr(languageCode: TrLanguage!, tagId: BigInt!): EventTagTr
 
@@ -3119,77 +2011,8 @@ type Query {
     """The method to use when ordering `EventTag`."""
     orderBy: [EventTagsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventTagsConnection
-  eventTemplate(id: BigInt!): EventTemplate
-  eventTemplateTr(eventTemplateId: BigInt!, languageCode: TrLanguage!): EventTemplateTr
-
-  """Reads and enables pagination through a set of `EventTemplateTr`."""
-  eventTemplateTrs(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: EventTemplateTrCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventTemplateTrFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `EventTemplateTr`."""
-    orderBy: [EventTemplateTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTemplateTrsConnection
-
-  """Reads and enables pagination through a set of `EventTemplate`."""
-  eventTemplates(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: EventTemplateCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventTemplateFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `EventTemplate`."""
-    orderBy: [EventTemplatesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTemplatesConnection
   eventTr(eventId: BigInt!, languageCode: TrLanguage!): EventTr
+  eventTrBySlugAndLanguageCode(languageCode: TrLanguage!, slug: String!): EventTr
 
   """Reads and enables pagination through a set of `EventTr`."""
   eventTrs(
@@ -3224,8 +2047,8 @@ type Query {
     """The method to use when ordering `EventTr`."""
     orderBy: [EventTrsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventTrsConnection
-  eventViaEventTag(eventId: BigInt!, tagId: Int!): EventViaEventTag
-  eventViaGroup(eventId: BigInt!, groupId: Int!): EventViaGroup
+  eventViaEventTag(eventId: BigInt!, tagId: BigInt!): EventViaEventTag
+  eventViaGroup(eventId: BigInt!, groupId: BigInt!): EventViaGroup
 
   """Reads and enables pagination through a set of `Event`."""
   events(
@@ -3442,6 +2265,50 @@ type Query {
   which can only query top level fields if they are in a particular form.
   """
   query: Query!
+
+  """Reads and enables pagination through a set of `EventTag`."""
+  searchEventTags(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+    query: String!
+  ): EventTagsConnection
+
+  """Reads and enables pagination through a set of `Group`."""
+  searchGroups(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+    query: String!
+  ): GroupsConnection
 }
 
 type ResponsiveImage {
@@ -3544,248 +2411,6 @@ input UUIDFilter {
   notEqualTo: UUID
 }
 
-"""All input for the `updateEvent` mutation."""
-input UpdateEventInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  id: BigInt!
-
-  """
-  An object where the defined keys will be set on the `Event` being updated.
-  """
-  patch: EventPatch!
-}
-
-"""The output of our update `Event` mutation."""
-type UpdateEventPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `Event` that was updated by this mutation."""
-  event: Event
-
-  """An edge for our `Event`. May be used by Relay 1."""
-  eventEdge(
-    """The method to use when ordering `Event`."""
-    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `updateEventTag` mutation."""
-input UpdateEventTagInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  id: BigInt!
-
-  """
-  An object where the defined keys will be set on the `EventTag` being updated.
-  """
-  patch: EventTagPatch!
-}
-
-"""The output of our update `EventTag` mutation."""
-type UpdateEventTagPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `EventTag` that was updated by this mutation."""
-  eventTag: EventTag
-
-  """An edge for our `EventTag`. May be used by Relay 1."""
-  eventTagEdge(
-    """The method to use when ordering `EventTag`."""
-    orderBy: [EventTagsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTagsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `updateEventTagTr` mutation."""
-input UpdateEventTagTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  languageCode: TrLanguage!
-
-  """
-  An object where the defined keys will be set on the `EventTagTr` being updated.
-  """
-  patch: EventTagTrPatch!
-  tagId: BigInt!
-}
-
-"""The output of our update `EventTagTr` mutation."""
-type UpdateEventTagTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `EventTagTr` that was updated by this mutation."""
-  eventTagTr: EventTagTr
-
-  """An edge for our `EventTagTr`. May be used by Relay 1."""
-  eventTagTrEdge(
-    """The method to use when ordering `EventTagTr`."""
-    orderBy: [EventTagTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTagTrsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-
-  """Reads a single `EventTag` that is related to this `EventTagTr`."""
-  tag: EventTag
-}
-
-"""All input for the `updateEventTemplate` mutation."""
-input UpdateEventTemplateInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  id: BigInt!
-
-  """
-  An object where the defined keys will be set on the `EventTemplate` being updated.
-  """
-  patch: EventTemplatePatch!
-}
-
-"""The output of our update `EventTemplate` mutation."""
-type UpdateEventTemplatePayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `EventTemplate` that was updated by this mutation."""
-  eventTemplate: EventTemplate
-
-  """An edge for our `EventTemplate`. May be used by Relay 1."""
-  eventTemplateEdge(
-    """The method to use when ordering `EventTemplate`."""
-    orderBy: [EventTemplatesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTemplatesEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `updateEventTemplateTr` mutation."""
-input UpdateEventTemplateTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  eventTemplateId: BigInt!
-  languageCode: TrLanguage!
-
-  """
-  An object where the defined keys will be set on the `EventTemplateTr` being updated.
-  """
-  patch: EventTemplateTrPatch!
-}
-
-"""The output of our update `EventTemplateTr` mutation."""
-type UpdateEventTemplateTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """
-  Reads a single `EventTemplate` that is related to this `EventTemplateTr`.
-  """
-  eventTemplate: EventTemplate
-
-  """The `EventTemplateTr` that was updated by this mutation."""
-  eventTemplateTr: EventTemplateTr
-
-  """An edge for our `EventTemplateTr`. May be used by Relay 1."""
-  eventTemplateTrEdge(
-    """The method to use when ordering `EventTemplateTr`."""
-    orderBy: [EventTemplateTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTemplateTrsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `updateEventTr` mutation."""
-input UpdateEventTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  eventId: BigInt!
-  languageCode: TrLanguage!
-
-  """
-  An object where the defined keys will be set on the `EventTr` being updated.
-  """
-  patch: EventTrPatch!
-}
-
-"""The output of our update `EventTr` mutation."""
-type UpdateEventTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """Reads a single `Event` that is related to this `EventTr`."""
-  event: Event
-
-  """The `EventTr` that was updated by this mutation."""
-  eventTr: EventTr
-
-  """An edge for our `EventTr`. May be used by Relay 1."""
-  eventTrEdge(
-    """The method to use when ordering `EventTr`."""
-    orderBy: [EventTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTrsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
 """All input for the `updateEventViaEventTag` mutation."""
 input UpdateEventViaEventTagInput {
   """
@@ -3799,7 +2424,7 @@ input UpdateEventViaEventTagInput {
   An object where the defined keys will be set on the `EventViaEventTag` being updated.
   """
   patch: EventViaEventTagPatch!
-  tagId: Int!
+  tagId: BigInt!
 }
 
 """The output of our update `EventViaEventTag` mutation."""
@@ -3839,7 +2464,7 @@ input UpdateEventViaGroupInput {
   """
   clientMutationId: String
   eventId: BigInt!
-  groupId: Int!
+  groupId: BigInt!
 
   """
   An object where the defined keys will be set on the `EventViaGroup` being updated.
@@ -3869,86 +2494,6 @@ type UpdateEventViaGroupPayload {
 
   """Reads a single `Group` that is related to this `EventViaGroup`."""
   group: Group
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `updateGroup` mutation."""
-input UpdateGroupInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  id: BigInt!
-
-  """
-  An object where the defined keys will be set on the `Group` being updated.
-  """
-  patch: GroupPatch!
-}
-
-"""The output of our update `Group` mutation."""
-type UpdateGroupPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `Group` that was updated by this mutation."""
-  group: Group
-
-  """An edge for our `Group`. May be used by Relay 1."""
-  groupEdge(
-    """The method to use when ordering `Group`."""
-    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): GroupsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `updateGroupTr` mutation."""
-input UpdateGroupTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  groupId: BigInt!
-  languageCode: TrLanguage!
-
-  """
-  An object where the defined keys will be set on the `GroupTr` being updated.
-  """
-  patch: GroupTrPatch!
-}
-
-"""The output of our update `GroupTr` mutation."""
-type UpdateGroupTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """Reads a single `Group` that is related to this `GroupTr`."""
-  group: Group
-
-  """The `GroupTr` that was updated by this mutation."""
-  groupTr: GroupTr
-
-  """An edge for our `GroupTr`. May be used by Relay 1."""
-  groupTrEdge(
-    """The method to use when ordering `GroupTr`."""
-    orderBy: [GroupTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): GroupTrsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -4082,6 +2627,39 @@ type UpdatePageTrPayload {
     """The method to use when ordering `PageTr`."""
     orderBy: [PageTrsOrderBy!] = [PRIMARY_KEY_ASC]
   ): PageTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `upsertEvent` mutation."""
+input UpsertEventInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  data: EventDatumInput!
+  eventId: BigInt
+  translations: [EventTrDatumInput]!
+}
+
+"""The output of our `upsertEvent` mutation."""
+type UpsertEventPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  event: Event
+
+  """An edge for our `Event`. May be used by Relay 1."""
+  eventEdge(
+    """The method to use when ordering `Event`."""
+    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
