@@ -186,3 +186,12 @@ VALUES ('home', 'DA', '<h1>Velkommen til SMIL Aarhus</h1><p>Vi er en forening fo
 INSERT INTO smil_aarhus.page_tr
 VALUES ('home', 'EN', '<h1>Welcome to SMIL Aarhus</h1><p>We are an association for people who are interested in and practice BDSM, sadomasochism, hard sex and a wide range of kinks in the same area.</p><p> If you are curious and considering becoming a member, you can read more under "Become a member" and use the calendar to find an Information Evening where you can get a tour and ask questions to the member who shows you around. If you want to visit some of our open events, you can look in the calendar for the events where you can come as a day member.</p><p>If you are already a member, the calendar is good to keep an eye on when you plan to play in the extended opening hours, as there may well be events during extended opening hours.</p>');
 
+
+INSERT INTO smil_aarhus.page
+VALUES ('faq');
+
+INSERT INTO smil_aarhus.page_tr
+VALUES ('faq', 'DA', '');
+
+INSERT INTO smil_aarhus.page_tr
+VALUES ('faq', 'EN', '');

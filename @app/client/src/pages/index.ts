@@ -1,3 +1,4 @@
+export { default as FAQ } from './FAQ.vue';
 export { default as Group } from './Group.vue';
 export { default as Groups } from './Groups.vue';
 export { default as Home } from './Home.vue';

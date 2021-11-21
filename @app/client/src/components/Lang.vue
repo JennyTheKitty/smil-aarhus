@@ -6,4 +6,10 @@
   </router-view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { locale } = useI18n();
+
+useHead({
+  htmlAttrs: computed(() => ({ lang: locale.value })),
+});
+</script>

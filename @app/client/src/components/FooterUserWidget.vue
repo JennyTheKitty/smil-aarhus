@@ -1,16 +1,16 @@
 <template>
   <div>
     <div v-if="state.currentMember" w:flex="~ col">
-      <span w:text="gray-500">Logged in as:</span>
+      <span w:text="gray-400">Logged in as:</span>
       <span>
         {{ state.currentMember.name }} ({{ state.currentMember.userRole }})
       </span>
-      <a href="#" w:text="gray-500" @click.stop.prevent="logout">Logout</a>
+      <a href="#" w:text="gray-400" @click.stop.prevent="logout">Logout</a>
     </div>
     <div v-else>
       <a
         href="#"
-        w:text="gray-500"
+        w:text="gray-400"
         @click.stop.prevent="isLoginDialogOpen = true"
       >
         Admin login

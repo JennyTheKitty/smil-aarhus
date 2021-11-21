@@ -9,8 +9,13 @@
 <script setup lang="ts">
 const route = useRoute();
 
-watch(
-  () => route.params,
-  () => console.log(route.params)
-);
+useHead({
+  title: computed(() => 'Calendar - SMil Aarhus'),
+  meta: [
+    {
+      name: `description`,
+      content: computed(() => ''),
+    },
+  ],
+});
 </script>

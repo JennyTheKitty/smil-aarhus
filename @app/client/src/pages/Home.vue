@@ -71,6 +71,7 @@
               w:transition="~ duration-200 all"
               href="#"
               tabindex="-1"
+              aria-hidden="true"
             ></a>
             <div
               w:pos="absolute bottom-0"
@@ -93,7 +94,10 @@
               class="object-cover"
               w:w="full"
               w:border="rounded-md"
+              width="150px"
+              height="103px"
               :src="img"
+              alt=""
             />
           </div>
         </div>
@@ -132,4 +136,14 @@ const images = [img1, img2, img3, img4];
 
 const { t, locale } = useI18n();
 const i18nRoute = inject(key.i18nRoute)!;
+
+useHead({
+  title: computed(() => 'Home - SMil Aarhus'),
+  meta: [
+    {
+      name: `description`,
+      content: computed(() => ''),
+    },
+  ],
+});
 </script>

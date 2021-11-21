@@ -88,6 +88,7 @@
         w:justify="center"
         w:gradient="to-l from-transparent to-dark-500"
         w:overflow="hidden"
+        aria-hidden="true"
       >
         <a
           href="#"
@@ -110,6 +111,7 @@
         <a
           href="#"
           w:m="l-4 -r-4"
+          aria-hidden="true"
           @click.stop.prevent="scroller!.scrollBy({left: scrollAmount, behavior: 'smooth'})"
         >
           <icon-mdi-chevron-right w:text="5xl" />
@@ -162,7 +164,8 @@ const scrollAmount = computed(() => {
   height: 0;
 }
 
-.group {
+.group,
+.group img {
   width: min(calc(80vw - 40px), 300px);
   height: min(calc(90vw - 40px), 300px);
 }

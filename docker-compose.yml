@@ -182,7 +182,7 @@ services:
       # IMGPROXY_REPORT_DOWNLOADING_ERRORS: "false"
       IMGPROXY_MAX_SRC_RESOLUTION: 50
       IMGPROXY_MAX_SRC_FILE_SIZE: 20971520 # 20MB
-      # IMGPROXY_TTL: 2592000 # client-side cache time is 30 days
+      IMGPROXY_TTL: 352800 # client-side cache time is 1 week
       IMGPROXY_FORMAT_QUALITY: 'jpeg=80,webp=70,avif=50'
       # IMGPROXY_SIGNATURE_SIZE: 32
       IMGPROXY_USE_S3: 'true'

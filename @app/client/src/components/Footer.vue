@@ -78,7 +78,7 @@
       </div>
     </div>
     <div w:m="t-12" w:flex="~ col">
-      <span w:text="gray-500">© SMil Aarhus</span>
+      <span w:text="gray-400">© SMil Aarhus</span>
       <ClientOnly><FooterUserWidget /></ClientOnly>
     </div>
   </div>
