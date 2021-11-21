@@ -39,7 +39,7 @@
           w:align="items-center"
           class="grid-cols-[1fr,auto,1fr]"
         >
-          <router-link
+          <i18n-link
             w:rounded="md"
             w:flex="~"
             w:font="medium"
@@ -49,11 +49,11 @@
             w:justify="self-start"
             w:align="items-center"
             class="btn-focus-ring"
-            :to="i18nRoute({ name: 'home' })"
+            to="HOME"
             :title="t('nav.home')"
           >
             <icon-smil-logo-aarhus w:text="7xl" />
-          </router-link>
+          </i18n-link>
           <PopoverGroup
             w:space="x-4"
             w:m="l-10"
@@ -82,6 +82,7 @@
 </template>
 
 <script setup lang="ts">
+import { Route } from '../../routes';
 import type { Link } from './NavLink.vue';
 
 defineProps<{
@@ -92,12 +93,11 @@ const menuOpen = ref(false);
 
 const { t } = useI18n();
 const route = useRoute();
-const i18nRoute = inject(key.i18nRoute)!;
 
 const heroHeight = inject(key.heroHeight);
 const { y: windowY } = useWindowScroll();
 const bgOpacity = computed(() => {
-  if (route.name === 'home') {
+  if ((route.name as string | undefined)?.endsWith(Route.HOME)) {
     if (heroHeight?.value && !menuOpen.value)
       return Math.min(0.9, windowY.value / heroHeight.value);
     return 0.0;

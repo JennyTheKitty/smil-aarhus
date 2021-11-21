@@ -1,16 +1,17 @@
 <template>
   <ul v-if="events.length">
     <li v-for="(event, i) in events" :key="i">
-      <router-link
+      <i18n-link
         v-if="event"
         w:bg="hover:dark-900"
         w:flex="~"
         w:m="t-1"
         class="btn-focus-ring"
-        :to="i18nRoute({ name: 'calendar', params: { eventSlug: event.slug } })"
+        to="CALENDAR"
+        :params="{ eventSlug: event.slug }"
       >
         <div w:flex="~ col shrink-0" w:w="18" w:text="right" w:p="r-3 y-1">
-          <span>{{ dayjs(event.startsAt).format('D MMM') }}</span>
+          <span>{{ dayjs(event.startsAt).format('d MMM') }}</span>
           <span w:text="sm gray-500">
             {{ dayjs(event.startsAt).format('ddd') }}
           </span>
@@ -27,7 +28,7 @@
             {{ dayjs(event.endsAt).format('LT') }}</span
           >
         </div>
-      </router-link>
+      </i18n-link>
     </li>
   </ul>
 </template>
@@ -41,6 +42,4 @@ import { Translated } from '../../utils';
 defineProps<{
   events: Translated<Event>[];
 }>();
-const { d } = useI18n();
-const i18nRoute = inject(key.i18nRoute)!;
 </script>

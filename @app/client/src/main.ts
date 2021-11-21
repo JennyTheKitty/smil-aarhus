@@ -31,14 +31,15 @@ import { cacheExchange } from '@urql/exchange-graphcache';
 import urql from '@urql/vue';
 import { createHead } from '@vueuse/head';
 import { useNProgress } from '@vueuse/integrations/useNProgress';
+import { parse as acceptLanguageParser } from 'accept-language-parser';
 import jwtDecode from 'jwt-decode';
 import viteSSR, { ClientOnly } from 'vite-ssr';
 import { Router } from 'vue-router';
 
 import { accessToken } from './accessToken';
 import App from './App.vue';
-import { i18n, Trans } from './i18n';
-import routes from './routes';
+import { i18n, Trans, userLangs } from './i18n';
+import { routes } from './routes';
 
 // @ts-ignore
 // eslint-disable-next-line no-undef
@@ -84,6 +85,16 @@ export default viteSSR(
     app.use(i18n);
     app.provide(key.i18nRoute, Trans.i18nRoute.bind(Trans));
 
+    userLangs.value = [
+      ...(import.meta.env.SSR
+        ? request?.headers['accept-language']
+          ? acceptLanguageParser(request.headers['accept-language']).map(
+              (l) => l.code + (l.region ? `-${l.region}` : '')
+            )
+          : []
+        : [window.navigator.language]),
+    ].map((l) => ({ lang: l, langNoISO: l.split('-')[0] }));
+
     app.component(ClientOnly.name, ClientOnly);
 
     const isServerSide = import.meta.env.SSR;
@@ -121,6 +132,7 @@ export default viteSSR(
         dedupExchange,
         ssr,
         cacheExchange({
+          // @ts-ignore
           schema,
           updates: {
             Mutation: {
@@ -157,6 +169,7 @@ export default viteSSR(
         }),
         authExchange({
           async getAuth({}) {
+            if (import.meta.env.SSR) return null;
             try {
               const res = await fetch('/access_token', {
                 method: 'POST',

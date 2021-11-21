@@ -36,6 +36,7 @@
     "@vueuse/head": "^0.6.0",
     "@vueuse/integrations": "^6.8.0",
     "abab": "^2.0.5",
+    "accept-language-parser": "^1.5.0",
     "dayjs": "^1.10.7",
     "graphql": "^15.6.1",
     "jwt-decode": "^3.1.2",
@@ -51,6 +52,7 @@
   "devDependencies": {
     "@iconify-json/carbon": "^1.0.7",
     "@intlify/vite-plugin-vue-i18n": "^2.5.0",
+    "@types/accept-language-parser": "^1.5.3",
     "@types/nprogress": "^0.2.0",
     "@vitejs/plugin-vue": "^1.9.3",
     "@vue/compiler-sfc": "^3.2.20",

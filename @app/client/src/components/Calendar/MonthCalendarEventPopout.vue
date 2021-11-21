@@ -174,11 +174,7 @@ function getCoords(elem: HTMLElement) {
 }
 
 async function closeDialog() {
-  await router.push(
-    i18nRoute({
-      name: 'calendar',
-    })
-  );
+  await router.push(i18nRoute('CALENDAR'));
 }
 
 const popupStyles = computed(() => {

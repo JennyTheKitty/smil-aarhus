@@ -67,6 +67,7 @@
 import { Lang, Trans } from '../../i18n';
 
 const router = useRouter();
+const route = useRoute();
 const { locale } = useI18n();
 
 const locales = {
@@ -81,8 +82,12 @@ const locales = {
 } as const;
 
 async function switchLocale(lang: Lang) {
-  const to = router.resolve({ params: { lang } });
+  // const to = router.resolve(i18nRoute(route.name);
   await Trans.changeLanguage(lang);
-  await router.push(to);
+  if (!route.name || typeof route.name !== 'string') return;
+  await router.push({
+    name: `${lang}-${route.name.split('-')[1]}`,
+    params: route.params,
+  });
 }
 </script>

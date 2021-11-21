@@ -17,13 +17,9 @@
           w:m="b-5 md:0"
           w:max-w="128"
         >
-          <router-link
-            :to="
-              i18nRoute({
-                name: 'calendar',
-                params: { slug: specialEvent.slug },
-              })
-            "
+          <i18n-link
+            to="CALENDAR"
+            :params="{ slug: specialEvent.slug }"
             w:rounded="lg"
             w:bg="dark-800"
             w:shadow="lg"
@@ -85,7 +81,7 @@
                 >
               </div>
             </div>
-          </router-link>
+          </i18n-link>
         </div>
         <div
           w:w="full md:1/2"
@@ -100,11 +96,9 @@
         >
           <div w:bg="dark-800" w:w="full" w:p="4" w:border="rounded-xl">
             <HomeEventWidget :events="events" />
-            <router-link
-              :to="i18nRoute({ name: 'calendar' })"
-              w:text="base underline"
-              >{{ t('home.goto-calendar') }}</router-link
-            >
+            <i18n-link to="CALENDAR" w:text="base underline">{{
+              t('home.goto-calendar')
+            }}</i18n-link>
           </div>
         </div>
       </div>
@@ -120,7 +114,6 @@ import { Ref } from 'vue';
 import { Translated, useTranslation } from '../../utils';
 
 const { t, locale } = useI18n();
-const i18nRoute = inject(key.i18nRoute)!;
 
 const now = new Date();
 const today = new Date(

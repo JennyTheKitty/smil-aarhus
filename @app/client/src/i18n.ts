@@ -3,17 +3,21 @@ import 'dayjs/locale/da';
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { createI18n } from 'petite-vue-i18n';
-import { RouteLocationNormalized, RouteLocationRaw } from 'vue-router';
+import { ComputedRef } from 'vue';
+import { RouteLocationRaw, RouteParamsRaw } from 'vue-router';
 
 import da from './lang/da.json';
+import { Route } from './routes';
 
 dayjs.extend(LocalizedFormat);
 
-const SUPPORTED_LANGUAGES = ['da', 'en'] as const;
+export const SUPPORTED_LANGUAGES = ['da', 'en'] as const;
 const DEFAULT_LANGUAGE = 'da';
 export const FALLBACK_LANGUAGE = 'da';
 
 export type Lang = typeof SUPPORTED_LANGUAGES[number];
+
+export const userLangs = ref<{ lang: string; langNoISO: string }[]>([]);
 
 export const i18n = createI18n({
   legacy: false,
@@ -31,26 +35,18 @@ export const Trans = {
   },
 
   getUserSupportedLang() {
-    const userPreferredLang = Trans.getUserLang();
+    for (const userLang of userLangs.value) {
+      // Check if user preferred browser lang is supported
+      if (Trans.isLangSupported(userLang.lang as Lang)) {
+        return userLang.lang;
+      }
+      // Check if user preferred lang without the ISO is supported
+      if (Trans.isLangSupported(userLang.langNoISO as Lang)) {
+        return userLang.langNoISO;
+      }
+    }
 
-    // Check if user preferred browser lang is supported
-    if (Trans.isLangSupported(userPreferredLang.lang as Lang)) {
-      return userPreferredLang.lang;
-    }
-    // Check if user preferred lang without the ISO is supported
-    if (Trans.isLangSupported(userPreferredLang.langNoISO as Lang)) {
-      return userPreferredLang.langNoISO;
-    }
     return Trans.defaultLanguage;
-  },
-
-  getUserLang() {
-    //(window && window.navigator.language) ||
-    const lang = Trans.defaultLanguage;
-    return {
-      lang: lang,
-      langNoISO: lang.split('-')[0],
-    };
   },
 
   setI18nLanguageInServices(lang: string) {
@@ -80,29 +76,20 @@ export const Trans = {
     return Trans.supportedLanguages.includes(lang);
   },
 
-  async routeMiddleware(to: RouteLocationNormalized) {
-    const lang = to.params.lang as Lang;
-    if (!Trans.isLangSupported(lang)) return Trans.getUserSupportedLang();
-    await Trans.changeLanguage(lang);
-    return true;
+  routeMiddleware(lang: Lang) {
+    return async () => {
+      await Trans.changeLanguage(lang);
+      return true;
+    };
   },
 
-  i18nRoute(to: RouteLocationRaw, lang: Lang | null = null): RouteLocationRaw {
-    // @ts-ignore
-    // eslint-disable-next-line no-param-reassign
-    if (lang === null) lang = i18n.global.locale.value;
-    if (typeof to === 'string') {
-      return {
-        path: to,
-        params: { lang },
-      };
-    }
+  i18nRoute(name: `${Route}`, params?: RouteParamsRaw): RouteLocationRaw {
     return {
-      ...to,
-      params: {
-        lang,
-        ...('params' in to ? to.params : {}),
-      },
+      name:
+        (i18n.global.locale as unknown as ComputedRef<string>).value +
+        '-' +
+        name,
+      params: params || undefined,
     };
   },
 };

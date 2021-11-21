@@ -81,11 +81,7 @@ const selectedEvent = ref<{
 }>({ event: null, translatedEvent: null, eventEl: null, open: false });
 
 async function editSelectedEvent() {
-  await router.push(
-    i18nRoute({
-      name: 'calendar',
-    })
-  );
+  await router.push(i18nRoute('CALENDAR'));
   await until(() => selectedEvent.value.open).not.toBeTruthy();
   await promiseTimeout(100);
   eventDialogEvent.value = selectedEvent.value.event!;
@@ -256,12 +252,8 @@ const calendarOptions: CalendarOptions = {
               title: event.title,
               start: new Date(event.startsAt),
               end: new Date(event.endsAt),
-              url: router.resolve(
-                i18nRoute({
-                  name: 'calendar',
-                  params: { slug: event.slug },
-                })
-              ).href,
+              url: router.resolve(i18nRoute('CALENDAR', { slug: event.slug }))
+                .href,
               display: 'list-item',
             } as EventInput & { start: Date; end: Date };
           })

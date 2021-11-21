@@ -5,15 +5,11 @@
       <div ref="scroller" w:p="y-4 x-4" class="hidden-scroll-x">
         <div w:w="min-content">
           <div w:flex="~" w:space="x-5" w:p="x-10">
-            <router-link
+            <i18n-link
               v-for="group in groups"
               :key="group.id"
-              :to="
-                i18nRoute({
-                  name: 'groups',
-                  params: { slug: group.slug },
-                })
-              "
+              to="GROUPS"
+              :params="{ slug: group.slug }"
               w:rounded="lg"
               w:bg="black"
               w:shadow="lg"
@@ -79,7 +75,7 @@
                   {{ group.shortDescription }}
                 </span>
               </div>
-            </router-link>
+            </i18n-link>
           </div>
         </div>
       </div>

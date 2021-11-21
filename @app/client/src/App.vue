@@ -103,11 +103,11 @@ const navLinks = computed(() => [
   },
   {
     name: t('nav.calendar'),
-    to: Trans.i18nRoute({ name: 'calendar' }),
+    to: Trans.i18nRoute('CALENDAR'),
   },
   {
     name: t('nav.news'),
-    to: Trans.i18nRoute({ name: 'news' }),
+    to: Trans.i18nRoute('NEWS'),
   },
 ]);
 </script>
