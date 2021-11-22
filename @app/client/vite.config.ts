@@ -34,15 +34,13 @@ export default defineConfig({
     },
   },
   build: {
-    // minify: 'terser',
-    // sourcemap: true,
-    // terserOptions: {
-    //   compress: false,
-    //   mangle: false,
-    //   output: {
-    //     comments: false,
-    //   },
-    // },
+    minify: 'terser',
+    sourcemap: true,
+    terserOptions: {
+      output: {
+        comments: false,
+      },
+    },
   },
   optimizeDeps: {
     include: [
@@ -155,7 +153,7 @@ export default defineConfig({
     imagetools(),
     ((options) => {
       return {
-        name: 'vite-raw-plugin',
+        name: 'vite-ckeditor-svg-raw-plugin',
         transform(code, id) {
           if (options.fileRegex.test(id)) {
             // eslint-disable-next-line no-param-reassign
