@@ -34,7 +34,7 @@ function createUrl(
 }
 
 function createResponsiveImage(file: string) {
-  const widths = [100, 250, 500, 1000, 2000];
+  const widths = [32, 64, 128, 256, 512, 1024, 2048];
   return {
     src: createUrl(file, { width: 0, height: 0, ext: 'jpg' }),
     srcSetWebp: widths

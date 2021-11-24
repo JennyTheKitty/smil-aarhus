@@ -13,8 +13,26 @@ CREATE TABLE smil_aarhus.group_tr(
     short_description text NOT NULL,
     description text NOT NULL,
     slug text NOT NULL,
-    PRIMARY KEY (group_id, language_code)
+    PRIMARY KEY (group_id, language_code),
+    UNIQUE (slug, language_code)
 );
+
+CREATE OR REPLACE FUNCTION smil_aarhus.group_by_slug(slug text, preferred_language_code TEXT)
+RETURNS smil_aarhus.group
+AS $$
+DECLARE
+    tr record;
+    group smil_aarhus.group;
+    _slug alias FOR slug;
+BEGIN
+    SELECT INTO tr group_id from smil_aarhus.group_tr where (smil_aarhus.group_tr.slug = _slug and smil_aarhus.group_tr.language_code = preferred_language_code);
+    IF (tr IS NULL) THEN
+        SELECT INTO tr group_id from smil_aarhus.group_tr where (smil_aarhus.group_tr.slug = _slug) LIMIT 1;
+    END IF;
+    SELECT INTO group * from smil_aarhus.group where (smil_aarhus.group.id = tr.group_id);
+    RETURN group;
+END
+$$ LANGUAGE plpgsql STABLE;
 
 
 COMMENT ON TABLE smil_aarhus.group_tr IS E'@omit create,update,delete';

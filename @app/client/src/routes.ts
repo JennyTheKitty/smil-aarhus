@@ -9,6 +9,7 @@ export enum Route {
   INFO = 'INFO',
   TEST = 'CALENDAR',
   GROUPS = 'GROUPS',
+  GROUP = 'GROUP',
   NEWS = 'NEWS',
 }
 
@@ -26,8 +27,12 @@ const i18nRoutes = {
     component: pages.Calendar,
   },
   [Route.GROUPS]: {
-    paths: { da: 'grupper/:slug?', en: 'groups/:slug?' },
+    paths: { da: 'grupper', en: 'groups' },
     component: pages.Groups,
+  },
+  [Route.GROUP]: {
+    paths: { da: 'grupper/:slug?', en: 'groups/:slug?' },
+    component: pages.Group,
   },
   [Route.NEWS]: {
     paths: { da: 'nyheder/:slug?', en: 'news/:slug?' },

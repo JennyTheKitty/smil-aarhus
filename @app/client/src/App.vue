@@ -25,89 +25,69 @@
 </template>
 
 <script setup lang="ts">
-import { Trans } from './i18n';
+import { Link } from './components/Nav/NavLink.vue';
 
 const { t } = useI18n();
 
 provide(key.heroHeight, ref(0));
 
-const navLinks = computed(() => [
-  // {
-  //   name: 'Home',
-  //   to: '/'
-  // },
-  {
-    name: t('nav.info'),
-    links: [
+const navLinks = computed(
+  () =>
+    [
       {
-        name: 'Hvad er SMIL?',
-        description: 'Generalt info om smil',
-        to: '/info/hvad-er-smil',
-        icon: IconMdiInformationOutline,
+        name: t('nav.info'),
+        links: [
+          {
+            name: 'Hvad er SMIL?',
+            description: 'Generalt info om smil',
+            to: 'INFO',
+            icon: IconMdiInformationOutline,
+          },
+          {
+            name: 'Udvidet åbningstid',
+            description: '???',
+            to: 'INFO',
+            icon: IconMdiTimelapse,
+          },
+          {
+            name: 'SMIL Aarhus',
+            description: 'Historie om SMIL Aarhus',
+            to: 'INFO',
+            icon: IconMdiRestoreAlert,
+          },
+          {
+            name: 'FAQ',
+            description: 'Ofte stillede spørgsmål',
+            to: 'INFO',
+            icon: IconWpfFaq,
+          },
+          {
+            name: 'Regler',
+            description: 'God opførsel i SMIL',
+            to: 'INFO',
+            icon: IconMdiClipboardText,
+          },
+          {
+            name: 'Lokaler',
+            description: 'Billeder & info',
+            to: 'INFO',
+            icon: IconMdiFloorPlan,
+          },
+        ],
+        singleColumn: false,
       },
       {
-        name: 'Udvidet åbningstid',
-        description: '???',
-        to: '/info/udvidet-åbningstid',
-        icon: IconMdiTimelapse,
+        name: t('nav.groups'),
+        to: 'GROUPS',
       },
       {
-        name: 'SMIL Aarhus',
-        description: 'Historie om SMIL Aarhus',
-        to: '/info/smil-aarhus',
-        icon: IconMdiRestoreAlert,
+        name: t('nav.calendar'),
+        to: 'CALENDAR',
       },
       {
-        name: 'FAQ',
-        description: 'Ofte stillede spørgsmål',
-        to: '/info/faq',
-        icon: IconWpfFaq,
+        name: t('nav.news'),
+        to: 'NEWS',
       },
-      {
-        name: 'Regler',
-        description: 'God opførsel i SMIL',
-        to: '/info/regler',
-        icon: IconMdiClipboardText,
-      },
-      {
-        name: 'Lokaler',
-        description: 'Billeder & info',
-        to: '/info/lokaler',
-        icon: IconMdiFloorPlan,
-      },
-      // {
-      //   name: 'Konakt',
-      //   description: 'Kontakt SMIL Aarhus',
-      //   to: '/kontakt',
-      //   icon: IconMdiMailRu
-      // },
-      // {
-      //   name: 'FetLife',
-      //   description: 'Find os på FetLife',
-      //   to: '/fetlife',
-      //   icon: IconSmilFetlife
-      // }
-    ],
-  },
-  {
-    name: t('nav.groups'),
-    links: [
-      { name: 'Alle grupper', to: '/grupper' },
-      { name: 'Rebhygge', to: '/grupper/rebhygge' },
-      { name: 'Domini Noctis', to: '/grupper/domini-noctis' },
-      { name: 'Kink Youth', to: '/grupper/kink-youth' },
-      { name: 'Frivilliggruppen', to: '/grupper/frivillig' },
-      { name: 'Kink Academy', to: '/grupper/kink-academy' },
-      { name: 'Peer Whip', to: '/grupper/peer-whip' },
-    ],
-  },
-  {
-    name: t('nav.calendar'),
-    to: Trans.i18nRoute('CALENDAR'),
-  },
-  {
-    name: t('nav.news'),
-    to: Trans.i18nRoute('NEWS'),
-  },
-]);
+    ] as Link[]
+);
 </script>

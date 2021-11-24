@@ -1620,7 +1620,9 @@ export type Query = {
   /** Reads and enables pagination through a set of `Event`. */
   events: Maybe<EventsConnection>;
   group: Maybe<Group>;
+  groupBySlug: Maybe<Group>;
   groupTr: Maybe<GroupTr>;
+  groupTrBySlugAndLanguageCode: Maybe<GroupTr>;
   /** Reads and enables pagination through a set of `GroupTr`. */
   groupTrs: Maybe<GroupTrsConnection>;
   /** Reads and enables pagination through a set of `Group`. */
@@ -1760,9 +1762,23 @@ export type QueryGroupArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryGroupBySlugArgs = {
+  preferredLanguageCode: Scalars['String'];
+  slug: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryGroupTrArgs = {
   groupId: Scalars['BigInt'];
   languageCode: TrLanguage;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryGroupTrBySlugAndLanguageCodeArgs = {
+  languageCode: TrLanguage;
+  slug: Scalars['String'];
 };
 
 

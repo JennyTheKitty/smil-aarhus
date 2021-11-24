@@ -1,6 +1,20 @@
 <template>
   <div>
-    <HomeHero />
+    <Hero :jpeg="heroImgJpeg" :webp="heroImgWebp" :metadata="heroImgMetadata">
+      <h1 class="title" w:font="bold" w:text="space-pre-line">
+        {{ t('hero.title') }}
+      </h1>
+      <span w:display="hidden md:block" w:text="base">{{
+        t('hero.subtitle')
+      }}</span>
+      <div w:flex="~ row" w:space="x-10" w:p="t-1 sm:t-5">
+        <button class="btn-hero">
+          <span w:text="uppercase" w:font="tracking-wider">{{
+            t('hero.buttons.signup')
+          }}</span>
+        </button>
+      </div>
+    </Hero>
 
     <a
       href="#"
@@ -127,6 +141,15 @@
 </template>
 
 <script setup lang="ts">
+// @ts-ignore
+// eslint-disable-next-line import/no-unresolved
+import heroImgMetadata from '../assets/images/artem-labunsky-whsB1P4Kblc-unsplash.jpg?metadata=width;height';
+// @ts-ignore
+// eslint-disable-next-line import/no-unresolved
+import heroImgJpeg from '../assets/images/artem-labunsky-whsB1P4Kblc-unsplash.jpg?w=300;900;1500;2000&format=jpeg&srcset';
+// @ts-ignore
+// eslint-disable-next-line import/no-unresolved
+import heroImgWebp from '../assets/images/artem-labunsky-whsB1P4Kblc-unsplash.jpg?w=300;900;1500;2000&format=webp&srcset';
 import img1 from '../assets/images/lokale.01.jpg';
 import img2 from '../assets/images/lokale.04.jpg';
 import img3 from '../assets/images/lokale.05.jpg';
@@ -147,3 +170,9 @@ useHead({
   ],
 });
 </script>
+
+<style scoped>
+.title {
+  font-size: min(4rem, 7vw);
+}
+</style>

@@ -2084,7 +2084,9 @@ type Query {
     orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventsConnection
   group(id: BigInt!): Group
+  groupBySlug(preferredLanguageCode: String!, slug: String!): Group
   groupTr(groupId: BigInt!, languageCode: TrLanguage!): GroupTr
+  groupTrBySlugAndLanguageCode(languageCode: TrLanguage!, slug: String!): GroupTr
 
   """Reads and enables pagination through a set of `GroupTr`."""
   groupTrs(

@@ -81,17 +81,18 @@
           w:rounded="xl"
           w:bg="dark-900"
           w:border="2 pink-800"
-          w:grid="~ cols-2"
+          :w:grid="`~ ${(link as Menu).singleColumn ? 'cols-1' : 'cols-2'}`"
           w:pos="absolute left-1/2"
           w:m="t-3"
           w:p="y-3 x-2"
           w:z="5"
           w:transform="~ -translate-x-1/2"
         >
-          <router-link
+          <i18n-link
             v-for="sublink in (link as Menu).links"
             :key="sublink.name"
-            v-bind="sublink"
+            :to="sublink.to"
+            :params="sublink.params"
             w:rounded="md"
             w:flex="~"
             w:m="y-1 x-3"
@@ -112,30 +113,34 @@
                 sublink.description
               }}</span>
             </div>
-          </router-link>
+          </i18n-link>
         </PopoverPanel>
       </transition>
     </Popover>
-    <router-link
+    <i18n-link
       v-else
-      v-bind="link"
+      :to="(link as InnerLink).to"
+      :params="(link as InnerLink).params"
       w:rounded="md"
       w:font="medium"
       w:text="base gray-300 hover:white"
       w:p="y-2 x-3"
       class="btn-focus-ring"
-      >{{ link.name }}</router-link
+      >{{ link.name }}</i18n-link
     >
   </div>
 </template>
 
 <script setup lang="ts">
-import { RouterLinkProps } from 'vue-router';
+import { RouteParamsRaw } from 'vue-router';
 
-type InnerLink = RouterLinkProps & { name: string };
+import { Route } from '../../routes';
+
+type InnerLink = { to: `${Route}`; params?: RouteParamsRaw; name: string };
 type Menu = {
   name: string;
   links: Array<InnerLink & { description?: string; icon?: any }>;
+  singleColumn: boolean;
 };
 export type Link = InnerLink | Menu;
 

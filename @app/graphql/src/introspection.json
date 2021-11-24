@@ -3959,6 +3959,36 @@
             ]
           },
           {
+            "name": "groupBySlug",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Group",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "preferredLanguageCode",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              },
+              {
+                "name": "slug",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
             "name": "groupTr",
             "type": {
               "kind": "OBJECT",
@@ -3978,6 +4008,36 @@
               },
               {
                 "name": "languageCode",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "groupTrBySlugAndLanguageCode",
+            "type": {
+              "kind": "OBJECT",
+              "name": "GroupTr",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "languageCode",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              },
+              {
+                "name": "slug",
                 "type": {
                   "kind": "NON_NULL",
                   "ofType": {
