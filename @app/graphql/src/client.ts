@@ -1157,6 +1157,7 @@ export type Group = {
   /** Reads a single `Image` that is related to this `Group`. */
   imageByImage: Maybe<Image>;
   img: ResponsiveImage;
+  isOpen: Scalars['Boolean'];
   /** Reads and enables pagination through a set of `GroupTr`. */
   translations: GroupTrsConnection;
 };
@@ -1191,6 +1192,8 @@ export type GroupCondition = {
   id?: Maybe<Scalars['BigInt']>;
   /** Checks for equality with the object’s `image` field. */
   image?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `isOpen` field. */
+  isOpen?: Maybe<Scalars['Boolean']>;
 };
 
 /** A filter to be used against `Group` object types. All fields are combined with a logical ‘and.’ */
@@ -1199,10 +1202,13 @@ export type GroupFilter = {
   id?: Maybe<BigIntFilter>;
   /** Filter by the object’s `image` field. */
   image?: Maybe<BigIntFilter>;
+  /** Filter by the object’s `isOpen` field. */
+  isOpen?: Maybe<BooleanFilter>;
 };
 
 export type GroupTr = {
   __typename?: 'GroupTr';
+  activity: Scalars['String'];
   description: Scalars['String'];
   /** Reads a single `Group` that is related to this `GroupTr`. */
   group: Maybe<Group>;
@@ -1215,6 +1221,8 @@ export type GroupTr = {
 
 /** A condition to be used against `GroupTr` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type GroupTrCondition = {
+  /** Checks for equality with the object’s `activity` field. */
+  activity?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `description` field. */
   description?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `groupId` field. */
@@ -1231,6 +1239,8 @@ export type GroupTrCondition = {
 
 /** A filter to be used against `GroupTr` object types. All fields are combined with a logical ‘and.’ */
 export type GroupTrFilter = {
+  /** Filter by the object’s `activity` field. */
+  activity?: Maybe<StringFilter>;
   /** Filter by the object’s `description` field. */
   description?: Maybe<StringFilter>;
   /** Filter by the object’s `groupId` field. */
@@ -1269,6 +1279,8 @@ export type GroupTrsEdge = {
 
 /** Methods to use when ordering `GroupTr`. */
 export enum GroupTrsOrderBy {
+  ActivityAsc = 'ACTIVITY_ASC',
+  ActivityDesc = 'ACTIVITY_DESC',
   DescriptionAsc = 'DESCRIPTION_ASC',
   DescriptionDesc = 'DESCRIPTION_DESC',
   GroupIdAsc = 'GROUP_ID_ASC',
@@ -1314,6 +1326,8 @@ export enum GroupsOrderBy {
   IdDesc = 'ID_DESC',
   ImageAsc = 'IMAGE_ASC',
   ImageDesc = 'IMAGE_DESC',
+  IsOpenAsc = 'IS_OPEN_ASC',
+  IsOpenDesc = 'IS_OPEN_DESC',
   Natural = 'NATURAL',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
@@ -3080,7 +3094,7 @@ export type HomeGroupsQueryQuery = (
     { __typename?: 'GroupsConnection' }
     & { nodes: Array<(
       { __typename?: 'Group' }
-      & Pick<Group, 'id'>
+      & Pick<Group, 'id' | 'isOpen'>
       & { img: (
         { __typename?: 'ResponsiveImage' }
         & Pick<ResponsiveImage, 'src' | 'srcSetJpeg' | 'srcSetWebp' | 'height' | 'width'>
@@ -3088,7 +3102,7 @@ export type HomeGroupsQueryQuery = (
         { __typename?: 'GroupTrsConnection' }
         & { nodes: Array<(
           { __typename?: 'GroupTr' }
-          & Pick<GroupTr, 'languageCode' | 'title' | 'shortDescription' | 'slug' | 'groupId'>
+          & Pick<GroupTr, 'languageCode' | 'title' | 'shortDescription' | 'slug' | 'groupId' | 'activity'>
         )> }
       ) }
     )> }
@@ -3493,6 +3507,7 @@ export const HomeGroupsQueryDocument = gql`
         height
         width
       }
+      isOpen
       translations {
         nodes {
           languageCode
@@ -3500,6 +3515,7 @@ export const HomeGroupsQueryDocument = gql`
           shortDescription
           slug
           groupId
+          activity
         }
       }
     }

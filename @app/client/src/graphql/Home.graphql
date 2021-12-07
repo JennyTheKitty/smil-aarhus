@@ -58,6 +58,7 @@ query HomeGroupsQuery {
         height
         width
       }
+      isOpen
       translations {
         nodes {
           languageCode
@@ -65,6 +66,7 @@ query HomeGroupsQuery {
           shortDescription
           slug
           groupId
+          activity
         }
       }
     }

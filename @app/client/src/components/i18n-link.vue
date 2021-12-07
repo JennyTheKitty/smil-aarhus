@@ -24,6 +24,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), { ariaCurrentValue: 'page' });
 
 const to = computed(() => {
+  console.log(props.params, Trans.i18nRoute(props.to, props.params));
   return Trans.i18nRoute(props.to, props.params);
 });
 </script>

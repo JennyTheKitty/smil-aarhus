@@ -1,7 +1,12 @@
 <template>
   <div>
-    <Hero :jpeg="heroImgJpeg" :webp="heroImgWebp" :metadata="heroImgMetadata">
-      <h1 class="title" w:font="bold" w:text="space-pre-line">
+    <Hero
+      :jpeg="heroImgJpeg"
+      :webp="heroImgWebp"
+      :metadata="heroImgMetadata"
+      :brightness="100"
+    >
+      <h1 class="title" w:font="bold" w:text="space-pre-line shadow-lg">
         Interessegrupper
       </h1>
     </Hero>
@@ -18,7 +23,7 @@
         <i18n-link
           v-for="group in groups"
           :key="group.id"
-          to="GROUPS"
+          to="GROUP"
           :params="{ slug: group.slug }"
           w:rounded="lg"
           w:bg="dark-300"
@@ -33,19 +38,19 @@
         >
           <picture w:flex="shrink-0">
             <source
-              :srcset="group.image.srcSetWebp"
+              :srcset="group.img.srcSetWebp"
               type="image/webp"
               sizes="20rem"
             />
             <source
-              :srcset="group.image.srcSetJpeg"
+              :srcset="group.img.srcSetJpeg"
               type="image/webp"
               sizes="20rem"
             />
             <img
               ref="img"
               alt=""
-              :src="group.image.src"
+              :src="group.img.src"
               loading="lazy"
               w:w="60"
               w:h="48"
@@ -55,9 +60,38 @@
               w:m="-l-12"
             />
           </picture>
-          <div>
-            <h3 w:text="2xl">{{ group.title }}</h3>
-            <span>{{ group.shortDescription }}</span>
+          <div w:flex="~ col" w:p="r-4 b-4 t-8" w:h="full" w:w="full">
+            <div>
+              <h3 w:text="3xl">{{ group.title }}</h3>
+              <span w:text="lg" w:font="light">{{
+                group.shortDescription
+              }}</span>
+            </div>
+            <div w:flex="grow"></div>
+            <div w:flex="~" w:align="items-center" w:space="x-4">
+              <div v-if="group.isOpen" w:flex="~" w:align="items-center">
+                <icon-mdi-door-open w:text="xl" w:m="r-2" />
+                <span>Åben gruppe</span>
+              </div>
+              <div v-else w:flex="~" w:align="items-center">
+                <icon-mdi-door-closed-lock w:text="xl" w:m="r-2" />
+                <span>Lukket gruppe</span>
+              </div>
+              <div w:flex="~" w:align="items-center">
+                <icon-mdi-calendar-clock w:text="xl" w:m="r-2" />
+                <span>{{ group.activity }}</span>
+              </div>
+              <div w:flex="grow"></div>
+              <button
+                w:border="rounded-xl"
+                w:shadow="lg"
+                w:bg="pink-800"
+                w:text="white xl"
+                w:p="y-1 x-2"
+              >
+                Læs mere
+              </button>
+            </div>
           </div>
         </i18n-link>
       </div>
@@ -70,13 +104,13 @@ import { HomeGroupsQueryDocument } from '@app/graphql/dist/client';
 
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
-import heroImgMetadata from '../assets/images/papaioannou-kostas-tysecUm5HJA-unsplash.jpg?metadata=width;height';
+import heroImgMetadata from '../assets/images/groups-header.jpg?metadata=width;height';
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
-import heroImgJpeg from '../assets/images/papaioannou-kostas-tysecUm5HJA-unsplash.jpg?w=300;900;1500;2000&format=jpeg&srcset';
+import heroImgJpeg from '../assets/images/groups-header.jpg?w=300;900;1500;2000&format=jpeg&srcset';
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
-import heroImgWebp from '../assets/images/papaioannou-kostas-tysecUm5HJA-unsplash.jpg?w=300;900;1500;2000&format=webp&srcset';
+import heroImgWebp from '../assets/images/groups-header.jpg?w=300;900;1500;2000&format=webp&srcset';
 import { useTranslation } from '../utils';
 
 const { t, locale } = useI18n();

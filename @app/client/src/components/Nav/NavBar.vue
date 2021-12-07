@@ -94,10 +94,12 @@ const menuOpen = ref(false);
 const { t } = useI18n();
 const route = useRoute();
 
+const heroRoutes = [Route.HOME, Route.GROUP, Route.GROUPS];
+
 const heroHeight = inject(key.heroHeight);
 const { y: windowY } = useWindowScroll();
 const bgOpacity = computed(() => {
-  if ((route.name as string | undefined)?.endsWith(Route.HOME)) {
+  if (heroRoutes.some((r) => (route.name as string | undefined)?.endsWith(r))) {
     if (heroHeight?.value && !menuOpen.value)
       return Math.min(0.9, windowY.value / heroHeight.value);
     return 0.0;

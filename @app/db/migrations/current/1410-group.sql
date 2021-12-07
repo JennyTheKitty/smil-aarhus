@@ -1,6 +1,7 @@
 CREATE TABLE smil_aarhus.group(
     id bigserial PRIMARY KEY,
-    image bigint REFERENCES smil_aarhus.image(id)
+    image bigint REFERENCES smil_aarhus.image(id),
+    is_open boolean NOT NULL
 );
 
 
@@ -12,6 +13,7 @@ CREATE TABLE smil_aarhus.group_tr(
     title text NOT NULL,
     short_description text NOT NULL,
     description text NOT NULL,
+    activity text not null,
     slug text NOT NULL,
     PRIMARY KEY (group_id, language_code),
     UNIQUE (slug, language_code)

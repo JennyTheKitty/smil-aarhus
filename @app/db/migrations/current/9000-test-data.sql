@@ -115,60 +115,60 @@ INSERT INTO smil_aarhus.picture (id,image,"rank", allow_on_home) VALUES
 	 (46,52,46, TRUE);
 
 INSERT INTO smil_aarhus."group"
-(id, image)
-VALUES(1, 1);
+(id, is_open, image)
+VALUES(1, TRUE, 1);
 INSERT INTO smil_aarhus."group"
-(id, image)
-VALUES(2, 2);
+(id, is_open, image)
+VALUES(2, TRUE, 2);
 INSERT INTO smil_aarhus."group"
-(id, image)
-VALUES(3, 3);
+(id, is_open, image)
+VALUES(3, true, 3);
 INSERT INTO smil_aarhus."group"
-(id, image)
-VALUES(4, 4);
+(id, is_open, image)
+VALUES(4, false, 4);
 INSERT INTO smil_aarhus."group"
-(id, image)
-VALUES(5, 5);
+(id, is_open, image)
+VALUES(5, false, 5);
 INSERT INTO smil_aarhus."group"
-(id, image)
-VALUES(6, 6);
+(id, is_open, image)
+VALUES(6, false, 6);
 
 INSERT INTO smil_aarhus.group_tr
-(group_id, language_code, title, short_description, description)
-VALUES(1, 'EN', 'Peer Rope', 'At Peer Rope we meet for the ropes. We do not bind a particular style, but meet around the joy of rope.', '');
+(group_id, language_code, title, short_description, description, activity)
+VALUES(1, 'EN', 'Peer Rope', 'At Peer Rope we meet for the ropes. We do not bind a particular style, but meet around the joy of rope.', '', 'about twice a month');
 INSERT INTO smil_aarhus.group_tr
-(group_id, language_code, title, short_description, description)
-VALUES(1, 'DA', 'Peer Rope', 'Til Peer Rope mødes vi om rebene. Vi binder ikke en bestemt stilart, men mødes omkring glæden ved reb.', '');
+(group_id, language_code, title, short_description, description, activity)
+VALUES(1, 'DA', 'Peer Rope', 'Til Peer Rope mødes vi om rebene. Vi binder ikke en bestemt stilart, men mødes omkring glæden ved reb.', '', 'ca. to gange om måneden');
 INSERT INTO smil_aarhus.group_tr
-(group_id, language_code, title, short_description, description)
-VALUES(2, 'EN', 'Peer Whip', 'Peer Whip is for those with a passion for floggers, whips, canes, etc. We meet in order to learn, practice, and give each other feedback.', '');
+(group_id, language_code, title, short_description, description, activity)
+VALUES(2, 'EN', 'Peer Whip', 'Peer Whip is for those with a passion for floggers, whips, canes, etc. We meet in order to learn, practice, and give each other feedback.', '',  'about twice a month');
 INSERT INTO smil_aarhus.group_tr
-(group_id, language_code, title, short_description, description)
-VALUES(2, 'DA', 'Peer Whip', 'Idéen med Peer Whip er, at de som har passion for slagredskaber mødes for at lære, øve og give feedback.', '');
+(group_id, language_code, title, short_description, description, activity)
+VALUES(2, 'DA', 'Peer Whip', 'Idéen med Peer Whip er, at de som har passion for slagredskaber mødes for at lære, øve og give feedback.', '', 'ca. to gange om måneden');
 INSERT INTO smil_aarhus.group_tr
-(group_id, language_code, title, short_description, description)
-VALUES(3, 'EN', 'Kink Academy', '...', '');
+(group_id, language_code, title, short_description, description, activity)
+VALUES(3, 'EN', 'Kink Academy', '...', '',  'about once a month');
 INSERT INTO smil_aarhus.group_tr
-(group_id, language_code, title, short_description, description)
-VALUES(3, 'DA', 'Kink Academy', '...', '');
+(group_id, language_code, title, short_description, description, activity)
+VALUES(3, 'DA', 'Kink Academy', '...', '', 'ca. en gang om måneden');
 INSERT INTO smil_aarhus.group_tr
-(group_id, language_code, title, short_description, description)
-VALUES(4, 'EN', 'Queer Community', '...', '');
+(group_id, language_code, title, short_description, description, activity)
+VALUES(4, 'EN', 'Queer Community', '...', '',  'about once a month');
 INSERT INTO smil_aarhus.group_tr
-(group_id, language_code, title, short_description, description)
-VALUES(4, 'DA', 'Queer Community', '...', '');
+(group_id, language_code, title, short_description, description, activity)
+VALUES(4, 'DA', 'Queer Community', '...', '', 'ca. en gang om måneden');
 INSERT INTO smil_aarhus.group_tr
-(group_id, language_code, title, short_description, description)
-VALUES(5, 'EN', 'Kink Youth', '...', '');
+(group_id, language_code, title, short_description, description, activity)
+VALUES(5, 'EN', 'Kink Youth', '...', '',  'more than once a month');
 INSERT INTO smil_aarhus.group_tr
-(group_id, language_code, title, short_description, description)
-VALUES(5, 'DA', 'Kink Youth', '...', '');
+(group_id, language_code, title, short_description, description, activity)
+VALUES(5, 'DA', 'Kink Youth', '...', '', 'mere end en gang om måneden');
 INSERT INTO smil_aarhus.group_tr
-(group_id, language_code, title, short_description, description)
-VALUES(6, 'EN', 'Shaaaaark', 'Ikea', '');
+(group_id, language_code, title, short_description, description, activity)
+VALUES(6, 'EN', 'Shaaaaark', 'Ikea', '',  'never');
 INSERT INTO smil_aarhus.group_tr
-(group_id, language_code, title, short_description, description)
-VALUES(6, 'DA', 'Haaaaaaaj', 'Ikea', '');
+(group_id, language_code, title, short_description, description, activity)
+VALUES(6, 'DA', 'Haaaaaaaj', 'Ikea', '', 'aldrig');
 
 INSERT INTO smil_aarhus.event_tag
 VALUES (1);

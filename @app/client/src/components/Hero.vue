@@ -9,8 +9,9 @@
         w:object="cover"
         w:w="full"
         w:max-h="50vh"
-        w:filter="~ brightness-35"
+        w:filter="~ brightness-75"
         v-bind="metadata"
+        :style="imgStyles"
       />
     </picture>
     <div
@@ -35,9 +36,10 @@ interface Props {
   webp: string;
   jpeg: string;
   metadata: any;
+  brightness: number;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const hero = ref(null);
 
@@ -46,6 +48,10 @@ const heroHeight = inject(key.heroHeight);
 watch(height, () => {
   heroHeight!.value = height.value;
 });
+
+const imgStyles = computed(() => ({
+  '--tw-brightness': `brightness(${props.brightness}%)`,
+})) as any;
 </script>
 
 <style scoped>

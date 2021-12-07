@@ -2404,6 +2404,17 @@
             "args": []
           },
           {
+            "name": "isOpen",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
             "name": "translations",
             "type": {
               "kind": "NON_NULL",
@@ -2485,6 +2496,17 @@
         "kind": "OBJECT",
         "name": "GroupTr",
         "fields": [
+          {
+            "name": "activity",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
           {
             "name": "description",
             "type": {

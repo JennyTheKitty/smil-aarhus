@@ -1,6 +1,11 @@
 <template>
   <div>
-    <Hero :jpeg="heroImgJpeg" :webp="heroImgWebp" :metadata="heroImgMetadata">
+    <Hero
+      :jpeg="heroImgJpeg"
+      :webp="heroImgWebp"
+      :metadata="heroImgMetadata"
+      :brightness="35"
+    >
       <h1 class="title" w:font="bold" w:text="space-pre-line">
         {{ t('hero.title') }}
       </h1>

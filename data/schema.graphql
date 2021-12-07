@@ -1410,6 +1410,7 @@ type Group {
   """Reads a single `Image` that is related to this `Group`."""
   imageByImage: Image
   img: ResponsiveImage!
+  isOpen: Boolean!
 
   """Reads and enables pagination through a set of `GroupTr`."""
   translations(
@@ -1455,6 +1456,9 @@ input GroupCondition {
 
   """Checks for equality with the object’s `image` field."""
   image: BigInt
+
+  """Checks for equality with the object’s `isOpen` field."""
+  isOpen: Boolean
 }
 
 """
@@ -1466,9 +1470,13 @@ input GroupFilter {
 
   """Filter by the object’s `image` field."""
   image: BigIntFilter
+
+  """Filter by the object’s `isOpen` field."""
+  isOpen: BooleanFilter
 }
 
 type GroupTr {
+  activity: String!
   description: String!
 
   """Reads a single `Group` that is related to this `GroupTr`."""
@@ -1484,6 +1492,9 @@ type GroupTr {
 A condition to be used against `GroupTr` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
 input GroupTrCondition {
+  """Checks for equality with the object’s `activity` field."""
+  activity: String
+
   """Checks for equality with the object’s `description` field."""
   description: String
 
@@ -1507,6 +1518,9 @@ input GroupTrCondition {
 A filter to be used against `GroupTr` object types. All fields are combined with a logical ‘and.’
 """
 input GroupTrFilter {
+  """Filter by the object’s `activity` field."""
+  activity: StringFilter
+
   """Filter by the object’s `description` field."""
   description: StringFilter
 
@@ -1554,6 +1568,8 @@ type GroupTrsEdge {
 
 """Methods to use when ordering `GroupTr`."""
 enum GroupTrsOrderBy {
+  ACTIVITY_ASC
+  ACTIVITY_DESC
   DESCRIPTION_ASC
   DESCRIPTION_DESC
   GROUP_ID_ASC
@@ -1603,6 +1619,8 @@ enum GroupsOrderBy {
   ID_DESC
   IMAGE_ASC
   IMAGE_DESC
+  IS_OPEN_ASC
+  IS_OPEN_DESC
   NATURAL
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC

@@ -36,7 +36,7 @@ const i18nRoutes = {
     component: pages.Groups,
   },
   [Route.GROUP]: {
-    paths: { da: 'grupper/:slug?', en: 'groups/:slug?' },
+    paths: { da: 'grupper/:slug', en: 'groups/:slug' },
     component: pages.Group,
   },
   [Route.NEWS]: {
