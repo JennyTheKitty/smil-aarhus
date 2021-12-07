@@ -7,3 +7,4 @@ export { default as News } from './News.vue';
 export { default as NotFound } from './NotFound.vue';
 
 export const Calendar = () => import('./Calendar.vue');
+export const Pictures = () => import('./Pictures.vue');

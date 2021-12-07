@@ -1,0 +1,67 @@
+query PicturesQuery {
+  pictures(orderBy: RANK_ASC) {
+    nodes {
+      img {
+        height
+        src
+        srcSetJpeg
+        srcSetWebp
+        width
+      }
+      id
+      rank
+      allowOnHome
+    }
+  }
+}
+
+mutation CreateImageMutation($path: String!, $height: Int!, $width: Int!) {
+  createImage(
+    input: { image: { path: $path, width: $width, height: $height } }
+  ) {
+    image {
+      id
+    }
+  }
+}
+
+mutation CreatePicture($image: BigInt!) {
+  createPicture(input: { picture: { image: $image } }) {
+    picture {
+      img {
+        height
+        src
+        srcSetJpeg
+        srcSetWebp
+        width
+      }
+      id
+      rank
+      allowOnHome
+    }
+  }
+}
+
+mutation ReorderPicturesMutation($reorders: [ReorderPicturesReorderInput]!) {
+  reorderPictures(input: { reorders: $reorders }) {
+    boolean
+  }
+}
+
+mutation SetPictureAllowOnHomeMutation($id: BigInt!, $input: Boolean!) {
+  updatePicture(input: { patch: { allowOnHome: $input }, id: $id }) {
+    picture {
+      image
+      id
+      rank
+      allowOnHome
+      img {
+        height
+        src
+        srcSetJpeg
+        srcSetWebp
+        width
+      }
+    }
+  }
+}

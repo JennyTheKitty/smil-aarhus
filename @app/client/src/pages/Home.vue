@@ -64,70 +64,9 @@
         w:p="x-8 md:0"
         w:max-w="128"
       >
-        <div w:grid="~ cols-2 gap-4">
-          <div
-            v-for="(img, i) in images"
-            :key="i"
-            w:w="full"
-            w:max-h="full"
-            w:border="1 pink-800 rounded-md"
-            w:pos="relative"
-            w:overflow="hidden"
-            class="group"
-          >
-            <a
-              w:pos="absolute"
-              w:w="full"
-              w:h="full"
-              w:flex="~"
-              w:border="rounded-md"
-              w:bg="hover:black hover:opacity-25"
-              w:transition="~ duration-200 all"
-              href="#"
-              tabindex="-1"
-              aria-hidden="true"
-            ></a>
-            <div
-              w:pos="absolute bottom-0"
-              w:m="-b-10 group-hover:b-0"
-              w:w="full"
-              w:h="10"
-              w:flex="~"
-              w:border="b-rounded-md"
-              w:bg="black opacity-75"
-              w:align="items-center"
-              w:justify="center"
-              w:pointer="none"
-              w:transition="~ duration-200 all"
-            >
-              <span w:text="true-gray-100 center">{{
-                t('home.more-pictures')
-              }}</span>
-            </div>
-            <img
-              class="object-cover"
-              w:w="full"
-              w:border="rounded-md"
-              width="150px"
-              height="103px"
-              :src="img"
-              alt=""
-            />
-          </div>
-        </div>
-        <div w:flex="~" w:justify="center" w:w="full">
-          <a
-            href="#"
-            w:transform="~ md:scale-0 md:focus:scale-100"
-            w:p="2"
-            w:w="max-content"
-            w:m="t-4"
-            w:border="rounded-xl"
-            class="btn-focus-ring"
-          >
-            {{ t('home.see-all-pictures') }}
-          </a>
-        </div>
+        <suspense>
+          <HomePicturesWidget />
+        </suspense>
       </div>
     </main>
 
@@ -150,15 +89,8 @@ import heroImgJpeg from '../assets/images/artem-labunsky-whsB1P4Kblc-unsplash.jp
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
 import heroImgWebp from '../assets/images/artem-labunsky-whsB1P4Kblc-unsplash.jpg?w=300;900;1500;2000&format=webp&srcset';
-import img1 from '../assets/images/lokale.01.jpg';
-import img2 from '../assets/images/lokale.04.jpg';
-import img3 from '../assets/images/lokale.05.jpg';
-import img4 from '../assets/images/lokale.06.jpg';
 
-const images = [img1, img2, img3, img4];
-
-const { t, locale } = useI18n();
-const i18nRoute = inject(key.i18nRoute)!;
+const { t } = useI18n();
 
 useHead({
   title: computed(() => 'Home - SMil Aarhus'),

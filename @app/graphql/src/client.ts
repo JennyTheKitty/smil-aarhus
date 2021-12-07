@@ -145,6 +145,39 @@ export type CreateEventViaGroupPayloadEventViaGroupEdgeArgs = {
   orderBy?: Maybe<Array<EventViaGroupsOrderBy>>;
 };
 
+/** All input for the create `Image` mutation. */
+export type CreateImageInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Image` to be created by this mutation. */
+  image: ImageInput;
+};
+
+/** The output of our create `Image` mutation. */
+export type CreateImagePayload = {
+  __typename?: 'CreateImagePayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  /** The `Image` that was created by this mutation. */
+  image: Maybe<Image>;
+  /** An edge for our `Image`. May be used by Relay 1. */
+  imageEdge: Maybe<ImagesEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our create `Image` mutation. */
+export type CreateImagePayloadImageEdgeArgs = {
+  orderBy?: Maybe<Array<ImagesOrderBy>>;
+};
+
 /** All input for the create `Member` mutation. */
 export type CreateMemberInput = {
   /**
@@ -244,6 +277,41 @@ export type CreatePageTrPayload = {
 /** The output of our create `PageTr` mutation. */
 export type CreatePageTrPayloadPageTrEdgeArgs = {
   orderBy?: Maybe<Array<PageTrsOrderBy>>;
+};
+
+/** All input for the create `Picture` mutation. */
+export type CreatePictureInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Picture` to be created by this mutation. */
+  picture: PictureInput;
+};
+
+/** The output of our create `Picture` mutation. */
+export type CreatePicturePayload = {
+  __typename?: 'CreatePicturePayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  /** Reads a single `Image` that is related to this `Picture`. */
+  imageByImage: Maybe<Image>;
+  /** The `Picture` that was created by this mutation. */
+  picture: Maybe<Picture>;
+  /** An edge for our `Picture`. May be used by Relay 1. */
+  pictureEdge: Maybe<PicturesEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our create `Picture` mutation. */
+export type CreatePicturePayloadPictureEdgeArgs = {
+  orderBy?: Maybe<Array<PicturesOrderBy>>;
 };
 
 /** All input for the `createUploadUrl` mutation. */
@@ -372,6 +440,39 @@ export type DeleteEventViaGroupPayloadEventViaGroupEdgeArgs = {
   orderBy?: Maybe<Array<EventViaGroupsOrderBy>>;
 };
 
+/** All input for the `deleteImage` mutation. */
+export type DeleteImageInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  id: Scalars['BigInt'];
+};
+
+/** The output of our delete `Image` mutation. */
+export type DeleteImagePayload = {
+  __typename?: 'DeleteImagePayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  deletedImageNodeId: Maybe<Scalars['ID']>;
+  /** The `Image` that was deleted by this mutation. */
+  image: Maybe<Image>;
+  /** An edge for our `Image`. May be used by Relay 1. */
+  imageEdge: Maybe<ImagesEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our delete `Image` mutation. */
+export type DeleteImagePayloadImageEdgeArgs = {
+  orderBy?: Maybe<Array<ImagesOrderBy>>;
+};
+
 /** All input for the `deleteMemberByUsername` mutation. */
 export type DeleteMemberByUsernameInput = {
   /**
@@ -484,16 +585,52 @@ export type DeletePageTrPayloadPageTrEdgeArgs = {
   orderBy?: Maybe<Array<PageTrsOrderBy>>;
 };
 
+/** All input for the `deletePicture` mutation. */
+export type DeletePictureInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  id: Scalars['BigInt'];
+};
+
+/** The output of our delete `Picture` mutation. */
+export type DeletePicturePayload = {
+  __typename?: 'DeletePicturePayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  deletedPictureNodeId: Maybe<Scalars['ID']>;
+  /** Reads a single `Image` that is related to this `Picture`. */
+  imageByImage: Maybe<Image>;
+  /** The `Picture` that was deleted by this mutation. */
+  picture: Maybe<Picture>;
+  /** An edge for our `Picture`. May be used by Relay 1. */
+  pictureEdge: Maybe<PicturesEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our delete `Picture` mutation. */
+export type DeletePicturePayloadPictureEdgeArgs = {
+  orderBy?: Maybe<Array<PicturesOrderBy>>;
+};
+
 export type Event = {
   __typename?: 'Event';
   endsAt: Scalars['Datetime'];
   /** Reads and enables pagination through a set of `EventViaGroup`. */
   groups: EventViaGroupsConnection;
   id: Scalars['BigInt'];
-  image: Maybe<ResponsiveImage>;
-  imageFile: Maybe<Scalars['String']>;
+  /** Reads a single `Image` that is related to this `Event`. */
+  imageByOverrideImage: Maybe<Image>;
+  img: Maybe<ResponsiveImage>;
   isTemplate: Scalars['Boolean'];
-  overrideImageFile: Maybe<Scalars['String']>;
+  overrideImage: Maybe<Scalars['BigInt']>;
   special: Scalars['Boolean'];
   startsAt: Scalars['Datetime'];
   /** Reads and enables pagination through a set of `EventViaEventTag`. */
@@ -546,8 +683,8 @@ export type EventCondition = {
   id?: Maybe<Scalars['BigInt']>;
   /** Checks for equality with the object’s `isTemplate` field. */
   isTemplate?: Maybe<Scalars['Boolean']>;
-  /** Checks for equality with the object’s `overrideImageFile` field. */
-  overrideImageFile?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `overrideImage` field. */
+  overrideImage?: Maybe<Scalars['BigInt']>;
   /** Checks for equality with the object’s `special` field. */
   special?: Maybe<Scalars['Boolean']>;
   /** Checks for equality with the object’s `startsAt` field. */
@@ -573,8 +710,8 @@ export type EventFilter = {
   id?: Maybe<BigIntFilter>;
   /** Filter by the object’s `isTemplate` field. */
   isTemplate?: Maybe<BooleanFilter>;
-  /** Filter by the object’s `overrideImageFile` field. */
-  overrideImageFile?: Maybe<StringFilter>;
+  /** Filter by the object’s `overrideImage` field. */
+  overrideImage?: Maybe<BigIntFilter>;
   /** Filter by the object’s `special` field. */
   special?: Maybe<BooleanFilter>;
   /** Filter by the object’s `startsAt` field. */
@@ -586,8 +723,10 @@ export type EventTag = {
   /** Reads and enables pagination through a set of `EventViaEventTag`. */
   events: EventViaEventTagsConnection;
   id: Scalars['BigInt'];
-  image: Maybe<ResponsiveImage>;
-  imageFile: Maybe<Scalars['String']>;
+  image: Maybe<Scalars['BigInt']>;
+  /** Reads a single `Image` that is related to this `EventTag`. */
+  imageByImage: Maybe<Image>;
+  img: ResponsiveImage;
   /** Reads and enables pagination through a set of `EventTagTr`. */
   translations: EventTagTrsConnection;
 };
@@ -623,16 +762,16 @@ export type EventTagTranslationsArgs = {
 export type EventTagCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['BigInt']>;
-  /** Checks for equality with the object’s `imageFile` field. */
-  imageFile?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `image` field. */
+  image?: Maybe<Scalars['BigInt']>;
 };
 
 /** A filter to be used against `EventTag` object types. All fields are combined with a logical ‘and.’ */
 export type EventTagFilter = {
   /** Filter by the object’s `id` field. */
   id?: Maybe<BigIntFilter>;
-  /** Filter by the object’s `imageFile` field. */
-  imageFile?: Maybe<StringFilter>;
+  /** Filter by the object’s `image` field. */
+  image?: Maybe<BigIntFilter>;
 };
 
 export type EventTagTr = {
@@ -728,8 +867,8 @@ export type EventTagsEdge = {
 export enum EventTagsOrderBy {
   IdAsc = 'ID_ASC',
   IdDesc = 'ID_DESC',
-  ImageFileAsc = 'IMAGE_FILE_ASC',
-  ImageFileDesc = 'IMAGE_FILE_DESC',
+  ImageAsc = 'IMAGE_ASC',
+  ImageDesc = 'IMAGE_DESC',
   Natural = 'NATURAL',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
@@ -999,8 +1138,8 @@ export enum EventsOrderBy {
   IsTemplateAsc = 'IS_TEMPLATE_ASC',
   IsTemplateDesc = 'IS_TEMPLATE_DESC',
   Natural = 'NATURAL',
-  OverrideImageFileAsc = 'OVERRIDE_IMAGE_FILE_ASC',
-  OverrideImageFileDesc = 'OVERRIDE_IMAGE_FILE_DESC',
+  OverrideImageAsc = 'OVERRIDE_IMAGE_ASC',
+  OverrideImageDesc = 'OVERRIDE_IMAGE_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
   SpecialAsc = 'SPECIAL_ASC',
@@ -1014,8 +1153,10 @@ export type Group = {
   /** Reads and enables pagination through a set of `EventViaGroup`. */
   events: EventViaGroupsConnection;
   id: Scalars['BigInt'];
-  image: ResponsiveImage;
-  imageFile: Scalars['String'];
+  image: Maybe<Scalars['BigInt']>;
+  /** Reads a single `Image` that is related to this `Group`. */
+  imageByImage: Maybe<Image>;
+  img: ResponsiveImage;
   /** Reads and enables pagination through a set of `GroupTr`. */
   translations: GroupTrsConnection;
 };
@@ -1048,16 +1189,16 @@ export type GroupTranslationsArgs = {
 export type GroupCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['BigInt']>;
-  /** Checks for equality with the object’s `imageFile` field. */
-  imageFile?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `image` field. */
+  image?: Maybe<Scalars['BigInt']>;
 };
 
 /** A filter to be used against `Group` object types. All fields are combined with a logical ‘and.’ */
 export type GroupFilter = {
   /** Filter by the object’s `id` field. */
   id?: Maybe<BigIntFilter>;
-  /** Filter by the object’s `imageFile` field. */
-  imageFile?: Maybe<StringFilter>;
+  /** Filter by the object’s `image` field. */
+  image?: Maybe<BigIntFilter>;
 };
 
 export type GroupTr = {
@@ -1171,12 +1312,171 @@ export type GroupsEdge = {
 export enum GroupsOrderBy {
   IdAsc = 'ID_ASC',
   IdDesc = 'ID_DESC',
-  ImageFileAsc = 'IMAGE_FILE_ASC',
-  ImageFileDesc = 'IMAGE_FILE_DESC',
+  ImageAsc = 'IMAGE_ASC',
+  ImageDesc = 'IMAGE_DESC',
   Natural = 'NATURAL',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
+
+export type Image = {
+  __typename?: 'Image';
+  /** Reads and enables pagination through a set of `EventTag`. */
+  eventTagsByImage: EventTagsConnection;
+  /** Reads and enables pagination through a set of `Event`. */
+  eventsByOverrideImage: EventsConnection;
+  /** Reads and enables pagination through a set of `Group`. */
+  groupsByImage: GroupsConnection;
+  height: Scalars['Int'];
+  id: Scalars['BigInt'];
+  path: Scalars['String'];
+  /** Reads and enables pagination through a set of `Picture`. */
+  picturesByImage: PicturesConnection;
+  width: Scalars['Int'];
+};
+
+
+export type ImageEventTagsByImageArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  condition?: Maybe<EventTagCondition>;
+  filter?: Maybe<EventTagFilter>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<EventTagsOrderBy>>;
+};
+
+
+export type ImageEventsByOverrideImageArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  condition?: Maybe<EventCondition>;
+  filter?: Maybe<EventFilter>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<EventsOrderBy>>;
+};
+
+
+export type ImageGroupsByImageArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  condition?: Maybe<GroupCondition>;
+  filter?: Maybe<GroupFilter>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<GroupsOrderBy>>;
+};
+
+
+export type ImagePicturesByImageArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  condition?: Maybe<PictureCondition>;
+  filter?: Maybe<PictureFilter>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<PicturesOrderBy>>;
+};
+
+/** A condition to be used against `Image` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export type ImageCondition = {
+  /** Checks for equality with the object’s `height` field. */
+  height?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `path` field. */
+  path?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `width` field. */
+  width?: Maybe<Scalars['Int']>;
+};
+
+/** A filter to be used against `Image` object types. All fields are combined with a logical ‘and.’ */
+export type ImageFilter = {
+  /** Filter by the object’s `height` field. */
+  height?: Maybe<IntFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: Maybe<BigIntFilter>;
+  /** Filter by the object’s `path` field. */
+  path?: Maybe<StringFilter>;
+  /** Filter by the object’s `width` field. */
+  width?: Maybe<IntFilter>;
+};
+
+/** An input for mutations affecting `Image` */
+export type ImageInput = {
+  height: Scalars['Int'];
+  id?: Maybe<Scalars['BigInt']>;
+  path: Scalars['String'];
+  width: Scalars['Int'];
+};
+
+/** Represents an update to a `Image`. Fields that are set will be updated. */
+export type ImagePatch = {
+  height?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['BigInt']>;
+  path?: Maybe<Scalars['String']>;
+  width?: Maybe<Scalars['Int']>;
+};
+
+/** A connection to a list of `Image` values. */
+export type ImagesConnection = {
+  __typename?: 'ImagesConnection';
+  /** A list of edges which contains the `Image` and cursor to aid in pagination. */
+  edges: Array<ImagesEdge>;
+  /** A list of `Image` objects. */
+  nodes: Array<Image>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Image` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Image` edge in the connection. */
+export type ImagesEdge = {
+  __typename?: 'ImagesEdge';
+  /** A cursor for use in pagination. */
+  cursor: Maybe<Scalars['Cursor']>;
+  /** The `Image` at the end of the edge. */
+  node: Image;
+};
+
+/** Methods to use when ordering `Image`. */
+export enum ImagesOrderBy {
+  HeightAsc = 'HEIGHT_ASC',
+  HeightDesc = 'HEIGHT_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  Natural = 'NATURAL',
+  PathAsc = 'PATH_ASC',
+  PathDesc = 'PATH_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
+  WidthAsc = 'WIDTH_ASC',
+  WidthDesc = 'WIDTH_DESC'
+}
+
+/** A filter to be used against Int fields. All fields are combined with a logical ‘and.’ */
+export type IntFilter = {
+  /** Equal to the specified value. */
+  equalTo?: Maybe<Scalars['Int']>;
+  /** Greater than the specified value. */
+  greaterThan?: Maybe<Scalars['Int']>;
+  /** Greater than or equal to the specified value. */
+  greaterThanOrEqualTo?: Maybe<Scalars['Int']>;
+  /** Is null (if `true` is specified) or is not null (if `false` is specified). */
+  isNull?: Maybe<Scalars['Boolean']>;
+  /** Less than the specified value. */
+  lessThan?: Maybe<Scalars['Int']>;
+  /** Less than or equal to the specified value. */
+  lessThanOrEqualTo?: Maybe<Scalars['Int']>;
+  /** Not equal to the specified value. */
+  notEqualTo?: Maybe<Scalars['Int']>;
+};
 
 export type Member = {
   __typename?: 'Member';
@@ -1280,18 +1580,24 @@ export type Mutation = {
   createEventViaEventTag: Maybe<CreateEventViaEventTagPayload>;
   /** Creates a single `EventViaGroup`. */
   createEventViaGroup: Maybe<CreateEventViaGroupPayload>;
+  /** Creates a single `Image`. */
+  createImage: Maybe<CreateImagePayload>;
   /** Creates a single `Member`. */
   createMember: Maybe<CreateMemberPayload>;
   /** Creates a single `Page`. */
   createPage: Maybe<CreatePagePayload>;
   /** Creates a single `PageTr`. */
   createPageTr: Maybe<CreatePageTrPayload>;
+  /** Creates a single `Picture`. */
+  createPicture: Maybe<CreatePicturePayload>;
   /** Get a signed URL for uploading files. It will expire in 5 minutes. */
   createUploadUrl: Maybe<CreateUploadUrlPayload>;
   /** Deletes a single `EventViaEventTag` using a unique key. */
   deleteEventViaEventTag: Maybe<DeleteEventViaEventTagPayload>;
   /** Deletes a single `EventViaGroup` using a unique key. */
   deleteEventViaGroup: Maybe<DeleteEventViaGroupPayload>;
+  /** Deletes a single `Image` using a unique key. */
+  deleteImage: Maybe<DeleteImagePayload>;
   /** Deletes a single `Member` using a unique key. */
   deleteMember: Maybe<DeleteMemberPayload>;
   /** Deletes a single `Member` using a unique key. */
@@ -1300,11 +1606,16 @@ export type Mutation = {
   deletePage: Maybe<DeletePagePayload>;
   /** Deletes a single `PageTr` using a unique key. */
   deletePageTr: Maybe<DeletePageTrPayload>;
+  /** Deletes a single `Picture` using a unique key. */
+  deletePicture: Maybe<DeletePicturePayload>;
   logout: Maybe<Scalars['Boolean']>;
+  reorderPictures: Maybe<ReorderPicturesPayload>;
   /** Updates a single `EventViaEventTag` using a unique key and a patch. */
   updateEventViaEventTag: Maybe<UpdateEventViaEventTagPayload>;
   /** Updates a single `EventViaGroup` using a unique key and a patch. */
   updateEventViaGroup: Maybe<UpdateEventViaGroupPayload>;
+  /** Updates a single `Image` using a unique key and a patch. */
+  updateImage: Maybe<UpdateImagePayload>;
   /** Updates a single `Member` using a unique key and a patch. */
   updateMember: Maybe<UpdateMemberPayload>;
   /** Updates a single `Member` using a unique key and a patch. */
@@ -1313,6 +1624,8 @@ export type Mutation = {
   updatePage: Maybe<UpdatePagePayload>;
   /** Updates a single `PageTr` using a unique key and a patch. */
   updatePageTr: Maybe<UpdatePageTrPayload>;
+  /** Updates a single `Picture` using a unique key and a patch. */
+  updatePicture: Maybe<UpdatePicturePayload>;
   upsertEvent: Maybe<UpsertEventPayload>;
 };
 
@@ -1336,6 +1649,12 @@ export type MutationCreateEventViaGroupArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateImageArgs = {
+  input: CreateImageInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateMemberArgs = {
   input: CreateMemberInput;
 };
@@ -1354,6 +1673,12 @@ export type MutationCreatePageTrArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreatePictureArgs = {
+  input: CreatePictureInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateUploadUrlArgs = {
   input: CreateUploadUrlInput;
 };
@@ -1368,6 +1693,12 @@ export type MutationDeleteEventViaEventTagArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteEventViaGroupArgs = {
   input: DeleteEventViaGroupInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteImageArgs = {
+  input: DeleteImageInput;
 };
 
 
@@ -1396,6 +1727,18 @@ export type MutationDeletePageTrArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeletePictureArgs = {
+  input: DeletePictureInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationReorderPicturesArgs = {
+  input: ReorderPicturesInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateEventViaEventTagArgs = {
   input: UpdateEventViaEventTagInput;
 };
@@ -1404,6 +1747,12 @@ export type MutationUpdateEventViaEventTagArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateEventViaGroupArgs = {
   input: UpdateEventViaGroupInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateImageArgs = {
+  input: UpdateImageInput;
 };
 
 
@@ -1428,6 +1777,12 @@ export type MutationUpdatePageArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdatePageTrArgs = {
   input: UpdatePageTrInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdatePictureArgs = {
+  input: UpdatePictureInput;
 };
 
 
@@ -1599,12 +1954,101 @@ export enum PagesOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
+export type Picture = {
+  __typename?: 'Picture';
+  allowOnHome: Scalars['Boolean'];
+  id: Scalars['BigInt'];
+  image: Scalars['BigInt'];
+  /** Reads a single `Image` that is related to this `Picture`. */
+  imageByImage: Maybe<Image>;
+  img: ResponsiveImage;
+  rank: Scalars['Int'];
+};
+
+/** A condition to be used against `Picture` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export type PictureCondition = {
+  /** Checks for equality with the object’s `allowOnHome` field. */
+  allowOnHome?: Maybe<Scalars['Boolean']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `image` field. */
+  image?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `rank` field. */
+  rank?: Maybe<Scalars['Int']>;
+};
+
+/** A filter to be used against `Picture` object types. All fields are combined with a logical ‘and.’ */
+export type PictureFilter = {
+  /** Filter by the object’s `allowOnHome` field. */
+  allowOnHome?: Maybe<BooleanFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: Maybe<BigIntFilter>;
+  /** Filter by the object’s `image` field. */
+  image?: Maybe<BigIntFilter>;
+  /** Filter by the object’s `rank` field. */
+  rank?: Maybe<IntFilter>;
+};
+
+/** An input for mutations affecting `Picture` */
+export type PictureInput = {
+  allowOnHome?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['BigInt']>;
+  image: Scalars['BigInt'];
+  rank?: Maybe<Scalars['Int']>;
+};
+
+/** Represents an update to a `Picture`. Fields that are set will be updated. */
+export type PicturePatch = {
+  allowOnHome?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['BigInt']>;
+  image?: Maybe<Scalars['BigInt']>;
+  rank?: Maybe<Scalars['Int']>;
+};
+
+/** A connection to a list of `Picture` values. */
+export type PicturesConnection = {
+  __typename?: 'PicturesConnection';
+  /** A list of edges which contains the `Picture` and cursor to aid in pagination. */
+  edges: Array<PicturesEdge>;
+  /** A list of `Picture` objects. */
+  nodes: Array<Picture>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Picture` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Picture` edge in the connection. */
+export type PicturesEdge = {
+  __typename?: 'PicturesEdge';
+  /** A cursor for use in pagination. */
+  cursor: Maybe<Scalars['Cursor']>;
+  /** The `Picture` at the end of the edge. */
+  node: Picture;
+};
+
+/** Methods to use when ordering `Picture`. */
+export enum PicturesOrderBy {
+  AllowOnHomeAsc = 'ALLOW_ON_HOME_ASC',
+  AllowOnHomeDesc = 'ALLOW_ON_HOME_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  ImageAsc = 'IMAGE_ASC',
+  ImageDesc = 'IMAGE_DESC',
+  Natural = 'NATURAL',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
+  RankAsc = 'RANK_ASC',
+  RankDesc = 'RANK_DESC'
+}
+
 /** The root query type which gives access points into the data universe. */
 export type Query = {
   __typename?: 'Query';
   currentMember: Maybe<Member>;
   event: Maybe<Event>;
   eventBySlug: Maybe<Event>;
+  eventImage: Maybe<Scalars['Int']>;
   eventTag: Maybe<EventTag>;
   eventTagTr: Maybe<EventTagTr>;
   /** Reads and enables pagination through a set of `EventTagTr`. */
@@ -1627,6 +2071,9 @@ export type Query = {
   groupTrs: Maybe<GroupTrsConnection>;
   /** Reads and enables pagination through a set of `Group`. */
   groups: Maybe<GroupsConnection>;
+  image: Maybe<Image>;
+  /** Reads and enables pagination through a set of `Image`. */
+  images: Maybe<ImagesConnection>;
   member: Maybe<Member>;
   memberByUsername: Maybe<Member>;
   /** Reads and enables pagination through a set of `Member`. */
@@ -1637,11 +2084,16 @@ export type Query = {
   pageTrs: Maybe<PageTrsConnection>;
   /** Reads and enables pagination through a set of `Page`. */
   pages: Maybe<PagesConnection>;
+  picture: Maybe<Picture>;
+  /** Reads and enables pagination through a set of `Picture`. */
+  pictures: Maybe<PicturesConnection>;
   /**
    * Exposes the root query type nested one level down. This is helpful for Relay 1
    * which can only query top level fields if they are in a particular form.
    */
   query: Query;
+  /** Reads and enables pagination through a set of `Picture`. */
+  randomPictures: Maybe<PicturesConnection>;
   /** Reads and enables pagination through a set of `EventTag`. */
   searchEventTags: Maybe<EventTagsConnection>;
   /** Reads and enables pagination through a set of `Group`. */
@@ -1659,6 +2111,13 @@ export type QueryEventArgs = {
 export type QueryEventBySlugArgs = {
   preferredLanguageCode: Scalars['String'];
   slug: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryEventImageArgs = {
+  eid: Scalars['Int'];
+  overrideImage: Scalars['Int'];
 };
 
 
@@ -1809,6 +2268,25 @@ export type QueryGroupsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryImageArgs = {
+  id: Scalars['BigInt'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryImagesArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  condition?: Maybe<ImageCondition>;
+  filter?: Maybe<ImageFilter>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<ImagesOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryMemberArgs = {
   id: Scalars['UUID'];
 };
@@ -1873,6 +2351,35 @@ export type QueryPagesArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryPictureArgs = {
+  id: Scalars['BigInt'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryPicturesArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  condition?: Maybe<PictureCondition>;
+  filter?: Maybe<PictureFilter>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<PicturesOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryRandomPicturesArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QuerySearchEventTagsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   before?: Maybe<Scalars['Cursor']>;
@@ -1893,11 +2400,42 @@ export type QuerySearchGroupsArgs = {
   query: Scalars['String'];
 };
 
+/** All input for the `reorderPictures` mutation. */
+export type ReorderPicturesInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  reorders: Array<Maybe<ReorderPicturesReorderInput>>;
+};
+
+/** The output of our `reorderPictures` mutation. */
+export type ReorderPicturesPayload = {
+  __typename?: 'ReorderPicturesPayload';
+  boolean: Maybe<Scalars['Boolean']>;
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+/** An input for mutations affecting `ReorderPicturesReorder` */
+export type ReorderPicturesReorderInput = {
+  fromRank?: Maybe<Scalars['Int']>;
+  toRank?: Maybe<Scalars['Int']>;
+};
+
 export type ResponsiveImage = {
   __typename?: 'ResponsiveImage';
+  height: Scalars['Int'];
   src: Scalars['String'];
   srcSetJpeg: Scalars['String'];
   srcSetWebp: Scalars['String'];
+  width: Scalars['Int'];
 };
 
 /** A filter to be used against String fields. All fields are combined with a logical ‘and.’ */
@@ -2038,6 +2576,40 @@ export type UpdateEventViaGroupPayloadEventViaGroupEdgeArgs = {
   orderBy?: Maybe<Array<EventViaGroupsOrderBy>>;
 };
 
+/** All input for the `updateImage` mutation. */
+export type UpdateImageInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  id: Scalars['BigInt'];
+  /** An object where the defined keys will be set on the `Image` being updated. */
+  patch: ImagePatch;
+};
+
+/** The output of our update `Image` mutation. */
+export type UpdateImagePayload = {
+  __typename?: 'UpdateImagePayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  /** The `Image` that was updated by this mutation. */
+  image: Maybe<Image>;
+  /** An edge for our `Image`. May be used by Relay 1. */
+  imageEdge: Maybe<ImagesEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our update `Image` mutation. */
+export type UpdateImagePayloadImageEdgeArgs = {
+  orderBy?: Maybe<Array<ImagesOrderBy>>;
+};
+
 /** All input for the `updateMemberByUsername` mutation. */
 export type UpdateMemberByUsernameInput = {
   /**
@@ -2155,6 +2727,42 @@ export type UpdatePageTrPayloadPageTrEdgeArgs = {
   orderBy?: Maybe<Array<PageTrsOrderBy>>;
 };
 
+/** All input for the `updatePicture` mutation. */
+export type UpdatePictureInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  id: Scalars['BigInt'];
+  /** An object where the defined keys will be set on the `Picture` being updated. */
+  patch: PicturePatch;
+};
+
+/** The output of our update `Picture` mutation. */
+export type UpdatePicturePayload = {
+  __typename?: 'UpdatePicturePayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  /** Reads a single `Image` that is related to this `Picture`. */
+  imageByImage: Maybe<Image>;
+  /** The `Picture` that was updated by this mutation. */
+  picture: Maybe<Picture>;
+  /** An edge for our `Picture`. May be used by Relay 1. */
+  pictureEdge: Maybe<PicturesEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our update `Picture` mutation. */
+export type UpdatePicturePayloadPictureEdgeArgs = {
+  orderBy?: Maybe<Array<PicturesOrderBy>>;
+};
+
 /** All input for the `upsertEvent` mutation. */
 export type UpsertEventInput = {
   /**
@@ -2178,6 +2786,8 @@ export type UpsertEventPayload = {
   event: Maybe<Event>;
   /** An edge for our `Event`. May be used by Relay 1. */
   eventEdge: Maybe<EventsEdge>;
+  /** Reads a single `Image` that is related to this `Event`. */
+  imageByOverrideImage: Maybe<Image>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query: Maybe<Query>;
 };
@@ -2343,16 +2953,16 @@ export type CalendarEventBySlugQuery = (
   { __typename?: 'Query' }
   & { eventBySlug: Maybe<(
     { __typename?: 'Event' }
-    & Pick<Event, 'startsAt' | 'imageFile' | 'endsAt' | 'id'>
+    & Pick<Event, 'startsAt' | 'endsAt' | 'id'>
     & { translations: (
       { __typename?: 'EventTrsConnection' }
       & { nodes: Array<(
         { __typename?: 'EventTr' }
         & Pick<EventTr, 'description' | 'eventId' | 'languageCode' | 'slug' | 'title'>
       )> }
-    ), image: Maybe<(
+    ), img: Maybe<(
       { __typename?: 'ResponsiveImage' }
-      & Pick<ResponsiveImage, 'src' | 'srcSetJpeg' | 'srcSetWebp'>
+      & Pick<ResponsiveImage, 'src' | 'srcSetJpeg' | 'srcSetWebp' | 'height' | 'width'>
     )>, tags: (
       { __typename?: 'EventViaEventTagsConnection' }
       & { nodes: Array<(
@@ -2411,6 +3021,7 @@ export type UpsertEventMutation = (
 
 export type GetUploadUrlMutationVariables = Exact<{
   contentType: Scalars['String'];
+  randomId?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -2433,10 +3044,9 @@ export type HomeEventsQueryQuery = (
     { __typename?: 'EventsConnection' }
     & { nodes: Array<(
       { __typename?: 'Event' }
-      & Pick<Event, 'imageFile'>
-      & { image: Maybe<(
+      & { img: Maybe<(
         { __typename?: 'ResponsiveImage' }
-        & Pick<ResponsiveImage, 'src' | 'srcSetWebp' | 'srcSetJpeg'>
+        & Pick<ResponsiveImage, 'src' | 'srcSetJpeg' | 'srcSetWebp' | 'height' | 'width'>
       )> }
       & HomeEventFragment
     )> }
@@ -2471,15 +3081,33 @@ export type HomeGroupsQueryQuery = (
     & { nodes: Array<(
       { __typename?: 'Group' }
       & Pick<Group, 'id'>
-      & { image: (
+      & { img: (
         { __typename?: 'ResponsiveImage' }
-        & Pick<ResponsiveImage, 'src' | 'srcSetWebp' | 'srcSetJpeg'>
+        & Pick<ResponsiveImage, 'src' | 'srcSetJpeg' | 'srcSetWebp' | 'height' | 'width'>
       ), translations: (
         { __typename?: 'GroupTrsConnection' }
         & { nodes: Array<(
           { __typename?: 'GroupTr' }
           & Pick<GroupTr, 'languageCode' | 'title' | 'shortDescription' | 'slug' | 'groupId'>
         )> }
+      ) }
+    )> }
+  )> }
+);
+
+export type HomeRandomPicturesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type HomeRandomPicturesQueryQuery = (
+  { __typename?: 'Query' }
+  & { randomPictures: Maybe<(
+    { __typename?: 'PicturesConnection' }
+    & { nodes: Array<(
+      { __typename?: 'Picture' }
+      & Pick<Picture, 'image' | 'id' | 'rank'>
+      & { img: (
+        { __typename?: 'ResponsiveImage' }
+        & Pick<ResponsiveImage, 'height' | 'src' | 'srcSetJpeg' | 'srcSetWebp' | 'width'>
       ) }
     )> }
   )> }
@@ -2526,6 +3154,96 @@ export type UpdatePageTranslationMutation = (
 export type PageTranslationFragment = (
   { __typename?: 'PageTr' }
   & Pick<PageTr, 'content' | 'languageCode' | 'pageName'>
+);
+
+export type PicturesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PicturesQueryQuery = (
+  { __typename?: 'Query' }
+  & { pictures: Maybe<(
+    { __typename?: 'PicturesConnection' }
+    & { nodes: Array<(
+      { __typename?: 'Picture' }
+      & Pick<Picture, 'id' | 'rank' | 'allowOnHome'>
+      & { img: (
+        { __typename?: 'ResponsiveImage' }
+        & Pick<ResponsiveImage, 'height' | 'src' | 'srcSetJpeg' | 'srcSetWebp' | 'width'>
+      ) }
+    )> }
+  )> }
+);
+
+export type CreateImageMutationMutationVariables = Exact<{
+  path: Scalars['String'];
+  height: Scalars['Int'];
+  width: Scalars['Int'];
+}>;
+
+
+export type CreateImageMutationMutation = (
+  { __typename?: 'Mutation' }
+  & { createImage: Maybe<(
+    { __typename?: 'CreateImagePayload' }
+    & { image: Maybe<(
+      { __typename?: 'Image' }
+      & Pick<Image, 'id'>
+    )> }
+  )> }
+);
+
+export type CreatePictureMutationVariables = Exact<{
+  image: Scalars['BigInt'];
+}>;
+
+
+export type CreatePictureMutation = (
+  { __typename?: 'Mutation' }
+  & { createPicture: Maybe<(
+    { __typename?: 'CreatePicturePayload' }
+    & { picture: Maybe<(
+      { __typename?: 'Picture' }
+      & Pick<Picture, 'id' | 'rank' | 'allowOnHome'>
+      & { img: (
+        { __typename?: 'ResponsiveImage' }
+        & Pick<ResponsiveImage, 'height' | 'src' | 'srcSetJpeg' | 'srcSetWebp' | 'width'>
+      ) }
+    )> }
+  )> }
+);
+
+export type ReorderPicturesMutationMutationVariables = Exact<{
+  reorders: Array<Maybe<ReorderPicturesReorderInput>> | Maybe<ReorderPicturesReorderInput>;
+}>;
+
+
+export type ReorderPicturesMutationMutation = (
+  { __typename?: 'Mutation' }
+  & { reorderPictures: Maybe<(
+    { __typename?: 'ReorderPicturesPayload' }
+    & Pick<ReorderPicturesPayload, 'boolean'>
+  )> }
+);
+
+export type SetPictureAllowOnHomeMutationMutationVariables = Exact<{
+  id: Scalars['BigInt'];
+  input: Scalars['Boolean'];
+}>;
+
+
+export type SetPictureAllowOnHomeMutationMutation = (
+  { __typename?: 'Mutation' }
+  & { updatePicture: Maybe<(
+    { __typename?: 'UpdatePicturePayload' }
+    & { picture: Maybe<(
+      { __typename?: 'Picture' }
+      & Pick<Picture, 'image' | 'id' | 'rank' | 'allowOnHome'>
+      & { img: (
+        { __typename?: 'ResponsiveImage' }
+        & Pick<ResponsiveImage, 'height' | 'src' | 'srcSetJpeg' | 'srcSetWebp' | 'width'>
+      ) }
+    )> }
+  )> }
 );
 
 export const CalendarEventFragmentDoc = gql`
@@ -2671,11 +3389,12 @@ export const CalendarEventBySlugDocument = gql`
       }
     }
     startsAt
-    imageFile
-    image {
+    img {
       src
       srcSetJpeg
       srcSetWebp
+      height
+      width
     }
     endsAt
     id
@@ -2724,8 +3443,8 @@ export const UpsertEventDocument = gql`
 }
     ${CalendarEventFragmentDoc}` as unknown as DocumentNode<UpsertEventMutation, UpsertEventMutationVariables>;
 export const GetUploadUrlDocument = gql`
-    mutation GetUploadUrl($contentType: String!) {
-  createUploadUrl(input: {contentType: $contentType}) {
+    mutation GetUploadUrl($contentType: String!, $randomId: String) {
+  createUploadUrl(input: {contentType: $contentType, clientMutationId: $randomId}) {
     uploadUrl
     formData
   }
@@ -2741,12 +3460,13 @@ export const HomeEventsQueryDocument = gql`
   ) {
     nodes {
       ...HomeEvent
-      image {
+      img {
         src
-        srcSetWebp
         srcSetJpeg
+        srcSetWebp
+        height
+        width
       }
-      imageFile
     }
   }
   events(
@@ -2766,10 +3486,12 @@ export const HomeGroupsQueryDocument = gql`
   groups {
     nodes {
       id
-      image {
+      img {
         src
-        srcSetWebp
         srcSetJpeg
+        srcSetWebp
+        height
+        width
       }
       translations {
         nodes {
@@ -2784,6 +3506,24 @@ export const HomeGroupsQueryDocument = gql`
   }
 }
     ` as unknown as DocumentNode<HomeGroupsQueryQuery, HomeGroupsQueryQueryVariables>;
+export const HomeRandomPicturesQueryDocument = gql`
+    query HomeRandomPicturesQuery {
+  randomPictures(first: 4) {
+    nodes {
+      image
+      id
+      rank
+      img {
+        height
+        src
+        srcSetJpeg
+        srcSetWebp
+        width
+      }
+    }
+  }
+}
+    ` as unknown as DocumentNode<HomeRandomPicturesQueryQuery, HomeRandomPicturesQueryQueryVariables>;
 export const PageQueryDocument = gql`
     query PageQuery($name: String!) {
   page(name: $name) {
@@ -2807,3 +3547,74 @@ export const UpdatePageTranslationDocument = gql`
   }
 }
     ${PageTranslationFragmentDoc}` as unknown as DocumentNode<UpdatePageTranslationMutation, UpdatePageTranslationMutationVariables>;
+export const PicturesQueryDocument = gql`
+    query PicturesQuery {
+  pictures(orderBy: RANK_ASC) {
+    nodes {
+      img {
+        height
+        src
+        srcSetJpeg
+        srcSetWebp
+        width
+      }
+      id
+      rank
+      allowOnHome
+    }
+  }
+}
+    ` as unknown as DocumentNode<PicturesQueryQuery, PicturesQueryQueryVariables>;
+export const CreateImageMutationDocument = gql`
+    mutation CreateImageMutation($path: String!, $height: Int!, $width: Int!) {
+  createImage(input: {image: {path: $path, width: $width, height: $height}}) {
+    image {
+      id
+    }
+  }
+}
+    ` as unknown as DocumentNode<CreateImageMutationMutation, CreateImageMutationMutationVariables>;
+export const CreatePictureDocument = gql`
+    mutation CreatePicture($image: BigInt!) {
+  createPicture(input: {picture: {image: $image}}) {
+    picture {
+      img {
+        height
+        src
+        srcSetJpeg
+        srcSetWebp
+        width
+      }
+      id
+      rank
+      allowOnHome
+    }
+  }
+}
+    ` as unknown as DocumentNode<CreatePictureMutation, CreatePictureMutationVariables>;
+export const ReorderPicturesMutationDocument = gql`
+    mutation ReorderPicturesMutation($reorders: [ReorderPicturesReorderInput]!) {
+  reorderPictures(input: {reorders: $reorders}) {
+    boolean
+  }
+}
+    ` as unknown as DocumentNode<ReorderPicturesMutationMutation, ReorderPicturesMutationMutationVariables>;
+export const SetPictureAllowOnHomeMutationDocument = gql`
+    mutation SetPictureAllowOnHomeMutation($id: BigInt!, $input: Boolean!) {
+  updatePicture(input: {patch: {allowOnHome: $input}, id: $id}) {
+    picture {
+      image
+      id
+      rank
+      allowOnHome
+      img {
+        height
+        src
+        srcSetJpeg
+        srcSetWebp
+        width
+      }
+    }
+  }
+}
+    ` as unknown as DocumentNode<SetPictureAllowOnHomeMutationMutation, SetPictureAllowOnHomeMutationMutationVariables>;

@@ -1,5 +1,7 @@
 import { createHmac } from 'crypto';
 import { gql, makeExtendSchemaPlugin } from 'graphile-utils';
+import { Client } from 'pg';
+import { SQLQuery } from 'pg-sql2';
 
 const urlSafeBase64 = (buf: any) => {
   return Buffer.from(buf)
@@ -21,8 +23,6 @@ function createUrl(
   url: string,
   options: { width: number; height: number; ext: string }
 ): string {
-  // eslint-disable-next-line no-param-reassign
-  url = url.replace('http://media.localhost/', 's3://');
   const encoded_url = urlSafeBase64(url);
   const path = `/resize:auto:${options.width}:${options.height}/${encoded_url}.${options.ext}`;
   const signature = sign(
@@ -33,13 +33,20 @@ function createUrl(
   return `http://img.${process.env.DOMAIN}/${signature}${path}`;
 }
 
-function createResponsiveImage(file: string) {
+interface Image {
+  path: string;
+  width: number;
+  height: number;
+}
+
+function createResponsiveImage({ path, width, height }: Image) {
   const widths = [32, 64, 128, 256, 512, 1024, 2048];
+  const url = `s3://${process.env.AWS_UPLOADS_BUCKET}/${path}`;
   return {
-    src: createUrl(file, { width: 0, height: 0, ext: 'jpg' }),
+    src: createUrl(url, { width: 0, height: 0, ext: 'jpg' }),
     srcSetWebp: widths
       .map((width) => {
-        return `${createUrl(file, {
+        return `${createUrl(url, {
           width,
           height: 0,
           ext: 'webp',
@@ -48,31 +55,47 @@ function createResponsiveImage(file: string) {
       .join(', '),
     srcSetJpeg: widths
       .map((width) => {
-        return `${createUrl(file, {
+        return `${createUrl(url, {
           width,
           height: 0,
           ext: 'jpg',
         })} ${width}w`;
       })
       .join(', '),
+    width,
+    height,
   };
 }
 
-const ImageUrlSigningPlugin = makeExtendSchemaPlugin(() => {
+async function getImage(
+  sql: typeof import('pg-sql2'),
+  pgClient: Client,
+  idQuery: SQLQuery
+): Promise<Image> {
+  const query = sql.query`select * from smil_aarhus.image where (smil_aarhus.image.id = (${idQuery}))`;
+  const { rows } = await pgClient.query(sql.compile(query));
+  return rows[0];
+}
+
+const ImageUrlSigningPlugin = makeExtendSchemaPlugin((build) => {
+  const { pgSql: sql } = build;
   return {
     typeDefs: gql`
       extend type Group {
-        image: ResponsiveImage! @requires(columns: ["image_file"])
+        img: ResponsiveImage! @requires(columns: ["image"])
       }
       extend type EventTag {
-        image: ResponsiveImage @requires(columns: ["image_file"])
+        img: ResponsiveImage! @requires(columns: ["image"])
+      }
+      extend type Picture {
+        img: ResponsiveImage! @requires(columns: ["image"])
       }
       extend type Event {
-        image: ResponsiveImage # NOTE NEEDS imageField but it's computed
+        img: ResponsiveImage @requires(columns: ["id", "override_image"])
       }
       type ResponsiveImage {
-        # width: Int!
-        # height: Int!
+        width: Int!
+        height: Int!
         src: String!
         srcSetWebp: String!
         srcSetJpeg: String!
@@ -80,20 +103,46 @@ const ImageUrlSigningPlugin = makeExtendSchemaPlugin(() => {
     `,
     resolvers: {
       Group: {
-        image: async (group) => {
-          return createResponsiveImage(group.imageFile);
+        img: async (group, _, context) => {
+          return createResponsiveImage(
+            await getImage(
+              sql,
+              context.pgClient,
+              sql.query`${sql.value(group.image)}`
+            )
+          );
         },
       },
       EventTag: {
-        image: async (eventTag) => {
-          return createResponsiveImage(eventTag.imageFile);
+        img: async (eventTag, _, context) => {
+          return createResponsiveImage(
+            await getImage(
+              sql,
+              context.pgClient,
+              sql.query`${sql.value(eventTag.image)}`
+            )
+          );
+        },
+      },
+      Picture: {
+        img: async (picture, _, context) => {
+          return createResponsiveImage(
+            await getImage(
+              sql,
+              context.pgClient,
+              sql.query`${sql.value(picture.image)}`
+            )
+          );
         },
       },
       Event: {
-        image: async (event) => {
-          if (event['@imageFile'] === undefined) return undefined;
-          if (event['@imageFile'] === null) return null;
-          return createResponsiveImage(event['@imageFile']);
+        img: async (event, _, context) => {
+          const idQuery = sql.query`SELECT * from smil_aarhus.event_image(${sql.value(
+            event.id
+          )}, ${sql.value(event.overrideImage)})`;
+          const image = await getImage(sql, context.pgClient, idQuery);
+          if (!image) return null;
+          return createResponsiveImage(image);
         },
       },
     },

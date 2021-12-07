@@ -35,11 +35,12 @@ query CalendarEventBySlug($languageCode: String!, $slug: String!) {
       }
     }
     startsAt
-    imageFile
-    image {
+    img {
       src
       srcSetJpeg
       srcSetWebp
+      height
+      width
     }
     endsAt
     id

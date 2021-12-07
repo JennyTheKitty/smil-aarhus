@@ -6,3 +6,4 @@ build/
 /@app/graphql/index.*
 yarn-error.log
 vendor/
+local/

@@ -7,7 +7,8 @@ import * as pages from './pages';
 export enum Route {
   HOME = 'HOME',
   INFO = 'INFO',
-  TEST = 'CALENDAR',
+  CALENDAR = 'CALENDAR',
+  PICTURES = 'PICTURES',
   GROUPS = 'GROUPS',
   GROUP = 'GROUP',
   NEWS = 'NEWS',
@@ -22,9 +23,13 @@ const i18nRoutes = {
     paths: { da: 'info', en: 'info' },
     component: pages.Info,
   },
-  [Route.TEST]: {
+  [Route.CALENDAR]: {
     paths: { da: 'kalender/:slug?', en: 'calendar/:slug?' },
     component: pages.Calendar,
+  },
+  [Route.PICTURES]: {
+    paths: { da: 'billeder', en: 'pictures' },
+    component: pages.Pictures,
   },
   [Route.GROUPS]: {
     paths: { da: 'grupper', en: 'groups' },

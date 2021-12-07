@@ -57,21 +57,23 @@
             <icon-mdi-close />
           </button>
         </div>
-        <div v-if="event?.image">
+        <div v-if="event?.img">
           <picture>
             <source
-              :srcset="event.image.srcSetWebp"
+              :srcset="event.img.srcSetWebp"
               type="image/webp"
               sizes="400px"
             />
             <source
-              :srcset="event.image.srcSetJpeg"
+              :srcset="event.img.srcSetJpeg"
               type="image/webp"
               sizes="400px"
             />
             <img
               alt=""
-              :src="event.image.src"
+              :src="event.img.src"
+              :height="event.img.height"
+              :width="event.img.width"
               loading="lazy"
               w:w="full"
               w:h="50"

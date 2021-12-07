@@ -90,7 +90,11 @@ export default defineConfig({
   },
   plugins: [
     viteSSR({
-      excludeSsrComponents: [/MonthCalendar.vue/, /ContentEditor.vue/],
+      excludeSsrComponents: [
+        /MonthCalendar.vue/,
+        /ContentEditor.vue/,
+        /Pictures.vue/,
+      ],
     }),
     Vue({
       include: [/\.vue$/],

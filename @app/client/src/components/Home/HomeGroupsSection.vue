@@ -19,19 +19,21 @@
             >
               <picture>
                 <source
-                  :srcset="group.image.srcSetWebp"
+                  :srcset="group.img.srcSetWebp"
                   type="image/webp"
                   sizes="20rem"
                 />
                 <source
-                  :srcset="group.image.srcSetJpeg"
+                  :srcset="group.img.srcSetJpeg"
                   type="image/webp"
                   sizes="20rem"
                 />
                 <img
                   ref="img"
                   alt=""
-                  :src="group.image.src"
+                  :src="group.img.src"
+                  :height="group.img.height"
+                  :width="group.img.width"
                   loading="lazy"
                   w:w="full"
                   w:h="full"

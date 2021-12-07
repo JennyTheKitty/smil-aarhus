@@ -10,12 +10,13 @@ query HomeEventsQuery($startsAfter: Datetime) {
   ) {
     nodes {
       ...HomeEvent
-      image {
+      img {
         src
-        srcSetWebp
         srcSetJpeg
+        srcSetWebp
+        height
+        width
       }
-      imageFile
     }
   }
   events(
@@ -50,10 +51,12 @@ query HomeGroupsQuery {
   groups {
     nodes {
       id
-      image {
+      img {
         src
-        srcSetWebp
         srcSetJpeg
+        srcSetWebp
+        height
+        width
       }
       translations {
         nodes {
@@ -63,6 +66,23 @@ query HomeGroupsQuery {
           slug
           groupId
         }
+      }
+    }
+  }
+}
+
+query HomeRandomPicturesQuery {
+  randomPictures(first: 4) {
+    nodes {
+      image
+      id
+      rank
+      img {
+        height
+        src
+        srcSetJpeg
+        srcSetWebp
+        width
       }
     }
   }

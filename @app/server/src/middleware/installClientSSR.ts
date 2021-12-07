@@ -176,7 +176,8 @@ export default async function installClientSSR(app: Koa, router: Router) {
       const url = ctx.protocol + '://' + ctx.get('host') + ctx.originalUrl;
       const { html, status, initialState } = await renderPage(url, {
         manifest,
-        preload: true,
+        // https://github.com/vitejs/vite/issues/5120
+        preload: false,
         response: ctx.res,
         request: ctx.req,
         // initialState: { ... } // <- This would also be available

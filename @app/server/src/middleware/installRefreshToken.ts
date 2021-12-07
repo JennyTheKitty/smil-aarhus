@@ -1,5 +1,5 @@
 import Router from '@koa/router';
-import { verify } from 'jsonwebtoken';
+import { TokenExpiredError, verify } from 'jsonwebtoken';
 import Koa from 'koa';
 
 import { getAuthPgPool } from '../databasePools';
@@ -46,8 +46,12 @@ export default async function installRefreshToken(app: Koa, router: Router) {
           }
         }
       } catch (err) {
-        console.error(err);
-        next();
+        if (err instanceof TokenExpiredError) {
+          sendRefreshToken(ctx, null);
+        } else {
+          console.error(err);
+          next();
+        }
       }
     }
 

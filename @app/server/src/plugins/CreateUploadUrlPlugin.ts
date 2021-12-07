@@ -126,12 +126,9 @@ const CreateUploadUrlPlugin = makeExtendSchemaPlugin(() => ({
         }
 
         const ext = mime.extension(contentType);
+        const key = `media/${uuidv4()}` + (ext ? `.${ext}` : '');
 
-        const data = await generatePresignedPostPolicy(
-          `media/${uuidv4()}` + (ext ? `.${ext}` : ''),
-          contentType,
-          {}
-        );
+        const data = await generatePresignedPostPolicy(key, contentType, {});
         return {
           clientMutationId,
           uploadUrl: data.postURL,

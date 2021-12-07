@@ -34,18 +34,20 @@
           >
             <picture>
               <source
-                :srcset="specialEvent.image?.srcSetWebp"
+                :srcset="specialEvent.img?.srcSetWebp"
                 type="image/webp"
                 sizes="20rem"
               />
               <source
-                :srcset="specialEvent.image?.srcSetJpeg"
+                :srcset="specialEvent.img?.srcSetJpeg"
                 type="image/webp"
                 sizes="20rem"
               />
               <img
                 alt=""
-                :src="specialEvent.image?.src"
+                :src="specialEvent.img?.src"
+                :height="specialEvent.img?.height"
+                :width="specialEvent.img?.width"
                 loading="lazy"
                 w:w="full"
                 w:h="60"

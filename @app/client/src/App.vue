@@ -77,6 +77,10 @@ const navLinks = computed(
         singleColumn: false,
       },
       {
+        name: t('nav.pictures'),
+        to: 'PICTURES',
+      },
+      {
         name: t('nav.groups'),
         to: 'GROUPS',
       },

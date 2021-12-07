@@ -16,3 +16,10 @@ declare module 'ckeditor.js' {
   const Editor: any;
   export = Editor;
 }
+
+declare module 'photoswipe/dist/photoswipe.esm.js' {
+  export = any;
+}
+declare module 'photoswipe/dist/photoswipe-lightbox.esm.js' {
+  export = any;
+}

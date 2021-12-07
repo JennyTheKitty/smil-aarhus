@@ -1,5 +1,7 @@
-mutation GetUploadUrl($contentType: String!) {
-  createUploadUrl(input: { contentType: $contentType }) {
+mutation GetUploadUrl($contentType: String!, $randomId: String) {
+  createUploadUrl(
+    input: { contentType: $contentType, clientMutationId: $randomId }
+  ) {
     uploadUrl
     formData
   }

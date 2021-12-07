@@ -148,6 +148,41 @@ type CreateEventViaGroupPayload {
   query: Query
 }
 
+"""All input for the create `Image` mutation."""
+input CreateImageInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Image` to be created by this mutation."""
+  image: ImageInput!
+}
+
+"""The output of our create `Image` mutation."""
+type CreateImagePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Image` that was created by this mutation."""
+  image: Image
+
+  """An edge for our `Image`. May be used by Relay 1."""
+  imageEdge(
+    """The method to use when ordering `Image`."""
+    orderBy: [ImagesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ImagesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
 """All input for the create `Member` mutation."""
 input CreateMemberInput {
   """
@@ -249,6 +284,44 @@ type CreatePageTrPayload {
     """The method to use when ordering `PageTr`."""
     orderBy: [PageTrsOrderBy!] = [PRIMARY_KEY_ASC]
   ): PageTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `Picture` mutation."""
+input CreatePictureInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Picture` to be created by this mutation."""
+  picture: PictureInput!
+}
+
+"""The output of our create `Picture` mutation."""
+type CreatePicturePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Image` that is related to this `Picture`."""
+  imageByImage: Image
+
+  """The `Picture` that was created by this mutation."""
+  picture: Picture
+
+  """An edge for our `Picture`. May be used by Relay 1."""
+  pictureEdge(
+    """The method to use when ordering `Picture`."""
+    orderBy: [PicturesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PicturesEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -409,6 +482,40 @@ type DeleteEventViaGroupPayload {
   query: Query
 }
 
+"""All input for the `deleteImage` mutation."""
+input DeleteImageInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+}
+
+"""The output of our delete `Image` mutation."""
+type DeleteImagePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedImageNodeId: ID
+
+  """The `Image` that was deleted by this mutation."""
+  image: Image
+
+  """An edge for our `Image`. May be used by Relay 1."""
+  imageEdge(
+    """The method to use when ordering `Image`."""
+    orderBy: [ImagesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ImagesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
 """All input for the `deleteMemberByUsername` mutation."""
 input DeleteMemberByUsernameInput {
   """
@@ -525,6 +632,43 @@ type DeletePageTrPayload {
   query: Query
 }
 
+"""All input for the `deletePicture` mutation."""
+input DeletePictureInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+}
+
+"""The output of our delete `Picture` mutation."""
+type DeletePicturePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedPictureNodeId: ID
+
+  """Reads a single `Image` that is related to this `Picture`."""
+  imageByImage: Image
+
+  """The `Picture` that was deleted by this mutation."""
+  picture: Picture
+
+  """An edge for our `Picture`. May be used by Relay 1."""
+  pictureEdge(
+    """The method to use when ordering `Picture`."""
+    orderBy: [PicturesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PicturesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
 type Event {
   endsAt: Datetime!
 
@@ -562,10 +706,12 @@ type Event {
     orderBy: [EventViaGroupsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventViaGroupsConnection!
   id: BigInt!
-  image: ResponsiveImage
-  imageFile: String
+
+  """Reads a single `Image` that is related to this `Event`."""
+  imageByOverrideImage: Image
+  img: ResponsiveImage
   isTemplate: Boolean!
-  overrideImageFile: String
+  overrideImage: BigInt
   special: Boolean!
   startsAt: Datetime!
 
@@ -651,8 +797,8 @@ input EventCondition {
   """Checks for equality with the object’s `isTemplate` field."""
   isTemplate: Boolean
 
-  """Checks for equality with the object’s `overrideImageFile` field."""
-  overrideImageFile: String
+  """Checks for equality with the object’s `overrideImage` field."""
+  overrideImage: BigInt
 
   """Checks for equality with the object’s `special` field."""
   special: Boolean
@@ -685,8 +831,8 @@ input EventFilter {
   """Filter by the object’s `isTemplate` field."""
   isTemplate: BooleanFilter
 
-  """Filter by the object’s `overrideImageFile` field."""
-  overrideImageFile: StringFilter
+  """Filter by the object’s `overrideImage` field."""
+  overrideImage: BigIntFilter
 
   """Filter by the object’s `special` field."""
   special: BooleanFilter
@@ -730,8 +876,11 @@ type EventTag {
     orderBy: [EventViaEventTagsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventViaEventTagsConnection!
   id: BigInt!
-  image: ResponsiveImage
-  imageFile: String
+  image: BigInt
+
+  """Reads a single `Image` that is related to this `EventTag`."""
+  imageByImage: Image
+  img: ResponsiveImage!
 
   """Reads and enables pagination through a set of `EventTagTr`."""
   translations(
@@ -776,8 +925,8 @@ input EventTagCondition {
   """Checks for equality with the object’s `id` field."""
   id: BigInt
 
-  """Checks for equality with the object’s `imageFile` field."""
-  imageFile: String
+  """Checks for equality with the object’s `image` field."""
+  image: BigInt
 }
 
 """
@@ -787,8 +936,8 @@ input EventTagFilter {
   """Filter by the object’s `id` field."""
   id: BigIntFilter
 
-  """Filter by the object’s `imageFile` field."""
-  imageFile: StringFilter
+  """Filter by the object’s `image` field."""
+  image: BigIntFilter
 }
 
 type EventTagTr {
@@ -898,8 +1047,8 @@ type EventTagsEdge {
 enum EventTagsOrderBy {
   ID_ASC
   ID_DESC
-  IMAGE_FILE_ASC
-  IMAGE_FILE_DESC
+  IMAGE_ASC
+  IMAGE_DESC
   NATURAL
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
@@ -1211,8 +1360,8 @@ enum EventsOrderBy {
   IS_TEMPLATE_ASC
   IS_TEMPLATE_DESC
   NATURAL
-  OVERRIDE_IMAGE_FILE_ASC
-  OVERRIDE_IMAGE_FILE_DESC
+  OVERRIDE_IMAGE_ASC
+  OVERRIDE_IMAGE_DESC
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
   SPECIAL_ASC
@@ -1256,8 +1405,11 @@ type Group {
     orderBy: [EventViaGroupsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventViaGroupsConnection!
   id: BigInt!
-  image: ResponsiveImage!
-  imageFile: String!
+  image: BigInt
+
+  """Reads a single `Image` that is related to this `Group`."""
+  imageByImage: Image
+  img: ResponsiveImage!
 
   """Reads and enables pagination through a set of `GroupTr`."""
   translations(
@@ -1301,8 +1453,8 @@ input GroupCondition {
   """Checks for equality with the object’s `id` field."""
   id: BigInt
 
-  """Checks for equality with the object’s `imageFile` field."""
-  imageFile: String
+  """Checks for equality with the object’s `image` field."""
+  image: BigInt
 }
 
 """
@@ -1312,8 +1464,8 @@ input GroupFilter {
   """Filter by the object’s `id` field."""
   id: BigIntFilter
 
-  """Filter by the object’s `imageFile` field."""
-  imageFile: StringFilter
+  """Filter by the object’s `image` field."""
+  image: BigIntFilter
 }
 
 type GroupTr {
@@ -1449,11 +1601,274 @@ type GroupsEdge {
 enum GroupsOrderBy {
   ID_ASC
   ID_DESC
-  IMAGE_FILE_ASC
-  IMAGE_FILE_DESC
+  IMAGE_ASC
+  IMAGE_DESC
   NATURAL
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
+}
+
+type Image {
+  """Reads and enables pagination through a set of `EventTag`."""
+  eventTagsByImage(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EventTagCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventTagFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `EventTag`."""
+    orderBy: [EventTagsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventTagsConnection!
+
+  """Reads and enables pagination through a set of `Event`."""
+  eventsByOverrideImage(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EventCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Event`."""
+    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EventsConnection!
+
+  """Reads and enables pagination through a set of `Group`."""
+  groupsByImage(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: GroupCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: GroupFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Group`."""
+    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): GroupsConnection!
+  height: Int!
+  id: BigInt!
+  path: String!
+
+  """Reads and enables pagination through a set of `Picture`."""
+  picturesByImage(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: PictureCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: PictureFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Picture`."""
+    orderBy: [PicturesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PicturesConnection!
+  width: Int!
+}
+
+"""
+A condition to be used against `Image` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input ImageCondition {
+  """Checks for equality with the object’s `height` field."""
+  height: Int
+
+  """Checks for equality with the object’s `id` field."""
+  id: BigInt
+
+  """Checks for equality with the object’s `path` field."""
+  path: String
+
+  """Checks for equality with the object’s `width` field."""
+  width: Int
+}
+
+"""
+A filter to be used against `Image` object types. All fields are combined with a logical ‘and.’
+"""
+input ImageFilter {
+  """Filter by the object’s `height` field."""
+  height: IntFilter
+
+  """Filter by the object’s `id` field."""
+  id: BigIntFilter
+
+  """Filter by the object’s `path` field."""
+  path: StringFilter
+
+  """Filter by the object’s `width` field."""
+  width: IntFilter
+}
+
+"""An input for mutations affecting `Image`"""
+input ImageInput {
+  height: Int!
+  id: BigInt
+  path: String!
+  width: Int!
+}
+
+"""
+Represents an update to a `Image`. Fields that are set will be updated.
+"""
+input ImagePatch {
+  height: Int
+  id: BigInt
+  path: String
+  width: Int
+}
+
+"""A connection to a list of `Image` values."""
+type ImagesConnection {
+  """
+  A list of edges which contains the `Image` and cursor to aid in pagination.
+  """
+  edges: [ImagesEdge!]!
+
+  """A list of `Image` objects."""
+  nodes: [Image!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Image` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Image` edge in the connection."""
+type ImagesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Image` at the end of the edge."""
+  node: Image!
+}
+
+"""Methods to use when ordering `Image`."""
+enum ImagesOrderBy {
+  HEIGHT_ASC
+  HEIGHT_DESC
+  ID_ASC
+  ID_DESC
+  NATURAL
+  PATH_ASC
+  PATH_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  WIDTH_ASC
+  WIDTH_DESC
+}
+
+"""
+A filter to be used against Int fields. All fields are combined with a logical ‘and.’
+"""
+input IntFilter {
+  """Equal to the specified value."""
+  equalTo: Int
+
+  """Greater than the specified value."""
+  greaterThan: Int
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: Int
+
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Less than the specified value."""
+  lessThan: Int
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: Int
+
+  """Not equal to the specified value."""
+  notEqualTo: Int
 }
 
 type Member {
@@ -1594,6 +2009,14 @@ type Mutation {
     input: CreateEventViaGroupInput!
   ): CreateEventViaGroupPayload
 
+  """Creates a single `Image`."""
+  createImage(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateImageInput!
+  ): CreateImagePayload
+
   """Creates a single `Member`."""
   createMember(
     """
@@ -1618,6 +2041,14 @@ type Mutation {
     input: CreatePageTrInput!
   ): CreatePageTrPayload
 
+  """Creates a single `Picture`."""
+  createPicture(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreatePictureInput!
+  ): CreatePicturePayload
+
   """Get a signed URL for uploading files. It will expire in 5 minutes."""
   createUploadUrl(
     """
@@ -1641,6 +2072,14 @@ type Mutation {
     """
     input: DeleteEventViaGroupInput!
   ): DeleteEventViaGroupPayload
+
+  """Deletes a single `Image` using a unique key."""
+  deleteImage(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteImageInput!
+  ): DeleteImagePayload
 
   """Deletes a single `Member` using a unique key."""
   deleteMember(
@@ -1673,7 +2112,21 @@ type Mutation {
     """
     input: DeletePageTrInput!
   ): DeletePageTrPayload
+
+  """Deletes a single `Picture` using a unique key."""
+  deletePicture(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeletePictureInput!
+  ): DeletePicturePayload
   logout: Boolean
+  reorderPictures(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: ReorderPicturesInput!
+  ): ReorderPicturesPayload
 
   """Updates a single `EventViaEventTag` using a unique key and a patch."""
   updateEventViaEventTag(
@@ -1690,6 +2143,14 @@ type Mutation {
     """
     input: UpdateEventViaGroupInput!
   ): UpdateEventViaGroupPayload
+
+  """Updates a single `Image` using a unique key and a patch."""
+  updateImage(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateImageInput!
+  ): UpdateImagePayload
 
   """Updates a single `Member` using a unique key and a patch."""
   updateMember(
@@ -1722,6 +2183,14 @@ type Mutation {
     """
     input: UpdatePageTrInput!
   ): UpdatePageTrPayload
+
+  """Updates a single `Picture` using a unique key and a patch."""
+  updatePicture(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdatePictureInput!
+  ): UpdatePicturePayload
   upsertEvent(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1936,11 +2405,116 @@ enum PagesOrderBy {
   PRIMARY_KEY_DESC
 }
 
+type Picture {
+  allowOnHome: Boolean!
+  id: BigInt!
+  image: BigInt!
+
+  """Reads a single `Image` that is related to this `Picture`."""
+  imageByImage: Image
+  img: ResponsiveImage!
+  rank: Int!
+}
+
+"""
+A condition to be used against `Picture` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input PictureCondition {
+  """Checks for equality with the object’s `allowOnHome` field."""
+  allowOnHome: Boolean
+
+  """Checks for equality with the object’s `id` field."""
+  id: BigInt
+
+  """Checks for equality with the object’s `image` field."""
+  image: BigInt
+
+  """Checks for equality with the object’s `rank` field."""
+  rank: Int
+}
+
+"""
+A filter to be used against `Picture` object types. All fields are combined with a logical ‘and.’
+"""
+input PictureFilter {
+  """Filter by the object’s `allowOnHome` field."""
+  allowOnHome: BooleanFilter
+
+  """Filter by the object’s `id` field."""
+  id: BigIntFilter
+
+  """Filter by the object’s `image` field."""
+  image: BigIntFilter
+
+  """Filter by the object’s `rank` field."""
+  rank: IntFilter
+}
+
+"""An input for mutations affecting `Picture`"""
+input PictureInput {
+  allowOnHome: Boolean
+  id: BigInt
+  image: BigInt!
+  rank: Int
+}
+
+"""
+Represents an update to a `Picture`. Fields that are set will be updated.
+"""
+input PicturePatch {
+  allowOnHome: Boolean
+  id: BigInt
+  image: BigInt
+  rank: Int
+}
+
+"""A connection to a list of `Picture` values."""
+type PicturesConnection {
+  """
+  A list of edges which contains the `Picture` and cursor to aid in pagination.
+  """
+  edges: [PicturesEdge!]!
+
+  """A list of `Picture` objects."""
+  nodes: [Picture!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Picture` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Picture` edge in the connection."""
+type PicturesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Picture` at the end of the edge."""
+  node: Picture!
+}
+
+"""Methods to use when ordering `Picture`."""
+enum PicturesOrderBy {
+  ALLOW_ON_HOME_ASC
+  ALLOW_ON_HOME_DESC
+  ID_ASC
+  ID_DESC
+  IMAGE_ASC
+  IMAGE_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  RANK_ASC
+  RANK_DESC
+}
+
 """The root query type which gives access points into the data universe."""
 type Query {
   currentMember: Member
   event(id: BigInt!): Event
   eventBySlug(preferredLanguageCode: String!, slug: String!): Event
+  eventImage(eid: Int!, overrideImage: Int!): Int
   eventTag(id: BigInt!): EventTag
   eventTagTr(languageCode: TrLanguage!, tagId: BigInt!): EventTagTr
 
@@ -2155,6 +2729,41 @@ type Query {
     """The method to use when ordering `Group`."""
     orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
   ): GroupsConnection
+  image(id: BigInt!): Image
+
+  """Reads and enables pagination through a set of `Image`."""
+  images(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ImageCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: ImageFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Image`."""
+    orderBy: [ImagesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ImagesConnection
   member(id: UUID!): Member
   memberByUsername(username: String!): Member
 
@@ -2261,12 +2870,68 @@ type Query {
     """The method to use when ordering `Page`."""
     orderBy: [PagesOrderBy!] = [PRIMARY_KEY_ASC]
   ): PagesConnection
+  picture(id: BigInt!): Picture
+
+  """Reads and enables pagination through a set of `Picture`."""
+  pictures(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: PictureCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: PictureFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Picture`."""
+    orderBy: [PicturesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PicturesConnection
 
   """
   Exposes the root query type nested one level down. This is helpful for Relay 1
   which can only query top level fields if they are in a particular form.
   """
   query: Query!
+
+  """Reads and enables pagination through a set of `Picture`."""
+  randomPictures(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+  ): PicturesConnection
 
   """Reads and enables pagination through a set of `EventTag`."""
   searchEventTags(
@@ -2313,10 +2978,44 @@ type Query {
   ): GroupsConnection
 }
 
+"""All input for the `reorderPictures` mutation."""
+input ReorderPicturesInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  reorders: [ReorderPicturesReorderInput]!
+}
+
+"""The output of our `reorderPictures` mutation."""
+type ReorderPicturesPayload {
+  boolean: Boolean
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""An input for mutations affecting `ReorderPicturesReorder`"""
+input ReorderPicturesReorderInput {
+  fromRank: Int
+  toRank: Int
+}
+
 type ResponsiveImage {
+  height: Int!
   src: String!
   srcSetJpeg: String!
   srcSetWebp: String!
+  width: Int!
 }
 
 """
@@ -2503,6 +3202,44 @@ type UpdateEventViaGroupPayload {
   query: Query
 }
 
+"""All input for the `updateImage` mutation."""
+input UpdateImageInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+
+  """
+  An object where the defined keys will be set on the `Image` being updated.
+  """
+  patch: ImagePatch!
+}
+
+"""The output of our update `Image` mutation."""
+type UpdateImagePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Image` that was updated by this mutation."""
+  image: Image
+
+  """An edge for our `Image`. May be used by Relay 1."""
+  imageEdge(
+    """The method to use when ordering `Image`."""
+    orderBy: [ImagesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ImagesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
 """All input for the `updateMemberByUsername` mutation."""
 input UpdateMemberByUsernameInput {
   """
@@ -2636,6 +3373,47 @@ type UpdatePageTrPayload {
   query: Query
 }
 
+"""All input for the `updatePicture` mutation."""
+input UpdatePictureInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+
+  """
+  An object where the defined keys will be set on the `Picture` being updated.
+  """
+  patch: PicturePatch!
+}
+
+"""The output of our update `Picture` mutation."""
+type UpdatePicturePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Image` that is related to this `Picture`."""
+  imageByImage: Image
+
+  """The `Picture` that was updated by this mutation."""
+  picture: Picture
+
+  """An edge for our `Picture`. May be used by Relay 1."""
+  pictureEdge(
+    """The method to use when ordering `Picture`."""
+    orderBy: [PicturesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PicturesEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
 """All input for the `upsertEvent` mutation."""
 input UpsertEventInput {
   """
@@ -2662,6 +3440,9 @@ type UpsertEventPayload {
     """The method to use when ordering `Event`."""
     orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventsEdge
+
+  """Reads a single `Image` that is related to this `Event`."""
+  imageByOverrideImage: Image
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.

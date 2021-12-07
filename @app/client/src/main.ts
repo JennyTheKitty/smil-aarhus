@@ -16,6 +16,7 @@ import {
   GroupTr,
   Page,
   PageTr,
+  PicturesQueryDocument,
 } from '@app/graphql/dist/client';
 import schema from '@app/graphql/dist/introspection';
 import {
@@ -141,6 +142,25 @@ export default viteSSR(
               },
               logout(_result, _args, cache, _info) {
                 cache.invalidate({ __typename: 'Query' }, 'currentMember');
+              },
+              reorderPictures(_result, args, cache, _info) {
+                cache.updateQuery({ query: PicturesQueryDocument }, (data) => {
+                  const pictures = data!.pictures!.nodes;
+                  for (const reorder of (
+                    args!.input! as {
+                      reorders: { fromRank: number; toRank: number }[];
+                    }
+                  ).reorders) {
+                    const picture = pictures.find(
+                      (picture) => picture.rank === reorder.fromRank
+                    );
+                    if (picture) {
+                      picture.rank = reorder.toRank;
+                    }
+                  }
+                  data!.pictures!.nodes.sort((a, b) => a.rank - b.rank);
+                  return data;
+                });
               },
             },
           },

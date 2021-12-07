@@ -32,3 +32,7 @@ body {
     @apply font-light leading-relaxed;
   }
 }
+
+svg.icon-shadow {
+  filter: drop-shadow(2px 3px 1px rgb(0 0 0 / 0.4));
+}
