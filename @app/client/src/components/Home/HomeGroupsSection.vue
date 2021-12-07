@@ -8,7 +8,7 @@
             <i18n-link
               v-for="group in groups"
               :key="group.id"
-              to="GROUPS"
+              to="GROUP"
               :params="{ slug: group.slug }"
               w:rounded="lg"
               w:bg="black"
