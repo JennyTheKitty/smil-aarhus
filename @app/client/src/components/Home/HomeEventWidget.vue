@@ -8,10 +8,10 @@
         w:m="t-1"
         class="btn-focus-ring"
         to="CALENDAR"
-        :params="{ eventSlug: event.slug }"
+        :params="{ slug: event.slug }"
       >
         <div w:flex="~ col shrink-0" w:w="18" w:text="right" w:p="r-3 y-1">
-          <span>{{ dayjs(event.startsAt).format('d MMM') }}</span>
+          <span>{{ dayjs(event.startsAt).format('D MMM') }}</span>
           <span w:text="sm gray-400">
             {{ dayjs(event.startsAt).format('ddd') }}
           </span>

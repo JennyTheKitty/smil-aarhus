@@ -10,7 +10,8 @@
       w:overflow="hidden"
       class="group"
     >
-      <a
+      <i18n-link
+        to="PICTURES"
         w:pos="absolute"
         w:w="full"
         w:h="full"
@@ -18,10 +19,9 @@
         w:border="rounded-md"
         w:bg="hover:black hover:opacity-25"
         w:transition="~ duration-200 all"
-        href="#"
         tabindex="-1"
         aria-hidden="true"
-      ></a>
+      ></i18n-link>
       <div
         w:pos="absolute bottom-0"
         w:m="-b-10 group-hover:b-0"
@@ -62,8 +62,8 @@
     </div>
   </div>
   <div w:flex="~" w:justify="center" w:w="full">
-    <a
-      href="#"
+    <i18n-link
+      to="PICTURES"
       w:transform="~ md:scale-0 md:focus:scale-100"
       w:p="2"
       w:w="max-content"
@@ -72,7 +72,7 @@
       class="btn-focus-ring"
     >
       {{ t('home.see-all-pictures') }}
-    </a>
+    </i18n-link>
   </div>
 </template>
 
