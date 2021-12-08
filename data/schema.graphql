@@ -218,6 +218,79 @@ type CreateMemberPayload {
   query: Query
 }
 
+"""All input for the create `News` mutation."""
+input CreateNewsInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `News` to be created by this mutation."""
+  news: NewsInput!
+}
+
+"""The output of our create `News` mutation."""
+type CreateNewsPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `News` that was created by this mutation."""
+  news: News
+
+  """An edge for our `News`. May be used by Relay 1."""
+  newsEdge(
+    """The method to use when ordering `News`."""
+    orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): NewsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `NewsTr` mutation."""
+input CreateNewsTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `NewsTr` to be created by this mutation."""
+  newsTr: NewsTrInput!
+}
+
+"""The output of our create `NewsTr` mutation."""
+type CreateNewsTrPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `News` that is related to this `NewsTr`."""
+  news: News
+
+  """The `NewsTr` that was created by this mutation."""
+  newsTr: NewsTr
+
+  """An edge for our `NewsTr`. May be used by Relay 1."""
+  newsTrEdge(
+    """The method to use when ordering `NewsTr`."""
+    orderBy: [NewsTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): NewsTrsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
 """All input for the create `Page` mutation."""
 input CreatePageInput {
   """
@@ -553,6 +626,78 @@ type DeleteMemberPayload {
     """The method to use when ordering `Member`."""
     orderBy: [MembersOrderBy!] = [PRIMARY_KEY_ASC]
   ): MembersEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteNews` mutation."""
+input DeleteNewsInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+}
+
+"""The output of our delete `News` mutation."""
+type DeleteNewsPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedNewsNodeId: ID
+
+  """The `News` that was deleted by this mutation."""
+  news: News
+
+  """An edge for our `News`. May be used by Relay 1."""
+  newsEdge(
+    """The method to use when ordering `News`."""
+    orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): NewsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteNewsTr` mutation."""
+input DeleteNewsTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  languageCode: TrLanguage!
+  newsId: BigInt!
+}
+
+"""The output of our delete `NewsTr` mutation."""
+type DeleteNewsTrPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedNewsTrNodeId: ID
+
+  """Reads a single `News` that is related to this `NewsTr`."""
+  news: News
+
+  """The `NewsTr` that was deleted by this mutation."""
+  newsTr: NewsTr
+
+  """An edge for our `NewsTr`. May be used by Relay 1."""
+  newsTrEdge(
+    """The method to use when ordering `NewsTr`."""
+    orderBy: [NewsTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): NewsTrsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -2043,6 +2188,22 @@ type Mutation {
     input: CreateMemberInput!
   ): CreateMemberPayload
 
+  """Creates a single `News`."""
+  createNews(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateNewsInput!
+  ): CreateNewsPayload
+
+  """Creates a single `NewsTr`."""
+  createNewsTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateNewsTrInput!
+  ): CreateNewsTrPayload
+
   """Creates a single `Page`."""
   createPage(
     """
@@ -2115,6 +2276,22 @@ type Mutation {
     input: DeleteMemberByUsernameInput!
   ): DeleteMemberPayload
 
+  """Deletes a single `News` using a unique key."""
+  deleteNews(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteNewsInput!
+  ): DeleteNewsPayload
+
+  """Deletes a single `NewsTr` using a unique key."""
+  deleteNewsTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteNewsTrInput!
+  ): DeleteNewsTrPayload
+
   """Deletes a single `Page` using a unique key."""
   deletePage(
     """
@@ -2186,6 +2363,22 @@ type Mutation {
     input: UpdateMemberByUsernameInput!
   ): UpdateMemberPayload
 
+  """Updates a single `News` using a unique key and a patch."""
+  updateNews(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateNewsInput!
+  ): UpdateNewsPayload
+
+  """Updates a single `NewsTr` using a unique key and a patch."""
+  updateNewsTr(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateNewsTrInput!
+  ): UpdateNewsTrPayload
+
   """Updates a single `Page` using a unique key and a patch."""
   updatePage(
     """
@@ -2215,6 +2408,230 @@ type Mutation {
     """
     input: UpsertEventInput!
   ): UpsertEventPayload
+}
+
+type News {
+  id: BigInt!
+  publishedAt: Datetime!
+
+  """Reads and enables pagination through a set of `NewsTr`."""
+  translations(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: NewsTrCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: NewsTrFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `NewsTr`."""
+    orderBy: [NewsTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): NewsTrsConnection!
+  updatedAt: Datetime!
+}
+
+"""
+A condition to be used against `News` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input NewsCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: BigInt
+
+  """Checks for equality with the object’s `publishedAt` field."""
+  publishedAt: Datetime
+
+  """Checks for equality with the object’s `updatedAt` field."""
+  updatedAt: Datetime
+}
+
+"""A connection to a list of `News` values."""
+type NewsConnection {
+  """
+  A list of edges which contains the `News` and cursor to aid in pagination.
+  """
+  edges: [NewsEdge!]!
+
+  """A list of `News` objects."""
+  nodes: [News!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `News` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `News` edge in the connection."""
+type NewsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `News` at the end of the edge."""
+  node: News!
+}
+
+"""
+A filter to be used against `News` object types. All fields are combined with a logical ‘and.’
+"""
+input NewsFilter {
+  """Filter by the object’s `id` field."""
+  id: BigIntFilter
+
+  """Filter by the object’s `publishedAt` field."""
+  publishedAt: DatetimeFilter
+
+  """Filter by the object’s `updatedAt` field."""
+  updatedAt: DatetimeFilter
+}
+
+"""An input for mutations affecting `News`"""
+input NewsInput {
+  id: BigInt
+  publishedAt: Datetime!
+  updatedAt: Datetime!
+}
+
+"""Methods to use when ordering `News`."""
+enum NewsOrderBy {
+  ID_ASC
+  ID_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  PUBLISHED_AT_ASC
+  PUBLISHED_AT_DESC
+  UPDATED_AT_ASC
+  UPDATED_AT_DESC
+}
+
+"""Represents an update to a `News`. Fields that are set will be updated."""
+input NewsPatch {
+  id: BigInt
+  publishedAt: Datetime
+  updatedAt: Datetime
+}
+
+type NewsTr {
+  content: String!
+  languageCode: TrLanguage!
+
+  """Reads a single `News` that is related to this `NewsTr`."""
+  news: News
+  newsId: BigInt!
+  title: String!
+}
+
+"""
+A condition to be used against `NewsTr` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input NewsTrCondition {
+  """Checks for equality with the object’s `content` field."""
+  content: String
+
+  """Checks for equality with the object’s `languageCode` field."""
+  languageCode: TrLanguage
+
+  """Checks for equality with the object’s `newsId` field."""
+  newsId: BigInt
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+}
+
+"""
+A filter to be used against `NewsTr` object types. All fields are combined with a logical ‘and.’
+"""
+input NewsTrFilter {
+  """Filter by the object’s `content` field."""
+  content: StringFilter
+
+  """Filter by the object’s `languageCode` field."""
+  languageCode: TrLanguageFilter
+
+  """Filter by the object’s `newsId` field."""
+  newsId: BigIntFilter
+
+  """Filter by the object’s `title` field."""
+  title: StringFilter
+}
+
+"""An input for mutations affecting `NewsTr`"""
+input NewsTrInput {
+  content: String!
+  languageCode: TrLanguage!
+  newsId: BigInt!
+  title: String!
+}
+
+"""
+Represents an update to a `NewsTr`. Fields that are set will be updated.
+"""
+input NewsTrPatch {
+  content: String
+  languageCode: TrLanguage
+  newsId: BigInt
+  title: String
+}
+
+"""A connection to a list of `NewsTr` values."""
+type NewsTrsConnection {
+  """
+  A list of edges which contains the `NewsTr` and cursor to aid in pagination.
+  """
+  edges: [NewsTrsEdge!]!
+
+  """A list of `NewsTr` objects."""
+  nodes: [NewsTr!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `NewsTr` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `NewsTr` edge in the connection."""
+type NewsTrsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `NewsTr` at the end of the edge."""
+  node: NewsTr!
+}
+
+"""Methods to use when ordering `NewsTr`."""
+enum NewsTrsOrderBy {
+  CONTENT_ASC
+  CONTENT_DESC
+  LANGUAGE_CODE_ASC
+  LANGUAGE_CODE_DESC
+  NATURAL
+  NEWS_ID_ASC
+  NEWS_ID_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  TITLE_ASC
+  TITLE_DESC
 }
 
 type Page {
@@ -2818,6 +3235,76 @@ type Query {
     """The method to use when ordering `Member`."""
     orderBy: [MembersOrderBy!] = [PRIMARY_KEY_ASC]
   ): MembersConnection
+  news(id: BigInt!): News
+  newsTr(languageCode: TrLanguage!, newsId: BigInt!): NewsTr
+
+  """Reads and enables pagination through a set of `NewsTr`."""
+  newsTrs(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: NewsTrCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: NewsTrFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `NewsTr`."""
+    orderBy: [NewsTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): NewsTrsConnection
+
+  """Reads and enables pagination through a set of `News`."""
+  newses(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: NewsCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: NewsFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `News`."""
+    orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): NewsConnection
   page(name: String!): Page
   pageTr(languageCode: TrLanguage!, pageName: String!): PageTr
 
@@ -3304,6 +3791,86 @@ type UpdateMemberPayload {
     """The method to use when ordering `Member`."""
     orderBy: [MembersOrderBy!] = [PRIMARY_KEY_ASC]
   ): MembersEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateNews` mutation."""
+input UpdateNewsInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: BigInt!
+
+  """
+  An object where the defined keys will be set on the `News` being updated.
+  """
+  patch: NewsPatch!
+}
+
+"""The output of our update `News` mutation."""
+type UpdateNewsPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `News` that was updated by this mutation."""
+  news: News
+
+  """An edge for our `News`. May be used by Relay 1."""
+  newsEdge(
+    """The method to use when ordering `News`."""
+    orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): NewsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateNewsTr` mutation."""
+input UpdateNewsTrInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  languageCode: TrLanguage!
+  newsId: BigInt!
+
+  """
+  An object where the defined keys will be set on the `NewsTr` being updated.
+  """
+  patch: NewsTrPatch!
+}
+
+"""The output of our update `NewsTr` mutation."""
+type UpdateNewsTrPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `News` that is related to this `NewsTr`."""
+  news: News
+
+  """The `NewsTr` that was updated by this mutation."""
+  newsTr: NewsTr
+
+  """An edge for our `NewsTr`. May be used by Relay 1."""
+  newsTrEdge(
+    """The method to use when ordering `NewsTr`."""
+    orderBy: [NewsTrsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): NewsTrsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.

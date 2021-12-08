@@ -26,6 +26,7 @@ declare module 'vue' {
     HomeEventWidget: typeof import('./components/Home/HomeEventWidget.vue')['default']
     HomeGroupsSection: typeof import('./components/Home/HomeGroupsSection.vue')['default']
     HomeHero: typeof import('./components/HomeHero.vue')['default']
+    HomeNewsWidget: typeof import('./components/Home/HomeNewsWidget.vue')['default']
     HomePicturesWidget: typeof import('./components/Home/HomePicturesWidget.vue')['default']
     I18nLink: typeof import('./components/i18n-link.vue')['default']
     IconCarbonTemplate: typeof import('~icons/carbon/template')['default']

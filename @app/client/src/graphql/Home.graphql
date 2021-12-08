@@ -89,3 +89,21 @@ query HomeRandomPicturesQuery {
     }
   }
 }
+
+query HomeNewsQuery {
+  newses(first: 1, orderBy: PUBLISHED_AT_DESC) {
+    nodes {
+      publishedAt
+      id
+      updatedAt
+      translations {
+        nodes {
+          content
+          title
+          languageCode
+          newsId
+        }
+      }
+    }
+  }
+}

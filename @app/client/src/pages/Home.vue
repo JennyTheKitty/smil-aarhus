@@ -21,34 +21,9 @@
       </div>
     </Hero>
 
-    <a
-      href="#"
-      class="btn-focus-ring"
-      w:rounded="lg"
-      w:cursor="pointer"
-      w:m="auto y-4 md:-y-16 md:b-16"
-      w:shadow="lg"
-      w:w="full"
-      w:max-w="80vw md:2xl"
-      w:display="block"
-      w:overflow="hidden"
-      w:z="3"
-      w:pos="relative"
-      w:border="2 pink-800"
-    >
-      <div w:bg="dark-800" w:w="full" w:p="4">
-        <p w:font="medium" w:text="base pink-500">
-          {{ t('home.latest-news') }}
-        </p>
-        <p w:font="medium" w:text="base md:xl white" w:m="b-2">
-          Coronagenåbning!!
-        </p>
-        <p w:font="light" w:text="sm md:base gray-300">
-          Efter at være lukket i lang tid, er SMIL Aarhus lokaler endelig åbne
-          igen...
-        </p>
-      </div>
-    </a>
+    <suspense>
+      <HomeNewsWidget />
+    </suspense>
 
     <main
       role="main"

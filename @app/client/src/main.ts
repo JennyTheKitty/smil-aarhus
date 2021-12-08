@@ -14,6 +14,7 @@ import {
   EventViaEventTag,
   EventViaGroup,
   GroupTr,
+  NewsTr,
   Page,
   PageTr,
   PicturesQueryDocument,
@@ -175,6 +176,8 @@ export default viteSSR(
               `${(data as EventTagTr).languageCode}|${
                 (data as EventTagTr).tagId
               }`,
+            NewsTr: (data) =>
+              `${(data as NewsTr).languageCode}|${(data as NewsTr).newsId}`,
             EventViaGroup: (data) =>
               `${(data as EventViaGroup).eventId}|${
                 (data as EventViaGroup).groupId

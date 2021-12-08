@@ -211,6 +211,74 @@ export type CreateMemberPayloadMemberEdgeArgs = {
   orderBy?: Maybe<Array<MembersOrderBy>>;
 };
 
+/** All input for the create `News` mutation. */
+export type CreateNewsInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `News` to be created by this mutation. */
+  news: NewsInput;
+};
+
+/** The output of our create `News` mutation. */
+export type CreateNewsPayload = {
+  __typename?: 'CreateNewsPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  /** The `News` that was created by this mutation. */
+  news: Maybe<News>;
+  /** An edge for our `News`. May be used by Relay 1. */
+  newsEdge: Maybe<NewsEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our create `News` mutation. */
+export type CreateNewsPayloadNewsEdgeArgs = {
+  orderBy?: Maybe<Array<NewsOrderBy>>;
+};
+
+/** All input for the create `NewsTr` mutation. */
+export type CreateNewsTrInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `NewsTr` to be created by this mutation. */
+  newsTr: NewsTrInput;
+};
+
+/** The output of our create `NewsTr` mutation. */
+export type CreateNewsTrPayload = {
+  __typename?: 'CreateNewsTrPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  /** Reads a single `News` that is related to this `NewsTr`. */
+  news: Maybe<News>;
+  /** The `NewsTr` that was created by this mutation. */
+  newsTr: Maybe<NewsTr>;
+  /** An edge for our `NewsTr`. May be used by Relay 1. */
+  newsTrEdge: Maybe<NewsTrsEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our create `NewsTr` mutation. */
+export type CreateNewsTrPayloadNewsTrEdgeArgs = {
+  orderBy?: Maybe<Array<NewsTrsOrderBy>>;
+};
+
 /** All input for the create `Page` mutation. */
 export type CreatePageInput = {
   /**
@@ -514,6 +582,75 @@ export type DeleteMemberPayload = {
 /** The output of our delete `Member` mutation. */
 export type DeleteMemberPayloadMemberEdgeArgs = {
   orderBy?: Maybe<Array<MembersOrderBy>>;
+};
+
+/** All input for the `deleteNews` mutation. */
+export type DeleteNewsInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  id: Scalars['BigInt'];
+};
+
+/** The output of our delete `News` mutation. */
+export type DeleteNewsPayload = {
+  __typename?: 'DeleteNewsPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  deletedNewsNodeId: Maybe<Scalars['ID']>;
+  /** The `News` that was deleted by this mutation. */
+  news: Maybe<News>;
+  /** An edge for our `News`. May be used by Relay 1. */
+  newsEdge: Maybe<NewsEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our delete `News` mutation. */
+export type DeleteNewsPayloadNewsEdgeArgs = {
+  orderBy?: Maybe<Array<NewsOrderBy>>;
+};
+
+/** All input for the `deleteNewsTr` mutation. */
+export type DeleteNewsTrInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  languageCode: TrLanguage;
+  newsId: Scalars['BigInt'];
+};
+
+/** The output of our delete `NewsTr` mutation. */
+export type DeleteNewsTrPayload = {
+  __typename?: 'DeleteNewsTrPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  deletedNewsTrNodeId: Maybe<Scalars['ID']>;
+  /** Reads a single `News` that is related to this `NewsTr`. */
+  news: Maybe<News>;
+  /** The `NewsTr` that was deleted by this mutation. */
+  newsTr: Maybe<NewsTr>;
+  /** An edge for our `NewsTr`. May be used by Relay 1. */
+  newsTrEdge: Maybe<NewsTrsEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our delete `NewsTr` mutation. */
+export type DeleteNewsTrPayloadNewsTrEdgeArgs = {
+  orderBy?: Maybe<Array<NewsTrsOrderBy>>;
 };
 
 /** All input for the `deletePage` mutation. */
@@ -1598,6 +1735,10 @@ export type Mutation = {
   createImage: Maybe<CreateImagePayload>;
   /** Creates a single `Member`. */
   createMember: Maybe<CreateMemberPayload>;
+  /** Creates a single `News`. */
+  createNews: Maybe<CreateNewsPayload>;
+  /** Creates a single `NewsTr`. */
+  createNewsTr: Maybe<CreateNewsTrPayload>;
   /** Creates a single `Page`. */
   createPage: Maybe<CreatePagePayload>;
   /** Creates a single `PageTr`. */
@@ -1616,6 +1757,10 @@ export type Mutation = {
   deleteMember: Maybe<DeleteMemberPayload>;
   /** Deletes a single `Member` using a unique key. */
   deleteMemberByUsername: Maybe<DeleteMemberPayload>;
+  /** Deletes a single `News` using a unique key. */
+  deleteNews: Maybe<DeleteNewsPayload>;
+  /** Deletes a single `NewsTr` using a unique key. */
+  deleteNewsTr: Maybe<DeleteNewsTrPayload>;
   /** Deletes a single `Page` using a unique key. */
   deletePage: Maybe<DeletePagePayload>;
   /** Deletes a single `PageTr` using a unique key. */
@@ -1634,6 +1779,10 @@ export type Mutation = {
   updateMember: Maybe<UpdateMemberPayload>;
   /** Updates a single `Member` using a unique key and a patch. */
   updateMemberByUsername: Maybe<UpdateMemberPayload>;
+  /** Updates a single `News` using a unique key and a patch. */
+  updateNews: Maybe<UpdateNewsPayload>;
+  /** Updates a single `NewsTr` using a unique key and a patch. */
+  updateNewsTr: Maybe<UpdateNewsTrPayload>;
   /** Updates a single `Page` using a unique key and a patch. */
   updatePage: Maybe<UpdatePagePayload>;
   /** Updates a single `PageTr` using a unique key and a patch. */
@@ -1671,6 +1820,18 @@ export type MutationCreateImageArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateMemberArgs = {
   input: CreateMemberInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateNewsArgs = {
+  input: CreateNewsInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateNewsTrArgs = {
+  input: CreateNewsTrInput;
 };
 
 
@@ -1729,6 +1890,18 @@ export type MutationDeleteMemberByUsernameArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteNewsArgs = {
+  input: DeleteNewsInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteNewsTrArgs = {
+  input: DeleteNewsTrInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeletePageArgs = {
   input: DeletePageInput;
 };
@@ -1783,6 +1956,18 @@ export type MutationUpdateMemberByUsernameArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateNewsArgs = {
+  input: UpdateNewsInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateNewsTrArgs = {
+  input: UpdateNewsTrInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdatePageArgs = {
   input: UpdatePageInput;
 };
@@ -1804,6 +1989,183 @@ export type MutationUpdatePictureArgs = {
 export type MutationUpsertEventArgs = {
   input: UpsertEventInput;
 };
+
+export type News = {
+  __typename?: 'News';
+  id: Scalars['BigInt'];
+  publishedAt: Scalars['Datetime'];
+  /** Reads and enables pagination through a set of `NewsTr`. */
+  translations: NewsTrsConnection;
+  updatedAt: Scalars['Datetime'];
+};
+
+
+export type NewsTranslationsArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  condition?: Maybe<NewsTrCondition>;
+  filter?: Maybe<NewsTrFilter>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<NewsTrsOrderBy>>;
+};
+
+/** A condition to be used against `News` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export type NewsCondition = {
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `publishedAt` field. */
+  publishedAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `updatedAt` field. */
+  updatedAt?: Maybe<Scalars['Datetime']>;
+};
+
+/** A connection to a list of `News` values. */
+export type NewsConnection = {
+  __typename?: 'NewsConnection';
+  /** A list of edges which contains the `News` and cursor to aid in pagination. */
+  edges: Array<NewsEdge>;
+  /** A list of `News` objects. */
+  nodes: Array<News>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `News` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `News` edge in the connection. */
+export type NewsEdge = {
+  __typename?: 'NewsEdge';
+  /** A cursor for use in pagination. */
+  cursor: Maybe<Scalars['Cursor']>;
+  /** The `News` at the end of the edge. */
+  node: News;
+};
+
+/** A filter to be used against `News` object types. All fields are combined with a logical ‘and.’ */
+export type NewsFilter = {
+  /** Filter by the object’s `id` field. */
+  id?: Maybe<BigIntFilter>;
+  /** Filter by the object’s `publishedAt` field. */
+  publishedAt?: Maybe<DatetimeFilter>;
+  /** Filter by the object’s `updatedAt` field. */
+  updatedAt?: Maybe<DatetimeFilter>;
+};
+
+/** An input for mutations affecting `News` */
+export type NewsInput = {
+  id?: Maybe<Scalars['BigInt']>;
+  publishedAt: Scalars['Datetime'];
+  updatedAt: Scalars['Datetime'];
+};
+
+/** Methods to use when ordering `News`. */
+export enum NewsOrderBy {
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  Natural = 'NATURAL',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
+  PublishedAtAsc = 'PUBLISHED_AT_ASC',
+  PublishedAtDesc = 'PUBLISHED_AT_DESC',
+  UpdatedAtAsc = 'UPDATED_AT_ASC',
+  UpdatedAtDesc = 'UPDATED_AT_DESC'
+}
+
+/** Represents an update to a `News`. Fields that are set will be updated. */
+export type NewsPatch = {
+  id?: Maybe<Scalars['BigInt']>;
+  publishedAt?: Maybe<Scalars['Datetime']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
+};
+
+export type NewsTr = {
+  __typename?: 'NewsTr';
+  content: Scalars['String'];
+  languageCode: TrLanguage;
+  /** Reads a single `News` that is related to this `NewsTr`. */
+  news: Maybe<News>;
+  newsId: Scalars['BigInt'];
+  title: Scalars['String'];
+};
+
+/** A condition to be used against `NewsTr` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export type NewsTrCondition = {
+  /** Checks for equality with the object’s `content` field. */
+  content?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `languageCode` field. */
+  languageCode?: Maybe<TrLanguage>;
+  /** Checks for equality with the object’s `newsId` field. */
+  newsId?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `title` field. */
+  title?: Maybe<Scalars['String']>;
+};
+
+/** A filter to be used against `NewsTr` object types. All fields are combined with a logical ‘and.’ */
+export type NewsTrFilter = {
+  /** Filter by the object’s `content` field. */
+  content?: Maybe<StringFilter>;
+  /** Filter by the object’s `languageCode` field. */
+  languageCode?: Maybe<TrLanguageFilter>;
+  /** Filter by the object’s `newsId` field. */
+  newsId?: Maybe<BigIntFilter>;
+  /** Filter by the object’s `title` field. */
+  title?: Maybe<StringFilter>;
+};
+
+/** An input for mutations affecting `NewsTr` */
+export type NewsTrInput = {
+  content: Scalars['String'];
+  languageCode: TrLanguage;
+  newsId: Scalars['BigInt'];
+  title: Scalars['String'];
+};
+
+/** Represents an update to a `NewsTr`. Fields that are set will be updated. */
+export type NewsTrPatch = {
+  content?: Maybe<Scalars['String']>;
+  languageCode?: Maybe<TrLanguage>;
+  newsId?: Maybe<Scalars['BigInt']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+/** A connection to a list of `NewsTr` values. */
+export type NewsTrsConnection = {
+  __typename?: 'NewsTrsConnection';
+  /** A list of edges which contains the `NewsTr` and cursor to aid in pagination. */
+  edges: Array<NewsTrsEdge>;
+  /** A list of `NewsTr` objects. */
+  nodes: Array<NewsTr>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `NewsTr` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `NewsTr` edge in the connection. */
+export type NewsTrsEdge = {
+  __typename?: 'NewsTrsEdge';
+  /** A cursor for use in pagination. */
+  cursor: Maybe<Scalars['Cursor']>;
+  /** The `NewsTr` at the end of the edge. */
+  node: NewsTr;
+};
+
+/** Methods to use when ordering `NewsTr`. */
+export enum NewsTrsOrderBy {
+  ContentAsc = 'CONTENT_ASC',
+  ContentDesc = 'CONTENT_DESC',
+  LanguageCodeAsc = 'LANGUAGE_CODE_ASC',
+  LanguageCodeDesc = 'LANGUAGE_CODE_DESC',
+  Natural = 'NATURAL',
+  NewsIdAsc = 'NEWS_ID_ASC',
+  NewsIdDesc = 'NEWS_ID_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
+  TitleAsc = 'TITLE_ASC',
+  TitleDesc = 'TITLE_DESC'
+}
 
 export type Page = {
   __typename?: 'Page';
@@ -2092,6 +2454,12 @@ export type Query = {
   memberByUsername: Maybe<Member>;
   /** Reads and enables pagination through a set of `Member`. */
   members: Maybe<MembersConnection>;
+  news: Maybe<News>;
+  newsTr: Maybe<NewsTr>;
+  /** Reads and enables pagination through a set of `NewsTr`. */
+  newsTrs: Maybe<NewsTrsConnection>;
+  /** Reads and enables pagination through a set of `News`. */
+  newses: Maybe<NewsConnection>;
   page: Maybe<Page>;
   pageTr: Maybe<PageTr>;
   /** Reads and enables pagination through a set of `PageTr`. */
@@ -2322,6 +2690,45 @@ export type QueryMembersArgs = {
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<MembersOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryNewsArgs = {
+  id: Scalars['BigInt'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryNewsTrArgs = {
+  languageCode: TrLanguage;
+  newsId: Scalars['BigInt'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryNewsTrsArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  condition?: Maybe<NewsTrCondition>;
+  filter?: Maybe<NewsTrFilter>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<NewsTrsOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryNewsesArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  condition?: Maybe<NewsCondition>;
+  filter?: Maybe<NewsFilter>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<NewsOrderBy>>;
 };
 
 
@@ -2668,6 +3075,77 @@ export type UpdateMemberPayload = {
 /** The output of our update `Member` mutation. */
 export type UpdateMemberPayloadMemberEdgeArgs = {
   orderBy?: Maybe<Array<MembersOrderBy>>;
+};
+
+/** All input for the `updateNews` mutation. */
+export type UpdateNewsInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  id: Scalars['BigInt'];
+  /** An object where the defined keys will be set on the `News` being updated. */
+  patch: NewsPatch;
+};
+
+/** The output of our update `News` mutation. */
+export type UpdateNewsPayload = {
+  __typename?: 'UpdateNewsPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  /** The `News` that was updated by this mutation. */
+  news: Maybe<News>;
+  /** An edge for our `News`. May be used by Relay 1. */
+  newsEdge: Maybe<NewsEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our update `News` mutation. */
+export type UpdateNewsPayloadNewsEdgeArgs = {
+  orderBy?: Maybe<Array<NewsOrderBy>>;
+};
+
+/** All input for the `updateNewsTr` mutation. */
+export type UpdateNewsTrInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  languageCode: TrLanguage;
+  newsId: Scalars['BigInt'];
+  /** An object where the defined keys will be set on the `NewsTr` being updated. */
+  patch: NewsTrPatch;
+};
+
+/** The output of our update `NewsTr` mutation. */
+export type UpdateNewsTrPayload = {
+  __typename?: 'UpdateNewsTrPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  /** Reads a single `News` that is related to this `NewsTr`. */
+  news: Maybe<News>;
+  /** The `NewsTr` that was updated by this mutation. */
+  newsTr: Maybe<NewsTr>;
+  /** An edge for our `NewsTr`. May be used by Relay 1. */
+  newsTrEdge: Maybe<NewsTrsEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our update `NewsTr` mutation. */
+export type UpdateNewsTrPayloadNewsTrEdgeArgs = {
+  orderBy?: Maybe<Array<NewsTrsOrderBy>>;
 };
 
 /** All input for the `updatePage` mutation. */
@@ -3127,6 +3605,27 @@ export type HomeRandomPicturesQueryQuery = (
   )> }
 );
 
+export type HomeNewsQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type HomeNewsQueryQuery = (
+  { __typename?: 'Query' }
+  & { newses: Maybe<(
+    { __typename?: 'NewsConnection' }
+    & { nodes: Array<(
+      { __typename?: 'News' }
+      & Pick<News, 'publishedAt' | 'id' | 'updatedAt'>
+      & { translations: (
+        { __typename?: 'NewsTrsConnection' }
+        & { nodes: Array<(
+          { __typename?: 'NewsTr' }
+          & Pick<NewsTr, 'content' | 'title' | 'languageCode' | 'newsId'>
+        )> }
+      ) }
+    )> }
+  )> }
+);
+
 export type PageQueryQueryVariables = Exact<{
   name: Scalars['String'];
 }>;
@@ -3540,6 +4039,25 @@ export const HomeRandomPicturesQueryDocument = gql`
   }
 }
     ` as unknown as DocumentNode<HomeRandomPicturesQueryQuery, HomeRandomPicturesQueryQueryVariables>;
+export const HomeNewsQueryDocument = gql`
+    query HomeNewsQuery {
+  newses(first: 1, orderBy: PUBLISHED_AT_DESC) {
+    nodes {
+      publishedAt
+      id
+      updatedAt
+      translations {
+        nodes {
+          content
+          title
+          languageCode
+          newsId
+        }
+      }
+    }
+  }
+}
+    ` as unknown as DocumentNode<HomeNewsQueryQuery, HomeNewsQueryQueryVariables>;
 export const PageQueryDocument = gql`
     query PageQuery($name: String!) {
   page(name: $name) {
