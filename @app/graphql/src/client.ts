@@ -3759,6 +3759,26 @@ export type SetPictureAllowOnHomeMutationMutation = (
   )> }
 );
 
+export type DeletePictureMutationMutationVariables = Exact<{
+  id: Scalars['BigInt'];
+}>;
+
+
+export type DeletePictureMutationMutation = (
+  { __typename?: 'Mutation' }
+  & { deletePicture: Maybe<(
+    { __typename?: 'DeletePicturePayload' }
+    & { picture: Maybe<(
+      { __typename?: 'Picture' }
+      & Pick<Picture, 'image' | 'id' | 'rank' | 'allowOnHome'>
+      & { img: (
+        { __typename?: 'ResponsiveImage' }
+        & Pick<ResponsiveImage, 'height' | 'src' | 'srcSetJpeg' | 'srcSetWebp' | 'width'>
+      ) }
+    )> }
+  )> }
+);
+
 export const CalendarEventFragmentDoc = gql`
     fragment CalendarEvent on Event {
   translations {
@@ -4152,3 +4172,22 @@ export const SetPictureAllowOnHomeMutationDocument = gql`
   }
 }
     ` as unknown as DocumentNode<SetPictureAllowOnHomeMutationMutation, SetPictureAllowOnHomeMutationMutationVariables>;
+export const DeletePictureMutationDocument = gql`
+    mutation DeletePictureMutation($id: BigInt!) {
+  deletePicture(input: {id: $id}) {
+    picture {
+      image
+      id
+      rank
+      allowOnHome
+      img {
+        height
+        src
+        srcSetJpeg
+        srcSetWebp
+        width
+      }
+    }
+  }
+}
+    ` as unknown as DocumentNode<DeletePictureMutationMutation, DeletePictureMutationMutationVariables>;

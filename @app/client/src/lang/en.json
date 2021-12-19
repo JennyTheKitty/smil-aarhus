@@ -27,5 +27,6 @@
   "home.more-pictures": "See more photos",
   "home.see-all-pictures": "See all photos",
   "save": "Save",
-  "nav.pictures": "Pictures"
+  "nav.pictures": "Pictures",
+  "picture.delete.confirm": "Are you sure you want to delete this picture?"
 }

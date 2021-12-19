@@ -163,6 +163,12 @@ export default viteSSR(
                   return data;
                 });
               },
+              deletePicture(_result, args, cache, _info) {
+                cache.invalidate({
+                  __typename: 'Picture',
+                  id: (args!.input! as { id: number }).id,
+                });
+              },
             },
           },
           keys: {

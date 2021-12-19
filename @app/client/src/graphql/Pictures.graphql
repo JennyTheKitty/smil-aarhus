@@ -65,3 +65,21 @@ mutation SetPictureAllowOnHomeMutation($id: BigInt!, $input: Boolean!) {
     }
   }
 }
+
+mutation DeletePictureMutation($id: BigInt!) {
+  deletePicture(input: { id: $id }) {
+    picture {
+      image
+      id
+      rank
+      allowOnHome
+      img {
+        height
+        src
+        srcSetJpeg
+        srcSetWebp
+        width
+      }
+    }
+  }
+}

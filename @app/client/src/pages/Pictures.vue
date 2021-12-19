@@ -48,9 +48,7 @@
                   w:text="2xl"
                 />
               </button>
-              <button>
-                <icon-mdi-delete class="icon-shadow" w:text="2xl" />
-              </button>
+              <PictureDelete @confirm="deletePicture({ id: item.id })" />
             </div>
             <a
               :href="item.img.src"
@@ -92,12 +90,12 @@
 import 'photoswipe/dist/photoswipe.css';
 
 import {
+  DeletePictureMutationDocument,
   PicturesQueryDocument,
   ReorderPicturesMutationDocument,
   SetPictureAllowOnHomeMutationDocument,
 } from '@app/graphql/dist/client';
 import { useClientHandle } from '@urql/vue';
-import { GridEvents } from 'muuri';
 import PhotoSwipe from 'photoswipe/dist/photoswipe.esm.js';
 import PhotoSwipeLightbox from 'photoswipe/dist/photoswipe-lightbox.esm.js';
 
@@ -105,7 +103,12 @@ import { useGlobalState } from '../store';
 
 const PictureUpload = defineAsyncComponent(async () => {
   await until(editing).toBe(true);
-  return await import('../components/PictureUpload.vue');
+  return await import('../components/Picture/PictureUpload.vue');
+});
+
+const PictureDelete = defineAsyncComponent(async () => {
+  await until(editing).toBe(true);
+  return await import('../components/Picture/PictureDelete.vue');
 });
 
 const muuriOptions = ref({
@@ -133,6 +136,10 @@ const { executeMutation: setAllowOnHome } = useMutation(
   SetPictureAllowOnHomeMutationDocument
 );
 
+const { executeMutation: deletePicture } = useMutation(
+  DeletePictureMutationDocument
+);
+
 interface Item {
   id: string;
   rank: number;
@@ -149,12 +156,10 @@ const items = computed({
     const reorders: { fromRank: number; toRank: number }[] = [];
     for (const [i, item] of newItems.entries()) {
       if (item.rank !== i) {
-        console.log('update', item, item.rank, i);
         reorders.push({ fromRank: item.rank, toRank: i });
         item.rank = i;
       }
     }
-    console.log(reorders);
     await handle.client
       .mutation(ReorderPicturesMutationDocument, {
         reorders,
