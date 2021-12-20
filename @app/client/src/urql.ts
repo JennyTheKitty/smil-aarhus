@@ -175,11 +175,6 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
                   })
                 );
               });
-            } else {
-              const { exp } = jwtDecode(accessToken.value) as {
-                exp: number;
-              };
-              return Date.now() >= exp * 1000;
             }
           } else if (operation.kind === 'query') {
             if (
@@ -195,8 +190,16 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
                   })
                 );
               })
-            )
+            ) {
               return true;
+            }
+          }
+
+          if (accessToken.value) {
+            const { exp } = jwtDecode(accessToken.value) as {
+              exp: number;
+            };
+            return Date.now() >= exp * 1000;
           }
 
           return false;

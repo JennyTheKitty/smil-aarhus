@@ -82,6 +82,7 @@ export default defineConfig({
       'naive-ui',
       'petite-vue-i18n',
       'graphql-tag',
+      'jsdom',
     ],
     exclude: ['vue-demi'],
   },
