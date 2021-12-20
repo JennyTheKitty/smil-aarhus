@@ -45,7 +45,7 @@ import { useClientHandle } from '@urql/vue';
 import { promiseTimeout } from '@vueuse/shared';
 import dayjs from 'dayjs';
 
-import { useGlobalState } from '../../store';
+import { useStore } from '../../store';
 import { Translated, useTranslation } from '../../utils';
 import { calculateExtendedOpeningEvents } from './extendedOpening';
 
@@ -66,7 +66,7 @@ const { locale } = useI18n();
 const i18nRoute = inject(key.i18nRoute)!;
 const router = useRouter();
 const route = useRoute();
-const state = useGlobalState();
+const store = useStore();
 const handle = useClientHandle();
 const loading = ref(false);
 const eventDialogIsOpen = ref(false);
@@ -150,7 +150,7 @@ nextTick(() => {
   );
 
   watch(
-    () => state.value.currentMember,
+    () => store.currentMember,
     (currentMember) => {
       calendarApi.value?.setOption('selectable', !!currentMember);
     },

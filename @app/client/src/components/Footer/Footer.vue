@@ -79,7 +79,7 @@
     </div>
     <div w:m="t-12" w:flex="~ col">
       <span w:text="gray-400">© SMil Aarhus</span>
-      <ClientOnly><FooterUserWidget /></ClientOnly>
+      <ClientOnly><LoginButton /></ClientOnly>
     </div>
   </div>
 </template>

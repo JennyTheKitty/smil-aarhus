@@ -31,5 +31,8 @@
   "home.groups": "Interessegrupper",
   "arrangeret-af": "Arrangeret af",
   "kategorier": "Kategorier",
-  "nav.pictures": "Billeder"
+  "nav.pictures": "Billeder",
+  "picture.delete.confirm": "Er du sikker på at du vil slette dette billede?",
+  "stop-editing": "Stop med at redigere",
+  "logged-in-as": "Logget ind som:"
 }

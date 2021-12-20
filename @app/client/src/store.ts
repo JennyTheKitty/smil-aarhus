@@ -1,8 +1,29 @@
-import { GetMeQuery } from '@app/graphql/dist/client';
-import { createGlobalState, useSessionStorage } from '@vueuse/core';
+import { GetMeDocument, GetMeQuery } from '@app/graphql/dist/client';
+import { useClientHandle } from '@urql/vue';
+import { defineStore } from 'pinia';
 
-export const useGlobalState = createGlobalState(() =>
-  useSessionStorage('smil-aarhus', {
-    currentMember: null as GetMeQuery['currentMember'],
-  })
-);
+import { accessToken } from './accessToken';
+
+export const useStore = defineStore('main', {
+  state: () => {
+    const handle = useClientHandle();
+
+    watch(
+      accessToken,
+      async (accessToken) => {
+        const store = useStore();
+        if (accessToken) {
+          const { data } = await handle.client.query(GetMeDocument).toPromise();
+          store.currentMember = data?.currentMember || null;
+        } else {
+          store.currentMember = null;
+        }
+      },
+      { immediate: true }
+    );
+
+    return {
+      currentMember: null as GetMeQuery['currentMember'],
+    };
+  },
+});

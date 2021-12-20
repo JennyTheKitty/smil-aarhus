@@ -56,6 +56,6 @@ const imgStyles = computed(() => ({
 
 <style scoped>
 .hero {
-  max-height: calc(64px + 50vh);
+  max-height: max(calc(64px + 50vh), 500px);
 }
 </style>

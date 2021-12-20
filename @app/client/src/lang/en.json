@@ -28,5 +28,10 @@
   "home.see-all-pictures": "See all photos",
   "save": "Save",
   "nav.pictures": "Pictures",
-  "picture.delete.confirm": "Are you sure you want to delete this picture?"
+  "picture.delete.confirm": "Are you sure you want to delete this picture?",
+  "arrangeret-af": "Organised by",
+  "edit-page": "Edit page",
+  "kategorier": "Categories",
+  "stop-editing": "Stop editing",
+  "logged-in-as": "Logged in as:"
 }

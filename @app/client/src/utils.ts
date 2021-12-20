@@ -53,3 +53,15 @@ export function useTranslation<T extends Translateable>(
     ...translation,
   };
 }
+
+export function useWaitImportComponent<X, T extends Promise<{ default: X }>>(
+  until: Ref<boolean>,
+  component: T
+): Ref<null | X> {
+  let val: Ref<null | X> = ref(null);
+
+  watch(until, async () => {
+    val.value = (await component).default;
+  });
+  return val;
+}

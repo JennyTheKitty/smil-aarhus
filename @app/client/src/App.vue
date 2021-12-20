@@ -1,5 +1,6 @@
 <template>
   <div w:bg="dark-500">
+    <MemberBar v-if="store.currentMember" />
     <NavBar :links="navLinks" />
     <router-view v-slot="{ Component }">
       <template v-if="Component">
@@ -26,10 +27,13 @@
 
 <script setup lang="ts">
 import { Link } from './components/Nav/NavLink.vue';
+import { useStore } from './store';
 
 const { t } = useI18n();
 
 provide(key.heroHeight, ref(0));
+
+const store = useStore();
 
 const navLinks = computed(
   () =>

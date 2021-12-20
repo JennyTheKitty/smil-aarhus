@@ -43,7 +43,7 @@ const gridEvents = [
 
 <script setup lang="ts">
 // heavily based on https://gist.github.com/sploders101/e80c244310e1e7d8b996f7a98faee9be
-import Muuri from 'muuri';
+import Muuri, { Item, LayoutData, LayoutFunctionCallback } from 'muuri';
 
 Muuri.defaultPacker.destroy();
 Muuri.defaultPacker = new Muuri.Packer(0);
@@ -88,7 +88,6 @@ function getOrder(): string[] {
 function updateData() {
   if (!muuri.value) return;
   const order = getOrder();
-  console.log(items.value);
   items.value = items.value.sort(
     (a, b) =>
       order.indexOf(a[props.keyField]) - order.indexOf(b[props.keyField])
@@ -101,7 +100,46 @@ watch(
     if (props.options !== null) {
       await until(el).not.toBe(null);
       if (muuri.value) muuri.value.destroy();
-      muuri.value = new Muuri(el.value!, props.options);
+
+      const options = {
+        ...props.options,
+        layout: (
+          grid: Muuri,
+          id: number,
+          items: Item[],
+          width: number,
+          height: number,
+          callback: LayoutFunctionCallback
+        ) => {
+          Muuri.defaultPacker.setOptions({ fillGaps: true });
+
+          const callbackWrapper = (layout: LayoutData) => {
+            const itemWidth =
+              layout.items.length > 0
+                ? (layout.items[0] as Item & { _width: number })._width
+                : 320;
+            const columns = Math.floor(width / (itemWidth + 10));
+            const left = (width - columns * (itemWidth + 10)) / 2;
+            layout.slots = layout.slots.map((slot, i) =>
+              i % 2 == 0 ? slot + left : slot
+            );
+            return callback(layout);
+          };
+
+          const cancelLayout = Muuri.defaultPacker.createLayout(
+            grid,
+            id,
+            items,
+            width,
+            height,
+            callbackWrapper
+          );
+
+          return cancelLayout;
+        },
+      };
+
+      muuri.value = new Muuri(el.value!, options);
       muuri.value.on('move', () => updateData());
       for (const event of gridEvents) {
         muuri.value.on(event, (...args: any[]) => emit(event, ...args));
@@ -166,7 +204,7 @@ watch(
 .item {
   display: block;
   position: absolute;
-  width: 20rem;
+  width: min(20rem, 90vw);
   margin: 5px;
   z-index: 1;
   background: #000;

@@ -10,7 +10,7 @@
       <ContentEditor v-else v-model="editContent" :inline="true" />
     </div>
     <ClientOnly>
-      <div v-if="state.currentMember && !editing" w:m="2">
+      <div v-if="store.currentMember && !editing" w:m="2">
         <button
           w:rounded="md"
           w:font="medium"
@@ -69,7 +69,7 @@ import {
   UpdatePageTranslationDocument,
 } from '@app/graphql/dist/client';
 
-import { useGlobalState } from '../store';
+import { useStore } from '../store';
 import { useTranslation } from '../utils';
 
 const ContentEditor = defineAsyncComponent(() => import('./ContentEditor.vue'));
@@ -79,7 +79,7 @@ const props = defineProps<{
 }>();
 
 const { t, locale } = useI18n();
-const state = useGlobalState();
+const store = useStore();
 const editing = ref(false);
 
 const { data: pageData } = await useQuery({

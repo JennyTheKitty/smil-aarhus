@@ -55,7 +55,7 @@ import {
   NInput,
 } from 'naive-ui';
 
-import { accessToken } from '../accessToken';
+import { accessToken } from '../../accessToken';
 
 defineProps<{
   isOpen: boolean;
@@ -78,5 +78,6 @@ async function submit(e: Event) {
 
   accessToken.value = data!.authenticate!;
   emit('update:isOpen', false);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>

@@ -9,6 +9,7 @@ import '@vue/runtime-dom';
 import 'nprogress/nprogress.css';
 
 import {
+  CreatePictureMutation,
   EventTagTr,
   EventTr,
   EventViaEventTag,
@@ -35,6 +36,7 @@ import { createHead } from '@vueuse/head';
 import { useNProgress } from '@vueuse/integrations/useNProgress';
 import { parse as acceptLanguageParser } from 'accept-language-parser';
 import jwtDecode from 'jwt-decode';
+import { createPinia } from 'pinia';
 import viteSSR, { ClientOnly } from 'vite-ssr';
 import { Router } from 'vue-router';
 
@@ -83,7 +85,7 @@ export default viteSSR(
     const { app, initialState, request, router } = ctx;
     const head = createHead();
     app.use(head);
-
+    app.use(createPinia());
     app.use(i18n);
     app.provide(key.i18nRoute, Trans.i18nRoute.bind(Trans));
 
@@ -168,6 +170,18 @@ export default viteSSR(
                   __typename: 'Picture',
                   id: (args!.input! as { id: number }).id,
                 });
+              },
+              createPicture(result: CreatePictureMutation, args, cache, _info) {
+                console.log(result, args);
+                cache.updateQuery({ query: PicturesQueryDocument }, (data) => {
+                  data!.pictures!.nodes.push(result.createPicture!.picture!);
+                  data!.pictures!.nodes.sort((a, b) => a.rank - b.rank);
+                  return data;
+                });
+                // cache.invalidate({ __typename: 'PicturesConnection' });
+                // cache.invalidate({ __typename: 'Query' }, 'pictures');
+                // cache.invalidate({ __typename: 'Picture' });
+                // cache.invalidate({ __typename: 'ResponsiveImage' });
               },
             },
           },

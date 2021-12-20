@@ -30,7 +30,7 @@
           :w:p="event?.image ? 't-2 r-2' : 't-4 r-4'"
         >
           <button
-            v-if="state.currentMember"
+            v-if="store.currentMember"
             w:text="gray-300 hover:white"
             class="btn-focus-ring"
             @click="$emit('edit')"
@@ -39,7 +39,7 @@
           </button>
 
           <button
-            v-if="state.currentMember"
+            v-if="store.currentMember"
             w:text="gray-300 hover:white"
             w:m="l-2"
             class="btn-focus-ring"
@@ -131,7 +131,7 @@ import { Event } from '@app/graphql/dist/client';
 import { Dialog } from '@headlessui/vue';
 import dayjs from 'dayjs';
 
-import { useGlobalState } from '../../store';
+import { useStore } from '../../store';
 import { Translated, useTranslation } from '../../utils';
 
 const props = defineProps<{
@@ -148,7 +148,7 @@ const router = useRouter();
 const dialog = ref<HTMLElement | null>(null);
 const closeButton = ref(null);
 const d = dayjs;
-const state = useGlobalState();
+const store = useStore();
 const { locale, t } = useI18n();
 
 const tags = computed(() => {

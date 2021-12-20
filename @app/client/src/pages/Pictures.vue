@@ -1,6 +1,6 @@
 <template>
   <main role="main" w:m="x-auto t-10 b-20" w:max-w="5xl">
-    <div v-if="state.currentMember" w:flex="~" w:justify="center">
+    <teleport v-if="store.currentMember" to="#member-bar-left">
       <button
         w:rounded="md"
         w:font="medium"
@@ -17,7 +17,7 @@
         </span>
         <icon-mdi-pencil />
       </button>
-    </div>
+    </teleport>
     <PictureUpload v-if="editing" />
     <div id="gallery--responsive-images" class="pswp-gallery">
       <MuuriGrid v-model:items="items" :options="muuriOptions" key-field="id">
@@ -99,7 +99,7 @@ import { useClientHandle } from '@urql/vue';
 import PhotoSwipe from 'photoswipe/dist/photoswipe.esm.js';
 import PhotoSwipeLightbox from 'photoswipe/dist/photoswipe-lightbox.esm.js';
 
-import { useGlobalState } from '../store';
+import { useStore } from '../store';
 
 const PictureUpload = defineAsyncComponent(async () => {
   await until(editing).toBe(true);
@@ -112,7 +112,6 @@ const PictureDelete = defineAsyncComponent(async () => {
 });
 
 const muuriOptions = ref({
-  layout: { fillGaps: true },
   dragEnabled: true,
   dragAutoScroll: {
     targets: [document.body],
@@ -123,7 +122,7 @@ const muuriOptions = ref({
   },
 });
 
-const state = useGlobalState();
+const store = useStore();
 const { t } = useI18n();
 const editing = ref(false);
 const handle = useClientHandle();

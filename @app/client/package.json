@@ -48,6 +48,7 @@
     "nprogress": "^0.2.0",
     "petite-vue-i18n": "^9.2.0-beta.17",
     "photoswipe": "git://github.com/dimsemenov/photoswipe#v5-beta",
+    "pinia": "^2.0.6",
     "vite-ssr": "^0.14.3",
     "vue": "^3.0.6",
     "vue-lazy-hydration": "^2.0.0-beta.4",
