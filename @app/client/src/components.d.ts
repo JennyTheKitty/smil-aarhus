@@ -13,6 +13,7 @@ declare module 'vue' {
     DialogOverlay: typeof import('@headlessui/vue')['DialogOverlay']
     DialogTitle: typeof import('@headlessui/vue')['DialogTitle']
     DirtyCancelButton: typeof import('./components/Form/DirtyCancelButton.vue')['default']
+    EditButton: typeof import('./components/EditButton.vue')['default']
     EditPageDialog: typeof import('./components/EditPageDialog.vue')['default']
     EventDialog: typeof import('./components/Calendar/EventDialog.vue')['default']
     ExpandTransition: typeof import('./components/ExpandTransition.vue')['default']

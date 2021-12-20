@@ -61,7 +61,7 @@
               active:top-0.5
               focus-visible:(bg-gray-200
               text-black)
-              "
+            "
           >
             <span>Gå til forsiden</span>
           </button>

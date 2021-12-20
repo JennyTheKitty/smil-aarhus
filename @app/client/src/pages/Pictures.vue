@@ -1,25 +1,10 @@
 <template>
   <main role="main" w:m="x-auto t-10 b-20" w:max-w="5xl">
     <teleport v-if="store.currentMember" to="#member-bar-left">
-      <button
-        w:rounded="md"
-        w:font="medium"
-        w:space="x-2"
-        w:text="sm gray-300 hover:white"
-        w:p="y-2 x-3"
-        w:display="flex"
-        w:align="center"
-        class="btn-focus-ring"
-        @click="editing = !editing"
-      >
-        <span>
-          {{ editing ? t('stop-editing') : t('edit') }}
-        </span>
-        <icon-mdi-pencil />
-      </button>
+      <EditButton v-model:editing="editing" />
     </teleport>
     <PictureUpload v-if="editing" />
-    <div id="gallery--responsive-images" class="pswp-gallery">
+    <div ref="gallery" class="pswp-gallery">
       <MuuriGrid v-model:items="items" :options="muuriOptions" key-field="id">
         <template #default="{ item }">
           <div class="item-content">
@@ -101,15 +86,25 @@ import PhotoSwipeLightbox from 'photoswipe/dist/photoswipe-lightbox.esm.js';
 
 import { useStore } from '../store';
 
-const PictureUpload = defineAsyncComponent(async () => {
-  await until(editing).toBe(true);
-  return await import('../components/Picture/PictureUpload.vue');
-});
+const editing = ref(false);
 
-const PictureDelete = defineAsyncComponent(async () => {
-  await until(editing).toBe(true);
-  return await import('../components/Picture/PictureDelete.vue');
-});
+const PictureUpload = useWaitImportComponent(
+  editing,
+  () => import('../components/Picture/PictureUpload.vue')
+);
+
+const PictureDelete = useWaitImportComponent(
+  editing,
+  () => import('../components/Picture/PictureDelete.vue')
+);
+
+const { executeMutation: setAllowOnHome } = useMutation(
+  SetPictureAllowOnHomeMutationDocument
+);
+
+const { executeMutation: deletePicture } = useMutation(
+  DeletePictureMutationDocument
+);
 
 const muuriOptions = ref({
   dragEnabled: true,
@@ -122,22 +117,9 @@ const muuriOptions = ref({
   },
 });
 
-const store = useStore();
-const { t } = useI18n();
-const editing = ref(false);
-const handle = useClientHandle();
-
 const { data } = useQuery({
   query: PicturesQueryDocument,
 });
-
-const { executeMutation: setAllowOnHome } = useMutation(
-  SetPictureAllowOnHomeMutationDocument
-);
-
-const { executeMutation: deletePicture } = useMutation(
-  DeletePictureMutationDocument
-);
 
 interface Item {
   id: string;
@@ -145,10 +127,10 @@ interface Item {
   img: any;
 }
 
+const handle = useClientHandle();
 const items = computed({
   get(): Item[] {
     const x = data.value?.pictures?.nodes || [];
-    console.log(x);
     return x;
   },
   async set(newItems: Item[]) {
@@ -167,9 +149,10 @@ const items = computed({
   },
 });
 
+const gallery = ref<HTMLElement | null>(null);
 onMounted(() => {
   const lightbox = new PhotoSwipeLightbox({
-    gallery: '#gallery--responsive-images',
+    gallery: gallery.value,
     children: 'a',
     pswpModule: PhotoSwipe,
   });
@@ -185,6 +168,9 @@ useHead({
     },
   ],
 });
+
+const store = useStore();
+const { t } = useI18n();
 </script>
 
 <style scoped>

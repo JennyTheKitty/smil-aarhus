@@ -1,5 +1,5 @@
 import { MaybeRef } from '@vueuse/core';
-import { Ref } from 'vue';
+import { InjectionKey, Ref } from 'vue';
 
 import { FALLBACK_LANGUAGE } from './i18n';
 
@@ -15,10 +15,12 @@ export type Translated<T extends Translateable> = Omit<
 > &
   Omit<T['translations']['nodes'][number], '__typename'>;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function useTranslation<T extends Translateable>(
   o: MaybeRef<undefined>,
   locale: Ref<string>
 ): null;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function useTranslation<T extends Translateable>(
   o: MaybeRef<null>,
   locale: Ref<string>
@@ -54,14 +56,20 @@ export function useTranslation<T extends Translateable>(
   };
 }
 
-export function useWaitImportComponent<X, T extends Promise<{ default: X }>>(
-  until: Ref<boolean>,
-  component: T
-): Ref<null | X> {
-  let val: Ref<null | X> = ref(null);
+export function useWaitImportComponent<
+  X,
+  T extends () => Promise<{ default: X }>
+>(until: Ref<boolean>, component: T): Ref<(() => null) | X> {
+  let val: Ref<(() => null) | X> = ref(() => null);
 
   watch(until, async () => {
-    val.value = (await component).default;
+    val.value = markRaw((await component()).default as any);
   });
   return val;
 }
+
+const heroHeight: InjectionKey<Ref<number>> = Symbol('heroHeight');
+
+export const key = {
+  heroHeight,
+} as const;

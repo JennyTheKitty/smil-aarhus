@@ -31,6 +31,7 @@ module.exports = {
         'no-unused-vars': 'off',
         'no-undef': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
+        'vue/no-v-html': 'off',
       },
     },
     {

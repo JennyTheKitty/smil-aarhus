@@ -112,7 +112,11 @@ export default defineConfig({
         '@vueuse/head',
         '@vueuse/core',
         {
-          '@app/client/src/symbols': ['key'],
+          '@app/client/src/utils': [
+            'key',
+            'useWaitImportComponent',
+            'useTranslation',
+          ],
           'petite-vue-i18n': ['useI18n'],
           '@urql/vue': ['useQuery', 'useMutation'],
         },

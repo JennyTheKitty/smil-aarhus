@@ -8,7 +8,7 @@
       >
         Admin login
       </a>
-      <LoginDialog v-if="LoginDialog" v-model:isOpen="isLoginDialogOpen" />
+      <LoginDialog v-model:isOpen="isLoginDialogOpen" />
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@ import { useWaitImportComponent } from '../../utils';
 const isLoginDialogOpen = ref(false);
 const LoginDialog = useWaitImportComponent(
   isLoginDialogOpen,
-  import('./LoginDialog.vue')
+  () => import('./LoginDialog.vue')
 );
 
 const store = useStore();

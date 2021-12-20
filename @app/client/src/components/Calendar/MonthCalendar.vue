@@ -45,33 +45,12 @@ import { useClientHandle } from '@urql/vue';
 import { promiseTimeout } from '@vueuse/shared';
 import dayjs from 'dayjs';
 
+import { Trans } from '../../i18n';
 import { useStore } from '../../store';
 import { Translated, useTranslation } from '../../utils';
 import { calculateExtendedOpeningEvents } from './extendedOpening';
 
-const MonthCalendarEventPopout = defineAsyncComponent(async () => {
-  await until(computed(() => selectedEvent.value.open)).toBe(true);
-  return await import('./MonthCalendarEventPopout.vue');
-});
-
-const EventDialog = defineAsyncComponent(async () => {
-  await until(eventDialogIsOpen).toBe(true);
-  return await import('./EventDialog.vue');
-});
-
-const calendar = ref<null | typeof FullCalendar>(null);
-const container = ref<null | HTMLDivElement>(null);
-const calendarApi = computed(() => calendar.value?.getApi() as Calendar | null);
-const { locale } = useI18n();
-const i18nRoute = inject(key.i18nRoute)!;
-const router = useRouter();
-const route = useRoute();
-const store = useStore();
-const handle = useClientHandle();
-const loading = ref(false);
 const eventDialogIsOpen = ref(false);
-const eventDialogEvent = ref({});
-const eventDialogCreate = ref(true);
 // TODO: Somehow extract inner CalendarGetEventBySlugQuery.eventTrBySlugAndLanguageCode.event
 const selectedEvent = ref<{
   event: Event | null;
@@ -80,8 +59,31 @@ const selectedEvent = ref<{
   open: boolean;
 }>({ event: null, translatedEvent: null, eventEl: null, open: false });
 
+const MonthCalendarEventPopout = useWaitImportComponent(
+  computed(() => selectedEvent.value.open),
+  () => import('./MonthCalendarEventPopout.vue')
+);
+
+const EventDialog = useWaitImportComponent(
+  eventDialogIsOpen,
+  () => import('./EventDialog.vue')
+);
+
+const calendar = ref<null | typeof FullCalendar>(null);
+const container = ref<null | HTMLDivElement>(null);
+const calendarApi = computed(() => calendar.value?.getApi() as Calendar | null);
+const { locale } = useI18n();
+const router = useRouter();
+const route = useRoute();
+const store = useStore();
+const handle = useClientHandle();
+const loading = ref(false);
+
+const eventDialogEvent = ref({});
+const eventDialogCreate = ref(true);
+
 async function editSelectedEvent() {
-  await router.push(i18nRoute('CALENDAR'));
+  await router.push(Trans.i18nRoute('CALENDAR'));
   await until(() => selectedEvent.value.open).not.toBeTruthy();
   await promiseTimeout(100);
   eventDialogEvent.value = selectedEvent.value.event!;
@@ -252,8 +254,9 @@ const calendarOptions: CalendarOptions = {
               title: event.title,
               start: new Date(event.startsAt),
               end: new Date(event.endsAt),
-              url: router.resolve(i18nRoute('CALENDAR', { slug: event.slug }))
-                .href,
+              url: router.resolve(
+                Trans.i18nRoute('CALENDAR', { slug: event.slug })
+              ).href,
               display: 'list-item',
             } as EventInput & { start: Date; end: Date };
           })

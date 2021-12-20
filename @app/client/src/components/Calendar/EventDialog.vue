@@ -150,7 +150,6 @@ import {
   UpsertEventDocument,
 } from '@app/graphql/dist/client';
 import { useClientHandle } from '@urql/vue';
-import { promiseTimeout } from '@vueuse/shared';
 import {
   darkTheme,
   FormRules,

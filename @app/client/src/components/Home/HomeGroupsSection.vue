@@ -129,7 +129,6 @@ import { HomeGroupsQueryDocument } from '@app/graphql/dist/client';
 import { useTranslation } from '../../utils';
 
 const { t, locale } = useI18n();
-const i18nRoute = inject(key.i18nRoute)!;
 
 const { data: groupsData } = await useQuery({
   query: HomeGroupsQueryDocument,

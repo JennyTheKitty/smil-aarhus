@@ -114,7 +114,6 @@ import heroImgWebp from '../assets/images/groups-header.jpg?w=300;900;1500;2000&
 import { useTranslation } from '../utils';
 
 const { t, locale } = useI18n();
-const i18nRoute = inject(key.i18nRoute)!;
 
 const { data: groupsData } = useQuery({
   query: HomeGroupsQueryDocument,
