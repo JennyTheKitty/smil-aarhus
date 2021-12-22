@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { darkTheme, NConfigProvider, NPopconfirm } from 'naive-ui';
+import { darkTheme, NConfigProvider, NPopconfirm } from 'naive-ui/lib';
 
 defineEmits(['confirm']);
 

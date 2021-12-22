@@ -88,7 +88,7 @@ CREATE TYPE smil_aarhus.event_data AS (
     starts_at TIMESTAMPTZ,
     ends_at TIMESTAMPTZ,
     special boolean,
-    override_image_file TEXT,
+    override_image bigint,
     is_template boolean,
     tag_ids bigint[],
     group_ids bigint[]
@@ -121,8 +121,8 @@ DECLARE
     lid bigint;
 BEGIN
     IF (event__id IS NULL) THEN
-        INSERT INTO smil_aarhus.event(starts_at, ends_at, special, override_image_file, is_template)
-            VALUES (data.starts_at, data.ends_at, data.special, data.override_image_file, data.is_template)
+        INSERT INTO smil_aarhus.event(starts_at, ends_at, special, override_image, is_template)
+            VALUES (data.starts_at, data.ends_at, data.special, data.override_image, data.is_template)
             RETURNING * INTO STRICT event;
     ELSE
         UPDATE smil_aarhus.event

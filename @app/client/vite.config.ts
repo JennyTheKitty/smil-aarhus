@@ -83,6 +83,7 @@ export default defineConfig({
       'petite-vue-i18n',
       'graphql-tag',
       'jsdom',
+      'muuri',
     ],
     exclude: ['vue-demi'],
   },

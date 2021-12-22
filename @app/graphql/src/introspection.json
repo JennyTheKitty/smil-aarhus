@@ -3281,6 +3281,18 @@
             "args": []
           },
           {
+            "name": "img",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ResponsiveImage",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
             "name": "path",
             "type": {
               "kind": "NON_NULL",
@@ -4287,6 +4299,26 @@
             "type": {
               "kind": "OBJECT",
               "name": "UpsertEventPayload",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "input",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "upsertGroup",
+            "type": {
+              "kind": "OBJECT",
+              "name": "UpsertGroupPayload",
               "ofType": null
             },
             "args": [
@@ -7569,6 +7601,71 @@
           },
           {
             "name": "imageByOverrideImage",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Image",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "query",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Query",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "UpsertGroupPayload",
+        "fields": [
+          {
+            "name": "clientMutationId",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
+            "name": "group",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Group",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "groupEdge",
+            "type": {
+              "kind": "OBJECT",
+              "name": "GroupsEdge",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "orderBy",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Any"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "imageByImage",
             "type": {
               "kind": "OBJECT",
               "name": "Image",

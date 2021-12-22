@@ -1,0 +1,59 @@
+query GroupQuery($slug: String!, $preferredLanguageCode: String!) {
+  groupBySlug(preferredLanguageCode: $preferredLanguageCode, slug: $slug) {
+    id
+    image
+    isOpen
+    translations {
+      nodes {
+        activity
+        description
+        languageCode
+        shortDescription
+        slug
+        title
+        groupId
+      }
+    }
+    img {
+      height
+      src
+      srcSetJpeg
+      srcSetWebp
+      width
+    }
+  }
+}
+
+mutation UpsertGroup(
+  $data: GroupDatumInput!
+  $translations: [GroupTrDatumInput]!
+  $id: BigInt
+) {
+  upsertGroup(
+    input: { data: $data, translations: $translations, groupId: $id }
+  ) {
+    group {
+      id
+      image
+      isOpen
+      translations {
+        nodes {
+          activity
+          description
+          languageCode
+          shortDescription
+          slug
+          title
+          groupId
+        }
+      }
+      img {
+        height
+        src
+        srcSetJpeg
+        srcSetWebp
+        width
+      }
+    }
+  }
+}

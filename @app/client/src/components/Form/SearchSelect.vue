@@ -19,7 +19,7 @@ import {
   SearchGroupsDocument,
 } from '@app/graphql/dist/client';
 import { useClientHandle } from '@urql/vue';
-import { NSelect } from 'naive-ui';
+import { NSelect } from 'naive-ui/lib';
 
 import { Translateable, useTranslation } from '../../utils';
 

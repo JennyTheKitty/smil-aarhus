@@ -1,4 +1,11 @@
+import {
+  CreateImageMutationDocument,
+  CreateImageMutationMutation,
+  GetUploadUrlDocument,
+} from '@app/graphql/dist/client';
+import { ClientHandle } from '@urql/vue';
 import { MaybeRef } from '@vueuse/core';
+import axios from 'axios';
 import { InjectionKey, Ref } from 'vue';
 
 import { FALLBACK_LANGUAGE } from './i18n';
@@ -73,3 +80,85 @@ const heroHeight: InjectionKey<Ref<number>> = Symbol('heroHeight');
 export const key = {
   heroHeight,
 } as const;
+
+export interface UploadInfo {
+  url: string;
+  data: FormData;
+}
+
+export async function getUploadUrl(
+  handle: ClientHandle,
+  fileType: string
+): Promise<UploadInfo> {
+  const { data } = await handle.client
+    .mutation(GetUploadUrlDocument, {
+      contentType: fileType,
+      randomId: Math.random().toString(),
+    })
+    .toPromise();
+  if (!data || !data.createUploadUrl) throw new Error('Get upload url failed.');
+  const formData = new FormData();
+  console.log(data);
+  for (const [key, val] of Object.entries(
+    JSON.parse(data.createUploadUrl.formData) as { [key: string]: string }
+  )) {
+    formData.append(key, val);
+  }
+  return { url: data.createUploadUrl.uploadUrl, data: formData };
+}
+
+export async function uploadFile(
+  file: File,
+  info: UploadInfo,
+  progressCallback: (percent: number) => void
+): Promise<string> {
+  info.data.append('file', file);
+  const res = await axios.post(info.url, info.data, {
+    onUploadProgress: (e: ProgressEvent) =>
+      progressCallback(e.loaded / e.total),
+  });
+  return new URL(res.headers.location).pathname.split('/').slice(2).join('/');
+}
+
+export function getImageFileDimentions(
+  file: File
+): Promise<{ height: number; width: number }> {
+  return new Promise((resolve) => {
+    const objectUrl = URL.createObjectURL(file);
+    const img = new Image();
+    img.addEventListener('load', () => {
+      resolve({ height: img.height, width: img.width });
+      URL.revokeObjectURL(objectUrl);
+    });
+    img.src = objectUrl;
+  });
+}
+
+type CreateImageReturn<T> = T extends false
+  ? NonNullable<
+      NonNullable<CreateImageMutationMutation['createImage']>['image']
+    >
+  : T extends true
+  ? number
+  : never;
+
+export async function createImage<B extends boolean>(
+  handle: ClientHandle,
+  file: File,
+  progressCallback: (percent: number) => void,
+  onlyId: B
+): Promise<CreateImageReturn<B>> {
+  const { height, width } = await getImageFileDimentions(file);
+  const info = await getUploadUrl(handle, file.type);
+  const url = await uploadFile(file, info, progressCallback);
+  const { data } = await handle.client
+    .mutation(CreateImageMutationDocument, {
+      path: url,
+      height,
+      width,
+      onlyId,
+    })
+    .toPromise();
+  if (!data?.createImage?.image) throw new Error('Could not create image');
+  return onlyId ? data.createImage.image.id : data.createImage.image;
+}

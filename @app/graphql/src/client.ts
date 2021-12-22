@@ -833,7 +833,7 @@ export type EventDatumInput = {
   endsAt: Scalars['Datetime'];
   groupIds?: Maybe<Array<Maybe<Scalars['BigInt']>>>;
   isTemplate?: Maybe<Scalars['Boolean']>;
-  overrideImageFile?: Maybe<Scalars['String']>;
+  overrideImage?: Maybe<Scalars['BigInt']>;
   special: Scalars['Boolean'];
   startsAt: Scalars['Datetime'];
   tagIds?: Maybe<Array<Maybe<Scalars['BigInt']>>>;
@@ -1333,6 +1333,12 @@ export type GroupCondition = {
   isOpen?: Maybe<Scalars['Boolean']>;
 };
 
+/** An input for mutations affecting `GroupDatum` */
+export type GroupDatumInput = {
+  image: Scalars['BigInt'];
+  isOpen: Scalars['Boolean'];
+};
+
 /** A filter to be used against `Group` object types. All fields are combined with a logical ‘and.’ */
 export type GroupFilter = {
   /** Filter by the object’s `id` field. */
@@ -1372,6 +1378,15 @@ export type GroupTrCondition = {
   slug?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `title` field. */
   title?: Maybe<Scalars['String']>;
+};
+
+/** An input for mutations affecting `GroupTrDatum` */
+export type GroupTrDatumInput = {
+  activity: Scalars['String'];
+  description: Scalars['String'];
+  languageCode: Scalars['String'];
+  shortDescription: Scalars['String'];
+  title: Scalars['String'];
 };
 
 /** A filter to be used against `GroupTr` object types. All fields are combined with a logical ‘and.’ */
@@ -1480,6 +1495,7 @@ export type Image = {
   groupsByImage: GroupsConnection;
   height: Scalars['Int'];
   id: Scalars['BigInt'];
+  img: ResponsiveImage;
   path: Scalars['String'];
   /** Reads and enables pagination through a set of `Picture`. */
   picturesByImage: PicturesConnection;
@@ -1790,6 +1806,7 @@ export type Mutation = {
   /** Updates a single `Picture` using a unique key and a patch. */
   updatePicture: Maybe<UpdatePicturePayload>;
   upsertEvent: Maybe<UpsertEventPayload>;
+  upsertGroup: Maybe<UpsertGroupPayload>;
 };
 
 
@@ -1988,6 +2005,12 @@ export type MutationUpdatePictureArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpsertEventArgs = {
   input: UpsertEventInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpsertGroupArgs = {
+  input: UpsertGroupInput;
 };
 
 export type News = {
@@ -3290,6 +3313,41 @@ export type UpsertEventPayloadEventEdgeArgs = {
   orderBy?: Maybe<Array<EventsOrderBy>>;
 };
 
+/** All input for the `upsertGroup` mutation. */
+export type UpsertGroupInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  data: GroupDatumInput;
+  groupId?: Maybe<Scalars['BigInt']>;
+  translations: Array<Maybe<GroupTrDatumInput>>;
+};
+
+/** The output of our `upsertGroup` mutation. */
+export type UpsertGroupPayload = {
+  __typename?: 'UpsertGroupPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  group: Maybe<Group>;
+  /** An edge for our `Group`. May be used by Relay 1. */
+  groupEdge: Maybe<GroupsEdge>;
+  /** Reads a single `Image` that is related to this `Group`. */
+  imageByImage: Maybe<Image>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our `upsertGroup` mutation. */
+export type UpsertGroupPayloadGroupEdgeArgs = {
+  orderBy?: Maybe<Array<GroupsOrderBy>>;
+};
+
 export type AuthenticateMutationVariables = Exact<{
   username: Scalars['String'];
   password: Scalars['String'];
@@ -3525,6 +3583,58 @@ export type GetUploadUrlMutation = (
   )> }
 );
 
+export type GroupQueryQueryVariables = Exact<{
+  slug: Scalars['String'];
+  preferredLanguageCode: Scalars['String'];
+}>;
+
+
+export type GroupQueryQuery = (
+  { __typename?: 'Query' }
+  & { groupBySlug: Maybe<(
+    { __typename?: 'Group' }
+    & Pick<Group, 'id' | 'image' | 'isOpen'>
+    & { translations: (
+      { __typename?: 'GroupTrsConnection' }
+      & { nodes: Array<(
+        { __typename?: 'GroupTr' }
+        & Pick<GroupTr, 'activity' | 'description' | 'languageCode' | 'shortDescription' | 'slug' | 'title' | 'groupId'>
+      )> }
+    ), img: (
+      { __typename?: 'ResponsiveImage' }
+      & Pick<ResponsiveImage, 'height' | 'src' | 'srcSetJpeg' | 'srcSetWebp' | 'width'>
+    ) }
+  )> }
+);
+
+export type UpsertGroupMutationVariables = Exact<{
+  data: GroupDatumInput;
+  translations: Array<Maybe<GroupTrDatumInput>> | Maybe<GroupTrDatumInput>;
+  id?: Maybe<Scalars['BigInt']>;
+}>;
+
+
+export type UpsertGroupMutation = (
+  { __typename?: 'Mutation' }
+  & { upsertGroup: Maybe<(
+    { __typename?: 'UpsertGroupPayload' }
+    & { group: Maybe<(
+      { __typename?: 'Group' }
+      & Pick<Group, 'id' | 'image' | 'isOpen'>
+      & { translations: (
+        { __typename?: 'GroupTrsConnection' }
+        & { nodes: Array<(
+          { __typename?: 'GroupTr' }
+          & Pick<GroupTr, 'activity' | 'description' | 'languageCode' | 'shortDescription' | 'slug' | 'title' | 'groupId'>
+        )> }
+      ), img: (
+        { __typename?: 'ResponsiveImage' }
+        & Pick<ResponsiveImage, 'height' | 'src' | 'srcSetJpeg' | 'srcSetWebp' | 'width'>
+      ) }
+    )> }
+  )> }
+);
+
 export type HomeEventsQueryQueryVariables = Exact<{
   startsAfter?: Maybe<Scalars['Datetime']>;
 }>;
@@ -3691,6 +3801,7 @@ export type CreateImageMutationMutationVariables = Exact<{
   path: Scalars['String'];
   height: Scalars['Int'];
   width: Scalars['Int'];
+  onlyId?: Maybe<Scalars['Boolean']>;
 }>;
 
 
@@ -3701,7 +3812,28 @@ export type CreateImageMutationMutation = (
     & { image: Maybe<(
       { __typename?: 'Image' }
       & Pick<Image, 'id'>
+      & { img?: Maybe<(
+        { __typename?: 'ResponsiveImage' }
+        & Pick<ResponsiveImage, 'height' | 'src' | 'srcSetJpeg' | 'srcSetWebp' | 'width'>
+      )> }
     )> }
+  )> }
+);
+
+export type ImageQueryQueryVariables = Exact<{
+  id: Scalars['BigInt'];
+}>;
+
+
+export type ImageQueryQuery = (
+  { __typename?: 'Query' }
+  & { image: Maybe<(
+    { __typename?: 'Image' }
+    & Pick<Image, 'id'>
+    & { img: (
+      { __typename?: 'ResponsiveImage' }
+      & Pick<ResponsiveImage, 'height' | 'src' | 'srcSetJpeg' | 'width' | 'srcSetWebp'>
+    ) }
   )> }
 );
 
@@ -3983,6 +4115,62 @@ export const GetUploadUrlDocument = gql`
   }
 }
     ` as unknown as DocumentNode<GetUploadUrlMutation, GetUploadUrlMutationVariables>;
+export const GroupQueryDocument = gql`
+    query GroupQuery($slug: String!, $preferredLanguageCode: String!) {
+  groupBySlug(preferredLanguageCode: $preferredLanguageCode, slug: $slug) {
+    id
+    image
+    isOpen
+    translations {
+      nodes {
+        activity
+        description
+        languageCode
+        shortDescription
+        slug
+        title
+        groupId
+      }
+    }
+    img {
+      height
+      src
+      srcSetJpeg
+      srcSetWebp
+      width
+    }
+  }
+}
+    ` as unknown as DocumentNode<GroupQueryQuery, GroupQueryQueryVariables>;
+export const UpsertGroupDocument = gql`
+    mutation UpsertGroup($data: GroupDatumInput!, $translations: [GroupTrDatumInput]!, $id: BigInt) {
+  upsertGroup(input: {data: $data, translations: $translations, groupId: $id}) {
+    group {
+      id
+      image
+      isOpen
+      translations {
+        nodes {
+          activity
+          description
+          languageCode
+          shortDescription
+          slug
+          title
+          groupId
+        }
+      }
+      img {
+        height
+        src
+        srcSetJpeg
+        srcSetWebp
+        width
+      }
+    }
+  }
+}
+    ` as unknown as DocumentNode<UpsertGroupMutation, UpsertGroupMutationVariables>;
 export const HomeEventsQueryDocument = gql`
     query HomeEventsQuery($startsAfter: Datetime) {
   specialEvents: events(
@@ -4120,14 +4308,35 @@ export const PicturesQueryDocument = gql`
 }
     ` as unknown as DocumentNode<PicturesQueryQuery, PicturesQueryQueryVariables>;
 export const CreateImageMutationDocument = gql`
-    mutation CreateImageMutation($path: String!, $height: Int!, $width: Int!) {
+    mutation CreateImageMutation($path: String!, $height: Int!, $width: Int!, $onlyId: Boolean = true) {
   createImage(input: {image: {path: $path, width: $width, height: $height}}) {
     image {
       id
+      img @skip(if: $onlyId) {
+        height
+        src
+        srcSetJpeg
+        srcSetWebp
+        width
+      }
     }
   }
 }
     ` as unknown as DocumentNode<CreateImageMutationMutation, CreateImageMutationMutationVariables>;
+export const ImageQueryDocument = gql`
+    query ImageQuery($id: BigInt!) {
+  image(id: $id) {
+    img {
+      height
+      src
+      srcSetJpeg
+      width
+      srcSetWebp
+    }
+    id
+  }
+}
+    ` as unknown as DocumentNode<ImageQueryQuery, ImageQueryQueryVariables>;
 export const CreatePictureDocument = gql`
     mutation CreatePicture($image: BigInt!) {
   createPicture(input: {picture: {image: $image}}) {

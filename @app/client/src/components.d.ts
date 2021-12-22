@@ -21,7 +21,9 @@ declare module 'vue' {
     FAQQuestion: typeof import('./components/FAQQuestion.vue')['default']
     Footer: typeof import('./components/Footer/Footer.vue')['default']
     FooterUserWidget: typeof import('./components/FooterUserWidget.vue')['default']
+    FormDialog: typeof import('./components/FormDialog.vue')['default']
     FormInput: typeof import('./components/Form/FormInput.vue')['default']
+    GroupDialog: typeof import('./components/GroupDialog.vue')['default']
     Hero: typeof import('./components/Hero.vue')['default']
     HomeEventsSection: typeof import('./components/Home/HomeEventsSection.vue')['default']
     HomeEventWidget: typeof import('./components/Home/HomeEventWidget.vue')['default']
@@ -60,6 +62,7 @@ declare module 'vue' {
     IconSmilFetlife: typeof import('~icons/smil/fetlife')['default']
     IconSmilLogo: typeof import('~icons/smil/logo')['default']
     IconSmilLogoAarhus: typeof import('~icons/smil/logo-aarhus')['default']
+    ImageUpload: typeof import('./components/Form/ImageUpload.vue')['default']
     Lang: typeof import('./components/Lang.vue')['default']
     LocaleSwitcher: typeof import('./components/Nav/LocaleSwitcher.vue')['default']
     LoginButton: typeof import('./components/Login/LoginButton.vue')['default']
@@ -86,6 +89,8 @@ declare module 'vue' {
     SearchSelect: typeof import('./components/Form/SearchSelect.vue')['default']
     TransitionChild: typeof import('@headlessui/vue')['TransitionChild']
     TransitionRoot: typeof import('@headlessui/vue')['TransitionRoot']
+    TranslatedInput: typeof import('./components/Form/TranslatedInput.vue')['default']
+    TranslationInput: typeof import('./components/Form/TranslationInput.vue')['default']
   }
 }
 

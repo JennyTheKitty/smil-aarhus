@@ -1,5 +1,9 @@
 <template>
   <div v-if="group">
+    <teleport v-if="store.currentMember" to="#member-bar-left">
+      <EditButton v-model:editing="editing" />
+    </teleport>
+    <GroupDialog v-model:isOpen="editing" :group="rawGroup!" />
     <Hero
       :jpeg="group.img.srcSetJpeg"
       :webp="group.img.srcSetWebp"
@@ -35,29 +39,34 @@
       w:text="true-gray-100"
       w:flex="~ col md:row"
       w:align="items-center"
-    ></main>
+    >
+      <div class="content" w:text="base">
+        <div v-html="group.description"></div>
+      </div>
+    </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import { HomeGroupsQueryDocument } from '@app/graphql/dist/client';
+import { GroupQueryDocument, TrLanguage } from '@app/graphql/dist/client';
 
+import { useStore } from '../store';
 import { useTranslation } from '../utils';
 
 const { t, locale } = useI18n();
 const route = useRoute();
+const store = useStore();
+const editing = ref(false);
 
-const { data: groupsData } = useQuery({
-  query: HomeGroupsQueryDocument,
+const { data } = useQuery({
+  query: GroupQueryDocument,
+  variables: {
+    slug: route.params.slug as string,
+    preferredLanguageCode: locale.value.toUpperCase() as TrLanguage,
+  },
 });
-const groups = computed(() =>
-  (groupsData.value?.groups?.nodes || []).map((group) =>
-    useTranslation(group, locale)
-  )
-);
-const group = computed(() => {
-  return groups.value.find((group) => group.slug === route.params.slug);
-});
+const group = computed(() => useTranslation(data.value?.groupBySlug, locale));
+const rawGroup = computed(() => data.value?.groupBySlug);
 </script>
 
 <style scoped>

@@ -76,3 +76,62 @@ comment on constraint event_via_group_group_id_fkey on smil_aarhus.event_via_gro
 
 GRANT SELECT ON TABLE smil_aarhus.event_via_group TO smil_anonymous, smil_organizer, smil_admin;
 GRANT INSERT, UPDATE, DELETE ON TABLE smil_aarhus.event_via_group TO smil_organizer, smil_admin;
+
+CREATE TYPE smil_aarhus.group_data AS (
+    image bigint,
+    is_open boolean
+);
+
+COMMENT ON COLUMN smil_aarhus.group_data.image IS E'@notNull';
+COMMENT ON COLUMN smil_aarhus.group_data.is_open IS E'@notNull';
+
+CREATE TYPE smil_aarhus.group_tr_data AS (
+    language_code text,
+    title text,
+    short_description text,
+    description text,
+    activity text
+);
+
+COMMENT ON COLUMN smil_aarhus.group_tr_data.language_code IS E'@notNull';
+COMMENT ON COLUMN smil_aarhus.group_tr_data.title IS E'@notNull';
+COMMENT ON COLUMN smil_aarhus.group_tr_data.description IS E'@notNull';
+COMMENT ON COLUMN smil_aarhus.group_tr_data.short_description IS E'@notNull';
+COMMENT ON COLUMN smil_aarhus.group_tr_data.activity IS E'@notNull';
+
+CREATE OR REPLACE FUNCTION smil_aarhus.upsert_group(
+    data smil_aarhus.group_data,
+    translations smil_aarhus.group_tr_data[],
+    group__id bigint DEFAULT NULL
+)
+RETURNS smil_aarhus.group
+AS $$
+DECLARE
+    _group smil_aarhus.group;
+    trans smil_aarhus.group_tr_data;
+BEGIN
+    IF (group__id IS NULL) THEN
+        INSERT INTO smil_aarhus.group(image, is_open)
+            VALUES (data.image, data.is_open)
+            RETURNING * INTO STRICT _group;
+    ELSE
+        UPDATE smil_aarhus.group
+            SET image = data.image, is_open = data.is_open
+            WHERE id = group__id
+            RETURNING * INTO STRICT _group;
+    END IF;
+
+    FOREACH trans IN ARRAY translations LOOP
+        INSERT INTO smil_aarhus.group_tr (group_id, language_code, title, short_description, description, activity)
+            VALUES (_group.id, trans.language_code, trans.title, trans.short_description, trans.description, trans.activity)
+            ON CONFLICT (group_id, language_code) DO UPDATE SET language_code = trans.language_code, title = trans.title, short_description = trans.short_description, description = trans.description, activity = trans.activity;
+    END LOOP;
+    DELETE FROM smil_aarhus.group_tr
+        WHERE (group_id = _group.id and language_code NOT IN (SELECT language_code FROM UNNEST(translations)));
+
+    RETURN _group;
+END
+$$ LANGUAGE plpgsql;
+
+
+GRANT EXECUTE ON FUNCTION smil_aarhus.upsert_event TO smil_anonymous, smil_organizer, smil_admin;

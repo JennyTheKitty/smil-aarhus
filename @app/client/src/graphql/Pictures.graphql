@@ -15,13 +15,38 @@ query PicturesQuery {
   }
 }
 
-mutation CreateImageMutation($path: String!, $height: Int!, $width: Int!) {
+mutation CreateImageMutation(
+  $path: String!
+  $height: Int!
+  $width: Int!
+  $onlyId: Boolean = true
+) {
   createImage(
     input: { image: { path: $path, width: $width, height: $height } }
   ) {
     image {
       id
+      img @skip(if: $onlyId) {
+        height
+        src
+        srcSetJpeg
+        srcSetWebp
+        width
+      }
     }
+  }
+}
+
+query ImageQuery($id: BigInt!) {
+  image(id: $id) {
+    img {
+      height
+      src
+      srcSetJpeg
+      width
+      srcSetWebp
+    }
+    id
   }
 }
 

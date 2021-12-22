@@ -162,7 +162,7 @@ import {
   NInput,
   NPopover,
   NSelect,
-} from 'naive-ui';
+} from 'naive-ui/lib';
 
 import { useTranslation } from '../../utils';
 import BaseDialog from '../BaseDialog.vue';

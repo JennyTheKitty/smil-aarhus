@@ -90,6 +90,9 @@ const ImageUrlSigningPlugin = makeExtendSchemaPlugin((build) => {
       extend type Picture {
         img: ResponsiveImage! @requires(columns: ["image"])
       }
+      extend type Image {
+        img: ResponsiveImage! @requires(columns: ["path", "width", "height"])
+      }
       extend type Event {
         img: ResponsiveImage @requires(columns: ["id", "override_image"])
       }
@@ -133,6 +136,11 @@ const ImageUrlSigningPlugin = makeExtendSchemaPlugin((build) => {
               sql.query`${sql.value(picture.image)}`
             )
           );
+        },
+      },
+      Image: {
+        img: async (image, _, _context) => {
+          return createResponsiveImage(image);
         },
       },
       Event: {

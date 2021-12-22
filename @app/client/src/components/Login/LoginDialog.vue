@@ -53,7 +53,7 @@ import {
   NForm,
   NFormItem,
   NInput,
-} from 'naive-ui';
+} from 'naive-ui/lib';
 
 import { accessToken } from '../../accessToken';
 

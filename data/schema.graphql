@@ -957,7 +957,7 @@ input EventDatumInput {
   endsAt: Datetime!
   groupIds: [BigInt]
   isTemplate: Boolean
-  overrideImageFile: String
+  overrideImage: BigInt
   special: Boolean!
   startsAt: Datetime!
   tagIds: [BigInt]
@@ -1606,6 +1606,12 @@ input GroupCondition {
   isOpen: Boolean
 }
 
+"""An input for mutations affecting `GroupDatum`"""
+input GroupDatumInput {
+  image: BigInt!
+  isOpen: Boolean!
+}
+
 """
 A filter to be used against `Group` object types. All fields are combined with a logical ‘and.’
 """
@@ -1657,6 +1663,15 @@ input GroupTrCondition {
 
   """Checks for equality with the object’s `title` field."""
   title: String
+}
+
+"""An input for mutations affecting `GroupTrDatum`"""
+input GroupTrDatumInput {
+  activity: String!
+  description: String!
+  languageCode: String!
+  shortDescription: String!
+  title: String!
 }
 
 """
@@ -1875,6 +1890,7 @@ type Image {
   ): GroupsConnection!
   height: Int!
   id: BigInt!
+  img: ResponsiveImage!
   path: String!
 
   """Reads and enables pagination through a set of `Picture`."""
@@ -2408,6 +2424,12 @@ type Mutation {
     """
     input: UpsertEventInput!
   ): UpsertEventPayload
+  upsertGroup(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertGroupInput!
+  ): UpsertGroupPayload
 }
 
 type News {
@@ -4028,6 +4050,42 @@ type UpsertEventPayload {
 
   """Reads a single `Image` that is related to this `Event`."""
   imageByOverrideImage: Image
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `upsertGroup` mutation."""
+input UpsertGroupInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  data: GroupDatumInput!
+  groupId: BigInt
+  translations: [GroupTrDatumInput]!
+}
+
+"""The output of our `upsertGroup` mutation."""
+type UpsertGroupPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  group: Group
+
+  """An edge for our `Group`. May be used by Relay 1."""
+  groupEdge(
+    """The method to use when ordering `Group`."""
+    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): GroupsEdge
+
+  """Reads a single `Image` that is related to this `Group`."""
+  imageByImage: Image
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
