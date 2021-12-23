@@ -28,6 +28,7 @@
           rel="noopener"
           w:flex="~"
           w:align="items-center"
+          w:text="underline underline-true-gray-600"
         >
           <icon-mdi-map w:m="x-2" />
           {{ t('footer.see-on-map') }}
@@ -41,6 +42,7 @@
             href="#mail"
             w:flex="~"
             w:align="items-center"
+            w:text="underline underline-true-gray-600"
             @click.stop.prevent="mailto('YmVzdHlyZWxzZUBzbWlsYWFyaHVzLmRr')"
           >
             <icon-mdi-human-greeting w:m="x-2" />
@@ -50,6 +52,7 @@
             href="#mail"
             w:flex="~"
             w:align="items-center"
+            w:text="underline underline-true-gray-600"
             @click.stop.prevent="mailto('a2FydG90ZWtAc21pbGFhcmh1cy5kaw==')"
           >
             <icon-mdi-account-group w:m="x-2" />
@@ -59,6 +62,7 @@
             href="#mail"
             w:flex="~"
             w:align="items-center"
+            w:text="underline underline-true-gray-600"
             @click.stop.prevent="mailto('aW5mb0BzbWlsYWFyaHVzLmRr')"
           >
             <icon-mdi-information-outline w:m="x-2" />
@@ -70,6 +74,7 @@
             rel="noopener"
             w:flex="~"
             w:align="items-center"
+            w:text="underline underline-true-gray-600"
           >
             <icon-smil-fetlife w:m="x-2" />
             {{ t('footer.contact.fetlife') }}

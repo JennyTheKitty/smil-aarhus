@@ -6,7 +6,12 @@
       :metadata="heroImgMetadata"
       :brightness="35"
     >
-      <h1 class="title" w:font="bold" w:text="space-pre-line">
+      <h1
+        class="title"
+        w:w="full"
+        w:font=" tracking-widest leading-[1.1]"
+        w:text="space-pre-line shadow-lg"
+      >
         {{ t('hero.title') }}
       </h1>
       <span w:display="hidden md:block" w:text="base">{{
@@ -62,13 +67,13 @@
 <script setup lang="ts">
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
-import heroImgMetadata from '../assets/images/artem-labunsky-whsB1P4Kblc-unsplash.jpg?metadata=width;height';
+import heroImgMetadata from '../assets/images/_S003654.jpg?metadata=width;height';
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
-import heroImgJpeg from '../assets/images/artem-labunsky-whsB1P4Kblc-unsplash.jpg?w=300;900;1500;2000&format=jpeg&srcset';
+import heroImgJpeg from '../assets/images/_S003654.jpg?w=300;900;1500;2000&format=jpeg&srcset';
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
-import heroImgWebp from '../assets/images/artem-labunsky-whsB1P4Kblc-unsplash.jpg?w=300;900;1500;2000&format=webp&srcset';
+import heroImgWebp from '../assets/images/_S003654.jpg?w=300;900;1500;2000&format=webp&srcset';
 
 const { t } = useI18n();
 

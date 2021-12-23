@@ -27,7 +27,7 @@
           w:text="lg shadow-sm"
           w:pos="absolute top-0 left-0"
           w:w="full"
-          :w:p="event?.image ? 't-2 r-2' : 't-4 r-4'"
+          :w:p="event?.img ? 't-2 r-2' : 't-4 r-4'"
         >
           <button
             v-if="store.currentMember"
@@ -127,23 +127,24 @@
 </template>
 
 <script setup lang="ts">
-import { Event } from '@app/graphql/dist/client';
+import { CalendarEventBySlugQuery, Event } from '@app/graphql/dist/client';
 import { Dialog } from '@headlessui/vue';
 import dayjs from 'dayjs';
 
+import { Trans } from '../../i18n';
 import { useStore } from '../../store';
 import { Translated, useTranslation } from '../../utils';
 
 const props = defineProps<{
-  // TODO: Somehow extract inner CalendarGetEventBySlugQuery.eventTrBySlugAndLanguageCode.event
-  event: Translated<Event> | null;
+  event: Translated<
+    NonNullable<CalendarEventBySlugQuery['eventBySlug']>
+  > | null;
   eventEl: HTMLElement | null;
   open: boolean;
   container: HTMLElement | null;
 }>();
 defineEmits(['edit']);
 
-const i18nRoute = inject(key.i18nRoute)!;
 const router = useRouter();
 const dialog = ref<HTMLElement | null>(null);
 const closeButton = ref(null);
@@ -176,7 +177,7 @@ function getCoords(elem: HTMLElement) {
 }
 
 async function closeDialog() {
-  await router.push(i18nRoute('CALENDAR'));
+  await router.push(Trans.i18nRoute('CALENDAR'));
 }
 
 const popupStyles = computed(() => {

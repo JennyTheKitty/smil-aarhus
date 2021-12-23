@@ -54,6 +54,7 @@ declare module 'vue' {
     IconMdiMailRu: typeof import('~icons/mdi/mail-ru')['default']
     IconMdiMap: typeof import('~icons/mdi/map')['default']
     IconMdiMapMarker: typeof import('~icons/mdi/map-marker')['default']
+    IconMdiMessageImageOutline: typeof import('~icons/mdi/message-image-outline')['default']
     IconMdiPen: typeof import('~icons/mdi/pen')['default']
     IconMdiPencil: typeof import('~icons/mdi/pencil')['default']
     IconMdiTranslate: typeof import('~icons/mdi/translate')['default']

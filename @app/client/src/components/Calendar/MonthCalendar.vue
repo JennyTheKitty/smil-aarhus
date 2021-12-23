@@ -25,6 +25,7 @@ import '@fullcalendar/vue3';
 
 import {
   CalendarEventBySlugDocument,
+  CalendarEventBySlugQuery,
   CalendarEventsQueryDocument,
   Event,
   TrLanguage,
@@ -53,8 +54,10 @@ import { calculateExtendedOpeningEvents } from './extendedOpening';
 const eventDialogIsOpen = ref(false);
 // TODO: Somehow extract inner CalendarGetEventBySlugQuery.eventTrBySlugAndLanguageCode.event
 const selectedEvent = ref<{
-  event: Event | null;
-  translatedEvent: Translated<Event> | null;
+  event: NonNullable<CalendarEventBySlugQuery['eventBySlug']> | null;
+  translatedEvent: Translated<
+    NonNullable<CalendarEventBySlugQuery['eventBySlug']>
+  > | null;
   eventEl: HTMLElement | null;
   open: boolean;
 }>({ event: null, translatedEvent: null, eventEl: null, open: false });

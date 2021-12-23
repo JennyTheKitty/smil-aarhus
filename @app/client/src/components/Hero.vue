@@ -28,6 +28,21 @@
     >
       <slot></slot>
     </div>
+    <div
+      w:pos="bottom-2 right-2 absolute"
+      w:text="true-gray-500 space-pre"
+      w:flex="~"
+    >
+      <icon-mdi-message-image-outline w:text="lg" w:m="r-2" />
+      <span>Photography by </span>
+      <a
+        href="https://fetlife.com/users/4607313"
+        noopener
+        target="_blank"
+        w:text="underline"
+        >MagicLight</a
+      >
+    </div>
   </div>
 </template>
 
