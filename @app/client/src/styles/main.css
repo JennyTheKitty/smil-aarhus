@@ -31,6 +31,10 @@ body {
   p {
     @apply font-light leading-relaxed;
   }
+  br {
+    content: '';
+    @apply mt-2 block;
+  }
 }
 
 svg.icon-shadow {

@@ -97,7 +97,7 @@
           w:max-w="128"
         >
           <div w:bg="dark-800" w:w="full" w:p="4" w:border="rounded-xl">
-            <HomeEventWidget :events="events" />
+            <EventsWidget :events="events" />
             <i18n-link to="CALENDAR" w:text="base underline">{{
               t('home.goto-calendar')
             }}</i18n-link>

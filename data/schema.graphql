@@ -3114,6 +3114,28 @@ type Query {
     """The method to use when ordering `Event`."""
     orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventsConnection
+
+  """Reads and enables pagination through a set of `Event`."""
+  eventsByGroup(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Only read the first `n` values of the set."""
+    first: Int
+    groupId: BigInt!
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+  ): EventsConnection
   group(id: BigInt!): Group
   groupBySlug(preferredLanguageCode: String!, slug: String!): Group
   groupTr(groupId: BigInt!, languageCode: TrLanguage!): GroupTr

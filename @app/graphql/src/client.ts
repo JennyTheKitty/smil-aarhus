@@ -2462,6 +2462,8 @@ export type Query = {
   eventViaGroup: Maybe<EventViaGroup>;
   /** Reads and enables pagination through a set of `Event`. */
   events: Maybe<EventsConnection>;
+  /** Reads and enables pagination through a set of `Event`. */
+  eventsByGroup: Maybe<EventsConnection>;
   group: Maybe<Group>;
   groupBySlug: Maybe<Group>;
   groupTr: Maybe<GroupTr>;
@@ -2618,6 +2620,17 @@ export type QueryEventsArgs = {
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<EventsOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryEventsByGroupArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  first?: Maybe<Scalars['Int']>;
+  groupId: Scalars['BigInt'];
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
 };
 
 
@@ -3689,6 +3702,22 @@ export type UpsertGroupMutation = (
   )> }
 );
 
+export type GroupEventsQueryVariables = Exact<{
+  groupId: Scalars['BigInt'];
+}>;
+
+
+export type GroupEventsQuery = (
+  { __typename?: 'Query' }
+  & { eventsByGroup: Maybe<(
+    { __typename?: 'EventsConnection' }
+    & { nodes: Array<(
+      { __typename?: 'Event' }
+      & CalendarEventFragment
+    )> }
+  )> }
+);
+
 export type HomeEventsQueryQueryVariables = Exact<{
   startsAfter?: Maybe<Scalars['Datetime']>;
 }>;
@@ -4254,6 +4283,15 @@ export const UpsertGroupDocument = gql`
   }
 }
     ` as unknown as DocumentNode<UpsertGroupMutation, UpsertGroupMutationVariables>;
+export const GroupEventsDocument = gql`
+    query GroupEvents($groupId: BigInt!) {
+  eventsByGroup(groupId: $groupId) {
+    nodes {
+      ...CalendarEvent
+    }
+  }
+}
+    ${CalendarEventFragmentDoc}` as unknown as DocumentNode<GroupEventsQuery, GroupEventsQueryVariables>;
 export const HomeEventsQueryDocument = gql`
     query HomeEventsQuery($startsAfter: Datetime) {
   specialEvents: events(

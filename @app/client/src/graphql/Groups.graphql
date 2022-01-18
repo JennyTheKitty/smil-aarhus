@@ -57,3 +57,11 @@ mutation UpsertGroup(
     }
   }
 }
+
+query GroupEvents($groupId: BigInt!) {
+  eventsByGroup(groupId: $groupId) {
+    nodes {
+      ...CalendarEvent
+    }
+  }
+}

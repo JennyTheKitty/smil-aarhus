@@ -153,3 +153,23 @@ $$ LANGUAGE plpgsql;
 
 
 GRANT EXECUTE ON FUNCTION smil_aarhus.upsert_event TO smil_anonymous, smil_organizer, smil_admin;
+
+CREATE OR REPLACE FUNCTION smil_aarhus.events_by_group(group_id bigint)
+returns setof smil_aarhus.event
+as $$
+DECLARE
+   gid bigint;
+BEGIN
+    gid := group_id;
+    RETURN QUERY SELECT smil_aarhus.event.*
+    FROM
+        smil_aarhus.event_via_group
+        INNER JOIN smil_aarhus.event ON smil_aarhus.event.id = smil_aarhus.event_via_group.event_id
+    WHERE smil_aarhus.event.template_name is NULL AND smil_aarhus.event_via_group.group_id = gid
+    ORDER BY smil_aarhus.event.starts_at ASC
+    LIMIT 5;
+END
+$$ language plpgsql stable;
+
+
+GRANT EXECUTE ON FUNCTION smil_aarhus.upsert_event TO smil_anonymous, smil_organizer, smil_admin;
