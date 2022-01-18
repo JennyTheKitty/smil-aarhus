@@ -3,8 +3,8 @@ query HomeEventsQuery($startsAfter: Datetime) {
     filter: {
       special: { equalTo: true }
       startsAt: { greaterThan: $startsAfter }
+      templateName: { isNull: true }
     }
-    condition: { isTemplate: false }
     first: 1
     orderBy: STARTS_AT_ASC
   ) {
@@ -20,8 +20,10 @@ query HomeEventsQuery($startsAfter: Datetime) {
     }
   }
   events(
-    filter: { startsAt: { greaterThan: $startsAfter } }
-    condition: { isTemplate: false }
+    filter: {
+      startsAt: { greaterThan: $startsAfter }
+      templateName: { isNull: true }
+    }
     first: 10
     orderBy: STARTS_AT_ASC
   ) {

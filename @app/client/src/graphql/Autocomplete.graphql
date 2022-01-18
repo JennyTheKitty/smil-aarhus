@@ -27,6 +27,22 @@ query SearchEventTags($query: String!) {
   }
 }
 
+query SearchEventTemplates($query: String!) {
+  searchEventTemplates(query: $query) {
+    nodes {
+      id
+      templateName
+      translations {
+        nodes {
+          languageCode
+          title
+          eventId
+        }
+      }
+    }
+  }
+}
+
 query GroupById($id: BigInt!) {
   group(id: $id) {
     id

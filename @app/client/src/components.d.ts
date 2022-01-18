@@ -5,6 +5,9 @@
 declare module 'vue' {
   export interface GlobalComponents {
     BaseDialog: typeof import('./components/BaseDialog.vue')['default']
+    CalendarEventPopout: typeof import('./components/Calendar/CalendarEventPopout.vue')['default']
+    CalendarToolbar: typeof import('./components/Calendar/CalendarToolbar.vue')['default']
+    CalendarWidget: typeof import('./components/Calendar/CalendarWidget.vue')['default']
     Content: typeof import('./components/Content.vue')['default']
     ContentEditor: typeof import('./components/ContentEditor.vue')['default']
     CreateEventDialog: typeof import('./components/Calendar/CreateEventDialog.vue')['default']
@@ -16,6 +19,8 @@ declare module 'vue' {
     EditButton: typeof import('./components/EditButton.vue')['default']
     EditPageDialog: typeof import('./components/EditPageDialog.vue')['default']
     EventDialog: typeof import('./components/Calendar/EventDialog.vue')['default']
+    EventDialogTemplateSelect: typeof import('./components/Calendar/EventDialogTemplateSelect.vue')['default']
+    EventDialogTemplateSelectLabelRenderer: typeof import('./components/Calendar/EventDialogTemplateSelectLabelRenderer.vue')['default']
     ExpandTransition: typeof import('./components/ExpandTransition.vue')['default']
     FAQAnswer: typeof import('./components/FAQAnswer.vue')['default']
     FAQQuestion: typeof import('./components/FAQQuestion.vue')['default']
@@ -88,6 +93,8 @@ declare module 'vue' {
     PopoverGroup: typeof import('@headlessui/vue')['PopoverGroup']
     PopoverPanel: typeof import('@headlessui/vue')['PopoverPanel']
     SearchSelect: typeof import('./components/Form/SearchSelect.vue')['default']
+    SearchSelectLabelRendererTitle: typeof import('./components/Form/SearchSelectLabelRendererTitle.vue')['default']
+    SearchSelectTitleOptionRenderer: typeof import('./components/Form/SearchSelectTitleOptionRenderer.vue')['default']
     TransitionChild: typeof import('@headlessui/vue')['TransitionChild']
     TransitionRoot: typeof import('@headlessui/vue')['TransitionRoot']
     TranslatedInput: typeof import('./components/Form/TranslatedInput.vue')['default']

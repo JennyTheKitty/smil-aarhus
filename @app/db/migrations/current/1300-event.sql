@@ -8,7 +8,7 @@ CREATE TABLE smil_aarhus.event(
     ends_at TIMESTAMPTZ NOT NULL,
     special boolean NOT NULL,
     override_image bigint REFERENCES smil_aarhus.image(id),
-    is_template boolean NOT NULL DEFAULT FALSE
+    template_name text
 );
 
 COMMENT ON TABLE smil_aarhus.event IS E'@omit create,update,delete';
@@ -53,6 +53,35 @@ BEGIN
 END
 $$ LANGUAGE plpgsql STABLE;
 
+CREATE INDEX event_template_name_trgm_index on smil_aarhus.event using gin(template_name gin_trgm_ops);
+
+CREATE OR REPLACE FUNCTION smil_aarhus.search_event_templates(query text)
+returns setof smil_aarhus.event
+as $$
+BEGIN
+    IF (query = '') THEN
+        RETURN QUERY SELECT smil_aarhus.event.*
+        FROM
+            smil_aarhus.event
+        WHERE smil_aarhus.event.template_name is NOT NULL;
+    ELSE
+        RETURN QUERY SELECT
+            id, starts_at, ends_at, special, override_image, template_name
+        FROM
+            (SELECT DISTINCT
+                smil_aarhus.event.*,
+                similarity (smil_aarhus.event.template_name, query) AS X
+            FROM
+                smil_aarhus.event
+            WHERE
+                similarity (smil_aarhus.event.template_name, query) > 0.05
+            ) AS g
+        ORDER BY
+            X;
+    END IF;
+END
+$$ language plpgsql stable;
+
 CREATE OR REPLACE FUNCTION smil_aarhus.event_image(eid integer, override_image integer)
 RETURNS integer
 AS $$
@@ -89,7 +118,7 @@ CREATE TYPE smil_aarhus.event_data AS (
     ends_at TIMESTAMPTZ,
     special boolean,
     override_image bigint,
-    is_template boolean,
+    template_name text,
     tag_ids bigint[],
     group_ids bigint[]
 );
@@ -121,12 +150,12 @@ DECLARE
     lid bigint;
 BEGIN
     IF (event__id IS NULL) THEN
-        INSERT INTO smil_aarhus.event(starts_at, ends_at, special, override_image, is_template)
-            VALUES (data.starts_at, data.ends_at, data.special, data.override_image, data.is_template)
+        INSERT INTO smil_aarhus.event(starts_at, ends_at, special, override_image, template_name)
+            VALUES (data.starts_at, data.ends_at, data.special, data.override_image, data.template_name)
             RETURNING * INTO STRICT event;
     ELSE
         UPDATE smil_aarhus.event
-            SET starts_at = data.starts_at, ends_at = data.ends_at, special = data.special, override_image_file = data.override_image_file,is_template = data.is_template
+            SET starts_at = data.starts_at, ends_at = data.ends_at, special = data.special, override_image = data.override_image, template_name = data.template_name
             WHERE id = event__id
             RETURNING * INTO STRICT event;
     END IF;

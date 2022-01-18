@@ -55,12 +55,30 @@ CREATE INDEX group_tr_title_trgm_index on smil_aarhus.group_tr using gin(title g
 CREATE OR REPLACE FUNCTION smil_aarhus.search_groups(query text)
 returns setof smil_aarhus.group
 as $$
-SELECT DISTINCT smil_aarhus.group.*
-FROM
-  smil_aarhus.group_tr
-  inner join smil_aarhus.group ON smil_aarhus.group_tr.group_id = smil_aarhus.group.id
-WHERE similarity(smil_aarhus.group_tr.title, query) > 0.1 ;
-$$ language sql stable;
+BEGIN
+    IF (query = '') THEN
+        RETURN QUERY SELECT DISTINCT smil_aarhus.group.*
+        FROM
+        smil_aarhus.group_tr
+        inner join smil_aarhus.group ON smil_aarhus.group_tr.group_id = smil_aarhus.group.id;
+    ELSE
+        RETURN QUERY SELECT
+            id, image, is_open
+        FROM
+            (SELECT DISTINCT
+                smil_aarhus.GROUP.*,
+                similarity (smil_aarhus.group_tr.title, query) AS X
+            FROM
+                smil_aarhus.group_tr
+                INNER JOIN smil_aarhus.group ON smil_aarhus.group_tr.group_id = smil_aarhus.group.id
+            WHERE
+                similarity (smil_aarhus.group_tr.title, query) > 0.05
+            ) AS g
+        ORDER BY
+            X;
+    END IF;
+END
+$$ language plpgsql stable;
 
 create table smil_aarhus.event_via_group (
   event_id bigint constraint event_via_group_event_id_fkey references smil_aarhus.event (id),

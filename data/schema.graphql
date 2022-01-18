@@ -855,7 +855,6 @@ type Event {
   """Reads a single `Image` that is related to this `Event`."""
   imageByOverrideImage: Image
   img: ResponsiveImage
-  isTemplate: Boolean!
   overrideImage: BigInt
   special: Boolean!
   startsAt: Datetime!
@@ -893,6 +892,7 @@ type Event {
     """The method to use when ordering `EventViaEventTag`."""
     orderBy: [EventViaEventTagsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventViaEventTagsConnection!
+  templateName: String
 
   """Reads and enables pagination through a set of `EventTr`."""
   translations(
@@ -939,9 +939,6 @@ input EventCondition {
   """Checks for equality with the object’s `id` field."""
   id: BigInt
 
-  """Checks for equality with the object’s `isTemplate` field."""
-  isTemplate: Boolean
-
   """Checks for equality with the object’s `overrideImage` field."""
   overrideImage: BigInt
 
@@ -950,17 +947,20 @@ input EventCondition {
 
   """Checks for equality with the object’s `startsAt` field."""
   startsAt: Datetime
+
+  """Checks for equality with the object’s `templateName` field."""
+  templateName: String
 }
 
 """An input for mutations affecting `EventDatum`"""
 input EventDatumInput {
   endsAt: Datetime!
   groupIds: [BigInt]
-  isTemplate: Boolean
   overrideImage: BigInt
   special: Boolean!
   startsAt: Datetime!
   tagIds: [BigInt]
+  templateName: String
 }
 
 """
@@ -973,9 +973,6 @@ input EventFilter {
   """Filter by the object’s `id` field."""
   id: BigIntFilter
 
-  """Filter by the object’s `isTemplate` field."""
-  isTemplate: BooleanFilter
-
   """Filter by the object’s `overrideImage` field."""
   overrideImage: BigIntFilter
 
@@ -984,6 +981,9 @@ input EventFilter {
 
   """Filter by the object’s `startsAt` field."""
   startsAt: DatetimeFilter
+
+  """Filter by the object’s `templateName` field."""
+  templateName: StringFilter
 }
 
 type EventTag {
@@ -1502,8 +1502,6 @@ enum EventsOrderBy {
   ENDS_AT_DESC
   ID_ASC
   ID_DESC
-  IS_TEMPLATE_ASC
-  IS_TEMPLATE_DESC
   NATURAL
   OVERRIDE_IMAGE_ASC
   OVERRIDE_IMAGE_DESC
@@ -1513,6 +1511,8 @@ enum EventsOrderBy {
   SPECIAL_DESC
   STARTS_AT_ASC
   STARTS_AT_DESC
+  TEMPLATE_NAME_ASC
+  TEMPLATE_NAME_DESC
 }
 
 type Group {
@@ -3481,6 +3481,28 @@ type Query {
     offset: Int
     query: String!
   ): EventTagsConnection
+
+  """Reads and enables pagination through a set of `Event`."""
+  searchEventTemplates(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+    query: String!
+  ): EventsConnection
 
   """Reads and enables pagination through a set of `Group`."""
   searchGroups(

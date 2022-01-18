@@ -1,6 +1,9 @@
 query CalendarEventsQuery($startsAfter: Datetime, $startsBefore: Datetime) {
   events(
-    filter: { startsAt: { greaterThan: $startsAfter, lessThan: $startsBefore } }
+    filter: {
+      startsAt: { greaterThan: $startsAfter, lessThan: $startsBefore }
+      templateName: { isNull: true }
+    }
     orderBy: STARTS_AT_ASC
   ) {
     nodes {
@@ -23,59 +26,69 @@ fragment CalendarEvent on Event {
   startsAt
 }
 
+fragment DetailedEvent on Event {
+  translations {
+    nodes {
+      description
+      eventId
+      languageCode
+      slug
+      title
+    }
+  }
+  startsAt
+  img {
+    src
+    srcSetJpeg
+    srcSetWebp
+    height
+    width
+  }
+  endsAt
+  id
+  tags {
+    nodes {
+      tag {
+        id
+        translations {
+          nodes {
+            languageCode
+            tagId
+            title
+          }
+        }
+      }
+      eventId
+      tagId
+    }
+  }
+  groups {
+    nodes {
+      group {
+        id
+        translations {
+          nodes {
+            groupId
+            languageCode
+            title
+          }
+        }
+      }
+      eventId
+      groupId
+    }
+  }
+}
+
 query CalendarEventBySlug($languageCode: String!, $slug: String!) {
   eventBySlug(preferredLanguageCode: $languageCode, slug: $slug) {
-    translations {
-      nodes {
-        description
-        eventId
-        languageCode
-        slug
-        title
-      }
-    }
-    startsAt
-    img {
-      src
-      srcSetJpeg
-      srcSetWebp
-      height
-      width
-    }
-    endsAt
-    id
-    tags {
-      nodes {
-        tag {
-          id
-          translations {
-            nodes {
-              languageCode
-              tagId
-              title
-            }
-          }
-        }
-        eventId
-        tagId
-      }
-    }
-    groups {
-      nodes {
-        group {
-          id
-          translations {
-            nodes {
-              groupId
-              languageCode
-              title
-            }
-          }
-        }
-        eventId
-        groupId
-      }
-    }
+    ...DetailedEvent
+  }
+}
+
+query CalendarEventById($id: BigInt!) {
+  event(id: $id) {
+    ...DetailedEvent
   }
 }
 

@@ -18,6 +18,7 @@
         w:text="white"
         w:pos="absolute"
         w:shadow="lg"
+        w:border="2 pink-800"
         w:z="5"
         :style="popupStyles"
       >
@@ -136,14 +137,14 @@ import { useStore } from '../../store';
 import { Translated, useTranslation } from '../../utils';
 
 const props = defineProps<{
-  event: Translated<
-    NonNullable<CalendarEventBySlugQuery['eventBySlug']>
-  > | null;
+  event: NonNullable<CalendarEventBySlugQuery['eventBySlug']> | null;
   eventEl: HTMLElement | null;
   open: boolean;
   container: HTMLElement | null;
 }>();
 defineEmits(['edit']);
+
+const event = computed(() => useTranslation(props.event, locale));
 
 const router = useRouter();
 const dialog = ref<HTMLElement | null>(null);
@@ -191,7 +192,7 @@ const popupStyles = computed(() => {
   if (!el) return;
   const width = 400;
   const height = dialogEl.offsetHeight;
-  const xPadding = 32;
+  const xPadding = 16;
   const elCoords = getCoords(el);
   const containerCoords = getCoords(props.container!);
 
@@ -205,6 +206,9 @@ const popupStyles = computed(() => {
   if (top > elCoords.top) top = elCoords.top;
   if (top + height < elCoords.top + elCoords.height)
     top = elCoords.top + elCoords.height - height - 20;
+  if (top + height > window.innerHeight + window.pageYOffset) {
+    top = window.innerHeight + window.pageYOffset - height;
+  }
   return {
     top: `${top}px`,
     left: `${left}px`,

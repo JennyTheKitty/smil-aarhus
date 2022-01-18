@@ -28,12 +28,31 @@ CREATE INDEX event_tag_tr_title_trgm_index on smil_aarhus.event_tag_tr using gin
 CREATE OR REPLACE FUNCTION smil_aarhus.search_event_tags(query text)
 returns setof smil_aarhus.event_tag
 as $$
-SELECT DISTINCT smil_aarhus.event_tag.*
-FROM
-  smil_aarhus.event_tag_tr
-  inner join smil_aarhus.event_tag ON smil_aarhus.event_tag_tr.tag_id = smil_aarhus.event_tag.id
-WHERE similarity(smil_aarhus.event_tag_tr.title, query) > 0.1 ;
-$$ language sql stable;
+BEGIN
+    IF (query = '') THEN
+        RETURN QUERY SELECT DISTINCT smil_aarhus.event_tag.*
+        FROM
+        smil_aarhus.event_tag_tr
+        inner join smil_aarhus.event_tag ON smil_aarhus.event_tag_tr.tag_id = smil_aarhus.event_tag.id;
+    ELSE
+        RETURN QUERY SELECT
+            id, image
+        FROM
+            (SELECT DISTINCT
+                smil_aarhus.event_tag.*,
+                similarity (smil_aarhus.event_tag_tr.title, query) AS X
+            FROM
+                smil_aarhus.event_tag_tr
+                INNER JOIN smil_aarhus.event_tag ON smil_aarhus.event_tag_tr.tag_id = smil_aarhus.event_tag.id
+            WHERE
+                similarity (smil_aarhus.event_tag_tr.title, query) > 0.05
+            ) AS g
+        ORDER BY
+            X;
+    END IF;
+END
+$$ language plpgsql stable;
+
 
 create table smil_aarhus.event_via_event_tag (
   event_id bigint constraint event_via_event_tag_event_id_fkey references smil_aarhus.event (id),

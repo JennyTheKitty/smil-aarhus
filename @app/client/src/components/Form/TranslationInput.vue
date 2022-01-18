@@ -22,7 +22,7 @@
       }"
     >
       <template #tab>
-        {{ LANGAUGE_OPTIONS.find((o) => o.value == tabLanguages[tab])?.label }}
+        {{ LANGUAGE_OPTIONS.find((o) => o.value == tabLanguages[tab])?.label }}
       </template>
       <n-form-item
         label="Language"
@@ -35,7 +35,7 @@
           :rule="languageRule"
           :options="[
             ...filteredLanguageOptions,
-            LANGAUGE_OPTIONS.find((o) => tabLanguages[tab] === o.value)!,
+            LANGUAGE_OPTIONS.find((o) => tabLanguages[tab] === o.value)!,
           ]"
           :to="to"
         />
@@ -66,7 +66,7 @@ const props = defineProps({
 });
 const emit = defineEmits(['update:value']);
 
-const LANGAUGE_OPTIONS = [
+const LANGUAGE_OPTIONS = [
   { label: 'Dansk', value: 'DA' as TrLanguage },
   { label: 'English', value: 'EN' as TrLanguage },
 ];
@@ -74,12 +74,12 @@ const LANGAUGE_OPTIONS = [
 const currentTab = ref(0);
 const tabs = ref<number[]>([]);
 const tabLanguages = ref<{
-  [tab: number]: typeof LANGAUGE_OPTIONS[number]['value'];
+  [tab: number]: typeof LANGUAGE_OPTIONS[number]['value'];
 }>({});
 const tabHasErrors = ref<{
   [tab: number]: boolean;
 }>({});
-const addable = computed(() => tabs.value.length < LANGAUGE_OPTIONS.length);
+const addable = computed(() => tabs.value.length < LANGUAGE_OPTIONS.length);
 const closable = computed(() => tabs.value.length > 1);
 
 const languageRule = {
@@ -89,7 +89,7 @@ const languageRule = {
 };
 
 const filteredLanguageOptions = computed(() => {
-  return LANGAUGE_OPTIONS.filter(
+  return LANGUAGE_OPTIONS.filter(
     (lang) => Object.values(tabLanguages.value).indexOf(lang.value) === -1
   );
 });
@@ -107,7 +107,7 @@ function addTab(lang: null | TrLanguage = null) {
         : langs[0].value;
     emit('update:value', [
       ...props.value,
-      { langaugeCode: lang, ...props.onCreate() },
+      { ...props.onCreate(), languageCode: lang },
     ]);
   }
   tabLanguages.value[newValue] = lang;
@@ -133,14 +133,26 @@ function closeTab(tab: number) {
   }
 }
 
-if (props.value) {
-  props.value.forEach((value, index) => {
-    addTab(value.languageCode);
-  });
-  currentTab.value = 0;
-} else {
+if (!props.value || props.value.length == 0) {
   addTab();
 }
+
+watch(
+  () => props.value,
+  () => {
+    if (props.value && props.value.length > 0) {
+      props.value.forEach((value, index) => {
+        nextTick(() => {
+          if (!Object.values(tabLanguages.value).includes(value.languageCode)) {
+            addTab(value.languageCode);
+          }
+        });
+      });
+      currentTab.value = 0;
+    }
+  },
+  { immediate: true }
+);
 
 const { formItems } = inject<{ formItems: Record<string, FormItemInst[]> }>(
   formItemInstsInjectionKey

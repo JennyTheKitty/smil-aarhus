@@ -2,6 +2,8 @@ import 'dayjs/locale/da';
 
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+import weekOfYear from 'dayjs/plugin/weekOfYear';
+import weekYear from 'dayjs/plugin/weekYear';
 import { createI18n } from 'petite-vue-i18n';
 import { ComputedRef } from 'vue';
 import { RouteLocationRaw, RouteParamsRaw } from 'vue-router';
@@ -10,6 +12,9 @@ import da from './lang/da.json';
 import { Route } from './routes';
 
 dayjs.extend(LocalizedFormat);
+
+dayjs.extend(weekOfYear);
+dayjs.extend(weekYear);
 
 export const SUPPORTED_LANGUAGES = ['da', 'en'] as const;
 const DEFAULT_LANGUAGE = 'da';

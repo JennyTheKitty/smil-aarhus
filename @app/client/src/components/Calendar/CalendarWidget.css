@@ -1,0 +1,154 @@
+.calendar {
+  /* Fix colors */
+  --fc-border-color: #8883;
+  --fc-neutral-bg-color: #0000;
+  --fc-page-bg-color: #0000;
+
+  /* Increate min height */
+  :global(.fc-daygrid-day) {
+    height: 8rem;
+  }
+  :global(.fc-timegrid-slot) {
+    height: 2em;
+  }
+
+  /* Remove borders */
+  :global(.fc-scrollgrid),
+  :global(.fc-timegrid-axis),
+  :global(.fc-scrollgrid-section > td),
+  :global(.fc-timegrid-slot-label) {
+    border: none;
+  }
+  :global(th) {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+
+  /* Break event titles */
+  :global(.fc-event-title) {
+    white-space: normal !important;
+  }
+  :global(.fc-event) {
+    align-items: first baseline;
+  }
+
+  /* Remove ugly today styling */
+  :global(.fc-daygrid-day.fc-day-today),
+  :global(.fc-timegrid-col.fc-day-today) {
+    background-color: unset !important;
+  }
+
+  /* Fix title pushing down time */
+  :global(.fc-event-title-container) {
+    flex-grow: 0;
+  }
+
+  /* Bold title */
+  :global(.fc-event-title) {
+    font-weight: 600;
+  }
+
+  /* ------- Toolbar ------- */
+  :global(.fc-header-toolbar) {
+    @apply flex flex-wrap mx-auto w-full max-w-6xl;
+  }
+  :global(.fc-toolbar-chunk) {
+    @apply flex flex-grow flex-wrap my-2 items-center justify-center sm:my-0;
+  }
+  :global(.fc-toolbar-chunk:nth-child(1)) {
+    @apply sm:justify-start;
+  }
+  :global(.fc-toolbar-chunk:nth-child(2)) {
+    @apply sm:justify-center;
+  }
+  :global(.fc-toolbar-chunk:nth-child(3)) {
+    @apply sm:justify-end;
+  }
+  :global(.fc-button:focus) {
+    outline: none !important;
+  }
+  :global(.fc-button) {
+    background: none;
+    box-shadow: none !important;
+    @apply border-transparent border-1 text-xs transition ease-in duration-200 active:(bg-transparent);
+  }
+  :global(.fc-today-button) {
+    @apply border-white uppercase !mr-4;
+  }
+  :global(.fc-button-group .fc-button) {
+    @apply border-gray-500 text-sm;
+  }
+  :global(.fc-button-active) {
+    @apply !bg-gray-200 !text-black;
+  }
+  :global(.fc-button:not([disabled]:not(.fc-today-button))) {
+    @apply hover:(border-gray-200) focus-visible:(border-gray-200);
+  }
+  :global(.fc-today-button:not([disabled])) {
+    @apply hover:(bg-gray-200 text-black) focus-visible:(bg-gray-200 text-black) ;
+  }
+  :global(.fc-next-button) {
+    @apply ml-2;
+  }
+  :global(.fc-toolbar-title) {
+    @apply !ml-4;
+  }
+
+  /* ------- Month view ------- */
+  /* Day number text */
+  :global(.fc-daygrid-day-top) {
+    @apply text-sm text-gray-500 justify-center;
+  }
+  :global(.fc-daygrid-day-top .fc-daygrid-day-number) {
+    @apply rounded-full flex h-24px text-white w-24px justify-center items-center;
+  }
+  :global(.fc-day-today .fc-daygrid-day-top .fc-daygrid-day-number) {
+    @apply bg-pink-900;
+  }
+
+  /* Extended opening styling */
+  :global(.fc-daygrid .extended-opening) {
+    display: none;
+  }
+
+  /* ------- Week view ------- */
+  /* Color and offset slot labels */
+  :global(.fc-timegrid-slot-label) {
+    @apply text-gray-500;
+    transform: translateY(-1em);
+  }
+
+  /* Make top slot visible after offset */
+  :global(.fc-scroller-harness) {
+    overflow: visible;
+  }
+
+  /* Make column headers big */
+  :global(.fc-col-header-cell) {
+    @apply text-gray-500 uppercase;
+  }
+
+  /* Make today column header pink */
+  :global(.fc-col-header-cell.fc-day.fc-day-today) {
+    @apply flex text-pink-500 justify-center items-center;
+  }
+
+  /* Increase padding */
+  :global(.fc-timegrid-event) {
+    @apply p-1;
+  }
+
+  /* Extended opening styling */
+  :global(.fc-timegrid .extended-opening) {
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: none;
+    border: rgba(236, 72, 153, 0.4) 1px solid;
+  }
+  :global(.fc-timegrid .extended-opening .fc-event-main) {
+    @apply text-gray-500;
+  }
+  :global(.fc-timegrid .extended-opening .fc-event-title) {
+    @apply font-normal;
+  }
+}

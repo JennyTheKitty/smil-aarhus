@@ -276,6 +276,16 @@ VALUES(6, 2);
 INSERT INTO smil_aarhus.event_via_group
 VALUES(6, 5);
 
+
+INSERT INTO smil_aarhus.event
+VALUES (7,  date_trunc('day', now()) + (INTERVAL '1' day) + (INTERVAL '19' hour), date_trunc('day', now()) + (INTERVAL '2' day) + (INTERVAL '2' hour), FALSE, NULL, 'medlemsaften');
+
+INSERT INTO smil_aarhus.event_tr
+VALUES (7, 'EN', 'Members Night', 'Ordinary members night.', NULL);
+
+INSERT INTO smil_aarhus.event_tr
+VALUES (7, 'DA', 'Medlemsaften', 'Normal medlemsaften.', NULL);
+
 INSERT INTO smil_aarhus.member
 VALUES ('132277f6-f147-4c02-b31e-ae5f1fcbc2b6', 'test admin', 'adm', 'smil_admin', TRUE);
 

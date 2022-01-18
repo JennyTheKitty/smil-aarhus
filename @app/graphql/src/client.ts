@@ -766,12 +766,12 @@ export type Event = {
   /** Reads a single `Image` that is related to this `Event`. */
   imageByOverrideImage: Maybe<Image>;
   img: Maybe<ResponsiveImage>;
-  isTemplate: Scalars['Boolean'];
   overrideImage: Maybe<Scalars['BigInt']>;
   special: Scalars['Boolean'];
   startsAt: Scalars['Datetime'];
   /** Reads and enables pagination through a set of `EventViaEventTag`. */
   tags: EventViaEventTagsConnection;
+  templateName: Maybe<Scalars['String']>;
   /** Reads and enables pagination through a set of `EventTr`. */
   translations: EventTrsConnection;
 };
@@ -818,25 +818,25 @@ export type EventCondition = {
   endsAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['BigInt']>;
-  /** Checks for equality with the object’s `isTemplate` field. */
-  isTemplate?: Maybe<Scalars['Boolean']>;
   /** Checks for equality with the object’s `overrideImage` field. */
   overrideImage?: Maybe<Scalars['BigInt']>;
   /** Checks for equality with the object’s `special` field. */
   special?: Maybe<Scalars['Boolean']>;
   /** Checks for equality with the object’s `startsAt` field. */
   startsAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `templateName` field. */
+  templateName?: Maybe<Scalars['String']>;
 };
 
 /** An input for mutations affecting `EventDatum` */
 export type EventDatumInput = {
   endsAt: Scalars['Datetime'];
   groupIds?: Maybe<Array<Maybe<Scalars['BigInt']>>>;
-  isTemplate?: Maybe<Scalars['Boolean']>;
   overrideImage?: Maybe<Scalars['BigInt']>;
   special: Scalars['Boolean'];
   startsAt: Scalars['Datetime'];
   tagIds?: Maybe<Array<Maybe<Scalars['BigInt']>>>;
+  templateName?: Maybe<Scalars['String']>;
 };
 
 /** A filter to be used against `Event` object types. All fields are combined with a logical ‘and.’ */
@@ -845,14 +845,14 @@ export type EventFilter = {
   endsAt?: Maybe<DatetimeFilter>;
   /** Filter by the object’s `id` field. */
   id?: Maybe<BigIntFilter>;
-  /** Filter by the object’s `isTemplate` field. */
-  isTemplate?: Maybe<BooleanFilter>;
   /** Filter by the object’s `overrideImage` field. */
   overrideImage?: Maybe<BigIntFilter>;
   /** Filter by the object’s `special` field. */
   special?: Maybe<BooleanFilter>;
   /** Filter by the object’s `startsAt` field. */
   startsAt?: Maybe<DatetimeFilter>;
+  /** Filter by the object’s `templateName` field. */
+  templateName?: Maybe<StringFilter>;
 };
 
 export type EventTag = {
@@ -1272,8 +1272,6 @@ export enum EventsOrderBy {
   EndsAtDesc = 'ENDS_AT_DESC',
   IdAsc = 'ID_ASC',
   IdDesc = 'ID_DESC',
-  IsTemplateAsc = 'IS_TEMPLATE_ASC',
-  IsTemplateDesc = 'IS_TEMPLATE_DESC',
   Natural = 'NATURAL',
   OverrideImageAsc = 'OVERRIDE_IMAGE_ASC',
   OverrideImageDesc = 'OVERRIDE_IMAGE_DESC',
@@ -1282,7 +1280,9 @@ export enum EventsOrderBy {
   SpecialAsc = 'SPECIAL_ASC',
   SpecialDesc = 'SPECIAL_DESC',
   StartsAtAsc = 'STARTS_AT_ASC',
-  StartsAtDesc = 'STARTS_AT_DESC'
+  StartsAtDesc = 'STARTS_AT_DESC',
+  TemplateNameAsc = 'TEMPLATE_NAME_ASC',
+  TemplateNameDesc = 'TEMPLATE_NAME_DESC'
 }
 
 export type Group = {
@@ -2501,6 +2501,8 @@ export type Query = {
   randomPictures: Maybe<PicturesConnection>;
   /** Reads and enables pagination through a set of `EventTag`. */
   searchEventTags: Maybe<EventTagsConnection>;
+  /** Reads and enables pagination through a set of `Event`. */
+  searchEventTemplates: Maybe<EventsConnection>;
   /** Reads and enables pagination through a set of `Group`. */
   searchGroups: Maybe<GroupsConnection>;
 };
@@ -2825,6 +2827,17 @@ export type QueryRandomPicturesArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QuerySearchEventTagsArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  query: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QuerySearchEventTemplatesArgs = {
   after?: Maybe<Scalars['Cursor']>;
   before?: Maybe<Scalars['Cursor']>;
   first?: Maybe<Scalars['Int']>;
@@ -3424,6 +3437,29 @@ export type SearchEventTagsQuery = (
   )> }
 );
 
+export type SearchEventTemplatesQueryVariables = Exact<{
+  query: Scalars['String'];
+}>;
+
+
+export type SearchEventTemplatesQuery = (
+  { __typename?: 'Query' }
+  & { searchEventTemplates: Maybe<(
+    { __typename?: 'EventsConnection' }
+    & { nodes: Array<(
+      { __typename?: 'Event' }
+      & Pick<Event, 'id' | 'templateName'>
+      & { translations: (
+        { __typename?: 'EventTrsConnection' }
+        & { nodes: Array<(
+          { __typename?: 'EventTr' }
+          & Pick<EventTr, 'languageCode' | 'title' | 'eventId'>
+        )> }
+      ) }
+    )> }
+  )> }
+);
+
 export type GroupByIdQueryVariables = Exact<{
   id: Scalars['BigInt'];
 }>;
@@ -3493,6 +3529,55 @@ export type CalendarEventFragment = (
   ) }
 );
 
+export type DetailedEventFragment = (
+  { __typename?: 'Event' }
+  & Pick<Event, 'startsAt' | 'endsAt' | 'id'>
+  & { translations: (
+    { __typename?: 'EventTrsConnection' }
+    & { nodes: Array<(
+      { __typename?: 'EventTr' }
+      & Pick<EventTr, 'description' | 'eventId' | 'languageCode' | 'slug' | 'title'>
+    )> }
+  ), img: Maybe<(
+    { __typename?: 'ResponsiveImage' }
+    & Pick<ResponsiveImage, 'src' | 'srcSetJpeg' | 'srcSetWebp' | 'height' | 'width'>
+  )>, tags: (
+    { __typename?: 'EventViaEventTagsConnection' }
+    & { nodes: Array<(
+      { __typename?: 'EventViaEventTag' }
+      & Pick<EventViaEventTag, 'eventId' | 'tagId'>
+      & { tag: Maybe<(
+        { __typename?: 'EventTag' }
+        & Pick<EventTag, 'id'>
+        & { translations: (
+          { __typename?: 'EventTagTrsConnection' }
+          & { nodes: Array<(
+            { __typename?: 'EventTagTr' }
+            & Pick<EventTagTr, 'languageCode' | 'tagId' | 'title'>
+          )> }
+        ) }
+      )> }
+    )> }
+  ), groups: (
+    { __typename?: 'EventViaGroupsConnection' }
+    & { nodes: Array<(
+      { __typename?: 'EventViaGroup' }
+      & Pick<EventViaGroup, 'eventId' | 'groupId'>
+      & { group: Maybe<(
+        { __typename?: 'Group' }
+        & Pick<Group, 'id'>
+        & { translations: (
+          { __typename?: 'GroupTrsConnection' }
+          & { nodes: Array<(
+            { __typename?: 'GroupTr' }
+            & Pick<GroupTr, 'groupId' | 'languageCode' | 'title'>
+          )> }
+        ) }
+      )> }
+    )> }
+  ) }
+);
+
 export type CalendarEventBySlugQueryVariables = Exact<{
   languageCode: Scalars['String'];
   slug: Scalars['String'];
@@ -3503,51 +3588,20 @@ export type CalendarEventBySlugQuery = (
   { __typename?: 'Query' }
   & { eventBySlug: Maybe<(
     { __typename?: 'Event' }
-    & Pick<Event, 'startsAt' | 'endsAt' | 'id'>
-    & { translations: (
-      { __typename?: 'EventTrsConnection' }
-      & { nodes: Array<(
-        { __typename?: 'EventTr' }
-        & Pick<EventTr, 'description' | 'eventId' | 'languageCode' | 'slug' | 'title'>
-      )> }
-    ), img: Maybe<(
-      { __typename?: 'ResponsiveImage' }
-      & Pick<ResponsiveImage, 'src' | 'srcSetJpeg' | 'srcSetWebp' | 'height' | 'width'>
-    )>, tags: (
-      { __typename?: 'EventViaEventTagsConnection' }
-      & { nodes: Array<(
-        { __typename?: 'EventViaEventTag' }
-        & Pick<EventViaEventTag, 'eventId' | 'tagId'>
-        & { tag: Maybe<(
-          { __typename?: 'EventTag' }
-          & Pick<EventTag, 'id'>
-          & { translations: (
-            { __typename?: 'EventTagTrsConnection' }
-            & { nodes: Array<(
-              { __typename?: 'EventTagTr' }
-              & Pick<EventTagTr, 'languageCode' | 'tagId' | 'title'>
-            )> }
-          ) }
-        )> }
-      )> }
-    ), groups: (
-      { __typename?: 'EventViaGroupsConnection' }
-      & { nodes: Array<(
-        { __typename?: 'EventViaGroup' }
-        & Pick<EventViaGroup, 'eventId' | 'groupId'>
-        & { group: Maybe<(
-          { __typename?: 'Group' }
-          & Pick<Group, 'id'>
-          & { translations: (
-            { __typename?: 'GroupTrsConnection' }
-            & { nodes: Array<(
-              { __typename?: 'GroupTr' }
-              & Pick<GroupTr, 'groupId' | 'languageCode' | 'title'>
-            )> }
-          ) }
-        )> }
-      )> }
-    ) }
+    & DetailedEventFragment
+  )> }
+);
+
+export type CalendarEventByIdQueryVariables = Exact<{
+  id: Scalars['BigInt'];
+}>;
+
+
+export type CalendarEventByIdQuery = (
+  { __typename?: 'Query' }
+  & { event: Maybe<(
+    { __typename?: 'Event' }
+    & DetailedEventFragment
   )> }
 );
 
@@ -3926,6 +3980,61 @@ export const CalendarEventFragmentDoc = gql`
   startsAt
 }
     ` as unknown as DocumentNode<CalendarEventFragment, unknown>;
+export const DetailedEventFragmentDoc = gql`
+    fragment DetailedEvent on Event {
+  translations {
+    nodes {
+      description
+      eventId
+      languageCode
+      slug
+      title
+    }
+  }
+  startsAt
+  img {
+    src
+    srcSetJpeg
+    srcSetWebp
+    height
+    width
+  }
+  endsAt
+  id
+  tags {
+    nodes {
+      tag {
+        id
+        translations {
+          nodes {
+            languageCode
+            tagId
+            title
+          }
+        }
+      }
+      eventId
+      tagId
+    }
+  }
+  groups {
+    nodes {
+      group {
+        id
+        translations {
+          nodes {
+            groupId
+            languageCode
+            title
+          }
+        }
+      }
+      eventId
+      groupId
+    }
+  }
+}
+    ` as unknown as DocumentNode<DetailedEventFragment, unknown>;
 export const HomeEventFragmentDoc = gql`
     fragment HomeEvent on Event {
   translations {
@@ -4001,6 +4110,23 @@ export const SearchEventTagsDocument = gql`
   }
 }
     ` as unknown as DocumentNode<SearchEventTagsQuery, SearchEventTagsQueryVariables>;
+export const SearchEventTemplatesDocument = gql`
+    query SearchEventTemplates($query: String!) {
+  searchEventTemplates(query: $query) {
+    nodes {
+      id
+      templateName
+      translations {
+        nodes {
+          languageCode
+          title
+          eventId
+        }
+      }
+    }
+  }
+}
+    ` as unknown as DocumentNode<SearchEventTemplatesQuery, SearchEventTemplatesQueryVariables>;
 export const GroupByIdDocument = gql`
     query GroupById($id: BigInt!) {
   group(id: $id) {
@@ -4032,7 +4158,7 @@ export const EventTagByIdDocument = gql`
 export const CalendarEventsQueryDocument = gql`
     query CalendarEventsQuery($startsAfter: Datetime, $startsBefore: Datetime) {
   events(
-    filter: {startsAt: {greaterThan: $startsAfter, lessThan: $startsBefore}}
+    filter: {startsAt: {greaterThan: $startsAfter, lessThan: $startsBefore}, templateName: {isNull: true}}
     orderBy: STARTS_AT_ASC
   ) {
     nodes {
@@ -4044,60 +4170,17 @@ export const CalendarEventsQueryDocument = gql`
 export const CalendarEventBySlugDocument = gql`
     query CalendarEventBySlug($languageCode: String!, $slug: String!) {
   eventBySlug(preferredLanguageCode: $languageCode, slug: $slug) {
-    translations {
-      nodes {
-        description
-        eventId
-        languageCode
-        slug
-        title
-      }
-    }
-    startsAt
-    img {
-      src
-      srcSetJpeg
-      srcSetWebp
-      height
-      width
-    }
-    endsAt
-    id
-    tags {
-      nodes {
-        tag {
-          id
-          translations {
-            nodes {
-              languageCode
-              tagId
-              title
-            }
-          }
-        }
-        eventId
-        tagId
-      }
-    }
-    groups {
-      nodes {
-        group {
-          id
-          translations {
-            nodes {
-              groupId
-              languageCode
-              title
-            }
-          }
-        }
-        eventId
-        groupId
-      }
-    }
+    ...DetailedEvent
   }
 }
-    ` as unknown as DocumentNode<CalendarEventBySlugQuery, CalendarEventBySlugQueryVariables>;
+    ${DetailedEventFragmentDoc}` as unknown as DocumentNode<CalendarEventBySlugQuery, CalendarEventBySlugQueryVariables>;
+export const CalendarEventByIdDocument = gql`
+    query CalendarEventById($id: BigInt!) {
+  event(id: $id) {
+    ...DetailedEvent
+  }
+}
+    ${DetailedEventFragmentDoc}` as unknown as DocumentNode<CalendarEventByIdQuery, CalendarEventByIdQueryVariables>;
 export const UpsertEventDocument = gql`
     mutation UpsertEvent($data: EventDatumInput!, $translations: [EventTrDatumInput]!, $id: BigInt) {
   upsertEvent(input: {data: $data, translations: $translations, eventId: $id}) {
@@ -4174,8 +4257,7 @@ export const UpsertGroupDocument = gql`
 export const HomeEventsQueryDocument = gql`
     query HomeEventsQuery($startsAfter: Datetime) {
   specialEvents: events(
-    filter: {special: {equalTo: true}, startsAt: {greaterThan: $startsAfter}}
-    condition: {isTemplate: false}
+    filter: {special: {equalTo: true}, startsAt: {greaterThan: $startsAfter}, templateName: {isNull: true}}
     first: 1
     orderBy: STARTS_AT_ASC
   ) {
@@ -4191,8 +4273,7 @@ export const HomeEventsQueryDocument = gql`
     }
   }
   events(
-    filter: {startsAt: {greaterThan: $startsAfter}}
-    condition: {isTemplate: false}
+    filter: {startsAt: {greaterThan: $startsAfter}, templateName: {isNull: true}}
     first: 10
     orderBy: STARTS_AT_ASC
   ) {
