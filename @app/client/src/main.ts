@@ -8,6 +8,7 @@ import 'virtual:windi-utilities.css';
 import '@vue/runtime-dom';
 import 'nprogress/nprogress.css';
 
+import Iconify from '@iconify/iconify';
 import { fetchExchange, ssrExchange } from '@urql/core';
 import urql from '@urql/vue';
 import { createHead } from '@vueuse/head';
@@ -33,6 +34,8 @@ if (!import.meta.env.SSR && import.meta.env.DEV) {
   // @ts-ignore
   (async () => import('virtual:windi-devtools'))();
 }
+
+Iconify.pauseObserver();
 
 export default viteSSR(
   App,
@@ -89,6 +92,8 @@ export default viteSSR(
       (router as Router).afterEach(() => {
         isLoading.value = false;
       });
+
+      Iconify.resumeObserver();
     }
 
     const lastExchange = isServerSide

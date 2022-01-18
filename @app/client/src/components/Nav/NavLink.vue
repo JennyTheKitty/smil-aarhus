@@ -12,12 +12,13 @@
         w:p="2"
         class="group btn-focus-ring"
       >
-        <component
-          :is="sublink.icon"
+        <span
           v-if="sublink.icon"
-          w:text="2xl"
-          w:m="-t-0.5 r-2"
-        />
+          class="iconify"
+          :data-icon="sublink.icon"
+          w:text="3xl"
+          w:m="r-2"
+        ></span>
         <div w:flex="~ col">
           <span w:font="medium" w:text="sm gray-300 group-hover:white">{{
             sublink.name
@@ -99,12 +100,13 @@
             w:p="2"
             class="group btn-focus-ring"
           >
-            <component
-              :is="sublink.icon"
+            <span
               v-if="sublink.icon"
-              w:text="2xl"
-              w:m="-t-0.5 r-2"
-            />
+              class="iconify"
+              :data-icon="sublink.icon"
+              w:text="3xl"
+              w:m="r-2"
+            ></span>
             <div w:flex="~ col">
               <span w:font="medium" w:text="sm gray-300 group-hover:white">{{
                 sublink.name

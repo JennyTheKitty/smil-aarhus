@@ -312,10 +312,37 @@ INSERT INTO smil_aarhus.page
 VALUES ('faq');
 
 INSERT INTO smil_aarhus.page_tr
-VALUES ('faq', 'DA', '');
+VALUES ('faq', 'DA', 'FAQ Side');
 
 INSERT INTO smil_aarhus.page_tr
-VALUES ('faq', 'EN', '');
+VALUES ('faq', 'EN', 'FAQ Page');
+
+INSERT INTO smil_aarhus.info_page
+VALUES ('faq', 'wpf:faq');
+
+INSERT INTO smil_aarhus.info_page_tr
+VALUES ('faq', 'DA', 'FAQ', 'Ofte Stillede Spørgsmål');
+
+INSERT INTO smil_aarhus.info_page_tr
+VALUES ('faq', 'EN', 'FAQ', 'Frequently Asked Questions');
+
+INSERT INTO smil_aarhus.page
+VALUES ('whatis');
+
+INSERT INTO smil_aarhus.page_tr
+VALUES ('whatis', 'DA', 'Hvad er SMil?');
+
+INSERT INTO smil_aarhus.page_tr
+VALUES ('whatis', 'EN', 'What is SMil?');
+
+INSERT INTO smil_aarhus.info_page
+VALUES ('whatis', 'mdi:information-outline');
+
+INSERT INTO smil_aarhus.info_page_tr
+VALUES ('whatis', 'DA', 'Hvad er SMil?', 'Generalt info om smil');
+
+INSERT INTO smil_aarhus.info_page_tr
+VALUES ('whatis', 'EN', 'What is SMil?', 'General info about SMil');
 
 
 INSERT INTO smil_aarhus.news

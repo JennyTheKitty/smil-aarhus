@@ -178,6 +178,76 @@ export type CreateImagePayloadImageEdgeArgs = {
   orderBy?: Maybe<Array<ImagesOrderBy>>;
 };
 
+/** All input for the create `InfoPage` mutation. */
+export type CreateInfoPageInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `InfoPage` to be created by this mutation. */
+  infoPage: InfoPageInput;
+};
+
+/** The output of our create `InfoPage` mutation. */
+export type CreateInfoPagePayload = {
+  __typename?: 'CreateInfoPagePayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  /** The `InfoPage` that was created by this mutation. */
+  infoPage: Maybe<InfoPage>;
+  /** An edge for our `InfoPage`. May be used by Relay 1. */
+  infoPageEdge: Maybe<InfoPagesEdge>;
+  /** Reads a single `Page` that is related to this `InfoPage`. */
+  pageByName: Maybe<Page>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our create `InfoPage` mutation. */
+export type CreateInfoPagePayloadInfoPageEdgeArgs = {
+  orderBy?: Maybe<Array<InfoPagesOrderBy>>;
+};
+
+/** All input for the create `InfoPageTr` mutation. */
+export type CreateInfoPageTrInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `InfoPageTr` to be created by this mutation. */
+  infoPageTr: InfoPageTrInput;
+};
+
+/** The output of our create `InfoPageTr` mutation. */
+export type CreateInfoPageTrPayload = {
+  __typename?: 'CreateInfoPageTrPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  /** Reads a single `InfoPage` that is related to this `InfoPageTr`. */
+  infoPageByInfoPageName: Maybe<InfoPage>;
+  /** The `InfoPageTr` that was created by this mutation. */
+  infoPageTr: Maybe<InfoPageTr>;
+  /** An edge for our `InfoPageTr`. May be used by Relay 1. */
+  infoPageTrEdge: Maybe<InfoPageTrsEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our create `InfoPageTr` mutation. */
+export type CreateInfoPageTrPayloadInfoPageTrEdgeArgs = {
+  orderBy?: Maybe<Array<InfoPageTrsOrderBy>>;
+};
+
 /** All input for the create `Member` mutation. */
 export type CreateMemberInput = {
   /**
@@ -539,6 +609,77 @@ export type DeleteImagePayload = {
 /** The output of our delete `Image` mutation. */
 export type DeleteImagePayloadImageEdgeArgs = {
   orderBy?: Maybe<Array<ImagesOrderBy>>;
+};
+
+/** All input for the `deleteInfoPage` mutation. */
+export type DeleteInfoPageInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
+/** The output of our delete `InfoPage` mutation. */
+export type DeleteInfoPagePayload = {
+  __typename?: 'DeleteInfoPagePayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  deletedInfoPageNodeId: Maybe<Scalars['ID']>;
+  /** The `InfoPage` that was deleted by this mutation. */
+  infoPage: Maybe<InfoPage>;
+  /** An edge for our `InfoPage`. May be used by Relay 1. */
+  infoPageEdge: Maybe<InfoPagesEdge>;
+  /** Reads a single `Page` that is related to this `InfoPage`. */
+  pageByName: Maybe<Page>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our delete `InfoPage` mutation. */
+export type DeleteInfoPagePayloadInfoPageEdgeArgs = {
+  orderBy?: Maybe<Array<InfoPagesOrderBy>>;
+};
+
+/** All input for the `deleteInfoPageTr` mutation. */
+export type DeleteInfoPageTrInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  infoPageName: Scalars['String'];
+  languageCode: TrLanguage;
+};
+
+/** The output of our delete `InfoPageTr` mutation. */
+export type DeleteInfoPageTrPayload = {
+  __typename?: 'DeleteInfoPageTrPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  deletedInfoPageTrNodeId: Maybe<Scalars['ID']>;
+  /** Reads a single `InfoPage` that is related to this `InfoPageTr`. */
+  infoPageByInfoPageName: Maybe<InfoPage>;
+  /** The `InfoPageTr` that was deleted by this mutation. */
+  infoPageTr: Maybe<InfoPageTr>;
+  /** An edge for our `InfoPageTr`. May be used by Relay 1. */
+  infoPageTrEdge: Maybe<InfoPageTrsEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our delete `InfoPageTr` mutation. */
+export type DeleteInfoPageTrPayloadInfoPageTrEdgeArgs = {
+  orderBy?: Maybe<Array<InfoPageTrsOrderBy>>;
 };
 
 /** All input for the `deleteMemberByUsername` mutation. */
@@ -1627,6 +1768,182 @@ export enum ImagesOrderBy {
   WidthDesc = 'WIDTH_DESC'
 }
 
+export type InfoPage = {
+  __typename?: 'InfoPage';
+  icon: Scalars['String'];
+  name: Scalars['String'];
+  /** Reads a single `Page` that is related to this `InfoPage`. */
+  pageByName: Maybe<Page>;
+  /** Reads and enables pagination through a set of `InfoPageTr`. */
+  translations: InfoPageTrsConnection;
+};
+
+
+export type InfoPageTranslationsArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  condition?: Maybe<InfoPageTrCondition>;
+  filter?: Maybe<InfoPageTrFilter>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<InfoPageTrsOrderBy>>;
+};
+
+/**
+ * A condition to be used against `InfoPage` object types. All fields are tested
+ * for equality and combined with a logical ‘and.’
+ */
+export type InfoPageCondition = {
+  /** Checks for equality with the object’s `icon` field. */
+  icon?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: Maybe<Scalars['String']>;
+};
+
+/** A filter to be used against `InfoPage` object types. All fields are combined with a logical ‘and.’ */
+export type InfoPageFilter = {
+  /** Filter by the object’s `icon` field. */
+  icon?: Maybe<StringFilter>;
+  /** Filter by the object’s `name` field. */
+  name?: Maybe<StringFilter>;
+};
+
+/** An input for mutations affecting `InfoPage` */
+export type InfoPageInput = {
+  icon: Scalars['String'];
+  name: Scalars['String'];
+};
+
+/** Represents an update to a `InfoPage`. Fields that are set will be updated. */
+export type InfoPagePatch = {
+  icon?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+export type InfoPageTr = {
+  __typename?: 'InfoPageTr';
+  /** Reads a single `InfoPage` that is related to this `InfoPageTr`. */
+  infoPageByInfoPageName: Maybe<InfoPage>;
+  infoPageName: Scalars['String'];
+  languageCode: TrLanguage;
+  subtitle: Scalars['String'];
+  title: Scalars['String'];
+};
+
+/**
+ * A condition to be used against `InfoPageTr` object types. All fields are tested
+ * for equality and combined with a logical ‘and.’
+ */
+export type InfoPageTrCondition = {
+  /** Checks for equality with the object’s `infoPageName` field. */
+  infoPageName?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `languageCode` field. */
+  languageCode?: Maybe<TrLanguage>;
+  /** Checks for equality with the object’s `subtitle` field. */
+  subtitle?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `title` field. */
+  title?: Maybe<Scalars['String']>;
+};
+
+/** A filter to be used against `InfoPageTr` object types. All fields are combined with a logical ‘and.’ */
+export type InfoPageTrFilter = {
+  /** Filter by the object’s `infoPageName` field. */
+  infoPageName?: Maybe<StringFilter>;
+  /** Filter by the object’s `languageCode` field. */
+  languageCode?: Maybe<TrLanguageFilter>;
+  /** Filter by the object’s `subtitle` field. */
+  subtitle?: Maybe<StringFilter>;
+  /** Filter by the object’s `title` field. */
+  title?: Maybe<StringFilter>;
+};
+
+/** An input for mutations affecting `InfoPageTr` */
+export type InfoPageTrInput = {
+  infoPageName: Scalars['String'];
+  languageCode: TrLanguage;
+  subtitle: Scalars['String'];
+  title: Scalars['String'];
+};
+
+/** Represents an update to a `InfoPageTr`. Fields that are set will be updated. */
+export type InfoPageTrPatch = {
+  infoPageName?: Maybe<Scalars['String']>;
+  languageCode?: Maybe<TrLanguage>;
+  subtitle?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+/** A connection to a list of `InfoPageTr` values. */
+export type InfoPageTrsConnection = {
+  __typename?: 'InfoPageTrsConnection';
+  /** A list of edges which contains the `InfoPageTr` and cursor to aid in pagination. */
+  edges: Array<InfoPageTrsEdge>;
+  /** A list of `InfoPageTr` objects. */
+  nodes: Array<InfoPageTr>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `InfoPageTr` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `InfoPageTr` edge in the connection. */
+export type InfoPageTrsEdge = {
+  __typename?: 'InfoPageTrsEdge';
+  /** A cursor for use in pagination. */
+  cursor: Maybe<Scalars['Cursor']>;
+  /** The `InfoPageTr` at the end of the edge. */
+  node: InfoPageTr;
+};
+
+/** Methods to use when ordering `InfoPageTr`. */
+export enum InfoPageTrsOrderBy {
+  InfoPageNameAsc = 'INFO_PAGE_NAME_ASC',
+  InfoPageNameDesc = 'INFO_PAGE_NAME_DESC',
+  LanguageCodeAsc = 'LANGUAGE_CODE_ASC',
+  LanguageCodeDesc = 'LANGUAGE_CODE_DESC',
+  Natural = 'NATURAL',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
+  SubtitleAsc = 'SUBTITLE_ASC',
+  SubtitleDesc = 'SUBTITLE_DESC',
+  TitleAsc = 'TITLE_ASC',
+  TitleDesc = 'TITLE_DESC'
+}
+
+/** A connection to a list of `InfoPage` values. */
+export type InfoPagesConnection = {
+  __typename?: 'InfoPagesConnection';
+  /** A list of edges which contains the `InfoPage` and cursor to aid in pagination. */
+  edges: Array<InfoPagesEdge>;
+  /** A list of `InfoPage` objects. */
+  nodes: Array<InfoPage>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `InfoPage` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `InfoPage` edge in the connection. */
+export type InfoPagesEdge = {
+  __typename?: 'InfoPagesEdge';
+  /** A cursor for use in pagination. */
+  cursor: Maybe<Scalars['Cursor']>;
+  /** The `InfoPage` at the end of the edge. */
+  node: InfoPage;
+};
+
+/** Methods to use when ordering `InfoPage`. */
+export enum InfoPagesOrderBy {
+  IconAsc = 'ICON_ASC',
+  IconDesc = 'ICON_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
 /** A filter to be used against Int fields. All fields are combined with a logical ‘and.’ */
 export type IntFilter = {
   /** Equal to the specified value. */
@@ -1749,6 +2066,10 @@ export type Mutation = {
   createEventViaGroup: Maybe<CreateEventViaGroupPayload>;
   /** Creates a single `Image`. */
   createImage: Maybe<CreateImagePayload>;
+  /** Creates a single `InfoPage`. */
+  createInfoPage: Maybe<CreateInfoPagePayload>;
+  /** Creates a single `InfoPageTr`. */
+  createInfoPageTr: Maybe<CreateInfoPageTrPayload>;
   /** Creates a single `Member`. */
   createMember: Maybe<CreateMemberPayload>;
   /** Creates a single `News`. */
@@ -1769,6 +2090,10 @@ export type Mutation = {
   deleteEventViaGroup: Maybe<DeleteEventViaGroupPayload>;
   /** Deletes a single `Image` using a unique key. */
   deleteImage: Maybe<DeleteImagePayload>;
+  /** Deletes a single `InfoPage` using a unique key. */
+  deleteInfoPage: Maybe<DeleteInfoPagePayload>;
+  /** Deletes a single `InfoPageTr` using a unique key. */
+  deleteInfoPageTr: Maybe<DeleteInfoPageTrPayload>;
   /** Deletes a single `Member` using a unique key. */
   deleteMember: Maybe<DeleteMemberPayload>;
   /** Deletes a single `Member` using a unique key. */
@@ -1791,6 +2116,10 @@ export type Mutation = {
   updateEventViaGroup: Maybe<UpdateEventViaGroupPayload>;
   /** Updates a single `Image` using a unique key and a patch. */
   updateImage: Maybe<UpdateImagePayload>;
+  /** Updates a single `InfoPage` using a unique key and a patch. */
+  updateInfoPage: Maybe<UpdateInfoPagePayload>;
+  /** Updates a single `InfoPageTr` using a unique key and a patch. */
+  updateInfoPageTr: Maybe<UpdateInfoPageTrPayload>;
   /** Updates a single `Member` using a unique key and a patch. */
   updateMember: Maybe<UpdateMemberPayload>;
   /** Updates a single `Member` using a unique key and a patch. */
@@ -1831,6 +2160,18 @@ export type MutationCreateEventViaGroupArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateImageArgs = {
   input: CreateImageInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateInfoPageArgs = {
+  input: CreateInfoPageInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateInfoPageTrArgs = {
+  input: CreateInfoPageTrInput;
 };
 
 
@@ -1891,6 +2232,18 @@ export type MutationDeleteEventViaGroupArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteImageArgs = {
   input: DeleteImageInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteInfoPageArgs = {
+  input: DeleteInfoPageInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteInfoPageTrArgs = {
+  input: DeleteInfoPageTrInput;
 };
 
 
@@ -1957,6 +2310,18 @@ export type MutationUpdateEventViaGroupArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateImageArgs = {
   input: UpdateImageInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateInfoPageArgs = {
+  input: UpdateInfoPageInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateInfoPageTrArgs = {
+  input: UpdateInfoPageTrInput;
 };
 
 
@@ -2192,6 +2557,8 @@ export enum NewsTrsOrderBy {
 
 export type Page = {
   __typename?: 'Page';
+  /** Reads a single `InfoPage` that is related to this `Page`. */
+  infoPageByName: Maybe<InfoPage>;
   name: Scalars['String'];
   /** Reads and enables pagination through a set of `PageTr`. */
   translations: PageTrsConnection;
@@ -2475,6 +2842,12 @@ export type Query = {
   image: Maybe<Image>;
   /** Reads and enables pagination through a set of `Image`. */
   images: Maybe<ImagesConnection>;
+  infoPage: Maybe<InfoPage>;
+  infoPageTr: Maybe<InfoPageTr>;
+  /** Reads and enables pagination through a set of `InfoPageTr`. */
+  infoPageTrs: Maybe<InfoPageTrsConnection>;
+  /** Reads and enables pagination through a set of `InfoPage`. */
+  infoPages: Maybe<InfoPagesConnection>;
   member: Maybe<Member>;
   memberByUsername: Maybe<Member>;
   /** Reads and enables pagination through a set of `Member`. */
@@ -2703,6 +3076,45 @@ export type QueryImagesArgs = {
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<ImagesOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryInfoPageArgs = {
+  name: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryInfoPageTrArgs = {
+  infoPageName: Scalars['String'];
+  languageCode: TrLanguage;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryInfoPageTrsArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  condition?: Maybe<InfoPageTrCondition>;
+  filter?: Maybe<InfoPageTrFilter>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<InfoPageTrsOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryInfoPagesArgs = {
+  after?: Maybe<Scalars['Cursor']>;
+  before?: Maybe<Scalars['Cursor']>;
+  condition?: Maybe<InfoPageCondition>;
+  filter?: Maybe<InfoPageFilter>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<InfoPagesOrderBy>>;
 };
 
 
@@ -3078,6 +3490,79 @@ export type UpdateImagePayload = {
 /** The output of our update `Image` mutation. */
 export type UpdateImagePayloadImageEdgeArgs = {
   orderBy?: Maybe<Array<ImagesOrderBy>>;
+};
+
+/** All input for the `updateInfoPage` mutation. */
+export type UpdateInfoPageInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  /** An object where the defined keys will be set on the `InfoPage` being updated. */
+  patch: InfoPagePatch;
+};
+
+/** The output of our update `InfoPage` mutation. */
+export type UpdateInfoPagePayload = {
+  __typename?: 'UpdateInfoPagePayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  /** The `InfoPage` that was updated by this mutation. */
+  infoPage: Maybe<InfoPage>;
+  /** An edge for our `InfoPage`. May be used by Relay 1. */
+  infoPageEdge: Maybe<InfoPagesEdge>;
+  /** Reads a single `Page` that is related to this `InfoPage`. */
+  pageByName: Maybe<Page>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our update `InfoPage` mutation. */
+export type UpdateInfoPagePayloadInfoPageEdgeArgs = {
+  orderBy?: Maybe<Array<InfoPagesOrderBy>>;
+};
+
+/** All input for the `updateInfoPageTr` mutation. */
+export type UpdateInfoPageTrInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  infoPageName: Scalars['String'];
+  languageCode: TrLanguage;
+  /** An object where the defined keys will be set on the `InfoPageTr` being updated. */
+  patch: InfoPageTrPatch;
+};
+
+/** The output of our update `InfoPageTr` mutation. */
+export type UpdateInfoPageTrPayload = {
+  __typename?: 'UpdateInfoPageTrPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  /** Reads a single `InfoPage` that is related to this `InfoPageTr`. */
+  infoPageByInfoPageName: Maybe<InfoPage>;
+  /** The `InfoPageTr` that was updated by this mutation. */
+  infoPageTr: Maybe<InfoPageTr>;
+  /** An edge for our `InfoPageTr`. May be used by Relay 1. */
+  infoPageTrEdge: Maybe<InfoPageTrsEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our update `InfoPageTr` mutation. */
+export type UpdateInfoPageTrPayloadInfoPageTrEdgeArgs = {
+  orderBy?: Maybe<Array<InfoPageTrsOrderBy>>;
 };
 
 /** All input for the `updateMemberByUsername` mutation. */

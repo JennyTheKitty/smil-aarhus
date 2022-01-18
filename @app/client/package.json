@@ -28,6 +28,7 @@
     "@fullcalendar/timegrid": "^5.10.1",
     "@fullcalendar/vue3": "^5.10.1",
     "@headlessui/vue": "^0.0.0-dev.50d9fd3",
+    "@iconify/iconify": "^2.1.1",
     "@types/jsdom": "^16.2.13",
     "@urql/devtools": "^2.0.3",
     "@urql/exchange-auth": "^0.1.6",

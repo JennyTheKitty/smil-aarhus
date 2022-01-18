@@ -1482,6 +1482,13 @@
   dependencies:
     "@iconify/types" "^1.0.7"
 
+"@iconify/iconify@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@iconify/iconify/-/iconify-2.1.1.tgz#eb17e9559f95cade5fbf5163f849790f1406dd12"
+  integrity sha512-g3d9lxUdGtnqM0aZkZNjnZkgIzh8CeqkkSwcrgzYyWg8urPuQtryhpRHPaYEqmYct4e9Mo0LSP7BqfTU5WeaPw==
+  dependencies:
+    cross-fetch "^3.1.4"
+
 "@iconify/types@^1.0.10", "@iconify/types@^1.0.7":
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/@iconify/types/-/types-1.0.10.tgz#951122c19d3717e308a3ceac6eaafda27bd9993d"
@@ -4938,7 +4945,7 @@ cross-fetch@3.0.6:
   dependencies:
     node-fetch "2.6.1"
 
-cross-fetch@3.1.4, cross-fetch@^3.0.4, cross-fetch@^3.0.6:
+cross-fetch@3.1.4, cross-fetch@^3.0.4, cross-fetch@^3.0.6, cross-fetch@^3.1.4:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.4.tgz#9723f3a3a247bf8b89039f3a380a9244e8fa2f39"
   integrity sha512-1eAtFWdIubi6T4XPy6ei9iUFoKpUkIF971QLN8lIvvvwueI65+Nw5haMNKUwfJxabqlIIDODJKGrQ66gxC0PbQ==
