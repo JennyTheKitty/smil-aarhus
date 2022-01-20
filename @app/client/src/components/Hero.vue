@@ -35,11 +35,7 @@
     >
       <icon-mdi-message-image-outline w:text="lg" w:m="r-2" />
       <span>Photography by </span>
-      <a
-        href="https://fetlife.com/users/4607313"
-        noopener
-        target="_blank"
-        w:text="underline"
+      <a href="https://fetlife.com/users/4607313" rel="noopener" target="_blank"
         >MagicLight</a
       >
     </div>

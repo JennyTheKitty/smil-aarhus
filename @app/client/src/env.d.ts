@@ -12,9 +12,10 @@ declare module '@ckeditor/ckeditor5-vue' {
   export default CKEditor;
 }
 
-declare module 'ckeditor.js' {
-  const Editor: any;
-  export = Editor;
+declare module '@app/editor/build/ckeditor.js' {
+  const InlineEditor: any;
+  const ClassicEditor: any;
+  export { InlineEditor, ClassicEditor };
 }
 
 declare module 'photoswipe/dist/photoswipe.esm.js' {

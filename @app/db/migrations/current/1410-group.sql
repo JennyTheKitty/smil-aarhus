@@ -37,7 +37,7 @@ END
 $$ LANGUAGE plpgsql STABLE;
 
 
-COMMENT ON TABLE smil_aarhus.group_tr IS E'@omit create,update,delete';
+COMMENT ON TABLE smil_aarhus.group_tr IS E'@omit create,update,delete,all,order';
 
 COMMENT ON CONSTRAINT group_tr_group_id_fkey ON smil_aarhus.group_tr IS E'@foreignFieldName translations';
 
@@ -86,7 +86,7 @@ create table smil_aarhus.event_via_group (
   primary key (event_id, group_id)
 );
 
-comment on table smil_aarhus.event_via_group is E'@omit all';
+comment on table smil_aarhus.event_via_group is E'@omit all,create,delete,update,order';
 
 
 comment on constraint event_via_group_event_id_fkey on smil_aarhus.event_via_group is E'@foreignFieldName groups\n@manyToManyFieldName groups';
@@ -152,7 +152,7 @@ END
 $$ LANGUAGE plpgsql;
 
 
-GRANT EXECUTE ON FUNCTION smil_aarhus.upsert_event TO smil_anonymous, smil_organizer, smil_admin;
+GRANT EXECUTE ON FUNCTION smil_aarhus.upsert_group TO smil_anonymous, smil_organizer, smil_admin;
 
 CREATE OR REPLACE FUNCTION smil_aarhus.events_by_group(group_id bigint)
 returns setof smil_aarhus.event

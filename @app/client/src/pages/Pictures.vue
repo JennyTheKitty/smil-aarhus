@@ -40,29 +40,25 @@
               :data-pswp-width="item.img.width"
               :data-pswp-height="item.img.height"
               :data-pswp-srcset="item.img.srcSetWebp"
+              :data-credit="item.img.credit"
+              :data-id="item.id"
               rel="noopener"
               target="_blank"
             >
-              <picture>
-                <source
-                  :srcset="item.img.srcSetWebp"
-                  type="image/webp"
-                  sizes="20rem"
-                />
-                <source
-                  :srcset="item.img.srcSetJpeg"
-                  type="image/jpeg"
-                  sizes="20rem"
-                />
-                <img
-                  :src="item.img.src"
-                  w:w="80"
-                  alt=""
-                  :height="item.img.height"
-                  :width="item.img.width"
-                  loading="lazy"
-                />
-              </picture>
+              <Image sizes="20rem" :image="item.img" w:w="80" alt="" />
+              <teleport
+                v-if="lightboxCurrentOpenId == item.id"
+                to="#pswp-caption"
+              >
+                <div v-if="!editing" v-html="item.img.credit" />
+                <ClientOnly
+                  ><suspense
+                    ><ContentEditor
+                      v-if="editing"
+                      v-model="item.img.credit"
+                      :inline="true" /></suspense
+                ></ClientOnly>
+              </teleport>
             </a>
           </div>
         </template>
@@ -96,6 +92,11 @@ const PictureUpload = useWaitImportComponent(
 const PictureDelete = useWaitImportComponent(
   editing,
   () => import('../components/Picture/PictureDelete.vue')
+);
+
+const ContentEditor = useWaitImportComponent(
+  editing,
+  () => import('../components/ContentEditor.vue')
 );
 
 const { executeMutation: setAllowOnHome } = useMutation(
@@ -149,12 +150,35 @@ const items = computed({
   },
 });
 
+const lightboxCurrentOpenId = ref<Number | null>(null);
+
 const gallery = ref<HTMLElement | null>(null);
 onMounted(() => {
   const lightbox = new PhotoSwipeLightbox({
     gallery: gallery.value,
     children: 'a',
     pswpModule: PhotoSwipe,
+  });
+
+  lightbox.on('uiRegister', () => {
+    lightbox.pswp.on('change', () => {
+      const currSlideElement: HTMLElement =
+        lightbox.pswp.currSlide.data.element;
+      lightboxCurrentOpenId.value = parseInt(currSlideElement.dataset.id || '');
+    });
+    lightbox.pswp.on('close', () => {
+      lightboxCurrentOpenId.value = null;
+    });
+    lightbox.pswp.ui.registerElement({
+      name: 'custom-caption',
+      order: 9,
+      isButton: false,
+      appendTo: 'root',
+      html: '',
+      onInit: (el: HTMLElement) => {
+        el.id = 'pswp-caption';
+      },
+    });
   });
   lightbox.init();
 });
@@ -182,5 +206,23 @@ const { t } = useI18n();
 <style>
 .pswp {
   position: fixed !important;
+}
+.pswp__custom-caption {
+  background: rgba(75, 150, 75, 0.75);
+  font-size: 16px;
+  color: #fff;
+  width: calc(100% - 32px);
+  max-width: 400px;
+  padding: 2px 8px;
+  border-radius: 4px;
+
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+}
+.pswp__custom-caption a {
+  color: #fff;
+  text-decoration: underline;
 }
 </style>

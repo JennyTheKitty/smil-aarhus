@@ -9,6 +9,8 @@ CREATE TABLE smil_aarhus.page_tr(
     PRIMARY KEY (page_name, language_code)
 );
 
+COMMENT ON TABLE smil_aarhus.page_tr IS E'@omit all,order';
+
 COMMENT ON CONSTRAINT page_tr_page_name_fkey ON smil_aarhus.page_tr IS E'@foreignFieldName translations';
 
 GRANT SELECT ON TABLE smil_aarhus.page TO smil_anonymous, smil_organizer, smil_admin;
@@ -22,6 +24,9 @@ CREATE TABLE smil_aarhus.info_page(
     icon text NOT NULL
 );
 
+
+COMMENT ON TABLE smil_aarhus.info_page IS E'@omit create,update,delete';
+
 CREATE TABLE smil_aarhus.info_page_tr(
     info_page_name text NOT NULL REFERENCES smil_aarhus.info_page (name),
     language_code text NOT NULL REFERENCES smil_aarhus.tr_language (code),
@@ -29,6 +34,8 @@ CREATE TABLE smil_aarhus.info_page_tr(
     subtitle text NOT NULL,
     PRIMARY KEY (info_page_name, language_code)
 );
+
+COMMENT ON TABLE smil_aarhus.info_page_tr IS E'@omit create,update,delete,all,order';
 
 COMMENT ON CONSTRAINT info_page_tr_info_page_name_fkey ON smil_aarhus.info_page_tr IS E'@foreignFieldName translations';
 

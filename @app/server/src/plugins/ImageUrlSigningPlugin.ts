@@ -37,9 +37,10 @@ interface Image {
   path: string;
   width: number;
   height: number;
+  credit: string;
 }
 
-function createResponsiveImage({ path, width, height }: Image) {
+function createResponsiveImage({ path, width, height, credit }: Image) {
   const widths = [32, 64, 128, 256, 512, 1024, 2048];
   const url = `s3://${process.env.AWS_UPLOADS_BUCKET}/${path}`;
   return {
@@ -64,6 +65,7 @@ function createResponsiveImage({ path, width, height }: Image) {
       .join(', '),
     width,
     height,
+    credit,
   };
 }
 
@@ -102,6 +104,7 @@ const ImageUrlSigningPlugin = makeExtendSchemaPlugin((build) => {
         src: String!
         srcSetWebp: String!
         srcSetJpeg: String!
+        credit: String!
       }
     `,
     resolvers: {

@@ -9,7 +9,6 @@ config:
   scalars:
     Datetime: 'string'
     JSON: '{ [key: string]: any }'
-  noGraphQLTag: false
 generates:
   ./src/client.ts:
     schema: '../../data/schema.graphql'

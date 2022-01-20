@@ -8,6 +8,7 @@ CREATE TABLE smil_aarhus.picture(
 );
 ALTER SEQUENCE picture_rank OWNED BY smil_aarhus.picture.rank;
 
+COMMENT ON TABLE smil_aarhus.picture IS E'@omit filter';
 
 GRANT SELECT ON TABLE smil_aarhus.picture TO smil_anonymous, smil_organizer, smil_admin;
 GRANT INSERT, UPDATE, DELETE ON TABLE smil_aarhus.picture TO smil_organizer, smil_admin;

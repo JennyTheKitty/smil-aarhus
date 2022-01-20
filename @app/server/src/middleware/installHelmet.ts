@@ -25,6 +25,7 @@ const CSP_DIRECTIVES = {
   'img-src': ["'self'", `img.${process.env.DOMAIN}`],
   'connect-src': [
     "'self'",
+    'https://api.iconify.design',
     // Safari doesn't allow using wss:// origins as 'self' from
     // an https:// page, so we have to translate explicitly for
     // it.

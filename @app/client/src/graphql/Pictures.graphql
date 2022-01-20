@@ -7,6 +7,7 @@ query PicturesQuery {
         srcSetJpeg
         srcSetWebp
         width
+        credit
       }
       id
       rank
@@ -22,7 +23,9 @@ mutation CreateImageMutation(
   $onlyId: Boolean = true
 ) {
   createImage(
-    input: { image: { path: $path, width: $width, height: $height } }
+    input: {
+      image: { path: $path, width: $width, height: $height, credit: "" }
+    }
   ) {
     image {
       id

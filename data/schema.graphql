@@ -66,88 +66,6 @@ input BooleanFilter {
   notEqualTo: Boolean
 }
 
-"""All input for the create `EventViaEventTag` mutation."""
-input CreateEventViaEventTagInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """The `EventViaEventTag` to be created by this mutation."""
-  eventViaEventTag: EventViaEventTagInput!
-}
-
-"""The output of our create `EventViaEventTag` mutation."""
-type CreateEventViaEventTagPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """Reads a single `Event` that is related to this `EventViaEventTag`."""
-  event: Event
-
-  """The `EventViaEventTag` that was created by this mutation."""
-  eventViaEventTag: EventViaEventTag
-
-  """An edge for our `EventViaEventTag`. May be used by Relay 1."""
-  eventViaEventTagEdge(
-    """The method to use when ordering `EventViaEventTag`."""
-    orderBy: [EventViaEventTagsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventViaEventTagsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-
-  """Reads a single `EventTag` that is related to this `EventViaEventTag`."""
-  tag: EventTag
-}
-
-"""All input for the create `EventViaGroup` mutation."""
-input CreateEventViaGroupInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """The `EventViaGroup` to be created by this mutation."""
-  eventViaGroup: EventViaGroupInput!
-}
-
-"""The output of our create `EventViaGroup` mutation."""
-type CreateEventViaGroupPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """Reads a single `Event` that is related to this `EventViaGroup`."""
-  event: Event
-
-  """The `EventViaGroup` that was created by this mutation."""
-  eventViaGroup: EventViaGroup
-
-  """An edge for our `EventViaGroup`. May be used by Relay 1."""
-  eventViaGroupEdge(
-    """The method to use when ordering `EventViaGroup`."""
-    orderBy: [EventViaGroupsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventViaGroupsEdge
-
-  """Reads a single `Group` that is related to this `EventViaGroup`."""
-  group: Group
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
 """All input for the create `Image` mutation."""
 input CreateImageInput {
   """
@@ -172,121 +90,7 @@ type CreateImagePayload {
   image: Image
 
   """An edge for our `Image`. May be used by Relay 1."""
-  imageEdge(
-    """The method to use when ordering `Image`."""
-    orderBy: [ImagesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): ImagesEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the create `InfoPage` mutation."""
-input CreateInfoPageInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """The `InfoPage` to be created by this mutation."""
-  infoPage: InfoPageInput!
-}
-
-"""The output of our create `InfoPage` mutation."""
-type CreateInfoPagePayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `InfoPage` that was created by this mutation."""
-  infoPage: InfoPage
-
-  """An edge for our `InfoPage`. May be used by Relay 1."""
-  infoPageEdge(
-    """The method to use when ordering `InfoPage`."""
-    orderBy: [InfoPagesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): InfoPagesEdge
-
-  """Reads a single `Page` that is related to this `InfoPage`."""
-  pageByName: Page
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the create `InfoPageTr` mutation."""
-input CreateInfoPageTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """The `InfoPageTr` to be created by this mutation."""
-  infoPageTr: InfoPageTrInput!
-}
-
-"""The output of our create `InfoPageTr` mutation."""
-type CreateInfoPageTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """Reads a single `InfoPage` that is related to this `InfoPageTr`."""
-  infoPageByInfoPageName: InfoPage
-
-  """The `InfoPageTr` that was created by this mutation."""
-  infoPageTr: InfoPageTr
-
-  """An edge for our `InfoPageTr`. May be used by Relay 1."""
-  infoPageTrEdge(
-    """The method to use when ordering `InfoPageTr`."""
-    orderBy: [InfoPageTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): InfoPageTrsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the create `Member` mutation."""
-input CreateMemberInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """The `Member` to be created by this mutation."""
-  member: MemberInput!
-}
-
-"""The output of our create `Member` mutation."""
-type CreateMemberPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `Member` that was created by this mutation."""
-  member: Member
-
-  """An edge for our `Member`. May be used by Relay 1."""
-  memberEdge(
-    """The method to use when ordering `Member`."""
-    orderBy: [MembersOrderBy!] = [PRIMARY_KEY_ASC]
-  ): MembersEdge
+  imageEdge: ImagesEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -322,44 +126,6 @@ type CreateNewsPayload {
     """The method to use when ordering `News`."""
     orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
   ): NewsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the create `NewsTr` mutation."""
-input CreateNewsTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """The `NewsTr` to be created by this mutation."""
-  newsTr: NewsTrInput!
-}
-
-"""The output of our create `NewsTr` mutation."""
-type CreateNewsTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """Reads a single `News` that is related to this `NewsTr`."""
-  news: News
-
-  """The `NewsTr` that was created by this mutation."""
-  newsTr: NewsTr
-
-  """An edge for our `NewsTr`. May be used by Relay 1."""
-  newsTrEdge(
-    """The method to use when ordering `NewsTr`."""
-    orderBy: [NewsTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): NewsTrsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -429,10 +195,7 @@ type CreatePageTrPayload {
   pageTr: PageTr
 
   """An edge for our `PageTr`. May be used by Relay 1."""
-  pageTrEdge(
-    """The method to use when ordering `PageTr`."""
-    orderBy: [PageTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): PageTrsEdge
+  pageTrEdge: PageTrsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -549,88 +312,6 @@ input DatetimeFilter {
   notEqualTo: Datetime
 }
 
-"""All input for the `deleteEventViaEventTag` mutation."""
-input DeleteEventViaEventTagInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  eventId: BigInt!
-  tagId: BigInt!
-}
-
-"""The output of our delete `EventViaEventTag` mutation."""
-type DeleteEventViaEventTagPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedEventViaEventTagNodeId: ID
-
-  """Reads a single `Event` that is related to this `EventViaEventTag`."""
-  event: Event
-
-  """The `EventViaEventTag` that was deleted by this mutation."""
-  eventViaEventTag: EventViaEventTag
-
-  """An edge for our `EventViaEventTag`. May be used by Relay 1."""
-  eventViaEventTagEdge(
-    """The method to use when ordering `EventViaEventTag`."""
-    orderBy: [EventViaEventTagsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventViaEventTagsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-
-  """Reads a single `EventTag` that is related to this `EventViaEventTag`."""
-  tag: EventTag
-}
-
-"""All input for the `deleteEventViaGroup` mutation."""
-input DeleteEventViaGroupInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  eventId: BigInt!
-  groupId: BigInt!
-}
-
-"""The output of our delete `EventViaGroup` mutation."""
-type DeleteEventViaGroupPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedEventViaGroupNodeId: ID
-
-  """Reads a single `Event` that is related to this `EventViaGroup`."""
-  event: Event
-
-  """The `EventViaGroup` that was deleted by this mutation."""
-  eventViaGroup: EventViaGroup
-
-  """An edge for our `EventViaGroup`. May be used by Relay 1."""
-  eventViaGroupEdge(
-    """The method to use when ordering `EventViaGroup`."""
-    orderBy: [EventViaGroupsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventViaGroupsEdge
-
-  """Reads a single `Group` that is related to this `EventViaGroup`."""
-  group: Group
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
 """All input for the `deleteImage` mutation."""
 input DeleteImageInput {
   """
@@ -654,129 +335,7 @@ type DeleteImagePayload {
   image: Image
 
   """An edge for our `Image`. May be used by Relay 1."""
-  imageEdge(
-    """The method to use when ordering `Image`."""
-    orderBy: [ImagesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): ImagesEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `deleteInfoPage` mutation."""
-input DeleteInfoPageInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  name: String!
-}
-
-"""The output of our delete `InfoPage` mutation."""
-type DeleteInfoPagePayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedInfoPageNodeId: ID
-
-  """The `InfoPage` that was deleted by this mutation."""
-  infoPage: InfoPage
-
-  """An edge for our `InfoPage`. May be used by Relay 1."""
-  infoPageEdge(
-    """The method to use when ordering `InfoPage`."""
-    orderBy: [InfoPagesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): InfoPagesEdge
-
-  """Reads a single `Page` that is related to this `InfoPage`."""
-  pageByName: Page
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `deleteInfoPageTr` mutation."""
-input DeleteInfoPageTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  infoPageName: String!
-  languageCode: TrLanguage!
-}
-
-"""The output of our delete `InfoPageTr` mutation."""
-type DeleteInfoPageTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedInfoPageTrNodeId: ID
-
-  """Reads a single `InfoPage` that is related to this `InfoPageTr`."""
-  infoPageByInfoPageName: InfoPage
-
-  """The `InfoPageTr` that was deleted by this mutation."""
-  infoPageTr: InfoPageTr
-
-  """An edge for our `InfoPageTr`. May be used by Relay 1."""
-  infoPageTrEdge(
-    """The method to use when ordering `InfoPageTr`."""
-    orderBy: [InfoPageTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): InfoPageTrsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `deleteMemberByUsername` mutation."""
-input DeleteMemberByUsernameInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  username: String!
-}
-
-"""All input for the `deleteMember` mutation."""
-input DeleteMemberInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  id: UUID!
-}
-
-"""The output of our delete `Member` mutation."""
-type DeleteMemberPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedMemberNodeId: ID
-
-  """The `Member` that was deleted by this mutation."""
-  member: Member
-
-  """An edge for our `Member`. May be used by Relay 1."""
-  memberEdge(
-    """The method to use when ordering `Member`."""
-    orderBy: [MembersOrderBy!] = [PRIMARY_KEY_ASC]
-  ): MembersEdge
+  imageEdge: ImagesEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -811,44 +370,6 @@ type DeleteNewsPayload {
     """The method to use when ordering `News`."""
     orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
   ): NewsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `deleteNewsTr` mutation."""
-input DeleteNewsTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  languageCode: TrLanguage!
-  newsId: BigInt!
-}
-
-"""The output of our delete `NewsTr` mutation."""
-type DeleteNewsTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedNewsTrNodeId: ID
-
-  """Reads a single `News` that is related to this `NewsTr`."""
-  news: News
-
-  """The `NewsTr` that was deleted by this mutation."""
-  newsTr: NewsTr
-
-  """An edge for our `NewsTr`. May be used by Relay 1."""
-  newsTrEdge(
-    """The method to use when ordering `NewsTr`."""
-    orderBy: [NewsTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): NewsTrsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -917,10 +438,7 @@ type DeletePageTrPayload {
   pageTr: PageTr
 
   """An edge for our `PageTr`. May be used by Relay 1."""
-  pageTrEdge(
-    """The method to use when ordering `PageTr`."""
-    orderBy: [PageTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): PageTrsEdge
+  pageTrEdge: PageTrsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -997,9 +515,6 @@ type Event {
     based pagination. May not be used with `last`.
     """
     offset: Int
-
-    """The method to use when ordering `EventViaGroup`."""
-    orderBy: [EventViaGroupsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventViaGroupsConnection!
   id: BigInt!
 
@@ -1018,16 +533,6 @@ type Event {
     """Read all values in the set before (above) this cursor."""
     before: Cursor
 
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: EventViaEventTagCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventViaEventTagFilter
-
     """Only read the first `n` values of the set."""
     first: Int
 
@@ -1039,9 +544,6 @@ type Event {
     based pagination. May not be used with `last`.
     """
     offset: Int
-
-    """The method to use when ordering `EventViaEventTag`."""
-    orderBy: [EventViaEventTagsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventViaEventTagsConnection!
   templateName: String
 
@@ -1074,9 +576,6 @@ type Event {
     based pagination. May not be used with `last`.
     """
     offset: Int
-
-    """The method to use when ordering `EventTr`."""
-    orderBy: [EventTrsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventTrsConnection!
 }
 
@@ -1146,16 +645,6 @@ type EventTag {
     """Read all values in the set before (above) this cursor."""
     before: Cursor
 
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: EventViaEventTagCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventViaEventTagFilter
-
     """Only read the first `n` values of the set."""
     first: Int
 
@@ -1167,9 +656,6 @@ type EventTag {
     based pagination. May not be used with `last`.
     """
     offset: Int
-
-    """The method to use when ordering `EventViaEventTag`."""
-    orderBy: [EventViaEventTagsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventViaEventTagsConnection!
   id: BigInt!
   image: BigInt
@@ -1207,9 +693,6 @@ type EventTag {
     based pagination. May not be used with `last`.
     """
     offset: Int
-
-    """The method to use when ordering `EventTagTr`."""
-    orderBy: [EventTagTrsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventTagTrsConnection!
 }
 
@@ -1300,19 +783,6 @@ type EventTagTrsEdge {
   node: EventTagTr!
 }
 
-"""Methods to use when ordering `EventTagTr`."""
-enum EventTagTrsOrderBy {
-  LANGUAGE_CODE_ASC
-  LANGUAGE_CODE_DESC
-  NATURAL
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
-  TAG_ID_ASC
-  TAG_ID_DESC
-  TITLE_ASC
-  TITLE_DESC
-}
-
 """A connection to a list of `EventTag` values."""
 type EventTagsConnection {
   """
@@ -1337,17 +807,6 @@ type EventTagsEdge {
 
   """The `EventTag` at the end of the edge."""
   node: EventTag!
-}
-
-"""Methods to use when ordering `EventTag`."""
-enum EventTagsOrderBy {
-  ID_ASC
-  ID_DESC
-  IMAGE_ASC
-  IMAGE_DESC
-  NATURAL
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
 }
 
 type EventTr {
@@ -1434,23 +893,6 @@ type EventTrsEdge {
   node: EventTr!
 }
 
-"""Methods to use when ordering `EventTr`."""
-enum EventTrsOrderBy {
-  DESCRIPTION_ASC
-  DESCRIPTION_DESC
-  EVENT_ID_ASC
-  EVENT_ID_DESC
-  LANGUAGE_CODE_ASC
-  LANGUAGE_CODE_DESC
-  NATURAL
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
-  SLUG_ASC
-  SLUG_DESC
-  TITLE_ASC
-  TITLE_DESC
-}
-
 type EventViaEventTag {
   """Reads a single `Event` that is related to this `EventViaEventTag`."""
   event: Event
@@ -1459,43 +901,6 @@ type EventViaEventTag {
   """Reads a single `EventTag` that is related to this `EventViaEventTag`."""
   tag: EventTag
   tagId: BigInt!
-}
-
-"""
-A condition to be used against `EventViaEventTag` object types. All fields are
-tested for equality and combined with a logical ‘and.’
-"""
-input EventViaEventTagCondition {
-  """Checks for equality with the object’s `eventId` field."""
-  eventId: BigInt
-
-  """Checks for equality with the object’s `tagId` field."""
-  tagId: BigInt
-}
-
-"""
-A filter to be used against `EventViaEventTag` object types. All fields are combined with a logical ‘and.’
-"""
-input EventViaEventTagFilter {
-  """Filter by the object’s `eventId` field."""
-  eventId: BigIntFilter
-
-  """Filter by the object’s `tagId` field."""
-  tagId: BigIntFilter
-}
-
-"""An input for mutations affecting `EventViaEventTag`"""
-input EventViaEventTagInput {
-  eventId: BigInt!
-  tagId: BigInt!
-}
-
-"""
-Represents an update to a `EventViaEventTag`. Fields that are set will be updated.
-"""
-input EventViaEventTagPatch {
-  eventId: BigInt
-  tagId: BigInt
 }
 
 """A connection to a list of `EventViaEventTag` values."""
@@ -1524,17 +929,6 @@ type EventViaEventTagsEdge {
 
   """The `EventViaEventTag` at the end of the edge."""
   node: EventViaEventTag!
-}
-
-"""Methods to use when ordering `EventViaEventTag`."""
-enum EventViaEventTagsOrderBy {
-  EVENT_ID_ASC
-  EVENT_ID_DESC
-  NATURAL
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
-  TAG_ID_ASC
-  TAG_ID_DESC
 }
 
 type EventViaGroup {
@@ -1570,20 +964,6 @@ input EventViaGroupFilter {
   groupId: BigIntFilter
 }
 
-"""An input for mutations affecting `EventViaGroup`"""
-input EventViaGroupInput {
-  eventId: BigInt!
-  groupId: BigInt!
-}
-
-"""
-Represents an update to a `EventViaGroup`. Fields that are set will be updated.
-"""
-input EventViaGroupPatch {
-  eventId: BigInt
-  groupId: BigInt
-}
-
 """A connection to a list of `EventViaGroup` values."""
 type EventViaGroupsConnection {
   """
@@ -1608,17 +988,6 @@ type EventViaGroupsEdge {
 
   """The `EventViaGroup` at the end of the edge."""
   node: EventViaGroup!
-}
-
-"""Methods to use when ordering `EventViaGroup`."""
-enum EventViaGroupsOrderBy {
-  EVENT_ID_ASC
-  EVENT_ID_DESC
-  GROUP_ID_ASC
-  GROUP_ID_DESC
-  NATURAL
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
 }
 
 """A connection to a list of `Event` values."""
@@ -1696,9 +1065,6 @@ type Group {
     based pagination. May not be used with `last`.
     """
     offset: Int
-
-    """The method to use when ordering `EventViaGroup`."""
-    orderBy: [EventViaGroupsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventViaGroupsConnection!
   id: BigInt!
   image: BigInt
@@ -1737,9 +1103,6 @@ type Group {
     based pagination. May not be used with `last`.
     """
     offset: Int
-
-    """The method to use when ordering `GroupTr`."""
-    orderBy: [GroupTrsOrderBy!] = [PRIMARY_KEY_ASC]
   ): GroupTrsConnection!
 }
 
@@ -1877,27 +1240,6 @@ type GroupTrsEdge {
   node: GroupTr!
 }
 
-"""Methods to use when ordering `GroupTr`."""
-enum GroupTrsOrderBy {
-  ACTIVITY_ASC
-  ACTIVITY_DESC
-  DESCRIPTION_ASC
-  DESCRIPTION_DESC
-  GROUP_ID_ASC
-  GROUP_ID_DESC
-  LANGUAGE_CODE_ASC
-  LANGUAGE_CODE_DESC
-  NATURAL
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
-  SHORT_DESCRIPTION_ASC
-  SHORT_DESCRIPTION_DESC
-  SLUG_ASC
-  SLUG_DESC
-  TITLE_ASC
-  TITLE_DESC
-}
-
 """A connection to a list of `Group` values."""
 type GroupsConnection {
   """
@@ -1938,6 +1280,8 @@ enum GroupsOrderBy {
 }
 
 type Image {
+  credit: String!
+
   """Reads and enables pagination through a set of `EventTag`."""
   eventTagsByImage(
     """Read all values in the set after (below) this cursor."""
@@ -1967,9 +1311,6 @@ type Image {
     based pagination. May not be used with `last`.
     """
     offset: Int
-
-    """The method to use when ordering `EventTag`."""
-    orderBy: [EventTagsOrderBy!] = [PRIMARY_KEY_ASC]
   ): EventTagsConnection!
 
   """Reads and enables pagination through a set of `Event`."""
@@ -2052,16 +1393,6 @@ type Image {
     """Read all values in the set before (above) this cursor."""
     before: Cursor
 
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: PictureCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: PictureFilter
-
     """Only read the first `n` values of the set."""
     first: Int
 
@@ -2080,42 +1411,9 @@ type Image {
   width: Int!
 }
 
-"""
-A condition to be used against `Image` object types. All fields are tested for equality and combined with a logical ‘and.’
-"""
-input ImageCondition {
-  """Checks for equality with the object’s `height` field."""
-  height: Int
-
-  """Checks for equality with the object’s `id` field."""
-  id: BigInt
-
-  """Checks for equality with the object’s `path` field."""
-  path: String
-
-  """Checks for equality with the object’s `width` field."""
-  width: Int
-}
-
-"""
-A filter to be used against `Image` object types. All fields are combined with a logical ‘and.’
-"""
-input ImageFilter {
-  """Filter by the object’s `height` field."""
-  height: IntFilter
-
-  """Filter by the object’s `id` field."""
-  id: BigIntFilter
-
-  """Filter by the object’s `path` field."""
-  path: StringFilter
-
-  """Filter by the object’s `width` field."""
-  width: IntFilter
-}
-
 """An input for mutations affecting `Image`"""
 input ImageInput {
+  credit: String!
   height: Int!
   id: BigInt
   path: String!
@@ -2126,27 +1424,11 @@ input ImageInput {
 Represents an update to a `Image`. Fields that are set will be updated.
 """
 input ImagePatch {
+  credit: String
   height: Int
   id: BigInt
   path: String
   width: Int
-}
-
-"""A connection to a list of `Image` values."""
-type ImagesConnection {
-  """
-  A list of edges which contains the `Image` and cursor to aid in pagination.
-  """
-  edges: [ImagesEdge!]!
-
-  """A list of `Image` objects."""
-  nodes: [Image!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Image` you could get from the connection."""
-  totalCount: Int!
 }
 
 """A `Image` edge in the connection."""
@@ -2156,21 +1438,6 @@ type ImagesEdge {
 
   """The `Image` at the end of the edge."""
   node: Image!
-}
-
-"""Methods to use when ordering `Image`."""
-enum ImagesOrderBy {
-  HEIGHT_ASC
-  HEIGHT_DESC
-  ID_ASC
-  ID_DESC
-  NATURAL
-  PATH_ASC
-  PATH_DESC
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
-  WIDTH_ASC
-  WIDTH_DESC
 }
 
 type InfoPage {
@@ -2209,9 +1476,6 @@ type InfoPage {
     based pagination. May not be used with `last`.
     """
     offset: Int
-
-    """The method to use when ordering `InfoPageTr`."""
-    orderBy: [InfoPageTrsOrderBy!] = [PRIMARY_KEY_ASC]
   ): InfoPageTrsConnection!
 }
 
@@ -2236,20 +1500,6 @@ input InfoPageFilter {
 
   """Filter by the object’s `name` field."""
   name: StringFilter
-}
-
-"""An input for mutations affecting `InfoPage`"""
-input InfoPageInput {
-  icon: String!
-  name: String!
-}
-
-"""
-Represents an update to a `InfoPage`. Fields that are set will be updated.
-"""
-input InfoPagePatch {
-  icon: String
-  name: String
 }
 
 type InfoPageTr {
@@ -2296,24 +1546,6 @@ input InfoPageTrFilter {
   title: StringFilter
 }
 
-"""An input for mutations affecting `InfoPageTr`"""
-input InfoPageTrInput {
-  infoPageName: String!
-  languageCode: TrLanguage!
-  subtitle: String!
-  title: String!
-}
-
-"""
-Represents an update to a `InfoPageTr`. Fields that are set will be updated.
-"""
-input InfoPageTrPatch {
-  infoPageName: String
-  languageCode: TrLanguage
-  subtitle: String
-  title: String
-}
-
 """A connection to a list of `InfoPageTr` values."""
 type InfoPageTrsConnection {
   """
@@ -2338,21 +1570,6 @@ type InfoPageTrsEdge {
 
   """The `InfoPageTr` at the end of the edge."""
   node: InfoPageTr!
-}
-
-"""Methods to use when ordering `InfoPageTr`."""
-enum InfoPageTrsOrderBy {
-  INFO_PAGE_NAME_ASC
-  INFO_PAGE_NAME_DESC
-  LANGUAGE_CODE_ASC
-  LANGUAGE_CODE_DESC
-  NATURAL
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
-  SUBTITLE_ASC
-  SUBTITLE_DESC
-  TITLE_ASC
-  TITLE_DESC
 }
 
 """A connection to a list of `InfoPage` values."""
@@ -2392,143 +1609,12 @@ enum InfoPagesOrderBy {
   PRIMARY_KEY_DESC
 }
 
-"""
-A filter to be used against Int fields. All fields are combined with a logical ‘and.’
-"""
-input IntFilter {
-  """Equal to the specified value."""
-  equalTo: Int
-
-  """Greater than the specified value."""
-  greaterThan: Int
-
-  """Greater than or equal to the specified value."""
-  greaterThanOrEqualTo: Int
-
-  """
-  Is null (if `true` is specified) or is not null (if `false` is specified).
-  """
-  isNull: Boolean
-
-  """Less than the specified value."""
-  lessThan: Int
-
-  """Less than or equal to the specified value."""
-  lessThanOrEqualTo: Int
-
-  """Not equal to the specified value."""
-  notEqualTo: Int
-}
-
 type Member {
   id: UUID!
   isActive: Boolean!
   name: String!
   userRole: String!
   username: String!
-}
-
-"""
-A condition to be used against `Member` object types. All fields are tested for equality and combined with a logical ‘and.’
-"""
-input MemberCondition {
-  """Checks for equality with the object’s `id` field."""
-  id: UUID
-
-  """Checks for equality with the object’s `isActive` field."""
-  isActive: Boolean
-
-  """Checks for equality with the object’s `name` field."""
-  name: String
-
-  """Checks for equality with the object’s `userRole` field."""
-  userRole: String
-
-  """Checks for equality with the object’s `username` field."""
-  username: String
-}
-
-"""
-A filter to be used against `Member` object types. All fields are combined with a logical ‘and.’
-"""
-input MemberFilter {
-  """Filter by the object’s `id` field."""
-  id: UUIDFilter
-
-  """Filter by the object’s `isActive` field."""
-  isActive: BooleanFilter
-
-  """Filter by the object’s `name` field."""
-  name: StringFilter
-
-  """Filter by the object’s `userRole` field."""
-  userRole: StringFilter
-
-  """Filter by the object’s `username` field."""
-  username: StringFilter
-}
-
-"""An input for mutations affecting `Member`"""
-input MemberInput {
-  id: UUID
-  isActive: Boolean!
-  name: String!
-  userRole: String!
-  username: String!
-}
-
-"""
-Represents an update to a `Member`. Fields that are set will be updated.
-"""
-input MemberPatch {
-  id: UUID
-  isActive: Boolean
-  name: String
-  userRole: String
-  username: String
-}
-
-"""A connection to a list of `Member` values."""
-type MembersConnection {
-  """
-  A list of edges which contains the `Member` and cursor to aid in pagination.
-  """
-  edges: [MembersEdge!]!
-
-  """A list of `Member` objects."""
-  nodes: [Member!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Member` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Member` edge in the connection."""
-type MembersEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Member` at the end of the edge."""
-  node: Member!
-}
-
-"""Methods to use when ordering `Member`."""
-enum MembersOrderBy {
-  ID_ASC
-  ID_DESC
-  IS_ACTIVE_ASC
-  IS_ACTIVE_DESC
-  NAME_ASC
-  NAME_DESC
-  NATURAL
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
-  USERNAME_ASC
-  USERNAME_DESC
-  USER_ROLE_ASC
-  USER_ROLE_DESC
 }
 
 """
@@ -2542,22 +1628,6 @@ type Mutation {
     input: AuthenticateInput!
   ): String!
 
-  """Creates a single `EventViaEventTag`."""
-  createEventViaEventTag(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreateEventViaEventTagInput!
-  ): CreateEventViaEventTagPayload
-
-  """Creates a single `EventViaGroup`."""
-  createEventViaGroup(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreateEventViaGroupInput!
-  ): CreateEventViaGroupPayload
-
   """Creates a single `Image`."""
   createImage(
     """
@@ -2566,30 +1636,6 @@ type Mutation {
     input: CreateImageInput!
   ): CreateImagePayload
 
-  """Creates a single `InfoPage`."""
-  createInfoPage(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreateInfoPageInput!
-  ): CreateInfoPagePayload
-
-  """Creates a single `InfoPageTr`."""
-  createInfoPageTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreateInfoPageTrInput!
-  ): CreateInfoPageTrPayload
-
-  """Creates a single `Member`."""
-  createMember(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreateMemberInput!
-  ): CreateMemberPayload
-
   """Creates a single `News`."""
   createNews(
     """
@@ -2597,14 +1643,6 @@ type Mutation {
     """
     input: CreateNewsInput!
   ): CreateNewsPayload
-
-  """Creates a single `NewsTr`."""
-  createNewsTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreateNewsTrInput!
-  ): CreateNewsTrPayload
 
   """Creates a single `Page`."""
   createPage(
@@ -2638,22 +1676,6 @@ type Mutation {
     input: CreateUploadUrlInput!
   ): CreateUploadUrlPayload
 
-  """Deletes a single `EventViaEventTag` using a unique key."""
-  deleteEventViaEventTag(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteEventViaEventTagInput!
-  ): DeleteEventViaEventTagPayload
-
-  """Deletes a single `EventViaGroup` using a unique key."""
-  deleteEventViaGroup(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteEventViaGroupInput!
-  ): DeleteEventViaGroupPayload
-
   """Deletes a single `Image` using a unique key."""
   deleteImage(
     """
@@ -2662,38 +1684,6 @@ type Mutation {
     input: DeleteImageInput!
   ): DeleteImagePayload
 
-  """Deletes a single `InfoPage` using a unique key."""
-  deleteInfoPage(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteInfoPageInput!
-  ): DeleteInfoPagePayload
-
-  """Deletes a single `InfoPageTr` using a unique key."""
-  deleteInfoPageTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteInfoPageTrInput!
-  ): DeleteInfoPageTrPayload
-
-  """Deletes a single `Member` using a unique key."""
-  deleteMember(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteMemberInput!
-  ): DeleteMemberPayload
-
-  """Deletes a single `Member` using a unique key."""
-  deleteMemberByUsername(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteMemberByUsernameInput!
-  ): DeleteMemberPayload
-
   """Deletes a single `News` using a unique key."""
   deleteNews(
     """
@@ -2701,14 +1691,6 @@ type Mutation {
     """
     input: DeleteNewsInput!
   ): DeleteNewsPayload
-
-  """Deletes a single `NewsTr` using a unique key."""
-  deleteNewsTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteNewsTrInput!
-  ): DeleteNewsTrPayload
 
   """Deletes a single `Page` using a unique key."""
   deletePage(
@@ -2741,22 +1723,6 @@ type Mutation {
     input: ReorderPicturesInput!
   ): ReorderPicturesPayload
 
-  """Updates a single `EventViaEventTag` using a unique key and a patch."""
-  updateEventViaEventTag(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateEventViaEventTagInput!
-  ): UpdateEventViaEventTagPayload
-
-  """Updates a single `EventViaGroup` using a unique key and a patch."""
-  updateEventViaGroup(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateEventViaGroupInput!
-  ): UpdateEventViaGroupPayload
-
   """Updates a single `Image` using a unique key and a patch."""
   updateImage(
     """
@@ -2765,38 +1731,6 @@ type Mutation {
     input: UpdateImageInput!
   ): UpdateImagePayload
 
-  """Updates a single `InfoPage` using a unique key and a patch."""
-  updateInfoPage(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateInfoPageInput!
-  ): UpdateInfoPagePayload
-
-  """Updates a single `InfoPageTr` using a unique key and a patch."""
-  updateInfoPageTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateInfoPageTrInput!
-  ): UpdateInfoPageTrPayload
-
-  """Updates a single `Member` using a unique key and a patch."""
-  updateMember(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateMemberInput!
-  ): UpdateMemberPayload
-
-  """Updates a single `Member` using a unique key and a patch."""
-  updateMemberByUsername(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateMemberByUsernameInput!
-  ): UpdateMemberPayload
-
   """Updates a single `News` using a unique key and a patch."""
   updateNews(
     """
@@ -2804,14 +1738,6 @@ type Mutation {
     """
     input: UpdateNewsInput!
   ): UpdateNewsPayload
-
-  """Updates a single `NewsTr` using a unique key and a patch."""
-  updateNewsTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateNewsTrInput!
-  ): UpdateNewsTrPayload
 
   """Updates a single `Page` using a unique key and a patch."""
   updatePage(
@@ -2883,9 +1809,6 @@ type News {
     based pagination. May not be used with `last`.
     """
     offset: Int
-
-    """The method to use when ordering `NewsTr`."""
-    orderBy: [NewsTrsOrderBy!] = [PRIMARY_KEY_ASC]
   ): NewsTrsConnection!
   updatedAt: Datetime!
 }
@@ -3015,24 +1938,6 @@ input NewsTrFilter {
   title: StringFilter
 }
 
-"""An input for mutations affecting `NewsTr`"""
-input NewsTrInput {
-  content: String!
-  languageCode: TrLanguage!
-  newsId: BigInt!
-  title: String!
-}
-
-"""
-Represents an update to a `NewsTr`. Fields that are set will be updated.
-"""
-input NewsTrPatch {
-  content: String
-  languageCode: TrLanguage
-  newsId: BigInt
-  title: String
-}
-
 """A connection to a list of `NewsTr` values."""
 type NewsTrsConnection {
   """
@@ -3057,21 +1962,6 @@ type NewsTrsEdge {
 
   """The `NewsTr` at the end of the edge."""
   node: NewsTr!
-}
-
-"""Methods to use when ordering `NewsTr`."""
-enum NewsTrsOrderBy {
-  CONTENT_ASC
-  CONTENT_DESC
-  LANGUAGE_CODE_ASC
-  LANGUAGE_CODE_DESC
-  NATURAL
-  NEWS_ID_ASC
-  NEWS_ID_DESC
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
-  TITLE_ASC
-  TITLE_DESC
 }
 
 type Page {
@@ -3108,9 +1998,6 @@ type Page {
     based pagination. May not be used with `last`.
     """
     offset: Int
-
-    """The method to use when ordering `PageTr`."""
-    orderBy: [PageTrsOrderBy!] = [PRIMARY_KEY_ASC]
   ): PageTrsConnection!
 }
 
@@ -3234,19 +2121,6 @@ type PageTrsEdge {
   node: PageTr!
 }
 
-"""Methods to use when ordering `PageTr`."""
-enum PageTrsOrderBy {
-  CONTENT_ASC
-  CONTENT_DESC
-  LANGUAGE_CODE_ASC
-  LANGUAGE_CODE_DESC
-  NATURAL
-  PAGE_NAME_ASC
-  PAGE_NAME_DESC
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
-}
-
 """A connection to a list of `Page` values."""
 type PagesConnection {
   """
@@ -3291,40 +2165,6 @@ type Picture {
   imageByImage: Image
   img: ResponsiveImage!
   rank: Int!
-}
-
-"""
-A condition to be used against `Picture` object types. All fields are tested for equality and combined with a logical ‘and.’
-"""
-input PictureCondition {
-  """Checks for equality with the object’s `allowOnHome` field."""
-  allowOnHome: Boolean
-
-  """Checks for equality with the object’s `id` field."""
-  id: BigInt
-
-  """Checks for equality with the object’s `image` field."""
-  image: BigInt
-
-  """Checks for equality with the object’s `rank` field."""
-  rank: Int
-}
-
-"""
-A filter to be used against `Picture` object types. All fields are combined with a logical ‘and.’
-"""
-input PictureFilter {
-  """Filter by the object’s `allowOnHome` field."""
-  allowOnHome: BooleanFilter
-
-  """Filter by the object’s `id` field."""
-  id: BigIntFilter
-
-  """Filter by the object’s `image` field."""
-  image: BigIntFilter
-
-  """Filter by the object’s `rank` field."""
-  rank: IntFilter
 }
 
 """An input for mutations affecting `Picture`"""
@@ -3391,113 +2231,10 @@ type Query {
   currentMember: Member
   event(id: BigInt!): Event
   eventBySlug(preferredLanguageCode: String!, slug: String!): Event
-  eventImage(eid: Int!, overrideImage: Int!): Int
   eventTag(id: BigInt!): EventTag
   eventTagTr(languageCode: TrLanguage!, tagId: BigInt!): EventTagTr
-
-  """Reads and enables pagination through a set of `EventTagTr`."""
-  eventTagTrs(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: EventTagTrCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventTagTrFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `EventTagTr`."""
-    orderBy: [EventTagTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTagTrsConnection
-
-  """Reads and enables pagination through a set of `EventTag`."""
-  eventTags(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: EventTagCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventTagFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `EventTag`."""
-    orderBy: [EventTagsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTagsConnection
   eventTr(eventId: BigInt!, languageCode: TrLanguage!): EventTr
   eventTrBySlugAndLanguageCode(languageCode: TrLanguage!, slug: String!): EventTr
-
-  """Reads and enables pagination through a set of `EventTr`."""
-  eventTrs(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: EventTrCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventTrFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `EventTr`."""
-    orderBy: [EventTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventTrsConnection
   eventViaEventTag(eventId: BigInt!, tagId: BigInt!): EventViaEventTag
   eventViaGroup(eventId: BigInt!, groupId: BigInt!): EventViaGroup
 
@@ -3561,40 +2298,6 @@ type Query {
   groupTr(groupId: BigInt!, languageCode: TrLanguage!): GroupTr
   groupTrBySlugAndLanguageCode(languageCode: TrLanguage!, slug: String!): GroupTr
 
-  """Reads and enables pagination through a set of `GroupTr`."""
-  groupTrs(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: GroupTrCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: GroupTrFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `GroupTr`."""
-    orderBy: [GroupTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): GroupTrsConnection
-
   """Reads and enables pagination through a set of `Group`."""
   groups(
     """Read all values in the set after (below) this cursor."""
@@ -3629,76 +2332,8 @@ type Query {
     orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
   ): GroupsConnection
   image(id: BigInt!): Image
-
-  """Reads and enables pagination through a set of `Image`."""
-  images(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: ImageCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: ImageFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `Image`."""
-    orderBy: [ImagesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): ImagesConnection
   infoPage(name: String!): InfoPage
   infoPageTr(infoPageName: String!, languageCode: TrLanguage!): InfoPageTr
-
-  """Reads and enables pagination through a set of `InfoPageTr`."""
-  infoPageTrs(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: InfoPageTrCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: InfoPageTrFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `InfoPageTr`."""
-    orderBy: [InfoPageTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): InfoPageTrsConnection
 
   """Reads and enables pagination through a set of `InfoPage`."""
   infoPages(
@@ -3733,78 +2368,8 @@ type Query {
     """The method to use when ordering `InfoPage`."""
     orderBy: [InfoPagesOrderBy!] = [PRIMARY_KEY_ASC]
   ): InfoPagesConnection
-  member(id: UUID!): Member
-  memberByUsername(username: String!): Member
-
-  """Reads and enables pagination through a set of `Member`."""
-  members(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: MemberCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: MemberFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `Member`."""
-    orderBy: [MembersOrderBy!] = [PRIMARY_KEY_ASC]
-  ): MembersConnection
   news(id: BigInt!): News
   newsTr(languageCode: TrLanguage!, newsId: BigInt!): NewsTr
-
-  """Reads and enables pagination through a set of `NewsTr`."""
-  newsTrs(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: NewsTrCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: NewsTrFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `NewsTr`."""
-    orderBy: [NewsTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): NewsTrsConnection
 
   """Reads and enables pagination through a set of `News`."""
   newses(
@@ -3841,40 +2406,6 @@ type Query {
   ): NewsConnection
   page(name: String!): Page
   pageTr(languageCode: TrLanguage!, pageName: String!): PageTr
-
-  """Reads and enables pagination through a set of `PageTr`."""
-  pageTrs(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: PageTrCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: PageTrFilter
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """The method to use when ordering `PageTr`."""
-    orderBy: [PageTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): PageTrsConnection
 
   """Reads and enables pagination through a set of `Page`."""
   pages(
@@ -3918,16 +2449,6 @@ type Query {
 
     """Read all values in the set before (above) this cursor."""
     before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: PictureCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: PictureFilter
 
     """Only read the first `n` values of the set."""
     first: Int
@@ -4072,6 +2593,7 @@ input ReorderPicturesReorderInput {
 }
 
 type ResponsiveImage {
+  credit: String!
   height: Int!
   src: String!
   srcSetJpeg: String!
@@ -4145,124 +2667,6 @@ A universally unique identifier as defined by [RFC 4122](https://tools.ietf.org/
 """
 scalar UUID
 
-"""
-A filter to be used against UUID fields. All fields are combined with a logical ‘and.’
-"""
-input UUIDFilter {
-  """Equal to the specified value."""
-  equalTo: UUID
-
-  """Greater than the specified value."""
-  greaterThan: UUID
-
-  """Greater than or equal to the specified value."""
-  greaterThanOrEqualTo: UUID
-
-  """
-  Is null (if `true` is specified) or is not null (if `false` is specified).
-  """
-  isNull: Boolean
-
-  """Less than the specified value."""
-  lessThan: UUID
-
-  """Less than or equal to the specified value."""
-  lessThanOrEqualTo: UUID
-
-  """Not equal to the specified value."""
-  notEqualTo: UUID
-}
-
-"""All input for the `updateEventViaEventTag` mutation."""
-input UpdateEventViaEventTagInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  eventId: BigInt!
-
-  """
-  An object where the defined keys will be set on the `EventViaEventTag` being updated.
-  """
-  patch: EventViaEventTagPatch!
-  tagId: BigInt!
-}
-
-"""The output of our update `EventViaEventTag` mutation."""
-type UpdateEventViaEventTagPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """Reads a single `Event` that is related to this `EventViaEventTag`."""
-  event: Event
-
-  """The `EventViaEventTag` that was updated by this mutation."""
-  eventViaEventTag: EventViaEventTag
-
-  """An edge for our `EventViaEventTag`. May be used by Relay 1."""
-  eventViaEventTagEdge(
-    """The method to use when ordering `EventViaEventTag`."""
-    orderBy: [EventViaEventTagsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventViaEventTagsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-
-  """Reads a single `EventTag` that is related to this `EventViaEventTag`."""
-  tag: EventTag
-}
-
-"""All input for the `updateEventViaGroup` mutation."""
-input UpdateEventViaGroupInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  eventId: BigInt!
-  groupId: BigInt!
-
-  """
-  An object where the defined keys will be set on the `EventViaGroup` being updated.
-  """
-  patch: EventViaGroupPatch!
-}
-
-"""The output of our update `EventViaGroup` mutation."""
-type UpdateEventViaGroupPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """Reads a single `Event` that is related to this `EventViaGroup`."""
-  event: Event
-
-  """The `EventViaGroup` that was updated by this mutation."""
-  eventViaGroup: EventViaGroup
-
-  """An edge for our `EventViaGroup`. May be used by Relay 1."""
-  eventViaGroupEdge(
-    """The method to use when ordering `EventViaGroup`."""
-    orderBy: [EventViaGroupsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventViaGroupsEdge
-
-  """Reads a single `Group` that is related to this `EventViaGroup`."""
-  group: Group
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
 """All input for the `updateImage` mutation."""
 input UpdateImageInput {
   """
@@ -4290,146 +2694,7 @@ type UpdateImagePayload {
   image: Image
 
   """An edge for our `Image`. May be used by Relay 1."""
-  imageEdge(
-    """The method to use when ordering `Image`."""
-    orderBy: [ImagesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): ImagesEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `updateInfoPage` mutation."""
-input UpdateInfoPageInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  name: String!
-
-  """
-  An object where the defined keys will be set on the `InfoPage` being updated.
-  """
-  patch: InfoPagePatch!
-}
-
-"""The output of our update `InfoPage` mutation."""
-type UpdateInfoPagePayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `InfoPage` that was updated by this mutation."""
-  infoPage: InfoPage
-
-  """An edge for our `InfoPage`. May be used by Relay 1."""
-  infoPageEdge(
-    """The method to use when ordering `InfoPage`."""
-    orderBy: [InfoPagesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): InfoPagesEdge
-
-  """Reads a single `Page` that is related to this `InfoPage`."""
-  pageByName: Page
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `updateInfoPageTr` mutation."""
-input UpdateInfoPageTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  infoPageName: String!
-  languageCode: TrLanguage!
-
-  """
-  An object where the defined keys will be set on the `InfoPageTr` being updated.
-  """
-  patch: InfoPageTrPatch!
-}
-
-"""The output of our update `InfoPageTr` mutation."""
-type UpdateInfoPageTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """Reads a single `InfoPage` that is related to this `InfoPageTr`."""
-  infoPageByInfoPageName: InfoPage
-
-  """The `InfoPageTr` that was updated by this mutation."""
-  infoPageTr: InfoPageTr
-
-  """An edge for our `InfoPageTr`. May be used by Relay 1."""
-  infoPageTrEdge(
-    """The method to use when ordering `InfoPageTr`."""
-    orderBy: [InfoPageTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): InfoPageTrsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `updateMemberByUsername` mutation."""
-input UpdateMemberByUsernameInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """
-  An object where the defined keys will be set on the `Member` being updated.
-  """
-  patch: MemberPatch!
-  username: String!
-}
-
-"""All input for the `updateMember` mutation."""
-input UpdateMemberInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  id: UUID!
-
-  """
-  An object where the defined keys will be set on the `Member` being updated.
-  """
-  patch: MemberPatch!
-}
-
-"""The output of our update `Member` mutation."""
-type UpdateMemberPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `Member` that was updated by this mutation."""
-  member: Member
-
-  """An edge for our `Member`. May be used by Relay 1."""
-  memberEdge(
-    """The method to use when ordering `Member`."""
-    orderBy: [MembersOrderBy!] = [PRIMARY_KEY_ASC]
-  ): MembersEdge
+  imageEdge: ImagesEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -4468,48 +2733,6 @@ type UpdateNewsPayload {
     """The method to use when ordering `News`."""
     orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
   ): NewsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `updateNewsTr` mutation."""
-input UpdateNewsTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  languageCode: TrLanguage!
-  newsId: BigInt!
-
-  """
-  An object where the defined keys will be set on the `NewsTr` being updated.
-  """
-  patch: NewsTrPatch!
-}
-
-"""The output of our update `NewsTr` mutation."""
-type UpdateNewsTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """Reads a single `News` that is related to this `NewsTr`."""
-  news: News
-
-  """The `NewsTr` that was updated by this mutation."""
-  newsTr: NewsTr
-
-  """An edge for our `NewsTr`. May be used by Relay 1."""
-  newsTrEdge(
-    """The method to use when ordering `NewsTr`."""
-    orderBy: [NewsTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): NewsTrsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -4586,10 +2809,7 @@ type UpdatePageTrPayload {
   pageTr: PageTr
 
   """An edge for our `PageTr`. May be used by Relay 1."""
-  pageTrEdge(
-    """The method to use when ordering `PageTr`."""
-    orderBy: [PageTrsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): PageTrsEdge
+  pageTrEdge: PageTrsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.

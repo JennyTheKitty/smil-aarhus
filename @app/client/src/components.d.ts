@@ -69,6 +69,7 @@ declare module 'vue' {
     IconSmilFetlife: typeof import('~icons/smil/fetlife')['default']
     IconSmilLogo: typeof import('~icons/smil/logo')['default']
     IconSmilLogoAarhus: typeof import('~icons/smil/logo-aarhus')['default']
+    Image: typeof import('./components/Image.vue')['default']
     ImageUpload: typeof import('./components/Form/ImageUpload.vue')['default']
     Lang: typeof import('./components/Lang.vue')['default']
     LocaleSwitcher: typeof import('./components/Nav/LocaleSwitcher.vue')['default']

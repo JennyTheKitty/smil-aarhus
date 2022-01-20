@@ -17,6 +17,8 @@ CREATE TABLE smil_aarhus.member(
     is_active boolean NOT NULL
 );
 
+comment on table smil_aarhus.member is E'@omit';
+
 CREATE TABLE smil_aarhus_private.member_account(
     member_id uuid PRIMARY KEY REFERENCES smil_aarhus.member(
         id

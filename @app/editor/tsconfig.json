@@ -5,13 +5,12 @@
     "outDir": "dist",
     "allowJs": true,
     "lib": ["esnext", "dom"],
-    "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo",
     "declarationDir": "dist",
-    "types": ["vite/client", "@intlify/vite-plugin-vue-i18n/client"],
+    "declaration": true,
+    "rootDir": "./src",
     "paths": {
       "~/*": ["src/*"]
-    },
-    "jsxFactory": "VueJSX"
+    }
   },
   "include": [
     "src/**/*.js",

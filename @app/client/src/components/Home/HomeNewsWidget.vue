@@ -49,7 +49,7 @@ const firstLine = computed(() => {
   if (!news.value) return;
   let doc: Document;
   if (jsdom) {
-    doc = new jsdom.JSDOM(`...`).window.document;
+    doc = new jsdom.JSDOM(news.value!.content).window.document;
   } else {
     doc = new DOMParser().parseFromString(news.value!.content, 'text/html');
   }

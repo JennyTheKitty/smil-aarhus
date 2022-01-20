@@ -1,0 +1,46 @@
+{
+  "name": "@app/editor",
+  "version": "31.1.0",
+  "main": "./dist/ckeditor.js",
+  "files": [
+    "dist",
+    "ckeditor5-metadata.json"
+  ],
+  "dependencies": {
+    "@ckeditor/ckeditor5-basic-styles": "^31.0.0",
+    "@ckeditor/ckeditor5-build-classic": "^31.0.0",
+    "@ckeditor/ckeditor5-build-inline": "^31.0.0",
+    "@ckeditor/ckeditor5-editor-inline": "^31.0.0",
+    "@ckeditor/ckeditor5-essentials": "^31.0.0",
+    "@ckeditor/ckeditor5-heading": "^31.0.0",
+    "@ckeditor/ckeditor5-link": "^31.0.0",
+    "@ckeditor/ckeditor5-list": "^31.0.0",
+    "@ckeditor/ckeditor5-paragraph": "^31.0.0",
+    "@ckeditor/ckeditor5-paste-from-office": "^31.0.0",
+    "@ckeditor/ckeditor5-source-editing": "^31.0.0",
+    "@ckeditor/ckeditor5-typing": "^31.0.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "ts-loader": "^9.2.6"
+  },
+  "devDependencies": {
+    "@ckeditor/ckeditor5-core": "^31.1.0",
+    "@ckeditor/ckeditor5-dev-utils": "^27.1.0",
+    "@ckeditor/ckeditor5-dev-webpack-plugin": "^27.1.0",
+    "@ckeditor/ckeditor5-theme-lark": "^31.1.0",
+    "css-loader": "^5.2.7",
+    "postcss-loader": "^4.3.0",
+    "raw-loader": "^4.0.1",
+    "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^4.2.3",
+    "webpack": "^5.58.1",
+    "webpack-cli": "^4.9.0"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=5.7.1"
+  },
+  "scripts": {
+    "build": "webpack --mode production",
+    "preversion": "npm run build"
+  }
+}

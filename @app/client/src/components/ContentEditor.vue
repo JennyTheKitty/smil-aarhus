@@ -8,10 +8,8 @@
 </template>
 
 <script setup lang="ts">
+import { ClassicEditor, InlineEditor } from '@app/editor';
 import CKEditor from '@ckeditor/ckeditor5-vue';
-
-import { ClassicEditor, InlineEditor } from '../ckeditor';
-
 const config = {
   toolbar: {
     shouldNotGroupWhenFull: true,

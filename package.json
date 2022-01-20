@@ -24,6 +24,7 @@
     "db": "yarn workspace @app/db",
     "graphql": "yarn workspace @app/graphql",
     "server": "yarn workspace @app/server",
+    "editor": "yarn workspace @app/editor",
     "docker": "yarn --cwd ./docker",
     "docker-compose": "yarn --cwd ./docker compose"
   },

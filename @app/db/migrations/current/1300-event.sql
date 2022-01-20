@@ -23,7 +23,7 @@ CREATE TABLE smil_aarhus.event_tr(
     UNIQUE (slug, language_code)
 );
 
-COMMENT ON TABLE smil_aarhus.event_tr IS E'@omit create,update,delete';
+COMMENT ON TABLE smil_aarhus.event_tr IS E'@omit create,update,delete,all,order';
 
 COMMENT ON CONSTRAINT event_tr_event_id_fkey ON smil_aarhus.event_tr IS E'@foreignFieldName translations';
 
@@ -111,7 +111,7 @@ BEGIN
 END
 $$ LANGUAGE plpgsql STABLE;
 
-COMMENT ON FUNCTION smil_aarhus.event_image IS E'@omit all';
+COMMENT ON FUNCTION smil_aarhus.event_image IS E'@omit all,execute';
 
 CREATE TYPE smil_aarhus.event_data AS (
     starts_at TIMESTAMPTZ,

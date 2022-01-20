@@ -5,7 +5,6 @@ import {
 } from '@app/graphql/dist/client';
 import { ClientHandle } from '@urql/vue';
 import { MaybeRef } from '@vueuse/core';
-import axios from 'axios';
 import { InjectionKey, Ref } from 'vue';
 
 import { FALLBACK_LANGUAGE } from './i18n';
@@ -113,6 +112,7 @@ export async function uploadFile(
   progressCallback: (percent: number) => void
 ): Promise<string> {
   info.data.append('file', file);
+  const axios = (await import('axios')).default;
   const res = await axios.post(info.url, info.data, {
     onUploadProgress: (e: ProgressEvent) =>
       progressCallback(e.loaded / e.total),

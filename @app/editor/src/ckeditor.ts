@@ -10,10 +10,10 @@ import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph.js';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
 
-class ClassicEditor extends ClassicEditorBase {}
-class InlineEditor extends InlineEditorBase {}
+export class ClassicEditor extends ClassicEditorBase {}
+export class InlineEditor extends InlineEditorBase {}
 
-ClassicEditor.builtinPlugins = [
+const builtinPlugins = [
   Bold,
   Essentials,
   Heading,
@@ -24,9 +24,8 @@ ClassicEditor.builtinPlugins = [
   PasteFromOffice,
   TextTransformation,
 ];
-InlineEditor.builtinPlugins = ClassicEditor.builtinPlugins;
 
-ClassicEditor.defaultConfig = {
+const defaultConfig = {
   toolbar: {
     items: [
       'heading',
@@ -43,6 +42,9 @@ ClassicEditor.defaultConfig = {
   },
   language: 'en',
 };
-InlineEditor.defaultConfig = ClassicEditor.defaultConfig;
 
-export { ClassicEditor, InlineEditor };
+(ClassicEditor as any).builtinPlugins = builtinPlugins;
+(InlineEditor as any).builtinPlugins = builtinPlugins;
+
+(ClassicEditor as any).defaultConfig = defaultConfig;
+(InlineEditor as any).defaultConfig = defaultConfig;

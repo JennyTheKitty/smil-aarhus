@@ -2,7 +2,8 @@ import { RouteRecordRaw } from 'vue-router';
 
 import Lang from './components/Lang.vue';
 import { SUPPORTED_LANGUAGES, Trans } from './i18n';
-import * as pages from './pages';
+
+import Home from './pages/Home.vue';
 
 export enum Route {
   HOME = 'HOME',
@@ -17,31 +18,31 @@ export enum Route {
 const i18nRoutes = {
   [Route.HOME]: {
     paths: { da: '', en: '' },
-    component: pages.Home,
+    component: Home,
   },
   [Route.INFO]: {
     paths: { da: 'info', en: 'info' },
-    component: pages.Info,
+    component: () => import('./pages/Info.vue'),
   },
   [Route.CALENDAR]: {
     paths: { da: 'kalender/:slug?', en: 'calendar/:slug?' },
-    component: pages.Calendar,
+    component: () => import('./pages/Calendar.vue'),
   },
   [Route.PICTURES]: {
     paths: { da: 'billeder', en: 'pictures' },
-    component: pages.Pictures,
+    component: () => import('./pages/Pictures.vue'),
   },
   [Route.GROUPS]: {
     paths: { da: 'grupper', en: 'groups' },
-    component: pages.Groups,
+    component: () => import('./pages/Groups.vue'),
   },
   [Route.GROUP]: {
     paths: { da: 'grupper/:slug', en: 'groups/:slug' },
-    component: pages.Group,
+    component: () => import('./pages/Group.vue'),
   },
   [Route.NEWS]: {
     paths: { da: 'nyheder/:slug?', en: 'news/:slug?' },
-    component: pages.News,
+    component: () => import('./pages/News.vue'),
   },
 } as {
   [name in Route]: {
@@ -62,7 +63,7 @@ export const routes = [
       })),
       {
         path: ':path(.+)+',
-        component: pages.NotFound,
+        component: () => import('./pages/NotFound.vue'),
       },
     ],
   })),

@@ -76,6 +76,11 @@ const route = useRoute();
 const store = useStore();
 const editing = ref(false);
 
+const GroupDialog = useWaitImportComponent(
+  editing,
+  () => import('../components/GroupDialog.vue')
+);
+
 const { data } = useQuery({
   query: GroupQueryDocument,
   variables: {

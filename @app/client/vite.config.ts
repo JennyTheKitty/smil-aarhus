@@ -26,6 +26,14 @@ export default defineConfig({
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
+      '@vue/compiler-dom': path.resolve(__dirname, 'src', 'shims', 'blank.js'),
+      '@vue/compiler-core': path.resolve(__dirname, 'src', 'shims', 'blank.js'),
+      'graphql/language/parser.mjs': path.resolve(
+        __dirname,
+        'src',
+        'shims',
+        'parse.js'
+      ),
     },
   },
   server: {
@@ -40,7 +48,10 @@ export default defineConfig({
       output: {
         comments: false,
       },
+      mangle: true,
     },
+    polyfillModulePreload: false,
+    reportCompressedSize: false,
   },
   optimizeDeps: {
     include: [
@@ -97,6 +108,58 @@ export default defineConfig({
         /ContentEditor.vue/,
         /Pictures.vue/,
       ],
+      build: {
+        clientOptions: {
+          build: {
+            rollupOptions: {
+              output: {
+                manualChunks: (id) => {
+                  if (id.includes('~icons')) {
+                    return 'vendor';
+                  }
+                  if (id.includes('node_modules')) {
+                    if (id.includes('@fullcalendar')) {
+                      return 'vendor_cal';
+                    }
+                    if (id.includes('preact')) {
+                      return 'vendor_preact';
+                    }
+                    if (id.includes('muuri') || id.includes('photoswipe')) {
+                      return 'vendor_pic';
+                    }
+                    if (id.includes('axios')) {
+                      return 'vendor_axios';
+                    }
+                    if (
+                      id.includes('naive-ui') ||
+                      id.includes('date-fns') ||
+                      id.includes('vueuc') ||
+                      id.includes('seemly') ||
+                      id.includes('vooks') ||
+                      id.includes('vfonts') ||
+                      id.includes('vdirs') ||
+                      id.includes('treemate') ||
+                      id.includes('async-validator') ||
+                      id.includes('evtd') ||
+                      id.includes('highlight.js') ||
+                      id.includes('@ckeditor') ||
+                      id.includes('resize-observer-polyfill') ||
+                      id.includes('css-render') ||
+                      id.includes('lodash') ||
+                      id.includes('@emotion') ||
+                      id.includes('csstype')
+                    ) {
+                      return 'vendor_authed';
+                    }
+
+                    return 'vendor'; // all other package goes here
+                  }
+                },
+              },
+            },
+          },
+        },
+      },
     }),
     Vue({
       include: [/\.vue$/],
@@ -163,33 +226,5 @@ export default defineConfig({
     }),
     WindiCSS({}),
     imagetools(),
-    ((options) => {
-      return {
-        name: 'vite-ckeditor-svg-raw-plugin',
-        transform(code, id) {
-          if (options.fileRegex.test(id)) {
-            // eslint-disable-next-line no-param-reassign
-            code = fs.readFileSync(id, 'utf8');
-
-            const json = JSON.stringify(code)
-              .replace(/\u2028/g, '\\u2028')
-              .replace(/\u2029/g, '\\u2029');
-            return {
-              code: `export default ${json}`,
-              map: { mappings: '' },
-            };
-          }
-        },
-        generateBundle(_, bundle) {
-          for (const [filename, info] of Object.entries(bundle)) {
-            if (options.fileRegex.test((info as AssetInfo).name)) {
-              delete bundle[filename];
-            }
-          }
-        },
-      };
-    })({
-      fileRegex: /@ckeditor\/.*\.svg/,
-    }),
   ],
 });

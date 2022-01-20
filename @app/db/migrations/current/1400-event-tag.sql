@@ -4,7 +4,7 @@ CREATE TABLE smil_aarhus.event_tag(
 );
 
 
-COMMENT ON TABLE smil_aarhus.event_tag IS E'@omit create,update,delete';
+COMMENT ON TABLE smil_aarhus.event_tag IS E'@omit create,update,delete,all,order';
 
 CREATE TABLE smil_aarhus.event_tag_tr(
     tag_id bigint constraint event_tag_tr_tag_id_fkey REFERENCES smil_aarhus.event_tag(id),
@@ -14,7 +14,7 @@ CREATE TABLE smil_aarhus.event_tag_tr(
 );
 
 
-COMMENT ON TABLE smil_aarhus.event_tag_tr IS E'@omit create,update,delete';
+COMMENT ON TABLE smil_aarhus.event_tag_tr IS E'@omit create,update,delete,all,order';
 
 COMMENT ON CONSTRAINT event_tag_tr_tag_id_fkey ON smil_aarhus.event_tag_tr IS E'@foreignFieldName translations';
 
@@ -60,7 +60,7 @@ create table smil_aarhus.event_via_event_tag (
   primary key (event_id, tag_id)
 );
 
-comment on table smil_aarhus.event_via_event_tag is E'@omit all';
+comment on table smil_aarhus.event_via_event_tag is E'@omit all,create,delete,update,order,filter';
 
 comment on constraint event_via_event_tag_tag_id_fkey on smil_aarhus.event_via_event_tag is E'@foreignFieldName events\n@manyToManyFieldName events';
 comment on constraint event_via_event_tag_event_id_fkey on smil_aarhus.event_via_event_tag is E'@foreignFieldName tags\n@manyToManyFieldName tags';

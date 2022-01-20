@@ -46,10 +46,6 @@ const route = useRoute();
 const { locale } = useI18n();
 const calendar = ref<ICalendarWidget | null>(null);
 
-const CalendarWidget = defineAsyncComponent(
-  () => import('../components/Calendar/CalendarWidget.vue')
-);
-
 const selectedEvent = ref({
   event: null as NonNullable<CalendarEventBySlugQuery['eventBySlug']> | null,
   eventEl: null as HTMLElement | null,
