@@ -95,6 +95,7 @@ export default defineConfig({
       'graphql-tag',
       'jsdom',
       'muuri',
+      'preact',
     ],
     exclude: ['vue-demi'],
   },
@@ -104,7 +105,7 @@ export default defineConfig({
   plugins: [
     viteSSR({
       excludeSsrComponents: [
-        /MonthCalendar.vue/,
+        /CalendarWidget.vue/,
         /ContentEditor.vue/,
         /Pictures.vue/,
       ],

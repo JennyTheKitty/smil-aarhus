@@ -21,7 +21,7 @@ const i18nRoutes = {
     component: Home,
   },
   [Route.INFO]: {
-    paths: { da: 'info', en: 'info' },
+    paths: { da: 'info/:slug', en: 'info/:slug' },
     component: () => import('./pages/Info.vue'),
   },
   [Route.CALENDAR]: {

@@ -164,57 +164,6 @@
       },
       {
         "kind": "OBJECT",
-        "name": "CreatePageTrPayload",
-        "fields": [
-          {
-            "name": "clientMutationId",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Any"
-            },
-            "args": []
-          },
-          {
-            "name": "pageByPageName",
-            "type": {
-              "kind": "OBJECT",
-              "name": "Page",
-              "ofType": null
-            },
-            "args": []
-          },
-          {
-            "name": "pageTr",
-            "type": {
-              "kind": "OBJECT",
-              "name": "PageTr",
-              "ofType": null
-            },
-            "args": []
-          },
-          {
-            "name": "pageTrEdge",
-            "type": {
-              "kind": "OBJECT",
-              "name": "PageTrsEdge",
-              "ofType": null
-            },
-            "args": []
-          },
-          {
-            "name": "query",
-            "type": {
-              "kind": "OBJECT",
-              "name": "Query",
-              "ofType": null
-            },
-            "args": []
-          }
-        ],
-        "interfaces": []
-      },
-      {
-        "kind": "OBJECT",
         "name": "CreatePicturePayload",
         "fields": [
           {
@@ -489,65 +438,6 @@
                 }
               }
             ]
-          },
-          {
-            "name": "query",
-            "type": {
-              "kind": "OBJECT",
-              "name": "Query",
-              "ofType": null
-            },
-            "args": []
-          }
-        ],
-        "interfaces": []
-      },
-      {
-        "kind": "OBJECT",
-        "name": "DeletePageTrPayload",
-        "fields": [
-          {
-            "name": "clientMutationId",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Any"
-            },
-            "args": []
-          },
-          {
-            "name": "deletedPageTrNodeId",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Any"
-            },
-            "args": []
-          },
-          {
-            "name": "pageByPageName",
-            "type": {
-              "kind": "OBJECT",
-              "name": "Page",
-              "ofType": null
-            },
-            "args": []
-          },
-          {
-            "name": "pageTr",
-            "type": {
-              "kind": "OBJECT",
-              "name": "PageTr",
-              "ofType": null
-            },
-            "args": []
-          },
-          {
-            "name": "pageTrEdge",
-            "type": {
-              "kind": "OBJECT",
-              "name": "PageTrsEdge",
-              "ofType": null
-            },
-            "args": []
           },
           {
             "name": "query",
@@ -2691,6 +2581,17 @@
             "args": []
           },
           {
+            "name": "rank",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
             "name": "translations",
             "type": {
               "kind": "NON_NULL",
@@ -2710,20 +2611,6 @@
               },
               {
                 "name": "before",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Any"
-                }
-              },
-              {
-                "name": "condition",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Any"
-                }
-              },
-              {
-                "name": "filter",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Any"
@@ -3150,26 +3037,6 @@
             ]
           },
           {
-            "name": "createPageTr",
-            "type": {
-              "kind": "OBJECT",
-              "name": "CreatePageTrPayload",
-              "ofType": null
-            },
-            "args": [
-              {
-                "name": "input",
-                "type": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "Any"
-                  }
-                }
-              }
-            ]
-          },
-          {
             "name": "createPicture",
             "type": {
               "kind": "OBJECT",
@@ -3254,26 +3121,6 @@
             "type": {
               "kind": "OBJECT",
               "name": "DeletePagePayload",
-              "ofType": null
-            },
-            "args": [
-              {
-                "name": "input",
-                "type": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "Any"
-                  }
-                }
-              }
-            ]
-          },
-          {
-            "name": "deletePageTr",
-            "type": {
-              "kind": "OBJECT",
-              "name": "DeletePageTrPayload",
               "ofType": null
             },
             "args": [
@@ -3462,6 +3309,26 @@
             "type": {
               "kind": "OBJECT",
               "name": "UpsertGroupPayload",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "input",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "upsertInfoPage",
+            "type": {
+              "kind": "OBJECT",
+              "name": "UpsertInfoPagePayload",
               "ofType": null
             },
             "args": [
@@ -4997,20 +4864,6 @@
                 }
               },
               {
-                "name": "condition",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Any"
-                }
-              },
-              {
-                "name": "filter",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Any"
-                }
-              },
-              {
                 "name": "first",
                 "type": {
                   "kind": "SCALAR",
@@ -6082,6 +5935,71 @@
             "type": {
               "kind": "OBJECT",
               "name": "Image",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "query",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Query",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "UpsertInfoPagePayload",
+        "fields": [
+          {
+            "name": "clientMutationId",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
+            "name": "infoPage",
+            "type": {
+              "kind": "OBJECT",
+              "name": "InfoPage",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "infoPageEdge",
+            "type": {
+              "kind": "OBJECT",
+              "name": "InfoPagesEdge",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "orderBy",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Any"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "pageByName",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Page",
               "ofType": null
             },
             "args": []

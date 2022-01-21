@@ -189,4 +189,4 @@ END
 $$ LANGUAGE plpgsql;
 
 
-GRANT EXECUTE ON FUNCTION smil_aarhus.upsert_event TO smil_anonymous, smil_organizer, smil_admin;
+GRANT EXECUTE ON FUNCTION smil_aarhus.upsert_event TO smil_organizer, smil_admin;

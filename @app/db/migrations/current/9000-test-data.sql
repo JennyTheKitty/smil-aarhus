@@ -11,127 +11,127 @@ INSERT INTO smil_aarhus.image (id,"path",width,height, credit) VALUES
 	 (5,'media/5ac9c28d-ee1b-4e0d-9b50-8b43690faff7.jpeg',1400,1050, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
 	 (6,'media/85e49295-46a6-4e3c-80df-e480a3303aa8.jpeg',474,411, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
 	 (7,'media/db177caa-35c7-4ba6-89c5-be671f17c116.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (8,'media/dcbe703e-3bb4-4abc-935e-5f72d64fe1bf.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (9,'media/809876d5-ba4d-4429-b3d1-58d75780e09f.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (10,'media/f6afbe74-13ce-4a67-9169-7a0fe891f432.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
-INSERT INTO smil_aarhus.image (id,"path",width,height, credit) VALUES
-	 (11,'media/17d81e6b-2d4e-4a43-b94e-2b162cff74b6.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (12,'media/8d04b581-49ff-4d65-a75e-97963b5ff8c0.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (13,'media/32c6feb5-ff44-466a-9229-946d425bd90e.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (14,'media/09023a64-28e1-4bcf-9bc8-5dfa9c95f7a9.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (15,'media/7f3799c7-0ab7-4a55-bb67-08f0eba3e96f.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (16,'media/64a5b873-da4c-4fe5-ac15-af6b1e76c95c.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (17,'media/12617651-6456-49ee-a85b-f509cf7664a2.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (18,'media/1fbee703-f775-483b-9e2a-be9df85fd09a.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (19,'media/97a4e30a-e671-4619-b64f-bd38a15b7e1b.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (20,'media/288f8762-1cdd-49a7-981f-22bc81b70876.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
-INSERT INTO smil_aarhus.image (id,"path",width,height, credit) VALUES
-	 (21,'media/b7afb0f7-af09-4d65-b230-70e02df6cfd8.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (22,'media/92f3c50d-12a2-450d-8122-32ae54e31a2a.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (23,'media/0572a74f-86dc-4b04-b0d8-5c0c338763a9.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (24,'media/0c2e2483-b547-4501-ae33-604e7ffb9cb8.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (25,'media/45deab99-4ca7-443c-9fab-cf8147fb791e.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (26,'media/5bc9fce6-574d-4d2c-916e-16fca5b89d96.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (27,'media/ac8621a1-c6c8-491b-8df1-a3e9a646f6b0.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (28,'media/dae02a6f-f0de-4a25-9e21-8ce5ac791c1b.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (29,'media/7ead7c9b-0812-462d-adb3-41aceb862258.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (30,'media/f81e7ecc-4ed4-4f39-9db7-37749f2cd5be.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
-INSERT INTO smil_aarhus.image (id,"path",width,height, credit) VALUES
-	 (31,'media/5b8cc6bb-f002-4f66-ad1b-da2485d78024.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (32,'media/445e24a6-66c8-4498-b9bb-176df6b4851d.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (33,'media/d98ced47-3be5-40e0-9574-95c8a960ef3d.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (34,'media/07862ac7-f1fc-4350-9a20-2318c8f96d16.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (35,'media/298afbc1-0acb-402f-91b5-0adea839e168.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (36,'media/c0f1c0cc-9d9b-4dcc-b3a4-ee8286f4e03f.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (37,'media/bca2bfb5-1643-4dfc-b18a-c0ced228bb0a.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (38,'media/b5b56194-87c6-4fe6-9244-7b71401d6432.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (39,'media/55b2eacb-4db8-40c5-a7e6-e00e8b147d74.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (40,'media/d96ee095-540d-4805-be57-0e0ce9d7d71d.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
-INSERT INTO smil_aarhus.image (id,"path",width,height, credit) VALUES
-	 (41,'media/cb2713d1-0c08-4c73-aea7-e0ecabe5b5fa.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (42,'media/571ec9a1-8f31-42ef-9ba7-d9b1cb04b0b8.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (43,'media/f9ce33d2-7349-4c7c-8e6d-7f1bc10c0c02.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (44,'media/7e2f6a64-4fca-410f-b099-325f6b581e9a.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (45,'media/7f9316d4-b3b9-47bc-b852-4b2ca8c2520a.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (46,'media/466245da-6b34-4c11-ba6a-e799e9c66fd2.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (47,'media/16efcce6-bdbc-4045-a0e3-79dc812ef8d8.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (48,'media/7842e88d-f91f-4164-9cd3-d8147c5894f5.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (49,'media/fd49a508-a1fa-46d2-af2f-451b2eedee50.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (50,'media/aaeb97be-9b78-4013-a483-c5d8e7a74b53.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
-INSERT INTO smil_aarhus.image (id,"path",width,height, credit) VALUES
-	 (51,'media/38080be5-5d63-4e50-8238-03cac6a1cc54.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (52,'media/1d057bef-b758-4a38-92de-befad0cceacc.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+	 (8,'media/dcbe703e-3bb4-4abc-935e-5f72d64fe1bf.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
 
-INSERT INTO smil_aarhus.picture (id,image,"rank", allow_on_home) VALUES
-	 (1,8,1, TRUE),
-	 (2,7,2, TRUE),
-	 (3,9,3, TRUE),
-	 (4,10,4, FALSE),
-	 (5,11,5, FALSE),
-	 (6,12,6, TRUE),
-	 (7,13,7, FALSE),
-	 (8,14,8, TRUE),
-	 (9,15,9, TRUE),
-	 (10,16,10, TRUE);
-INSERT INTO smil_aarhus.picture (id,image,"rank", allow_on_home) VALUES
-	 (11,17,11, TRUE),
-	 (12,18,12, FALSE),
-	 (13,19,13, FALSE),
-	 (14,20,14, FALSE),
-	 (15,21,15, FALSE),
-	 (16,22,16, TRUE),
-	 (17,23,17, TRUE),
-	 (18,24,18, TRUE),
-	 (19,25,19, TRUE),
-	 (20,26,20, FALSE);
-INSERT INTO smil_aarhus.picture (id,image,"rank", allow_on_home) VALUES
-	 (21,27,21, FALSE),
-	 (22,28,22, TRUE),
-	 (23,29,23, FALSE),
-	 (24,30,24, FALSE),
-	 (25,32,25, TRUE),
-	 (26,31,26, FALSE),
-	 (27,33,27, FALSE),
-	 (28,34,28, FALSE),
-	 (29,35,29, FALSE),
-	 (30,36,30, FALSE);
-INSERT INTO smil_aarhus.picture (id,image,"rank", allow_on_home) VALUES
-	 (31,37,31, FALSE),
-	 (32,38,32, FALSE),
-	 (33,39,33, TRUE),
-	 (34,40,34, FALSE),
-	 (35,41,35, FALSE),
-	 (36,42,36, FALSE),
-	 (37,43,37, FALSE),
-	 (38,44,38, FALSE),
-	 (39,45,39, FALSE),
-	 (40,46,40, FALSE);
-INSERT INTO smil_aarhus.picture (id,image,"rank", allow_on_home) VALUES
-	 (41,47,41, TRUE),
-	 (42,48,42, TRUE),
-	 (43,49,43, TRUE),
-	 (44,50,44, TRUE),
-	 (45,51,45, FALSE),
-	 (46,52,46, TRUE);
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(9, 'media/3f0bf4d5-9944-4d8f-85ee-ca7cc1ec9200.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(10, 'media/ff2a4b73-ed7e-48d5-b9c0-b8a605c02db6.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(11, 'media/6296e222-f987-41df-94ca-da4ed9e0f31d.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(12, 'media/baaf02a4-2f73-4191-b38e-0b9adeb4c79e.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(13, 'media/49a0d4d8-4de2-4b94-9b90-f4bbbbd8645f.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(14, 'media/5dbe0e32-d04f-4950-a3ad-85ac55487eb8.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(15, 'media/3a1aead6-f5b9-44ae-adfb-61c5312bdb94.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(16, 'media/17683b26-0722-4ff6-adb0-716977fe49cf.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(17, 'media/be227991-cf22-4dc3-b61e-f1841e2039f1.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(18, 'media/369fe777-04e3-4edb-bf3b-1e5da4408387.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(19, 'media/b226180b-9900-4541-a0b8-d12f49c37cc9.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(20, 'media/7e2e9089-d207-4387-acac-dc45ed51fd60.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(21, 'media/0f26569a-e4e4-4218-904d-8825af330afc.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(22, 'media/3e023105-f192-45c6-a6e7-cb91281e1310.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(23, 'media/600bd574-4a29-4a07-b072-ae42362ab26d.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(24, 'media/5c100b1d-1c3c-44e0-ad51-0ad5ef6df3ba.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(25, 'media/f2362f59-e57f-4bdb-be2c-18f433e0d51c.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(26, 'media/3248019e-63f8-4ebe-abf4-0238ad8b2618.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(27, 'media/8a3285e9-7ea9-4a6d-b4b6-7e015b9957f0.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(28, 'media/9e6aff04-0537-4126-8243-064a99e73aff.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(29, 'media/029f1b93-b426-41da-96db-7d3195339698.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(30, 'media/6fdc1f05-7956-4ac1-9ff7-69af6c6ed7b0.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(31, 'media/595cf7c4-c6ba-47dd-98a4-651b06c7407c.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(32, 'media/e5026741-0aec-4392-b8bb-8fd53fe73487.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(33, 'media/84fd89ca-10a9-414d-a161-dabfd242a5a3.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(34, 'media/52286c78-36e8-46d0-a2f3-6cccea7d758e.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(35, 'media/999f6a45-fb89-4e01-a356-7f98fbb0e23c.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(36, 'media/a8e879b5-629d-4292-8f6d-f712e6698a2d.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(37, 'media/05986c03-54ba-47e0-873b-e869a1309eb3.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(38, 'media/66046925-85f5-474d-8f51-8edf414623f6.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(39, 'media/91d2f2d4-2f2d-4c50-9739-6a8fff7e6cc4.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(40, 'media/53e090c3-e15d-4b48-bc75-e9a3f96ca77f.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(41, 'media/3e7dc242-b636-4b08-b551-96175c8802c5.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(42, 'media/81d763fa-5556-458c-8de7-b457731e04e3.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(43, 'media/6ea22904-2379-40df-9e97-c55e6b806da7.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(44, 'media/207395f6-5151-4bfb-8351-82d733526a61.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(45, 'media/9bb2defd-90b9-42ea-87c6-1a339f0a952a.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(46, 'media/b3bd294a-9a44-428c-ae4c-719bf1add46e.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(47, 'media/4fa8d4e1-dc05-4173-8e91-e18e56128d48.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(48, 'media/185455df-a27f-4f1a-8c5e-d5a4daa249c4.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(49, 'media/312f2982-8978-4ec7-b396-62083707e8dc.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(50, 'media/5cf8fa73-e734-4c26-b364-5fed0f51dbca.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(51, 'media/0ca0cdb3-571f-4aa6-ac8c-5134bb0ac0ca.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(52, 'media/6428b258-85d8-46d3-9032-1cb4c5d72fd9.jpeg', 954, 1431, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(53, 'media/3365f9b9-6470-4301-b152-c2ebc391abcc.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(54, 'media/c8fe0599-9a70-4784-a544-54b50268aa73.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(55, 'media/cd6139ed-2bbc-4c78-ada2-0d81be3e37de.jpeg', 5966, 3356, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(56, 'media/2c7d9d7a-56e9-4f6d-bf89-6493b4957ad4.jpeg', 4160, 6240, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(57, 'media/c708fbe4-1c23-4dfe-b3da-25ed96a94bb5.jpeg', 5184, 3456, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(58, 'media/7ac25440-4c81-4382-b16c-2281b7d99e7b.jpeg', 5616, 3744, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(59, 'media/060813d4-bd89-466f-8016-900de4d7e924.jpeg', 1400, 1050, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(60, 'media/962d88e4-abe8-4a8d-95ca-ffa1330b3ef3.jpeg', 474, 441, '');
+
+
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(1, 9, 1, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(2, 10, 2, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(5, 16, 4, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(4, 13, 5, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(6, 12, 6, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(7, 14, 7, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(8, 15, 8, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(10, 20, 10, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(11, 18, 11, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(12, 19, 12, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(13, 21, 13, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(14, 22, 14, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(15, 24, 15, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(16, 23, 16, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(18, 26, 18, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(19, 33, 19, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(20, 32, 20, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(22, 28, 22, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(23, 27, 23, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(24, 31, 24, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(26, 34, 26, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(27, 35, 27, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(28, 36, 28, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(30, 38, 30, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(31, 39, 31, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(33, 41, 33, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(34, 40, 34, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(36, 46, 36, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(37, 47, 37, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(38, 45, 38, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(39, 44, 39, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(40, 49, 40, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(41, 48, 41, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(42, 50, 42, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(44, 53, 44, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(45, 51, 45, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(46, 54, 46, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(3, 11, 3, true);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(9, 17, 9, true);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(17, 25, 17, false);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(21, 29, 21, true);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(25, 30, 25, true);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(29, 37, 29, true);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(32, 42, 32, true);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(43, 52, 43, true);
+INSERT INTO smil_aarhus.picture (id, image, "rank", allow_on_home) VALUES(35, 43, 35, true);
 
 INSERT INTO smil_aarhus."group"
 (id, is_open, image)
-VALUES(1, TRUE, 1);
+VALUES(1, TRUE, 55);
 INSERT INTO smil_aarhus."group"
 (id, is_open, image)
-VALUES(2, TRUE, 2);
+VALUES(2, TRUE, 56);
 INSERT INTO smil_aarhus."group"
 (id, is_open, image)
-VALUES(3, true, 3);
+VALUES(3, true, 57);
 INSERT INTO smil_aarhus."group"
 (id, is_open, image)
-VALUES(4, false, 4);
+VALUES(4, false, 58);
 INSERT INTO smil_aarhus."group"
 (id, is_open, image)
-VALUES(5, false, 5);
+VALUES(5, false, 59);
 INSERT INTO smil_aarhus."group"
 (id, is_open, image)
-VALUES(6, false, 6);
+VALUES(6, false, 60);
 
 INSERT INTO smil_aarhus.group_tr
 (group_id, language_code, title, short_description, description, activity)

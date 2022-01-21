@@ -26,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+import { InfoPagesQueryDocument } from '@app/graphql/dist/client';
 import { Link } from './components/Nav/NavLink.vue';
 import { useStore } from './store';
 
@@ -33,51 +34,68 @@ const { t } = useI18n();
 
 provide(key.heroHeight, ref(0));
 
+const { locale } = useI18n();
 const store = useStore();
+
+const { data } = useQuery({
+  query: InfoPagesQueryDocument,
+});
+const pages = computed(() =>
+  (data.value?.infoPages?.nodes || []).map((page) =>
+    useTranslation(page, locale)
+  )
+);
 
 const navLinks = computed(
   () =>
     [
       {
         name: t('nav.info'),
-        links: [
-          {
-            name: 'Hvad er SMIL?',
-            description: 'Generalt info om smil',
-            to: 'INFO',
-            icon: 'mdi:information-outline',
-          },
-          {
-            name: 'Udvidet åbningstid',
-            description: '???',
-            to: 'INFO',
-            icon: 'mdi:timelapse',
-          },
-          {
-            name: 'SMIL Aarhus',
-            description: 'Historie om SMIL Aarhus',
-            to: 'INFO',
-            icon: 'mdi:restore-alert',
-          },
-          {
-            name: 'FAQ',
-            description: 'Ofte stillede spørgsmål',
-            to: 'INFO',
-            icon: 'wpf:faq',
-          },
-          {
-            name: 'Regler',
-            description: 'God opførsel i SMIL',
-            to: 'INFO',
-            icon: 'mdi:clipboard-text',
-          },
-          {
-            name: 'Lokaler',
-            description: 'Billeder & info',
-            to: 'INFO',
-            icon: 'mdi:floor-plan',
-          },
-        ],
+        links: pages.value.map((page) => ({
+          name: page.title,
+          description: page.subtitle,
+          to: 'INFO',
+          params: { slug: page.name },
+          icon: page.icon,
+        })),
+        // [
+        //   {
+        //     name: 'Hvad er SMIL?',
+        //     description: 'Generalt info om smil',
+        //     to: 'INFO',
+        //     icon: 'mdi:information-outline',
+        //   },
+        //   {
+        //     name: 'Udvidet åbningstid',
+        //     description: '???',
+        //     to: 'INFO',
+        //     icon: 'mdi:timelapse',
+        //   },
+        //   {
+        //     name: 'SMIL Aarhus',
+        //     description: 'Historie om SMIL Aarhus',
+        //     to: 'INFO',
+        //     icon: 'mdi:restore-alert',
+        //   },
+        //   {
+        //     name: 'FAQ',
+        //     description: 'Ofte stillede spørgsmål',
+        //     to: 'INFO',
+        //     icon: 'wpf:faq',
+        //   },
+        //   {
+        //     name: 'Regler',
+        //     description: 'God opførsel i SMIL',
+        //     to: 'INFO',
+        //     icon: 'mdi:clipboard-text',
+        //   },
+        //   {
+        //     name: 'Lokaler',
+        //     description: 'Billeder & info',
+        //     to: 'INFO',
+        //     icon: 'mdi:floor-plan',
+        //   },
+        // ],
         singleColumn: false,
       },
       {

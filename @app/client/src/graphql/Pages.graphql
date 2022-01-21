@@ -32,3 +32,62 @@ fragment PageTranslation on PageTr {
   languageCode
   pageName
 }
+
+query InfoPagesQuery {
+  infoPages(orderBy: RANK_ASC) {
+    nodes {
+      icon
+      name
+      rank
+
+      translations {
+        nodes {
+          languageCode
+          infoPageName
+          subtitle
+          title
+        }
+      }
+    }
+  }
+}
+
+query InfoPageQuery($name: String!) {
+  infoPage(name: $name) {
+    icon
+    rank
+    name
+    translations {
+      nodes {
+        languageCode
+        infoPageName
+        subtitle
+        title
+      }
+    }
+  }
+}
+
+mutation UpsertInfoPage(
+  $data: InfoPageDatumInput!
+  $translations: [InfoPageTrDatumInput]!
+  $name: String!
+) {
+  upsertInfoPage(
+    input: { data: $data, translations: $translations, infoPageName: $name }
+  ) {
+    infoPage {
+      icon
+      rank
+      name
+      translations {
+        nodes {
+          languageCode
+          infoPageName
+          subtitle
+          title
+        }
+      }
+    }
+  }
+}

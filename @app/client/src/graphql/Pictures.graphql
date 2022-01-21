@@ -35,6 +35,7 @@ mutation CreateImageMutation(
         srcSetJpeg
         srcSetWebp
         width
+        credit
       }
     }
   }
@@ -48,6 +49,7 @@ query ImageQuery($id: BigInt!) {
       srcSetJpeg
       width
       srcSetWebp
+      credit
     }
     id
   }
@@ -62,6 +64,7 @@ mutation CreatePicture($image: BigInt!) {
         srcSetJpeg
         srcSetWebp
         width
+        credit
       }
       id
       rank
@@ -89,6 +92,7 @@ mutation SetPictureAllowOnHomeMutation($id: BigInt!, $input: Boolean!) {
         srcSetJpeg
         srcSetWebp
         width
+        credit
       }
     }
   }
@@ -107,6 +111,7 @@ mutation DeletePictureMutation($id: BigInt!) {
         srcSetJpeg
         srcSetWebp
         width
+        credit
       }
     }
   }

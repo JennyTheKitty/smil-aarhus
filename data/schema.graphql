@@ -168,41 +168,6 @@ type CreatePagePayload {
   query: Query
 }
 
-"""All input for the create `PageTr` mutation."""
-input CreatePageTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """The `PageTr` to be created by this mutation."""
-  pageTr: PageTrInput!
-}
-
-"""The output of our create `PageTr` mutation."""
-type CreatePageTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """Reads a single `Page` that is related to this `PageTr`."""
-  pageByPageName: Page
-
-  """The `PageTr` that was created by this mutation."""
-  pageTr: PageTr
-
-  """An edge for our `PageTr`. May be used by Relay 1."""
-  pageTrEdge: PageTrsEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
 """All input for the create `Picture` mutation."""
 input CreatePictureInput {
   """
@@ -404,41 +369,6 @@ type DeletePagePayload {
     """The method to use when ordering `Page`."""
     orderBy: [PagesOrderBy!] = [PRIMARY_KEY_ASC]
   ): PagesEdge
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-}
-
-"""All input for the `deletePageTr` mutation."""
-input DeletePageTrInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  languageCode: TrLanguage!
-  pageName: String!
-}
-
-"""The output of our delete `PageTr` mutation."""
-type DeletePageTrPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedPageTrNodeId: ID
-
-  """Reads a single `Page` that is related to this `PageTr`."""
-  pageByPageName: Page
-
-  """The `PageTr` that was deleted by this mutation."""
-  pageTr: PageTr
-
-  """An edge for our `PageTr`. May be used by Relay 1."""
-  pageTrEdge: PageTrsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -1446,6 +1376,7 @@ type InfoPage {
 
   """Reads a single `Page` that is related to this `InfoPage`."""
   pageByName: Page
+  rank: Int!
 
   """Reads and enables pagination through a set of `InfoPageTr`."""
   translations(
@@ -1454,16 +1385,6 @@ type InfoPage {
 
     """Read all values in the set before (above) this cursor."""
     before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: InfoPageTrCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: InfoPageTrFilter
 
     """Only read the first `n` values of the set."""
     first: Int
@@ -1479,27 +1400,9 @@ type InfoPage {
   ): InfoPageTrsConnection!
 }
 
-"""
-A condition to be used against `InfoPage` object types. All fields are tested
-for equality and combined with a logical ‘and.’
-"""
-input InfoPageCondition {
-  """Checks for equality with the object’s `icon` field."""
-  icon: String
-
-  """Checks for equality with the object’s `name` field."""
-  name: String
-}
-
-"""
-A filter to be used against `InfoPage` object types. All fields are combined with a logical ‘and.’
-"""
-input InfoPageFilter {
-  """Filter by the object’s `icon` field."""
-  icon: StringFilter
-
-  """Filter by the object’s `name` field."""
-  name: StringFilter
+"""An input for mutations affecting `InfoPageDatum`"""
+input InfoPageDatumInput {
+  icon: String!
 }
 
 type InfoPageTr {
@@ -1511,39 +1414,11 @@ type InfoPageTr {
   title: String!
 }
 
-"""
-A condition to be used against `InfoPageTr` object types. All fields are tested
-for equality and combined with a logical ‘and.’
-"""
-input InfoPageTrCondition {
-  """Checks for equality with the object’s `infoPageName` field."""
-  infoPageName: String
-
-  """Checks for equality with the object’s `languageCode` field."""
-  languageCode: TrLanguage
-
-  """Checks for equality with the object’s `subtitle` field."""
-  subtitle: String
-
-  """Checks for equality with the object’s `title` field."""
-  title: String
-}
-
-"""
-A filter to be used against `InfoPageTr` object types. All fields are combined with a logical ‘and.’
-"""
-input InfoPageTrFilter {
-  """Filter by the object’s `infoPageName` field."""
-  infoPageName: StringFilter
-
-  """Filter by the object’s `languageCode` field."""
-  languageCode: TrLanguageFilter
-
-  """Filter by the object’s `subtitle` field."""
-  subtitle: StringFilter
-
-  """Filter by the object’s `title` field."""
-  title: StringFilter
+"""An input for mutations affecting `InfoPageTrDatum`"""
+input InfoPageTrDatumInput {
+  languageCode: String!
+  subtitle: String!
+  title: String!
 }
 
 """A connection to a list of `InfoPageTr` values."""
@@ -1607,6 +1482,8 @@ enum InfoPagesOrderBy {
   NATURAL
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
+  RANK_ASC
+  RANK_DESC
 }
 
 type Member {
@@ -1652,14 +1529,6 @@ type Mutation {
     input: CreatePageInput!
   ): CreatePagePayload
 
-  """Creates a single `PageTr`."""
-  createPageTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreatePageTrInput!
-  ): CreatePageTrPayload
-
   """Creates a single `Picture`."""
   createPicture(
     """
@@ -1699,14 +1568,6 @@ type Mutation {
     """
     input: DeletePageInput!
   ): DeletePagePayload
-
-  """Deletes a single `PageTr` using a unique key."""
-  deletePageTr(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeletePageTrInput!
-  ): DeletePageTrPayload
 
   """Deletes a single `Picture` using a unique key."""
   deletePicture(
@@ -1774,6 +1635,12 @@ type Mutation {
     """
     input: UpsertGroupInput!
   ): UpsertGroupPayload
+  upsertInfoPage(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertInfoPageInput!
+  ): UpsertInfoPagePayload
 }
 
 type News {
@@ -2079,13 +1946,6 @@ input PageTrFilter {
   pageName: StringFilter
 }
 
-"""An input for mutations affecting `PageTr`"""
-input PageTrInput {
-  content: String!
-  languageCode: TrLanguage!
-  pageName: String!
-}
-
 """
 Represents an update to a `PageTr`. Fields that are set will be updated.
 """
@@ -2342,16 +2202,6 @@ type Query {
 
     """Read all values in the set before (above) this cursor."""
     before: Cursor
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: InfoPageCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: InfoPageFilter
 
     """Only read the first `n` values of the set."""
     first: Int
@@ -2923,6 +2773,42 @@ type UpsertGroupPayload {
 
   """Reads a single `Image` that is related to this `Group`."""
   imageByImage: Image
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `upsertInfoPage` mutation."""
+input UpsertInfoPageInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  data: InfoPageDatumInput!
+  infoPageName: String!
+  translations: [InfoPageTrDatumInput]!
+}
+
+"""The output of our `upsertInfoPage` mutation."""
+type UpsertInfoPagePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  infoPage: InfoPage
+
+  """An edge for our `InfoPage`. May be used by Relay 1."""
+  infoPageEdge(
+    """The method to use when ordering `InfoPage`."""
+    orderBy: [InfoPagesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): InfoPagesEdge
+
+  """Reads a single `Page` that is related to this `InfoPage`."""
+  pageByName: Page
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.

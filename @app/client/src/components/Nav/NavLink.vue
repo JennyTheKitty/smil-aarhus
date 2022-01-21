@@ -2,10 +2,11 @@
   <div v-if="mobile">
     <div v-if="Object.prototype.hasOwnProperty.call(link, 'links')">
       <span w:text="lg gray-500">{{ link.name }}</span>
-      <router-link
+      <i18n-link
         v-for="sublink in (link as Menu).links"
         :key="sublink.name"
-        v-bind="sublink"
+        :to="sublink.to"
+        :params="sublink.params"
         w:rounded="md"
         w:flex="~"
         w:m="y-1"
@@ -27,11 +28,12 @@
             sublink.description
           }}</span>
         </div>
-      </router-link>
+      </i18n-link>
     </div>
-    <router-link
+    <i18n-link
       v-else
-      v-bind="link"
+      :to="(link as InnerLink).to"
+      :params="(link as InnerLink).params"
       w:rounded="md"
       w:font="medium"
       w:text="lg gray-300 hover:white"
@@ -39,7 +41,7 @@
       w:m="y-2"
       w:display="block"
       class="btn-focus-ring"
-      >{{ link.name }}</router-link
+      >{{ link.name }}</i18n-link
     >
   </div>
   <div v-else w:flex="~" w:align="items-center">

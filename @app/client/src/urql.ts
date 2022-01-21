@@ -5,10 +5,14 @@ import {
   EventViaEventTag,
   EventViaGroup,
   GroupTr,
+  InfoPage,
+  InfoPagesQueryDocument,
+  InfoPageTr,
   NewsTr,
   Page,
   PageTr,
   PicturesQueryDocument,
+  UpsertInfoPageMutation,
 } from '@app/graphql/dist/client';
 import schema from '@app/graphql/dist/introspection';
 import {
@@ -20,10 +24,12 @@ import {
 } from '@urql/core';
 import { devtoolsExchange } from '@urql/devtools';
 import { authExchange } from '@urql/exchange-auth';
-import { cacheExchange } from '@urql/exchange-graphcache';
+import { cacheExchange, DataFields } from '@urql/exchange-graphcache';
 import jwtDecode from 'jwt-decode';
 
 import { accessToken } from './accessToken';
+
+const Narrow = <T>(v: any): v is T => true;
 
 export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
   return urqlCreateClient({
@@ -70,12 +76,23 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
                 id: (args!.input! as { id: number }).id,
               });
             },
-            createPicture(result: CreatePictureMutation, _args, cache, _info) {
-              cache.updateQuery({ query: PicturesQueryDocument }, (data) => {
-                data!.pictures!.nodes.push(result.createPicture!.picture!);
-                data!.pictures!.nodes.sort((a, b) => a.rank - b.rank);
-                return data;
-              });
+            createPicture(result, _args, cache, _info) {
+              if (Narrow<NonNullable<CreatePictureMutation>>(result)) {
+                cache.updateQuery({ query: PicturesQueryDocument }, (data) => {
+                  data!.pictures!.nodes.push(result.createPicture!.picture!);
+                  data!.pictures!.nodes.sort((a, b) => a.rank - b.rank);
+                  return data;
+                });
+              }
+            },
+            upsertInfoPage(result, _args, cache, _info) {
+              if (Narrow<NonNullable<UpsertInfoPageMutation>>(result)) {
+                cache.updateQuery({ query: InfoPagesQueryDocument }, (data) => {
+                  data!.infoPages!.nodes.push(result.upsertInfoPage!.infoPage!);
+                  data!.infoPages!.nodes.sort((a, b) => a.rank - b.rank);
+                  return data;
+                });
+              }
             },
           },
         },
@@ -92,6 +109,10 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
             }`,
           NewsTr: (data) =>
             `${(data as NewsTr).languageCode}|${(data as NewsTr).newsId}`,
+          InfoPageTr: (data) =>
+            `${(data as InfoPageTr).languageCode}|${
+              (data as InfoPageTr).infoPageName
+            }`,
           EventViaGroup: (data) =>
             `${(data as EventViaGroup).eventId}|${
               (data as EventViaGroup).groupId
@@ -101,6 +122,7 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
               (data as EventViaEventTag).tagId
             }`,
           Page: (data) => (data as Page).name,
+          InfoPage: (data) => (data as InfoPage).name,
           ResponsiveImage: () => null,
         },
       }),
