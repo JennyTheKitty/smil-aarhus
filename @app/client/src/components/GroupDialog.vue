@@ -31,6 +31,11 @@
       <n-form-item label="Group image" path="image">
         <ImageUpload v-model:value="model.image" />
       </n-form-item>
+      <n-form-item label="Image Credit" path="imageCredit">
+        <div w:w="full" class="content">
+          <ContentEditor v-model="model.imageCredit" :inline="false" />
+        </div>
+      </n-form-item>
       <n-form-item
         path="translations"
         :show-feedback="false"
@@ -142,6 +147,7 @@ async function handleSubmitClick(e: any) {
       .mutation(UpsertGroupDocument, {
         data: {
           image: model.image,
+          imageCredit: model.imageCredit,
           isOpen: model.isOpen!,
         },
         translations: model.translations,
@@ -154,6 +160,7 @@ async function handleSubmitClick(e: any) {
 
 const model = reactive({
   image: undefined as string | undefined,
+  imageCredit: '',
   isOpen: undefined as undefined | boolean,
   id: null as null | number,
   translations: [] as {
@@ -196,6 +203,11 @@ const rules = {
     required: true,
     trigger: ['input', 'blur'],
     message: 'An image is required',
+  },
+  imageCredit: {
+    required: true,
+    trigger: ['input', 'blur'],
+    message: 'Image credits are required',
   },
   translations: {
     required: true,

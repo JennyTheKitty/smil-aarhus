@@ -760,6 +760,7 @@ input GroupCondition {
 """An input for mutations affecting `GroupDatum`"""
 input GroupDatumInput {
   image: BigInt!
+  imageCredit: String!
   isOpen: Boolean!
 }
 

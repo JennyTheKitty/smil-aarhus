@@ -18,6 +18,7 @@ query GroupQuery($slug: String!, $preferredLanguageCode: String!) {
       srcSetJpeg
       srcSetWebp
       width
+      credit
     }
   }
 }
@@ -49,6 +50,7 @@ mutation UpsertGroup(
         srcSetJpeg
         srcSetWebp
         width
+        credit
       }
     }
   }

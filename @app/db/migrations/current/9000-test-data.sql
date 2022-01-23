@@ -4,61 +4,61 @@ INSERT INTO smil_aarhus_private.user_role VALUES ('smil_admin', 'administrator')
 
 
 INSERT INTO smil_aarhus.image (id,"path",width,height, credit) VALUES
-	 (1,'media/b5693919-37ef-4480-848f-49b099ad4994.jpeg',5966,3356, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (2,'media/36a86154-45f7-4066-8f58-0105916e2f2a.jpeg',4160,6240, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (3,'media/a9e1f80b-9f69-4c8d-8d43-24d5978c9f42.jpeg',5184,3456, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (4,'media/576aac3e-fdcc-4ac7-ae39-6fdbc908f5f2.jpeg',5616,3744, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (5,'media/5ac9c28d-ee1b-4e0d-9b50-8b43690faff7.jpeg',1400,1050, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (6,'media/85e49295-46a6-4e3c-80df-e480a3303aa8.jpeg',474,411, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (7,'media/db177caa-35c7-4ba6-89c5-be671f17c116.jpeg',954,1431, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
-	 (8,'media/dcbe703e-3bb4-4abc-935e-5f72d64fe1bf.jpeg',1431,954, '<span>Photography by </span><a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+	 (1,'media/b5693919-37ef-4480-848f-49b099ad4994.jpeg',5966,3356, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
+	 (2,'media/36a86154-45f7-4066-8f58-0105916e2f2a.jpeg',4160,6240, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
+	 (3,'media/a9e1f80b-9f69-4c8d-8d43-24d5978c9f42.jpeg',5184,3456, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
+	 (4,'media/576aac3e-fdcc-4ac7-ae39-6fdbc908f5f2.jpeg',5616,3744, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
+	 (5,'media/5ac9c28d-ee1b-4e0d-9b50-8b43690faff7.jpeg',1400,1050, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
+	 (6,'media/85e49295-46a6-4e3c-80df-e480a3303aa8.jpeg',474,411, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
+	 (7,'media/db177caa-35c7-4ba6-89c5-be671f17c116.jpeg',954,1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>'),
+	 (8,'media/dcbe703e-3bb4-4abc-935e-5f72d64fe1bf.jpeg',1431,954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
 
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(9, 'media/3f0bf4d5-9944-4d8f-85ee-ca7cc1ec9200.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(10, 'media/ff2a4b73-ed7e-48d5-b9c0-b8a605c02db6.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(11, 'media/6296e222-f987-41df-94ca-da4ed9e0f31d.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(12, 'media/baaf02a4-2f73-4191-b38e-0b9adeb4c79e.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(13, 'media/49a0d4d8-4de2-4b94-9b90-f4bbbbd8645f.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(14, 'media/5dbe0e32-d04f-4950-a3ad-85ac55487eb8.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(15, 'media/3a1aead6-f5b9-44ae-adfb-61c5312bdb94.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(16, 'media/17683b26-0722-4ff6-adb0-716977fe49cf.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(17, 'media/be227991-cf22-4dc3-b61e-f1841e2039f1.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(18, 'media/369fe777-04e3-4edb-bf3b-1e5da4408387.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(19, 'media/b226180b-9900-4541-a0b8-d12f49c37cc9.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(20, 'media/7e2e9089-d207-4387-acac-dc45ed51fd60.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(21, 'media/0f26569a-e4e4-4218-904d-8825af330afc.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(22, 'media/3e023105-f192-45c6-a6e7-cb91281e1310.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(23, 'media/600bd574-4a29-4a07-b072-ae42362ab26d.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(24, 'media/5c100b1d-1c3c-44e0-ad51-0ad5ef6df3ba.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(25, 'media/f2362f59-e57f-4bdb-be2c-18f433e0d51c.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(26, 'media/3248019e-63f8-4ebe-abf4-0238ad8b2618.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(27, 'media/8a3285e9-7ea9-4a6d-b4b6-7e015b9957f0.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(28, 'media/9e6aff04-0537-4126-8243-064a99e73aff.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(29, 'media/029f1b93-b426-41da-96db-7d3195339698.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(30, 'media/6fdc1f05-7956-4ac1-9ff7-69af6c6ed7b0.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(31, 'media/595cf7c4-c6ba-47dd-98a4-651b06c7407c.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(32, 'media/e5026741-0aec-4392-b8bb-8fd53fe73487.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(33, 'media/84fd89ca-10a9-414d-a161-dabfd242a5a3.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(34, 'media/52286c78-36e8-46d0-a2f3-6cccea7d758e.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(35, 'media/999f6a45-fb89-4e01-a356-7f98fbb0e23c.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(36, 'media/a8e879b5-629d-4292-8f6d-f712e6698a2d.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(37, 'media/05986c03-54ba-47e0-873b-e869a1309eb3.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(38, 'media/66046925-85f5-474d-8f51-8edf414623f6.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(39, 'media/91d2f2d4-2f2d-4c50-9739-6a8fff7e6cc4.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(40, 'media/53e090c3-e15d-4b48-bc75-e9a3f96ca77f.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(41, 'media/3e7dc242-b636-4b08-b551-96175c8802c5.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(42, 'media/81d763fa-5556-458c-8de7-b457731e04e3.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(43, 'media/6ea22904-2379-40df-9e97-c55e6b806da7.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(44, 'media/207395f6-5151-4bfb-8351-82d733526a61.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(45, 'media/9bb2defd-90b9-42ea-87c6-1a339f0a952a.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(46, 'media/b3bd294a-9a44-428c-ae4c-719bf1add46e.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(47, 'media/4fa8d4e1-dc05-4173-8e91-e18e56128d48.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(48, 'media/185455df-a27f-4f1a-8c5e-d5a4daa249c4.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(49, 'media/312f2982-8978-4ec7-b396-62083707e8dc.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(50, 'media/5cf8fa73-e734-4c26-b364-5fed0f51dbca.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(51, 'media/0ca0cdb3-571f-4aa6-ac8c-5134bb0ac0ca.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(52, 'media/6428b258-85d8-46d3-9032-1cb4c5d72fd9.jpeg', 954, 1431, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(53, 'media/3365f9b9-6470-4301-b152-c2ebc391abcc.jpeg', 1431, 954, '');
-INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(54, 'media/c8fe0599-9a70-4784-a544-54b50268aa73.jpeg', 1431, 954, '');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(9, 'media/3f0bf4d5-9944-4d8f-85ee-ca7cc1ec9200.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(10, 'media/ff2a4b73-ed7e-48d5-b9c0-b8a605c02db6.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(11, 'media/6296e222-f987-41df-94ca-da4ed9e0f31d.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(12, 'media/baaf02a4-2f73-4191-b38e-0b9adeb4c79e.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(13, 'media/49a0d4d8-4de2-4b94-9b90-f4bbbbd8645f.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(14, 'media/5dbe0e32-d04f-4950-a3ad-85ac55487eb8.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(15, 'media/3a1aead6-f5b9-44ae-adfb-61c5312bdb94.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(16, 'media/17683b26-0722-4ff6-adb0-716977fe49cf.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(17, 'media/be227991-cf22-4dc3-b61e-f1841e2039f1.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(18, 'media/369fe777-04e3-4edb-bf3b-1e5da4408387.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(19, 'media/b226180b-9900-4541-a0b8-d12f49c37cc9.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(20, 'media/7e2e9089-d207-4387-acac-dc45ed51fd60.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(21, 'media/0f26569a-e4e4-4218-904d-8825af330afc.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(22, 'media/3e023105-f192-45c6-a6e7-cb91281e1310.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(23, 'media/600bd574-4a29-4a07-b072-ae42362ab26d.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(24, 'media/5c100b1d-1c3c-44e0-ad51-0ad5ef6df3ba.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(25, 'media/f2362f59-e57f-4bdb-be2c-18f433e0d51c.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(26, 'media/3248019e-63f8-4ebe-abf4-0238ad8b2618.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(27, 'media/8a3285e9-7ea9-4a6d-b4b6-7e015b9957f0.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(28, 'media/9e6aff04-0537-4126-8243-064a99e73aff.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(29, 'media/029f1b93-b426-41da-96db-7d3195339698.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(30, 'media/6fdc1f05-7956-4ac1-9ff7-69af6c6ed7b0.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(31, 'media/595cf7c4-c6ba-47dd-98a4-651b06c7407c.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(32, 'media/e5026741-0aec-4392-b8bb-8fd53fe73487.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(33, 'media/84fd89ca-10a9-414d-a161-dabfd242a5a3.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(34, 'media/52286c78-36e8-46d0-a2f3-6cccea7d758e.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(35, 'media/999f6a45-fb89-4e01-a356-7f98fbb0e23c.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(36, 'media/a8e879b5-629d-4292-8f6d-f712e6698a2d.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(37, 'media/05986c03-54ba-47e0-873b-e869a1309eb3.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(38, 'media/66046925-85f5-474d-8f51-8edf414623f6.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(39, 'media/91d2f2d4-2f2d-4c50-9739-6a8fff7e6cc4.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(40, 'media/53e090c3-e15d-4b48-bc75-e9a3f96ca77f.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(41, 'media/3e7dc242-b636-4b08-b551-96175c8802c5.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(42, 'media/81d763fa-5556-458c-8de7-b457731e04e3.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(43, 'media/6ea22904-2379-40df-9e97-c55e6b806da7.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(44, 'media/207395f6-5151-4bfb-8351-82d733526a61.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(45, 'media/9bb2defd-90b9-42ea-87c6-1a339f0a952a.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(46, 'media/b3bd294a-9a44-428c-ae4c-719bf1add46e.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(47, 'media/4fa8d4e1-dc05-4173-8e91-e18e56128d48.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(48, 'media/185455df-a27f-4f1a-8c5e-d5a4daa249c4.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(49, 'media/312f2982-8978-4ec7-b396-62083707e8dc.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(50, 'media/5cf8fa73-e734-4c26-b364-5fed0f51dbca.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(51, 'media/0ca0cdb3-571f-4aa6-ac8c-5134bb0ac0ca.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(52, 'media/6428b258-85d8-46d3-9032-1cb4c5d72fd9.jpeg', 954, 1431, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(53, 'media/3365f9b9-6470-4301-b152-c2ebc391abcc.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
+INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(54, 'media/c8fe0599-9a70-4784-a544-54b50268aa73.jpeg', 1431, 954, '<a href="https://fetlife.com/users/4607313" noopener target="_blank">MagicLight</a>');
 INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(55, 'media/cd6139ed-2bbc-4c78-ada2-0d81be3e37de.jpeg', 5966, 3356, '');
 INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(56, 'media/2c7d9d7a-56e9-4f6d-bf89-6493b4957ad4.jpeg', 4160, 6240, '');
 INSERT INTO smil_aarhus.image (id, "path", width, height, credit) VALUES(57, 'media/c708fbe4-1c23-4dfe-b3da-25ed96a94bb5.jpeg', 5184, 3456, '');

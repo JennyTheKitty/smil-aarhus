@@ -50,14 +50,23 @@
                 v-if="lightboxCurrentOpenId == item.id"
                 to="#pswp-caption"
               >
-                <div v-if="!editing" v-html="item.img.credit" />
-                <ClientOnly
-                  ><suspense
-                    ><ContentEditor
+                <ImageCredits
+                  v-if="!editing && item.img.credit"
+                  :content="item.img.credit"
+                />
+                <ClientOnly>
+                  <suspense>
+                    <ContentEditor
+                      @focus="creditEditorFocussed(true)"
+                      @blur="creditEditorFocussed(false)"
+                      w:min-w="!2xl"
+                      w:bg="dark-500"
                       v-if="editing"
                       v-model="item.img.credit"
-                      :inline="true" /></suspense
-                ></ClientOnly>
+                      :inline="false"
+                    />
+                  </suspense>
+                </ClientOnly>
               </teleport>
             </a>
           </div>
@@ -81,6 +90,7 @@ import PhotoSwipe from 'photoswipe/dist/photoswipe.esm.js';
 import PhotoSwipeLightbox from 'photoswipe/dist/photoswipe-lightbox.esm.js';
 
 import { useStore } from '../store';
+import ImageCredits from '../components/ImageCredits.vue';
 
 const editing = ref(false);
 
@@ -150,26 +160,60 @@ const items = computed({
   },
 });
 
+const lightbox = ref<any>(null);
+const pausedEvents: any[] = [];
+
+function creditEditorFocussed(focus: boolean) {
+  if (focus) {
+    for (const event of lightbox.value.pswp.events._pool) {
+      if (!['scroll', 'resize'].includes(event.type)) {
+        pausedEvents.push(event);
+        lightbox.value.pswp.events._toggleListener(
+          event.target,
+          event.type,
+          event.listener,
+          event.passive,
+          true,
+          false
+        );
+      }
+    }
+  } else {
+    while (pausedEvents.length) {
+      const event = pausedEvents.pop();
+      lightbox.value.pswp.events._toggleListener(
+        event.target,
+        event.type,
+        event.listener,
+        event.passive,
+        false,
+        false
+      );
+    }
+  }
+  console.log(focus, lightbox.value.pswp.events._pool, pausedEvents);
+}
+
 const lightboxCurrentOpenId = ref<Number | null>(null);
 
 const gallery = ref<HTMLElement | null>(null);
 onMounted(() => {
-  const lightbox = new PhotoSwipeLightbox({
+  lightbox.value = new PhotoSwipeLightbox({
     gallery: gallery.value,
     children: 'a',
     pswpModule: PhotoSwipe,
   });
 
-  lightbox.on('uiRegister', () => {
-    lightbox.pswp.on('change', () => {
+  lightbox.value.on('uiRegister', () => {
+    lightbox.value.pswp.on('change', () => {
       const currSlideElement: HTMLElement =
-        lightbox.pswp.currSlide.data.element;
+        lightbox.value.pswp.currSlide.data.element;
       lightboxCurrentOpenId.value = parseInt(currSlideElement.dataset.id || '');
     });
-    lightbox.pswp.on('close', () => {
+    lightbox.value.pswp.on('close', () => {
       lightboxCurrentOpenId.value = null;
     });
-    lightbox.pswp.ui.registerElement({
+    lightbox.value.pswp.ui.registerElement({
       name: 'custom-caption',
       order: 9,
       isButton: false,
@@ -180,7 +224,10 @@ onMounted(() => {
       },
     });
   });
-  lightbox.init();
+  lightbox.value.on('afterInit', () => {
+    console.log();
+  });
+  lightbox.value.init();
 });
 
 useHead({
@@ -208,18 +255,15 @@ const { t } = useI18n();
   position: fixed !important;
 }
 .pswp__custom-caption {
-  background: rgba(75, 150, 75, 0.75);
   font-size: 16px;
   color: #fff;
-  width: calc(100% - 32px);
-  max-width: 400px;
-  padding: 2px 8px;
-  border-radius: 4px;
+  width: max-content;
+  text-align: right;
+  padding: 1rem;
 
   position: absolute;
-  left: 50%;
-  bottom: 16px;
-  transform: translateX(-50%);
+  right: 0;
+  bottom: 0px;
 }
 .pswp__custom-caption a {
   color: #fff;

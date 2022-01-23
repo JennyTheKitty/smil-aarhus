@@ -41,7 +41,6 @@ export default async function installRefreshToken(app: Koa, router: Router) {
               ok: true,
               access_token: signToken(sub, userRole, {}, ACCESS_TOKEN_SECRET!),
             };
-            ctx.status = 200;
             return;
           }
         }

@@ -6,6 +6,9 @@
       :metadata="heroImgMetadata"
       :brightness="100"
     >
+      <template #credits>
+        <MagicLightImgCredits />
+      </template>
       <h1 class="title" w:font="bold" w:text="space-pre-line shadow-lg">
         Interessegrupper
       </h1>

@@ -97,10 +97,12 @@ GRANT INSERT, UPDATE, DELETE ON TABLE smil_aarhus.event_via_group TO smil_organi
 
 CREATE TYPE smil_aarhus.group_data AS (
     image bigint,
+    image_credit text,
     is_open boolean
 );
 
 COMMENT ON COLUMN smil_aarhus.group_data.image IS E'@notNull';
+COMMENT ON COLUMN smil_aarhus.group_data.image_credit IS E'@notNull';
 COMMENT ON COLUMN smil_aarhus.group_data.is_open IS E'@notNull';
 
 CREATE TYPE smil_aarhus.group_tr_data AS (
@@ -138,6 +140,8 @@ BEGIN
             WHERE id = group__id
             RETURNING * INTO STRICT _group;
     END IF;
+
+    UPDATE smil_aarhus.image SET credit = data.image_credit where id = data.image;
 
     FOREACH trans IN ARRAY translations LOOP
         INSERT INTO smil_aarhus.group_tr (group_id, language_code, title, short_description, description, activity)

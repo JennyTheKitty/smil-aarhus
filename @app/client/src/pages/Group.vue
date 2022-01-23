@@ -10,6 +10,9 @@
       :metadata="{ width: group.img.width, height: group.img.height }"
       :brightness="50"
     >
+      <template #credits>
+        <div v-html="group.img.credit" />
+      </template>
       <span class="subtitle" w:font="light" w:text="space-pre-line">
         SMil Aarhus Interessegruppe
       </span>

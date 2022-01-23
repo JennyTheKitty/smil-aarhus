@@ -33,11 +33,9 @@
       w:text="true-gray-500 space-pre"
       w:flex="~"
     >
-      <icon-mdi-message-image-outline w:text="lg" w:m="r-2" />
-      <span>Photography by </span>
-      <a href="https://fetlife.com/users/4607313" rel="noopener" target="_blank"
-        >MagicLight</a
-      >
+      <ImageCredits>
+        <slot name="credits" />
+      </ImageCredits>
     </div>
   </div>
 </template>

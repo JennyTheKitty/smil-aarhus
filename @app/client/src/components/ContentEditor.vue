@@ -4,23 +4,39 @@
     :model-value="modelValue"
     :config="config"
     @update:modelValue="$emit('update:modelValue', $event)"
+    @ready="onReady"
   ></CKEditor.component>
 </template>
 
 <script setup lang="ts">
 import { ClassicEditor, InlineEditor } from '@app/editor';
 import CKEditor from '@ckeditor/ckeditor5-vue';
+
+defineProps<{
+  modelValue: string;
+  inline: boolean;
+}>();
+const emit = defineEmits(['update:modelValue', 'focus', 'blur']);
+
 const config = {
   toolbar: {
     shouldNotGroupWhenFull: true,
   },
 };
 
-defineProps<{
-  modelValue: string;
-  inline: boolean;
-}>();
-defineEmits(['update:modelValue']);
+function onReady(editor: any) {
+  editor.ui.focusTracker.on('change:isFocused', () => {
+    if (editor.ui.focusTracker.isFocused) {
+      emit('focus');
+    } else {
+      emit('blur');
+    }
+  });
+}
+
+onBeforeUnmount(() => {
+  emit('blur');
+});
 </script>
 
 <style>
@@ -33,7 +49,7 @@ defineEmits(['update:modelValue']);
 
   /* Helper variables to avoid duplication in the colors. */
   --ck-custom-background: hsl(0, 0%, 19%);
-  --ck-custom-foreground: hsl(0, 0%, 19%);
+  --ck-custom-foreground: hsl(0, 0%, 100%);
   --ck-custom-border: transparent;
   --ck-custom-white: hsl(0, 0%, 100%);
 
@@ -88,12 +104,7 @@ defineEmits(['update:modelValue']);
 
   /* -- Overrides the default .ck-input class colors. ----------------------------------------- */
 
-  /* --ck-color-input-background: var(--ck-custom-background);
-  --ck-color-input-border: hsl(257, 3%, 43%);
-  --ck-color-input-text: hsl(0, 0%, 98%);
-  --ck-color-input-disabled-background: hsl(255, 4%, 21%);
-  --ck-color-input-disabled-border: hsl(250, 3%, 38%);
-  --ck-color-input-disabled-text: hsl(0, 0%, 78%); */
+  --ck-color-input-background: var(--ck-custom-background);
 
   /* -- Overrides the default .ck-labeled-field-view class colors. ---------------------------- */
 
@@ -141,5 +152,8 @@ defineEmits(['update:modelValue']);
 }
 .ck .ck-toolbar {
   border-bottom: 1px solid #555 !important;
+}
+.ck .ck-balloon-panel {
+  z-index: 100000;
 }
 </style>

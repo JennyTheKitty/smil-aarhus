@@ -6,6 +6,9 @@
       :metadata="heroImgMetadata"
       :brightness="35"
     >
+      <template #credits>
+        <MagicLightImgCredits />
+      </template>
       <h1
         class="title"
         w:w="full"
