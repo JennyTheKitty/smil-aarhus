@@ -158,7 +158,11 @@ export default async function installClientSSR(app: Koa, router: Router) {
     });
 
     // Use vite's connect instance as middleware
-    app.use(c2k(viteServer.middlewares));
+    app.use(async (ctx) => {
+      ctx.status = 200;
+      const x = await c2k(viteServer.middlewares)(ctx, async () => {});
+      return false;
+    });
   } else {
     const dist = resolve(`./dist`);
     // This contains a list of static routes (assets)

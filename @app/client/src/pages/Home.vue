@@ -82,7 +82,10 @@ useHead({
   meta: [
     {
       name: `description`,
-      content: computed(() => ''),
+      content: computed(
+        () =>
+          'We are an association for people who are interested in and practice BDSM, sadomasochism, hard sex and a wide range of kinks in the same area.'
+      ),
     },
   ],
 });

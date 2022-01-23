@@ -37,10 +37,11 @@
       <div w:flex="~ col" w:align="items-center" w:w="64">
         <span w:font="tracking-0.4em">{{ t('footer.contact') }}</span>
         <icon-mdi-mail-ru w:text="3xl" w:m="6" />
-        <div w:text="start">
+        <div w:text="start" w:flex="~ col" w:space="y-2 sm:y-0">
           <a
             href="#mail"
             w:flex="~"
+            w:p="2 sm:0"
             w:align="items-center"
             w:text="underline underline-true-gray-600"
             @click.stop.prevent="mailto('YmVzdHlyZWxzZUBzbWlsYWFyaHVzLmRr')"
@@ -51,6 +52,7 @@
           <a
             href="#mail"
             w:flex="~"
+            w:p="2 sm:0"
             w:align="items-center"
             w:text="underline underline-true-gray-600"
             @click.stop.prevent="mailto('a2FydG90ZWtAc21pbGFhcmh1cy5kaw==')"
@@ -61,6 +63,7 @@
           <a
             href="#mail"
             w:flex="~"
+            w:p="2 sm:0"
             w:align="items-center"
             w:text="underline underline-true-gray-600"
             @click.stop.prevent="mailto('aW5mb0BzbWlsYWFyaHVzLmRr')"
@@ -73,6 +76,7 @@
             target="_blank"
             rel="noopener"
             w:flex="~"
+            w:p="2 sm:0"
             w:align="items-center"
             w:text="underline underline-true-gray-600"
           >

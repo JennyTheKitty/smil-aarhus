@@ -98,9 +98,14 @@
         >
           <div w:bg="dark-800" w:w="full" w:p="4" w:border="rounded-xl">
             <EventsWidget :events="events" />
-            <i18n-link to="CALENDAR" w:text="base underline">{{
-              t('home.goto-calendar')
-            }}</i18n-link>
+            <i18n-link
+              to="CALENDAR"
+              w:text="base underline"
+              w:m="t-1"
+              w:p="3 sm:0"
+              w:display="inline-block"
+              >{{ t('home.goto-calendar') }}</i18n-link
+            >
           </div>
         </div>
       </div>

@@ -11,7 +11,6 @@ const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET, REFRESH_TOKEN_COOKIE_NAME } =
 export default async function installRefreshToken(app: Koa, router: Router) {
   router.post('/access_token', async (ctx, next) => {
     const token = ctx.cookies.get(REFRESH_TOKEN_COOKIE_NAME!);
-    console.log(token);
     if (token) {
       try {
         const payload = verify(token, REFRESH_TOKEN_SECRET!, {
@@ -42,6 +41,7 @@ export default async function installRefreshToken(app: Koa, router: Router) {
               ok: true,
               access_token: signToken(sub, userRole, {}, ACCESS_TOKEN_SECRET!),
             };
+            ctx.status = 200;
             return;
           }
         }

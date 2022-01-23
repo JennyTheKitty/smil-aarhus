@@ -61,7 +61,7 @@
               active:top-0.5
               focus-visible:(bg-gray-200
               text-black)
-            "
+              "
           >
             <span>Gå til forsiden</span>
           </button>
@@ -70,3 +70,16 @@
     </div>
   </main>
 </template>
+
+<script setup lang="ts">
+import { useContext } from 'vite-ssr';
+
+const { writeResponse } = useContext();
+
+if (import.meta.env.SSR) {
+  writeResponse({
+    status: 404,
+    headers: {},
+  });
+}
+</script>

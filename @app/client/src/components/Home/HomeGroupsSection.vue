@@ -95,6 +95,7 @@
         <a
           href="#"
           w:m="-l-4 r-4"
+          tabindex="-1"
           @click.stop.prevent="scroller!.scrollBy({left: -scrollAmount, behavior: 'smooth'})"
         >
           <icon-mdi-chevron-left w:text="5xl" />
@@ -109,11 +110,12 @@
         w:justify="center"
         w:gradient="to-r from-transparent to-dark-500"
         w:overflow="hidden"
+        aria-hidden="true"
       >
         <a
           href="#"
           w:m="l-4 -r-4"
-          aria-hidden="true"
+          tabindex="-1"
           @click.stop.prevent="scroller!.scrollBy({left: scrollAmount, behavior: 'smooth'})"
         >
           <icon-mdi-chevron-right w:text="5xl" />

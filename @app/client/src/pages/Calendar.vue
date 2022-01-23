@@ -145,7 +145,7 @@ useHead({
   meta: [
     {
       name: `description`,
-      content: computed(() => ''),
+      content: computed(() => 'The calendar for SMil Aarhus.'),
     },
   ],
 });
