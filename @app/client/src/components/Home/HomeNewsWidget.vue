@@ -42,7 +42,7 @@ const { data } = await useQuery({
   query: HomeNewsQueryDocument,
 });
 const news = computed(() =>
-  useTranslation(data.value?.newses?.nodes[0] || null, locale)
+  useTranslation(data.value?.newses ? data.value.newses[0] : null, locale)
 );
 
 const firstLine = computed(() => {

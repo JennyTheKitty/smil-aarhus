@@ -6,20 +6,16 @@ query CalendarEventsQuery($startsAfter: Datetime, $startsBefore: Datetime) {
     }
     orderBy: STARTS_AT_ASC
   ) {
-    nodes {
-      ...CalendarEvent
-    }
+    ...CalendarEvent
   }
 }
 
 fragment CalendarEvent on Event {
   translations {
-    nodes {
-      slug
-      title
-      languageCode
-      eventId
-    }
+    slug
+    title
+    languageCode
+    eventId
   }
   endsAt
   id
@@ -28,13 +24,11 @@ fragment CalendarEvent on Event {
 
 fragment DetailedEvent on Event {
   translations {
-    nodes {
-      description
-      eventId
-      languageCode
-      slug
-      title
-    }
+    description
+    eventId
+    languageCode
+    slug
+    title
   }
   startsAt
   img {
@@ -47,36 +41,28 @@ fragment DetailedEvent on Event {
   endsAt
   id
   tags {
-    nodes {
-      tag {
-        id
-        translations {
-          nodes {
-            languageCode
-            tagId
-            title
-          }
-        }
+    tag {
+      id
+      translations {
+        languageCode
+        tagId
+        title
       }
-      eventId
-      tagId
     }
+    eventId
+    tagId
   }
   groups {
-    nodes {
-      group {
-        id
-        translations {
-          nodes {
-            groupId
-            languageCode
-            title
-          }
-        }
+    group {
+      id
+      translations {
+        groupId
+        languageCode
+        title
       }
-      eventId
-      groupId
     }
+    eventId
+    groupId
   }
 }
 

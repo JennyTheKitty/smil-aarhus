@@ -131,7 +131,7 @@ interface Item {
 const handle = useClientHandle();
 const items = computed({
   get(): Item[] {
-    const x = data.value?.pictures?.nodes || [];
+    const x = data.value?.pictures || [];
     return x;
   },
   async set(newItems: Item[]) {

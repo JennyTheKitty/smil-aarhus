@@ -99,7 +99,7 @@ const { data: eventsData } = useQuery({
   pause: computed(() => !group.value),
 });
 const events = computed(() =>
-  (eventsData.value?.eventsByGroup?.nodes || []).map((event) =>
+  (eventsData.value?.eventsByGroup || []).map((event) =>
     useTranslation(event, locale)
   )
 );

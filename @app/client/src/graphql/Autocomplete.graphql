@@ -1,44 +1,32 @@
 query SearchGroups($query: String!) {
   searchGroups(query: $query) {
-    nodes {
-      id
-      translations {
-        nodes {
-          title
-          groupId
-          languageCode
-        }
-      }
+    id
+    translations {
+      title
+      groupId
+      languageCode
     }
   }
 }
 query SearchEventTags($query: String!) {
   searchEventTags(query: $query) {
-    nodes {
-      id
-      translations {
-        nodes {
-          languageCode
-          title
-          tagId
-        }
-      }
+    id
+    translations {
+      languageCode
+      title
+      tagId
     }
   }
 }
 
 query SearchEventTemplates($query: String!) {
   searchEventTemplates(query: $query) {
-    nodes {
-      id
-      templateName
-      translations {
-        nodes {
-          languageCode
-          title
-          eventId
-        }
-      }
+    id
+    templateName
+    translations {
+      languageCode
+      title
+      eventId
     }
   }
 }
@@ -47,11 +35,9 @@ query GroupById($id: BigInt!) {
   group(id: $id) {
     id
     translations {
-      nodes {
-        languageCode
-        title
-        groupId
-      }
+      languageCode
+      title
+      groupId
     }
   }
 }
@@ -60,11 +46,9 @@ query EventTagById($id: BigInt!) {
   eventTag(id: $id) {
     id
     translations {
-      nodes {
-        languageCode
-        title
-        tagId
-      }
+      languageCode
+      title
+      tagId
     }
   }
 }

@@ -10,16 +10,14 @@ import { InjectionKey, Ref } from 'vue';
 import { FALLBACK_LANGUAGE } from './i18n';
 
 export type Translateable = Record<string, unknown> & {
-  translations: {
-    nodes: (Record<string, unknown> & { languageCode: string })[];
-  };
+  translations: (Record<string, unknown> & { languageCode: string })[];
 };
 
 export type Translated<T extends Translateable> = Omit<
   Omit<T, 'translations'>,
   '__typename'
 > &
-  Omit<T['translations']['nodes'][number], '__typename'>;
+  Omit<T['translations'][number], '__typename'>;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function useTranslation<T extends Translateable>(
@@ -45,16 +43,15 @@ export function useTranslation<T extends Translateable>(
 ): Translated<T> | null {
   const obj = unref(o);
   if (obj === null || obj === undefined) return null;
-  const {
-    translations: { nodes },
-    ...rest
-  } = obj;
-  let translation: T['translations']['nodes'][number] | undefined;
+  const { translations, ...rest } = obj;
+  let translation: T['translations'][number] | undefined;
   for (const l of [locale.value, FALLBACK_LANGUAGE]) {
-    translation = nodes.find((node) => node.languageCode.toLowerCase() === l);
+    translation = translations.find(
+      (node) => node.languageCode.toLowerCase() === l
+    );
     if (translation !== undefined) break;
   }
-  if (translation === undefined) translation = nodes[0];
+  if (translation === undefined) translation = translations[0];
 
   return {
     ...rest,

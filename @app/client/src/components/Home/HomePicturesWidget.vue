@@ -84,5 +84,5 @@ const { t } = useI18n();
 const { data } = await useQuery({
   query: HomeRandomPicturesQueryDocument,
 });
-const pictures = computed(() => data.value?.randomPictures?.nodes || []);
+const pictures = computed(() => data.value?.randomPictures || []);
 </script>

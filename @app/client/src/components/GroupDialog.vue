@@ -212,7 +212,7 @@ function onOpen() {
   const group = props.group;
   model.image = group.image;
   model.isOpen = group.isOpen;
-  model.translations = (group.translations?.nodes || []).map((trans) => ({
+  model.translations = (group.translations || []).map((trans) => ({
     languageCode: trans.languageCode,
     title: trans.title,
     shortDescription: trans.shortDescription,

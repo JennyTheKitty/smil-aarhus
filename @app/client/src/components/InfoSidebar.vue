@@ -64,7 +64,7 @@
         w:h="min-content"
         w:align="items-center"
         class="btn-focus-ring"
-        @click.prevent="editingPage = data!.infoPages!.nodes[i]"
+        @click.prevent="editingPage = data!.infoPages![i]"
       >
         <icon-mdi-pencil />
       </button>
@@ -102,7 +102,7 @@ const { locale } = useI18n();
 const store = useStore();
 
 const editingPage = ref<null | Partial<
-  NonNullable<InfoPagesQueryQuery['infoPages']>['nodes'][number]
+  NonNullable<InfoPagesQueryQuery['infoPages']>[number]
 >>(null);
 
 const InfoPageDialog = useWaitImportComponent(
@@ -114,9 +114,7 @@ const { data } = await useQuery({
   query: InfoPagesQueryDocument,
 });
 const infoPages = computed(() =>
-  (data.value?.infoPages?.nodes || []).map((page) =>
-    useTranslation(page, locale)
-  )
+  (data.value?.infoPages || []).map((page) => useTranslation(page, locale))
 );
 </script>
 

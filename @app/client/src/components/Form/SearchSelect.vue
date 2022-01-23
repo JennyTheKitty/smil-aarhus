@@ -29,7 +29,7 @@ type Query = { __typename?: string } & {
   [root: string]: {
     nodes: {
       id: string;
-      translations: { nodes: { languageCode: string; title: string }[] };
+      translations: { languageCode: string; title: string }[];
     }[];
   };
 };
@@ -110,7 +110,7 @@ async function handleSearch(query: string) {
     .toPromise();
   options.value =
     data && data[Object.keys(data)[0]]
-      ? data[Object.keys(data)[0]].nodes.map(
+      ? data[Object.keys(data)[0]].map(
           (
             value: {
               id: any;

@@ -43,6 +43,6 @@ const { data } = useQuery({
   query: NewsesQueryDocument,
 });
 const newses = computed(() =>
-  (data.value?.newses?.nodes || []).map((news) => useTranslation(news, locale))
+  (data.value?.newses || []).map((news) => useTranslation(news, locale))
 );
 </script>

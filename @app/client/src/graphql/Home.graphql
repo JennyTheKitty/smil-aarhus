@@ -8,15 +8,13 @@ query HomeEventsQuery($startsAfter: Datetime) {
     first: 1
     orderBy: STARTS_AT_ASC
   ) {
-    nodes {
-      ...HomeEvent
-      img {
-        src
-        srcSetJpeg
-        srcSetWebp
-        height
-        width
-      }
+    ...HomeEvent
+    img {
+      src
+      srcSetJpeg
+      srcSetWebp
+      height
+      width
     }
   }
   events(
@@ -27,21 +25,17 @@ query HomeEventsQuery($startsAfter: Datetime) {
     first: 10
     orderBy: STARTS_AT_ASC
   ) {
-    nodes {
-      ...HomeEvent
-    }
+    ...HomeEvent
   }
 }
 
 fragment HomeEvent on Event {
   translations {
-    nodes {
-      slug
-      title
-      languageCode
-      description
-      eventId
-    }
+    slug
+    title
+    languageCode
+    description
+    eventId
   }
   endsAt
   id
@@ -51,61 +45,51 @@ fragment HomeEvent on Event {
 
 query HomeGroupsQuery {
   groups {
-    nodes {
-      id
-      img {
-        src
-        srcSetJpeg
-        srcSetWebp
-        height
-        width
-      }
-      isOpen
-      translations {
-        nodes {
-          languageCode
-          title
-          shortDescription
-          slug
-          groupId
-          activity
-        }
-      }
+    id
+    img {
+      src
+      srcSetJpeg
+      srcSetWebp
+      height
+      width
+    }
+    isOpen
+    translations {
+      languageCode
+      title
+      shortDescription
+      slug
+      groupId
+      activity
     }
   }
 }
 
 query HomeRandomPicturesQuery {
   randomPictures(first: 4) {
-    nodes {
-      image
-      id
-      rank
-      img {
-        height
-        src
-        srcSetJpeg
-        srcSetWebp
-        width
-      }
+    image
+    id
+    rank
+    img {
+      height
+      src
+      srcSetJpeg
+      srcSetWebp
+      width
     }
   }
 }
 
 query HomeNewsQuery {
   newses(first: 1, orderBy: PUBLISHED_AT_DESC) {
-    nodes {
-      publishedAt
-      id
-      updatedAt
-      translations {
-        nodes {
-          content
-          title
-          languageCode
-          newsId
-        }
-      }
+    publishedAt
+    id
+    updatedAt
+    translations {
+      content
+      title
+      languageCode
+      newsId
     }
   }
 }

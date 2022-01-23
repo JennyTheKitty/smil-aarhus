@@ -32,6 +32,7 @@ export const postgraphileOptions: PostGraphileOptions = {
   ownerConnectionString: process.env.DATABASE_URL,
   skipPlugins: [NodePlugin],
   sortExport: true,
+  simpleCollections: 'only',
   graphileBuildOptions: {
     pgStrictFunctions: true,
     connectionFilterAllowedOperators: [
@@ -47,7 +48,8 @@ export const postgraphileOptions: PostGraphileOptions = {
     connectionFilterComputedColumns: false,
     connectionFilterSetofFunctions: false,
     connectionFilterLogicalOperators: false,
-    onnectionFilterAllowedFieldTypes: ['String', 'Int', 'DateTime'],
+    connectionFilterAllowedFieldTypes: ['String', 'Int', 'DateTime'],
+    pgOmitListSuffix: true,
   },
   additionalGraphQLContextFromRequest: async (msg) => {
     return {

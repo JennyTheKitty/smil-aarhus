@@ -129,11 +129,14 @@ const { data: eventsData } = await useQuery({
   },
 });
 const specialEvent = computed(() =>
-  useTranslation(eventsData.value?.specialEvents?.nodes[0] || null, locale)
+  useTranslation(
+    eventsData.value?.specialEvents ? eventsData.value.specialEvents[0] : null,
+    locale
+  )
 );
 
 const events = computed(() =>
-  (eventsData.value?.events?.nodes || [])
+  (eventsData.value?.events || [])
     .map((event) => useTranslation(event, locale))
     .filter((e) => e?.id !== specialEvent.value?.id)
 ) as unknown as Ref<Translated<Event>[]>;

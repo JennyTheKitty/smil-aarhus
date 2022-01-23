@@ -63,7 +63,7 @@ export async function fetchEvents(
   if (!result.data || !result.data.events) throw new Error('no data');
 
   // Turn into event input
-  const events = result.data.events.nodes
+  const events = result.data.events
     .map((event) => useTranslation(event, locale))
     .map((event) => {
       return {

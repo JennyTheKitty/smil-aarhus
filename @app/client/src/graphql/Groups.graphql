@@ -4,15 +4,13 @@ query GroupQuery($slug: String!, $preferredLanguageCode: String!) {
     image
     isOpen
     translations {
-      nodes {
-        activity
-        description
-        languageCode
-        shortDescription
-        slug
-        title
-        groupId
-      }
+      activity
+      description
+      languageCode
+      shortDescription
+      slug
+      title
+      groupId
     }
     img {
       height
@@ -37,15 +35,13 @@ mutation UpsertGroup(
       image
       isOpen
       translations {
-        nodes {
-          activity
-          description
-          languageCode
-          shortDescription
-          slug
-          title
-          groupId
-        }
+        activity
+        description
+        languageCode
+        shortDescription
+        slug
+        title
+        groupId
       }
       img {
         height
@@ -60,8 +56,6 @@ mutation UpsertGroup(
 
 query GroupEvents($groupId: BigInt!) {
   eventsByGroup(groupId: $groupId) {
-    nodes {
-      ...CalendarEvent
-    }
+    ...CalendarEvent
   }
 }

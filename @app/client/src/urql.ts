@@ -53,7 +53,7 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
             },
             reorderPictures(_result, args, cache, _info) {
               cache.updateQuery({ query: PicturesQueryDocument }, (data) => {
-                const pictures = data!.pictures!.nodes;
+                const pictures = data!.pictures!;
                 for (const reorder of (
                   args!.input! as {
                     reorders: { fromRank: number; toRank: number }[];
@@ -66,7 +66,7 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
                     picture.rank = reorder.toRank;
                   }
                 }
-                data!.pictures!.nodes.sort((a, b) => a.rank - b.rank);
+                data!.pictures!.sort((a, b) => a.rank - b.rank);
                 return data;
               });
             },
@@ -79,8 +79,8 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
             createPicture(result, _args, cache, _info) {
               if (Narrow<NonNullable<CreatePictureMutation>>(result)) {
                 cache.updateQuery({ query: PicturesQueryDocument }, (data) => {
-                  data!.pictures!.nodes.push(result.createPicture!.picture!);
-                  data!.pictures!.nodes.sort((a, b) => a.rank - b.rank);
+                  data!.pictures!.push(result.createPicture!.picture!);
+                  data!.pictures!.sort((a, b) => a.rank - b.rank);
                   return data;
                 });
               }
@@ -88,8 +88,8 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
             upsertInfoPage(result, _args, cache, _info) {
               if (Narrow<NonNullable<UpsertInfoPageMutation>>(result)) {
                 cache.updateQuery({ query: InfoPagesQueryDocument }, (data) => {
-                  data!.infoPages!.nodes.push(result.upsertInfoPage!.infoPage!);
-                  data!.infoPages!.nodes.sort((a, b) => a.rank - b.rank);
+                  data!.infoPages!.push(result.upsertInfoPage!.infoPage!);
+                  data!.infoPages!.sort((a, b) => a.rank - b.rank);
                   return data;
                 });
               }

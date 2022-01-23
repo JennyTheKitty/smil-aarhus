@@ -155,13 +155,11 @@ const { locale, t } = useI18n();
 
 const tags = computed(() => {
   if (!props.event) return null;
-  return props.event.tags.nodes.map((evet) => useTranslation(evet.tag, locale));
+  return props.event.tags.map((evet) => useTranslation(evet.tag, locale));
 });
 const groups = computed(() => {
   if (!props.event) return null;
-  return props.event.groups.nodes.map((evet) =>
-    useTranslation(evet.group, locale)
-  );
+  return props.event.groups.map((evet) => useTranslation(evet.group, locale));
 });
 
 function getCoords(elem: HTMLElement) {

@@ -41,9 +41,7 @@ const { data } = useQuery({
   query: InfoPagesQueryDocument,
 });
 const pages = computed(() =>
-  (data.value?.infoPages?.nodes || []).map((page) =>
-    useTranslation(page, locale)
-  )
+  (data.value?.infoPages || []).map((page) => useTranslation(page, locale))
 );
 
 const navLinks = computed(

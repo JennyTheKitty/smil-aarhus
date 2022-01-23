@@ -84,7 +84,7 @@ const props = defineProps({
   isOpen: { type: Boolean, required: true },
   infoPage: {
     type: Object as PropType<
-      Partial<NonNullable<InfoPagesQueryQuery['infoPages']>['nodes'][number]>
+      Partial<NonNullable<InfoPagesQueryQuery['infoPages']>[number]>
     >,
     required: true,
   },
@@ -158,7 +158,7 @@ const rules = {
 function onOpen() {
   const infoPage = props.infoPage;
   model.icon = infoPage.icon || '';
-  model.translations = (infoPage.translations?.nodes || []).map((trans) => ({
+  model.translations = (infoPage.translations || []).map((trans) => ({
     languageCode: trans.languageCode,
     title: trans.title,
     subtitle: trans.subtitle,

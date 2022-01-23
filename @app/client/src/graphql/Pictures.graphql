@@ -1,18 +1,16 @@
 query PicturesQuery {
   pictures(orderBy: RANK_ASC) {
-    nodes {
-      img {
-        height
-        src
-        srcSetJpeg
-        srcSetWebp
-        width
-        credit
-      }
-      id
-      rank
-      allowOnHome
+    img {
+      height
+      src
+      srcSetJpeg
+      srcSetWebp
+      width
+      credit
     }
+    id
+    rank
+    allowOnHome
   }
 }
 

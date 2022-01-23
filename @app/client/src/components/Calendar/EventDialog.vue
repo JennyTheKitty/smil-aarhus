@@ -219,16 +219,16 @@ function modelFromEvent(
     model.startsAt = event.startsAt ? new Date(event.startsAt) : null;
     model.endsAt = event.endsAt ? new Date(event.endsAt) : null;
   }
-  model.tags = (('tags' in event && event.tags?.nodes) || []).map((t) => {
+  model.tags = (('tags' in event && event.tags) || []).map((t) => {
     const tag = useTranslation(t.tag, locale)!;
     return tag.id;
   });
-  model.groups = (('groups' in event && event.groups?.nodes) || []).map((g) => {
+  model.groups = (('groups' in event && event.groups) || []).map((g) => {
     const group = useTranslation(g.group, locale)!;
     return group.id;
   });
   model.translations = (
-    ('translations' in event && event.translations?.nodes) ||
+    ('translations' in event && event.translations) ||
     []
   ).map((trans) => ({
     languageCode: trans.languageCode,

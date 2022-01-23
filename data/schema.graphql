@@ -89,9 +89,6 @@ type CreateImagePayload {
   """The `Image` that was created by this mutation."""
   image: Image
 
-  """An edge for our `Image`. May be used by Relay 1."""
-  imageEdge: ImagesEdge
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -121,12 +118,6 @@ type CreateNewsPayload {
   """The `News` that was created by this mutation."""
   news: News
 
-  """An edge for our `News`. May be used by Relay 1."""
-  newsEdge(
-    """The method to use when ordering `News`."""
-    orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): NewsEdge
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -155,12 +146,6 @@ type CreatePagePayload {
 
   """The `Page` that was created by this mutation."""
   page: Page
-
-  """An edge for our `Page`. May be used by Relay 1."""
-  pageEdge(
-    """The method to use when ordering `Page`."""
-    orderBy: [PagesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): PagesEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -193,12 +178,6 @@ type CreatePicturePayload {
 
   """The `Picture` that was created by this mutation."""
   picture: Picture
-
-  """An edge for our `Picture`. May be used by Relay 1."""
-  pictureEdge(
-    """The method to use when ordering `Picture`."""
-    orderBy: [PicturesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): PicturesEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -239,9 +218,6 @@ type CreateUploadUrlPayload {
   """Upload content to this signed URL."""
   uploadUrl: String!
 }
-
-"""A location in a connection that can be used for resuming pagination."""
-scalar Cursor
 
 """
 A point in time as described by the [ISO
@@ -299,9 +275,6 @@ type DeleteImagePayload {
   """The `Image` that was deleted by this mutation."""
   image: Image
 
-  """An edge for our `Image`. May be used by Relay 1."""
-  imageEdge: ImagesEdge
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -330,12 +303,6 @@ type DeleteNewsPayload {
   """The `News` that was deleted by this mutation."""
   news: News
 
-  """An edge for our `News`. May be used by Relay 1."""
-  newsEdge(
-    """The method to use when ordering `News`."""
-    orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): NewsEdge
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -363,12 +330,6 @@ type DeletePagePayload {
 
   """The `Page` that was deleted by this mutation."""
   page: Page
-
-  """An edge for our `Page`. May be used by Relay 1."""
-  pageEdge(
-    """The method to use when ordering `Page`."""
-    orderBy: [PagesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): PagesEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -401,12 +362,6 @@ type DeletePicturePayload {
   """The `Picture` that was deleted by this mutation."""
   picture: Picture
 
-  """An edge for our `Picture`. May be used by Relay 1."""
-  pictureEdge(
-    """The method to use when ordering `Picture`."""
-    orderBy: [PicturesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): PicturesEdge
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -418,12 +373,6 @@ type Event {
 
   """Reads and enables pagination through a set of `EventViaGroup`."""
   groups(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -437,15 +386,9 @@ type Event {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
-  ): EventViaGroupsConnection!
+  ): [EventViaGroup!]!
   id: BigInt!
 
   """Reads a single `Image` that is related to this `Event`."""
@@ -457,34 +400,16 @@ type Event {
 
   """Reads and enables pagination through a set of `EventViaEventTag`."""
   tags(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
-  ): EventViaEventTagsConnection!
+  ): [EventViaEventTag!]!
   templateName: String
 
   """Reads and enables pagination through a set of `EventTr`."""
   translations(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -498,15 +423,9 @@ type Event {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
-  ): EventTrsConnection!
+  ): [EventTr!]!
 }
 
 """
@@ -569,24 +488,12 @@ input EventFilter {
 type EventTag {
   """Reads and enables pagination through a set of `EventViaEventTag`."""
   events(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
-  ): EventViaEventTagsConnection!
+  ): [EventViaEventTag!]!
   id: BigInt!
   image: BigInt
 
@@ -596,12 +503,6 @@ type EventTag {
 
   """Reads and enables pagination through a set of `EventTagTr`."""
   translations(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -615,15 +516,9 @@ type EventTag {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
-  ): EventTagTrsConnection!
+  ): [EventTagTr!]!
 }
 
 """
@@ -687,58 +582,6 @@ input EventTagTrFilter {
   title: StringFilter
 }
 
-"""A connection to a list of `EventTagTr` values."""
-type EventTagTrsConnection {
-  """
-  A list of edges which contains the `EventTagTr` and cursor to aid in pagination.
-  """
-  edges: [EventTagTrsEdge!]!
-
-  """A list of `EventTagTr` objects."""
-  nodes: [EventTagTr!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `EventTagTr` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `EventTagTr` edge in the connection."""
-type EventTagTrsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `EventTagTr` at the end of the edge."""
-  node: EventTagTr!
-}
-
-"""A connection to a list of `EventTag` values."""
-type EventTagsConnection {
-  """
-  A list of edges which contains the `EventTag` and cursor to aid in pagination.
-  """
-  edges: [EventTagsEdge!]!
-
-  """A list of `EventTag` objects."""
-  nodes: [EventTag!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `EventTag` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `EventTag` edge in the connection."""
-type EventTagsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `EventTag` at the end of the edge."""
-  node: EventTag!
-}
-
 type EventTr {
   description: String!
 
@@ -797,32 +640,6 @@ input EventTrFilter {
   title: StringFilter
 }
 
-"""A connection to a list of `EventTr` values."""
-type EventTrsConnection {
-  """
-  A list of edges which contains the `EventTr` and cursor to aid in pagination.
-  """
-  edges: [EventTrsEdge!]!
-
-  """A list of `EventTr` objects."""
-  nodes: [EventTr!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `EventTr` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `EventTr` edge in the connection."""
-type EventTrsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `EventTr` at the end of the edge."""
-  node: EventTr!
-}
-
 type EventViaEventTag {
   """Reads a single `Event` that is related to this `EventViaEventTag`."""
   event: Event
@@ -831,34 +648,6 @@ type EventViaEventTag {
   """Reads a single `EventTag` that is related to this `EventViaEventTag`."""
   tag: EventTag
   tagId: BigInt!
-}
-
-"""A connection to a list of `EventViaEventTag` values."""
-type EventViaEventTagsConnection {
-  """
-  A list of edges which contains the `EventViaEventTag` and cursor to aid in pagination.
-  """
-  edges: [EventViaEventTagsEdge!]!
-
-  """A list of `EventViaEventTag` objects."""
-  nodes: [EventViaEventTag!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """
-  The count of *all* `EventViaEventTag` you could get from the connection.
-  """
-  totalCount: Int!
-}
-
-"""A `EventViaEventTag` edge in the connection."""
-type EventViaEventTagsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `EventViaEventTag` at the end of the edge."""
-  node: EventViaEventTag!
 }
 
 type EventViaGroup {
@@ -894,58 +683,6 @@ input EventViaGroupFilter {
   groupId: BigIntFilter
 }
 
-"""A connection to a list of `EventViaGroup` values."""
-type EventViaGroupsConnection {
-  """
-  A list of edges which contains the `EventViaGroup` and cursor to aid in pagination.
-  """
-  edges: [EventViaGroupsEdge!]!
-
-  """A list of `EventViaGroup` objects."""
-  nodes: [EventViaGroup!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `EventViaGroup` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `EventViaGroup` edge in the connection."""
-type EventViaGroupsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `EventViaGroup` at the end of the edge."""
-  node: EventViaGroup!
-}
-
-"""A connection to a list of `Event` values."""
-type EventsConnection {
-  """
-  A list of edges which contains the `Event` and cursor to aid in pagination.
-  """
-  edges: [EventsEdge!]!
-
-  """A list of `Event` objects."""
-  nodes: [Event!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Event` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Event` edge in the connection."""
-type EventsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Event` at the end of the edge."""
-  node: Event!
-}
-
 """Methods to use when ordering `Event`."""
 enum EventsOrderBy {
   ENDS_AT_ASC
@@ -968,12 +705,6 @@ enum EventsOrderBy {
 type Group {
   """Reads and enables pagination through a set of `EventViaGroup`."""
   events(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -987,15 +718,9 @@ type Group {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
-  ): EventViaGroupsConnection!
+  ): [EventViaGroup!]!
   id: BigInt!
   image: BigInt
 
@@ -1006,12 +731,6 @@ type Group {
 
   """Reads and enables pagination through a set of `GroupTr`."""
   translations(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -1025,15 +744,9 @@ type Group {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
-  ): GroupTrsConnection!
+  ): [GroupTr!]!
 }
 
 """
@@ -1144,58 +857,6 @@ input GroupTrFilter {
   title: StringFilter
 }
 
-"""A connection to a list of `GroupTr` values."""
-type GroupTrsConnection {
-  """
-  A list of edges which contains the `GroupTr` and cursor to aid in pagination.
-  """
-  edges: [GroupTrsEdge!]!
-
-  """A list of `GroupTr` objects."""
-  nodes: [GroupTr!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `GroupTr` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `GroupTr` edge in the connection."""
-type GroupTrsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `GroupTr` at the end of the edge."""
-  node: GroupTr!
-}
-
-"""A connection to a list of `Group` values."""
-type GroupsConnection {
-  """
-  A list of edges which contains the `Group` and cursor to aid in pagination.
-  """
-  edges: [GroupsEdge!]!
-
-  """A list of `Group` objects."""
-  nodes: [Group!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Group` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Group` edge in the connection."""
-type GroupsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Group` at the end of the edge."""
-  node: Group!
-}
-
 """Methods to use when ordering `Group`."""
 enum GroupsOrderBy {
   ID_ASC
@@ -1214,12 +875,6 @@ type Image {
 
   """Reads and enables pagination through a set of `EventTag`."""
   eventTagsByImage(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -1233,24 +888,12 @@ type Image {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
-  ): EventTagsConnection!
+  ): [EventTag!]!
 
   """Reads and enables pagination through a set of `Event`."""
   eventsByOverrideImage(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -1264,27 +907,15 @@ type Image {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Event`."""
-    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventsConnection!
+    orderBy: [EventsOrderBy!]
+  ): [Event!]!
 
   """Reads and enables pagination through a set of `Group`."""
   groupsByImage(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -1298,18 +929,12 @@ type Image {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Group`."""
-    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): GroupsConnection!
+    orderBy: [GroupsOrderBy!]
+  ): [Group!]!
   height: Int!
   id: BigInt!
   img: ResponsiveImage!
@@ -1317,27 +942,15 @@ type Image {
 
   """Reads and enables pagination through a set of `Picture`."""
   picturesByImage(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Picture`."""
-    orderBy: [PicturesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): PicturesConnection!
+    orderBy: [PicturesOrderBy!]
+  ): [Picture!]!
   width: Int!
 }
 
@@ -1361,15 +974,6 @@ input ImagePatch {
   width: Int
 }
 
-"""A `Image` edge in the connection."""
-type ImagesEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Image` at the end of the edge."""
-  node: Image!
-}
-
 type InfoPage {
   icon: String!
   name: String!
@@ -1380,24 +984,12 @@ type InfoPage {
 
   """Reads and enables pagination through a set of `InfoPageTr`."""
   translations(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
-  ): InfoPageTrsConnection!
+  ): [InfoPageTr!]!
 }
 
 """An input for mutations affecting `InfoPageDatum`"""
@@ -1419,58 +1011,6 @@ input InfoPageTrDatumInput {
   languageCode: String!
   subtitle: String!
   title: String!
-}
-
-"""A connection to a list of `InfoPageTr` values."""
-type InfoPageTrsConnection {
-  """
-  A list of edges which contains the `InfoPageTr` and cursor to aid in pagination.
-  """
-  edges: [InfoPageTrsEdge!]!
-
-  """A list of `InfoPageTr` objects."""
-  nodes: [InfoPageTr!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `InfoPageTr` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `InfoPageTr` edge in the connection."""
-type InfoPageTrsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `InfoPageTr` at the end of the edge."""
-  node: InfoPageTr!
-}
-
-"""A connection to a list of `InfoPage` values."""
-type InfoPagesConnection {
-  """
-  A list of edges which contains the `InfoPage` and cursor to aid in pagination.
-  """
-  edges: [InfoPagesEdge!]!
-
-  """A list of `InfoPage` objects."""
-  nodes: [InfoPage!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `InfoPage` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `InfoPage` edge in the connection."""
-type InfoPagesEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `InfoPage` at the end of the edge."""
-  node: InfoPage!
 }
 
 """Methods to use when ordering `InfoPage`."""
@@ -1649,12 +1189,6 @@ type News {
 
   """Reads and enables pagination through a set of `NewsTr`."""
   translations(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -1668,15 +1202,9 @@ type News {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
-  ): NewsTrsConnection!
+  ): [NewsTr!]!
   updatedAt: Datetime!
 }
 
@@ -1692,32 +1220,6 @@ input NewsCondition {
 
   """Checks for equality with the object’s `updatedAt` field."""
   updatedAt: Datetime
-}
-
-"""A connection to a list of `News` values."""
-type NewsConnection {
-  """
-  A list of edges which contains the `News` and cursor to aid in pagination.
-  """
-  edges: [NewsEdge!]!
-
-  """A list of `News` objects."""
-  nodes: [News!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `News` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `News` edge in the connection."""
-type NewsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `News` at the end of the edge."""
-  node: News!
 }
 
 """
@@ -1805,32 +1307,6 @@ input NewsTrFilter {
   title: StringFilter
 }
 
-"""A connection to a list of `NewsTr` values."""
-type NewsTrsConnection {
-  """
-  A list of edges which contains the `NewsTr` and cursor to aid in pagination.
-  """
-  edges: [NewsTrsEdge!]!
-
-  """A list of `NewsTr` objects."""
-  nodes: [NewsTr!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `NewsTr` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `NewsTr` edge in the connection."""
-type NewsTrsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `NewsTr` at the end of the edge."""
-  node: NewsTr!
-}
-
 type Page {
   """Reads a single `InfoPage` that is related to this `Page`."""
   infoPageByName: InfoPage
@@ -1838,12 +1314,6 @@ type Page {
 
   """Reads and enables pagination through a set of `PageTr`."""
   translations(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -1857,15 +1327,9 @@ type Page {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
-  ): PageTrsConnection!
+  ): [PageTr!]!
 }
 
 """
@@ -1882,21 +1346,6 @@ A filter to be used against `Page` object types. All fields are combined with a 
 input PageFilter {
   """Filter by the object’s `name` field."""
   name: StringFilter
-}
-
-"""Information about pagination in a connection."""
-type PageInfo {
-  """When paginating forwards, the cursor to continue."""
-  endCursor: Cursor
-
-  """When paginating forwards, are there more items?"""
-  hasNextPage: Boolean!
-
-  """When paginating backwards, are there more items?"""
-  hasPreviousPage: Boolean!
-
-  """When paginating backwards, the cursor to continue."""
-  startCursor: Cursor
 }
 
 """An input for mutations affecting `Page`"""
@@ -1955,58 +1404,6 @@ input PageTrPatch {
   pageName: String
 }
 
-"""A connection to a list of `PageTr` values."""
-type PageTrsConnection {
-  """
-  A list of edges which contains the `PageTr` and cursor to aid in pagination.
-  """
-  edges: [PageTrsEdge!]!
-
-  """A list of `PageTr` objects."""
-  nodes: [PageTr!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `PageTr` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `PageTr` edge in the connection."""
-type PageTrsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `PageTr` at the end of the edge."""
-  node: PageTr!
-}
-
-"""A connection to a list of `Page` values."""
-type PagesConnection {
-  """
-  A list of edges which contains the `Page` and cursor to aid in pagination.
-  """
-  edges: [PagesEdge!]!
-
-  """A list of `Page` objects."""
-  nodes: [Page!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Page` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Page` edge in the connection."""
-type PagesEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Page` at the end of the edge."""
-  node: Page!
-}
-
 """Methods to use when ordering `Page`."""
 enum PagesOrderBy {
   NAME_ASC
@@ -2045,32 +1442,6 @@ input PicturePatch {
   rank: Int
 }
 
-"""A connection to a list of `Picture` values."""
-type PicturesConnection {
-  """
-  A list of edges which contains the `Picture` and cursor to aid in pagination.
-  """
-  edges: [PicturesEdge!]!
-
-  """A list of `Picture` objects."""
-  nodes: [Picture!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Picture` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Picture` edge in the connection."""
-type PicturesEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Picture` at the end of the edge."""
-  node: Picture!
-}
-
 """Methods to use when ordering `Picture`."""
 enum PicturesOrderBy {
   ALLOW_ON_HOME_ASC
@@ -2098,14 +1469,8 @@ type Query {
   eventViaEventTag(eventId: BigInt!, tagId: BigInt!): EventViaEventTag
   eventViaGroup(eventId: BigInt!, groupId: BigInt!): EventViaGroup
 
-  """Reads and enables pagination through a set of `Event`."""
+  """Reads a set of `Event`."""
   events(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -2119,53 +1484,29 @@ type Query {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Event`."""
-    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventsConnection
+    orderBy: [EventsOrderBy!]
+  ): [Event!]
 
   """Reads and enables pagination through a set of `Event`."""
   eventsByGroup(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """Only read the first `n` values of the set."""
     first: Int
     groupId: BigInt!
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
-  ): EventsConnection
+  ): [Event!]
   group(id: BigInt!): Group
   groupBySlug(preferredLanguageCode: String!, slug: String!): Group
   groupTr(groupId: BigInt!, languageCode: TrLanguage!): GroupTr
   groupTrBySlugAndLanguageCode(languageCode: TrLanguage!, slug: String!): GroupTr
 
-  """Reads and enables pagination through a set of `Group`."""
+  """Reads a set of `Group`."""
   groups(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -2179,56 +1520,32 @@ type Query {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Group`."""
-    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): GroupsConnection
+    orderBy: [GroupsOrderBy!]
+  ): [Group!]
   image(id: BigInt!): Image
   infoPage(name: String!): InfoPage
   infoPageTr(infoPageName: String!, languageCode: TrLanguage!): InfoPageTr
 
-  """Reads and enables pagination through a set of `InfoPage`."""
+  """Reads a set of `InfoPage`."""
   infoPages(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `InfoPage`."""
-    orderBy: [InfoPagesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): InfoPagesConnection
+    orderBy: [InfoPagesOrderBy!]
+  ): [InfoPage!]
   news(id: BigInt!): News
   newsTr(languageCode: TrLanguage!, newsId: BigInt!): NewsTr
 
-  """Reads and enables pagination through a set of `News`."""
+  """Reads a set of `News`."""
   newses(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -2242,29 +1559,17 @@ type Query {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `News`."""
-    orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): NewsConnection
+    orderBy: [NewsOrderBy!]
+  ): [News!]
   page(name: String!): Page
   pageTr(languageCode: TrLanguage!, pageName: String!): PageTr
 
-  """Reads and enables pagination through a set of `Page`."""
+  """Reads a set of `Page`."""
   pages(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -2278,43 +1583,25 @@ type Query {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Page`."""
-    orderBy: [PagesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): PagesConnection
+    orderBy: [PagesOrderBy!]
+  ): [Page!]
   picture(id: BigInt!): Picture
 
-  """Reads and enables pagination through a set of `Picture`."""
+  """Reads a set of `Picture`."""
   pictures(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Picture`."""
-    orderBy: [PicturesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): PicturesConnection
+    orderBy: [PicturesOrderBy!]
+  ): [Picture!]
 
   """
   Exposes the root query type nested one level down. This is helpful for Relay 1
@@ -2324,90 +1611,42 @@ type Query {
 
   """Reads and enables pagination through a set of `Picture`."""
   randomPictures(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
-  ): PicturesConnection
+  ): [Picture!]
 
   """Reads and enables pagination through a set of `EventTag`."""
   searchEventTags(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
     query: String!
-  ): EventTagsConnection
+  ): [EventTag!]
 
   """Reads and enables pagination through a set of `Event`."""
   searchEventTemplates(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
     query: String!
-  ): EventsConnection
+  ): [Event!]
 
   """Reads and enables pagination through a set of `Group`."""
   searchGroups(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
     query: String!
-  ): GroupsConnection
+  ): [Group!]
 }
 
 """All input for the `reorderPictures` mutation."""
@@ -2543,9 +1782,6 @@ type UpdateImagePayload {
   """The `Image` that was updated by this mutation."""
   image: Image
 
-  """An edge for our `Image`. May be used by Relay 1."""
-  imageEdge: ImagesEdge
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -2578,12 +1814,6 @@ type UpdateNewsPayload {
   """The `News` that was updated by this mutation."""
   news: News
 
-  """An edge for our `News`. May be used by Relay 1."""
-  newsEdge(
-    """The method to use when ordering `News`."""
-    orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): NewsEdge
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -2615,12 +1845,6 @@ type UpdatePagePayload {
 
   """The `Page` that was updated by this mutation."""
   page: Page
-
-  """An edge for our `Page`. May be used by Relay 1."""
-  pageEdge(
-    """The method to use when ordering `Page`."""
-    orderBy: [PagesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): PagesEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -2658,9 +1882,6 @@ type UpdatePageTrPayload {
   """The `PageTr` that was updated by this mutation."""
   pageTr: PageTr
 
-  """An edge for our `PageTr`. May be used by Relay 1."""
-  pageTrEdge: PageTrsEdge
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -2696,12 +1917,6 @@ type UpdatePicturePayload {
   """The `Picture` that was updated by this mutation."""
   picture: Picture
 
-  """An edge for our `Picture`. May be used by Relay 1."""
-  pictureEdge(
-    """The method to use when ordering `Picture`."""
-    orderBy: [PicturesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): PicturesEdge
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -2728,12 +1943,6 @@ type UpsertEventPayload {
   """
   clientMutationId: String
   event: Event
-
-  """An edge for our `Event`. May be used by Relay 1."""
-  eventEdge(
-    """The method to use when ordering `Event`."""
-    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): EventsEdge
 
   """Reads a single `Image` that is related to this `Event`."""
   imageByOverrideImage: Image
@@ -2765,12 +1974,6 @@ type UpsertGroupPayload {
   clientMutationId: String
   group: Group
 
-  """An edge for our `Group`. May be used by Relay 1."""
-  groupEdge(
-    """The method to use when ordering `Group`."""
-    orderBy: [GroupsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): GroupsEdge
-
   """Reads a single `Image` that is related to this `Group`."""
   imageByImage: Image
 
@@ -2800,12 +2003,6 @@ type UpsertInfoPagePayload {
   """
   clientMutationId: String
   infoPage: InfoPage
-
-  """An edge for our `InfoPage`. May be used by Relay 1."""
-  infoPageEdge(
-    """The method to use when ordering `InfoPage`."""
-    orderBy: [InfoPagesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): InfoPagesEdge
 
   """Reads a single `Page` that is related to this `InfoPage`."""
   pageByName: Page

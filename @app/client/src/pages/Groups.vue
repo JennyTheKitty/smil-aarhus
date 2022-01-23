@@ -26,7 +26,7 @@
           to="GROUP"
           :params="{ slug: group.slug }"
           w:rounded="lg"
-          w:bg="dark-300"
+          w:bg="dark-800"
           w:w="full"
           w:h="64"
           w:shadow="lg"
@@ -119,9 +119,7 @@ const { data: groupsData } = useQuery({
   query: HomeGroupsQueryDocument,
 });
 const groups = computed(() =>
-  (groupsData.value?.groups?.nodes || []).map((group) =>
-    useTranslation(group, locale)
-  )
+  (groupsData.value?.groups || []).map((group) => useTranslation(group, locale))
 );
 </script>
 

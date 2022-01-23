@@ -2,9 +2,7 @@ query PageQuery($name: String!) {
   page(name: $name) {
     name
     translations {
-      nodes {
-        ...PageTranslation
-      }
+      ...PageTranslation
     }
   }
 }
@@ -35,19 +33,15 @@ fragment PageTranslation on PageTr {
 
 query InfoPagesQuery {
   infoPages(orderBy: RANK_ASC) {
-    nodes {
-      icon
-      name
-      rank
+    icon
+    name
+    rank
 
-      translations {
-        nodes {
-          languageCode
-          infoPageName
-          subtitle
-          title
-        }
-      }
+    translations {
+      languageCode
+      infoPageName
+      subtitle
+      title
     }
   }
 }
@@ -58,12 +52,10 @@ query InfoPageQuery($name: String!) {
     rank
     name
     translations {
-      nodes {
-        languageCode
-        infoPageName
-        subtitle
-        title
-      }
+      languageCode
+      infoPageName
+      subtitle
+      title
     }
   }
 }
@@ -81,12 +73,10 @@ mutation UpsertInfoPage(
       rank
       name
       translations {
-        nodes {
-          languageCode
-          infoPageName
-          subtitle
-          title
-        }
+        languageCode
+        infoPageName
+        subtitle
+        title
       }
     }
   }

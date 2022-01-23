@@ -134,9 +134,7 @@ const { data: groupsData } = await useQuery({
   query: HomeGroupsQueryDocument,
 });
 const groups = computed(() =>
-  (groupsData.value?.groups?.nodes || []).map((group) =>
-    useTranslation(group, locale)
-  )
+  (groupsData.value?.groups || []).map((group) => useTranslation(group, locale))
 );
 
 const scroller = ref<HTMLElement | null>(null);
