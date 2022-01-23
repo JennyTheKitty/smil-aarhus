@@ -1,8 +1,8 @@
 <template>
   <div ref="hero" class="hero" w:h="full" w:pos="relative" w:m="-t-16">
     <picture>
-      <source :srcset="jpeg" type="image/jpeg" sizes="100vw" />
       <source :srcset="webp" type="image/webp" sizes="100vw" />
+      <source :srcset="jpeg" type="image/jpeg" sizes="100vw" />
       <img
         alt=""
         class="hero"
