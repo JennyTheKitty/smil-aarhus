@@ -99,6 +99,7 @@ declare module 'vue' {
     NavLink: typeof import('./components/Nav/NavLink.vue')['default']
     NavMenuButton: typeof import('./components/Nav/NavMenuButton.vue')['default']
     PageEditButton: typeof import('./components/PageEditButton.vue')['default']
+    Pagination: typeof import('./components/Pagination.vue')['default']
     PictureDelete: typeof import('./components/Picture/PictureDelete.vue')['default']
     PictureUpload: typeof import('./components/Picture/PictureUpload.vue')['default']
     Popover: typeof import('@headlessui/vue')['Popover']

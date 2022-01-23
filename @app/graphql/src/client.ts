@@ -18,6 +18,8 @@ export type Scalars = {
    * strings and not numbers.
    */
   BigInt: any;
+  /** A location in a connection that can be used for resuming pagination. */
+  Cursor: any;
   /**
    * A point in time as described by the [ISO
    * 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
@@ -114,8 +116,16 @@ export type CreateNewsPayload = {
   clientMutationId: Maybe<Scalars['String']>;
   /** The `News` that was created by this mutation. */
   news: Maybe<News>;
+  /** An edge for our `News`. May be used by Relay 1. */
+  newsEdge: Maybe<NewsEdge>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query: Maybe<Query>;
+};
+
+
+/** The output of our create `News` mutation. */
+export type CreateNewsPayloadNewsEdgeArgs = {
+  orderBy?: InputMaybe<Array<NewsOrderBy>>;
 };
 
 /** All input for the create `Page` mutation. */
@@ -264,8 +274,16 @@ export type DeleteNewsPayload = {
   deletedNewsNodeId: Maybe<Scalars['ID']>;
   /** The `News` that was deleted by this mutation. */
   news: Maybe<News>;
+  /** An edge for our `News`. May be used by Relay 1. */
+  newsEdge: Maybe<NewsEdge>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query: Maybe<Query>;
+};
+
+
+/** The output of our delete `News` mutation. */
+export type DeleteNewsPayloadNewsEdgeArgs = {
+  orderBy?: InputMaybe<Array<NewsOrderBy>>;
 };
 
 /** All input for the `deletePage` mutation. */
@@ -1018,6 +1036,28 @@ export type NewsCondition = {
   updatedAt?: InputMaybe<Scalars['Datetime']>;
 };
 
+/** A connection to a list of `News` values. */
+export type NewsConnection = {
+  __typename?: 'NewsConnection';
+  /** A list of edges which contains the `News` and cursor to aid in pagination. */
+  edges: Array<NewsEdge>;
+  /** A list of `News` objects. */
+  nodes: Array<News>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `News` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `News` edge in the connection. */
+export type NewsEdge = {
+  __typename?: 'NewsEdge';
+  /** A cursor for use in pagination. */
+  cursor: Maybe<Scalars['Cursor']>;
+  /** The `News` at the end of the edge. */
+  node: News;
+};
+
 /** A filter to be used against `News` object types. All fields are combined with a logical ‘and.’ */
 export type NewsFilter = {
   /** Filter by the object’s `id` field. */
@@ -1114,6 +1154,19 @@ export type PageCondition = {
 export type PageFilter = {
   /** Filter by the object’s `name` field. */
   name?: InputMaybe<StringFilter>;
+};
+
+/** Information about pagination in a connection. */
+export type PageInfo = {
+  __typename?: 'PageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor: Maybe<Scalars['Cursor']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor: Maybe<Scalars['Cursor']>;
 };
 
 /** An input for mutations affecting `Page` */
@@ -1242,6 +1295,8 @@ export type Query = {
   newsTr: Maybe<NewsTr>;
   /** Reads a set of `News`. */
   newses: Maybe<Array<News>>;
+  /** Reads and enables pagination through a set of `News`. */
+  newsesConnection: Maybe<NewsConnection>;
   page: Maybe<Page>;
   pageTr: Maybe<PageTr>;
   /** Reads a set of `Page`. */
@@ -1425,6 +1480,19 @@ export type QueryNewsesArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryNewsesConnectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']>;
+  before?: InputMaybe<Scalars['Cursor']>;
+  condition?: InputMaybe<NewsCondition>;
+  filter?: InputMaybe<NewsFilter>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<NewsOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryPageArgs = {
   name: Scalars['String'];
 };
@@ -1601,8 +1669,16 @@ export type UpdateNewsPayload = {
   clientMutationId: Maybe<Scalars['String']>;
   /** The `News` that was updated by this mutation. */
   news: Maybe<News>;
+  /** An edge for our `News`. May be used by Relay 1. */
+  newsEdge: Maybe<NewsEdge>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query: Maybe<Query>;
+};
+
+
+/** The output of our update `News` mutation. */
+export type UpdateNewsPayloadNewsEdgeArgs = {
+  orderBy?: InputMaybe<Array<NewsOrderBy>>;
 };
 
 /** All input for the `updatePage` mutation. */
@@ -1914,10 +1990,13 @@ export type HomeNewsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type HomeNewsQueryQuery = { __typename?: 'Query', newses: Array<{ __typename?: 'News', publishedAt: string, id: any, updatedAt: string, translations: Array<{ __typename?: 'NewsTr', content: string, title: string, languageCode: TrLanguage, newsId: any }> }> | null | undefined };
 
-export type NewsesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type NewsesQueryQueryVariables = Exact<{
+  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+}>;
 
 
-export type NewsesQueryQuery = { __typename?: 'Query', newses: Array<{ __typename?: 'News', publishedAt: string, id: any, updatedAt: string, translations: Array<{ __typename?: 'NewsTr', content: string, title: string, languageCode: TrLanguage, newsId: any }> }> | null | undefined };
+export type NewsesQueryQuery = { __typename?: 'Query', newsesConnection: { __typename?: 'NewsConnection', totalCount: number, nodes: Array<{ __typename?: 'News', publishedAt: string, id: any, updatedAt: string, translations: Array<{ __typename?: 'NewsTr', content: string, title: string, languageCode: TrLanguage, newsId: any }> }> } | null | undefined };
 
 export type PageQueryQueryVariables = Exact<{
   name: Scalars['String'];
@@ -2033,7 +2112,7 @@ export const HomeEventsQueryDocument = {"kind":"Document","definitions":[{"kind"
 export const HomeGroupsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"HomeGroupsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"groups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"srcSetJpeg"}},{"kind":"Field","name":{"kind":"Name","value":"srcSetWebp"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"isOpen"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"languageCode"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"shortDescription"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"groupId"}},{"kind":"Field","name":{"kind":"Name","value":"activity"}}]}}]}}]}}]} as unknown as DocumentNode<HomeGroupsQueryQuery, HomeGroupsQueryQueryVariables>;
 export const HomeRandomPicturesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"HomeRandomPicturesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"randomPictures"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"4"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"srcSetJpeg"}},{"kind":"Field","name":{"kind":"Name","value":"srcSetWebp"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}}]}}]}}]} as unknown as DocumentNode<HomeRandomPicturesQueryQuery, HomeRandomPicturesQueryQueryVariables>;
 export const HomeNewsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"HomeNewsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"newses"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"PUBLISHED_AT_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"languageCode"}},{"kind":"Field","name":{"kind":"Name","value":"newsId"}}]}}]}}]}}]} as unknown as DocumentNode<HomeNewsQueryQuery, HomeNewsQueryQueryVariables>;
-export const NewsesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"NewsesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"newses"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"PUBLISHED_AT_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"languageCode"}},{"kind":"Field","name":{"kind":"Name","value":"newsId"}}]}}]}}]}}]} as unknown as DocumentNode<NewsesQueryQuery, NewsesQueryQueryVariables>;
+export const NewsesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"NewsesQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"newsesConnection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"PUBLISHED_AT_DESC"}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"languageCode"}},{"kind":"Field","name":{"kind":"Name","value":"newsId"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}}]}}]} as unknown as DocumentNode<NewsesQueryQuery, NewsesQueryQueryVariables>;
 export const PageQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PageQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageTranslation"}}]}}]}}]}},...PageTranslationFragmentDoc.definitions]} as unknown as DocumentNode<PageQueryQuery, PageQueryQueryVariables>;
 export const UpdatePageTranslationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdatePageTranslation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"content"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"pageName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"TrLanguage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updatePageTr"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"patch"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"content"},"value":{"kind":"Variable","name":{"kind":"Name","value":"content"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"pageName"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"languageCode"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pageTr"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageTranslation"}}]}}]}}]}},...PageTranslationFragmentDoc.definitions]} as unknown as DocumentNode<UpdatePageTranslationMutation, UpdatePageTranslationMutationVariables>;
 export const InfoPagesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"InfoPagesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"infoPages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"RANK_ASC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"languageCode"}},{"kind":"Field","name":{"kind":"Name","value":"infoPageName"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<InfoPagesQueryQuery, InfoPagesQueryQueryVariables>;

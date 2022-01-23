@@ -4,6 +4,8 @@ CREATE TABLE smil_aarhus.news(
     updated_at TIMESTAMPTZ NOT NULL
 );
 
+comment on table smil_aarhus.news is E'@simpleCollections both';
+
 CREATE TABLE smil_aarhus.news_tr(
     news_id bigint NOT NULL REFERENCES smil_aarhus.news (id),
     language_code text NOT NULL REFERENCES smil_aarhus.tr_language (code),

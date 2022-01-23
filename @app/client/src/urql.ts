@@ -24,7 +24,7 @@ import {
 } from '@urql/core';
 import { devtoolsExchange } from '@urql/devtools';
 import { authExchange } from '@urql/exchange-auth';
-import { cacheExchange, DataFields } from '@urql/exchange-graphcache';
+import { cacheExchange } from '@urql/exchange-graphcache';
 import jwtDecode from 'jwt-decode';
 
 import { accessToken } from './accessToken';

@@ -30,19 +30,34 @@
         </span>
       </span>
     </div>
+    <Pagination v-bind="paginationData" />
   </main>
 </template>
 
 <script setup lang="ts">
 import { NewsesQueryDocument } from '@app/graphql/dist/client';
 import dayjs from 'dayjs';
+import { usePagination } from '../components/Pagination.vue';
 
 const { t, locale } = useI18n();
 
+const paginationData = usePagination({
+  pageSize: 2,
+});
+
 const { data } = useQuery({
   query: NewsesQueryDocument,
+  variables: paginationData.urql,
 });
+
+watch(
+  data,
+  (data) => (paginationData.total.value = data!.newsesConnection!.totalCount)
+);
+
 const newses = computed(() =>
-  (data.value?.newses || []).map((news) => useTranslation(news, locale))
+  (data.value?.newsesConnection?.nodes || []).map((news) =>
+    useTranslation(news, locale)
+  )
 );
 </script>

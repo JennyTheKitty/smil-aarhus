@@ -118,6 +118,12 @@ type CreateNewsPayload {
   """The `News` that was created by this mutation."""
   news: News
 
+  """An edge for our `News`. May be used by Relay 1."""
+  newsEdge(
+    """The method to use when ordering `News`."""
+    orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): NewsEdge
+
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -219,6 +225,9 @@ type CreateUploadUrlPayload {
   uploadUrl: String!
 }
 
+"""A location in a connection that can be used for resuming pagination."""
+scalar Cursor
+
 """
 A point in time as described by the [ISO
 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
@@ -302,6 +311,12 @@ type DeleteNewsPayload {
 
   """The `News` that was deleted by this mutation."""
   news: News
+
+  """An edge for our `News`. May be used by Relay 1."""
+  newsEdge(
+    """The method to use when ordering `News`."""
+    orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): NewsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -1214,6 +1229,32 @@ input NewsCondition {
   updatedAt: Datetime
 }
 
+"""A connection to a list of `News` values."""
+type NewsConnection {
+  """
+  A list of edges which contains the `News` and cursor to aid in pagination.
+  """
+  edges: [NewsEdge!]!
+
+  """A list of `News` objects."""
+  nodes: [News!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `News` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `News` edge in the connection."""
+type NewsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `News` at the end of the edge."""
+  node: News!
+}
+
 """
 A filter to be used against `News` object types. All fields are combined with a logical ‘and.’
 """
@@ -1335,6 +1376,21 @@ A filter to be used against `Page` object types. All fields are combined with a 
 input PageFilter {
   """Filter by the object’s `name` field."""
   name: StringFilter
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: Cursor
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: Cursor
 }
 
 """An input for mutations affecting `Page`"""
@@ -1551,6 +1607,40 @@ type Query {
     """The method to use when ordering `News`."""
     orderBy: [NewsOrderBy!]
   ): [News!]
+
+  """Reads and enables pagination through a set of `News`."""
+  newsesConnection(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: NewsCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: NewsFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `News`."""
+    orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): NewsConnection
   page(name: String!): Page
   pageTr(languageCode: TrLanguage!, pageName: String!): PageTr
 
@@ -1771,6 +1861,12 @@ type UpdateNewsPayload {
 
   """The `News` that was updated by this mutation."""
   news: News
+
+  """An edge for our `News`. May be used by Relay 1."""
+  newsEdge(
+    """The method to use when ordering `News`."""
+    orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): NewsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
