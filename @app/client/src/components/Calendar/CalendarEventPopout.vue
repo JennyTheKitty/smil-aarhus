@@ -19,7 +19,7 @@
         w:pos="absolute"
         w:shadow="lg"
         w:border="2 pink-800"
-        w:z="5"
+        w:z="500"
         :style="popupStyles"
       >
         <CalendarEventDetails
@@ -82,6 +82,14 @@ const popupStyles = computed(() => {
   const xPadding = 16;
   const elCoords = getCoords(el);
   const containerCoords = getCoords(props.container!);
+
+  if (window.innerWidth < 1000) {
+    return {
+      top: `${window.pageYOffset}px`,
+      left: `${window.pageXOffset}px`,
+      width: `${window.innerWidth}px`,
+    };
+  }
 
   let left =
     elCoords.left - containerCoords.left + elCoords.width + xPadding + 20;
