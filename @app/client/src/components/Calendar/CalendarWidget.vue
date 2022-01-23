@@ -1,5 +1,9 @@
 <template>
   <FullCalendar ref="calendar" class="calendar" :options="calendarOptions" />
+  <CalendarListView
+    :calendarAPI="(calendarApi as any)"
+    v-if="currentView && currentView.type == 'list'"
+  />
 </template>
 
 <script lang="ts">
@@ -28,6 +32,7 @@ import FullCalendar, {
   EventApi,
   EventContentArg,
   EventInput,
+  ViewApi,
 } from '@fullcalendar/vue3';
 import { ComputedRef, Ref } from 'vue';
 
@@ -49,14 +54,14 @@ const emit = defineEmits({
 
 const calendar = ref<any>(null);
 
-const calendarApi = computed(
-  () => calendar.value!.getApi() as Calendar | null,
-  {
-    onTrigger: () => {
-      console.log('aa');
-    },
-  }
-);
+const calendarApi = ref<Calendar | null>(null);
+
+watch(calendar, () => {
+  calendarApi.value = calendar.value?.getApi();
+});
+
+const currentView = ref<ViewApi | null>(null);
+
 const { locale } = useI18n();
 const router = useRouter();
 const store = useStore();
@@ -89,6 +94,19 @@ nextTick(() => {
     },
     { immediate: true }
   );
+  watch(
+    currentView,
+    (currentView) => {
+      if (currentView) {
+        calendarApi.value?.setOption('headerToolbar', {
+          left: currentView.type !== 'list' ? 'today prev next' : '',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,list',
+        });
+      }
+    },
+    { immediate: true }
+  );
 });
 
 const calendarOptions: CalendarOptions = {
@@ -96,11 +114,7 @@ const calendarOptions: CalendarOptions = {
   locale: locale.value,
   plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
   initialView: 'timeGridWeek',
-  headerToolbar: {
-    left: 'today prev next',
-    center: 'title',
-    right: 'dayGridMonth,timeGridWeek,list',
-  },
+  headerToolbar: {},
   firstDay: 1,
   height: 'auto',
   selectable: false,
@@ -136,7 +150,7 @@ const calendarOptions: CalendarOptions = {
     timeGridWeek: {
       slotDuration: '01:00:00',
       titleFormat: ({ start, end, localeCodes }) => {
-        if (calendar.value.getApi() === undefined) return '';
+        if (!calendarApi.value) return '';
         let str = calendarApi.value!.formatRange(start.marker, end!.marker, {
           year: 'numeric',
           month: 'short',
@@ -182,6 +196,9 @@ const calendarOptions: CalendarOptions = {
   },
   loading(isLoading) {
     loading.value = isLoading;
+  },
+  datesSet: ({ view }) => {
+    currentView.value = view;
   },
 };
 

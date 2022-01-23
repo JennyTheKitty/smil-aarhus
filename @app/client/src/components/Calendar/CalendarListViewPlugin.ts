@@ -1,13 +1,33 @@
-import { createPlugin, sliceEvents } from '@fullcalendar/core';
-import { Component } from 'preact';
+import {
+  createPlugin,
+  DateComponent,
+  DateProfile,
+  Duration,
+  ViewProps,
+  DateRange,
+  ViewContext,
+} from '@fullcalendar/core';
+import dayjs from 'dayjs';
+import { h } from 'preact';
 
-class ListView extends Component {
-  render(props: any, context: any) {
-    let segs = sliceEvents(props, true);
+export const listViewProps = ref<
+  ViewProps & { dateProfile: DateProfile; nextDayThreshold: Duration }
+>();
 
-    console.log(segs, context, props);
-    // TODO: Implement proper list view
-    return 'TODO';
+export const listViewContext = ref<ViewContext>();
+
+export const listViewRange = ref<DateRange>();
+
+class ListView extends DateComponent<ViewProps> {
+  render() {
+    let { props, context } = this;
+    listViewContext.value = context;
+    listViewProps.value = props as any;
+    return h('div', { id: 'calendar-list-view' }, []);
+  }
+  componentDidUpdate() {
+    let { props } = this;
+    listViewProps.value = props as any;
   }
 }
 
@@ -15,9 +35,14 @@ export default createPlugin({
   views: {
     list: {
       component: ListView,
-      visibleRange: {
-        start: '2020-03-22',
-        end: '2020-07-25',
+      visibleRange: function () {
+        if (listViewRange.value === undefined) {
+          listViewRange.value = {
+            start: dayjs().toDate(),
+            end: dayjs().add(1, 'months').toDate(),
+          };
+        }
+        return listViewRange.value;
       },
     },
   },

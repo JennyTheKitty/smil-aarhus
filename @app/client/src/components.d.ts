@@ -5,7 +5,9 @@
 declare module 'vue' {
   export interface GlobalComponents {
     BaseDialog: typeof import('./components/BaseDialog.vue')['default']
+    CalendarEventDetails: typeof import('./components/Calendar/CalendarEventDetails.vue')['default']
     CalendarEventPopout: typeof import('./components/Calendar/CalendarEventPopout.vue')['default']
+    CalendarListView: typeof import('./components/Calendar/CalendarListView.vue')['default']
     CalendarToolbar: typeof import('./components/Calendar/CalendarToolbar.vue')['default']
     CalendarWidget: typeof import('./components/Calendar/CalendarWidget.vue')['default']
     Content: typeof import('./components/Content.vue')['default']

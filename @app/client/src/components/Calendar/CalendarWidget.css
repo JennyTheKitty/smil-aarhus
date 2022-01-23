@@ -51,7 +51,7 @@
 
   /* ------- Toolbar ------- */
   :global(.fc-header-toolbar) {
-    @apply flex flex-wrap mx-auto w-full max-w-6xl;
+    @apply mx-auto w-full max-w-6xl grid grid-cols-1 sm:grid-cols-3;
   }
   :global(.fc-toolbar-chunk) {
     @apply flex flex-grow flex-wrap my-2 items-center justify-center sm:my-0;

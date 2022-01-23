@@ -64,8 +64,8 @@ export async function fetchEvents(
 
   // Turn into event input
   const events = result.data.events
-    .map((event) => useTranslation(event, locale))
-    .map((event) => {
+    .map((event) => ({ raw: event, event: useTranslation(event, locale) }))
+    .map(({ raw, event }) => {
       return {
         id: event.slug,
         title: event.title,
@@ -74,6 +74,9 @@ export async function fetchEvents(
         url: router.resolve(Trans.i18nRoute('CALENDAR', { slug: event.slug }))
           .href,
         display: 'list-item',
+        extendedProps: {
+          raw: raw,
+        },
       } as EventInput & { start: Date; end: Date };
     })
     .sort((a, b) => +a.start - +b.start);
