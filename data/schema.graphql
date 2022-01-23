@@ -572,9 +572,6 @@ input EventTagTrCondition {
 A filter to be used against `EventTagTr` object types. All fields are combined with a logical ‘and.’
 """
 input EventTagTrFilter {
-  """Filter by the object’s `languageCode` field."""
-  languageCode: TrLanguageFilter
-
   """Filter by the object’s `tagId` field."""
   tagId: BigIntFilter
 
@@ -629,9 +626,6 @@ input EventTrFilter {
 
   """Filter by the object’s `eventId` field."""
   eventId: BigIntFilter
-
-  """Filter by the object’s `languageCode` field."""
-  languageCode: TrLanguageFilter
 
   """Filter by the object’s `slug` field."""
   slug: StringFilter
@@ -843,9 +837,6 @@ input GroupTrFilter {
 
   """Filter by the object’s `groupId` field."""
   groupId: BigIntFilter
-
-  """Filter by the object’s `languageCode` field."""
-  languageCode: TrLanguageFilter
 
   """Filter by the object’s `shortDescription` field."""
   shortDescription: StringFilter
@@ -1297,9 +1288,6 @@ input NewsTrFilter {
   """Filter by the object’s `content` field."""
   content: StringFilter
 
-  """Filter by the object’s `languageCode` field."""
-  languageCode: TrLanguageFilter
-
   """Filter by the object’s `newsId` field."""
   newsId: BigIntFilter
 
@@ -1387,9 +1375,6 @@ A filter to be used against `PageTr` object types. All fields are combined with 
 input PageTrFilter {
   """Filter by the object’s `content` field."""
   content: StringFilter
-
-  """Filter by the object’s `languageCode` field."""
-  languageCode: TrLanguageFilter
 
   """Filter by the object’s `pageName` field."""
   pageName: StringFilter
@@ -1721,34 +1706,6 @@ input StringFilter {
 enum TrLanguage {
   DA
   EN
-}
-
-"""
-A filter to be used against TrLanguage fields. All fields are combined with a logical ‘and.’
-"""
-input TrLanguageFilter {
-  """Equal to the specified value."""
-  equalTo: TrLanguage
-
-  """Greater than the specified value."""
-  greaterThan: TrLanguage
-
-  """Greater than or equal to the specified value."""
-  greaterThanOrEqualTo: TrLanguage
-
-  """
-  Is null (if `true` is specified) or is not null (if `false` is specified).
-  """
-  isNull: Boolean
-
-  """Less than the specified value."""
-  lessThan: TrLanguage
-
-  """Less than or equal to the specified value."""
-  lessThanOrEqualTo: TrLanguage
-
-  """Not equal to the specified value."""
-  notEqualTo: TrLanguage
 }
 
 """

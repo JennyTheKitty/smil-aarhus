@@ -48,7 +48,13 @@ export const postgraphileOptions: PostGraphileOptions = {
     connectionFilterComputedColumns: false,
     connectionFilterSetofFunctions: false,
     connectionFilterLogicalOperators: false,
-    connectionFilterAllowedFieldTypes: ['String', 'Int', 'DateTime'],
+    connectionFilterAllowedFieldTypes: [
+      'String',
+      'Int',
+      'Datetime',
+      'Boolean',
+      'BigInt',
+    ],
     pgOmitListSuffix: true,
   },
   additionalGraphQLContextFromRequest: async (msg) => {

@@ -474,8 +474,6 @@ export type EventTagTrCondition = {
 
 /** A filter to be used against `EventTagTr` object types. All fields are combined with a logical ‘and.’ */
 export type EventTagTrFilter = {
-  /** Filter by the object’s `languageCode` field. */
-  languageCode?: InputMaybe<TrLanguageFilter>;
   /** Filter by the object’s `tagId` field. */
   tagId?: InputMaybe<BigIntFilter>;
   /** Filter by the object’s `title` field. */
@@ -520,8 +518,6 @@ export type EventTrFilter = {
   description?: InputMaybe<StringFilter>;
   /** Filter by the object’s `eventId` field. */
   eventId?: InputMaybe<BigIntFilter>;
-  /** Filter by the object’s `languageCode` field. */
-  languageCode?: InputMaybe<TrLanguageFilter>;
   /** Filter by the object’s `slug` field. */
   slug?: InputMaybe<StringFilter>;
   /** Filter by the object’s `title` field. */
@@ -690,8 +686,6 @@ export type GroupTrFilter = {
   description?: InputMaybe<StringFilter>;
   /** Filter by the object’s `groupId` field. */
   groupId?: InputMaybe<BigIntFilter>;
-  /** Filter by the object’s `languageCode` field. */
-  languageCode?: InputMaybe<TrLanguageFilter>;
   /** Filter by the object’s `shortDescription` field. */
   shortDescription?: InputMaybe<StringFilter>;
   /** Filter by the object’s `slug` field. */
@@ -1086,8 +1080,6 @@ export type NewsTrCondition = {
 export type NewsTrFilter = {
   /** Filter by the object’s `content` field. */
   content?: InputMaybe<StringFilter>;
-  /** Filter by the object’s `languageCode` field. */
-  languageCode?: InputMaybe<TrLanguageFilter>;
   /** Filter by the object’s `newsId` field. */
   newsId?: InputMaybe<BigIntFilter>;
   /** Filter by the object’s `title` field. */
@@ -1156,8 +1148,6 @@ export type PageTrCondition = {
 export type PageTrFilter = {
   /** Filter by the object’s `content` field. */
   content?: InputMaybe<StringFilter>;
-  /** Filter by the object’s `languageCode` field. */
-  languageCode?: InputMaybe<TrLanguageFilter>;
   /** Filter by the object’s `pageName` field. */
   pageName?: InputMaybe<StringFilter>;
 };
@@ -1561,24 +1551,6 @@ export enum TrLanguage {
   Da = 'DA',
   En = 'EN'
 }
-
-/** A filter to be used against TrLanguage fields. All fields are combined with a logical ‘and.’ */
-export type TrLanguageFilter = {
-  /** Equal to the specified value. */
-  equalTo?: InputMaybe<TrLanguage>;
-  /** Greater than the specified value. */
-  greaterThan?: InputMaybe<TrLanguage>;
-  /** Greater than or equal to the specified value. */
-  greaterThanOrEqualTo?: InputMaybe<TrLanguage>;
-  /** Is null (if `true` is specified) or is not null (if `false` is specified). */
-  isNull?: InputMaybe<Scalars['Boolean']>;
-  /** Less than the specified value. */
-  lessThan?: InputMaybe<TrLanguage>;
-  /** Less than or equal to the specified value. */
-  lessThanOrEqualTo?: InputMaybe<TrLanguage>;
-  /** Not equal to the specified value. */
-  notEqualTo?: InputMaybe<TrLanguage>;
-};
 
 /** All input for the `updateImage` mutation. */
 export type UpdateImageInput = {
