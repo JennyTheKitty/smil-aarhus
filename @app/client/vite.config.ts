@@ -14,13 +14,6 @@ import { imagetools } from 'vite-imagetools';
 import WindiCSS from 'vite-plugin-windicss';
 import viteSSR from 'vite-ssr/plugin.js';
 
-type AssetInfo = {
-  fileName: string;
-  name?: string;
-  source: string | Uint8Array;
-  type: 'asset';
-};
-
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {

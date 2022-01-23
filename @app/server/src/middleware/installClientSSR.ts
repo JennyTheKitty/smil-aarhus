@@ -171,8 +171,9 @@ export default async function installClientSSR(app: Koa, router: Router) {
     for (const asset of ssr.assets || []) {
       app.use(mount('/' + asset, serve(`${dist}/client/` + asset)));
     }
+    app.use(mount('/', serve(`${dist}/client/`)));
+
     router.get('/(.*)', async (ctx, next) => {
-      console.log(ctx.url);
       const url = ctx.protocol + '://' + ctx.get('host') + ctx.originalUrl;
       const { html, status, initialState } = await renderPage(url, {
         manifest,
