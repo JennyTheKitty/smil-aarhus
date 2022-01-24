@@ -111,6 +111,7 @@ declare module 'vue' {
     SearchSelectTitleOptionRenderer: typeof import('./components/Form/SearchSelectTitleOptionRenderer.vue')['default']
     TransitionChild: typeof import('@headlessui/vue')['TransitionChild']
     TransitionRoot: typeof import('@headlessui/vue')['TransitionRoot']
+    TranslatedFormItem: typeof import('./components/TranslatedFormItem.vue')['default']
     TranslatedInput: typeof import('./components/Form/TranslatedInput.vue')['default']
     TranslationInput: typeof import('./components/Form/TranslationInput.vue')['default']
   }

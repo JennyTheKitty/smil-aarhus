@@ -1,43 +1,46 @@
 <template>
-  <n-popover
-    trigger="manual"
-    placement="bottom"
-    :to="to"
-    width="trigger"
-    overlap
-    :show="show"
-    @update-show="focusTemplateSelect"
-  >
-    <template #trigger>
-      <n-button
-        w:m="b-2"
-        w:w="full"
-        w:p="y-4"
-        size="large"
-        dashed
-        @click="
-          () => {
-            show = true;
-            focusTemplateSelect();
-          }
-        "
-      >
-        <icon-carbon-template w:m="r-2" />
-        Create from template
-      </n-button>
-    </template>
-    <div ref="popover">
-      <SearchSelect
-        ref="templateSelect"
-        :to="popover"
-        autofocus
-        placeholder="Select template"
-        :search="SearchEventTemplatesDocument"
-        :on-update:value="onSelect"
-        :label-renderer="EventDialogTemplateSelectLabelRenderer"
-      />
-    </div>
-  </n-popover>
+  <div w:flex="~" w:justify="center">
+    <n-popover
+      trigger="manual"
+      placement="bottom"
+      :to="to"
+      width="trigger"
+      overlap
+      :show="show"
+      @update-show="focusTemplateSelect"
+    >
+      <template #trigger>
+        <n-button
+          w:m="b-2"
+          w:w="full"
+          w:max-w="xl"
+          w:p="y-10"
+          size="large"
+          dashed
+          @click="
+            () => {
+              show = true;
+              focusTemplateSelect();
+            }
+          "
+        >
+          <icon-carbon-template w:m="r-2" />
+          Create from template
+        </n-button>
+      </template>
+      <div ref="popover">
+        <SearchSelect
+          ref="templateSelect"
+          :to="popover"
+          autofocus
+          placeholder="Select template"
+          :search="SearchEventTemplatesDocument"
+          :on-update:value="onSelect"
+          :label-renderer="EventDialogTemplateSelectLabelRenderer"
+        />
+      </div>
+    </n-popover>
+  </div>
 </template>
 
 <script setup lang="ts">

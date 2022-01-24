@@ -2,7 +2,7 @@
   <FormDialog
     ref="formDialog"
     :is-open="isOpen"
-    :model="model"
+    v-model:model="model"
     title="Create/update event"
     :form-props="{
       labelWidth: 140,
@@ -12,17 +12,18 @@
     @update:is-open="$emit('update:isOpen', false)"
     @open="onOpen"
     @close="onClose"
+    :create-translation="createTranslation"
   >
     <template #create>
-      <n-button w:m="r-5" @click="onSaveAsTemplate">
-        <icon-carbon-template w:m="r-2" />
-        Save as new template
-      </n-button>
       <n-button type="primary" @click="handleSubmitClick">{{
         create ? 'Create' : 'Update'
       }}</n-button>
+      <n-button @click="onSaveAsTemplate">
+        <icon-carbon-template w:m="r-2" />
+        Save as new template
+      </n-button>
     </template>
-    <template #default="{ root }">
+    <template #default="{ root, index }">
       <div v-if="create">
         <EventDialogTemplateSelect :to="root!" @select="onTemplateSelected" />
         <span w:text="center" w:w="full" w:display="block" w:m="b-5">
@@ -38,6 +39,16 @@
           :update-value-on-close="true"
           :actions="[]"
           :to="root!"
+        />
+      </n-form-item>
+      <n-form-item
+        label="Title"
+        :path="`translations[${index}].title`"
+        :rule="translationRules.title"
+      >
+        <n-input
+          v-model:value="model.translations[index].title"
+          @keydown.enter.prevent
         />
       </n-form-item>
       <n-form-item label="Categories">
@@ -57,41 +68,17 @@
           :search="SearchGroupsDocument"
         />
       </n-form-item>
+
       <n-form-item
-        path="translations"
-        :show-feedback="false"
-        :show-label="false"
+        label="Description"
+        :path="`translations[${index}].description`"
       >
-        <TranslationInput
-          v-model:value="model.translations"
-          :to="root!"
-          :on-create="createTranslation"
-          #="{ index }"
-        >
-          <n-form-item
-            label="Title"
-            ignore-path-change
-            :path="`translations[${index}].title`"
-            :rule="translationRules.title"
-          >
-            <n-input
-              v-model:value="model.translations[index].title"
-              @keydown.enter.prevent
-            />
-          </n-form-item>
-          <n-form-item
-            label="Description"
-            ignore-path-change
-            :path="`translations[${index}].description`"
-          >
-            <div w:w="full">
-              <ContentEditor
-                v-model="model.translations[index].description"
-                :inline="false"
-              />
-            </div>
-          </n-form-item>
-        </TranslationInput>
+        <div w:w="full">
+          <ContentEditor
+            v-model="model.translations[index].description"
+            :inline="false"
+          />
+        </div>
       </n-form-item>
     </template>
   </FormDialog>
@@ -142,7 +129,7 @@ const handle = useClientHandle();
 
 const form = computed(() => formDialog.value!.form);
 
-const model = reactive({
+const model = ref({
   id: null as number | null,
   startsAt: null as Date | null,
   endsAt: null as Date | null,
@@ -173,9 +160,12 @@ const rules = {
     required: true,
     trigger: ['input', 'blur'],
     validator() {
-      if (!model.startsAt || !model.endsAt)
+      if (!model.value.startsAt || !model.value.endsAt)
         return new Error('Date/time is required.');
-      if (model.startsAt.valueOf() + 60 * 1000 > model.endsAt.valueOf())
+      if (
+        model.value.startsAt.valueOf() + 60 * 1000 >
+        model.value.endsAt.valueOf()
+      )
         return new Error('Event must last at least 1 minute.');
       return true;
     },
@@ -209,25 +199,25 @@ function modelFromEvent(
   if (template) {
     if (props.allDay) {
       const newTimes = replaceTime(
-        { startsAt: model.startsAt!, endsAt: model.endsAt! },
+        { startsAt: model.value.startsAt!, endsAt: model.value.endsAt! },
         { startsAt: new Date(event.startsAt), endsAt: new Date(event.endsAt) }
       );
-      model.startsAt = newTimes.startsAt;
-      model.endsAt = newTimes.endsAt;
+      model.value.startsAt = newTimes.startsAt;
+      model.value.endsAt = newTimes.endsAt;
     }
   } else {
-    model.startsAt = event.startsAt ? new Date(event.startsAt) : null;
-    model.endsAt = event.endsAt ? new Date(event.endsAt) : null;
+    model.value.startsAt = event.startsAt ? new Date(event.startsAt) : null;
+    model.value.endsAt = event.endsAt ? new Date(event.endsAt) : null;
   }
-  model.tags = (('tags' in event && event.tags) || []).map((t) => {
+  model.value.tags = (('tags' in event && event.tags) || []).map((t) => {
     const tag = useTranslation(t.tag, locale)!;
     return tag.id;
   });
-  model.groups = (('groups' in event && event.groups) || []).map((g) => {
+  model.value.groups = (('groups' in event && event.groups) || []).map((g) => {
     const group = useTranslation(g.group, locale)!;
     return group.id;
   });
-  model.translations = (
+  model.value.translations = (
     ('translations' in event && event.translations) ||
     []
   ).map((trans) => ({
@@ -235,19 +225,18 @@ function modelFromEvent(
     title: trans.title,
     description: trans.description,
   }));
-  model.id = 'id' in event ? event.id : null;
+  model.value.id = 'id' in event ? event.id : null;
 }
-
 function onOpen() {
   modelFromEvent(props.event);
 }
 
 function onClose() {
-  model.endsAt = null;
-  model.startsAt = null;
-  model.tags = [];
-  model.groups = [];
-  model.translations = [];
+  model.value.endsAt = null;
+  model.value.startsAt = null;
+  model.value.tags = [];
+  model.value.groups = [];
+  model.value.translations = [];
 }
 
 async function handleSubmitClick(e: any) {
@@ -257,15 +246,15 @@ async function handleSubmitClick(e: any) {
     await handle.client
       .mutation(UpsertEventDocument, {
         data: {
-          startsAt: model.startsAt!.toISOString(),
-          endsAt: model.endsAt!.toISOString(),
+          startsAt: model.value.startsAt!.toISOString(),
+          endsAt: model.value.endsAt!.toISOString(),
           templateName: null,
           special: false,
-          groupIds: model.groups,
-          tagIds: model.tags,
+          groupIds: model.value.groups,
+          tagIds: model.value.tags,
         },
-        translations: model.translations,
-        id: model.id,
+        translations: model.value.translations,
+        id: model.value.id,
       })
       .toPromise();
     props.refresh();
@@ -274,17 +263,20 @@ async function handleSubmitClick(e: any) {
 }
 
 function createTranslation() {
-  return { languageCode: '', title: '', description: '' };
+  return { title: '', description: '' };
 }
 
 const date = computed({
   get: () =>
-    model.startsAt && model.endsAt
-      ? ([model.startsAt.valueOf(), model.endsAt.valueOf()] as [number, number])
+    model.value.startsAt && model.value.endsAt
+      ? ([model.value.startsAt.valueOf(), model.value.endsAt.valueOf()] as [
+          number,
+          number
+        ])
       : null,
   set: (date) => {
-    model.startsAt = date && date[0] ? new Date(date[0]) : null;
-    model.endsAt = date && date[1] ? new Date(date[1]) : null;
+    model.value.startsAt = date && date[0] ? new Date(date[0]) : null;
+    model.value.endsAt = date && date[1] ? new Date(date[1]) : null;
   },
 });
 
@@ -300,15 +292,15 @@ async function onSaveAsTemplate(e: any) {
     await handle.client
       .mutation(UpsertEventDocument, {
         data: {
-          startsAt: model.startsAt!.toISOString(),
-          endsAt: model.endsAt!.toISOString(),
+          startsAt: model.value.startsAt!.toISOString(),
+          endsAt: model.value.endsAt!.toISOString(),
           templateName: templateName,
           special: false,
-          groupIds: model.groups,
-          tagIds: model.tags,
+          groupIds: model.value.groups,
+          tagIds: model.value.tags,
         },
-        translations: model.translations,
-        id: model.id,
+        translations: model.value.translations,
+        id: model.value.id,
       })
       .toPromise();
     props.refresh();

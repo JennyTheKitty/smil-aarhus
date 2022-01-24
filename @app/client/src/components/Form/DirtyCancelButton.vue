@@ -9,7 +9,7 @@
     @positive-click="confirm"
   >
     <template #trigger>
-      <n-button ref="trigger" @click="check">Cancel</n-button>
+      <n-button ref="trigger" @click="check" v-bind="$attrs">Cancel</n-button>
     </template>
     <span>You have unsaved changes. Are you sure you want to cancel?</span>
   </n-popconfirm>

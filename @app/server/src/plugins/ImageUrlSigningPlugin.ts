@@ -93,7 +93,8 @@ const ImageUrlSigningPlugin = makeExtendSchemaPlugin((build) => {
         img: ResponsiveImage! @requires(columns: ["image"])
       }
       extend type Image {
-        img: ResponsiveImage! @requires(columns: ["path", "width", "height"])
+        img: ResponsiveImage!
+          @requires(columns: ["path", "width", "height", "credit"])
       }
       extend type Event {
         img: ResponsiveImage @requires(columns: ["id", "override_image"])

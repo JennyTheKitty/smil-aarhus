@@ -7,19 +7,20 @@
     :form-props="{
       labelWidth: 140,
       rules,
-      labelPlacement: 'left',
+      labelPlacement: 'top',
     }"
     @update:is-open="$emit('update:isOpen', false)"
     @open="onOpen"
     @close="onClose"
+    :create-translation="createTranslation"
   >
     <template #create>
       <n-button type="primary" @click="handleSubmitClick">{{
         create ? 'Create' : 'Update'
       }}</n-button>
     </template>
-    <template #default="{ root }">
-      <n-form-item label="Type of group" path="isOpen">
+    <template #default="{ root, index }">
+      <n-form-item label="Type of group" path="isOpen" label-placement="top">
         <n-radio-group
           :value="model.isOpen ? 'true' : 'false'"
           @update-value="(val) => (model.isOpen = val === 'true')"
@@ -28,74 +29,75 @@
           <n-radio-button value="false">Closed group</n-radio-button>
         </n-radio-group>
       </n-form-item>
-      <n-form-item label="Group image" path="image">
-        <ImageUpload v-model:value="model.image" />
+      <div w:grid="~ cols-2  gap-4">
+        <n-form-item label="Group image" path="image" label-placement="top">
+          <ImageUpload v-model:value="model.image" />
+        </n-form-item>
+        <n-form-item
+          label="Image credits"
+          path="imageCredit"
+          label-placement="top"
+        >
+          <div w:w="full" class="content credits">
+            <ContentEditor v-model="model.imageCredit" :inline="false" />
+          </div>
+        </n-form-item>
+      </div>
+      <!-- <TranslationInput
+        v-model:value="model.translations"
+        :to="root!"
+        :on-create="createTranslation"
+        #="{ index }"
+      > -->
+      <n-form-item
+        label="Title"
+        ignore-path-change
+        :path="`translations[${index}].title`"
+        :rule="translationRules.title"
+      >
+        <n-input
+          v-model:value="model.translations[index].title"
+          @keydown.enter.prevent
+        />
       </n-form-item>
-      <n-form-item label="Image Credit" path="imageCredit">
+
+      <n-form-item
+        label="Activity"
+        ignore-path-change
+        :path="`translations[${index}].activity`"
+        :rule="translationRules.activity"
+      >
+        <n-input
+          v-model:value="model.translations[index].activity"
+          @keydown.enter.prevent
+        />
+      </n-form-item>
+      <n-form-item
+        label="Full description"
+        ignore-path-change
+        :path="`translations[${index}].description`"
+        :rule="translationRules.description"
+      >
         <div w:w="full" class="content">
-          <ContentEditor v-model="model.imageCredit" :inline="false" />
+          <ContentEditor
+            v-model="model.translations[index].description"
+            :inline="false"
+          />
         </div>
       </n-form-item>
       <n-form-item
-        path="translations"
-        :show-feedback="false"
-        :show-label="false"
+        label="Short description"
+        ignore-path-change
+        :path="`translations[${index}].shortDescription`"
+        :rule="translationRules.shortDescription"
       >
-        <TranslationInput
-          v-model:value="model.translations"
-          :to="root!"
-          :on-create="createTranslation"
-          #="{ index }"
-        >
-          <n-form-item
-            label="Title"
-            ignore-path-change
-            :path="`translations[${index}].title`"
-            :rule="translationRules.title"
-          >
-            <n-input
-              v-model:value="model.translations[index].title"
-              @keydown.enter.prevent
-            />
-          </n-form-item>
-          <n-form-item
-            label="Short description"
-            ignore-path-change
-            :path="`translations[${index}].shortDescription`"
-            :rule="translationRules.shortDescription"
-          >
-            <n-input
-              v-model:value="model.translations[index].shortDescription"
-              type="textarea"
-              @keydown.enter.prevent
-            />
-          </n-form-item>
-          <n-form-item
-            label="Activity"
-            ignore-path-change
-            :path="`translations[${index}].activity`"
-            :rule="translationRules.activity"
-          >
-            <n-input
-              v-model:value="model.translations[index].activity"
-              @keydown.enter.prevent
-            />
-          </n-form-item>
-          <n-form-item
-            label="Description"
-            ignore-path-change
-            :path="`translations[${index}].description`"
-            :rule="translationRules.description"
-          >
-            <div w:w="full" class="content">
-              <ContentEditor
-                v-model="model.translations[index].description"
-                :inline="false"
-              />
-            </div>
-          </n-form-item>
-        </TranslationInput>
+        <n-input
+          v-model:value="model.translations[index].shortDescription"
+          type="textarea"
+          @keydown.enter.prevent
+        />
       </n-form-item>
+      <!-- </TranslationInput> -->
     </template>
   </FormDialog>
 </template>
@@ -242,7 +244,6 @@ function onClose() {
 
 function createTranslation() {
   return {
-    languageCode: '',
     title: '',
     description: '',
     activity: '',
@@ -250,3 +251,20 @@ function createTranslation() {
   };
 }
 </script>
+
+<style scoped>
+.credits {
+  height: 100%;
+}
+.credits ::v-deep(.ck-editor) {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.credits ::v-deep(.ck-editor__main) {
+  flex-grow: 1;
+}
+.credits ::v-deep(.ck-editor__editable) {
+  height: 100%;
+}
+</style>

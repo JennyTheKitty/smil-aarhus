@@ -2,6 +2,7 @@ import {
   CreateImageMutationDocument,
   CreateImageMutationMutation,
   GetUploadUrlDocument,
+  TrLanguage,
 } from '@app/graphql/dist/client';
 import { ClientHandle } from '@urql/vue';
 import { MaybeRef } from '@vueuse/core';
@@ -72,9 +73,13 @@ export function useWaitImportComponent<
 }
 
 const heroHeight: InjectionKey<Ref<number>> = Symbol('heroHeight');
+const formDialogCurrentLanguageCode: InjectionKey<Ref<TrLanguage>> = Symbol(
+  'formDialogCurrentLanguageCode'
+);
 
 export const key = {
   heroHeight,
+  formDialogCurrentLanguageCode,
 } as const;
 
 export interface UploadInfo {

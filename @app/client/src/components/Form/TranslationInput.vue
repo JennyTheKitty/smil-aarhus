@@ -10,19 +10,19 @@
     @before-leave="beforeLeaveTab"
   >
     <n-tab-pane
-      v-for="tab in tabs"
-      :key="tab"
-      :name="tab"
+      v-for="({ languageCode, hasErrors }, i) in tabs"
+      :key="i"
+      :name="i"
       display-directive="show"
       :style="{
-        ...(tabHasErrors[tab]
+        ...(hasErrors
           ? { '--tab-border-color': 'var(--feedback-text-color-error)' }
           : {}),
         '--pane-padding': '12px',
       }"
     >
       <template #tab>
-        {{ LANGUAGE_OPTIONS.find((o) => o.value == tabLanguages[tab])?.label }}
+        {{ LANGUAGE_OPTIONS.find((o) => o.value == languageCode)?.label }}
       </template>
       <n-form-item
         label="Language"
@@ -31,16 +31,16 @@
         required
       >
         <n-select
-          v-model:value="tabLanguages[tab]"
+          :value="languageCode"
           :rule="languageRule"
           :options="[
             ...filteredLanguageOptions,
-            LANGUAGE_OPTIONS.find((o) => tabLanguages[tab] === o.value)!,
+            LANGUAGE_OPTIONS.find((o) => languageCode === o.value)!,
           ]"
           :to="to"
         />
       </n-form-item>
-      <div v-if="value[tab]"><slot :index="tab"></slot></div>
+      <div v-if="value[i]"><slot :index="i"></slot></div>
     </n-tab-pane>
   </n-tabs>
 </template>
@@ -61,7 +61,12 @@ const props = defineProps({
     type: [String, Object, Boolean] as PropType<string | boolean | HTMLElement>,
     default: undefined,
   },
-  value: { type: Array as PropType<any[]>, required: true },
+  value: {
+    type: Array as PropType<
+      ({ [key: string]: any } & { languageCode: TrLanguage })[]
+    >,
+    required: true,
+  },
   onCreate: { type: Function as PropType<() => any>, required: true },
 });
 const emit = defineEmits(['update:value']);
@@ -72,13 +77,16 @@ const LANGUAGE_OPTIONS = [
 ];
 
 const currentTab = ref(0);
-const tabs = ref<number[]>([]);
-const tabLanguages = ref<{
-  [tab: number]: typeof LANGUAGE_OPTIONS[number]['value'];
-}>({});
-const tabHasErrors = ref<{
-  [tab: number]: boolean;
-}>({});
+const tabHasErrors = ref<number[]>([]);
+const tabs = computed<{ languageCode: TrLanguage; hasErrors: boolean }[]>(
+  () => {
+    return props.value.map((v, i) => ({
+      languageCode: v.languageCode,
+      hasErrors: tabHasErrors.value.includes(i),
+    }));
+  }
+);
+
 const addable = computed(() => tabs.value.length < LANGUAGE_OPTIONS.length);
 const closable = computed(() => tabs.value.length > 1);
 
@@ -90,14 +98,14 @@ const languageRule = {
 
 const filteredLanguageOptions = computed(() => {
   return LANGUAGE_OPTIONS.filter(
-    (lang) => Object.values(tabLanguages.value).indexOf(lang.value) === -1
+    (lang) =>
+      Object.values(tabs.value)
+        .map((v) => v.languageCode)
+        .indexOf(lang.value) === -1
   );
 });
 
 function addTab(lang: null | TrLanguage = null) {
-  const newValue = tabs.value.length > 0 ? Math.max(...tabs.value) + 1 : 0;
-  tabs.value.push(newValue);
-  currentTab.value = newValue;
   const langs = filteredLanguageOptions.value;
   if (!lang) {
     // eslint-disable-next-line no-param-reassign
@@ -110,49 +118,22 @@ function addTab(lang: null | TrLanguage = null) {
       { ...props.onCreate(), languageCode: lang },
     ]);
   }
-  tabLanguages.value[newValue] = lang;
-  tabHasErrors.value[newValue] = false;
 }
 
 function closeTab(tab: number) {
-  const lang = tabLanguages.value[tab];
+  const lang = tabs.value[tab].languageCode;
 
   emit(
     'update:value',
     props.value.filter((v) => v.languageCode !== lang)
   );
-  delete tabLanguages.value[tab];
-  delete tabHasErrors.value[tab];
-
-  tabs.value.splice(
-    tabs.value.findIndex((t) => t === tab),
-    1
-  );
-  if (tab === currentTab.value) {
-    currentTab.value = tabs.value[Math.min(tab, tabs.value.length - 1)];
-  }
+  tabHasErrors.value = tabHasErrors.value.filter((v) => v !== tab);
+  currentTab.value = Math.max(0, tab - 1);
 }
 
 if (!props.value || props.value.length == 0) {
   addTab();
 }
-
-watch(
-  () => props.value,
-  () => {
-    if (props.value && props.value.length > 0) {
-      props.value.forEach((value, index) => {
-        nextTick(() => {
-          if (!Object.values(tabLanguages.value).includes(value.languageCode)) {
-            addTab(value.languageCode);
-          }
-        });
-      });
-      currentTab.value = 0;
-    }
-  },
-  { immediate: true }
-);
 
 const { formItems } = inject<{ formItems: Record<string, FormItemInst[]> }>(
   formItemInstsInjectionKey
@@ -162,7 +143,7 @@ async function beforeLeaveTab(
   activeTab: number,
   oldActiveTab: number
 ): Promise<boolean> {
-  tabHasErrors.value[activeTab] = false;
+  tabHasErrors.value = tabHasErrors.value.filter((v) => v !== activeTab);
   return await new Promise((resolve, reject) => {
     const shouldRuleBeApplied = () => true;
     const formItemValidationPromises = Object.entries(formItems)
@@ -177,9 +158,9 @@ async function beforeLeaveTab(
         );
       });
     void Promise.all(formItemValidationPromises).then((results) => {
-      tabHasErrors.value[oldActiveTab] = results.some(
-        (result) => !result.valid
-      );
+      if (results.some((result) => !result.valid)) {
+        tabHasErrors.value.push(activeTab);
+      }
       resolve(true);
     });
   });
