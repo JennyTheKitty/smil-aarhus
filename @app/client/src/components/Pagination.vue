@@ -1,12 +1,60 @@
 <template>
-  <div>
-    <template v-for="button in buttons">
-      <button v-if="button.type === 'prev'" @click="prev">Prev</button>
-      <button v-if="button.type === 'goto'" @click="goto(button.page)">
-        {{ button.page }}
-      </button>
-      <button v-if="button.type === 'next'" @click="next">Next</button>
-    </template>
+  <div class="pagination" w:w="xl">
+    <button
+      class="prev"
+      w:border="pink-500 1 rounded-md disabled:grey-500"
+      w:p="r-3 l-1 y-1"
+      w:flex="~"
+      w:align="items-center"
+      :disabled="currentPage.value === 1"
+      @click="prev"
+    >
+      <icon-mdi-chevron-left w:text="lg" />
+      Prev
+    </button>
+    <div>
+      <template v-for="button in buttons">
+        <button
+          class="number"
+          w:text="pink-500"
+          w:p="x-2"
+          w:pointer="none"
+          v-if="button.type === 'ellipsis'"
+        >
+          ...
+        </button>
+        <button
+          class="number"
+          w:text="grey-500 underline"
+          w:p="x-2"
+          w:pointer="none"
+          v-if="button.type === 'goto' && button.page == currentPage.value"
+        >
+          {{ button.page }}
+        </button>
+        <button
+          class="number"
+          w:text="pink-500"
+          w:p="x-2"
+          v-else-if="button.type === 'goto'"
+          @click="goto(button.page)"
+        >
+          {{ button.page }}
+        </button>
+      </template>
+    </div>
+    <button
+      class="next"
+      w:border="pink-500 1 rounded-md disabled:grey-500"
+      w:p="l-3 r-1 y-1"
+      w:flex="~"
+      w:align="items-center"
+      :disabled="currentPage.value === lastPage.value"
+      @click="next"
+    >
+      Next
+      <icon-mdi-chevron-right w:text="lg" />
+    </button>
   </div>
 </template>
 <script lang="ts">
@@ -104,25 +152,61 @@ interface GotoButton {
   page: number;
 }
 
-interface NextButton {
-  type: 'next';
+interface EllipsisButton {
+  type: 'ellipsis';
 }
 
-interface PrevButton {
-  type: 'prev';
-}
-
-type Button = GotoButton | PrevButton | NextButton;
+type Button = GotoButton | EllipsisButton;
 
 const buttons = computed<Button[]>(() => {
   if (!props.total) return [];
   const buttons: Button[] = [];
-  if (props.currentPage.value !== 0) buttons.push({ type: 'prev' });
+  const cur = props.currentPage.value;
+  const max = props.lastPage.value;
 
-  buttons.push({ type: 'goto', page: props.currentPage.value });
+  if (cur < 4) {
+    for (let i = cur - 1; i > 0; i--) {
+      buttons.splice(0, 0, { type: 'goto', page: i });
+    }
+  } else if (cur > max - 5) {
+    for (let i = cur - 1; i > max - 5; i--) {
+      buttons.splice(0, 0, { type: 'goto', page: i });
+    }
+  } else {
+    buttons.push({ type: 'goto', page: cur - 1 });
+  }
 
-  if (props.currentPage.value !== props.lastPage.value)
-    buttons.push({ type: 'next' });
+  buttons.push({ type: 'goto', page: cur });
+
+  if (cur < 4) {
+    for (let i = cur + 1; i < Math.min(5, max + 1); i++) {
+      buttons.push({ type: 'goto', page: i });
+    }
+  } else if (cur > max - 3) {
+    for (let i = cur + 1; i < max + 1; i++) {
+      buttons.push({ type: 'goto', page: i });
+    }
+  } else {
+    buttons.push({ type: 'goto', page: cur + 1 });
+  }
+
+  if ((buttons[buttons.length - 1] as GotoButton).page !== max) {
+    buttons.push({ type: 'ellipsis' });
+    buttons.push({ type: 'goto', page: max });
+  }
+  if ((buttons[0] as GotoButton).page !== 1) {
+    buttons.splice(0, 0, { type: 'ellipsis' });
+    buttons.splice(0, 0, { type: 'goto', page: 1 });
+  }
   return buttons;
 });
 </script>
+
+<style lang="scss" scoped>
+.pagination {
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  place-content: center;
+  place-items: center;
+}
+</style>

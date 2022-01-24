@@ -63,9 +63,7 @@
         -
         {{ dayjs(event.endsAt).format('llll').replace(/ /g, '\xA0') }}
       </span>
-      <span w:p="y-4">
-        {{ event.description }}
-      </span>
+      <span w:p="y-4" v-html="event.description"> </span>
       <div v-if="tags && tags.length > 0" w:flex="~" w:space="x-2">
         <span w:text="sm gray-500">{{ t('kategorier') }}:</span>
         <span
