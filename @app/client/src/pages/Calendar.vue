@@ -45,6 +45,8 @@
 </template>
 
 <script setup lang="ts">
+import '@fullcalendar/core/vdom.cjs';
+
 import {
   CalendarEventBySlugDocument,
   CalendarEventBySlugQuery,

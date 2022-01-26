@@ -11,3 +11,16 @@ query GetMe {
     ...Member
   }
 }
+
+query MembersQuery($first: Int!, $offset: Int!) {
+  membersConnection(
+    first: $first
+    offset: $offset
+    orderBy: [IS_ACTIVE_DESC, USERNAME_DESC]
+  ) {
+    nodes {
+      ...Member
+    }
+    totalCount
+  }
+}

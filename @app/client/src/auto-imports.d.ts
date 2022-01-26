@@ -26,6 +26,8 @@ declare global {
   const IconEmojioneFlagForDenmark: typeof import('~icons/emojione/flag-for-denmark')['default']
   const IconEmojioneFlagForUnitedKingdom: typeof import('~icons/emojione/flag-for-united-kingdom')['default']
   const IconEmojioneFlagForUnitedStates: typeof import('~icons/emojione/flag-for-united-states')['default']
+  const IconMdiCheckboxBlankCircle: typeof import('~icons/mdi/checkbox-blank-circle')['default']
+  const IconMdiCheckboxMarkedCircle: typeof import('~icons/mdi/checkbox-marked-circle')['default']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const inject: typeof import('vue')['inject']
   const isDefined: typeof import('@vueuse/core')['isDefined']

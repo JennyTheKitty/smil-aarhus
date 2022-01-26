@@ -100,6 +100,7 @@ export default viteSSR(
       ? (request as { _koaCtx: any } | undefined)?._koaCtx.state
           .graphileExchange
       : fetchExchange;
+    console.log(lastExchange);
 
     const ssr = ssrExchange({
       isClient: !isServerSide,

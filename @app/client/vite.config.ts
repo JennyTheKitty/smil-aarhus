@@ -41,7 +41,7 @@ export default defineConfig({
       output: {
         comments: false,
       },
-      mangle: true,
+      mangle: false,
     },
     polyfillModulePreload: false,
     reportCompressedSize: false,
@@ -101,6 +101,7 @@ export default defineConfig({
         /CalendarWidget.vue/,
         /ContentEditor.vue/,
         /Pictures.vue/,
+        /\@fullcalendar\/core\/vdom\.cjs/,
       ],
       build: {
         clientOptions: {

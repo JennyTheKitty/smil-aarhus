@@ -15,11 +15,6 @@ export interface ICalendarWidget {
 </script>
 
 <script setup lang="ts">
-/* eslint-disable import/no-duplicates */
-// solves problem with Vite SSR
-import '@fullcalendar/core/vdom.cjs';
-import '@fullcalendar/vue3';
-
 import { Event } from '@app/graphql/dist/client';
 import daLocale from '@fullcalendar/core/locales/da';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -199,7 +194,6 @@ const calendarOptions: CalendarOptions = {
   },
   datesSet: ({ view }) => {
     currentView.value = view;
-    refetch();
   },
 };
 

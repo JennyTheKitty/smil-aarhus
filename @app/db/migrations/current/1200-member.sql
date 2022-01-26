@@ -17,7 +17,7 @@ CREATE TABLE smil_aarhus.member(
     is_active boolean NOT NULL
 );
 
-comment on table smil_aarhus.member is E'@omit';
+comment on table smil_aarhus.member is E'@simpleCollections both';
 
 CREATE TABLE smil_aarhus_private.member_account(
     member_id uuid PRIMARY KEY REFERENCES smil_aarhus.member(
@@ -27,7 +27,7 @@ CREATE TABLE smil_aarhus_private.member_account(
 );
 
 -- allow all to see members
-GRANT SELECT ON TABLE smil_aarhus.member TO smil_anonymous, smil_organizer, smil_admin;
+GRANT SELECT ON TABLE smil_aarhus.member TO smil_organizer, smil_admin;
 
 -- allow admins users to change members
 GRANT UPDATE, DELETE ON TABLE smil_aarhus.member TO smil_admin;

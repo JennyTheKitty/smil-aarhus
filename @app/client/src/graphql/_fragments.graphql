@@ -2,6 +2,8 @@ fragment Member on Member {
   name
   id
   userRole
+  username
+  isActive
 }
 
 fragment Picture on Picture {

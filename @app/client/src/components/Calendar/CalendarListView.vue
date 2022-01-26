@@ -37,11 +37,6 @@
 </template>
 
 <script setup lang="ts">
-/* eslint-disable import/no-duplicates */
-// solves problem with Vite SSR
-import '@fullcalendar/core/vdom.cjs';
-import '@fullcalendar/vue3';
-
 import {
   Calendar,
   EventApi,
@@ -55,7 +50,7 @@ import {
   listViewProps,
   listViewRange,
 } from './CalendarListViewPlugin';
-import { CalendarEventFragment } from '@app/graphql/dist/client';
+import { ShortEventFragment } from '@app/graphql/dist/client';
 
 const d = dayjs;
 const { locale } = useI18n();
@@ -68,7 +63,7 @@ const events = computed(() => {
   return sliceEvents(listViewProps.value!)
     .filter((event) => event.def.groupId !== 'extendedOpening')
     .map((event) => ({
-      raw: event.def.extendedProps.raw as CalendarEventFragment,
+      raw: event.def.extendedProps.raw as ShortEventFragment,
       event,
     }))
     .map(({ raw, event }) => ({

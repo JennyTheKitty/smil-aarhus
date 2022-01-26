@@ -24,7 +24,9 @@
         }}</span>
       </div>
       <div w:justify="self-end" w:flex="~" w:space-x="4">
-        <button>Manage users</button>
+        <router-link as="button" :to="{ name: 'ADMIN-MEMBERS' }"
+          >Manage users</router-link
+        >
         <button @click="logout">Logout</button>
       </div>
     </div>

@@ -1,6 +1,15 @@
 {
   "configurations": [
     {
+      "name": "Launch Program",
+      "program": "${workspaceFolder}/@app/server/dist/index.js",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "pwa-node",
+      "runtimeArgs": ["-r", "@app/config/env"]
+    },
+
+    {
       "type": "node",
       "request": "attach",
       "name": "Attach to Node Server",

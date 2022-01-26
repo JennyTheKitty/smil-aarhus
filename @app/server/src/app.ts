@@ -19,8 +19,8 @@ export async function makeApp(): Promise<Koa> {
   await middleware.installCors(app, router);
   await middleware.installRefreshToken(app, router);
   await middleware.installPostGraphile(app, router);
-  app.use(router.routes()).use(router.allowedMethods());
   await middleware.installClientSSR(app, router);
+  app.use(router.routes()).use(router.allowedMethods());
   await middleware.installHelmet(app, router);
 
   return app;

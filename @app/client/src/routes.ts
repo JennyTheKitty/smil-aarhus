@@ -77,6 +77,11 @@ export const routes = [
         component: () => import('./pages/Admin/EventTags.vue'),
         name: 'ADMIN-EVENT-TAGS',
       },
+      {
+        path: 'members',
+        component: () => import('./pages/Admin/Members.vue'),
+        name: 'ADMIN-MEMBERS',
+      },
     ],
   },
   {
