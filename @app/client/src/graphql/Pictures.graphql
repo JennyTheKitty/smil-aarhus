@@ -1,20 +1,11 @@
 query PicturesQuery {
   pictures(orderBy: RANK_ASC) {
-    img {
-      height
-      src
-      srcSetJpeg
-      srcSetWebp
-      width
-      credit
-    }
-    id
-    rank
-    allowOnHome
+    ...Picture
   }
 }
 
 mutation CreateImageMutation(
+  $id: UUID!
   $path: String!
   $height: Int!
   $width: Int!
@@ -22,51 +13,37 @@ mutation CreateImageMutation(
 ) {
   createImage(
     input: {
-      image: { path: $path, width: $width, height: $height, credit: "" }
+      image: {
+        id: $id
+        path: $path
+        width: $width
+        height: $height
+        credit: ""
+      }
     }
   ) {
     image {
       id
       img @skip(if: $onlyId) {
-        height
-        src
-        srcSetJpeg
-        srcSetWebp
-        width
-        credit
+        ...IMG
       }
     }
   }
 }
 
-query ImageQuery($id: BigInt!) {
+query ImageQuery($id: UUID!) {
   image(id: $id) {
     img {
-      height
-      src
-      srcSetJpeg
-      width
-      srcSetWebp
-      credit
+      ...IMG
     }
     id
   }
 }
 
-mutation CreatePicture($image: BigInt!) {
+mutation CreatePicture($image: UUID!) {
   createPicture(input: { picture: { image: $image } }) {
     picture {
-      img {
-        height
-        src
-        srcSetJpeg
-        srcSetWebp
-        width
-        credit
-      }
-      id
-      rank
-      allowOnHome
+      ...Picture
     }
   }
 }
@@ -77,40 +54,18 @@ mutation ReorderPicturesMutation($reorders: [ReorderPicturesReorderInput]!) {
   }
 }
 
-mutation SetPictureAllowOnHomeMutation($id: BigInt!, $input: Boolean!) {
+mutation SetPictureAllowOnHomeMutation($id: UUID!, $input: Boolean!) {
   updatePicture(input: { patch: { allowOnHome: $input }, id: $id }) {
     picture {
-      image
-      id
-      rank
-      allowOnHome
-      img {
-        height
-        src
-        srcSetJpeg
-        srcSetWebp
-        width
-        credit
-      }
+      ...Picture
     }
   }
 }
 
-mutation DeletePictureMutation($id: BigInt!) {
+mutation DeletePictureMutation($id: UUID!) {
   deletePicture(input: { id: $id }) {
     picture {
-      image
-      id
-      rank
-      allowOnHome
-      img {
-        height
-        src
-        srcSetJpeg
-        srcSetWebp
-        width
-        credit
-      }
+      ...Picture
     }
   }
 }

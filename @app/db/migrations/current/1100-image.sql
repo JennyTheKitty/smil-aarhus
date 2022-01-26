@@ -1,5 +1,5 @@
 create table image (
-  id bigserial primary key,
+  id uuid primary key DEFAULT gen_random_uuid(),
   path text NOT NULL,
   width integer not null,
   height integer not null,

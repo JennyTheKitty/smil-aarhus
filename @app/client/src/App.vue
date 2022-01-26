@@ -14,9 +14,9 @@
           mode="out-in"
         >
           <div>
-            <keep-alive>
-              <component :is="Component"></component>
-            </keep-alive>
+            <!-- <keep-alive> -->
+            <component :is="Component"></component>
+            <!-- </keep-alive> -->
           </div>
         </transition>
       </template>
@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { InfoPagesQueryDocument } from '@app/graphql/dist/client';
-import { Link } from './components/Nav/NavLink.vue';
+import { Link } from './components/Nav/Link';
 import { useStore } from './store';
 
 const { t } = useI18n();
@@ -36,6 +36,7 @@ provide(key.heroHeight, ref(0));
 
 const { locale } = useI18n();
 const store = useStore();
+const { fromUUID } = useShort();
 
 const { data } = useQuery({
   query: InfoPagesQueryDocument,
@@ -53,7 +54,7 @@ const navLinks = computed(
           name: page.title,
           description: page.subtitle,
           to: 'INFO',
-          params: { slug: page.name },
+          params: { id: fromUUID(page.id), slug: page.slug },
           icon: page.icon,
         })),
         // [

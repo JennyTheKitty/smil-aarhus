@@ -175,6 +175,7 @@ export default defineConfig({
             'key',
             'useWaitImportComponent',
             'useTranslation',
+            'useShort',
           ],
           '@app/client/src/store': ['useStore'],
           'petite-vue-i18n': ['useI18n'],

@@ -9,7 +9,7 @@
     w:border="b-pink-800 b-2"
   >
     <div
-      w:max-w="5xl"
+      w:max-w="6xl"
       w:text="true-gray-100"
       w:grid="~ cols-3"
       w:w="full"
@@ -23,7 +23,8 @@
           store.currentMember?.name
         }}</span>
       </div>
-      <div w:justify="self-end">
+      <div w:justify="self-end" w:flex="~" w:space-x="4">
+        <button>Manage users</button>
         <button @click="logout">Logout</button>
       </div>
     </div>

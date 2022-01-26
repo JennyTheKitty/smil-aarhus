@@ -88,6 +88,16 @@
     </div>
     <div w:m="t-12" w:flex="~ col">
       <span w:text="gray-400">© SMil Aarhus</span>
+      <span w:text="gray-400">
+        Website coding and design by
+        <a href="https://fetlife.com/users/12739819">JennyTheKitty</a>
+      </span>
+      <span w:text="gray-400">
+        FetLife® is a registered trademark of BitLove
+      </span>
+      <span w:text="gray-400">
+        Butt Plug icon by Jessica Birn from NounProject.com
+      </span>
       <ClientOnly><LoginButton /></ClientOnly>
     </div>
   </div>

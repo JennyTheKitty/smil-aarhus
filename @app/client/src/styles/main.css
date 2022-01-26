@@ -23,13 +23,32 @@ body {
     @apply font-light text-3xl;
   }
   h2 {
-    @apply font-light text-3xl;
+    @apply font-light text-2xl;
   }
-  p:not(:last-of-type) {
+  h3 {
+    @apply font-light text-xl;
+  }
+  p,
+  ul,
+  ol {
     @apply mb-5;
   }
-  p {
+  p,
+  li {
     @apply font-light leading-relaxed;
+  }
+  ul li {
+    list-style: none;
+    position: relative;
+  }
+  ul li:before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: -24px;
+    width: 32px;
+    height: 32px;
+    background: no-repeat url('../assets/icons/buttplug.svg');
   }
   br {
     content: '';
@@ -39,4 +58,15 @@ body {
 
 svg.icon-shadow {
   filter: drop-shadow(2px 3px 1px rgb(0 0 0 / 0.4));
+}
+
+.scrollbar-hidden {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  /* WebKit */
+  width: 0;
+  height: 0;
 }

@@ -3,7 +3,7 @@
     <div v-if="Object.prototype.hasOwnProperty.call(link, 'links')">
       <span w:text="lg gray-500">{{ link.name }}</span>
       <i18n-link
-        v-for="sublink in (link as Menu).links"
+        v-for="sublink in (link as LinkMenu).links"
         :key="sublink.name"
         :to="sublink.to"
         :params="sublink.params"
@@ -47,7 +47,7 @@
   <div v-else w:flex="~" w:align="items-center">
     <Popover
       v-if="Object.prototype.hasOwnProperty.call(link, 'links')"
-      v-slot="{ open }"
+      v-slot="{ open, close }"
     >
       <PopoverButton
         w:rounded="md"
@@ -84,7 +84,7 @@
           w:rounded="xl"
           w:bg="dark-900"
           w:border="2 pink-800"
-          :w:grid="`~ ${(link as Menu).singleColumn ? 'cols-1' : 'cols-2'}`"
+          :w:grid="`~ ${(link as LinkMenu).singleColumn ? 'cols-1' : 'cols-2'}`"
           w:pos="absolute left-1/2"
           w:m="t-3"
           w:p="y-3 x-2"
@@ -92,10 +92,11 @@
           w:transform="~ -translate-x-1/2"
         >
           <i18n-link
-            v-for="sublink in (link as Menu).links"
+            v-for="sublink in (link as LinkMenu).links"
             :key="sublink.name"
             :to="sublink.to"
             :params="sublink.params"
+            @click="close"
             w:rounded="md"
             w:flex="~"
             w:m="y-1 x-3"
@@ -136,17 +137,7 @@
 </template>
 
 <script setup lang="ts">
-import { RouteParamsRaw } from 'vue-router';
-
-import { Route } from '../../routes';
-
-type InnerLink = { to: `${Route}`; params?: RouteParamsRaw; name: string };
-type Menu = {
-  name: string;
-  links: Array<InnerLink & { description?: string; icon?: any }>;
-  singleColumn: boolean;
-};
-export type Link = InnerLink | Menu;
+import type { Link, InnerLink, LinkMenu } from './Link';
 
 defineProps<{
   link: Link;

@@ -1,8 +1,8 @@
 CREATE SEQUENCE picture_rank AS integer;
 
 CREATE TABLE smil_aarhus.picture(
-    id bigserial PRIMARY KEY,
-    image bigint NOT NULL REFERENCES smil_aarhus.image(id),
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    image uuid NOT NULL REFERENCES smil_aarhus.image(id),
     rank integer NOT NULL DEFAULT nextval('picture_rank'),
     allow_on_home bool NOT NULL DEFAULT FALSE
 );

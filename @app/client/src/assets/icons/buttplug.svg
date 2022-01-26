@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="24"
+   height="24"
+   viewBox="0 0 24 24"
+   version="1.1"
+   id="SVGRoot"
+   sodipodi:docname="buttplug.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1472"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="4.2179991"
+     inkscape:cx="-25.960176"
+     inkscape:cy="44.333817"
+     inkscape:window-width="1920"
+     inkscape:window-height="1042"
+     inkscape:window-x="1920"
+     inkscape:window-y="604"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     width="31px">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1535" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1467" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       d="M 18.266797,21.852019 15.426415,21.01375 c 0,0 -0.982967,-0.571099 -0.968515,-1.604341 C 14.47238,18.375809 15,18 15,18 c 0,0 0.737086,-0.787695 0.281998,-2.233148 L 13.525529,4.6655003 c 0,0 -0.0506,-1.6405167 -1.250176,-1.5105878 -1.199862,-0.1302 -1.293697,1.5105878 -1.293697,1.5105878 L 9.2255042,15.766852 C 8.7630073,17.212359 9.5075025,18 9.5075025,18 c 0,0 0.5275965,0.375794 0.5421005,1.409409 0.01448,1.033596 -0.9685153,1.604341 -0.9685153,1.604341 l -2.8403835,0.838269 c 0,0 -0.1949976,0.06511 -0.2094935,0.390298 -0.014482,0.325198 0.4118925,0.354201 0.4118925,0.354201 H 18.072074 c 0,0 0.426393,-0.02901 0.411893,-0.354201 -0.02191,-0.325198 -0.216902,-0.389989 -0.216902,-0.389989 z"
+       id="path1100"
+       style="fill:#cccccc;fill-opacity:1;stroke-width:0.0789854" />
+  </g>
+</svg>

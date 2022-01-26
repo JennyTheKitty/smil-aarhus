@@ -1,0 +1,138 @@
+fragment Member on Member {
+  name
+  id
+  userRole
+}
+
+fragment Picture on Picture {
+  image
+  id
+  rank
+  allowOnHome
+  img {
+    ...IMG
+  }
+}
+
+fragment IMG on ResponsiveImage {
+  height
+  src
+  srcSetJpeg
+  srcSetWebp
+  width
+  credit
+}
+
+fragment PageTranslation on PageTr {
+  content
+  languageCode
+  pageId
+}
+
+fragment InfoPageTranslation on InfoPageTr {
+  languageCode
+  infoPageId
+  subtitle
+  title
+  slug
+}
+
+fragment InfoPage on InfoPage {
+  icon
+  rank
+  id
+  translations {
+    ...InfoPageTranslation
+  }
+}
+
+fragment ShortEventTagTranslation on EventTagTr {
+  tagId
+  languageCode
+  title
+}
+
+fragment ShortGroupTranslation on GroupTr {
+  groupId
+  languageCode
+  title
+}
+
+fragment DetailedGroupTranslation on GroupTr {
+  activity
+  description
+  shortDescription
+  slug
+  ...ShortGroupTranslation
+}
+
+fragment ShortEventTranslation on EventTr {
+  eventId
+  languageCode
+  slug
+  title
+}
+
+fragment DetailedEventTranslation on EventTr {
+  description
+  ...ShortEventTranslation
+}
+
+fragment ShortEvent on Event {
+  translations {
+    ...ShortEventTranslation
+  }
+  endsAt
+  id
+  startsAt
+  special
+}
+
+fragment DetailedEvent on Event {
+  translations {
+    ...DetailedEventTranslation
+  }
+  startsAt
+  img {
+    ...IMG
+  }
+  endsAt
+  id
+  special
+  tags {
+    tag {
+      id
+      translations {
+        ...ShortEventTagTranslation
+      }
+    }
+    eventId
+    tagId
+  }
+  groups {
+    group {
+      id
+      translations {
+        ...ShortGroupTranslation
+      }
+    }
+    eventId
+    groupId
+  }
+}
+
+fragment NewsTranslation on NewsTr {
+  content
+  title
+  languageCode
+  newsId
+}
+
+fragment News on News {
+  publishedAt
+  id
+  updatedAt
+  translations {
+    ...NewsTranslation
+  }
+}

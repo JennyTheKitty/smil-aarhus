@@ -1,6 +1,6 @@
-query PageQuery($name: String!) {
-  page(name: $name) {
-    name
+query PageQuery($id: UUID!) {
+  page(id: $id) {
+    id
     translations {
       ...PageTranslation
     }
@@ -9,13 +9,13 @@ query PageQuery($name: String!) {
 
 mutation UpdatePageTranslation(
   $content: String!
-  $pageName: String!
+  $pageId: UUID!
   $languageCode: TrLanguage!
 ) {
   updatePageTr(
     input: {
       patch: { content: $content }
-      pageName: $pageName
+      pageId: $pageId
       languageCode: $languageCode
     }
   ) {
@@ -25,59 +25,28 @@ mutation UpdatePageTranslation(
   }
 }
 
-fragment PageTranslation on PageTr {
-  content
-  languageCode
-  pageName
-}
-
 query InfoPagesQuery {
   infoPages(orderBy: RANK_ASC) {
-    icon
-    name
-    rank
-
-    translations {
-      languageCode
-      infoPageName
-      subtitle
-      title
-    }
+    ...InfoPage
   }
 }
 
-query InfoPageQuery($name: String!) {
-  infoPage(name: $name) {
-    icon
-    rank
-    name
-    translations {
-      languageCode
-      infoPageName
-      subtitle
-      title
-    }
+query InfoPageQuery($id: UUID!) {
+  infoPage(id: $id) {
+    ...InfoPage
   }
 }
 
 mutation UpsertInfoPage(
   $data: InfoPageDatumInput!
   $translations: [InfoPageTrDatumInput]!
-  $name: String!
+  $id: UUID
 ) {
   upsertInfoPage(
-    input: { data: $data, translations: $translations, infoPageName: $name }
+    input: { data: $data, translations: $translations, infoPageId: $id }
   ) {
     infoPage {
-      icon
-      rank
-      name
-      translations {
-        languageCode
-        infoPageName
-        subtitle
-        title
-      }
+      ...InfoPage
     }
   }
 }

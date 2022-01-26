@@ -36,11 +36,11 @@ const editing = ref(false);
 
 const ContentEditor = useWaitImportComponent(
   editing,
-  () => import('./ContentEditor.vue')
+  () => import('./Form/ContentEditor.vue')
 );
 
 const props = defineProps<{
-  name: string;
+  id: string;
 }>();
 
 const { t, locale } = useI18n();
@@ -48,7 +48,7 @@ const store = useStore();
 
 const { data: pageData } = await useQuery({
   query: PageQueryDocument,
-  variables: computed(() => ({ name: props.name })),
+  variables: computed(() => ({ id: props.id, slug: 'TODO-slug' })),
 });
 const page = computed(() => useTranslation(pageData.value?.page, locale));
 
@@ -67,7 +67,7 @@ watch(editing, (editing) => {
 async function save() {
   await updatePageTranslation({
     content: editContent.value,
-    pageName: props.name,
+    pageId: props.id,
     languageCode: locale.value.toUpperCase() as TrLanguage,
   });
   editing.value = false;

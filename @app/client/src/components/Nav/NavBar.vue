@@ -83,7 +83,7 @@
 
 <script setup lang="ts">
 import { Route } from '../../routes';
-import type { Link } from './NavLink.vue';
+import type { Link } from './Link';
 
 defineProps<{
   links: Array<Link>;

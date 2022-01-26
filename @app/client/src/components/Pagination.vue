@@ -140,13 +140,6 @@ const props = defineProps<{
   urql: Ref<{ offset: number; first: number }>;
 }>();
 
-// currentPage: { type: Number, required: true },
-// total: { type: Number, required: true },
-// lastPage: { type: Number, required: true },
-// next: { type: Function as PropType<() => void>, required: true },
-// prev: { type: Function as PropType<() => void>, required: true },
-// goto: { type: Function as PropType<(page: number) => void>, required: true },
-
 interface GotoButton {
   type: 'goto';
   page: number;

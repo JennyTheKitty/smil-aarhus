@@ -8,13 +8,9 @@ query HomeEventsQuery($startsAfter: Datetime) {
     first: 1
     orderBy: STARTS_AT_ASC
   ) {
-    ...HomeEvent
+    ...ShortEvent
     img {
-      src
-      srcSetJpeg
-      srcSetWebp
-      height
-      width
+      ...IMG
     }
   }
   events(
@@ -25,71 +21,31 @@ query HomeEventsQuery($startsAfter: Datetime) {
     first: 10
     orderBy: STARTS_AT_ASC
   ) {
-    ...HomeEvent
+    ...ShortEvent
   }
-}
-
-fragment HomeEvent on Event {
-  translations {
-    slug
-    title
-    languageCode
-    description
-    eventId
-  }
-  endsAt
-  id
-  startsAt
-  special
 }
 
 query HomeGroupsQuery {
   groups {
     id
     img {
-      src
-      srcSetJpeg
-      srcSetWebp
-      height
-      width
+      ...IMG
     }
     isOpen
     translations {
-      languageCode
-      title
-      shortDescription
-      slug
-      groupId
-      activity
+      ...DetailedGroupTranslation
     }
   }
 }
 
 query HomeRandomPicturesQuery {
   randomPictures(first: 4) {
-    image
-    id
-    rank
-    img {
-      height
-      src
-      srcSetJpeg
-      srcSetWebp
-      width
-    }
+    ...Picture
   }
 }
 
 query HomeNewsQuery {
   newses(first: 1, orderBy: PUBLISHED_AT_DESC) {
-    publishedAt
-    id
-    updatedAt
-    translations {
-      content
-      title
-      languageCode
-      newsId
-    }
+    ...News
   }
 }

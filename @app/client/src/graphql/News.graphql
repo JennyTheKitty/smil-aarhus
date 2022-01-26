@@ -1,15 +1,7 @@
 query NewsesQuery($offset: Int, $first: Int) {
   newsesConnection(orderBy: PUBLISHED_AT_DESC, first: $first, offset: $offset) {
     nodes {
-      publishedAt
-      id
-      updatedAt
-      translations {
-        content
-        title
-        languageCode
-        newsId
-      }
+      ...News
     }
     totalCount
   }

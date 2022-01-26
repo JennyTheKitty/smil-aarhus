@@ -7,6 +7,7 @@ import {
 import { ClientHandle } from '@urql/vue';
 import { MaybeRef } from '@vueuse/core';
 import { InjectionKey, Ref } from 'vue';
+import short from 'short-uuid';
 
 import { FALLBACK_LANGUAGE } from './i18n';
 
@@ -85,6 +86,7 @@ export const key = {
 export interface UploadInfo {
   url: string;
   data: FormData;
+  id: string;
 }
 
 export async function getUploadUrl(
@@ -105,7 +107,11 @@ export async function getUploadUrl(
   )) {
     formData.append(key, val);
   }
-  return { url: data.createUploadUrl.uploadUrl, data: formData };
+  return {
+    url: data.createUploadUrl.uploadUrl,
+    data: formData,
+    id: data.createUploadUrl.id,
+  };
 }
 
 export async function uploadFile(
@@ -136,31 +142,38 @@ export function getImageFileDimentions(
   });
 }
 
-type CreateImageReturn<T> = T extends false
-  ? NonNullable<
-      NonNullable<CreateImageMutationMutation['createImage']>['image']
-    >
-  : T extends true
-  ? number
-  : never;
-
-export async function createImage<B extends boolean>(
+export async function createImage(
   handle: ClientHandle,
   file: File,
-  progressCallback: (percent: number) => void,
-  onlyId: B
-): Promise<CreateImageReturn<B>> {
+  progressCallback: (percent: number) => void
+): Promise<
+  NonNullable<NonNullable<CreateImageMutationMutation['createImage']>['image']>
+> {
   const { height, width } = await getImageFileDimentions(file);
   const info = await getUploadUrl(handle, file.type);
   const url = await uploadFile(file, info, progressCallback);
   const { data } = await handle.client
     .mutation(CreateImageMutationDocument, {
+      id: info.id,
       path: url,
       height,
       width,
-      onlyId,
     })
     .toPromise();
   if (!data?.createImage?.image) throw new Error('Could not create image');
-  return onlyId ? data.createImage.image.id : data.createImage.image;
+  return data.createImage.image;
+}
+
+const shortTranslator = short(
+  '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ_-+'
+);
+
+export function useShort(): {
+  fromUUID: (uuid: string | short.UUID) => string;
+  toUUID: (shortId: string | short.SUUID) => string;
+} {
+  return {
+    fromUUID: (uuid) => shortTranslator.fromUUID(uuid),
+    toUUID: (shortId) => shortTranslator.toUUID(shortId),
+  };
 }

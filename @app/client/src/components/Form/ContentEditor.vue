@@ -31,6 +31,9 @@ function onReady(editor: any) {
     } else {
       emit('blur');
     }
+    const body = editor.ui.view.body._bodyCollectionContainer;
+    body.remove();
+    editor.ui.view.element.appendChild(body);
   });
 }
 

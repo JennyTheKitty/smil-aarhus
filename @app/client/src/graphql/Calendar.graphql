@@ -6,63 +6,7 @@ query CalendarEventsQuery($startsAfter: Datetime, $startsBefore: Datetime) {
     }
     orderBy: STARTS_AT_ASC
   ) {
-    ...CalendarEvent
-  }
-}
-
-fragment CalendarEvent on Event {
-  translations {
-    slug
-    title
-    languageCode
-    eventId
-  }
-  endsAt
-  id
-  startsAt
-}
-
-fragment DetailedEvent on Event {
-  translations {
-    description
-    eventId
-    languageCode
-    slug
-    title
-  }
-  startsAt
-  img {
-    src
-    srcSetJpeg
-    srcSetWebp
-    height
-    width
-  }
-  endsAt
-  id
-  tags {
-    tag {
-      id
-      translations {
-        languageCode
-        tagId
-        title
-      }
-    }
-    eventId
-    tagId
-  }
-  groups {
-    group {
-      id
-      translations {
-        groupId
-        languageCode
-        title
-      }
-    }
-    eventId
-    groupId
+    ...ShortEvent
   }
 }
 
@@ -72,7 +16,7 @@ query CalendarEventBySlug($languageCode: String!, $slug: String!) {
   }
 }
 
-query CalendarEventById($id: BigInt!) {
+query CalendarEventById($id: UUID!) {
   event(id: $id) {
     ...DetailedEvent
   }
@@ -81,13 +25,13 @@ query CalendarEventById($id: BigInt!) {
 mutation UpsertEvent(
   $data: EventDatumInput!
   $translations: [EventTrDatumInput]!
-  $id: BigInt
+  $id: UUID
 ) {
   upsertEvent(
     input: { data: $data, translations: $translations, eventId: $id }
   ) {
     event {
-      ...CalendarEvent
+      ...ShortEvent
     }
   }
 }

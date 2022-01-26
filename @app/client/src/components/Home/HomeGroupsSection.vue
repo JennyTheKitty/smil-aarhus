@@ -9,7 +9,7 @@
               v-for="group in groups"
               :key="group.id"
               to="GROUP"
-              :params="{ slug: group.slug }"
+              :params="{ id: fromUUID(group.id), slug: group.slug }"
               w:rounded="lg"
               w:bg="black"
               w:shadow="lg"
@@ -131,6 +131,7 @@ import { HomeGroupsQueryDocument } from '@app/graphql/dist/client';
 import { useTranslation } from '../../utils';
 
 const { t, locale } = useI18n();
+const { fromUUID } = useShort();
 
 const { data: groupsData } = await useQuery({
   query: HomeGroupsQueryDocument,
@@ -145,7 +146,6 @@ const { width: imgWidth } = useElementSize(img);
 const { x, arrivedState } = useScroll(scroller);
 const { width } = useElementSize(scroller);
 const scrollAmount = computed(() => {
-  console.log(width.value, img.value, imgWidth.value);
   let scroll = 0;
   scroll +=
     (imgWidth.value + 20) * Math.floor(width.value / (imgWidth.value + 20));

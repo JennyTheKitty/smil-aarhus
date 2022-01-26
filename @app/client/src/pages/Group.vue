@@ -3,7 +3,7 @@
     <teleport v-if="store.currentMember" to="#member-bar-left">
       <EditButton v-model:editing="editing" />
     </teleport>
-    <GroupDialog v-model:isOpen="editing" :group="rawGroup!" />
+    <GroupDialog v-model:isOpen="editing" :group="rawGroup!" :create="false" />
     <Hero
       :jpeg="group.img.srcSetJpeg"
       :webp="group.img.srcSetWebp"
@@ -40,7 +40,7 @@
       w:max-w="5xl"
       w:w="full"
       w:text="true-gray-100"
-      w:align="items-center"
+      w:align="items-start"
       w:p="x-8"
       class="grid gap-8 grid-cols-1 md:grid-cols-[2fr,1fr]"
     >
@@ -77,6 +77,7 @@ import { useTranslation } from '../utils';
 const { t, locale } = useI18n();
 const route = useRoute();
 const store = useStore();
+const { toUUID } = useShort();
 const editing = ref(false);
 
 const GroupDialog = useWaitImportComponent(
@@ -87,12 +88,11 @@ const GroupDialog = useWaitImportComponent(
 const { data } = useQuery({
   query: GroupQueryDocument,
   variables: {
-    slug: route.params.slug as string,
-    preferredLanguageCode: locale.value.toUpperCase() as TrLanguage,
+    id: toUUID((route.params.id as string) || ''),
   },
 });
-const group = computed(() => useTranslation(data.value?.groupBySlug, locale));
-const rawGroup = computed(() => data.value?.groupBySlug);
+const group = computed(() => useTranslation(data.value?.group, locale));
+const rawGroup = computed(() => data.value?.group);
 
 const { data: eventsData } = useQuery({
   query: GroupEventsDocument,

@@ -2,7 +2,7 @@
   <FormDialog
     ref="formDialog"
     :is-open="isOpen"
-    :model="model"
+    v-model:model="model"
     title="Create/update group"
     :form-props="{
       labelWidth: 140,
@@ -43,12 +43,6 @@
           </div>
         </n-form-item>
       </div>
-      <!-- <TranslationInput
-        v-model:value="model.translations"
-        :to="root!"
-        :on-create="createTranslation"
-        #="{ index }"
-      > -->
       <n-form-item
         label="Title"
         ignore-path-change
@@ -97,7 +91,6 @@
           @keydown.enter.prevent
         />
       </n-form-item>
-      <!-- </TranslationInput> -->
     </template>
   </FormDialog>
 </template>
@@ -120,16 +113,19 @@ import {
 } from 'naive-ui/lib';
 import { PropType } from 'vue';
 
-import FormDialog from './FormDialog.vue';
+import FormDialog from './Form/FormDialog.vue';
 
-const ContentEditor = defineAsyncComponent(() => import('./ContentEditor.vue'));
+const ContentEditor = defineAsyncComponent(
+  () => import('./Form/ContentEditor.vue')
+);
 
 const props = defineProps({
   isOpen: { type: Boolean, required: true },
   group: {
-    type: Object as PropType<NonNullable<GroupQueryQuery['groupBySlug']>>,
+    type: Object as PropType<NonNullable<GroupQueryQuery['group']> | {}>,
     required: true,
   },
+  create: { type: Boolean, required: true },
 });
 const emit = defineEmits(['update:isOpen']);
 
@@ -139,8 +135,6 @@ const formDialog = ref<
   (InstanceType<typeof FormDialog> & { form: FormInst }) | null
 >(null);
 
-const create = false;
-
 async function handleSubmitClick(e: any) {
   e.preventDefault();
   formDialog.value!.form.validate(async (errors: any) => {
@@ -148,23 +142,23 @@ async function handleSubmitClick(e: any) {
     await handle.client
       .mutation(UpsertGroupDocument, {
         data: {
-          image: model.image,
-          imageCredit: model.imageCredit,
-          isOpen: model.isOpen!,
+          image: model.value.image,
+          imageCredit: model.value.imageCredit,
+          isOpen: model.value.isOpen!,
         },
-        translations: model.translations,
-        id: model.id,
+        translations: model.value.translations,
+        id: model.value.id,
       })
       .toPromise();
     emit('update:isOpen', false);
   });
 }
 
-const model = reactive({
+const model = ref({
   image: undefined as string | undefined,
   imageCredit: '',
   isOpen: undefined as undefined | boolean,
-  id: null as null | number,
+  id: undefined as undefined | number,
   translations: [] as {
     languageCode: TrLanguage;
     title: string;
@@ -214,7 +208,7 @@ const rules = {
   translations: {
     required: true,
     validator() {
-      if (model.translations.length < 1)
+      if (model.value.translations.length < 1)
         return new Error('Must add at least one translation');
 
       return true;
@@ -224,22 +218,29 @@ const rules = {
 
 function onOpen() {
   const group = props.group;
-  model.image = group.image;
-  model.isOpen = group.isOpen;
-  model.translations = (group.translations || []).map((trans) => ({
-    languageCode: trans.languageCode,
-    title: trans.title,
-    shortDescription: trans.shortDescription,
-    description: trans.description,
-    activity: trans.activity,
-  }));
-  model.id = group.id;
+  if ('id' in group) {
+    model.value.image = group.image;
+    model.value.imageCredit = group.img.credit;
+    model.value.isOpen = group.isOpen;
+    model.value.translations = (group.translations || []).map((trans) => ({
+      languageCode: trans.languageCode,
+      title: trans.title,
+      shortDescription: trans.shortDescription,
+      description: trans.description,
+      activity: trans.activity,
+    }));
+    model.value.id = group.id;
+  } else {
+    onClose();
+  }
 }
 
 function onClose() {
-  model.image = undefined;
-  model.isOpen = undefined;
-  model.translations = [];
+  model.value.image = undefined;
+  model.value.imageCredit = '';
+  model.value.isOpen = undefined;
+  model.value.translations = [];
+  model.value.id = undefined;
 }
 
 function createTranslation() {

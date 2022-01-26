@@ -109,7 +109,7 @@ import {
 import { useTranslation } from '../../utils';
 
 const ContentEditor = defineAsyncComponent(
-  () => import('../ContentEditor.vue')
+  () => import('../Form/ContentEditor.vue')
 );
 
 const props = defineProps<{

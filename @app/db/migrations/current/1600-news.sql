@@ -1,5 +1,5 @@
 CREATE TABLE smil_aarhus.news(
-    id bigserial NOT NULL PRIMARY KEY,
+    id uuid NOT NULL PRIMARY KEY,
     published_at TIMESTAMPTZ NOT NULL,
     updated_at TIMESTAMPTZ NOT NULL
 );
@@ -7,7 +7,7 @@ CREATE TABLE smil_aarhus.news(
 comment on table smil_aarhus.news is E'@simpleCollections both';
 
 CREATE TABLE smil_aarhus.news_tr(
-    news_id bigint NOT NULL REFERENCES smil_aarhus.news (id),
+    news_id uuid NOT NULL REFERENCES smil_aarhus.news (id),
     language_code text NOT NULL REFERENCES smil_aarhus.tr_language (code),
     title text NOT NULL,
     content text NOT NULL,

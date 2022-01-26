@@ -2,9 +2,7 @@ query SearchGroups($query: String!) {
   searchGroups(query: $query) {
     id
     translations {
-      title
-      groupId
-      languageCode
+      ...ShortGroupTranslation
     }
   }
 }
@@ -12,9 +10,7 @@ query SearchEventTags($query: String!) {
   searchEventTags(query: $query) {
     id
     translations {
-      languageCode
-      title
-      tagId
+      ...ShortEventTagTranslation
     }
   }
 }
@@ -31,24 +27,20 @@ query SearchEventTemplates($query: String!) {
   }
 }
 
-query GroupById($id: BigInt!) {
+query GroupById($id: UUID!) {
   group(id: $id) {
     id
     translations {
-      languageCode
-      title
-      groupId
+      ...ShortGroupTranslation
     }
   }
 }
 
-query EventTagById($id: BigInt!) {
+query EventTagById($id: UUID!) {
   eventTag(id: $id) {
     id
     translations {
-      languageCode
-      title
-      tagId
+      ...ShortEventTagTranslation
     }
   }
 }

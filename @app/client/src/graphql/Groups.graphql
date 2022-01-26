@@ -1,24 +1,13 @@
-query GroupQuery($slug: String!, $preferredLanguageCode: String!) {
-  groupBySlug(preferredLanguageCode: $preferredLanguageCode, slug: $slug) {
+query GroupQuery($id: UUID!) {
+  group(id: $id) {
     id
     image
     isOpen
     translations {
-      activity
-      description
-      languageCode
-      shortDescription
-      slug
-      title
-      groupId
+      ...DetailedGroupTranslation
     }
     img {
-      height
-      src
-      srcSetJpeg
-      srcSetWebp
-      width
-      credit
+      ...IMG
     }
   }
 }
@@ -26,7 +15,7 @@ query GroupQuery($slug: String!, $preferredLanguageCode: String!) {
 mutation UpsertGroup(
   $data: GroupDatumInput!
   $translations: [GroupTrDatumInput]!
-  $id: BigInt
+  $id: UUID
 ) {
   upsertGroup(
     input: { data: $data, translations: $translations, groupId: $id }
@@ -36,28 +25,17 @@ mutation UpsertGroup(
       image
       isOpen
       translations {
-        activity
-        description
-        languageCode
-        shortDescription
-        slug
-        title
-        groupId
+        ...DetailedGroupTranslation
       }
       img {
-        height
-        src
-        srcSetJpeg
-        srcSetWebp
-        width
-        credit
+        ...IMG
       }
     }
   }
 }
 
-query GroupEvents($groupId: BigInt!) {
+query GroupEvents($groupId: UUID!) {
   eventsByGroup(groupId: $groupId) {
-    ...CalendarEvent
+    ...ShortEvent
   }
 }

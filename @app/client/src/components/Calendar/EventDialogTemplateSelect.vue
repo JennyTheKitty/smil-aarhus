@@ -36,6 +36,11 @@
           placeholder="Select template"
           :search="SearchEventTemplatesDocument"
           :on-update:value="onSelect"
+          :on-blur="
+            () => {
+              show = false;
+            }
+          "
           :label-renderer="EventDialogTemplateSelectLabelRenderer"
         />
       </div>

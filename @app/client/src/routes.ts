@@ -21,11 +21,11 @@ const i18nRoutes = {
     component: Home,
   },
   [Route.INFO]: {
-    paths: { da: 'info/:slug', en: 'info/:slug' },
+    paths: { da: 'info/:id/:slug?', en: 'info/:id/:slug?' },
     component: () => import('./pages/Info.vue'),
   },
   [Route.CALENDAR]: {
-    paths: { da: 'kalender/:slug?', en: 'calendar/:slug?' },
+    paths: { da: 'kalender/:id?/:slug?', en: 'calendar/:id?/:slug?' },
     component: () => import('./pages/Calendar.vue'),
   },
   [Route.PICTURES]: {
@@ -37,11 +37,11 @@ const i18nRoutes = {
     component: () => import('./pages/Groups.vue'),
   },
   [Route.GROUP]: {
-    paths: { da: 'grupper/:slug', en: 'groups/:slug' },
+    paths: { da: 'grupper/:id/:slug?', en: 'groups/:id/:slug?' },
     component: () => import('./pages/Group.vue'),
   },
   [Route.NEWS]: {
-    paths: { da: 'nyheder/:slug?', en: 'news/:slug?' },
+    paths: { da: 'nyheder', en: 'news' },
     component: () => import('./pages/News.vue'),
   },
 } as {

@@ -8,8 +8,6 @@ mutation Logout {
 
 query GetMe {
   currentMember {
-    name
-    id
-    userRole
+    ...Member
   }
 }

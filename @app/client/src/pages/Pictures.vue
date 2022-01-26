@@ -106,7 +106,7 @@ const PictureDelete = useWaitImportComponent(
 
 const ContentEditor = useWaitImportComponent(
   editing,
-  () => import('../components/ContentEditor.vue')
+  () => import('../components/Form/ContentEditor.vue')
 );
 
 const { executeMutation: setAllowOnHome } = useMutation(
@@ -194,7 +194,7 @@ function creditEditorFocussed(focus: boolean) {
   console.log(focus, lightbox.value.pswp.events._pool, pausedEvents);
 }
 
-const lightboxCurrentOpenId = ref<Number | null>(null);
+const lightboxCurrentOpenId = ref<string | null>(null);
 
 const gallery = ref<HTMLElement | null>(null);
 onMounted(() => {
@@ -208,7 +208,7 @@ onMounted(() => {
     lightbox.value.pswp.on('change', () => {
       const currSlideElement: HTMLElement =
         lightbox.value.pswp.currSlide.data.element;
-      lightboxCurrentOpenId.value = parseInt(currSlideElement.dataset.id || '');
+      lightboxCurrentOpenId.value = currSlideElement.dataset.id || '';
     });
     lightbox.value.pswp.on('close', () => {
       lightboxCurrentOpenId.value = null;
@@ -264,9 +264,5 @@ const { t } = useI18n();
   position: absolute;
   right: 0;
   bottom: 0px;
-}
-.pswp__custom-caption a {
-  color: #fff;
-  text-decoration: underline;
 }
 </style>

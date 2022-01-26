@@ -1,13 +1,13 @@
 CREATE TABLE smil_aarhus.event_tag(
-    id bigserial PRIMARY KEY,
-    image bigint REFERENCES smil_aarhus.image(id)
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    image uuid REFERENCES smil_aarhus.image(id)
 );
 
 
 COMMENT ON TABLE smil_aarhus.event_tag IS E'@omit create,update,delete,all,order';
 
 CREATE TABLE smil_aarhus.event_tag_tr(
-    tag_id bigint constraint event_tag_tr_tag_id_fkey REFERENCES smil_aarhus.event_tag(id),
+    tag_id uuid constraint event_tag_tr_tag_id_fkey REFERENCES smil_aarhus.event_tag(id),
     language_code text constraint event_tag_tr_language_code_fkey REFERENCES smil_aarhus.tr_language(code),
     title text NOT NULL,
     PRIMARY KEY (tag_id, language_code)
@@ -55,8 +55,8 @@ $$ language plpgsql stable;
 
 
 create table smil_aarhus.event_via_event_tag (
-  event_id bigint constraint event_via_event_tag_event_id_fkey references smil_aarhus.event (id),
-  tag_id bigint constraint event_via_event_tag_tag_id_fkey references smil_aarhus.event_tag (id),
+  event_id uuid constraint event_via_event_tag_event_id_fkey references smil_aarhus.event (id),
+  tag_id uuid constraint event_via_event_tag_tag_id_fkey references smil_aarhus.event_tag (id),
   primary key (event_id, tag_id)
 );
 

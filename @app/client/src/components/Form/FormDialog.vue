@@ -2,7 +2,7 @@
   <BaseDialog :is-open="isOpen" @update:is-open="() => cancelButton!.check()">
     <div
       ref="root"
-      w:p="2"
+      w:p="x-2 t-2"
       w:border="2 pink-800 rounded-lg"
       w:w="5xl"
       w:shadow="lg"
@@ -12,8 +12,14 @@
       w:max-h="90vh"
       w:h="90vh"
     >
-      <n-config-provider :theme="darkTheme">
-        <n-form ref="form" :model="model" v-bind="formProps">
+      <n-config-provider :theme="darkTheme" w:h="full">
+        <n-form
+          ref="form"
+          :model="model"
+          v-bind="formProps"
+          w:flex="~ col"
+          w:h="full"
+        >
           <input type="submit" w:display="hidden" />
           <div w:border="b-2 pink-800" w:p="2">
             <div class="header-grid">
@@ -65,13 +71,14 @@
               </div>
             </div>
           </div>
-          <div w:p="4" w:overflow="scroll" w:h="full">
-            {{ currentLanguageIndex }}
-            <slot
-              v-if="currentLanguageIndex !== -1"
-              :root="root"
-              :index="currentLanguageIndex"
-            ></slot>
+          <div w:flex="grow" w:overflow="hidden">
+            <div w:p="x-4 t-4" w:overflow="y-auto" w:h="full">
+              <slot
+                v-if="currentLanguageIndex !== -1"
+                :root="root"
+                :index="currentLanguageIndex"
+              ></slot>
+            </div>
           </div>
         </n-form>
       </n-config-provider>
@@ -92,7 +99,7 @@ import { formItemInstsInjectionKey } from 'naive-ui/lib/form/src/interface';
 import { PropType } from 'vue';
 import { TrLanguage } from '@app/graphql/dist/client';
 
-import DirtyCancelButton from './Form/DirtyCancelButton.vue';
+import DirtyCancelButton from './DirtyCancelButton.vue';
 
 const props = defineProps({
   isOpen: { type: Boolean, required: true },
@@ -227,6 +234,16 @@ function maybeAddTranslation() {
     currentLanguageIndex.value
   );
   if (currentLanguageIndex.value === -1) {
+    console.log({
+      ...model.value,
+      translations: [
+        ...model.value.translations,
+        {
+          ...props.createTranslation(),
+          languageCode: currentLanguageCode.value,
+        },
+      ],
+    });
     emit('update:model', {
       ...model.value,
       translations: [

@@ -3,18 +3,18 @@
 -- dress code?
 -- text updated at?
 CREATE TABLE smil_aarhus.event(
-    id bigserial PRIMARY KEY,
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     starts_at TIMESTAMPTZ NOT NULL,
     ends_at TIMESTAMPTZ NOT NULL,
     special boolean NOT NULL,
-    override_image bigint REFERENCES smil_aarhus.image(id),
+    override_image uuid REFERENCES smil_aarhus.image(id),
     template_name text
 );
 
 COMMENT ON TABLE smil_aarhus.event IS E'@omit create,update,delete';
 
 CREATE TABLE smil_aarhus.event_tr(
-    event_id bigint REFERENCES smil_aarhus.event (id),
+    event_id uuid REFERENCES smil_aarhus.event (id),
     language_code text REFERENCES smil_aarhus.tr_language (code),
     title text NOT NULL,
     description text NOT NULL,
@@ -82,8 +82,8 @@ BEGIN
 END
 $$ language plpgsql stable;
 
-CREATE OR REPLACE FUNCTION smil_aarhus.event_image(eid integer, override_image integer)
-RETURNS integer
+CREATE OR REPLACE FUNCTION smil_aarhus.event_image(eid uuid, override_image uuid)
+RETURNS uuid
 AS $$
 DECLARE
     _l record;
@@ -117,10 +117,10 @@ CREATE TYPE smil_aarhus.event_data AS (
     starts_at TIMESTAMPTZ,
     ends_at TIMESTAMPTZ,
     special boolean,
-    override_image bigint,
+    override_image uuid,
     template_name text,
-    tag_ids bigint[],
-    group_ids bigint[]
+    tag_ids uuid[],
+    group_ids uuid[]
 );
 
 COMMENT ON COLUMN smil_aarhus.event_data.starts_at IS E'@notNull';
@@ -140,14 +140,14 @@ COMMENT ON COLUMN smil_aarhus.event_tr_data.description IS E'@notNull';
 CREATE OR REPLACE FUNCTION smil_aarhus.upsert_event(
     data smil_aarhus.event_data,
     translations smil_aarhus.event_tr_data[],
-    event__id bigint DEFAULT NULL
+    event__id uuid DEFAULT NULL
 )
 RETURNS smil_aarhus.event
 AS $$
 DECLARE
     event smil_aarhus.event;
     trans smil_aarhus.event_tr_data;
-    lid bigint;
+    lid uuid;
 BEGIN
     IF (event__id IS NULL) THEN
         INSERT INTO smil_aarhus.event(starts_at, ends_at, special, override_image, template_name)

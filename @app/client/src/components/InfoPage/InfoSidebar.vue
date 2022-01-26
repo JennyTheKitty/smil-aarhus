@@ -13,8 +13,8 @@
     <i18n-link
       v-for="(page, i) in infoPages"
       to="INFO"
-      :params="{ slug: page.name }"
-      :key="page.name"
+      :params="{ id: fromUUID(page.id), slug: page.slug }"
+      :key="page.id"
       w:rounded="md"
       w:flex="~"
       w:m="y-1"
@@ -85,7 +85,7 @@
       v-if="editingPage"
       :infoPage="editingPage"
       :isOpen="!!editingPage"
-      :create="!editingPage.name"
+      :create="!editingPage.id"
       @update:isOpen="(isOpen) => !isOpen && (editingPage = null)"
     />
   </div>
@@ -96,10 +96,10 @@ import {
   InfoPagesQueryDocument,
   InfoPagesQueryQuery,
 } from '@app/graphql/dist/client';
-import { Translated } from '../utils';
 
 const { locale } = useI18n();
 const store = useStore();
+const { fromUUID } = useShort();
 
 const editingPage = ref<null | Partial<
   NonNullable<InfoPagesQueryQuery['infoPages']>[number]

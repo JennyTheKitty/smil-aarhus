@@ -44,13 +44,10 @@ async function createPicture(imageId: number) {
 
 async function upload(options: UploadCustomRequestOptions) {
   try {
-    const imageId = await createImage(
-      handle,
-      options.file.file!,
-      (percent) => options.onProgress({ percent }),
-      true
+    const image = await createImage(handle, options.file.file!, (percent) =>
+      options.onProgress({ percent })
     );
-    await createPicture(imageId);
+    await createPicture(image.id);
     options.onFinish();
   } catch (e) {
     options.onError();

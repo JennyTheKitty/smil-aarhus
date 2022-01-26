@@ -2,7 +2,7 @@
   <FormDialog
     ref="formDialog"
     :is-open="isOpen"
-    :model="model"
+    v-model:model="model"
     title="Create/update info page"
     :form-props="{
       labelWidth: 140,
@@ -12,57 +12,38 @@
     @update:is-open="$emit('update:isOpen', false)"
     @open="onOpen"
     @close="onClose"
+    :create-translation="createTranslation"
   >
     <template #create>
       <n-button type="primary" @click="handleSubmitClick">{{
         create ? 'Create' : 'Update'
       }}</n-button>
     </template>
-    <template #default="{ root }">
-      <n-form-item label="Name" path="name">
-        <n-input
-          v-model:value="model.name"
-          @keydown.enter.prevent
-          :disabled="!create"
-        />
-      </n-form-item>
+    <template #default="{ root, index }">
       <n-form-item label="Icon" path="icon">
         <n-input v-model:value="model.icon" @keydown.enter.prevent />
       </n-form-item>
       <n-form-item
-        path="translations"
-        :show-feedback="false"
-        :show-label="false"
+        label="Title"
+        ignore-path-change
+        :path="`translations[${index}].title`"
+        :rule="translationRules.title"
       >
-        <TranslationInput
-          v-model:value="model.translations"
-          :to="root!"
-          :on-create="createTranslation"
-          #="{ index }"
-        >
-          <n-form-item
-            label="Title"
-            ignore-path-change
-            :path="`translations[${index}].title`"
-            :rule="translationRules.title"
-          >
-            <n-input
-              v-model:value="model.translations[index].title"
-              @keydown.enter.prevent
-            />
-          </n-form-item>
-          <n-form-item
-            label="Subtitle"
-            ignore-path-change
-            :path="`translations[${index}].subtitle`"
-            :rule="translationRules.subtitle"
-          >
-            <n-input
-              v-model:value="model.translations[index].subtitle"
-              @keydown.enter.prevent
-            />
-          </n-form-item>
-        </TranslationInput>
+        <n-input
+          v-model:value="model.translations[index].title"
+          @keydown.enter.prevent
+        />
+      </n-form-item>
+      <n-form-item
+        label="Subtitle"
+        ignore-path-change
+        :path="`translations[${index}].subtitle`"
+        :rule="translationRules.subtitle"
+      >
+        <n-input
+          v-model:value="model.translations[index].subtitle"
+          @keydown.enter.prevent
+        />
       </n-form-item>
     </template>
   </FormDialog>
@@ -78,7 +59,7 @@ import { useClientHandle } from '@urql/vue';
 import { FormInst, FormRules, NButton, NFormItem, NInput } from 'naive-ui/lib';
 import { PropType } from 'vue';
 
-import FormDialog from './FormDialog.vue';
+import FormDialog from '../Form/FormDialog.vue';
 
 const props = defineProps({
   isOpen: { type: Boolean, required: true },
@@ -105,19 +86,19 @@ async function handleSubmitClick(e: any) {
     await handle.client
       .mutation(UpsertInfoPageDocument, {
         data: {
-          icon: model.icon,
+          icon: model.value.icon,
         },
-        translations: model.translations,
-        name: model.name,
+        translations: model.value.translations,
+        id: model.value.id,
       })
       .toPromise();
     emit('update:isOpen', false);
   });
 }
 
-const model = reactive({
+const model = ref({
   icon: '',
-  name: '',
+  id: undefined as undefined | string,
   translations: [] as {
     languageCode: TrLanguage;
     title: string;
@@ -147,7 +128,7 @@ const rules = {
   translations: {
     required: true,
     validator() {
-      if (model.translations.length < 1)
+      if (model.value.translations.length < 1)
         return new Error('Must add at least one translation');
 
       return true;
@@ -157,19 +138,23 @@ const rules = {
 
 function onOpen() {
   const infoPage = props.infoPage;
-  model.icon = infoPage.icon || '';
-  model.translations = (infoPage.translations || []).map((trans) => ({
-    languageCode: trans.languageCode,
-    title: trans.title,
-    subtitle: trans.subtitle,
-  }));
-  model.name = infoPage.name || '';
+  if ('id' in infoPage) {
+    model.value.icon = infoPage.icon || '';
+    model.value.translations = (infoPage.translations || []).map((trans) => ({
+      languageCode: trans.languageCode,
+      title: trans.title,
+      subtitle: trans.subtitle,
+    }));
+    model.value.id = infoPage.id;
+  } else {
+    onClose();
+  }
 }
 
 function onClose() {
-  model.icon = '';
-  model.name = '';
-  model.translations = [];
+  model.value.icon = '';
+  model.value.id = undefined;
+  model.value.translations = [];
 }
 
 function createTranslation() {

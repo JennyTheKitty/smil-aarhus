@@ -4,5 +4,6 @@ mutation GetUploadUrl($contentType: String!, $randomId: String) {
   ) {
     uploadUrl
     formData
+    id
   }
 }

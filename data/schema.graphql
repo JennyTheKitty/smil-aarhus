@@ -4,41 +4,6 @@ input AuthenticateInput {
 }
 
 """
-A signed eight-byte integer. The upper big integer values are greater than the
-max value for a JavaScript number. Therefore all big integers will be output as
-strings and not numbers.
-"""
-scalar BigInt
-
-"""
-A filter to be used against BigInt fields. All fields are combined with a logical ‘and.’
-"""
-input BigIntFilter {
-  """Equal to the specified value."""
-  equalTo: BigInt
-
-  """Greater than the specified value."""
-  greaterThan: BigInt
-
-  """Greater than or equal to the specified value."""
-  greaterThanOrEqualTo: BigInt
-
-  """
-  Is null (if `true` is specified) or is not null (if `false` is specified).
-  """
-  isNull: Boolean
-
-  """Less than the specified value."""
-  lessThan: BigInt
-
-  """Less than or equal to the specified value."""
-  lessThanOrEqualTo: BigInt
-
-  """Not equal to the specified value."""
-  notEqualTo: BigInt
-}
-
-"""
 A filter to be used against Boolean fields. All fields are combined with a logical ‘and.’
 """
 input BooleanFilter {
@@ -214,7 +179,12 @@ type CreateUploadUrlPayload {
   unchanged and unused. May be used by a client to track mutations.
   """
   clientMutationId: String
+
+  """Use this formdata when uploading"""
   formData: String!
+
+  """Create the image under this ID"""
+  id: UUID
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -269,7 +239,7 @@ input DeleteImageInput {
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  id: BigInt!
+  id: UUID!
 }
 
 """The output of our delete `Image` mutation."""
@@ -297,7 +267,7 @@ input DeleteNewsInput {
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  id: BigInt!
+  id: UUID!
 }
 
 """The output of our delete `News` mutation."""
@@ -331,7 +301,7 @@ input DeletePageInput {
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  name: String!
+  id: UUID!
 }
 
 """The output of our delete `Page` mutation."""
@@ -359,7 +329,7 @@ input DeletePictureInput {
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  id: BigInt!
+  id: UUID!
 }
 
 """The output of our delete `Picture` mutation."""
@@ -393,23 +363,18 @@ type Event {
     """
     condition: EventViaGroupCondition
 
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventViaGroupFilter
-
     """Only read the first `n` values of the set."""
     first: Int
 
     """Skip the first `n` values."""
     offset: Int
   ): [EventViaGroup!]!
-  id: BigInt!
+  id: UUID!
 
   """Reads a single `Image` that is related to this `Event`."""
   imageByOverrideImage: Image
   img: ResponsiveImage
-  overrideImage: BigInt
+  overrideImage: UUID
   special: Boolean!
   startsAt: Datetime!
 
@@ -451,10 +416,10 @@ input EventCondition {
   endsAt: Datetime
 
   """Checks for equality with the object’s `id` field."""
-  id: BigInt
+  id: UUID
 
   """Checks for equality with the object’s `overrideImage` field."""
-  overrideImage: BigInt
+  overrideImage: UUID
 
   """Checks for equality with the object’s `special` field."""
   special: Boolean
@@ -469,11 +434,11 @@ input EventCondition {
 """An input for mutations affecting `EventDatum`"""
 input EventDatumInput {
   endsAt: Datetime!
-  groupIds: [BigInt]
-  overrideImage: BigInt
+  groupIds: [UUID]
+  overrideImage: UUID
   special: Boolean!
   startsAt: Datetime!
-  tagIds: [BigInt]
+  tagIds: [UUID]
   templateName: String
 }
 
@@ -483,12 +448,6 @@ A filter to be used against `Event` object types. All fields are combined with a
 input EventFilter {
   """Filter by the object’s `endsAt` field."""
   endsAt: DatetimeFilter
-
-  """Filter by the object’s `id` field."""
-  id: BigIntFilter
-
-  """Filter by the object’s `overrideImage` field."""
-  overrideImage: BigIntFilter
 
   """Filter by the object’s `special` field."""
   special: BooleanFilter
@@ -509,8 +468,8 @@ type EventTag {
     """Skip the first `n` values."""
     offset: Int
   ): [EventViaEventTag!]!
-  id: BigInt!
-  image: BigInt
+  id: UUID!
+  image: UUID
 
   """Reads a single `Image` that is related to this `EventTag`."""
   imageByImage: Image
@@ -542,21 +501,10 @@ for equality and combined with a logical ‘and.’
 """
 input EventTagCondition {
   """Checks for equality with the object’s `id` field."""
-  id: BigInt
+  id: UUID
 
   """Checks for equality with the object’s `image` field."""
-  image: BigInt
-}
-
-"""
-A filter to be used against `EventTag` object types. All fields are combined with a logical ‘and.’
-"""
-input EventTagFilter {
-  """Filter by the object’s `id` field."""
-  id: BigIntFilter
-
-  """Filter by the object’s `image` field."""
-  image: BigIntFilter
+  image: UUID
 }
 
 type EventTagTr {
@@ -564,7 +512,7 @@ type EventTagTr {
 
   """Reads a single `EventTag` that is related to this `EventTagTr`."""
   tag: EventTag
-  tagId: BigInt!
+  tagId: UUID!
   title: String!
 }
 
@@ -577,7 +525,7 @@ input EventTagTrCondition {
   languageCode: TrLanguage
 
   """Checks for equality with the object’s `tagId` field."""
-  tagId: BigInt
+  tagId: UUID
 
   """Checks for equality with the object’s `title` field."""
   title: String
@@ -587,9 +535,6 @@ input EventTagTrCondition {
 A filter to be used against `EventTagTr` object types. All fields are combined with a logical ‘and.’
 """
 input EventTagTrFilter {
-  """Filter by the object’s `tagId` field."""
-  tagId: BigIntFilter
-
   """Filter by the object’s `title` field."""
   title: StringFilter
 }
@@ -599,7 +544,7 @@ type EventTr {
 
   """Reads a single `Event` that is related to this `EventTr`."""
   event: Event
-  eventId: BigInt!
+  eventId: UUID!
   languageCode: TrLanguage!
   slug: String!
   title: String!
@@ -613,7 +558,7 @@ input EventTrCondition {
   description: String
 
   """Checks for equality with the object’s `eventId` field."""
-  eventId: BigInt
+  eventId: UUID
 
   """Checks for equality with the object’s `languageCode` field."""
   languageCode: TrLanguage
@@ -639,9 +584,6 @@ input EventTrFilter {
   """Filter by the object’s `description` field."""
   description: StringFilter
 
-  """Filter by the object’s `eventId` field."""
-  eventId: BigIntFilter
-
   """Filter by the object’s `slug` field."""
   slug: StringFilter
 
@@ -652,21 +594,21 @@ input EventTrFilter {
 type EventViaEventTag {
   """Reads a single `Event` that is related to this `EventViaEventTag`."""
   event: Event
-  eventId: BigInt!
+  eventId: UUID!
 
   """Reads a single `EventTag` that is related to this `EventViaEventTag`."""
   tag: EventTag
-  tagId: BigInt!
+  tagId: UUID!
 }
 
 type EventViaGroup {
   """Reads a single `Event` that is related to this `EventViaGroup`."""
   event: Event
-  eventId: BigInt!
+  eventId: UUID!
 
   """Reads a single `Group` that is related to this `EventViaGroup`."""
   group: Group
-  groupId: BigInt!
+  groupId: UUID!
 }
 
 """
@@ -675,21 +617,10 @@ tested for equality and combined with a logical ‘and.’
 """
 input EventViaGroupCondition {
   """Checks for equality with the object’s `eventId` field."""
-  eventId: BigInt
+  eventId: UUID
 
   """Checks for equality with the object’s `groupId` field."""
-  groupId: BigInt
-}
-
-"""
-A filter to be used against `EventViaGroup` object types. All fields are combined with a logical ‘and.’
-"""
-input EventViaGroupFilter {
-  """Filter by the object’s `eventId` field."""
-  eventId: BigIntFilter
-
-  """Filter by the object’s `groupId` field."""
-  groupId: BigIntFilter
+  groupId: UUID
 }
 
 """Methods to use when ordering `Event`."""
@@ -719,19 +650,14 @@ type Group {
     """
     condition: EventViaGroupCondition
 
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventViaGroupFilter
-
     """Only read the first `n` values of the set."""
     first: Int
 
     """Skip the first `n` values."""
     offset: Int
   ): [EventViaGroup!]!
-  id: BigInt!
-  image: BigInt
+  id: UUID!
+  image: UUID
 
   """Reads a single `Image` that is related to this `Group`."""
   imageByImage: Image
@@ -763,10 +689,10 @@ A condition to be used against `Group` object types. All fields are tested for e
 """
 input GroupCondition {
   """Checks for equality with the object’s `id` field."""
-  id: BigInt
+  id: UUID
 
   """Checks for equality with the object’s `image` field."""
-  image: BigInt
+  image: UUID
 
   """Checks for equality with the object’s `isOpen` field."""
   isOpen: Boolean
@@ -774,7 +700,7 @@ input GroupCondition {
 
 """An input for mutations affecting `GroupDatum`"""
 input GroupDatumInput {
-  image: BigInt!
+  image: UUID!
   imageCredit: String!
   isOpen: Boolean!
 }
@@ -783,12 +709,6 @@ input GroupDatumInput {
 A filter to be used against `Group` object types. All fields are combined with a logical ‘and.’
 """
 input GroupFilter {
-  """Filter by the object’s `id` field."""
-  id: BigIntFilter
-
-  """Filter by the object’s `image` field."""
-  image: BigIntFilter
-
   """Filter by the object’s `isOpen` field."""
   isOpen: BooleanFilter
 }
@@ -799,10 +719,10 @@ type GroupTr {
 
   """Reads a single `Group` that is related to this `GroupTr`."""
   group: Group
-  groupId: BigInt!
+  groupId: UUID!
   languageCode: TrLanguage!
   shortDescription: String!
-  slug: String!
+  slug: String
   title: String!
 }
 
@@ -817,16 +737,13 @@ input GroupTrCondition {
   description: String
 
   """Checks for equality with the object’s `groupId` field."""
-  groupId: BigInt
+  groupId: UUID
 
   """Checks for equality with the object’s `languageCode` field."""
   languageCode: TrLanguage
 
   """Checks for equality with the object’s `shortDescription` field."""
   shortDescription: String
-
-  """Checks for equality with the object’s `slug` field."""
-  slug: String
 
   """Checks for equality with the object’s `title` field."""
   title: String
@@ -851,14 +768,8 @@ input GroupTrFilter {
   """Filter by the object’s `description` field."""
   description: StringFilter
 
-  """Filter by the object’s `groupId` field."""
-  groupId: BigIntFilter
-
   """Filter by the object’s `shortDescription` field."""
   shortDescription: StringFilter
-
-  """Filter by the object’s `slug` field."""
-  slug: StringFilter
 
   """Filter by the object’s `title` field."""
   title: StringFilter
@@ -886,11 +797,6 @@ type Image {
     A condition to be used in determining which values should be returned by the collection.
     """
     condition: EventTagCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventTagFilter
 
     """Only read the first `n` values of the set."""
     first: Int
@@ -943,7 +849,7 @@ type Image {
     orderBy: [GroupsOrderBy!]
   ): [Group!]!
   height: Int!
-  id: BigInt!
+  id: UUID!
   img: ResponsiveImage!
   path: String!
 
@@ -965,7 +871,7 @@ type Image {
 input ImageInput {
   credit: String!
   height: Int!
-  id: BigInt
+  id: UUID
   path: String!
   width: Int!
 }
@@ -976,17 +882,17 @@ Represents an update to a `Image`. Fields that are set will be updated.
 input ImagePatch {
   credit: String
   height: Int
-  id: BigInt
+  id: UUID
   path: String
   width: Int
 }
 
 type InfoPage {
   icon: String!
-  name: String!
+  id: UUID!
 
   """Reads a single `Page` that is related to this `InfoPage`."""
-  pageByName: Page
+  pageById: Page
   rank: Int!
 
   """Reads and enables pagination through a set of `InfoPageTr`."""
@@ -1006,9 +912,10 @@ input InfoPageDatumInput {
 
 type InfoPageTr {
   """Reads a single `InfoPage` that is related to this `InfoPageTr`."""
-  infoPageByInfoPageName: InfoPage
-  infoPageName: String!
+  infoPage: InfoPage
+  infoPageId: UUID!
   languageCode: TrLanguage!
+  slug: String
   subtitle: String!
   title: String!
 }
@@ -1024,8 +931,8 @@ input InfoPageTrDatumInput {
 enum InfoPagesOrderBy {
   ICON_ASC
   ICON_DESC
-  NAME_ASC
-  NAME_DESC
+  ID_ASC
+  ID_DESC
   NATURAL
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
@@ -1191,7 +1098,7 @@ type Mutation {
 }
 
 type News {
-  id: BigInt!
+  id: UUID!
   publishedAt: Datetime!
 
   """Reads and enables pagination through a set of `NewsTr`."""
@@ -1220,7 +1127,7 @@ A condition to be used against `News` object types. All fields are tested for eq
 """
 input NewsCondition {
   """Checks for equality with the object’s `id` field."""
-  id: BigInt
+  id: UUID
 
   """Checks for equality with the object’s `publishedAt` field."""
   publishedAt: Datetime
@@ -1259,9 +1166,6 @@ type NewsEdge {
 A filter to be used against `News` object types. All fields are combined with a logical ‘and.’
 """
 input NewsFilter {
-  """Filter by the object’s `id` field."""
-  id: BigIntFilter
-
   """Filter by the object’s `publishedAt` field."""
   publishedAt: DatetimeFilter
 
@@ -1271,7 +1175,7 @@ input NewsFilter {
 
 """An input for mutations affecting `News`"""
 input NewsInput {
-  id: BigInt
+  id: UUID!
   publishedAt: Datetime!
   updatedAt: Datetime!
 }
@@ -1291,7 +1195,7 @@ enum NewsOrderBy {
 
 """Represents an update to a `News`. Fields that are set will be updated."""
 input NewsPatch {
-  id: BigInt
+  id: UUID
   publishedAt: Datetime
   updatedAt: Datetime
 }
@@ -1302,7 +1206,7 @@ type NewsTr {
 
   """Reads a single `News` that is related to this `NewsTr`."""
   news: News
-  newsId: BigInt!
+  newsId: UUID!
   title: String!
 }
 
@@ -1317,7 +1221,7 @@ input NewsTrCondition {
   languageCode: TrLanguage
 
   """Checks for equality with the object’s `newsId` field."""
-  newsId: BigInt
+  newsId: UUID
 
   """Checks for equality with the object’s `title` field."""
   title: String
@@ -1330,17 +1234,15 @@ input NewsTrFilter {
   """Filter by the object’s `content` field."""
   content: StringFilter
 
-  """Filter by the object’s `newsId` field."""
-  newsId: BigIntFilter
-
   """Filter by the object’s `title` field."""
   title: StringFilter
 }
 
 type Page {
+  id: UUID!
+
   """Reads a single `InfoPage` that is related to this `Page`."""
-  infoPageByName: InfoPage
-  name: String!
+  infoPageById: InfoPage
 
   """Reads and enables pagination through a set of `PageTr`."""
   translations(
@@ -1366,16 +1268,8 @@ type Page {
 A condition to be used against `Page` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
 input PageCondition {
-  """Checks for equality with the object’s `name` field."""
-  name: String
-}
-
-"""
-A filter to be used against `Page` object types. All fields are combined with a logical ‘and.’
-"""
-input PageFilter {
-  """Filter by the object’s `name` field."""
-  name: StringFilter
+  """Checks for equality with the object’s `id` field."""
+  id: UUID
 }
 
 """Information about pagination in a connection."""
@@ -1395,12 +1289,12 @@ type PageInfo {
 
 """An input for mutations affecting `Page`"""
 input PageInput {
-  name: String!
+  id: UUID
 }
 
 """Represents an update to a `Page`. Fields that are set will be updated."""
 input PagePatch {
-  name: String
+  id: UUID
 }
 
 type PageTr {
@@ -1408,8 +1302,8 @@ type PageTr {
   languageCode: TrLanguage!
 
   """Reads a single `Page` that is related to this `PageTr`."""
-  pageByPageName: Page
-  pageName: String!
+  page: Page
+  pageId: UUID!
 }
 
 """
@@ -1422,8 +1316,8 @@ input PageTrCondition {
   """Checks for equality with the object’s `languageCode` field."""
   languageCode: TrLanguage
 
-  """Checks for equality with the object’s `pageName` field."""
-  pageName: String
+  """Checks for equality with the object’s `pageId` field."""
+  pageId: UUID
 }
 
 """
@@ -1432,9 +1326,6 @@ A filter to be used against `PageTr` object types. All fields are combined with 
 input PageTrFilter {
   """Filter by the object’s `content` field."""
   content: StringFilter
-
-  """Filter by the object’s `pageName` field."""
-  pageName: StringFilter
 }
 
 """
@@ -1443,13 +1334,13 @@ Represents an update to a `PageTr`. Fields that are set will be updated.
 input PageTrPatch {
   content: String
   languageCode: TrLanguage
-  pageName: String
+  pageId: UUID
 }
 
 """Methods to use when ordering `Page`."""
 enum PagesOrderBy {
-  NAME_ASC
-  NAME_DESC
+  ID_ASC
+  ID_DESC
   NATURAL
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
@@ -1457,8 +1348,8 @@ enum PagesOrderBy {
 
 type Picture {
   allowOnHome: Boolean!
-  id: BigInt!
-  image: BigInt!
+  id: UUID!
+  image: UUID!
 
   """Reads a single `Image` that is related to this `Picture`."""
   imageByImage: Image
@@ -1469,8 +1360,8 @@ type Picture {
 """An input for mutations affecting `Picture`"""
 input PictureInput {
   allowOnHome: Boolean
-  id: BigInt
-  image: BigInt!
+  id: UUID
+  image: UUID!
   rank: Int
 }
 
@@ -1479,8 +1370,8 @@ Represents an update to a `Picture`. Fields that are set will be updated.
 """
 input PicturePatch {
   allowOnHome: Boolean
-  id: BigInt
-  image: BigInt
+  id: UUID
+  image: UUID
   rank: Int
 }
 
@@ -1502,14 +1393,14 @@ enum PicturesOrderBy {
 """The root query type which gives access points into the data universe."""
 type Query {
   currentMember: Member
-  event(id: BigInt!): Event
+  event(id: UUID!): Event
   eventBySlug(preferredLanguageCode: String!, slug: String!): Event
-  eventTag(id: BigInt!): EventTag
-  eventTagTr(languageCode: TrLanguage!, tagId: BigInt!): EventTagTr
-  eventTr(eventId: BigInt!, languageCode: TrLanguage!): EventTr
+  eventTag(id: UUID!): EventTag
+  eventTagTr(languageCode: TrLanguage!, tagId: UUID!): EventTagTr
+  eventTr(eventId: UUID!, languageCode: TrLanguage!): EventTr
   eventTrBySlugAndLanguageCode(languageCode: TrLanguage!, slug: String!): EventTr
-  eventViaEventTag(eventId: BigInt!, tagId: BigInt!): EventViaEventTag
-  eventViaGroup(eventId: BigInt!, groupId: BigInt!): EventViaGroup
+  eventViaEventTag(eventId: UUID!, tagId: UUID!): EventViaEventTag
+  eventViaGroup(eventId: UUID!, groupId: UUID!): EventViaGroup
 
   """Reads a set of `Event`."""
   events(
@@ -1537,15 +1428,14 @@ type Query {
   eventsByGroup(
     """Only read the first `n` values of the set."""
     first: Int
-    groupId: BigInt!
+    groupId: UUID!
 
     """Skip the first `n` values."""
     offset: Int
   ): [Event!]
-  group(id: BigInt!): Group
+  group(id: UUID!): Group
   groupBySlug(preferredLanguageCode: String!, slug: String!): Group
-  groupTr(groupId: BigInt!, languageCode: TrLanguage!): GroupTr
-  groupTrBySlugAndLanguageCode(languageCode: TrLanguage!, slug: String!): GroupTr
+  groupTr(groupId: UUID!, languageCode: TrLanguage!): GroupTr
 
   """Reads a set of `Group`."""
   groups(
@@ -1568,9 +1458,9 @@ type Query {
     """The method to use when ordering `Group`."""
     orderBy: [GroupsOrderBy!]
   ): [Group!]
-  image(id: BigInt!): Image
-  infoPage(name: String!): InfoPage
-  infoPageTr(infoPageName: String!, languageCode: TrLanguage!): InfoPageTr
+  image(id: UUID!): Image
+  infoPage(id: UUID!): InfoPage
+  infoPageTr(infoPageId: UUID!, languageCode: TrLanguage!): InfoPageTr
 
   """Reads a set of `InfoPage`."""
   infoPages(
@@ -1583,8 +1473,8 @@ type Query {
     """The method to use when ordering `InfoPage`."""
     orderBy: [InfoPagesOrderBy!]
   ): [InfoPage!]
-  news(id: BigInt!): News
-  newsTr(languageCode: TrLanguage!, newsId: BigInt!): NewsTr
+  news(id: UUID!): News
+  newsTr(languageCode: TrLanguage!, newsId: UUID!): NewsTr
 
   """Reads a set of `News`."""
   newses(
@@ -1641,8 +1531,8 @@ type Query {
     """The method to use when ordering `News`."""
     orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
   ): NewsConnection
-  page(name: String!): Page
-  pageTr(languageCode: TrLanguage!, pageName: String!): PageTr
+  page(id: UUID!): Page
+  pageTr(languageCode: TrLanguage!, pageId: UUID!): PageTr
 
   """Reads a set of `Page`."""
   pages(
@@ -1650,11 +1540,6 @@ type Query {
     A condition to be used in determining which values should be returned by the collection.
     """
     condition: PageCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: PageFilter
 
     """Only read the first `n` values of the set."""
     first: Int
@@ -1665,7 +1550,7 @@ type Query {
     """The method to use when ordering `Page`."""
     orderBy: [PagesOrderBy!]
   ): [Page!]
-  picture(id: BigInt!): Picture
+  picture(id: UUID!): Picture
 
   """Reads a set of `Picture`."""
   pictures(
@@ -1811,7 +1696,7 @@ input UpdateImageInput {
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  id: BigInt!
+  id: UUID!
 
   """
   An object where the defined keys will be set on the `Image` being updated.
@@ -1843,7 +1728,7 @@ input UpdateNewsInput {
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  id: BigInt!
+  id: UUID!
 
   """
   An object where the defined keys will be set on the `News` being updated.
@@ -1881,7 +1766,7 @@ input UpdatePageInput {
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  name: String!
+  id: UUID!
 
   """
   An object where the defined keys will be set on the `Page` being updated.
@@ -1914,7 +1799,7 @@ input UpdatePageTrInput {
   """
   clientMutationId: String
   languageCode: TrLanguage!
-  pageName: String!
+  pageId: UUID!
 
   """
   An object where the defined keys will be set on the `PageTr` being updated.
@@ -1931,7 +1816,7 @@ type UpdatePageTrPayload {
   clientMutationId: String
 
   """Reads a single `Page` that is related to this `PageTr`."""
-  pageByPageName: Page
+  page: Page
 
   """The `PageTr` that was updated by this mutation."""
   pageTr: PageTr
@@ -1949,7 +1834,7 @@ input UpdatePictureInput {
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  id: BigInt!
+  id: UUID!
 
   """
   An object where the defined keys will be set on the `Picture` being updated.
@@ -1985,7 +1870,7 @@ input UpsertEventInput {
   """
   clientMutationId: String
   data: EventDatumInput!
-  eventId: BigInt
+  eventId: UUID
   translations: [EventTrDatumInput]!
 }
 
@@ -2015,7 +1900,7 @@ input UpsertGroupInput {
   """
   clientMutationId: String
   data: GroupDatumInput!
-  groupId: BigInt
+  groupId: UUID
   translations: [GroupTrDatumInput]!
 }
 
@@ -2045,7 +1930,7 @@ input UpsertInfoPageInput {
   """
   clientMutationId: String
   data: InfoPageDatumInput!
-  infoPageName: String!
+  infoPageId: UUID
   translations: [InfoPageTrDatumInput]!
 }
 
@@ -2059,7 +1944,7 @@ type UpsertInfoPagePayload {
   infoPage: InfoPage
 
   """Reads a single `Page` that is related to this `InfoPage`."""
-  pageByName: Page
+  pageById: Page
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.

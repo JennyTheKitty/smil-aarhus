@@ -196,6 +196,14 @@
             "args": []
           },
           {
+            "name": "id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
             "name": "query",
             "type": {
               "kind": "OBJECT",
@@ -448,13 +456,6 @@
             "args": [
               {
                 "name": "condition",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Any"
-                }
-              },
-              {
-                "name": "filter",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Any"
@@ -996,13 +997,6 @@
                 }
               },
               {
-                "name": "filter",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Any"
-                }
-              },
-              {
                 "name": "first",
                 "type": {
                   "kind": "SCALAR",
@@ -1190,11 +1184,8 @@
           {
             "name": "slug",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Any"
-              }
+              "kind": "SCALAR",
+              "name": "Any"
             },
             "args": []
           },
@@ -1246,13 +1237,6 @@
             "args": [
               {
                 "name": "condition",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Any"
-                }
-              },
-              {
-                "name": "filter",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Any"
@@ -1515,7 +1499,7 @@
             "args": []
           },
           {
-            "name": "name",
+            "name": "id",
             "type": {
               "kind": "NON_NULL",
               "ofType": {
@@ -1526,7 +1510,7 @@
             "args": []
           },
           {
-            "name": "pageByName",
+            "name": "pageById",
             "type": {
               "kind": "OBJECT",
               "name": "Page",
@@ -1586,7 +1570,7 @@
         "name": "InfoPageTr",
         "fields": [
           {
-            "name": "infoPageByInfoPageName",
+            "name": "infoPage",
             "type": {
               "kind": "OBJECT",
               "name": "InfoPage",
@@ -1595,7 +1579,7 @@
             "args": []
           },
           {
-            "name": "infoPageName",
+            "name": "infoPageId",
             "type": {
               "kind": "NON_NULL",
               "ofType": {
@@ -1613,6 +1597,14 @@
                 "kind": "SCALAR",
                 "name": "Any"
               }
+            },
+            "args": []
+          },
+          {
+            "name": "slug",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
             },
             "args": []
           },
@@ -2345,22 +2337,22 @@
         "name": "Page",
         "fields": [
           {
-            "name": "infoPageByName",
-            "type": {
-              "kind": "OBJECT",
-              "name": "InfoPage",
-              "ofType": null
-            },
-            "args": []
-          },
-          {
-            "name": "name",
+            "name": "id",
             "type": {
               "kind": "NON_NULL",
               "ofType": {
                 "kind": "SCALAR",
                 "name": "Any"
               }
+            },
+            "args": []
+          },
+          {
+            "name": "infoPageById",
+            "type": {
+              "kind": "OBJECT",
+              "name": "InfoPage",
+              "ofType": null
             },
             "args": []
           },
@@ -2486,7 +2478,7 @@
             "args": []
           },
           {
-            "name": "pageByPageName",
+            "name": "page",
             "type": {
               "kind": "OBJECT",
               "name": "Page",
@@ -2495,7 +2487,7 @@
             "args": []
           },
           {
-            "name": "pageName",
+            "name": "pageId",
             "type": {
               "kind": "NON_NULL",
               "ofType": {
@@ -2991,36 +2983,6 @@
             ]
           },
           {
-            "name": "groupTrBySlugAndLanguageCode",
-            "type": {
-              "kind": "OBJECT",
-              "name": "GroupTr",
-              "ofType": null
-            },
-            "args": [
-              {
-                "name": "languageCode",
-                "type": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "Any"
-                  }
-                }
-              },
-              {
-                "name": "slug",
-                "type": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "Any"
-                  }
-                }
-              }
-            ]
-          },
-          {
             "name": "groups",
             "type": {
               "kind": "LIST",
@@ -3106,7 +3068,7 @@
             },
             "args": [
               {
-                "name": "name",
+                "name": "id",
                 "type": {
                   "kind": "NON_NULL",
                   "ofType": {
@@ -3126,7 +3088,7 @@
             },
             "args": [
               {
-                "name": "infoPageName",
+                "name": "infoPageId",
                 "type": {
                   "kind": "NON_NULL",
                   "ofType": {
@@ -3378,7 +3340,7 @@
             },
             "args": [
               {
-                "name": "name",
+                "name": "id",
                 "type": {
                   "kind": "NON_NULL",
                   "ofType": {
@@ -3408,7 +3370,7 @@
                 }
               },
               {
-                "name": "pageName",
+                "name": "pageId",
                 "type": {
                   "kind": "NON_NULL",
                   "ofType": {
@@ -3435,13 +3397,6 @@
             "args": [
               {
                 "name": "condition",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Any"
-                }
-              },
-              {
-                "name": "filter",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Any"
@@ -3944,7 +3899,7 @@
             "args": []
           },
           {
-            "name": "pageByPageName",
+            "name": "page",
             "type": {
               "kind": "OBJECT",
               "name": "Page",
@@ -4121,7 +4076,7 @@
             "args": []
           },
           {
-            "name": "pageByName",
+            "name": "pageById",
             "type": {
               "kind": "OBJECT",
               "name": "Page",

@@ -88,7 +88,13 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
             upsertInfoPage(result, _args, cache, _info) {
               if (Narrow<NonNullable<UpsertInfoPageMutation>>(result)) {
                 cache.updateQuery({ query: InfoPagesQueryDocument }, (data) => {
-                  data!.infoPages!.push(result.upsertInfoPage!.infoPage!);
+                  if (
+                    !data!.infoPages?.some(
+                      (ip) => ip.id === result.upsertInfoPage!.infoPage!.id
+                    )
+                  ) {
+                    data!.infoPages!.push(result.upsertInfoPage!.infoPage!);
+                  }
                   data!.infoPages!.sort((a, b) => a.rank - b.rank);
                   return data;
                 });
@@ -100,7 +106,7 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
           EventTr: (data) =>
             `${(data as EventTr).languageCode}|${(data as EventTr).eventId}`,
           PageTr: (data) =>
-            `${(data as PageTr).languageCode}|${(data as PageTr).pageName}`,
+            `${(data as PageTr).languageCode}|${(data as PageTr).pageId}`,
           GroupTr: (data) =>
             `${(data as GroupTr).languageCode}|${(data as GroupTr).groupId}`,
           EventTagTr: (data) =>
@@ -111,7 +117,7 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
             `${(data as NewsTr).languageCode}|${(data as NewsTr).newsId}`,
           InfoPageTr: (data) =>
             `${(data as InfoPageTr).languageCode}|${
-              (data as InfoPageTr).infoPageName
+              (data as InfoPageTr).infoPageId
             }`,
           EventViaGroup: (data) =>
             `${(data as EventViaGroup).eventId}|${
@@ -121,8 +127,6 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
             `${(data as EventViaEventTag).eventId}|${
               (data as EventViaEventTag).tagId
             }`,
-          Page: (data) => (data as Page).name,
-          InfoPage: (data) => (data as InfoPage).name,
           ResponsiveImage: () => null,
         },
       }),

@@ -82,8 +82,15 @@ const CreateUploadUrlPlugin = makeExtendSchemaPlugin(() => ({
       Upload content to this signed URL.
       """
       uploadUrl: String!
-
+      """
+      Use this formdata when uploading
+      """
       formData: String!
+
+      """
+      Create the image under this ID
+      """
+      id: UUID
     }
 
     extend type Mutation {
@@ -126,13 +133,15 @@ const CreateUploadUrlPlugin = makeExtendSchemaPlugin(() => ({
         }
 
         const ext = mime.extension(contentType);
-        const key = `media/${uuidv4()}` + (ext ? `.${ext}` : '');
+        const id = uuidv4();
+        const key = `media/${id}` + (ext ? `.${ext}` : '');
 
         const data = await generatePresignedPostPolicy(key, contentType, {});
         return {
           clientMutationId,
           uploadUrl: data.postURL,
           formData: JSON.stringify(data.formData),
+          id,
         };
       },
     },

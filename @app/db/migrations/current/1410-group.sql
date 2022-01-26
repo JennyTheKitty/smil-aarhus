@@ -1,6 +1,6 @@
 CREATE TABLE smil_aarhus.group(
-    id bigserial PRIMARY KEY,
-    image bigint REFERENCES smil_aarhus.image(id),
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    image uuid REFERENCES smil_aarhus.image(id),
     is_open boolean NOT NULL
 );
 
@@ -8,15 +8,13 @@ CREATE TABLE smil_aarhus.group(
 COMMENT ON TABLE smil_aarhus.group IS E'@omit create,update,delete';
 
 CREATE TABLE smil_aarhus.group_tr(
-    group_id bigint REFERENCES smil_aarhus.group (id),
+    group_id uuid REFERENCES smil_aarhus.group (id),
     language_code text REFERENCES smil_aarhus.tr_language (code),
     title text NOT NULL,
     short_description text NOT NULL,
     description text NOT NULL,
     activity text not null,
-    slug text NOT NULL,
-    PRIMARY KEY (group_id, language_code),
-    UNIQUE (slug, language_code)
+    PRIMARY KEY (group_id, language_code)
 );
 
 CREATE OR REPLACE FUNCTION smil_aarhus.group_by_slug(slug text, preferred_language_code TEXT)
@@ -46,9 +44,9 @@ GRANT SELECT ON TABLE smil_aarhus.group_tr TO smil_anonymous, smil_organizer, sm
 GRANT INSERT, UPDATE, DELETE ON TABLE smil_aarhus.group TO smil_organizer, smil_admin;
 GRANT INSERT, UPDATE, DELETE ON TABLE smil_aarhus.group_tr TO smil_organizer, smil_admin;
 
-CREATE TRIGGER add_group_tr_slug BEFORE INSERT ON smil_aarhus.group_tr FOR EACH ROW
-WHEN (NEW.title IS NOT NULL AND NEW.slug IS NULL)
-EXECUTE PROCEDURE smil_aarhus.tr_set_slug('group', 'id', 'group_id', 'false');
+CREATE FUNCTION smil_aarhus.group_tr_slug(group_tr group_tr) RETURNS text AS $$
+  SELECT smil_aarhus.slugify(group_tr.title)
+$$ LANGUAGE sql STABLE;
 
 CREATE INDEX group_tr_title_trgm_index on smil_aarhus.group_tr using gin(title gin_trgm_ops);
 
@@ -81,8 +79,8 @@ END
 $$ language plpgsql stable;
 
 create table smil_aarhus.event_via_group (
-  event_id bigint constraint event_via_group_event_id_fkey references smil_aarhus.event (id),
-  group_id bigint constraint event_via_group_group_id_fkey references smil_aarhus.group (id),
+  event_id uuid constraint event_via_group_event_id_fkey references smil_aarhus.event (id),
+  group_id uuid constraint event_via_group_group_id_fkey references smil_aarhus.group (id),
   primary key (event_id, group_id)
 );
 
@@ -96,7 +94,7 @@ GRANT SELECT ON TABLE smil_aarhus.event_via_group TO smil_anonymous, smil_organi
 GRANT INSERT, UPDATE, DELETE ON TABLE smil_aarhus.event_via_group TO smil_organizer, smil_admin;
 
 CREATE TYPE smil_aarhus.group_data AS (
-    image bigint,
+    image uuid,
     image_credit text,
     is_open boolean
 );
@@ -122,7 +120,7 @@ COMMENT ON COLUMN smil_aarhus.group_tr_data.activity IS E'@notNull';
 CREATE OR REPLACE FUNCTION smil_aarhus.upsert_group(
     data smil_aarhus.group_data,
     translations smil_aarhus.group_tr_data[],
-    group__id bigint DEFAULT NULL
+    group__id uuid DEFAULT NULL
 )
 RETURNS smil_aarhus.group
 AS $$
@@ -158,11 +156,11 @@ $$ LANGUAGE plpgsql;
 
 GRANT EXECUTE ON FUNCTION smil_aarhus.upsert_group TO smil_anonymous, smil_organizer, smil_admin;
 
-CREATE OR REPLACE FUNCTION smil_aarhus.events_by_group(group_id bigint)
+CREATE OR REPLACE FUNCTION smil_aarhus.events_by_group(group_id uuid)
 returns setof smil_aarhus.event
 as $$
 DECLARE
-   gid bigint;
+   gid uuid;
 BEGIN
     gid := group_id;
     RETURN QUERY SELECT smil_aarhus.event.*

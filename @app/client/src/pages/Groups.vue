@@ -1,5 +1,9 @@
 <template>
   <div>
+    <teleport v-if="store.currentMember" to="#member-bar-left">
+      <CreateButton v-model:creating="creating"
+    /></teleport>
+    <GroupDialog v-model:isOpen="creating" :group="{}" :create="true" />
     <Hero
       :jpeg="heroImgJpeg"
       :webp="heroImgWebp"
@@ -27,7 +31,7 @@
           v-for="group in groups"
           :key="group.id"
           to="GROUP"
-          :params="{ slug: group.slug }"
+          :params="{ id: fromUUID(group.id), slug: group.slug }"
           w:rounded="lg"
           w:bg="dark-800"
           w:w="full"
@@ -117,6 +121,9 @@ import heroImgWebp from '../assets/images/groups-header.jpg?w=300;900;1500;2000&
 import { useTranslation } from '../utils';
 
 const { t, locale } = useI18n();
+const store = useStore();
+const { fromUUID } = useShort();
+const creating = ref(false);
 
 const { data: groupsData } = useQuery({
   query: HomeGroupsQueryDocument,

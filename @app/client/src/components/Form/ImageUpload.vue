@@ -1,9 +1,15 @@
 <template>
-  <n-upload :custom-request="upload" :show-file-list="false" default-upload>
-    <n-upload-dragger w:p="2">
-      <div w:flex="~" w:justify="center">
-        <img v-if="img" :src="img?.src" w:max-h="30" w:max-w="60" />
+  <n-upload
+    :custom-request="upload"
+    :show-file-list="false"
+    default-upload
+    w:h="full"
+  >
+    <n-upload-dragger w:p="2" w:flex="~ col" w:h="full">
+      <div w:flex="~" w:justify="center" v-if="img" w:h="full">
+        <img :src="img?.src" w:max-h="30" w:max-w="60" />
       </div>
+      <div w:flex="grow" />
       <p w:text="sm" w:font="light" w:m="t-2">
         Click or drag a file to this area to upload
       </p>
@@ -32,6 +38,7 @@ const handle = useClientHandle();
 const { data } = useQuery({
   query: ImageQueryDocument,
   variables: computed(() => ({ id: props.value })),
+  pause: computed(() => !props.value),
 });
 
 const img = computed(() => {
@@ -40,11 +47,8 @@ const img = computed(() => {
 
 async function upload(options: UploadCustomRequestOptions) {
   try {
-    const image = await createImage(
-      handle,
-      options.file.file!,
-      (percent) => options.onProgress({ percent }),
-      false
+    const image = await createImage(handle, options.file.file!, (percent) =>
+      options.onProgress({ percent })
     );
     emit('update:value', image.id);
     options.onFinish();
@@ -58,5 +62,6 @@ async function upload(options: UploadCustomRequestOptions) {
 <style scoped>
 .n-upload ::v-deep(.n-upload-trigger) {
   width: 100%;
+  height: 100%;
 }
 </style>

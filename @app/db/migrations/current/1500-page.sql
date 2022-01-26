@@ -1,17 +1,17 @@
 CREATE TABLE smil_aarhus.page(
-    name text NOT NULL PRIMARY KEY
+    id uuid NOT NULL PRIMARY KEY DEFAULT gen_random_uuid()
 );
 
 CREATE TABLE smil_aarhus.page_tr(
-    page_name text NOT NULL REFERENCES smil_aarhus.page (name),
+    page_id uuid NOT NULL REFERENCES smil_aarhus.page (id),
     language_code text NOT NULL REFERENCES smil_aarhus.tr_language (code),
     content text NOT NULL,
-    PRIMARY KEY (page_name, language_code)
+    PRIMARY KEY (page_id, language_code)
 );
 
 COMMENT ON TABLE smil_aarhus.page_tr IS E'@omit all,order,create,delete';
 
-COMMENT ON CONSTRAINT page_tr_page_name_fkey ON smil_aarhus.page_tr IS E'@foreignFieldName translations';
+COMMENT ON CONSTRAINT page_tr_page_id_fkey ON smil_aarhus.page_tr IS E'@foreignFieldName translations';
 
 GRANT SELECT ON TABLE smil_aarhus.page TO smil_anonymous, smil_organizer, smil_admin;
 GRANT SELECT ON TABLE smil_aarhus.page_tr TO smil_anonymous, smil_organizer, smil_admin;
@@ -22,7 +22,7 @@ GRANT INSERT, UPDATE, DELETE ON TABLE smil_aarhus.page_tr TO smil_organizer, smi
 CREATE SEQUENCE info_page_rank AS integer;
 
 CREATE TABLE smil_aarhus.info_page(
-    name text NOT NULL PRIMARY KEY REFERENCES smil_aarhus.page (name),
+    id uuid NOT NULL PRIMARY KEY REFERENCES smil_aarhus.page (id),
     icon text NOT NULL,
     rank integer NOT NULL DEFAULT nextval('info_page_rank')
 );
@@ -32,16 +32,20 @@ ALTER SEQUENCE info_page_rank OWNED BY smil_aarhus.info_page.rank;
 COMMENT ON TABLE smil_aarhus.info_page IS E'@omit create,update,delete,filter';
 
 CREATE TABLE smil_aarhus.info_page_tr(
-    info_page_name text NOT NULL REFERENCES smil_aarhus.info_page (name),
+    info_page_id uuid NOT NULL REFERENCES smil_aarhus.info_page (id),
     language_code text NOT NULL REFERENCES smil_aarhus.tr_language (code),
     title text NOT NULL,
     subtitle text NOT NULL,
-    PRIMARY KEY (info_page_name, language_code)
+    PRIMARY KEY (info_page_id, language_code)
 );
 
 COMMENT ON TABLE smil_aarhus.info_page_tr IS E'@omit create,update,delete,all,order,filter';
 
-COMMENT ON CONSTRAINT info_page_tr_info_page_name_fkey ON smil_aarhus.info_page_tr IS E'@foreignFieldName translations';
+COMMENT ON CONSTRAINT info_page_tr_info_page_id_fkey ON smil_aarhus.info_page_tr IS E'@foreignFieldName translations';
+
+CREATE FUNCTION smil_aarhus.info_page_tr_slug(info_page_tr info_page_tr) RETURNS text AS $$
+  SELECT smil_aarhus.slugify(info_page_tr.title)
+$$ LANGUAGE sql STABLE;
 
 GRANT SELECT ON TABLE smil_aarhus.info_page TO smil_anonymous, smil_organizer, smil_admin;
 GRANT SELECT ON TABLE smil_aarhus.info_page_tr TO smil_anonymous, smil_organizer, smil_admin;
@@ -67,35 +71,37 @@ COMMENT ON COLUMN smil_aarhus.info_page_tr_data.subtitle IS E'@notNull';
 CREATE OR REPLACE FUNCTION smil_aarhus.upsert_info_page(
     data smil_aarhus.info_page_data,
     translations smil_aarhus.info_page_tr_data[],
-    info_page__name text
+    info_page__id uuid DEFAULT NULL
 )
 RETURNS smil_aarhus.info_page
 AS $$
 DECLARE
+    page smil_aarhus.page;
     info_page smil_aarhus.info_page;
     trans smil_aarhus.info_page_tr_data;
-    lid bigint;
+    lid uuid;
 BEGIN
-    UPDATE smil_aarhus.info_page
-        SET icon = data.icon
-        WHERE name = info_page__name
-        RETURNING * INTO info_page;
-
-    IF (info_page IS NULL) THEN
-        INSERT INTO smil_aarhus.page(name)
-            VALUES (info_page__name);
-        INSERT INTO smil_aarhus.info_page(name, icon)
-            VALUES (info_page__name, data.icon)
+    IF (info_page__id IS NOT NULL) THEN
+        UPDATE smil_aarhus.info_page
+            SET icon = data.icon
+            WHERE id = info_page__id
+            RETURNING * INTO STRICT info_page;
+    ELSE
+        INSERT INTO smil_aarhus.page(id)
+            VALUES (default)
+            RETURNING * INTO STRICT page;
+        INSERT INTO smil_aarhus.info_page(id, icon)
+            VALUES (page.id, data.icon)
             RETURNING * INTO STRICT info_page;
     END IF;
 
     FOREACH trans IN ARRAY translations LOOP
-        INSERT INTO smil_aarhus.info_page_tr (info_page_name, language_code, title, subtitle)
-            VALUES (info_page__name, trans.language_code, trans.title, trans.subtitle)
-            ON CONFLICT (info_page_name, language_code) DO UPDATE SET language_code = trans.language_code, title = trans.title, subtitle = trans.subtitle;
+        INSERT INTO smil_aarhus.info_page_tr (info_page_id, language_code, title, subtitle)
+            VALUES (info_page.id, trans.language_code, trans.title, trans.subtitle)
+            ON CONFLICT (info_page_id, language_code) DO UPDATE SET language_code = trans.language_code, title = trans.title, subtitle = trans.subtitle;
     END LOOP;
     DELETE FROM smil_aarhus.info_page_tr
-        WHERE (info_page_name = info_page__name and language_code NOT IN (SELECT language_code FROM UNNEST(translations)));
+        WHERE (info_page_id = info_page.id and language_code NOT IN (SELECT language_code FROM UNNEST(translations)));
 
     RETURN info_page;
 END
