@@ -40,7 +40,11 @@ interface Image {
   credit: string;
 }
 
-function createResponsiveImage({ path, width, height, credit }: Image) {
+function createResponsiveImage(image: Image | null) {
+  if (!image) {
+    return null;
+  }
+  const { path, width, height, credit } = image;
   const widths = [32, 64, 128, 256, 512, 1024, 2048];
   const url = `s3://${process.env.AWS_UPLOADS_BUCKET}/${path}`;
   return {
@@ -73,7 +77,7 @@ async function getImage(
   sql: typeof import('pg-sql2'),
   pgClient: Client,
   idQuery: SQLQuery
-): Promise<Image> {
+): Promise<Image | null> {
   const query = sql.query`select * from smil_aarhus.image where (smil_aarhus.image.id = (${idQuery}))`;
   const { rows } = await pgClient.query(sql.compile(query));
   return rows[0];
@@ -84,16 +88,16 @@ const ImageUrlSigningPlugin = makeExtendSchemaPlugin((build) => {
   return {
     typeDefs: gql`
       extend type Group {
-        img: ResponsiveImage! @requires(columns: ["image"])
+        img: ResponsiveImage @requires(columns: ["image"])
       }
       extend type EventTag {
-        img: ResponsiveImage! @requires(columns: ["image"])
+        img: ResponsiveImage @requires(columns: ["image"])
       }
       extend type Picture {
-        img: ResponsiveImage! @requires(columns: ["image"])
+        img: ResponsiveImage @requires(columns: ["image"])
       }
       extend type Image {
-        img: ResponsiveImage!
+        img: ResponsiveImage
           @requires(columns: ["path", "width", "height", "credit"])
       }
       extend type Event {

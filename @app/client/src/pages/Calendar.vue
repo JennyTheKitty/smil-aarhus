@@ -1,5 +1,22 @@
 <template>
   <div ref="container" w:m="5" w:text="white" w:pos="relative">
+    <teleport v-if="store.currentMember" to="#member-bar-left">
+      <router-link
+        as="button"
+        :to="{ name: 'ADMIN-EVENT-TAGS' }"
+        w:rounded="md"
+        w:font="medium"
+        w:space="x-2"
+        w:text="sm gray-300 hover:white"
+        w:p="y-2 x-3"
+        w:display="flex"
+        w:align="center"
+        class="btn-focus-ring"
+      >
+        <span>Edit event categories </span>
+        <icon-mdi-pencil />
+      </router-link>
+    </teleport>
     <ClientOnly>
       <CalendarWidget
         ref="calendar"
@@ -42,6 +59,7 @@ import { Trans } from '../i18n';
 const handle = useClientHandle();
 const container = ref<null | HTMLDivElement>(null);
 const router = useRouter();
+const store = useStore();
 const route = useRoute();
 const { locale } = useI18n();
 const calendar = ref<ICalendarWidget | null>(null);

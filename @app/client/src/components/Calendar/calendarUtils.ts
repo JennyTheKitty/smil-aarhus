@@ -12,6 +12,8 @@ import { Router } from 'vue-router';
 
 import { i18n, Trans } from '../../i18n';
 
+const { fromUUID } = useShort();
+
 const HOUR = 60 * 60 * 1000;
 const BUFFER = HOUR / 2;
 
@@ -71,8 +73,12 @@ export async function fetchEvents(
         title: event.title,
         start: new Date(event.startsAt),
         end: new Date(event.endsAt),
-        url: router.resolve(Trans.i18nRoute('CALENDAR', { slug: event.slug }))
-          .href,
+        url: router.resolve(
+          Trans.i18nRoute('CALENDAR', {
+            id: fromUUID(event.id),
+            slug: event.slug,
+          })
+        ).href,
         display: 'list-item',
         extendedProps: {
           raw: raw,
@@ -82,6 +88,71 @@ export async function fetchEvents(
     .sort((a, b) => +a.start - +b.start);
 
   return events;
+}
+
+function calcSingleExtendedOpeningEvent(
+  extendedOpeningEvents: EventInput[],
+  newEvents: (EventInput & { start: Date; end: Date })[],
+  ss: number,
+  ee: number
+) {
+  // Check for events during
+  for (const e of newEvents
+    .filter(
+      (e) => e.start.valueOf() >= ss - BUFFER && e.end.valueOf() <= ee + BUFFER
+    )
+    .sort(
+      (a, b) => (a.start.valueOf() as number) - (b.start.valueOf() as number)
+    )) {
+    if ((e.start.valueOf() as number) - BUFFER > ss) {
+      calcSingleExtendedOpeningEvent(
+        extendedOpeningEvents,
+        newEvents,
+        ss,
+        (e.start.valueOf() as number) - BUFFER
+      );
+    }
+
+    ss = (e.end.valueOf() as number) + BUFFER;
+  }
+
+  // Check for events before
+  for (const e of newEvents
+    .filter(
+      (e) =>
+        e.end.valueOf() >= ss - BUFFER &&
+        // e.end.valueOf() <= ee + BUFFER &&
+        e.start.valueOf() <= ss + BUFFER
+    )
+    .sort(
+      (a, b) => (a.start.valueOf() as number) - (b.start.valueOf() as number)
+    )) {
+    if ((e.end.valueOf() as number) + BUFFER > ss)
+      ss = (e.end.valueOf() as number) + BUFFER;
+  }
+
+  // Check for events after
+  for (const e of newEvents
+    .filter(
+      (e) =>
+        e.start.valueOf() <= ee + BUFFER &&
+        e.start.valueOf() >= ss - BUFFER &&
+        e.end.valueOf() >= ee + BUFFER
+    )
+    .sort(
+      (a, b) => (a.start.valueOf() as number) - (b.start.valueOf() as number)
+    )) {
+    if ((e.start.valueOf() as number) - BUFFER < ee)
+      ee = (e.start.valueOf() as number) - BUFFER;
+  }
+
+  if (ss < ee && ss + BUFFER * 2 < ee) {
+    extendedOpeningEvents.push({
+      ...EXTENDED_OPENING_PROPS,
+      start: new Date(ss),
+      end: new Date(ee),
+    });
+  }
 }
 
 export function calculateExtendedOpeningEvents(
@@ -100,47 +171,7 @@ export function calculateExtendedOpeningEvents(
       let ss = millis + x.start;
       let ee = millis + x.end;
 
-      // Check for events before
-      for (const e of newEvents.filter(
-        (e) =>
-          e.end.valueOf() > ss - BUFFER &&
-          e.end.valueOf() < ee + BUFFER &&
-          e.start.valueOf() < ss - BUFFER
-      )) {
-        if ((e.end.valueOf() as number) + BUFFER > ss)
-          ss = (e.end.valueOf() as number) + BUFFER;
-      }
-
-      // Check for events after
-      for (const e of newEvents.filter(
-        (e) =>
-          e.start.valueOf() < ee + BUFFER &&
-          e.start.valueOf() > ss - BUFFER &&
-          e.end.valueOf() > ee + BUFFER
-      )) {
-        if ((e.start.valueOf() as number) - BUFFER < ee)
-          ee = (e.start.valueOf() as number) - BUFFER;
-      }
-
-      // Check for events during
-      for (const e of newEvents.filter(
-        (e) => e.start.valueOf() > ss - BUFFER && e.end.valueOf() < ee + BUFFER
-      )) {
-        extendedOpeningEvents.push({
-          ...EXTENDED_OPENING_PROPS,
-          start: new Date(ss),
-          end: new Date((e.start.valueOf() as number) - BUFFER),
-        });
-        ss = (e.end.valueOf() as number) + BUFFER;
-      }
-
-      if (ss < ee) {
-        extendedOpeningEvents.push({
-          ...EXTENDED_OPENING_PROPS,
-          start: new Date(ss),
-          end: new Date(ee),
-        });
-      }
+      calcSingleExtendedOpeningEvent(extendedOpeningEvents, newEvents, ss, ee);
     }
 
     start = start.add(1, 'days');

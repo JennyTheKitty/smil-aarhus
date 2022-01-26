@@ -154,7 +154,7 @@ END
 $$ LANGUAGE plpgsql;
 
 
-GRANT EXECUTE ON FUNCTION smil_aarhus.upsert_group TO smil_anonymous, smil_organizer, smil_admin;
+GRANT EXECUTE ON FUNCTION smil_aarhus.upsert_group TO smil_organizer, smil_admin;
 
 CREATE OR REPLACE FUNCTION smil_aarhus.events_by_group(group_id uuid)
 returns setof smil_aarhus.event
@@ -174,4 +174,4 @@ END
 $$ language plpgsql stable;
 
 
-GRANT EXECUTE ON FUNCTION smil_aarhus.upsert_event TO smil_anonymous, smil_organizer, smil_admin;
+GRANT EXECUTE ON FUNCTION smil_aarhus.events_by_group TO smil_anonymous, smil_organizer, smil_admin;

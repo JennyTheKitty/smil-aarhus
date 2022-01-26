@@ -404,7 +404,7 @@ export type EventTag = {
   image: Maybe<Scalars['UUID']>;
   /** Reads a single `Image` that is related to this `EventTag`. */
   imageByImage: Maybe<Image>;
-  img: ResponsiveImage;
+  img: Maybe<ResponsiveImage>;
   /** Reads and enables pagination through a set of `EventTagTr`. */
   translations: Array<EventTagTr>;
 };
@@ -434,6 +434,12 @@ export type EventTagCondition = {
   image?: InputMaybe<Scalars['UUID']>;
 };
 
+/** An input for mutations affecting `EventTagDatum` */
+export type EventTagDatumInput = {
+  image?: InputMaybe<Scalars['UUID']>;
+  imageCredit?: InputMaybe<Scalars['String']>;
+};
+
 export type EventTagTr = {
   __typename?: 'EventTagTr';
   languageCode: TrLanguage;
@@ -456,11 +462,50 @@ export type EventTagTrCondition = {
   title?: InputMaybe<Scalars['String']>;
 };
 
+/** An input for mutations affecting `EventTagTrDatum` */
+export type EventTagTrDatumInput = {
+  languageCode: Scalars['String'];
+  title: Scalars['String'];
+};
+
 /** A filter to be used against `EventTagTr` object types. All fields are combined with a logical ‘and.’ */
 export type EventTagTrFilter = {
   /** Filter by the object’s `title` field. */
   title?: InputMaybe<StringFilter>;
 };
+
+/** A connection to a list of `EventTag` values. */
+export type EventTagsConnection = {
+  __typename?: 'EventTagsConnection';
+  /** A list of edges which contains the `EventTag` and cursor to aid in pagination. */
+  edges: Array<EventTagsEdge>;
+  /** A list of `EventTag` objects. */
+  nodes: Array<EventTag>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `EventTag` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `EventTag` edge in the connection. */
+export type EventTagsEdge = {
+  __typename?: 'EventTagsEdge';
+  /** A cursor for use in pagination. */
+  cursor: Maybe<Scalars['Cursor']>;
+  /** The `EventTag` at the end of the edge. */
+  node: EventTag;
+};
+
+/** Methods to use when ordering `EventTag`. */
+export enum EventTagsOrderBy {
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  ImageAsc = 'IMAGE_ASC',
+  ImageDesc = 'IMAGE_DESC',
+  Natural = 'NATURAL',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
 
 export type EventTr = {
   __typename?: 'EventTr';
@@ -562,7 +607,7 @@ export type Group = {
   image: Maybe<Scalars['UUID']>;
   /** Reads a single `Image` that is related to this `Group`. */
   imageByImage: Maybe<Image>;
-  img: ResponsiveImage;
+  img: Maybe<ResponsiveImage>;
   isOpen: Scalars['Boolean'];
   /** Reads and enables pagination through a set of `GroupTr`. */
   translations: Array<GroupTr>;
@@ -674,13 +719,15 @@ export type Image = {
   credit: Scalars['String'];
   /** Reads and enables pagination through a set of `EventTag`. */
   eventTagsByImage: Array<EventTag>;
+  /** Reads and enables pagination through a set of `EventTag`. */
+  eventTagsByImageConnection: EventTagsConnection;
   /** Reads and enables pagination through a set of `Event`. */
   eventsByOverrideImage: Array<Event>;
   /** Reads and enables pagination through a set of `Group`. */
   groupsByImage: Array<Group>;
   height: Scalars['Int'];
   id: Scalars['UUID'];
-  img: ResponsiveImage;
+  img: Maybe<ResponsiveImage>;
   path: Scalars['String'];
   /** Reads and enables pagination through a set of `Picture`. */
   picturesByImage: Array<Picture>;
@@ -692,6 +739,18 @@ export type ImageEventTagsByImageArgs = {
   condition?: InputMaybe<EventTagCondition>;
   first?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<EventTagsOrderBy>>;
+};
+
+
+export type ImageEventTagsByImageConnectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']>;
+  before?: InputMaybe<Scalars['Cursor']>;
+  condition?: InputMaybe<EventTagCondition>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<EventTagsOrderBy>>;
 };
 
 
@@ -834,6 +893,7 @@ export type Mutation = {
   /** Updates a single `Picture` using a unique key and a patch. */
   updatePicture: Maybe<UpdatePicturePayload>;
   upsertEvent: Maybe<UpsertEventPayload>;
+  upsertEventTag: Maybe<UpsertEventTagPayload>;
   upsertGroup: Maybe<UpsertGroupPayload>;
   upsertInfoPage: Maybe<UpsertInfoPagePayload>;
 };
@@ -938,6 +998,12 @@ export type MutationUpdatePictureArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpsertEventArgs = {
   input: UpsertEventInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpsertEventTagArgs = {
+  input: UpsertEventTagInput;
 };
 
 
@@ -1160,7 +1226,7 @@ export type Picture = {
   image: Scalars['UUID'];
   /** Reads a single `Image` that is related to this `Picture`. */
   imageByImage: Maybe<Image>;
-  img: ResponsiveImage;
+  img: Maybe<ResponsiveImage>;
   rank: Scalars['Int'];
 };
 
@@ -1203,6 +1269,10 @@ export type Query = {
   eventBySlug: Maybe<Event>;
   eventTag: Maybe<EventTag>;
   eventTagTr: Maybe<EventTagTr>;
+  /** Reads a set of `EventTag`. */
+  eventTags: Maybe<Array<EventTag>>;
+  /** Reads and enables pagination through a set of `EventTag`. */
+  eventTagsConnection: Maybe<EventTagsConnection>;
   eventTr: Maybe<EventTr>;
   eventTrBySlugAndLanguageCode: Maybe<EventTr>;
   eventViaEventTag: Maybe<EventViaEventTag>;
@@ -1273,6 +1343,27 @@ export type QueryEventTagArgs = {
 export type QueryEventTagTrArgs = {
   languageCode: TrLanguage;
   tagId: Scalars['UUID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryEventTagsArgs = {
+  condition?: InputMaybe<EventTagCondition>;
+  first?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<EventTagsOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryEventTagsConnectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']>;
+  before?: InputMaybe<Scalars['Cursor']>;
+  condition?: InputMaybe<EventTagCondition>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<EventTagsOrderBy>>;
 };
 
 
@@ -1713,6 +1804,41 @@ export type UpsertEventPayload = {
   query: Maybe<Query>;
 };
 
+/** All input for the `upsertEventTag` mutation. */
+export type UpsertEventTagInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  data: EventTagDatumInput;
+  eventTagId?: InputMaybe<Scalars['UUID']>;
+  translations: Array<InputMaybe<EventTagTrDatumInput>>;
+};
+
+/** The output of our `upsertEventTag` mutation. */
+export type UpsertEventTagPayload = {
+  __typename?: 'UpsertEventTagPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  eventTag: Maybe<EventTag>;
+  /** An edge for our `EventTag`. May be used by Relay 1. */
+  eventTagEdge: Maybe<EventTagsEdge>;
+  /** Reads a single `Image` that is related to this `EventTag`. */
+  imageByImage: Maybe<Image>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our `upsertEventTag` mutation. */
+export type UpsertEventTagPayloadEventTagEdgeArgs = {
+  orderBy?: InputMaybe<Array<EventTagsOrderBy>>;
+};
+
 /** All input for the `upsertGroup` mutation. */
 export type UpsertGroupInput = {
   /**
@@ -1852,6 +1978,23 @@ export type UpsertEventMutationVariables = Exact<{
 
 export type UpsertEventMutation = { __typename?: 'Mutation', upsertEvent: { __typename?: 'UpsertEventPayload', event: { __typename?: 'Event', endsAt: string, id: any, startsAt: string, special: boolean, translations: Array<{ __typename?: 'EventTr', eventId: any, languageCode: TrLanguage, slug: string, title: string }> } | null | undefined } | null | undefined };
 
+export type EventTagsQueryQueryVariables = Exact<{
+  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type EventTagsQueryQuery = { __typename?: 'Query', eventTagsConnection: { __typename?: 'EventTagsConnection', totalCount: number, nodes: Array<{ __typename?: 'EventTag', id: any, image: any | null | undefined, translations: Array<{ __typename?: 'EventTagTr', tagId: any, languageCode: TrLanguage, title: string }>, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined }> } | null | undefined };
+
+export type UpsertEventTagMutationVariables = Exact<{
+  data: EventTagDatumInput;
+  translations: Array<InputMaybe<EventTagTrDatumInput>> | InputMaybe<EventTagTrDatumInput>;
+  id?: InputMaybe<Scalars['UUID']>;
+}>;
+
+
+export type UpsertEventTagMutation = { __typename?: 'Mutation', upsertEventTag: { __typename?: 'UpsertEventTagPayload', eventTag: { __typename?: 'EventTag', id: any, image: any | null | undefined, translations: Array<{ __typename?: 'EventTagTr', tagId: any, languageCode: TrLanguage, title: string }>, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined } | null | undefined } | null | undefined };
+
 export type GetUploadUrlMutationVariables = Exact<{
   contentType: Scalars['String'];
   randomId?: InputMaybe<Scalars['String']>;
@@ -1865,7 +2008,7 @@ export type GroupQueryQueryVariables = Exact<{
 }>;
 
 
-export type GroupQueryQuery = { __typename?: 'Query', group: { __typename?: 'Group', id: any, image: any | null | undefined, isOpen: boolean, translations: Array<{ __typename?: 'GroupTr', activity: string, description: string, shortDescription: string, slug: string | null | undefined, groupId: any, languageCode: TrLanguage, title: string }>, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } } | null | undefined };
+export type GroupQueryQuery = { __typename?: 'Query', group: { __typename?: 'Group', id: any, image: any | null | undefined, isOpen: boolean, translations: Array<{ __typename?: 'GroupTr', activity: string, description: string, shortDescription: string, slug: string | null | undefined, groupId: any, languageCode: TrLanguage, title: string }>, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined } | null | undefined };
 
 export type UpsertGroupMutationVariables = Exact<{
   data: GroupDatumInput;
@@ -1874,7 +2017,7 @@ export type UpsertGroupMutationVariables = Exact<{
 }>;
 
 
-export type UpsertGroupMutation = { __typename?: 'Mutation', upsertGroup: { __typename?: 'UpsertGroupPayload', group: { __typename?: 'Group', id: any, image: any | null | undefined, isOpen: boolean, translations: Array<{ __typename?: 'GroupTr', activity: string, description: string, shortDescription: string, slug: string | null | undefined, groupId: any, languageCode: TrLanguage, title: string }>, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } } | null | undefined } | null | undefined };
+export type UpsertGroupMutation = { __typename?: 'Mutation', upsertGroup: { __typename?: 'UpsertGroupPayload', group: { __typename?: 'Group', id: any, image: any | null | undefined, isOpen: boolean, translations: Array<{ __typename?: 'GroupTr', activity: string, description: string, shortDescription: string, slug: string | null | undefined, groupId: any, languageCode: TrLanguage, title: string }>, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined } | null | undefined } | null | undefined };
 
 export type GroupEventsQueryVariables = Exact<{
   groupId: Scalars['UUID'];
@@ -1893,12 +2036,12 @@ export type HomeEventsQueryQuery = { __typename?: 'Query', specialEvents: Array<
 export type HomeGroupsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomeGroupsQueryQuery = { __typename?: 'Query', groups: Array<{ __typename?: 'Group', id: any, isOpen: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string }, translations: Array<{ __typename?: 'GroupTr', activity: string, description: string, shortDescription: string, slug: string | null | undefined, groupId: any, languageCode: TrLanguage, title: string }> }> | null | undefined };
+export type HomeGroupsQueryQuery = { __typename?: 'Query', groups: Array<{ __typename?: 'Group', id: any, isOpen: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined, translations: Array<{ __typename?: 'GroupTr', activity: string, description: string, shortDescription: string, slug: string | null | undefined, groupId: any, languageCode: TrLanguage, title: string }> }> | null | undefined };
 
 export type HomeRandomPicturesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomeRandomPicturesQueryQuery = { __typename?: 'Query', randomPictures: Array<{ __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } }> | null | undefined };
+export type HomeRandomPicturesQueryQuery = { __typename?: 'Query', randomPictures: Array<{ __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined }> | null | undefined };
 
 export type HomeNewsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1953,7 +2096,7 @@ export type UpsertInfoPageMutation = { __typename?: 'Mutation', upsertInfoPage: 
 export type PicturesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PicturesQueryQuery = { __typename?: 'Query', pictures: Array<{ __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } }> | null | undefined };
+export type PicturesQueryQuery = { __typename?: 'Query', pictures: Array<{ __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined }> | null | undefined };
 
 export type CreateImageMutationMutationVariables = Exact<{
   id: Scalars['UUID'];
@@ -1964,21 +2107,21 @@ export type CreateImageMutationMutationVariables = Exact<{
 }>;
 
 
-export type CreateImageMutationMutation = { __typename?: 'Mutation', createImage: { __typename?: 'CreateImagePayload', image: { __typename?: 'Image', id: any, img?: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } } | null | undefined } | null | undefined };
+export type CreateImageMutationMutation = { __typename?: 'Mutation', createImage: { __typename?: 'CreateImagePayload', image: { __typename?: 'Image', id: any, img?: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined } | null | undefined } | null | undefined };
 
 export type ImageQueryQueryVariables = Exact<{
   id: Scalars['UUID'];
 }>;
 
 
-export type ImageQueryQuery = { __typename?: 'Query', image: { __typename?: 'Image', id: any, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } } | null | undefined };
+export type ImageQueryQuery = { __typename?: 'Query', image: { __typename?: 'Image', id: any, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined } | null | undefined };
 
 export type CreatePictureMutationVariables = Exact<{
   image: Scalars['UUID'];
 }>;
 
 
-export type CreatePictureMutation = { __typename?: 'Mutation', createPicture: { __typename?: 'CreatePicturePayload', picture: { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } } | null | undefined } | null | undefined };
+export type CreatePictureMutation = { __typename?: 'Mutation', createPicture: { __typename?: 'CreatePicturePayload', picture: { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined } | null | undefined } | null | undefined };
 
 export type ReorderPicturesMutationMutationVariables = Exact<{
   reorders: Array<InputMaybe<ReorderPicturesReorderInput>> | InputMaybe<ReorderPicturesReorderInput>;
@@ -1993,18 +2136,18 @@ export type SetPictureAllowOnHomeMutationMutationVariables = Exact<{
 }>;
 
 
-export type SetPictureAllowOnHomeMutationMutation = { __typename?: 'Mutation', updatePicture: { __typename?: 'UpdatePicturePayload', picture: { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } } | null | undefined } | null | undefined };
+export type SetPictureAllowOnHomeMutationMutation = { __typename?: 'Mutation', updatePicture: { __typename?: 'UpdatePicturePayload', picture: { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined } | null | undefined } | null | undefined };
 
 export type DeletePictureMutationMutationVariables = Exact<{
   id: Scalars['UUID'];
 }>;
 
 
-export type DeletePictureMutationMutation = { __typename?: 'Mutation', deletePicture: { __typename?: 'DeletePicturePayload', picture: { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } } | null | undefined } | null | undefined };
+export type DeletePictureMutationMutation = { __typename?: 'Mutation', deletePicture: { __typename?: 'DeletePicturePayload', picture: { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined } | null | undefined } | null | undefined };
 
 export type MemberFragment = { __typename?: 'Member', name: string, id: any, userRole: string };
 
-export type PictureFragment = { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } };
+export type PictureFragment = { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined };
 
 export type ImgFragment = { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string };
 
@@ -2059,11 +2202,13 @@ export const CalendarEventsQueryDocument = {"kind":"Document","definitions":[{"k
 export const CalendarEventBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CalendarEventBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"eventBySlug"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"preferredLanguageCode"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}}},{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DetailedEvent"}}]}}]}},...DetailedEventFragmentDoc.definitions]} as unknown as DocumentNode<CalendarEventBySlugQuery, CalendarEventBySlugQueryVariables>;
 export const CalendarEventByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CalendarEventById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"event"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DetailedEvent"}}]}}]}},...DetailedEventFragmentDoc.definitions]} as unknown as DocumentNode<CalendarEventByIdQuery, CalendarEventByIdQueryVariables>;
 export const UpsertEventDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpsertEvent"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EventDatumInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"translations"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EventTrDatumInput"}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"upsertEvent"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"translations"},"value":{"kind":"Variable","name":{"kind":"Name","value":"translations"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"eventId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ShortEvent"}}]}}]}}]}},...ShortEventFragmentDoc.definitions]} as unknown as DocumentNode<UpsertEventMutation, UpsertEventMutationVariables>;
+export const EventTagsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"EventTagsQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"eventTagsConnection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"ID_ASC"}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ShortEventTagTranslation"}}]}},{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"IMG"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}}]}},...ShortEventTagTranslationFragmentDoc.definitions,...ImgFragmentDoc.definitions]} as unknown as DocumentNode<EventTagsQueryQuery, EventTagsQueryQueryVariables>;
+export const UpsertEventTagDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"upsertEventTag"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EventTagDatumInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"translations"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EventTagTrDatumInput"}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"upsertEventTag"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"translations"},"value":{"kind":"Variable","name":{"kind":"Name","value":"translations"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"eventTagId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"eventTag"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ShortEventTagTranslation"}}]}},{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"IMG"}}]}}]}}]}}]}},...ShortEventTagTranslationFragmentDoc.definitions,...ImgFragmentDoc.definitions]} as unknown as DocumentNode<UpsertEventTagMutation, UpsertEventTagMutationVariables>;
 export const GetUploadUrlDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"GetUploadUrl"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"contentType"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"randomId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createUploadUrl"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"contentType"},"value":{"kind":"Variable","name":{"kind":"Name","value":"contentType"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"clientMutationId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"randomId"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uploadUrl"}},{"kind":"Field","name":{"kind":"Name","value":"formData"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<GetUploadUrlMutation, GetUploadUrlMutationVariables>;
 export const GroupQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GroupQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"isOpen"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DetailedGroupTranslation"}}]}},{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"IMG"}}]}}]}}]}},...DetailedGroupTranslationFragmentDoc.definitions,...ImgFragmentDoc.definitions]} as unknown as DocumentNode<GroupQueryQuery, GroupQueryQueryVariables>;
 export const UpsertGroupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpsertGroup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GroupDatumInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"translations"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GroupTrDatumInput"}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"upsertGroup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"translations"},"value":{"kind":"Variable","name":{"kind":"Name","value":"translations"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"groupId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"isOpen"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DetailedGroupTranslation"}}]}},{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"IMG"}}]}}]}}]}}]}},...DetailedGroupTranslationFragmentDoc.definitions,...ImgFragmentDoc.definitions]} as unknown as DocumentNode<UpsertGroupMutation, UpsertGroupMutationVariables>;
 export const GroupEventsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GroupEvents"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"groupId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"eventsByGroup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"groupId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"groupId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ShortEvent"}}]}}]}},...ShortEventFragmentDoc.definitions]} as unknown as DocumentNode<GroupEventsQuery, GroupEventsQueryVariables>;
-export const HomeEventsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"HomeEventsQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startsAfter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Datetime"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"specialEvents"},"name":{"kind":"Name","value":"events"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"special"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"equalTo"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"startsAt"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"greaterThan"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startsAfter"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"templateName"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"isNull"},"value":{"kind":"BooleanValue","value":true}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"STARTS_AT_ASC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ShortEvent"}},{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"IMG"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"events"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"startsAt"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"greaterThan"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startsAfter"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"templateName"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"isNull"},"value":{"kind":"BooleanValue","value":true}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"STARTS_AT_ASC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ShortEvent"}}]}}]}},...ShortEventFragmentDoc.definitions,...ImgFragmentDoc.definitions]} as unknown as DocumentNode<HomeEventsQueryQuery, HomeEventsQueryQueryVariables>;
+export const HomeEventsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"HomeEventsQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startsAfter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Datetime"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"specialEvents"},"name":{"kind":"Name","value":"events"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"special"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"equalTo"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"startsAt"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"greaterThan"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startsAfter"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"templateName"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"isNull"},"value":{"kind":"BooleanValue","value":true}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"STARTS_AT_ASC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ShortEvent"}},{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"IMG"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"events"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"startsAt"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"greaterThan"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startsAfter"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"templateName"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"isNull"},"value":{"kind":"BooleanValue","value":true}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"7"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"STARTS_AT_ASC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ShortEvent"}}]}}]}},...ShortEventFragmentDoc.definitions,...ImgFragmentDoc.definitions]} as unknown as DocumentNode<HomeEventsQueryQuery, HomeEventsQueryQueryVariables>;
 export const HomeGroupsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"HomeGroupsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"groups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"IMG"}}]}},{"kind":"Field","name":{"kind":"Name","value":"isOpen"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DetailedGroupTranslation"}}]}}]}}]}},...ImgFragmentDoc.definitions,...DetailedGroupTranslationFragmentDoc.definitions]} as unknown as DocumentNode<HomeGroupsQueryQuery, HomeGroupsQueryQueryVariables>;
 export const HomeRandomPicturesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"HomeRandomPicturesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"randomPictures"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"4"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Picture"}}]}}]}},...PictureFragmentDoc.definitions]} as unknown as DocumentNode<HomeRandomPicturesQueryQuery, HomeRandomPicturesQueryQueryVariables>;
 export const HomeNewsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"HomeNewsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"newses"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"PUBLISHED_AT_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"News"}}]}}]}},...NewsFragmentDoc.definitions]} as unknown as DocumentNode<HomeNewsQueryQuery, HomeNewsQueryQueryVariables>;

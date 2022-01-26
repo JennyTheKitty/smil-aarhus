@@ -168,7 +168,7 @@ BEGIN
     DELETE FROM smil_aarhus.event_tr
         WHERE (event_id = event.id and language_code NOT IN (SELECT language_code FROM UNNEST(translations)));
 
-    FOREACH lid IN ARRAY COALESCE(data.tag_ids, ARRAY[]::bigint[]) LOOP
+    FOREACH lid IN ARRAY COALESCE(data.tag_ids, ARRAY[]::uuid[]) LOOP
         INSERT INTO smil_aarhus.event_via_event_tag (event_id, tag_id)
         VALUES (event.id, lid)
         ON CONFLICT (event_id, tag_id) DO NOTHING;
@@ -176,7 +176,7 @@ BEGIN
     DELETE FROM smil_aarhus.event_via_event_tag
         WHERE (event_id = event.id and tag_id <> ALL(data.tag_ids));
 
-    FOREACH lid IN ARRAY COALESCE(data.group_ids, ARRAY[]::bigint[]) LOOP
+    FOREACH lid IN ARRAY COALESCE(data.group_ids, ARRAY[]::uuid[]) LOOP
         INSERT INTO smil_aarhus.event_via_group (event_id, group_id)
         VALUES (event.id, lid)
         ON CONFLICT (event_id, group_id) DO NOTHING;

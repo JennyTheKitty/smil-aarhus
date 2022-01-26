@@ -1,5 +1,6 @@
 import {
   CreatePictureMutation,
+  EventTagsQueryDocument,
   EventTagTr,
   EventTr,
   EventViaEventTag,
@@ -12,6 +13,7 @@ import {
   Page,
   PageTr,
   PicturesQueryDocument,
+  UpsertEventTagMutation,
   UpsertInfoPageMutation,
 } from '@app/graphql/dist/client';
 import schema from '@app/graphql/dist/introspection';
@@ -99,6 +101,15 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
                   return data;
                 });
               }
+            },
+            upsertEventTag(_result, _args, cache, _info) {
+              const key = 'Query';
+              cache
+                .inspectFields(key)
+                .filter((field) => field.fieldName === 'eventTagsConnection')
+                .forEach((field) => {
+                  cache.invalidate(key, field.fieldName, field.arguments);
+                });
             },
           },
         },

@@ -8,7 +8,7 @@
         w:m="t-1"
         class="btn-focus-ring"
         to="CALENDAR"
-        :params="{ slug: event.slug }"
+        :params="{ id: fromUUID(event.id), slug: event.slug }"
       >
         <div w:flex="~ col shrink-0" w:w="18" w:text="right" w:p="r-3 y-1">
           <span>{{ dayjs(event.startsAt).format('D MMM') }}</span>
@@ -38,6 +38,8 @@ import { ShortEventFragment } from '@app/graphql/dist/client';
 import dayjs from 'dayjs';
 
 import { Translated } from '../../utils';
+
+const { fromUUID } = useShort();
 
 defineProps<{
   events: Translated<ShortEventFragment>[];

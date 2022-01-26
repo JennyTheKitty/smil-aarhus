@@ -4,7 +4,7 @@ CREATE TABLE smil_aarhus.event_tag(
 );
 
 
-COMMENT ON TABLE smil_aarhus.event_tag IS E'@omit create,update,delete,all,order';
+COMMENT ON TABLE smil_aarhus.event_tag IS E'@omit create,update,delete\n@simpleCollections both';
 
 CREATE TABLE smil_aarhus.event_tag_tr(
     tag_id uuid constraint event_tag_tr_tag_id_fkey REFERENCES smil_aarhus.event_tag(id),
@@ -67,3 +67,56 @@ comment on constraint event_via_event_tag_event_id_fkey on smil_aarhus.event_via
 
 GRANT SELECT ON TABLE smil_aarhus.event_via_event_tag TO smil_anonymous, smil_organizer, smil_admin;
 GRANT INSERT, UPDATE, DELETE ON TABLE smil_aarhus.event_via_event_tag TO smil_organizer, smil_admin;
+
+CREATE TYPE smil_aarhus.event_tag_data AS (
+    image uuid,
+    image_credit text
+);
+
+CREATE TYPE smil_aarhus.event_tag_tr_data AS (
+    language_code text,
+    title text
+);
+
+COMMENT ON COLUMN smil_aarhus.event_tag_tr_data.language_code IS E'@notNull';
+COMMENT ON COLUMN smil_aarhus.event_tag_tr_data.title IS E'@notNull';
+
+CREATE OR REPLACE FUNCTION smil_aarhus.upsert_event_tag(
+    data smil_aarhus.event_tag_data,
+    translations smil_aarhus.event_tag_tr_data[],
+    event_tag__id uuid DEFAULT NULL
+)
+RETURNS smil_aarhus.event_tag
+AS $$
+DECLARE
+    _event_tag smil_aarhus.event_tag;
+    trans smil_aarhus.event_tag_tr_data;
+BEGIN
+    IF (event_tag__id IS NULL) THEN
+        INSERT INTO smil_aarhus.event_tag(image)
+            VALUES (data.image)
+            RETURNING * INTO STRICT _event_tag;
+    ELSE
+        UPDATE smil_aarhus.event_tag
+            SET image = data.image
+            WHERE id = event_tag__id
+            RETURNING * INTO STRICT _event_tag;
+    END IF;
+
+    UPDATE smil_aarhus.image SET credit = data.image_credit where id = data.image;
+
+    FOREACH trans IN ARRAY translations LOOP
+        INSERT INTO smil_aarhus.event_tag_tr (tag_id, language_code, title)
+            VALUES (_event_tag.id, trans.language_code, trans.title)
+            ON CONFLICT (tag_id, language_code) DO UPDATE SET language_code = trans.language_code, title = trans.title;
+    END LOOP;
+    DELETE FROM smil_aarhus.event_tag_tr
+        WHERE (tag_id = _event_tag.id and language_code NOT IN (SELECT language_code FROM UNNEST(translations)));
+
+    RETURN _event_tag;
+END
+$$ LANGUAGE plpgsql;
+
+
+GRANT EXECUTE ON FUNCTION smil_aarhus.upsert_event_tag TO smil_organizer, smil_admin;
+

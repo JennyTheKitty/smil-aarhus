@@ -5,6 +5,7 @@
 declare module 'vue' {
   export interface GlobalComponents {
     BaseDialog: typeof import('./components/BaseDialog.vue')['default']
+    BaseView: typeof import('./components/BaseView.vue')['default']
     CalendarEventDetails: typeof import('./components/Calendar/CalendarEventDetails.vue')['default']
     CalendarEventPopout: typeof import('./components/Calendar/CalendarEventPopout.vue')['default']
     CalendarListView: typeof import('./components/Calendar/CalendarListView.vue')['default']
@@ -25,6 +26,7 @@ declare module 'vue' {
     EventDialogTemplateSelect: typeof import('./components/Calendar/EventDialogTemplateSelect.vue')['default']
     EventDialogTemplateSelectLabelRenderer: typeof import('./components/Calendar/EventDialogTemplateSelectLabelRenderer.vue')['default']
     EventsWidget: typeof import('./components/Calendar/EventsWidget.vue')['default']
+    EventTagDialog: typeof import('./components/EventTagDialog.vue')['default']
     ExpandTransition: typeof import('./components/ExpandTransition.vue')['default']
     FAQAnswer: typeof import('./components/FAQAnswer.vue')['default']
     FAQQuestion: typeof import('./components/FAQQuestion.vue')['default']
@@ -34,6 +36,7 @@ declare module 'vue' {
     FormInput: typeof import('./components/Form/FormInput.vue')['default']
     FormModal: typeof import('./components/FormModal.vue')['default']
     GroupDialog: typeof import('./components/GroupDialog.vue')['default']
+    'GroupDialog copy': typeof import('./components/GroupDialog copy.vue')['default']
     Hero: typeof import('./components/Hero.vue')['default']
     HomeEventsSection: typeof import('./components/Home/HomeEventsSection.vue')['default']
     HomeEventWidget: typeof import('./components/HomeEventWidget.vue')['default']

@@ -35,3 +35,40 @@ mutation UpsertEvent(
     }
   }
 }
+
+query EventTagsQuery($offset: Int, $first: Int) {
+  eventTagsConnection(orderBy: ID_ASC, first: $first, offset: $offset) {
+    nodes {
+      id
+      image
+      translations {
+        ...ShortEventTagTranslation
+      }
+      img {
+        ...IMG
+      }
+    }
+    totalCount
+  }
+}
+
+mutation upsertEventTag(
+  $data: EventTagDatumInput!
+  $translations: [EventTagTrDatumInput]!
+  $id: UUID
+) {
+  upsertEventTag(
+    input: { data: $data, translations: $translations, eventTagId: $id }
+  ) {
+    eventTag {
+      id
+      image
+      translations {
+        ...ShortEventTagTranslation
+      }
+      img {
+        ...IMG
+      }
+    }
+  }
+}

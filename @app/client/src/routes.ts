@@ -1,6 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
 
 import Lang from './components/Lang.vue';
+import BaseView from './components/BaseView.vue';
 import { SUPPORTED_LANGUAGES, Trans } from './i18n';
 
 import Home from './pages/Home.vue';
@@ -67,6 +68,17 @@ export const routes = [
       },
     ],
   })),
+  {
+    path: '/admin',
+    component: BaseView,
+    children: [
+      {
+        path: 'event-categories',
+        component: () => import('./pages/Admin/EventTags.vue'),
+        name: 'ADMIN-EVENT-TAGS',
+      },
+    ],
+  },
   {
     path: '/:path(.+)*',
     redirect(route) {

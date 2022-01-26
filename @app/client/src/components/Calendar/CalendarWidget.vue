@@ -199,6 +199,7 @@ const calendarOptions: CalendarOptions = {
   },
   datesSet: ({ view }) => {
     currentView.value = view;
+    refetch();
   },
 };
 

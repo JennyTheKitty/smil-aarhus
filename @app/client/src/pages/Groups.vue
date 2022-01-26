@@ -1,8 +1,8 @@
 <template>
   <div>
     <teleport v-if="store.currentMember" to="#member-bar-left">
-      <CreateButton v-model:creating="creating"
-    /></teleport>
+      <CreateButton v-model:creating="creating" />
+    </teleport>
     <GroupDialog v-model:isOpen="creating" :group="{}" :create="true" />
     <Hero
       :jpeg="heroImgJpeg"

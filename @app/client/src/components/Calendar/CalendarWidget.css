@@ -3,6 +3,7 @@
   --fc-border-color: #8883;
   --fc-neutral-bg-color: #0000;
   --fc-page-bg-color: #0000;
+  --fc-event-border-color: #fff;
 
   /* Increate min height */
   :global(.fc-daygrid-day) {
@@ -136,7 +137,7 @@
 
   /* Increase padding */
   :global(.fc-timegrid-event) {
-    @apply p-1;
+    @apply px-1;
   }
 
   /* Extended opening styling */

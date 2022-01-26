@@ -18,7 +18,7 @@ query HomeEventsQuery($startsAfter: Datetime) {
       startsAt: { greaterThan: $startsAfter }
       templateName: { isNull: true }
     }
-    first: 10
+    first: 7
     orderBy: STARTS_AT_ASC
   ) {
     ...ShortEvent

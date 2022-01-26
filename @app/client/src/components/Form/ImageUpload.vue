@@ -25,11 +25,12 @@ import {
   NUploadDragger,
   UploadCustomRequestOptions,
 } from 'naive-ui/lib';
+import { PropType } from 'vue';
 
 import { createImage } from '../../utils';
 
 const props = defineProps({
-  value: { type: String, default: () => null },
+  value: { type: String as PropType<string | null>, default: () => null },
 });
 const emit = defineEmits(['update:value']);
 
