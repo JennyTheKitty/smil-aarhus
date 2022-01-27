@@ -63,6 +63,7 @@
     "@types/pg": "^8.6.0",
     "@types/source-map-support": "^0",
     "@types/uuid": "^8.3.4",
+    "cross-env": "^7.0.3",
     "graphql": "^15.8.0",
     "koa-helmet": "^6.1.0",
     "ts-node": "^10.4.0"

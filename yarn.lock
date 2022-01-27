@@ -69,6 +69,7 @@ __metadata:
     abab: ^2.0.5
     accept-language-parser: ^1.5.0
     axios: ^0.25.0
+    cross-env: ^7.0.3
     dayjs: ^1.10.7
     graphql: ^15.8.0
     jsdom: ^19.0.0
@@ -195,6 +196,7 @@ __metadata:
     "@types/uuid": ^8.3.4
     "@urql/core": ^2.3.6
     "@vueuse/core": ^7.5.5
+    cross-env: ^7.0.3
     graphile-build: ^4.12.2
     graphile-build-pg: ^4.12.2
     graphile-utils: ^4.12.2
