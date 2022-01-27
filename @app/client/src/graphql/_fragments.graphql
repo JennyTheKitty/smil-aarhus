@@ -88,6 +88,7 @@ fragment ShortEvent on Event {
   id
   startsAt
   special
+  color
 }
 
 fragment DetailedEvent on Event {
@@ -98,6 +99,7 @@ fragment DetailedEvent on Event {
   img {
     ...IMG
   }
+  color
   endsAt
   id
   special

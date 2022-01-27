@@ -43,6 +43,13 @@
           </div>
         </n-form-item>
       </div>
+      <n-form-item label="Group event color" path="color" label-placement="top">
+        <n-color-picker
+          :to="root!"
+          :showPreview="true"
+          v-model:value="model.color"
+        />
+      </n-form-item>
       <n-form-item
         label="Title"
         ignore-path-change
@@ -137,6 +144,7 @@ async function handleSubmitClick(e: any) {
           image: model.value.image,
           imageCredit: model.value.imageCredit,
           isOpen: model.value.isOpen!,
+          color: model.value.color,
         },
         translations: model.value.translations,
         id: model.value.id,
@@ -151,6 +159,7 @@ const model = ref({
   imageCredit: '',
   isOpen: undefined as undefined | boolean,
   id: undefined as undefined | number,
+  color: undefined as undefined | string,
   translations: [] as {
     languageCode: TrLanguage;
     title: string;
@@ -214,6 +223,7 @@ function onOpen() {
     model.value.image = group.image;
     model.value.imageCredit = group.img.credit;
     model.value.isOpen = group.isOpen;
+    model.value.color = group.color || undefined;
     model.value.translations = (group.translations || []).map((trans) => ({
       languageCode: trans.languageCode,
       title: trans.title,
@@ -233,6 +243,7 @@ function onClose() {
   model.value.isOpen = undefined;
   model.value.translations = [];
   model.value.id = undefined;
+  model.value.color = undefined;
 }
 
 function createTranslation() {

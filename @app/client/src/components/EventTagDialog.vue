@@ -34,6 +34,13 @@
           </div>
         </n-form-item>
       </div>
+      <n-form-item label="Event color" path="color" label-placement="top">
+        <n-color-picker
+          :to="root!"
+          :showPreview="true"
+          v-model:value="model.color"
+        />
+      </n-form-item>
       <n-form-item
         label="Title"
         ignore-path-change
@@ -93,6 +100,7 @@ async function handleSubmitClick(e: any) {
         data: {
           image: model.value.image,
           imageCredit: model.value.imageCredit,
+          color: model.value.color,
         },
         translations: model.value.translations,
         id: model.value.id,
@@ -105,6 +113,7 @@ async function handleSubmitClick(e: any) {
 const model = ref({
   image: null as string | null,
   id: undefined as undefined | number,
+  color: undefined as undefined | string,
   imageCredit: '',
   translations: [] as {
     languageCode: TrLanguage;
@@ -140,6 +149,7 @@ function onOpen() {
       languageCode: trans.languageCode,
       title: trans.title,
     }));
+    model.value.color = tag.color || undefined;
     model.value.id = tag.id;
   } else {
     onClose();
@@ -148,6 +158,7 @@ function onOpen() {
 
 function onClose() {
   model.value.image = null;
+  model.value.color = undefined;
   model.value.translations = [];
   model.value.id = undefined;
 }

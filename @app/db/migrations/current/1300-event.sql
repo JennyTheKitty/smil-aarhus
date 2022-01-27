@@ -113,6 +113,31 @@ $$ LANGUAGE plpgsql STABLE;
 
 COMMENT ON FUNCTION smil_aarhus.event_image IS E'@omit all,execute';
 
+CREATE OR REPLACE FUNCTION smil_aarhus.event_color(event event)
+RETURNS text
+AS $$
+DECLARE
+    _l record;
+BEGIN
+    -- Get first group
+    select smil_aarhus.group.color from smil_aarhus.event_via_group INNER JOIN smil_aarhus.group ON smil_aarhus.event_via_group.group_id = smil_aarhus.group.id WHERE smil_aarhus.event_via_group.event_id = event.id LIMIT 1 INTO _l;
+    if (_l.color IS NOT NULL) THEN
+        return _l.color;
+    END IF;
+
+    -- Otherwise try tag
+    select smil_aarhus.event_tag.color from smil_aarhus.event_via_event_tag INNER JOIN smil_aarhus.event_tag ON smil_aarhus.event_via_event_tag.tag_id = smil_aarhus.event_tag.id WHERE smil_aarhus.event_via_event_tag.event_id = event.id LIMIT 1 INTO _l;
+    if (_l.color IS NOT NULL) THEN
+        return _l.color;
+    END IF;
+
+    -- Otherwise default color
+    return '#3788d8';
+
+END
+$$ LANGUAGE plpgsql STABLE;
+
+
 CREATE TYPE smil_aarhus.event_data AS (
     starts_at TIMESTAMPTZ,
     ends_at TIMESTAMPTZ,

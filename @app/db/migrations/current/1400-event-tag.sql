@@ -1,6 +1,7 @@
 CREATE TABLE smil_aarhus.event_tag(
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    image uuid REFERENCES smil_aarhus.image(id)
+    image uuid REFERENCES smil_aarhus.image(id),
+    color text
 );
 
 
@@ -70,7 +71,8 @@ GRANT INSERT, UPDATE, DELETE ON TABLE smil_aarhus.event_via_event_tag TO smil_or
 
 CREATE TYPE smil_aarhus.event_tag_data AS (
     image uuid,
-    image_credit text
+    image_credit text,
+    color text
 );
 
 CREATE TYPE smil_aarhus.event_tag_tr_data AS (
@@ -93,12 +95,12 @@ DECLARE
     trans smil_aarhus.event_tag_tr_data;
 BEGIN
     IF (event_tag__id IS NULL) THEN
-        INSERT INTO smil_aarhus.event_tag(image)
-            VALUES (data.image)
+        INSERT INTO smil_aarhus.event_tag(image, color)
+            VALUES (data.image, data.color)
             RETURNING * INTO STRICT _event_tag;
     ELSE
         UPDATE smil_aarhus.event_tag
-            SET image = data.image
+            SET image = data.image, color = data.color
             WHERE id = event_tag__id
             RETURNING * INTO STRICT _event_tag;
     END IF;

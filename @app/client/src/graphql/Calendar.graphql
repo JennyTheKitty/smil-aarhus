@@ -47,6 +47,7 @@ query EventTagsQuery($offset: Int, $first: Int) {
       img {
         ...IMG
       }
+      color
     }
     totalCount
   }
@@ -69,6 +70,7 @@ mutation upsertEventTag(
       img {
         ...IMG
       }
+      color
     }
   }
 }

@@ -1,7 +1,8 @@
 CREATE TABLE smil_aarhus.group(
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     image uuid REFERENCES smil_aarhus.image(id),
-    is_open boolean NOT NULL
+    is_open boolean NOT NULL,
+    color text
 );
 
 
@@ -96,7 +97,8 @@ GRANT INSERT, UPDATE, DELETE ON TABLE smil_aarhus.event_via_group TO smil_organi
 CREATE TYPE smil_aarhus.group_data AS (
     image uuid,
     image_credit text,
-    is_open boolean
+    is_open boolean,
+    color text
 );
 
 COMMENT ON COLUMN smil_aarhus.group_data.image IS E'@notNull';
@@ -129,12 +131,12 @@ DECLARE
     trans smil_aarhus.group_tr_data;
 BEGIN
     IF (group__id IS NULL) THEN
-        INSERT INTO smil_aarhus.group(image, is_open)
-            VALUES (data.image, data.is_open)
+        INSERT INTO smil_aarhus.group(image, is_open, color)
+            VALUES (data.image, data.is_open, data.color)
             RETURNING * INTO STRICT _group;
     ELSE
         UPDATE smil_aarhus.group
-            SET image = data.image, is_open = data.is_open
+            SET image = data.image, is_open = data.is_open, color = data.color
             WHERE id = group__id
             RETURNING * INTO STRICT _group;
     END IF;

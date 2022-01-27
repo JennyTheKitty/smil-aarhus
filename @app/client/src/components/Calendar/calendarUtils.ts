@@ -83,6 +83,7 @@ export async function fetchEvents(
         extendedProps: {
           raw: raw,
         },
+        backgroundColor: event.color,
       } as EventInput & { start: Date; end: Date };
     })
     .sort((a, b) => +a.start - +b.start);

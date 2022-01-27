@@ -547,6 +547,14 @@
         "name": "Event",
         "fields": [
           {
+            "name": "color",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
             "name": "endsAt",
             "type": {
               "kind": "NON_NULL",
@@ -751,6 +759,14 @@
         "kind": "OBJECT",
         "name": "EventTag",
         "fields": [
+          {
+            "name": "color",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
           {
             "name": "events",
             "type": {
@@ -1183,6 +1199,14 @@
         "name": "Group",
         "fields": [
           {
+            "name": "color",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
             "name": "events",
             "type": {
               "kind": "NON_NULL",
@@ -1453,6 +1477,13 @@
                 }
               },
               {
+                "name": "filter",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
                 "name": "first",
                 "type": {
                   "kind": "SCALAR",
@@ -1508,6 +1539,13 @@
               },
               {
                 "name": "condition",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "filter",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Any"
@@ -3231,6 +3269,13 @@
                 }
               },
               {
+                "name": "filter",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
                 "name": "first",
                 "type": {
                   "kind": "SCALAR",
@@ -3283,6 +3328,13 @@
               },
               {
                 "name": "condition",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "filter",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Any"

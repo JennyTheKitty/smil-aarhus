@@ -110,7 +110,7 @@ watch(
     if (!selectedEvent.value.eventEl) {
       await until(calendar).not.toBeNull();
       calendar.value!.api.gotoDate(event.startsAt);
-      await until(() => calendar.value!.loading).toBe(false);
+      await until(() => calendar.value?.loading).toBe(false);
       const el = document.querySelector<HTMLElement>(`[data-id="${slug}"]`);
       if (!el) {
         console.warn('event el not found');

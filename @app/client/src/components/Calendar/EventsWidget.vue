@@ -18,7 +18,11 @@
             </span>
           </ClientOnly>
         </div>
-        <div w:border="r-2 blue-500" w:m="y-1" />
+        <div
+          w:border="r-2"
+          w:m="y-1"
+          :style="{ borderColor: event.color || '' }"
+        />
         <div w:flex="~ col" w:p="l-3 y-1">
           <span w:text="base white">{{ event.title }}</span>
           <span w:text="sm gray-400">

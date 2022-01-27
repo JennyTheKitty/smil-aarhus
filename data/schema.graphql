@@ -433,6 +433,7 @@ type DeletePicturePayload {
 }
 
 type Event {
+  color: String
   endsAt: Datetime!
 
   """Reads and enables pagination through a set of `EventViaGroup`."""
@@ -539,6 +540,8 @@ input EventFilter {
 }
 
 type EventTag {
+  color: String
+
   """Reads and enables pagination through a set of `EventViaEventTag`."""
   events(
     """Only read the first `n` values of the set."""
@@ -579,6 +582,9 @@ A condition to be used against `EventTag` object types. All fields are tested
 for equality and combined with a logical ‘and.’
 """
 input EventTagCondition {
+  """Checks for equality with the object’s `color` field."""
+  color: String
+
   """Checks for equality with the object’s `id` field."""
   id: UUID
 
@@ -588,8 +594,17 @@ input EventTagCondition {
 
 """An input for mutations affecting `EventTagDatum`"""
 input EventTagDatumInput {
+  color: String
   image: UUID
   imageCredit: String
+}
+
+"""
+A filter to be used against `EventTag` object types. All fields are combined with a logical ‘and.’
+"""
+input EventTagFilter {
+  """Filter by the object’s `color` field."""
+  color: StringFilter
 }
 
 type EventTagTr {
@@ -658,6 +673,8 @@ type EventTagsEdge {
 
 """Methods to use when ordering `EventTag`."""
 enum EventTagsOrderBy {
+  COLOR_ASC
+  COLOR_DESC
   ID_ASC
   ID_DESC
   IMAGE_ASC
@@ -771,6 +788,8 @@ enum EventsOrderBy {
 }
 
 type Group {
+  color: String
+
   """Reads and enables pagination through a set of `EventViaGroup`."""
   events(
     """
@@ -816,6 +835,9 @@ type Group {
 A condition to be used against `Group` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
 input GroupCondition {
+  """Checks for equality with the object’s `color` field."""
+  color: String
+
   """Checks for equality with the object’s `id` field."""
   id: UUID
 
@@ -828,6 +850,7 @@ input GroupCondition {
 
 """An input for mutations affecting `GroupDatum`"""
 input GroupDatumInput {
+  color: String
   image: UUID!
   imageCredit: String!
   isOpen: Boolean!
@@ -837,6 +860,9 @@ input GroupDatumInput {
 A filter to be used against `Group` object types. All fields are combined with a logical ‘and.’
 """
 input GroupFilter {
+  """Filter by the object’s `color` field."""
+  color: StringFilter
+
   """Filter by the object’s `isOpen` field."""
   isOpen: BooleanFilter
 }
@@ -905,6 +931,8 @@ input GroupTrFilter {
 
 """Methods to use when ordering `Group`."""
 enum GroupsOrderBy {
+  COLOR_ASC
+  COLOR_DESC
   ID_ASC
   ID_DESC
   IMAGE_ASC
@@ -925,6 +953,11 @@ type Image {
     A condition to be used in determining which values should be returned by the collection.
     """
     condition: EventTagCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventTagFilter
 
     """Only read the first `n` values of the set."""
     first: Int
@@ -948,6 +981,11 @@ type Image {
     A condition to be used in determining which values should be returned by the collection.
     """
     condition: EventTagCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventTagFilter
 
     """Only read the first `n` values of the set."""
     first: Int
@@ -1724,6 +1762,11 @@ type Query {
     """
     condition: EventTagCondition
 
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventTagFilter
+
     """Only read the first `n` values of the set."""
     first: Int
 
@@ -1746,6 +1789,11 @@ type Query {
     A condition to be used in determining which values should be returned by the collection.
     """
     condition: EventTagCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventTagFilter
 
     """Only read the first `n` values of the set."""
     first: Int
