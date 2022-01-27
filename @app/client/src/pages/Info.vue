@@ -24,7 +24,7 @@ const route = useRoute();
 const { locale } = useI18n();
 const { toUUID } = useShort();
 
-const { data } = useQuery({
+const { data } = await useQuery({
   query: InfoPageQueryDocument,
   variables: computed(() => ({
     id: toUUID((route.params.id as string) || ''),

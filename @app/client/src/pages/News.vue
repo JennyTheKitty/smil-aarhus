@@ -45,14 +45,15 @@ const paginationData = usePagination({
   pageSize: 2,
 });
 
-const { data } = useQuery({
+const { data } = await useQuery({
   query: NewsesQueryDocument,
   variables: paginationData.urql,
 });
 
 watch(
   data,
-  (data) => (paginationData.total.value = data!.newsesConnection!.totalCount)
+  (data) => (paginationData.total.value = data!.newsesConnection!.totalCount),
+  { immediate: true }
 );
 
 const newses = computed(() =>

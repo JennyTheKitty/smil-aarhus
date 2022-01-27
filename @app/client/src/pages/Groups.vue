@@ -131,7 +131,7 @@ const { t, locale } = useI18n();
 const store = useStore();
 const { fromUUID } = useShort();
 
-const { data: groupsData } = useQuery({
+const { data: groupsData } = await useQuery({
   query: HomeGroupsQueryDocument,
 });
 const groups = computed(() =>

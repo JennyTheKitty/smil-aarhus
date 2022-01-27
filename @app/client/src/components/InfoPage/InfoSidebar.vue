@@ -22,12 +22,14 @@
       w:align="items-center"
       class="group btn-focus-ring"
     >
-      <span
-        class="iconify"
-        :data-icon="page.icon"
-        w:text="3xl"
-        w:m="r-2"
-      ></span>
+      <ClientOnly>
+        <span
+          class="iconify"
+          :data-icon="page.icon"
+          w:text="3xl"
+          w:m="r-2"
+        ></span>
+      </ClientOnly>
       <div w:flex="~ col">
         <span w:font="medium" w:text="sm gray-300 group-hover:white">{{
           page.title

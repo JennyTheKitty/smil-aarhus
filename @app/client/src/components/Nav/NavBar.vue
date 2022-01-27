@@ -24,7 +24,7 @@
           w:w="95vw"
           w:m="x-auto"
         >
-          <div v-for="link in links" :key="link.name">
+          <div v-for="link in navLinks" :key="link.name">
             <NavLink :link="link" :mobile="true" />
           </div>
         </div>
@@ -60,7 +60,7 @@
             w:display="hidden md:flex"
             w:align="items-center"
           >
-            <div v-for="link in links" :key="link.name">
+            <div v-for="link in navLinks" :key="link.name">
               <NavLink :link="link" :mobile="false" />
             </div>
           </PopoverGroup>
@@ -82,12 +82,9 @@
 </template>
 
 <script setup lang="ts">
+import { InfoPagesQueryDocument } from '@app/graphql/dist/client';
 import { Route } from '../../routes';
 import type { Link } from './Link';
-
-defineProps<{
-  links: Array<Link>;
-}>();
 
 const menuOpen = ref(false);
 
@@ -106,6 +103,50 @@ const bgOpacity = computed(() => {
   }
   return 1.0;
 });
+
+const { locale } = useI18n();
+const store = useStore();
+const { fromUUID } = useShort();
+
+const { data } = await useQuery({
+  query: InfoPagesQueryDocument,
+});
+const pages = computed(() =>
+  (data.value?.infoPages || []).map((page) => useTranslation(page, locale))
+);
+
+const navLinks = computed(
+  () =>
+    [
+      {
+        name: t('nav.info'),
+        links: pages.value.map((page) => ({
+          name: page.title,
+          description: page.subtitle,
+          to: 'INFO',
+          params: { id: fromUUID(page.id), slug: page.slug },
+          icon: page.icon,
+        })),
+        singleColumn: false,
+      },
+      {
+        name: t('nav.pictures'),
+        to: 'PICTURES',
+      },
+      {
+        name: t('nav.groups'),
+        to: 'GROUPS',
+      },
+      {
+        name: t('nav.calendar'),
+        to: 'CALENDAR',
+      },
+      {
+        name: t('nav.news'),
+        to: 'NEWS',
+      },
+    ] as Link[]
+);
 </script>
 
 <style>

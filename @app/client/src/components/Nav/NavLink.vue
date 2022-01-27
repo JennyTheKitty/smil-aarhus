@@ -13,13 +13,15 @@
         w:p="2"
         class="group btn-focus-ring"
       >
-        <span
-          v-if="sublink.icon"
-          class="iconify"
-          :data-icon="sublink.icon"
-          w:text="3xl"
-          w:m="r-2"
-        ></span>
+        <ClientOnly>
+          <span
+            v-if="sublink.icon"
+            class="iconify"
+            :data-icon="sublink.icon"
+            w:text="3xl"
+            w:m="r-2"
+          ></span>
+        </ClientOnly>
         <div w:flex="~ col">
           <span w:font="medium" w:text="sm gray-300 group-hover:white">{{
             sublink.name
@@ -103,13 +105,15 @@
             w:p="2"
             class="group btn-focus-ring"
           >
-            <span
-              v-if="sublink.icon"
-              class="iconify"
-              :data-icon="sublink.icon"
-              w:text="3xl"
-              w:m="r-2"
-            ></span>
+            <ClientOnly>
+              <span
+                v-if="sublink.icon"
+                class="iconify"
+                :data-icon="sublink.icon"
+                w:text="3xl"
+                w:m="r-2"
+              ></span>
+            </ClientOnly>
             <div w:flex="~ col">
               <span w:font="medium" w:text="sm gray-300 group-hover:white">{{
                 sublink.name

@@ -1,7 +1,7 @@
 <template>
   <div w:bg="dark-500">
     <MemberBar v-if="store.currentMember" />
-    <NavBar :links="navLinks" />
+    <suspense><NavBar /></suspense>
     <router-view v-slot="{ Component }">
       <template v-if="Component">
         <transition
@@ -26,93 +26,9 @@
 </template>
 
 <script setup lang="ts">
-import { InfoPagesQueryDocument } from '@app/graphql/dist/client';
-import { Link } from './components/Nav/Link';
 import { useStore } from './store';
-
-const { t } = useI18n();
 
 provide(key.heroHeight, ref(0));
 
-const { locale } = useI18n();
 const store = useStore();
-const { fromUUID } = useShort();
-
-const { data } = useQuery({
-  query: InfoPagesQueryDocument,
-});
-const pages = computed(() =>
-  (data.value?.infoPages || []).map((page) => useTranslation(page, locale))
-);
-
-const navLinks = computed(
-  () =>
-    [
-      {
-        name: t('nav.info'),
-        links: pages.value.map((page) => ({
-          name: page.title,
-          description: page.subtitle,
-          to: 'INFO',
-          params: { id: fromUUID(page.id), slug: page.slug },
-          icon: page.icon,
-        })),
-        // [
-        //   {
-        //     name: 'Hvad er SMIL?',
-        //     description: 'Generalt info om smil',
-        //     to: 'INFO',
-        //     icon: 'mdi:information-outline',
-        //   },
-        //   {
-        //     name: 'Udvidet åbningstid',
-        //     description: '???',
-        //     to: 'INFO',
-        //     icon: 'mdi:timelapse',
-        //   },
-        //   {
-        //     name: 'SMIL Aarhus',
-        //     description: 'Historie om SMIL Aarhus',
-        //     to: 'INFO',
-        //     icon: 'mdi:restore-alert',
-        //   },
-        //   {
-        //     name: 'FAQ',
-        //     description: 'Ofte stillede spørgsmål',
-        //     to: 'INFO',
-        //     icon: 'wpf:faq',
-        //   },
-        //   {
-        //     name: 'Regler',
-        //     description: 'God opførsel i SMIL',
-        //     to: 'INFO',
-        //     icon: 'mdi:clipboard-text',
-        //   },
-        //   {
-        //     name: 'Lokaler',
-        //     description: 'Billeder & info',
-        //     to: 'INFO',
-        //     icon: 'mdi:floor-plan',
-        //   },
-        // ],
-        singleColumn: false,
-      },
-      {
-        name: t('nav.pictures'),
-        to: 'PICTURES',
-      },
-      {
-        name: t('nav.groups'),
-        to: 'GROUPS',
-      },
-      {
-        name: t('nav.calendar'),
-        to: 'CALENDAR',
-      },
-      {
-        name: t('nav.news'),
-        to: 'NEWS',
-      },
-    ] as Link[]
-);
 </script>

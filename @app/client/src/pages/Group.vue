@@ -85,7 +85,7 @@ const GroupDialog = useWaitImportComponent(
   () => import('../components/GroupDialog.vue')
 );
 
-const { data } = useQuery({
+const { data } = await useQuery({
   query: GroupQueryDocument,
   variables: {
     id: toUUID((route.params.id as string) || ''),
@@ -94,7 +94,7 @@ const { data } = useQuery({
 const group = computed(() => useTranslation(data.value?.group, locale));
 const rawGroup = computed(() => data.value?.group);
 
-const { data: eventsData } = useQuery({
+const { data: eventsData } = await useQuery({
   query: GroupEventsDocument,
   variables: computed(() => ({
     groupId: group.value?.id,

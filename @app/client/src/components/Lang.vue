@@ -1,5 +1,7 @@
 <template>
-  <BaseView />
+  <Suspense>
+    <BaseView />
+  </Suspense>
 </template>
 
 <script setup lang="ts">

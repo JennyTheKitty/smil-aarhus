@@ -29,9 +29,7 @@
       </div>
     </Hero>
 
-    <suspense>
-      <HomeNewsWidget />
-    </suspense>
+    <HomeNewsWidget />
 
     <main
       role="main"
@@ -43,9 +41,7 @@
     >
       <!-- eslint-disable-next-line vue/no-v-html -->
       <div w:w="full md:1/2" w:p="x-8 t-0">
-        <suspense
-          ><Content id="5d70cca4-7d84-43eb-94f7-833a8d618b31"
-        /></suspense>
+        <Content id="5d70cca4-7d84-43eb-94f7-833a8d618b31" />
       </div>
       <div
         w:w="full md:1/2"
@@ -54,18 +50,12 @@
         w:p="x-8 md:0"
         w:max-w="128"
       >
-        <suspense>
-          <HomePicturesWidget />
-        </suspense>
+        <HomePicturesWidget />
       </div>
     </main>
 
-    <suspense>
-      <HomeEventsSection />
-    </suspense>
-    <suspense>
-      <HomeGroupsSection />
-    </suspense>
+    <HomeEventsSection />
+    <HomeGroupsSection />
   </div>
 </template>
 
