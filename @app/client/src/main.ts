@@ -38,6 +38,15 @@ export default viteSSR(
   App,
   {
     routes,
+    routerOptions: {
+      scrollBehavior(to: any, from: any, savedPosition: any) {
+        if (savedPosition) {
+          return savedPosition;
+        } else {
+          return { top: 0 };
+        }
+      },
+    },
     transformState(state, defaultTransformer) {
       if (import.meta.env.SSR) {
         state.urqlCache = Object.fromEntries(
