@@ -8,9 +8,6 @@
     "build": "tsc"
   },
   "dependencies": {
-    "dotenv": "^10.0.0"
-  },
-  "devDependencies": {
-    "@types/lodash": "^4.14.176"
+    "dotenv": "^14.3.2"
   }
 }

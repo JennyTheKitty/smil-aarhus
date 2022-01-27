@@ -1,5 +1,4 @@
 import PgSimplfyInflector from '@graphile-contrib/pg-simplify-inflector';
-import Router from '@koa/router';
 import { NodePlugin } from 'graphile-build';
 import Koa from 'koa';
 import { postgraphile, PostGraphileOptions } from 'postgraphile';
@@ -65,7 +64,7 @@ export const postgraphileOptions: PostGraphileOptions = {
 };
 
 export const postgraphileClientMiddleware = postgraphile(
-  getAuthPgPool(),
+  getAuthPgPool() as any,
   'smil_aarhus',
   {
     ...postgraphileOptions,

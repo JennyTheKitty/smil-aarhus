@@ -37,6 +37,7 @@
     "johnsoncodehk.volar",
     "antfu.where-am-i",
     "voorjaar.windicss-intellisense",
-    "codezombiech.gitignore"
+    "codezombiech.gitignore",
+    "arcanis.vscode-zipfs"
   ]
 }

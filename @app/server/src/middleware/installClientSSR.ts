@@ -59,7 +59,13 @@ const makeSource = (
           res,
           {},
           (context) =>
-            execute(schema, operation.query, {}, context, operation.variables)
+            execute({
+              schema,
+              document: operation.query,
+              rootValue: {},
+              contextValue: context,
+              variableValues: operation.variables,
+            })
         );
       })
       .then((data) => {
@@ -162,7 +168,7 @@ export default async function installClientSSR(app: Koa) {
     // Use vite's connect instance as middleware
     app.use(async (ctx) => {
       ctx.status = 200;
-      const x = await c2k(viteServer.middlewares)(ctx, async () => {});
+      await c2k(viteServer.middlewares)(ctx, async () => {});
       return false;
     });
   } else {

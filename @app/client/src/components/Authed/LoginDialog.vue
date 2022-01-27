@@ -48,7 +48,6 @@
 import { AuthenticateDocument } from '@app/graphql/dist/client';
 
 import { accessToken } from '../../accessToken';
-import NaiveWrapper from '../../NaiveWrapper.vue';
 
 defineProps<{
   isOpen: boolean;

@@ -1,5 +1,4 @@
 import cors from '@koa/cors';
-import Router from '@koa/router';
 import Koa from 'koa';
 
 export default async function installCors(app: Koa) {

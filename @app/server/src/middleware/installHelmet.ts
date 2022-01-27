@@ -1,4 +1,3 @@
-import Router from '@koa/router';
 import crypto from 'crypto';
 import helmet from 'helmet';
 import Koa from 'koa';

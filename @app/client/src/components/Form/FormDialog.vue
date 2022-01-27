@@ -100,7 +100,6 @@ import { PropType } from 'vue';
 import { TrLanguage } from '@app/graphql/dist/client';
 
 import DirtyCancelButton from './DirtyCancelButton.vue';
-import NaiveWrapper from '../../NaiveWrapper.vue';
 
 const props = defineProps({
   isOpen: { type: Boolean, required: true },
