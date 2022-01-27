@@ -120,10 +120,16 @@ import heroImgJpeg from '../assets/images/groups-header.jpg?w=300;900;1500;2000&
 import heroImgWebp from '../assets/images/groups-header.jpg?w=300;900;1500;2000&format=webp&srcset';
 import { useTranslation } from '../utils';
 
+const creating = ref(false);
+
+const GroupDialog = useWaitImportComponent(
+  creating,
+  () => import('../components/GroupDialog.vue')
+);
+
 const { t, locale } = useI18n();
 const store = useStore();
 const { fromUUID } = useShort();
-const creating = ref(false);
 
 const { data: groupsData } = useQuery({
   query: HomeGroupsQueryDocument,

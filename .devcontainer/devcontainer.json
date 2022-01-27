@@ -1,7 +1,10 @@
 // If you want to run as a non-root user in the container, see ../docker-compose.yml.
 {
   "name": "SMIL Aarhus DEV",
-  "dockerComposeFile": "../docker-compose.yml",
+  "dockerComposeFile": [
+    "../docker-compose.yml",
+    "../docker-compose.override.yml"
+  ],
   "service": "dev", // attaches to this service after docker-compose up `runServices`
   "workspaceFolder": "/work",
 

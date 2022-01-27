@@ -1,5 +1,5 @@
 <template>
-  <n-config-provider :theme="darkTheme">
+  <NaiveWrapper>
     <n-popconfirm @positive-click="$emit('confirm')">
       <template #trigger>
         <button>
@@ -8,12 +8,10 @@
       </template>
       {{ t('picture.delete.confirm') }}
     </n-popconfirm>
-  </n-config-provider>
+  </NaiveWrapper>
 </template>
 
 <script setup lang="ts">
-import { darkTheme, NConfigProvider, NPopconfirm } from 'naive-ui/lib';
-
 defineEmits(['confirm']);
 
 const { t } = useI18n();

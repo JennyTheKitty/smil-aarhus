@@ -102,15 +102,7 @@ import {
   UpsertGroupDocument,
 } from '@app/graphql/dist/client';
 import { useClientHandle } from '@urql/vue';
-import {
-  FormInst,
-  FormRules,
-  NButton,
-  NFormItem,
-  NInput,
-  NRadioButton,
-  NRadioGroup,
-} from 'naive-ui/lib';
+import { FormInst, FormRules } from 'naive-ui/lib/form';
 import { PropType } from 'vue';
 
 import FormDialog from './Form/FormDialog.vue';

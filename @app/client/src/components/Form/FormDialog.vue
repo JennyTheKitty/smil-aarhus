@@ -12,7 +12,7 @@
       w:max-h="90vh"
       w:h="90vh"
     >
-      <n-config-provider :theme="darkTheme" w:h="full">
+      <NaiveWrapper w:h="full">
         <n-form
           ref="form"
           :model="model"
@@ -81,7 +81,7 @@
             </div>
           </div>
         </n-form>
-      </n-config-provider>
+      </NaiveWrapper>
     </div>
   </BaseDialog>
 </template>
@@ -100,6 +100,7 @@ import { PropType } from 'vue';
 import { TrLanguage } from '@app/graphql/dist/client';
 
 import DirtyCancelButton from './DirtyCancelButton.vue';
+import NaiveWrapper from '../../NaiveWrapper.vue';
 
 const props = defineProps({
   isOpen: { type: Boolean, required: true },

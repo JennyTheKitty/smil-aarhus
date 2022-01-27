@@ -683,7 +683,7 @@ export type Group = {
   image: Maybe<Scalars['UUID']>;
   /** Reads a single `Image` that is related to this `Group`. */
   imageByImage: Maybe<Image>;
-  img: Maybe<ResponsiveImage>;
+  img: ResponsiveImage;
   isOpen: Scalars['Boolean'];
   /** Reads and enables pagination through a set of `GroupTr`. */
   translations: Array<GroupTr>;
@@ -803,7 +803,7 @@ export type Image = {
   groupsByImage: Array<Group>;
   height: Scalars['Int'];
   id: Scalars['UUID'];
-  img: Maybe<ResponsiveImage>;
+  img: ResponsiveImage;
   path: Scalars['String'];
   /** Reads and enables pagination through a set of `Picture`. */
   picturesByImage: Array<Picture>;
@@ -1425,7 +1425,7 @@ export type Picture = {
   image: Scalars['UUID'];
   /** Reads a single `Image` that is related to this `Picture`. */
   imageByImage: Maybe<Image>;
-  img: Maybe<ResponsiveImage>;
+  img: ResponsiveImage;
   rank: Scalars['Int'];
 };
 
@@ -2302,7 +2302,7 @@ export type GroupQueryQueryVariables = Exact<{
 }>;
 
 
-export type GroupQueryQuery = { __typename?: 'Query', group: { __typename?: 'Group', id: any, image: any | null | undefined, isOpen: boolean, translations: Array<{ __typename?: 'GroupTr', activity: string, description: string, shortDescription: string, slug: string | null | undefined, groupId: any, languageCode: TrLanguage, title: string }>, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined } | null | undefined };
+export type GroupQueryQuery = { __typename?: 'Query', group: { __typename?: 'Group', id: any, image: any | null | undefined, isOpen: boolean, translations: Array<{ __typename?: 'GroupTr', activity: string, description: string, shortDescription: string, slug: string | null | undefined, groupId: any, languageCode: TrLanguage, title: string }>, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } } | null | undefined };
 
 export type UpsertGroupMutationVariables = Exact<{
   data: GroupDatumInput;
@@ -2311,7 +2311,7 @@ export type UpsertGroupMutationVariables = Exact<{
 }>;
 
 
-export type UpsertGroupMutation = { __typename?: 'Mutation', upsertGroup: { __typename?: 'UpsertGroupPayload', group: { __typename?: 'Group', id: any, image: any | null | undefined, isOpen: boolean, translations: Array<{ __typename?: 'GroupTr', activity: string, description: string, shortDescription: string, slug: string | null | undefined, groupId: any, languageCode: TrLanguage, title: string }>, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined } | null | undefined } | null | undefined };
+export type UpsertGroupMutation = { __typename?: 'Mutation', upsertGroup: { __typename?: 'UpsertGroupPayload', group: { __typename?: 'Group', id: any, image: any | null | undefined, isOpen: boolean, translations: Array<{ __typename?: 'GroupTr', activity: string, description: string, shortDescription: string, slug: string | null | undefined, groupId: any, languageCode: TrLanguage, title: string }>, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } } | null | undefined } | null | undefined };
 
 export type GroupEventsQueryVariables = Exact<{
   groupId: Scalars['UUID'];
@@ -2330,12 +2330,12 @@ export type HomeEventsQueryQuery = { __typename?: 'Query', specialEvents: Array<
 export type HomeGroupsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomeGroupsQueryQuery = { __typename?: 'Query', groups: Array<{ __typename?: 'Group', id: any, isOpen: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined, translations: Array<{ __typename?: 'GroupTr', activity: string, description: string, shortDescription: string, slug: string | null | undefined, groupId: any, languageCode: TrLanguage, title: string }> }> | null | undefined };
+export type HomeGroupsQueryQuery = { __typename?: 'Query', groups: Array<{ __typename?: 'Group', id: any, isOpen: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string }, translations: Array<{ __typename?: 'GroupTr', activity: string, description: string, shortDescription: string, slug: string | null | undefined, groupId: any, languageCode: TrLanguage, title: string }> }> | null | undefined };
 
 export type HomeRandomPicturesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomeRandomPicturesQueryQuery = { __typename?: 'Query', randomPictures: Array<{ __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined }> | null | undefined };
+export type HomeRandomPicturesQueryQuery = { __typename?: 'Query', randomPictures: Array<{ __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } }> | null | undefined };
 
 export type HomeNewsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2390,7 +2390,7 @@ export type UpsertInfoPageMutation = { __typename?: 'Mutation', upsertInfoPage: 
 export type PicturesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PicturesQueryQuery = { __typename?: 'Query', pictures: Array<{ __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined }> | null | undefined };
+export type PicturesQueryQuery = { __typename?: 'Query', pictures: Array<{ __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } }> | null | undefined };
 
 export type CreateImageMutationMutationVariables = Exact<{
   id: Scalars['UUID'];
@@ -2401,21 +2401,21 @@ export type CreateImageMutationMutationVariables = Exact<{
 }>;
 
 
-export type CreateImageMutationMutation = { __typename?: 'Mutation', createImage: { __typename?: 'CreateImagePayload', image: { __typename?: 'Image', id: any, img?: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined } | null | undefined } | null | undefined };
+export type CreateImageMutationMutation = { __typename?: 'Mutation', createImage: { __typename?: 'CreateImagePayload', image: { __typename?: 'Image', id: any, img?: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } } | null | undefined } | null | undefined };
 
 export type ImageQueryQueryVariables = Exact<{
   id: Scalars['UUID'];
 }>;
 
 
-export type ImageQueryQuery = { __typename?: 'Query', image: { __typename?: 'Image', id: any, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined } | null | undefined };
+export type ImageQueryQuery = { __typename?: 'Query', image: { __typename?: 'Image', id: any, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } } | null | undefined };
 
 export type CreatePictureMutationVariables = Exact<{
   image: Scalars['UUID'];
 }>;
 
 
-export type CreatePictureMutation = { __typename?: 'Mutation', createPicture: { __typename?: 'CreatePicturePayload', picture: { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined } | null | undefined } | null | undefined };
+export type CreatePictureMutation = { __typename?: 'Mutation', createPicture: { __typename?: 'CreatePicturePayload', picture: { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } } | null | undefined } | null | undefined };
 
 export type ReorderPicturesMutationMutationVariables = Exact<{
   reorders: Array<InputMaybe<ReorderPicturesReorderInput>> | InputMaybe<ReorderPicturesReorderInput>;
@@ -2430,18 +2430,18 @@ export type SetPictureAllowOnHomeMutationMutationVariables = Exact<{
 }>;
 
 
-export type SetPictureAllowOnHomeMutationMutation = { __typename?: 'Mutation', updatePicture: { __typename?: 'UpdatePicturePayload', picture: { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined } | null | undefined } | null | undefined };
+export type SetPictureAllowOnHomeMutationMutation = { __typename?: 'Mutation', updatePicture: { __typename?: 'UpdatePicturePayload', picture: { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } } | null | undefined } | null | undefined };
 
 export type DeletePictureMutationMutationVariables = Exact<{
   id: Scalars['UUID'];
 }>;
 
 
-export type DeletePictureMutationMutation = { __typename?: 'Mutation', deletePicture: { __typename?: 'DeletePicturePayload', picture: { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined } | null | undefined } | null | undefined };
+export type DeletePictureMutationMutation = { __typename?: 'Mutation', deletePicture: { __typename?: 'DeletePicturePayload', picture: { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } } | null | undefined } | null | undefined };
 
 export type MemberFragment = { __typename?: 'Member', name: string, id: any, userRole: string, username: string, isActive: boolean };
 
-export type PictureFragment = { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } | null | undefined };
+export type PictureFragment = { __typename?: 'Picture', image: any, id: any, rank: number, allowOnHome: boolean, img: { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string } };
 
 export type ImgFragment = { __typename?: 'ResponsiveImage', height: number, src: string, srcSetJpeg: string, srcSetWebp: string, width: number, credit: string };
 

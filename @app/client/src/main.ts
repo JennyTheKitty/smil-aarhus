@@ -8,7 +8,6 @@ import 'virtual:windi-utilities.css';
 import '@vue/runtime-dom';
 import 'nprogress/nprogress.css';
 
-import Iconify from '@iconify/iconify';
 import { fetchExchange, ssrExchange } from '@urql/core';
 import urql from '@urql/vue';
 import { createHead } from '@vueuse/head';
@@ -35,8 +34,6 @@ if (!import.meta.env.SSR && import.meta.env.DEV) {
   (async () => import('virtual:windi-devtools'))();
 }
 
-Iconify.pauseObserver();
-
 export default viteSSR(
   App,
   {
@@ -47,10 +44,7 @@ export default viteSSR(
           Object.entries(
             (state.ssr as ReturnType<typeof ssrExchange>).extractData()
           ).map(([key, val]) => {
-            return [
-              key,
-              { ...val, data: val.data?.replace(/(?<!\\)\\(.)/g, '\\\\$1') },
-            ];
+            return [key, { ...val, data: val.data }];
           })
         );
       }
@@ -93,14 +87,16 @@ export default viteSSR(
         isLoading.value = false;
       });
 
-      Iconify.resumeObserver();
+      void (async () => {
+        const Iconify = await import('@iconify/iconify');
+        Iconify.resumeObserver();
+      })();
     }
 
     const lastExchange = isServerSide
       ? (request as { _koaCtx: any } | undefined)?._koaCtx.state
           .graphileExchange
       : fetchExchange;
-    console.log(lastExchange);
 
     const ssr = ssrExchange({
       isClient: !isServerSide,

@@ -20,11 +20,8 @@
 <script setup lang="ts">
 import { ImageQueryDocument } from '@app/graphql/dist/client';
 import { useClientHandle } from '@urql/vue';
-import {
-  NUpload,
-  NUploadDragger,
-  UploadCustomRequestOptions,
-} from 'naive-ui/lib';
+import { UploadCustomRequestOptions } from 'naive-ui/lib/upload';
+
 import { PropType } from 'vue';
 
 import { createImage } from '../../utils';

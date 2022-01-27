@@ -56,7 +56,7 @@ import {
   UpsertInfoPageDocument,
 } from '@app/graphql/dist/client';
 import { useClientHandle } from '@urql/vue';
-import { FormInst, FormRules, NButton, NFormItem, NInput } from 'naive-ui/lib';
+import { FormInst, FormRules } from 'naive-ui/lib/form';
 import { PropType } from 'vue';
 
 import FormDialog from '../Form/FormDialog.vue';

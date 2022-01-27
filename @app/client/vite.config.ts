@@ -6,7 +6,10 @@ import AutoImport from 'unplugin-auto-import/vite';
 import { FileSystemIconLoader } from 'unplugin-icons/loaders';
 import IconsResolver from 'unplugin-icons/resolver';
 import Icons from 'unplugin-icons/vite';
-import { HeadlessUiResolver } from 'unplugin-vue-components/resolvers';
+import {
+  HeadlessUiResolver,
+  NaiveUiResolver,
+} from 'unplugin-vue-components/resolvers';
 import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
 // @ts-ignore
@@ -41,7 +44,7 @@ export default defineConfig({
       output: {
         comments: false,
       },
-      mangle: false,
+      mangle: true,
     },
     polyfillModulePreload: false,
     reportCompressedSize: false,
@@ -113,6 +116,9 @@ export default defineConfig({
                     return 'vendor';
                   }
                   if (id.includes('node_modules')) {
+                    if (id.includes('@iconify')) {
+                      return 'vendor_iconify';
+                    }
                     if (id.includes('@fullcalendar')) {
                       return 'vendor_cal';
                     }
@@ -208,7 +214,8 @@ export default defineConfig({
           customCollections: ['smil'],
           // enabledCollections: ['carbon']
         }),
-        HeadlessUiResolver(),
+        HeadlessUiResolver({}),
+        NaiveUiResolver(),
       ],
       dts: path.resolve(__dirname, 'src', 'components.d.ts'),
     }),

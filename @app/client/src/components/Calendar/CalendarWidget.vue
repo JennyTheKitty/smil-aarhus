@@ -15,6 +15,8 @@ export interface ICalendarWidget {
 </script>
 
 <script setup lang="ts">
+import '@fullcalendar/core/vdom.cjs';
+
 import { Event } from '@app/graphql/dist/client';
 import daLocale from '@fullcalendar/core/locales/da';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -51,7 +53,8 @@ const calendar = ref<any>(null);
 
 const calendarApi = ref<Calendar | null>(null);
 
-watch(calendar, () => {
+watch(calendar, async (q) => {
+  await nextTick();
   calendarApi.value = calendar.value?.getApi();
 });
 
@@ -89,27 +92,32 @@ nextTick(() => {
     },
     { immediate: true }
   );
-  watch(
-    currentView,
-    (currentView) => {
-      if (currentView) {
-        calendarApi.value?.setOption('headerToolbar', {
-          left: currentView.type !== 'list' ? 'today prev next' : '',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,list',
-        });
-      }
-    },
-    { immediate: true }
-  );
 });
+watch(
+  currentView,
+  async (currentView) => {
+    if (currentView) {
+      await until(calendarApi).not.toBeNull();
+      calendarApi.value!.setOption('headerToolbar', {
+        left: currentView.type !== 'list' ? 'today prev next' : '',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,list',
+      });
+    }
+  },
+  { immediate: true }
+);
 
 const calendarOptions: CalendarOptions = {
   locales: [daLocale],
   locale: locale.value,
   plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
   initialView: 'timeGridWeek',
-  headerToolbar: {},
+  headerToolbar: {
+    left: 'today prev next',
+    center: 'title',
+    right: 'dayGridMonth,timeGridWeek,list',
+  },
   firstDay: 1,
   height: 'auto',
   selectable: false,

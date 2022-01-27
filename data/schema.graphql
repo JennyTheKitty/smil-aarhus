@@ -789,7 +789,7 @@ type Group {
 
   """Reads a single `Image` that is related to this `Group`."""
   imageByImage: Image
-  img: ResponsiveImage
+  img: ResponsiveImage!
   isOpen: Boolean!
 
   """Reads and enables pagination through a set of `GroupTr`."""
@@ -1010,7 +1010,7 @@ type Image {
   ): [Group!]!
   height: Int!
   id: UUID!
-  img: ResponsiveImage
+  img: ResponsiveImage!
   path: String!
 
   """Reads and enables pagination through a set of `Picture`."""
@@ -1659,7 +1659,7 @@ type Picture {
 
   """Reads a single `Image` that is related to this `Picture`."""
   imageByImage: Image
-  img: ResponsiveImage
+  img: ResponsiveImage!
   rank: Int!
 }
 

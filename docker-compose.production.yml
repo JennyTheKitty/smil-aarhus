@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  db:
+    restart: unless-stopped
+  minio:
+    restart: unless-stopped
+  imgproxy:
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/proxy.conf:/etc/nginx/proxy.conf
+      - ./local/nginx-cache:/var/cache/nginx
+
+    ports:
+      - "80:80"
+
+    restart: unless-stopped

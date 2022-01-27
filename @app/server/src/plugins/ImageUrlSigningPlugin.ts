@@ -88,16 +88,16 @@ const ImageUrlSigningPlugin = makeExtendSchemaPlugin((build) => {
   return {
     typeDefs: gql`
       extend type Group {
-        img: ResponsiveImage @requires(columns: ["image"])
+        img: ResponsiveImage! @requires(columns: ["image"])
       }
       extend type EventTag {
         img: ResponsiveImage @requires(columns: ["image"])
       }
       extend type Picture {
-        img: ResponsiveImage @requires(columns: ["image"])
+        img: ResponsiveImage! @requires(columns: ["image"])
       }
       extend type Image {
-        img: ResponsiveImage
+        img: ResponsiveImage!
           @requires(columns: ["path", "width", "height", "credit"])
       }
       extend type Event {

@@ -98,13 +98,7 @@ import {
 } from '@app/graphql/dist/client';
 import { useClientHandle } from '@urql/vue';
 import dayjs from 'dayjs';
-import {
-  FormRules,
-  NButton,
-  NDatePicker,
-  NFormItem,
-  NInput,
-} from 'naive-ui/lib';
+import { FormRules } from 'naive-ui/lib/form';
 
 import { useTranslation } from '../../utils';
 

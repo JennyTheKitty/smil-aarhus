@@ -63,12 +63,14 @@
                 w:text="right"
                 w:p="r-3 y-1"
               >
-                <span w:text="base">{{
-                  dayjs(specialEvent.startsAt).format('D MMM')
-                }}</span>
-                <span w:text="sm gray-400">
-                  {{ dayjs(specialEvent.startsAt).format('ddd') }}
-                </span>
+                <ClientOnly>
+                  <span w:text="base">{{
+                    dayjs(specialEvent.startsAt).format('D MMM')
+                  }}</span>
+                  <span w:text="sm gray-400">
+                    {{ dayjs(specialEvent.startsAt).format('ddd') }}
+                  </span>
+                </ClientOnly>
               </div>
               <div w:border="r-2 blue-500" w:m="y-1" />
               <div w:flex="~ col" w:p="l-3 y-1">
@@ -78,9 +80,11 @@
                     w:display="inline-block"
                     w:m="b-0.5 -l-1 r-0.5"
                   />
-                  {{ dayjs(specialEvent.startsAt).format('LT') }} -
-                  {{ dayjs(specialEvent.endsAt).format('LT') }}</span
-                >
+                  <ClientOnly>
+                    {{ dayjs(specialEvent.startsAt).format('LT') }} -
+                    {{ dayjs(specialEvent.endsAt).format('LT') }}
+                  </ClientOnly>
+                </span>
               </div>
             </div>
           </i18n-link>

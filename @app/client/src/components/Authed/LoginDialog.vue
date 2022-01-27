@@ -16,7 +16,7 @@
       <DialogTitle w:text="center lg" w:m="0 b-4">
         Login to SMil Aarhus
       </DialogTitle>
-      <n-config-provider :theme="darkTheme">
+      <NaiveWrapper>
         <n-form
           :label-width="80"
           :model="model"
@@ -39,23 +39,16 @@
             <n-button @click="submit">Login</n-button>
           </n-form-item>
         </n-form>
-      </n-config-provider>
+      </NaiveWrapper>
     </div>
   </BaseDialog>
 </template>
 
 <script setup lang="ts">
 import { AuthenticateDocument } from '@app/graphql/dist/client';
-import {
-  darkTheme,
-  NButton,
-  NConfigProvider,
-  NForm,
-  NFormItem,
-  NInput,
-} from 'naive-ui/lib';
 
 import { accessToken } from '../../accessToken';
+import NaiveWrapper from '../../NaiveWrapper.vue';
 
 defineProps<{
   isOpen: boolean;

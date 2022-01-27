@@ -1253,9 +1253,12 @@
           {
             "name": "img",
             "type": {
-              "kind": "OBJECT",
-              "name": "ResponsiveImage",
-              "ofType": null
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ResponsiveImage",
+                "ofType": null
+              }
             },
             "args": []
           },
@@ -1691,9 +1694,12 @@
           {
             "name": "img",
             "type": {
-              "kind": "OBJECT",
-              "name": "ResponsiveImage",
-              "ofType": null
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ResponsiveImage",
+                "ofType": null
+              }
             },
             "args": []
           },
@@ -3047,9 +3053,12 @@
           {
             "name": "img",
             "type": {
-              "kind": "OBJECT",
-              "name": "ResponsiveImage",
-              "ofType": null
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ResponsiveImage",
+                "ofType": null
+              }
             },
             "args": []
           },

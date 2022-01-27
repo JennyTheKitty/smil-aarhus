@@ -8,13 +8,13 @@
     w:flex="~ col"
     w:align="items-center"
   >
-    <n-config-provider :theme="darkTheme" w:w="full">
+    <NaiveWrapper w:w="full">
       <n-data-table
         :columns="columns"
         :data="members"
         :row-key="(m: Member) => m.id"
       />
-    </n-config-provider>
+    </NaiveWrapper>
     <Pagination w:m="t-5" v-bind="paginationData" />
   </main>
 </template>
@@ -25,7 +25,7 @@ import {
   MembersQueryQuery,
 } from '@app/graphql/dist/client';
 import { usePagination } from '../../components/Pagination.vue';
-import { NDataTable, NConfigProvider, darkTheme, NButton } from 'naive-ui';
+import { NButton } from 'naive-ui/lib/button';
 
 const { t, locale } = useI18n();
 

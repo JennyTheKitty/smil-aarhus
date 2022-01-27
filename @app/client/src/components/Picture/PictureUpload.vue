@@ -1,6 +1,6 @@
 <template>
   <div w:flex="~" w:justify="center">
-    <n-config-provider :theme="darkTheme" w:text="white">
+    <NaiveWrapper w:text="white">
       <n-upload
         multiple
         accept="image/*"
@@ -15,20 +15,14 @@
           <p>Click or drag a file to this area to upload</p>
         </n-upload-dragger>
       </n-upload>
-    </n-config-provider>
+    </NaiveWrapper>
   </div>
 </template>
 
 <script setup lang="ts">
 import { CreatePictureDocument } from '@app/graphql/dist/client';
 import { useClientHandle } from '@urql/vue';
-import {
-  darkTheme,
-  NConfigProvider,
-  NUpload,
-  NUploadDragger,
-  UploadCustomRequestOptions,
-} from 'naive-ui/lib';
+import { UploadCustomRequestOptions } from 'naive-ui/lib/upload';
 
 import { createImage } from '../../utils';
 
