@@ -113,7 +113,7 @@ const GraphileExchange = (
                 operation,
                 data: {
                   url: '',
-                  fetchOptions: '',
+                  fetchOptions: {},
                   value: error || result,
                 },
               });
@@ -135,7 +135,9 @@ const GraphileExchange = (
   };
 };
 
-export default async function installClientSSR(app: Koa, router: Router) {
+export default async function installClientSSR(app: Koa) {
+  const router = new Router();
+
   const resolve = (p: string) => pathResolve(__dirname + '/../../../client', p);
   app.use(async (ctx, next) => {
     const link = GraphileExchange(ctx.req, ctx.res);
@@ -196,4 +198,6 @@ export default async function installClientSSR(app: Koa, router: Router) {
       await next();
     });
   }
+
+  app.use(router.routes()).use(router.allowedMethods());
 }

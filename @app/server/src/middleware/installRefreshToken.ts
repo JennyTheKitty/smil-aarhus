@@ -8,7 +8,8 @@ import { sendRefreshToken, signToken } from '../plugins/AuthPlugin';
 const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET, REFRESH_TOKEN_COOKIE_NAME } =
   process.env;
 
-export default async function installRefreshToken(app: Koa, router: Router) {
+export default async function installRefreshToken(app: Koa) {
+  const router = new Router();
   router.post('/access_token', async (ctx, next) => {
     const token = ctx.cookies.get(REFRESH_TOKEN_COOKIE_NAME!);
     if (token) {
@@ -24,6 +25,7 @@ export default async function installRefreshToken(app: Koa, router: Router) {
                 LIMIT 1`,
           [payload.sub]
         );
+        console.log(rows);
         if (rows.length) {
           const { sub, isActive, userRole } = rows[0];
           if (isActive) {
@@ -56,4 +58,6 @@ export default async function installRefreshToken(app: Koa, router: Router) {
 
     ctx.body = { ok: false, accessToken: '' };
   });
+
+  app.use(router.routes()).use(router.allowedMethods());
 }

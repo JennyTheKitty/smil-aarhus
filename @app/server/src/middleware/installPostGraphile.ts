@@ -82,7 +82,7 @@ export const postgraphileClientMiddleware = postgraphile(
   }
 );
 
-export default async function installPostGraphile(app: Koa, _router: Router) {
+export default async function installPostGraphile(app: Koa) {
   app.use(postgraphileClientMiddleware);
   // https://github.com/graphile/postgraphile/pull/1548
   app.use((ctx, next) => {

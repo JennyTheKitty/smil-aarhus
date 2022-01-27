@@ -14,14 +14,12 @@ export async function makeApp(): Promise<Koa> {
   }
 
   const app = new Koa();
-  const router = new Router();
 
-  await middleware.installCors(app, router);
-  await middleware.installRefreshToken(app, router);
-  await middleware.installPostGraphile(app, router);
-  await middleware.installClientSSR(app, router);
-  app.use(router.routes()).use(router.allowedMethods());
-  await middleware.installHelmet(app, router);
+  await middleware.installCors(app);
+  await middleware.installRefreshToken(app);
+  await middleware.installPostGraphile(app);
+  await middleware.installClientSSR(app);
+  await middleware.installHelmet(app);
 
   return app;
 }

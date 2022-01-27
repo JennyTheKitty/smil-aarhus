@@ -2,7 +2,7 @@ import cors from '@koa/cors';
 import Router from '@koa/router';
 import Koa from 'koa';
 
-export default async function installCors(app: Koa, _router: Router) {
+export default async function installCors(app: Koa) {
   const isDev = process.env.NODE_ENV === 'development';
   const port = process.env.ADMIN_DEVSERVER_PORT || 3001;
 

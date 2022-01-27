@@ -35,7 +35,7 @@ const CSP_DIRECTIVES = {
   ],
 };
 
-export default async function installHelmet(app: Koa, _router: Router) {
+export default async function installHelmet(app: Koa) {
   app.use(async (ctx, next) => {
     // await next();
     const cspMiddleware = koaHelmet(
