@@ -8,19 +8,23 @@ export const useStore = defineStore('main', {
   state: () => {
     const handle = useClientHandle();
 
-    watch(
-      accessToken,
-      async (accessToken) => {
-        const store = useStore();
-        if (accessToken) {
-          const { data } = await handle.client.query(GetMeDocument).toPromise();
-          store.currentMember = data?.currentMember || null;
-        } else {
-          store.currentMember = null;
-        }
-      },
-      { immediate: true }
-    );
+    if (!import.meta.env.SSR) {
+      watch(
+        accessToken,
+        async (accessToken) => {
+          const store = useStore();
+          if (accessToken) {
+            const { data } = await handle.client
+              .query(GetMeDocument)
+              .toPromise();
+            store.currentMember = data?.currentMember || null;
+          } else {
+            store.currentMember = null;
+          }
+        },
+        { immediate: true }
+      );
+    }
 
     return {
       currentMember: null as GetMeQuery['currentMember'],

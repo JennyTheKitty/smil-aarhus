@@ -1401,6 +1401,12 @@ type Mutation {
     """
     input: UpsertInfoPageInput!
   ): UpsertInfoPagePayload
+  upsertNews(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertNewsInput!
+  ): UpsertNewsPayload
 }
 
 type News {
@@ -1481,7 +1487,7 @@ input NewsFilter {
 
 """An input for mutations affecting `News`"""
 input NewsInput {
-  id: UUID!
+  id: UUID
   publishedAt: Datetime!
   updatedAt: Datetime!
 }
@@ -1531,6 +1537,13 @@ input NewsTrCondition {
 
   """Checks for equality with the object’s `title` field."""
   title: String
+}
+
+"""An input for mutations affecting `NewsTrDatum`"""
+input NewsTrDatumInput {
+  content: String!
+  languageCode: String!
+  title: String!
 }
 
 """
@@ -2444,6 +2457,38 @@ type UpsertInfoPagePayload {
 
   """Reads a single `Page` that is related to this `InfoPage`."""
   pageById: Page
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `upsertNews` mutation."""
+input UpsertNewsInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  newsId: UUID
+  translations: [NewsTrDatumInput]!
+}
+
+"""The output of our `upsertNews` mutation."""
+type UpsertNewsPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  news: News
+
+  """An edge for our `News`. May be used by Relay 1."""
+  newsEdge(
+    """The method to use when ordering `News`."""
+    orderBy: [NewsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): NewsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.

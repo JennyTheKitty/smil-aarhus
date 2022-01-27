@@ -111,6 +111,15 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
                   cache.invalidate(key, field.fieldName, field.arguments);
                 });
             },
+            upsertNews(_result, _args, cache, _info) {
+              const key = 'Query';
+              cache
+                .inspectFields(key)
+                .filter((field) => field.fieldName === 'newsesConnection')
+                .forEach((field) => {
+                  cache.invalidate(key, field.fieldName, field.arguments);
+                });
+            },
           },
         },
         keys: {

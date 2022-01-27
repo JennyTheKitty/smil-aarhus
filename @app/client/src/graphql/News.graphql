@@ -6,3 +6,11 @@ query NewsesQuery($offset: Int, $first: Int) {
     totalCount
   }
 }
+
+mutation UpsertNews($translations: [NewsTrDatumInput]!, $id: UUID) {
+  upsertNews(input: { translations: $translations, newsId: $id }) {
+    news {
+      ...News
+    }
+  }
+}

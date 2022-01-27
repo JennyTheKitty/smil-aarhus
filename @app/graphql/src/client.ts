@@ -1065,6 +1065,7 @@ export type Mutation = {
   upsertEventTag: Maybe<UpsertEventTagPayload>;
   upsertGroup: Maybe<UpsertGroupPayload>;
   upsertInfoPage: Maybe<UpsertInfoPagePayload>;
+  upsertNews: Maybe<UpsertNewsPayload>;
 };
 
 
@@ -1217,6 +1218,12 @@ export type MutationUpsertInfoPageArgs = {
   input: UpsertInfoPageInput;
 };
 
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpsertNewsArgs = {
+  input: UpsertNewsInput;
+};
+
 export type News = {
   __typename?: 'News';
   id: Scalars['UUID'];
@@ -1276,7 +1283,7 @@ export type NewsFilter = {
 
 /** An input for mutations affecting `News` */
 export type NewsInput = {
-  id: Scalars['UUID'];
+  id?: InputMaybe<Scalars['UUID']>;
   publishedAt: Scalars['Datetime'];
   updatedAt: Scalars['Datetime'];
 };
@@ -1321,6 +1328,13 @@ export type NewsTrCondition = {
   newsId?: InputMaybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `title` field. */
   title?: InputMaybe<Scalars['String']>;
+};
+
+/** An input for mutations affecting `NewsTrDatum` */
+export type NewsTrDatumInput = {
+  content: Scalars['String'];
+  languageCode: Scalars['String'];
+  title: Scalars['String'];
 };
 
 /** A filter to be used against `NewsTr` object types. All fields are combined with a logical ‘and.’ */
@@ -2179,6 +2193,38 @@ export type UpsertInfoPagePayload = {
   query: Maybe<Query>;
 };
 
+/** All input for the `upsertNews` mutation. */
+export type UpsertNewsInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  newsId?: InputMaybe<Scalars['UUID']>;
+  translations: Array<InputMaybe<NewsTrDatumInput>>;
+};
+
+/** The output of our `upsertNews` mutation. */
+export type UpsertNewsPayload = {
+  __typename?: 'UpsertNewsPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId: Maybe<Scalars['String']>;
+  news: Maybe<News>;
+  /** An edge for our `News`. May be used by Relay 1. */
+  newsEdge: Maybe<NewsEdge>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query: Maybe<Query>;
+};
+
+
+/** The output of our `upsertNews` mutation. */
+export type UpsertNewsPayloadNewsEdgeArgs = {
+  orderBy?: InputMaybe<Array<NewsOrderBy>>;
+};
+
 export type AuthenticateMutationVariables = Exact<{
   username: Scalars['String'];
   password: Scalars['String'];
@@ -2350,6 +2396,14 @@ export type NewsesQueryQueryVariables = Exact<{
 
 export type NewsesQueryQuery = { __typename?: 'Query', newsesConnection: { __typename?: 'NewsConnection', totalCount: number, nodes: Array<{ __typename?: 'News', publishedAt: string, id: any, updatedAt: string, translations: Array<{ __typename?: 'NewsTr', content: string, title: string, languageCode: TrLanguage, newsId: any }> }> } | null | undefined };
 
+export type UpsertNewsMutationVariables = Exact<{
+  translations: Array<InputMaybe<NewsTrDatumInput>> | InputMaybe<NewsTrDatumInput>;
+  id?: InputMaybe<Scalars['UUID']>;
+}>;
+
+
+export type UpsertNewsMutation = { __typename?: 'Mutation', upsertNews: { __typename?: 'UpsertNewsPayload', news: { __typename?: 'News', publishedAt: string, id: any, updatedAt: string, translations: Array<{ __typename?: 'NewsTr', content: string, title: string, languageCode: TrLanguage, newsId: any }> } | null | undefined } | null | undefined };
+
 export type PageQueryQueryVariables = Exact<{
   id: Scalars['UUID'];
 }>;
@@ -2508,6 +2562,7 @@ export const HomeGroupsQueryDocument = {"kind":"Document","definitions":[{"kind"
 export const HomeRandomPicturesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"HomeRandomPicturesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"randomPictures"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"4"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Picture"}}]}}]}},...PictureFragmentDoc.definitions]} as unknown as DocumentNode<HomeRandomPicturesQueryQuery, HomeRandomPicturesQueryQueryVariables>;
 export const HomeNewsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"HomeNewsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"newses"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"PUBLISHED_AT_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"News"}}]}}]}},...NewsFragmentDoc.definitions]} as unknown as DocumentNode<HomeNewsQueryQuery, HomeNewsQueryQueryVariables>;
 export const NewsesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"NewsesQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"newsesConnection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"PUBLISHED_AT_DESC"}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"News"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}}]}},...NewsFragmentDoc.definitions]} as unknown as DocumentNode<NewsesQueryQuery, NewsesQueryQueryVariables>;
+export const UpsertNewsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpsertNews"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"translations"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"NewsTrDatumInput"}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"upsertNews"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"translations"},"value":{"kind":"Variable","name":{"kind":"Name","value":"translations"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"newsId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"news"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"News"}}]}}]}}]}},...NewsFragmentDoc.definitions]} as unknown as DocumentNode<UpsertNewsMutation, UpsertNewsMutationVariables>;
 export const PageQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PageQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageTranslation"}}]}}]}}]}},...PageTranslationFragmentDoc.definitions]} as unknown as DocumentNode<PageQueryQuery, PageQueryQueryVariables>;
 export const UpdatePageTranslationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdatePageTranslation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"content"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"pageId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"TrLanguage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updatePageTr"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"patch"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"content"},"value":{"kind":"Variable","name":{"kind":"Name","value":"content"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"pageId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"languageCode"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pageTr"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageTranslation"}}]}}]}}]}},...PageTranslationFragmentDoc.definitions]} as unknown as DocumentNode<UpdatePageTranslationMutation, UpdatePageTranslationMutationVariables>;
 export const InfoPagesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"InfoPagesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"infoPages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"RANK_ASC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"InfoPage"}}]}}]}},...InfoPageFragmentDoc.definitions]} as unknown as DocumentNode<InfoPagesQueryQuery, InfoPagesQueryQueryVariables>;
