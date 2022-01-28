@@ -37,7 +37,7 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
   return urqlCreateClient({
     // @ts-ignore
     // eslint-disable-next-line no-undef
-    url: `${__ROOT_URL__}/graphql`,
+    url: `/graphql`,
 
     exchanges: [
       ...(import.meta.env.DEV ? [devtoolsExchange] : []),

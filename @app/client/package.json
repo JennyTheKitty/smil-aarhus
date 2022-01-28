@@ -4,6 +4,12 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production NODE_OPTIONS=\"${NODE_OPTIONS:-} -r @app/config/env\" vite-ssr build"
   },
+  "files": [
+    "./src",
+    "./tsconfig.json",
+    "./windi.config.js",
+    "./vite.config.ts"
+  ],
   "dependencies": {
     "@app/config": "workspace:^",
     "@app/editor": "workspace:^",

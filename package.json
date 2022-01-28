@@ -29,16 +29,7 @@
   },
   "author": "Jasmin Bom",
   "license": "SEE LICENSE IN LICENSE.md",
-  "dependencies": {
-    "abort-controller": "^3.0.0",
-    "dayjs": "^1.10.7",
-    "graphql": "^15.8.0",
-    "ical.js": "^1.5.0",
-    "inquirer": "^8.2.0",
-    "lerna": "^4.0.0",
-    "string-width": "^5.1.0",
-    "uuid": "^8.3.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^17.0.12",
     "@types/uuid": "^8.3.4",
@@ -59,7 +50,15 @@
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
     "ts-node": "^10.4.0",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "lerna": "^4.0.0",
+    "abort-controller": "^3.0.0",
+    "dayjs": "^1.10.7",
+    "graphql": "^15.8.0",
+    "ical.js": "^1.5.0",
+    "inquirer": "^8.2.0",
+    "string-width": "^5.1.0",
+    "uuid": "^8.3.2"
   },
   "resolutions": {
     "graphql": "15.x",

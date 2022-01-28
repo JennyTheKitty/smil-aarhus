@@ -18,5 +18,6 @@
     "down": "yarn compose down --remove-orphans"
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {},
+  "files": []
 }

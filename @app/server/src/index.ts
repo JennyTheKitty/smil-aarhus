@@ -13,7 +13,8 @@ async function main() {
 
   // And finally, we open the listen port
   const PORT = parseInt(process.env.PORT || '', 10) || 3000;
-  server.listen(PORT, () => {
+  server.listen(PORT, '0.0.0.0', () => {
+    console.log(server.address(), process.env);
     const address = server.address();
     if (address && typeof address !== 'string') {
       const href = `${process.env.ROOT_URL}/graphiql`;

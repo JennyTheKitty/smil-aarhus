@@ -95,9 +95,6 @@ export default defineConfig({
     ],
     exclude: ['vue-demi'],
   },
-  define: {
-    __ROOT_URL__: JSON.stringify(process.env.ROOT_URL),
-  },
   plugins: [
     viteSSR({
       excludeSsrComponents: [
