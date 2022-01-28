@@ -6,9 +6,9 @@ const {
   outro,
   runSync,
   projectName,
-} = require("./_setup_utils.cjs");
-const inquirer = require("inquirer");
-const pg = require("pg");
+} = require('./_setup_utils.cjs');
+const inquirer = require('inquirer');
+const pg = require('pg');
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -16,10 +16,9 @@ runMain(async () => {
   await checkGit();
 
   // Ensure server build has been run
-  runSync(yarnCmd, ["server", "build"]);
+  runSync(yarnCmd, ['server', 'build']);
 
   // Source our environment
-  require(`${__dirname}/../@app/config/env`);
   const {
     DATABASE_AUTHENTICATOR,
     DATABASE_AUTHENTICATOR_PASSWORD,
@@ -33,27 +32,27 @@ runMain(async () => {
   if (!CONFIRM_DROP) {
     const confirm = await inquirer.prompt([
       {
-        type: "confirm",
-        name: "CONFIRM",
+        type: 'confirm',
+        name: 'CONFIRM',
         default: false,
         message: `We're going to drop (if necessary)`,
       },
     ]);
     if (!confirm.CONFIRM) {
-      console.error("Confirmation failed; exiting");
+      console.error('Confirmation failed; exiting');
       process.exit(1);
     }
   }
 
-  console.log("Installing or reinstalling the roles and database...");
+  console.log('Installing or reinstalling the roles and database...');
   const pgPool = new pg.Pool({
     connectionString: ROOT_DATABASE_URL,
   });
 
-  pgPool.on("error", (err) => {
+  pgPool.on('error', (err) => {
     // Ignore
     console.log(
-      "An error occurred whilst trying to talk to the database: " + err.message
+      'An error occurred whilst trying to talk to the database: ' + err.message
     );
   });
 
@@ -64,7 +63,7 @@ runMain(async () => {
       await pgPool.query('select true as "Connection test";');
       break;
     } catch (e) {
-      if (e.code === "28P01") {
+      if (e.code === '28P01') {
         throw e;
       }
       attempts++;
@@ -114,8 +113,8 @@ runMain(async () => {
   }
   await pgPool.end();
 
-  runSync(yarnCmd, ["db", "reset", "--erase"]);
-  runSync(yarnCmd, ["db", "reset", "--shadow", "--erase"]);
+  runSync(yarnCmd, ['db', 'reset', '--erase']);
+  runSync(yarnCmd, ['db', 'reset', '--shadow', '--erase']);
 
   outro(`\
 ✅ Setup success
@@ -125,7 +124,7 @@ runMain(async () => {
 ${
   projectName
     ? // Probably Docker setup
-      "  export UID; docker-compose up server"
+      '  export UID; docker-compose up server'
     : `  ${yarnCmd} start`
 }`);
 });

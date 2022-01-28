@@ -25,19 +25,17 @@ services:
       - ./docker/nginx/10-default.conf:/etc/nginx/conf.d/10-default.conf
       - ./docker/nginx/20-proxy.conf:/etc/nginx/conf.d/20-proxy.conf
 
-      - ./docker/nginx/50-server.conf:/etc/nginx/templates/50-server.conf.template
-      - ./docker/nginx/50-img.conf:/etc/nginx/templates/50-img.conf.template
-      - ./docker/nginx/50-media.conf:/etc/nginx/templates/50-media.conf.template
+      - ./docker/nginx/40-server.conf:/etc/nginx/templates/40-server.conf.template
+      - ./docker/nginx/30-img.conf:/etc/nginx/templates/30-img.conf.template
+      - ./docker/nginx/30-media.conf:/etc/nginx/templates/30-media.conf.template
 
     ports:
-      - "80:80"
+      - "8000:80"
 
     restart: unless-stopped
 
   server:
-    build:
-      context: .
-      dockerfile: production.Dockerfile
+    image: smil-server
 
     networks:
       - default
