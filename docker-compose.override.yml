@@ -16,9 +16,15 @@ services:
     image: nginx:alpine
 
     volumes:
-      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./docker/nginx/proxy.conf:/etc/nginx/proxy.conf
       - nginx_cache:/var/cache/nginx
+
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/10-default.conf:/etc/nginx/conf.d/10-default.conf
+      - ./docker/nginx/20-proxy.conf:/etc/nginx/conf.d/20-proxy.conf
+
+      - ./docker/nginx/40-dev.conf:/etc/nginx/templates/40-dev.conf.template
+      - ./docker/nginx/30-img.conf:/etc/nginx/templates/30-img.conf.template
+      - ./docker/nginx/30-media.conf:/etc/nginx/templates/30-media.conf.template
 
     ports:
       - '12345:12345'
@@ -27,7 +33,7 @@ services:
   dev:
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: Dockerfile
       args:
         SETUP_MODE: dev
 
@@ -47,6 +53,7 @@ services:
       - nm_app_db:/work/@app/db/node_modules
       - nm_app_graphql:/work/@app/graphql/node_modules
       - nm_app_server:/work/@app/server/node_modules
+      - nm_app_editor:/work/@app/editor/node_modules
       - vscode_extensions:/root/.vscode-server
 
     working_dir: /work
@@ -66,11 +73,11 @@ services:
 
 volumes:
   nm_root:
-  nm_app_admin:
   nm_app_client:
   nm_app_config:
   nm_app_db:
   nm_app_graphql:
   nm_app_server:
+  nm_app_editor:
   vscode_extensions:
   nginx_cache:

@@ -127,13 +127,17 @@
 
 <script setup lang="ts">
 import { HomeGroupsQueryDocument } from '@app/graphql/dist/client';
+import { ResultOf, VariablesOf } from '@graphql-typed-document-node/core';
 
 import { useTranslation } from '../../utils';
 
 const { t, locale } = useI18n();
 const { fromUUID } = useShort();
 
-const { data: groupsData } = await useQuery({
+const { data: groupsData } = await useQuery<
+  ResultOf<typeof HomeGroupsQueryDocument>,
+  VariablesOf<typeof HomeGroupsQueryDocument>
+>({
   query: HomeGroupsQueryDocument,
 });
 const groups = computed(() =>
@@ -141,8 +145,10 @@ const groups = computed(() =>
 );
 
 const scroller = ref<HTMLElement | null>(null);
-const img = ref<HTMLElement | null>(null);
-const { width: imgWidth } = useElementSize(img);
+const img = ref<HTMLElement[] | null>(null);
+const { width: imgWidth } = useElementSize(
+  computed(() => (img.value ? img.value[0] : null))
+);
 const { x, arrivedState } = useScroll(scroller);
 const { width } = useElementSize(scroller);
 const scrollAmount = computed(() => {

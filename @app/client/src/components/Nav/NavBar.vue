@@ -7,7 +7,7 @@
     w:pos="md:sticky top-0"
     w:transition="~ background-color duration-50"
   >
-    <ExpandTransition>
+    <!-- <ExpandTransition>
       <div
         v-show="menuOpen"
         id="nav-menu"
@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-    </ExpandTransition>
+    </ExpandTransition> -->
     <div w:m="auto" w:max-w="7xl" w:p="x-2 md:x-8" w:z="10" w:pos="relative">
       <div w:flex="~" w:h="16" w:align="items-center" w:justify="between">
         <div

@@ -1,10 +1,6 @@
 {
-  "i18n-ally.enabledFrameworks": [
-    "vue"
-  ],
-  "i18n-ally.localesPaths": [
-    "@app/client/src/lang"
-  ],
+  "i18n-ally.enabledFrameworks": ["vue"],
+  "i18n-ally.localesPaths": ["@app/client/src/lang"],
   "i18n-ally.keystyle": "flat",
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
@@ -21,7 +17,7 @@
     "graphql"
   ],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": false
   },
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
@@ -52,6 +48,6 @@
   },
   "eslint.nodePath": ".yarn/sdks",
   "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
-  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true
 }

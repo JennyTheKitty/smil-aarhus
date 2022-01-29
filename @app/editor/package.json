@@ -7,10 +7,13 @@
     "./webpack.config.cjs"
   ],
   "type": "module",
-  "dependencies": {
+  "devDependencies": {
     "@ckeditor/ckeditor5-basic-styles": "^31.1.0",
     "@ckeditor/ckeditor5-build-classic": "^31.1.0",
     "@ckeditor/ckeditor5-build-inline": "^31.1.0",
+    "@ckeditor/ckeditor5-core": "^31.1.0",
+    "@ckeditor/ckeditor5-dev-utils": "^28.0.1",
+    "@ckeditor/ckeditor5-dev-webpack-plugin": "^28.0.1",
     "@ckeditor/ckeditor5-editor-classic": "^31.1.0",
     "@ckeditor/ckeditor5-editor-inline": "^31.1.0",
     "@ckeditor/ckeditor5-essentials": "^31.1.0",
@@ -20,13 +23,8 @@
     "@ckeditor/ckeditor5-paragraph": "^31.1.0",
     "@ckeditor/ckeditor5-paste-from-office": "^31.1.0",
     "@ckeditor/ckeditor5-source-editing": "^31.1.0",
-    "@ckeditor/ckeditor5-typing": "^31.1.0"
-  },
-  "devDependencies": {
-    "@ckeditor/ckeditor5-core": "^31.1.0",
-    "@ckeditor/ckeditor5-dev-utils": "^28.0.1",
-    "@ckeditor/ckeditor5-dev-webpack-plugin": "^28.0.1",
     "@ckeditor/ckeditor5-theme-lark": "^31.1.0",
+    "@ckeditor/ckeditor5-typing": "^31.1.0",
     "css-loader": "^6.5.1",
     "postcss": "^8.4.5",
     "postcss-loader": "^6.2.1",

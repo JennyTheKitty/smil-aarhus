@@ -11,7 +11,6 @@ import 'nprogress/nprogress.css';
 import { fetchExchange, ssrExchange } from '@urql/core';
 import urql from '@urql/vue';
 import { createHead } from '@vueuse/head';
-import { useNProgress } from '@vueuse/integrations/useNProgress';
 import { parse as acceptLanguageParser } from 'accept-language-parser';
 import { createPinia } from 'pinia';
 import viteSSR, { ClientOnly } from 'vite-ssr';
@@ -21,13 +20,6 @@ import App from './App.vue';
 import { i18n, userLangs } from './i18n';
 import { routes } from './routes';
 import { createClient } from './urql';
-
-// @ts-ignore
-// eslint-disable-next-line no-undef
-if (__ROOT_URL__ === '') {
-  console.log(import.meta.env);
-  throw new Error('No ROOT_URL');
-}
 
 if (!import.meta.env.SSR && import.meta.env.DEV) {
   // @ts-ignore
@@ -86,15 +78,15 @@ export default viteSSR(
     const isServerSide = import.meta.env.SSR;
 
     if (!isServerSide) {
-      const { isLoading } = useNProgress();
+      // const { isLoading } = useNProgress();
 
-      (router as Router).beforeEach((to, from, next) => {
-        isLoading.value = true;
-        next();
-      });
-      (router as Router).afterEach(() => {
-        isLoading.value = false;
-      });
+      // (router as Router).beforeEach((to, from, next) => {
+      //   isLoading.value = true;
+      //   next();
+      // });
+      // (router as Router).afterEach(() => {
+      //   isLoading.value = false;
+      // });
 
       void (async () => {
         const Iconify = await import('@iconify/iconify');

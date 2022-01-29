@@ -2,25 +2,21 @@
   <div w:bg="dark-500">
     <MemberBar v-if="store.currentMember" />
     <suspense><NavBar /></suspense>
-    <router-view v-slot="{ Component }">
+    <router-view v-slot="{ Component, route }">
       <template v-if="Component">
-        <transition
-          enter-active-class="transition duration-500 ease-out"
-          enter-from-class="opacity-0"
-          enter-to-class="opacity-100"
-          leave-active-class="transition duration-500 ease-in"
-          leave-from-class="opacity-100"
-          leave-to-class="opacity-0"
-          mode="out-in"
-        >
-          <div>
-            <!-- <keep-alive> -->
-            <component :is="Component"></component>
-            <!-- </keep-alive> -->
+        <transition mode="out-in">
+          <div :key="route.name">
+            <suspense>
+              <component :is="Component"></component>
+              <template #fallback>
+                <div>Loading...</div>
+              </template>
+            </suspense>
           </div>
         </transition>
       </template>
     </router-view>
+
     <Footer />
   </div>
 </template>

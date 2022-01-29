@@ -21,6 +21,7 @@
     "@fullcalendar/list": "^5.10.1",
     "@fullcalendar/timegrid": "^5.10.1",
     "@fullcalendar/vue3": "^5.10.1",
+    "@graphql-typed-document-node/core": "^3.1.1",
     "@headlessui/vue": "^1.4.3",
     "@iconify/iconify": "^2.1.2",
     "@types/jsdom": "^16.2.14",
@@ -32,7 +33,7 @@
     "@vue/runtime-dom": "^3.2.29",
     "@vueuse/core": "^7.5.5",
     "@vueuse/head": "^0.7.5",
-    "@vueuse/integrations": "^7.5.5",
+    "@vueuse/shared": "^7.5.5",
     "abab": "^2.0.5",
     "accept-language-parser": "^1.5.0",
     "axios": "^0.25.0",
@@ -48,11 +49,8 @@
     "pinia": "^2.0.9",
     "preact": "^10.6.5",
     "short-uuid": "^4.2.0",
-    "vite-ssr": "^0.15.0",
     "vue": "3.2.29",
-    "vue-lazy-hydration": "^2.0.0-beta.4",
     "vue-router": "^4.0.3",
-    "webpack": "^5.67.0",
     "windicss": "^3.4.3"
   },
   "devDependencies": {
@@ -64,12 +62,14 @@
     "@vue/compiler-sfc": "^3.2.29",
     "@vue/server-renderer": "^3.2.29",
     "cross-env": "^7.0.3",
+    "sass": "^1.49.0",
     "typescript": "^4.5.5",
     "unplugin-auto-import": "^0.5.11",
     "unplugin-icons": "^0.13.0",
     "unplugin-vue-components": "^0.17.14",
     "vite": "^2.7.13",
     "vite-imagetools": "^4.0.3",
-    "vite-plugin-windicss": "^1.6.3"
+    "vite-plugin-windicss": "^1.6.3",
+    "vite-ssr": "^0.15.0"
   }
 }

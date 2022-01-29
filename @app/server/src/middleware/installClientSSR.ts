@@ -145,6 +145,7 @@ export default async function installClientSSR(app: Koa) {
   const router = new Router();
 
   const resolve = (p: string) => pathResolve(__dirname + '/../../../client', p);
+  console.log(resolve(`./dist`));
   app.use(async (ctx, next) => {
     const link = GraphileExchange(ctx.req, ctx.res);
     ctx.state.graphileExchange = link;

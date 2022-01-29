@@ -11,15 +11,7 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'prettier',
   ],
-  plugins: [
-    'jest',
-    '@typescript-eslint',
-    'react-hooks',
-    'react',
-    'graphql',
-    'simple-import-sort',
-    'import',
-  ],
+  plugins: ['@typescript-eslint', 'graphql', 'simple-import-sort', 'import'],
   overrides: [
     {
       files: ['*.vue'],
@@ -100,9 +92,6 @@ module.exports = {
     },
   },
   settings: {
-    react: {
-      version: 'detect',
-    },
     'import/core-modules': [
       'virtual:windi-base.css',
       'virtual:windi-components.css',
@@ -115,7 +104,6 @@ module.exports = {
       'virtual:windi-devtools',
       'unplugin-vue-components/resolvers',
       'unplugin-icons/loaders',
-      '@vueuse/integrations/useNProgress',
     ],
   },
   env: {
@@ -125,8 +113,6 @@ module.exports = {
     es6: true,
   },
   rules: {
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'error',
     '@typescript-eslint/no-unused-vars': [
       'warn',
       {
@@ -147,8 +133,6 @@ module.exports = {
     'no-else-return': 0,
     'no-return-assign': [2, 'except-parens'],
     'no-underscore-dangle': 0,
-    'jest/no-focused-tests': 2,
-    'jest/no-identical-title': 2,
     camelcase: 0,
     'prefer-arrow-callback': [
       'error',
@@ -164,14 +148,8 @@ module.exports = {
         props: false,
       },
     ],
-    'react/prop-types': 0,
-    'react/no-multi-comp': 0,
-    'react/jsx-filename-extension': 0,
-    'react/no-unescaped-entities': 0,
 
     'import/no-extraneous-dependencies': 0,
-
-    'react/destructuring-assignment': 0,
 
     'arrow-body-style': 0,
     'no-nested-ternary': 0,

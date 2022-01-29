@@ -1,20 +1,7 @@
 import {
-  CreatePictureMutation,
-  EventTagsQueryDocument,
-  EventTagTr,
-  EventTr,
-  EventViaEventTag,
-  EventViaGroup,
-  GroupTr,
-  InfoPage,
   InfoPagesQueryDocument,
-  InfoPageTr,
-  NewsTr,
-  Page,
-  PageTr,
   PicturesQueryDocument,
-  UpsertEventTagMutation,
-  UpsertInfoPageMutation,
+  GraphCacheConfig,
 } from '@app/graphql/dist/client';
 import schema from '@app/graphql/dist/introspection';
 import {
@@ -31,19 +18,14 @@ import jwtDecode from 'jwt-decode';
 
 import { accessToken } from './accessToken';
 
-const Narrow = <T>(v: any): v is T => true;
-
 export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
   return urqlCreateClient({
-    // @ts-ignore
-    // eslint-disable-next-line no-undef
     url: `/graphql`,
 
     exchanges: [
       ...(import.meta.env.DEV ? [devtoolsExchange] : []),
       dedupExchange,
-      cacheExchange({
-        // @ts-ignore
+      cacheExchange<GraphCacheConfig>({
         schema,
         updates: {
           Mutation: {
@@ -79,28 +61,24 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
               });
             },
             createPicture(result, _args, cache, _info) {
-              if (Narrow<NonNullable<CreatePictureMutation>>(result)) {
-                cache.updateQuery({ query: PicturesQueryDocument }, (data) => {
-                  data!.pictures!.push(result.createPicture!.picture!);
-                  data!.pictures!.sort((a, b) => a.rank - b.rank);
-                  return data;
-                });
-              }
+              cache.updateQuery({ query: PicturesQueryDocument }, (data) => {
+                data!.pictures!.push(result.createPicture!.picture!);
+                data!.pictures!.sort((a, b) => a.rank - b.rank);
+                return data;
+              });
             },
             upsertInfoPage(result, _args, cache, _info) {
-              if (Narrow<NonNullable<UpsertInfoPageMutation>>(result)) {
-                cache.updateQuery({ query: InfoPagesQueryDocument }, (data) => {
-                  if (
-                    !data!.infoPages?.some(
-                      (ip) => ip.id === result.upsertInfoPage!.infoPage!.id
-                    )
-                  ) {
-                    data!.infoPages!.push(result.upsertInfoPage!.infoPage!);
-                  }
-                  data!.infoPages!.sort((a, b) => a.rank - b.rank);
-                  return data;
-                });
-              }
+              cache.updateQuery({ query: InfoPagesQueryDocument }, (data) => {
+                if (
+                  !data!.infoPages?.some(
+                    (ip) => ip.id === result.upsertInfoPage!.infoPage!.id
+                  )
+                ) {
+                  data!.infoPages!.push(result.upsertInfoPage!.infoPage!);
+                }
+                data!.infoPages!.sort((a, b) => a.rank - b.rank);
+                return data;
+              });
             },
             upsertEventTag(_result, _args, cache, _info) {
               const key = 'Query';
@@ -123,30 +101,14 @@ export function createClient(lastExchange: Exchange, ssr: Exchange): Client {
           },
         },
         keys: {
-          EventTr: (data) =>
-            `${(data as EventTr).languageCode}|${(data as EventTr).eventId}`,
-          PageTr: (data) =>
-            `${(data as PageTr).languageCode}|${(data as PageTr).pageId}`,
-          GroupTr: (data) =>
-            `${(data as GroupTr).languageCode}|${(data as GroupTr).groupId}`,
-          EventTagTr: (data) =>
-            `${(data as EventTagTr).languageCode}|${
-              (data as EventTagTr).tagId
-            }`,
-          NewsTr: (data) =>
-            `${(data as NewsTr).languageCode}|${(data as NewsTr).newsId}`,
-          InfoPageTr: (data) =>
-            `${(data as InfoPageTr).languageCode}|${
-              (data as InfoPageTr).infoPageId
-            }`,
-          EventViaGroup: (data) =>
-            `${(data as EventViaGroup).eventId}|${
-              (data as EventViaGroup).groupId
-            }`,
-          EventViaEventTag: (data) =>
-            `${(data as EventViaEventTag).eventId}|${
-              (data as EventViaEventTag).tagId
-            }`,
+          EventTr: (data) => `${data.languageCode}|${data.eventId}`,
+          PageTr: (data) => `${data.languageCode}|${data.pageId}`,
+          GroupTr: (data) => `${data.languageCode}|${data.groupId}`,
+          EventTagTr: (data) => `${data.languageCode}|${data.tagId}`,
+          NewsTr: (data) => `${data.languageCode}|${data.newsId}`,
+          InfoPageTr: (data) => `${data.languageCode}|${data.infoPageId}`,
+          EventViaGroup: (data) => `${data.eventId}|${data.groupId}`,
+          EventViaEventTag: (data) => `${data.eventId}|${data.tagId}`,
           ResponsiveImage: () => null,
         },
       }),

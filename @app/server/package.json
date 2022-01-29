@@ -39,10 +39,7 @@
     "postgraphile-plugin-fulltext-filter": "^1.0.0-beta.7",
     "source-map-support": "^0.5.21",
     "tslib": "^2.3.1",
-    "typescript": "^4.5.5",
     "uuid": "^8.3.2",
-    "vite": "^2.7.13",
-    "vite-ssr": "^0.15.0",
     "wonka": "^4.0.15"
   },
   "devDependencies": {
@@ -66,7 +63,19 @@
     "@types/uuid": "^8.3.4",
     "cross-env": "^7.0.3",
     "graphql": "^15.8.0",
-    "ts-node": "^10.4.0"
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5",
+    "vite": "^2.7.13",
+    "vite-ssr": "^0.15.0"
+  },
+  "resolutions": {
+    "graphql": "15.x",
+    "pg-connection-string": "2.x",
+    "@graphql-typed-document-node/core": "3.1.1",
+    "vfonts": "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.1.3.tgz",
+    "highlight.js": "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.1.3.tgz",
+    "util": "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.1.3.tgz",
+    "crypto-browserify": "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.1.3.tgz"
   },
   "files": [
     "./src",
