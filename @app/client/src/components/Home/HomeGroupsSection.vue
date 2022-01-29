@@ -66,14 +66,14 @@
                 w:transition="~ duration-200 all"
               >
                 <span
-                  w:text="white 3xl md:xl shadow-lg center md:group-hover:3xl space-nowrap"
+                  w:text="white 2xl md:xl shadow-lg center md:group-hover:3xl space-nowrap"
                   w:w="full md:0 md:group-hover:full"
                   w:font="bold tracking-wider md:tracking-wide md:group-hover:tracking-wider"
                   w:transition="~ duration-200 all"
                 >
                   {{ group.title }}
                 </span>
-                <span w:text="center" w:w="full" w:p="4">
+                <span w:text="base center" w:w="full" w:p="4">
                   {{ group.shortDescription }}
                 </span>
               </div>

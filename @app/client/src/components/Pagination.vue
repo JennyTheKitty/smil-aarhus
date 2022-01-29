@@ -1,5 +1,5 @@
 <template>
-  <div class="pagination" w:w="xl">
+  <div class="pagination" w:w="full sm:xl">
     <button
       class="prev"
       w:border="pink-500 1 rounded-md disabled:grey-500"

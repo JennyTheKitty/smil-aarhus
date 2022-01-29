@@ -7,7 +7,7 @@
     w:pos="md:sticky top-0"
     w:transition="~ background-color duration-50"
   >
-    <!-- <ExpandTransition>
+    <ExpandTransition>
       <div
         v-show="menuOpen"
         id="nav-menu"
@@ -25,11 +25,11 @@
           w:m="x-auto"
         >
           <div v-for="link in navLinks" :key="link.name">
-            <NavLink :link="link" :mobile="true" />
+            <NavLink :link="link" :mobile="true" @click="menuOpen = false" />
           </div>
         </div>
       </div>
-    </ExpandTransition> -->
+    </ExpandTransition>
     <div w:m="auto" w:max-w="7xl" w:p="x-2 md:x-8" w:z="10" w:pos="relative">
       <div w:flex="~" w:h="16" w:align="items-center" w:justify="between">
         <div

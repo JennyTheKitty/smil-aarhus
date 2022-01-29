@@ -3,6 +3,7 @@
     role="main"
     w:m="x-auto b-5 md:b-20 t-10"
     w:max-w="5xl"
+    w:p="x-4 sm:x-0"
     w:w="full"
     w:text="true-gray-100"
     w:flex="~ col"
@@ -36,7 +37,7 @@
       w:w="full"
       w:shadow="lg"
       w:flex="~ col"
-      w:p="x-40 y-5"
+      w:p="x-4 sm:x-40 y-5"
     >
       <h1 w:text="3xl" w:font="tracking-wider" w:m="b-2">{{ news.title }}</h1>
       <div class="content" w:text="base" v-html="news.content" />

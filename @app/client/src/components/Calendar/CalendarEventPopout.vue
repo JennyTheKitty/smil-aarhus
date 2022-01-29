@@ -85,9 +85,9 @@ const popupStyles = computed(() => {
 
   if (window.innerWidth < 1000) {
     return {
-      top: `${window.pageYOffset}px`,
-      left: `${window.pageXOffset}px`,
-      width: `${window.innerWidth}px`,
+      top: `${window.innerHeight / 2 + window.pageYOffset - height / 2}px`,
+      left: `${window.pageXOffset + 20}px`,
+      width: `${window.innerWidth - 40}px`,
     };
   }
 

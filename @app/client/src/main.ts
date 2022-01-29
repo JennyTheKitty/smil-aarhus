@@ -35,7 +35,9 @@ export default viteSSR(
         if (savedPosition) {
           return savedPosition;
         } else {
-          return { top: 0 };
+          if (to.name !== from.name) {
+            return { top: 0 };
+          }
         }
       },
     },

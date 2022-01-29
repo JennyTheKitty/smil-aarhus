@@ -19,9 +19,10 @@
     </Hero>
     <main
       role="main"
-      w:m="x-auto b-5 md:b-20"
+      w:m="sm:x-auto b-5 md:b-20"
       w:max-w="3xl"
       w:w="full"
+      w:p="x-2 sm:0"
       w:text="true-gray-100"
       w:flex="~ col md:row"
       w:align="items-center"
@@ -35,15 +36,14 @@
           w:rounded="lg"
           w:bg="dark-800"
           w:w="full"
-          w:h="64"
+          w:h="sm:64"
           w:shadow="lg"
           w:pos="relative"
           w:overflow="visible"
           class="group btn-focus-ring"
-          w:flex="~"
-          w:align="items-center"
+          w:flex="~ col sm:row"
         >
-          <picture w:flex="shrink-0">
+          <picture w:flex="shrink-0" w:display="hidden sm:block">
             <source
               :srcset="group.img.srcSetWebp"
               type="image/webp"
@@ -59,15 +59,44 @@
               alt=""
               :src="group.img.src"
               loading="lazy"
-              w:w="60"
-              w:h="48"
+              w:w="30 sm:60"
+              w:h="30 sm:48"
               w:object="cover"
               w:rounded="lg"
               w:shadow="lg"
-              w:m="-l-12"
+              w:m="l-4 sm:-l-12"
             />
           </picture>
-          <div w:flex="~ col" w:p="r-4 b-4 t-8" w:h="full" w:w="full">
+          <picture>
+            <source
+              :srcset="group.img.srcSetWebp"
+              type="image/webp"
+              sizes="400px"
+            />
+            <source
+              :srcset="group.img.srcSetJpeg"
+              type="image/webp"
+              sizes="400px"
+            />
+            <img
+              alt=""
+              :src="group.img.src"
+              :height="group.img.height"
+              :width="group.img.width"
+              loading="lazy"
+              w:w="full"
+              w:h="50"
+              w:object="cover"
+              w:rounded="t-lg"
+              w:border="pink-600 b-2"
+            />
+          </picture>
+          <div
+            w:flex="~ col"
+            w:p="r-4 b-4 t-8 l-4 sm:l-0"
+            w:h="full"
+            w:w="full"
+          >
             <div>
               <h3 w:text="3xl">{{ group.title }}</h3>
               <span w:text="lg" w:font="light">{{
