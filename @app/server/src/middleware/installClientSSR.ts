@@ -13,7 +13,7 @@ import c2k from 'koa-connect';
 import mount from 'koa-mount';
 import serve from 'koa-static';
 import { resolve as pathResolve } from 'path';
-import { createSsrServer } from 'vite-ssr/dev';
+
 import {
   filter,
   make,
@@ -145,7 +145,7 @@ export default async function installClientSSR(app: Koa) {
   const router = new Router();
 
   const resolve = (p: string) => pathResolve(__dirname + '/../../../client', p);
-  console.log(resolve(`./dist`));
+
   app.use(async (ctx, next) => {
     const link = GraphileExchange(ctx.req, ctx.res);
     ctx.state.graphileExchange = link;
@@ -153,6 +153,7 @@ export default async function installClientSSR(app: Koa) {
   });
 
   if (isDev) {
+    const { createSsrServer } = await import('vite-ssr/dev');
     const root = resolve('.');
     const viteServer = await createSsrServer({
       root,
