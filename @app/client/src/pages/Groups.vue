@@ -42,6 +42,7 @@
           w:overflow="visible"
           class="group btn-focus-ring"
           w:flex="~ col sm:row"
+          w:align="sm:items-center"
         >
           <picture w:flex="shrink-0" w:display="hidden sm:block">
             <source
@@ -67,7 +68,7 @@
               w:m="l-4 sm:-l-12"
             />
           </picture>
-          <picture>
+          <picture w:display="sm:hidden block">
             <source
               :srcset="group.img.srcSetWebp"
               type="image/webp"
