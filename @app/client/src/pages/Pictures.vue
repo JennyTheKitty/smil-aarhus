@@ -93,7 +93,7 @@ import { useStore } from '../store';
 import ImageCredits from '../components/ImageCredits.vue';
 
 const editing = ref(false);
-
+const store = useStore();
 const PictureUpload = useWaitImportComponent(
   editing,
   () => import('../components/Picture/PictureUpload.vue')
@@ -117,8 +117,8 @@ const { executeMutation: deletePicture } = useMutation(
   DeletePictureMutationDocument
 );
 
-const muuriOptions = ref({
-  dragEnabled: true,
+const muuriOptions = computed(() => ({
+  dragEnabled: editing.value,
   dragAutoScroll: {
     targets: [document.body],
   },
@@ -126,7 +126,7 @@ const muuriOptions = ref({
     distance: 10,
     delay: 100,
   },
-});
+}));
 
 const { data } = useQuery({
   query: PicturesQueryDocument,
@@ -240,7 +240,6 @@ useHead({
   ],
 });
 
-const store = useStore();
 const { t } = useI18n();
 </script>
 
