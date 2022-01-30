@@ -36,8 +36,6 @@ import { useTranslation } from '../../utils';
 
 const { t, locale } = useI18n();
 
-const jsdom = import.meta.env.SSR ? await import('jsdom') : null;
-
 const { data } = await useQuery({
   query: HomeNewsQueryDocument,
 });
@@ -47,12 +45,14 @@ const news = computed(() =>
 
 const firstLine = computed(() => {
   if (!news.value) return;
-  let doc: Document;
-  if (jsdom) {
-    doc = new jsdom.JSDOM(news.value!.content).window.document;
-  } else {
+
+  if (!import.meta.env.SSR) {
+    let doc: Document;
     doc = new DOMParser().parseFromString(news.value!.content, 'text/html');
+
+    return doc.querySelector('p')?.textContent;
+  } else {
+    return '';
   }
-  return doc.querySelector('p')?.textContent;
 });
 </script>
