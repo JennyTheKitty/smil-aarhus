@@ -16,7 +16,6 @@ INSERT INTO smil_aarhus.picture (id,image,"rank",allow_on_home) VALUES
 	 ('c89f0712-f3f9-49b1-808c-cd7a7a25b46f','4468df0e-7b62-4c39-9997-bc6b54a027e8',25,false),
 	 ('7398a8e0-3d1a-4c6b-88c8-e9c3e1797821','bfda2866-e9ed-4494-be79-a91ce8c04dc7',26,false),
 	 ('85bd144a-46a1-4bb3-b230-b1983ab15a68','ea7c30eb-8e6d-487d-a469-e47da44cf0a8',28,false),
-	 ('6cccb892-e7d1-4d8e-855a-60c12758ec0f','ba50a0b5-3000-4df0-8bd1-80571ca9f11a',30,false),
 	 ('d51b9f51-bcbd-4313-bc8a-953d8c21d894','859e2658-9520-4fa6-91a8-65cc770d111d',31,false),
 	 ('d9e0cc08-268e-446f-b45e-2e773595eb08','837822be-e2b9-4507-9c02-7a8f1381c429',35,false),
 	 ('5cc48f09-5a23-4b0e-b5c5-b7680921042d','8147e8a6-ef32-40b3-8a57-4207ae082e27',36,false),

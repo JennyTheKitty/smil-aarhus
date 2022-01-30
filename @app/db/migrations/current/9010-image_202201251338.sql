@@ -28,7 +28,6 @@ INSERT INTO smil_aarhus.image (id,"path",width,height,credit) VALUES
 	 ('ea7c30eb-8e6d-487d-a469-e47da44cf0a8','media/ea7c30eb-8e6d-487d-a469-e47da44cf0a8.jpeg',954,1431,'<p><a href="https://fetlife.com/users/4607313">MagicLight</a></p>'),
 	 ('bb7ceeb8-d117-421f-96b5-22e0e756a287','media/bb7ceeb8-d117-421f-96b5-22e0e756a287.jpeg',1431,954,'<p><a href="https://fetlife.com/users/4607313">MagicLight</a></p>'),
 	 ('05093146-bbf4-4c78-85c6-1312530862d4','media/05093146-bbf4-4c78-85c6-1312530862d4.jpeg',1431,954,'<p><a href="https://fetlife.com/users/4607313">MagicLight</a></p>'),
-	 ('ba50a0b5-3000-4df0-8bd1-80571ca9f11a','media/ba50a0b5-3000-4df0-8bd1-80571ca9f11a.jpeg',954,1431,'<p><a href="https://fetlife.com/users/4607313">MagicLight</a></p>'),
 	 ('859e2658-9520-4fa6-91a8-65cc770d111d','media/859e2658-9520-4fa6-91a8-65cc770d111d.jpeg',954,1431,'<p><a href="https://fetlife.com/users/4607313">MagicLight</a></p>'),
 	 ('02f3793c-8277-4946-8060-8e6d663e778e','media/02f3793c-8277-4946-8060-8e6d663e778e.jpeg',1431,954,'<p><a href="https://fetlife.com/users/4607313">MagicLight</a></p>'),
 	 ('10293b00-644d-4e62-a96d-a1190c6f8630','media/10293b00-644d-4e62-a96d-a1190c6f8630.jpeg',1431,954,'<p><a href="https://fetlife.com/users/4607313">MagicLight</a></p>'),
