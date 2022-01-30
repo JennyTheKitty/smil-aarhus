@@ -98,7 +98,7 @@ import {
 } from '@app/graphql/dist/client';
 import { useClientHandle } from '@urql/vue';
 import dayjs from 'dayjs';
-import { FormRules } from 'naive-ui/lib/form';
+import { FormRules } from 'naive-ui';
 
 import { useTranslation } from '../../utils';
 

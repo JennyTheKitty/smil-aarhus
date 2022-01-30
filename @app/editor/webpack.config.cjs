@@ -8,28 +8,22 @@
 /* eslint-env node */
 
 const path = require('path');
-const webpack = require('webpack');
-const { bundler, styles } = require('@ckeditor/ckeditor5-dev-utils');
+const { styles } = require('@ckeditor/ckeditor5-dev-utils');
 const CKEditorWebpackPlugin = require('@ckeditor/ckeditor5-dev-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+const { ESBuildMinifyPlugin } = require('esbuild-loader');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: false,
+  context: __dirname,
   performance: { hints: false },
 
   entry: path.resolve(__dirname, 'src', 'ckeditor.ts'),
 
   output: {
-    // // The name under which the editor will be exported.
-    // library: 'ClassicEditor',
-
     path: path.resolve(__dirname, 'dist'),
     filename: 'ckeditor.js',
-    // libraryTarget: 'commonjs',
-    // libraryExport: 'default',
-    // library: 'myLibrary', // Important
-    libraryTarget: 'module', // Important
-    // umdNamedDefine: true, // Important
+    libraryTarget: 'module',
   },
 
   resolve: {
@@ -38,14 +32,9 @@ module.exports = {
 
   optimization: {
     minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          output: {
-            // Preserve CKEditor 5 license comments.
-            comments: /^!/,
-          },
-        },
-        extractComments: false,
+      new ESBuildMinifyPlugin({
+        target: 'es2015',
+        legalComments: 'none',
       }),
     ],
   },
@@ -60,6 +49,9 @@ module.exports = {
       // When changing the built-in language, remember to also change it in the editor's configuration (src/ckeditor.js).
       language: 'en',
       additionalLanguages: 'all',
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: { build: true, mode: 'write-dts' },
     }),
   ],
 
@@ -97,8 +89,12 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
+        loader: 'esbuild-loader',
         exclude: /node_modules/,
+        options: {
+          loader: 'ts',
+          target: 'es2015',
+        },
       },
     ],
   },

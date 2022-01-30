@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { ImageQueryDocument } from '@app/graphql/dist/client';
 import { useClientHandle } from '@urql/vue';
-import { UploadCustomRequestOptions } from 'naive-ui/lib/upload';
+import { UploadCustomRequestOptions } from 'naive-ui';
 
 import { PropType } from 'vue';
 

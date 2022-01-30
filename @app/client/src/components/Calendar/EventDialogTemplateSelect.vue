@@ -55,7 +55,7 @@ import {
   SearchEventTemplatesDocument,
 } from '@app/graphql/dist/client';
 import { useClientHandle } from '@urql/vue';
-import { NSelect } from 'naive-ui/lib/select';
+import { NSelect } from 'naive-ui';
 import { PropType } from 'vue';
 
 import EventDialogTemplateSelectLabelRenderer from './EventDialogTemplateSelectLabelRenderer.vue';

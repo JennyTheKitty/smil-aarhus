@@ -1,6 +1,5 @@
 import vueI18n from '@intlify/vite-plugin-vue-i18n';
 import Vue from '@vitejs/plugin-vue';
-import fs from 'fs';
 import path from 'path';
 import AutoImport from 'unplugin-auto-import/vite';
 import { FileSystemIconLoader } from 'unplugin-icons/loaders';
@@ -12,7 +11,6 @@ import {
 } from 'unplugin-vue-components/resolvers';
 import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
-// @ts-ignore
 import { imagetools } from 'vite-imagetools';
 import WindiCSS from 'vite-plugin-windicss';
 import viteSSR from 'vite-ssr/plugin.js';
@@ -32,20 +30,12 @@ export default defineConfig({
       ),
     },
   },
-  server: {
-    fs: {
-      strict: true,
-    },
-  },
   build: {
-    minify: 'terser',
+    minify: 'esbuild',
     sourcemap: true,
-    terserOptions: {
-      output: {
-        comments: false,
-      },
-      mangle: true,
-    },
+    // terserOptions: {
+    //   mangle: false,
+    // },
     polyfillModulePreload: false,
     reportCompressedSize: false,
   },
@@ -86,9 +76,15 @@ export default defineConfig({
         /ContentEditor.vue/,
         /Pictures.vue/,
         /\@fullcalendar\/core\/vdom\.cjs/,
+        /FormDialog.vue/,
       ],
       build: {
         clientOptions: {
+          resolve: {
+            alias: {
+              'naive-ui': 'naive-ui/es',
+            },
+          },
           build: {
             rollupOptions: {
               output: {

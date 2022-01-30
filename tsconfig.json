@@ -39,7 +39,6 @@
       "@app/*": ["@app/*"]
     }
   },
-  "include": ["@app/editor/build/**/.js"],
   "references": [
     { "path": "@app/config" },
     { "path": "@app/graphql" },

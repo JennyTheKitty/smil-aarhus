@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { CreatePictureDocument } from '@app/graphql/dist/client';
 import { useClientHandle } from '@urql/vue';
-import { UploadCustomRequestOptions } from 'naive-ui/lib/upload';
+import { UploadCustomRequestOptions } from 'naive-ui';
 
 import { createImage } from '../../utils';
 

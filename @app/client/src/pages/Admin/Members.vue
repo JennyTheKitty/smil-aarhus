@@ -25,7 +25,7 @@ import {
   MembersQueryQuery,
 } from '@app/graphql/dist/client';
 import { usePagination } from '../../components/Pagination.vue';
-import { NButton } from 'naive-ui/lib/button';
+import { NButton } from 'naive-ui';
 
 const { t, locale } = useI18n();
 

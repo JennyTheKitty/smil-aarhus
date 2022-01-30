@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { SelectMixedOption } from 'naive-ui/lib/select/src/interface';
+import { SelectMixedOption } from 'naive-ui/select/src/interface';
 import { PropType } from 'vue';
 
 defineProps({

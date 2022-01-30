@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { NButton } from 'naive-ui/lib/button';
+import { NButton } from 'naive-ui';
 import { PropType } from 'vue';
 
 const emit = defineEmits(['confirm']);

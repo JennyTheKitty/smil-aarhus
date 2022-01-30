@@ -87,15 +87,8 @@
 </template>
 
 <script setup lang="ts">
-import {
-  darkTheme,
-  FormInst,
-  FormProps,
-  NConfigProvider,
-  NForm,
-  FormItemInst,
-} from 'naive-ui/lib';
-import { formItemInstsInjectionKey } from 'naive-ui/lib/form/src/interface';
+import { FormInst, FormProps, NForm, FormItemInst } from 'naive-ui';
+import { formItemInstsInjectionKey } from 'naive-ui/form/src/interface';
 import { PropType } from 'vue';
 import { TrLanguage } from '@app/graphql/dist/client';
 

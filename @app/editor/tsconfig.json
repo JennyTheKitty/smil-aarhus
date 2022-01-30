@@ -6,6 +6,7 @@
     "allowJs": true,
     "lib": ["esnext", "dom"],
     "declarationDir": "dist",
+    "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo",
     "declaration": true,
     "rootDir": "./src",
     "paths": {

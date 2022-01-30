@@ -8,7 +8,7 @@ ARG NODE_ENV="production"
 FROM node:17-alpine as builder
 ARG NODE_ENV
 
-COPY lerna.json package.json yarn.lock tsconfig.json .yarnrc.yml /app/
+COPY package.json yarn.lock tsconfig.json .yarnrc.yml /app/
 COPY @app/ /app/@app/
 COPY data/ /app/data/
 COPY scripts/ /app/scripts/
@@ -23,7 +23,6 @@ ENV PATH="/app/node_modules/.bin/:${PATH}"
 RUN yarn build
 
 RUN mkdir /build/ && \
-  cp lerna.json /build/ && \
   cp package.json /build/ && \
   cp yarn.lock /build/ && \
   cp .yarnrc.yml /build/ && \
@@ -46,10 +45,7 @@ RUN echo -e "NODE_ENV=$NODE_ENV" > /build/.env
 RUN rm -rf /build/.yarn/cache && \
   find /build/node_modules -name "*.d.ts" -type f -delete && \
   find /build/node_modules -name "*.flow" -type f -delete && \
-  find /build/node_modules -name "*.map" -type f -delete && \
-  rm -rf /build/node_modules/date-fns/fp && \
-  rm -rf /build/node_modules/date-fns/esm && \
-  rm -rf /build/node-modules/naive-ui/es
+  find /build/node_modules -name "*.map" -type f -delete
 
 # ################################################################################
 # # Build stage FINAL

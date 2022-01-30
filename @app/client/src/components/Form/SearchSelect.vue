@@ -16,8 +16,8 @@
 <script setup lang="ts">
 import { Exact } from '@app/graphql/dist/client';
 import { TypedDocumentNode, useClientHandle } from '@urql/vue';
-import { NSelect } from 'naive-ui/lib/select';
-import { RenderLabel } from 'naive-ui/lib/_internal/select-menu/src/interface';
+import { NSelect } from 'naive-ui';
+import { RenderLabel } from 'naive-ui/_internal/select-menu/src/interface';
 import { Component, PropType } from 'vue';
 
 import { Translateable, useTranslation } from '../../utils';

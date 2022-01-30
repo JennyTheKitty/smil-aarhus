@@ -12,7 +12,7 @@
 import { ClassicEditor, InlineEditor } from '@app/editor';
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
-defineProps<{
+const props = defineProps<{
   modelValue: string;
   inline: boolean;
 }>();
@@ -31,9 +31,11 @@ function onReady(editor: any) {
     } else {
       emit('blur');
     }
-    const body = editor.ui.view.body._bodyCollectionContainer;
-    body.remove();
-    editor.ui.view.element.appendChild(body);
+    if (!props.inline) {
+      const body = editor.ui.view.body._bodyCollectionContainer;
+      body.remove();
+      editor.ui.view.element.appendChild(body);
+    }
   });
 }
 
